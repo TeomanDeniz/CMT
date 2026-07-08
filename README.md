@@ -412,6 +412,11 @@ int	main(void)
 }
 ```
 
+---
+## References
+
+ - [CMT - BOUND_METHODS_IN_ISO_C_VIA_TRAMPOLINES](https://github.com/TeomanDeniz/CMT/blob/main/DOCS/BOUND_METHODS_IN_ISO_C_VIA_TRAMPOLINES.DOCX)
+
 ----
 </details>
 
@@ -7902,12 +7907,13 @@ Important note: It is not recommended to SETUP the entire CMT unless you're actu
 * Yes, you can use them for free.
 * These icons are inspired by the style of Windows 95 icons.
 * They are all created by me and are not affiliated with or endorsed by Microsoft.
+* Not mandatory but I'll be glad if you credit me when you are using my icon(s) on a project or something.
 
 ---
 
-## Openning Issues
+## Openning Issues & Reporting Bugs
 
-* There is no rules. You can swear at me, ask questions, suggest something, or report bugs.
+* There are no rules. You can swear at me, ask questions, suggest something, or report bugs.
 * I am open to all kinds of criticisms and that would be so kind if criticisms are helpful or teachfull.
 
 ## Copyright
