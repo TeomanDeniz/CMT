@@ -53,3 +53,7 @@ dkms.conf
 
 # MACOS Folder Settings
 .DS_Store
+
+# Windows Folder Settings
+desktop.ini
+*.ico

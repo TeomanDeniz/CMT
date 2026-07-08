@@ -4,7 +4,7 @@
 CMT_FAR \- FAR pointer/memory qualifier for 16-bit segmented systems
 
 .SH SYNOPSIS
-.B #define INCL__FAR
+.B #define INCL_CMT_FAR
 .br
 .B #include <CMT/CMT.H>
 
@@ -20,6 +20,9 @@ On modern 32/64-bit systems it normally expands to an empty token.
 .B FAR
 Marks a variable, pointer, struct, or function pointer as far.
 On 16-bit systems this expands to "far" or compiler-specific equivalents.
+.TP
+.B IS__FAR__SUPPORTED
+Defined if FAR keyword is supported.
 
 .SH USAGE
 On real-mode/16-bit compilers it enables addressability of memory outside the current segment.

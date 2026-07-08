@@ -1,105 +1,143 @@
-.TH CMT 3 "2025-11-30" "1.0" "Maximum Tension C Library Extension"
-
+.TH CMT 3 "2026-01-04" "CMT 1.0" "C Library Extensions"
+.
 .SH NAME
 CMT \- modular and portable C library extension
-
+.
 .SH SYNOPSIS
 .B #include "CMT/CMT.H"
 .br
-.B #include "CMT/CMT.HPP" \- for C++
-
-.IP "Optional Modular Include:"
-Predefine
-.B INCL__<MODULE>
-macros before including `CMT.H` to selectively include specific modules:
-
+.B #include "CMT/CMT.HPP"
+.RI " (for C++)"
+.
+.SS Optional Modular Include
+Define
+.B INCL_CMT_<MODULE>
+macros before including
+.B CMT.H
+to selectively include individual modules.
+.
 .nf
-#define INCL__FAR
-#include "CMT/CMT.H" // Includes only the FAR module
-
-#define INCL__INLINE
-#define INCL__OBJECT
-#include "CMT/CMT.H" // Includes INLINE and OBJECT modules only
+#define INCL_CMT_FAR
+#include "CMT/CMT.H"
 .fi
-
-.IP "Optional Sectional Include:"
-Predefine
-.B INCL__<SECTION>
-macros to include entire sections:
-
+.
+Multiple modules may be combined:
+.
 .nf
-#define INCL__KEYWORDS
-#include "CMT/CMT.H" // Includes all KEYWORDS
-
-#define INCL__ATTRIBUTES
-#define INCL__KEYWORDS
-#define INCL__RAX
-#include "CMT/CMT.H" // Includes RAX, all KEYWORDS, and all ATTRIBUTES
+#define INCL_CMT_INLINE
+#define INCL_CMT_OBJECT
+#include "CMT/CMT.H"
 .fi
-
-.SH SECTIONS AND MODULES
-Currently available section macros:
-
-.TP
-.B INCL__ASM
-Includes all ASM-related features
-.TP
-.B INCL__ATTRIBUTES
-Includes all attributes
-.TP
-.B INCL__CHECK_FEATURE
-Includes feature-check macros
-.TP
-.B INCL__ENVIRONMENTS
-Includes environment-specific definitions
-.TP
-.B INCL__FUNCTIONS
-Includes standard library extensions
-.TP
-.B INCL__KEYWORDS
-Includes all custom keywords
-
+.
+.SS Optional Sectional Include
+Define
+.B INCL_CMT_<SECTION>
+macros to include entire feature sections.
+.
+.nf
+#define INCL_CMT_KEYWORDS
+#include "CMT/CMT.H"
+.fi
+.
+Multiple sections may be combined:
+.
+.nf
+#define INCL_CMT_ATTRIBUTES
+#define INCL_CMT_KEYWORDS
+#define INCL_CMT_RAX
+#include "CMT/CMT.H"
+.fi
+.
 .SH DESCRIPTION
-CMT provides essential tools and features missing from the standard C library, fully compatible with all compilers and platforms.  
+CMT is a modular, portable, header-only extension library for the C language.
+It provides low-level utilities and language features omitted from the standard
+C library while maintaining maximum compiler and platform compatibility.
+.
+.PP
+CMT requires no build system integration and introduces no link-time
+dependencies.
+All functionality is provided through headers.
+.
+.SH SECTIONS AND MODULES
+The following section-level include macros are currently supported:
+.
+.TP
+.B INCL_CMT_ASM
+Assembly-related features.
+.
+.TP
+.B INCL_CMT_ATTRIBUTES
+Compiler attributes.
+.
+.TP
+.B INCL_CMT_CHECK_FEATURE
+Feature-detection and capability macros.
+.
+.TP
+.B INCL_CMT_ENVIRONMENTS
+Environment- and platform-specific definitions.
+.
+.TP
+.B INCL_CMT_FUNCTIONS
+Standard library extensions.
+.
+.TP
+.B INCL_CMT_KEYWORDS
+Custom language keywords.
+.
+.SH DEFAULT BEHAVIOR
 If no
-.B INCL__...
-macro is defined, all modules and sections are automatically included by default.
-
-.IP "Notes:"
-- Defining an `INCL__<MODULE>` that belongs to a section already included via `INCL__<SECTION>` will not produce errors or warnings.
-- Sections and modules can be combined freely to tailor the library to your project's needs.
-
-.B Icons
-Inspired by Windows 2000 style; original creations, not affiliated with Microsoft.
-
+.B INCL_CMT_...
+macro is defined prior to including
+.B CMT.H,
+all sections and modules are included automatically.
+.
+.PP
+Redundant macro definitions are permitted.
+Defining a module that belongs to an already-included section has no effect
+and produces no warnings or errors.
+.
+.SH NOTES
+Sections and modules may be freely combined to tailor the library to the needs
+of a particular project.
+.
+.PP
+Iconography used by CMT is inspired by the Windows 2000 visual style.
+All icons are original works and are not affiliated with or endorsed by
+Microsoft.
+.
 .SH SEE ALSO
-.B CMT_ARCHITECTURE(3),
-.B CMT_ASM(3),
-.B CMT_CLEAR_INSTRUCTION_CACHE(3),
-.B CMT_COMMA_OPERATOR(3),
-.B CMT_CPU(3),
-.B CMT_DLL(3),
-.B CMT_FAR(3),
-.B CMT_IGNORE_VAR(3),
-.B CMT_INLINE(3),
-.B CMT_INLINE_ASM(3),
-.B CMT_KNR_STYLE(3),
-.B CMT_LOCAL(3),
-.B CMT_NORETURN(3),
-.B CMT_OBJECT(3),
-.B CMT_PACK(3),
-.B CMT_PREFETCH(3),
-.B CMT_RAX(3),
-.B CMT_READ_FILE(3),
-.B CMT_REGPARM(3),
-.B CMT_ROM(3),
-.B CMT_STDCALL(3),
-.B CMT_STRINGIFICATION(3),
-.B CMT_THREAD(3),
-.B CMT_TOKEN_PASTNG(3),
-.B CMT_TRY_CATCH(3),
-.B CMT_TYPES(3),
-.B CMT_UNUSED(3),
-.B CMT_VA_ARGS(3)
+.BR CMT_ALIGN (3),
+.BR CMT_ARCHITECTURE (3),
+.BR CMT_ASM (3),
+.BR CMT_CLEAR_INSTRUCTION_CACHE (3),
+.BR CMT_COMMA_OPERATOR (3),
+.BR CMT_CPU (3),
+.BR CMT_DLL (3),
+.BR CMT_FAR (3),
+.BR CMT_IGNORE_VAR (3),
+.BR CMT_INLINE (3),
+.BR CMT_INLINE_ASM (3),
+.BR CMT_KNR_STYLE (3),
+.BR CMT_LOCAL (3),
+.BR CMT_NORETURN (3),
+.BR CMT_OBJECT (3),
+.BR CMT_PACK (3),
+.BR CMT_PREFETCH (3),
+.BR CMT_RAX (3),
+.BR CMT_READ_FILE (3),
+.BR CMT_REGPARM (3),
+.BR CMT_ROM (3),
+.BR CMT_STDCALL (3),
+.BR CMT_STRINGIFICATION (3),
+.BR CMT_THREAD (3),
+.BR CMT_TOKEN_PASTING (3),
+.BR CMT_TRY_CATCH (3),
+.BR CMT_TYPES (3),
+.BR CMT_UNUSED (3),
+.BR CMT_VA_ARGS (3)
+.
 .SH AUTHOR
-Teoman Deniz <te.odenizgml@gmail.com>
+Teoman Deniz
+.MT te.odenizgml@gmail.com
+.ME
