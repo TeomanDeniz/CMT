@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2025/11/27 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/06/11 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/07/11 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -125,7 +125,7 @@
 \******************************************************************************/
 
 #ifndef TYPES_H
-#define TYPES_H 202606 /* VERSION */
+#define TYPES_H 202607 /* VERSION */
 
 /* **************************** [v] INCLUDES [v] **************************** */
 #include "../ENVIRONMENTS/ARCHITECTURE.H"
@@ -141,6 +141,16 @@
 /******* """""""""""""""""""""""""""""
  * #define void
  * #define unsigned
+ */
+#include "BOOLEAN.H"
+/******* """""""""""
+ * #define BOOLEAN
+ * #define boolean
+ * #define TRUE
+ * #define true
+ * #define FALSE
+ * #define false
+ * #define __bool_true_false_are_defined
  */
 /* **************************** [^] INCLUDES [^] **************************** */
 
@@ -179,12 +189,13 @@ typedef FLOAT32			float32;
 #ifdef LOCALMACRO__INT32
 #undef LOCALMACRO__INT32
 typedef long			VAR;
+typedef unsigned long	LET;
 #else /* !LOCALMACRO__INT32 */
 typedef int				VAR;
+typedef unsigned int	LET;
 #endif /* LOCALMACRO__INT32 */
 
 typedef VAR				var;
-typedef unsigned int	LET;
 typedef LET				let;
 typedef unsigned char	BYTE;
 typedef BYTE			byte;
@@ -320,10 +331,17 @@ typedef BIT128		bit128;
 
 #ifdef __GNUC__
 #ifdef __SIZEOF_LONG_DOUBLE__
-#if (__SIZEOF_LONG_DOUBLE__ == 12)
-typedef long double	FLOAT128;
+#ifdef NOT_YET
+#if (__SIZEOF_LONG_DOUBLE__ > 8)
+typedef long double	BIG_FLOAT;
+#define SUPPORTED__BIG_FLOAT
+#endif /* __SIZEOF_LONG_DOUBLE__ > 8 */
+#endif
+
+#ifdef __SIZEOF_FLOAT128__
+typedef __float128	FLOAT128;
 #define SUPPORTED__FLOAT128
-#endif /* __SIZEOF_LONG_DOUBLE__ >= 12 */
+#endif /* __SIZEOF_FLOAT128__ */
 #endif /* __SIZEOF_LONG_DOUBLE__ */
 #endif /* __GNUC__ */
 #endif /* !TYPES_H */

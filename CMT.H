@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2025/06/22 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/07/06 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/07/11 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -49,7 +49,9 @@
 #ifndef INCL_CMT_CLEAR_INSTRUCTION_CACHE
 #ifndef INCL_CMT_IGNORE_VAR
 #ifndef INCL_CMT_W_XOR_X
+#ifndef INCL_CMT_BOOLEAN
 #define LOCALMACRO_DEFINE_ALL_TRY_1
+#endif /* !INCL_CMT_BOOLEAN */
 #endif /* !INCL_CMT_W_XOR_X */
 #endif /* !INCL_CMT_IGNORE_VAR */
 #endif /* !INCL_CMT_CLEAR_INSTRUCTION_CACHE */
@@ -226,6 +228,10 @@
 #ifndef INCL_CMT_IGNORE_VAR
 #define INCL_CMT_IGNORE_VAR
 #endif /* !INCL_CMT_IGNORE_VAR */
+
+#ifndef INCL_CMT_BOOLEAN
+#define INCL_CMT_BOOLEAN
+#endif /* !INCL_CMT_BOOLEAN */
 #endif /* INCL_CMT_KEYWORDS */
 /* **************************** [^] KEYWORDS [^] **************************** */
 
@@ -790,6 +796,20 @@
  */
 #undef INCL_CMT_TYPES
 #endif /* INCL_CMT_TYPES */
+
+#ifdef INCL_CMT_BOOLEAN
+#include "KEYWORDS/BOOLEAN.H"
+/******* """"""""""""""""""""
+ * #define BOOLEAN
+ * #define boolean
+ * #define TRUE
+ * #define true
+ * #define FALSE
+ * #define false
+ * #define __bool_true_false_are_defined
+ */
+#undef INCL_CMT_BOOLEAN
+#endif /* INCL_CMT_BOOLEAN */
 /* **************************** [^] KEYWORDS [^] **************************** */
 
 /* ***************************** [v] OS_API [v] ***************************** */
