@@ -1,13 +1,13 @@
 
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/TeomanDeniz/refs/heads/main/images/repo_projects/libcmt/HEADER3.png" ALT="Header" STYLE="WIDTH: 100%;"/>
 
-**CMT (C Maximum Tension) 1986-2018** is a header-only systems programming library for C that pushes the language far beyond its conventional limits without sacrificing portability or performance. It introduces a unified runtime layer that enhances ergonomics, abstraction, and developer control while staying compatible with both ANSI and K&R C.
+**CMT (C Maximum Tension)** is a header-only systems programming library for C that pushes the language far beyond its conventional limits without sacrificing portability or performance. It introduces a unified runtime layer that enhances ergonomics, abstraction, and developer control while staying compatible with both ANSI and K&R C.
 
 The library is built around low-level mechanisms rather than syntactic tricks, enabling natural and efficient usage patterns that integrate directly with the compiler, ABI, and architecture. It avoids hidden globals, minimizes overhead, and leverages register-level behavior and inline assembly to deliver predictable, high-performance execution across platforms.
 
 CMT also provides a structured meta-layer over assembly, bridging differences between architectures, compilers, and calling conventions. It includes feature detection, environment introspection, and compatibility layers that allow code to adapt at compile-time and runtime to the exact system it is targeting.
 
-Designed with longevity in mind, the project maintains support for legacy systems and toolchains while scaling up to modern environments. It emphasizes consistency across platforms, modular expansion, and deep control over system resources—from CPU instructions to OS-level APIs.
+Designed with longevity in mind, the project maintains support for legacy systems and toolchains while scaling up to modern environments. It emphasizes consistency across platforms, modular expansion, and deep control over system resources-from CPU instructions to OS-level APIs.
 
 The repository includes multiple documentation formats, test matrices across compilers and architectures, and a stripped release variant optimized for minimal footprint.
 
@@ -7347,7 +7347,7 @@ Resizes a previously allocated memory block (`PTR`) to `LEN` bytes.
 
 * If the new size is larger, the existing data is preserved and the extra memory is uninitialized.
 * If smaller, the block is truncated.
-* May move the memory to a new location — always use the returned pointer.
+* May move the memory to a new location - always use the returned pointer.
 * If `PTR` is `NULL`, behaves like `malloc`.
 * If `LEN` is `0`, behaves like `free`.
 
