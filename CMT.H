@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2025/06/22 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/07/11 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/07/20 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -50,7 +50,11 @@
 #ifndef INCL_CMT_IGNORE_VAR
 #ifndef INCL_CMT_W_XOR_X
 #ifndef INCL_CMT_BOOLEAN
+#ifndef INCL_CMT_MUTEX
+#ifndef INCL_CMT_THREAD
 #define LOCALMACRO_DEFINE_ALL_TRY_1
+#endif /* !INCL_CMT_THREAD */
+#endif /* !INCL_CMT_MUTEX */
 #endif /* !INCL_CMT_BOOLEAN */
 #endif /* !INCL_CMT_W_XOR_X */
 #endif /* !INCL_CMT_IGNORE_VAR */
@@ -95,9 +99,9 @@
 #ifndef INCL_CMT_ENVIRONMENTS
 #ifndef INCL_CMT_WIN_CORE
 #ifndef INCL_CMT_KEYWORDS
-#ifndef ICNL_CMT_OS_API
+#ifndef INCL_CMT_OS_API
 #define LOCALMACRO_DEFINE_ALL
-#endif /* !ICNL_CMT_OS_API */
+#endif /* !INCL_CMT_OS_API */
 #endif /* !INCL_CMT_KEYWORDS */
 #endif /* !INCL_CMT_WIN_CORE */
 #endif /* !INCL_CMT_ENVIRONMENTS */
@@ -119,7 +123,7 @@
 #define INCL_CMT_ENVIRONMENTS
 #define INCL_CMT_WIN_CORE
 #define INCL_CMT_KEYWORDS
-#define ICNL_CMT_OS_API
+#define INCL_CMT_OS_API
 #endif /* LOCALMACRO_DEFINE_ALL */
 /* ************************ [^] CMT JUST CALLED [^] ************************* */
 
@@ -241,6 +245,14 @@
 #ifndef INCL_CMT_CLEAR_INSTRUCTION_CACHE
 #define INCL_CMT_CLEAR_INSTRUCTION_CACHE
 #endif /* !INCL_CMT_CLEAR_INSTRUCTION_CACHE */
+
+#ifndef INCL_CMT_MUTEX
+#define INCL_CMT_MUTEX
+#endif /* !INCL_CMT_MUTEX */
+
+#ifndef INCL_CMT_THREAD
+#define INCL_CMT_THREAD
+#endif /* !INCL_CMT_THREAD */
 #endif /* INCL_CMT_OS_API */
 /* ***************************** [^] OS_API [^] ***************************** */
 
@@ -471,6 +483,7 @@
 #include "ATTRIBUTES/FAR.H"
 /******* """"""""""""""""""
  * #define FAR
+ * #define IS__FAR__SUPPORTED
  */
 #undef INCL_CMT_FAR
 #endif /* INCL_CMT_FAR */
@@ -556,11 +569,12 @@
  * #define IS__INLINE_ASM__SUPPORTED
  * #define INLINE_ASM_TYPE__AZTEC
  * #define INLINE_ASM_TYPE__BORLAND
- * #define INLINE_ASM_TYPE__DIGITAL_MARS
  * #define INLINE_ASM_TYPE__CC65
  * #define INLINE_ASM_TYPE__CODEWARRIOR
+ * #define INLINE_ASM_TYPE__DIGITAL_MARS
  * #define INLINE_ASM_TYPE__GNU
- * #define INLINE_ASM_TYPE__ISO
+ * #define INLINE_ASM_TYPE__GNU_EXTENDED
+ * #define INLINE_ASM_TYPE__IMAGECRAFT
  * #define INLINE_ASM_TYPE__KEIL_C166
  * #define INLINE_ASM_TYPE__LATTICE
  * #define INLINE_ASM_TYPE__MSVC
@@ -651,7 +665,7 @@
  * #define __CPU_BLACKFIN__
  * #define __CPU_DSP56K__
  * #define __SYSTEM_370__
- * char *__CPU_VER__(void);
+ * const char	*CPU_VERSION;
  */
 #undef INCL_CMT_CPU
 #endif /* INCL_CMT_CPU */
@@ -777,6 +791,8 @@
  * typedef	var;
  * typedef	PTR;
  * typedef	ptr;
+ * typedef	FAR_PTR;
+ * typedef	far_ptr;
  * typedef	BIT8;
  * typedef	bit8;
  * typedef	BIT16;
@@ -821,6 +837,36 @@
  */
 #undef INCL_CMT_CLEAR_INSTRUCTION_CACHE
 #endif /* INCL_CMT_CLEAR_INSTRUCTION_CACHE */
+
+#ifdef INCL_CMT_MUTEX
+#include "OS_API/MUTEX.H"
+/******* """"""""""""""""
+ * int		MUTEX_CREATE(T_MUTEX *);
+ * int		mutex_create(t_mutex *);
+ * int		MUTEX_DESTROY(T_MUTEX *);
+ * int		mutex_destroy(t_mutex *);
+ * #define MUTEX_LOCK(MUTEX)
+ * #define mutex_lock(MUTEX)
+ * #define MUTEX_UNLOCK(MUTEX)
+ * #define mutex_unlock(MUTEX)
+ * typedef	T_MUTEX;
+ * typedef	t_mutex;
+ */
+#undef INCL_CMT_MUTEX
+#endif /* INCL_CMT_MUTEX */
+
+#ifdef INCL_CMT_THREAD
+#include "OS_API/THREAD.H"
+/******* """""""""""""""""
+ * T_THREAD	THREAD_CREATE(void *(*) (void *), void *);
+ * t_thread	thread_create(void *(*) (void *), void *);
+ * int		THREAD_JOIN(T_THREAD, void **);
+ * int		thread_join(t_thread, void **);
+ * typedef	T_THREAD;
+ * typedef	t_thread;
+ */
+#undef INCL_CMT_THREAD
+#endif /* INCL_CMT_THREAD */
 /* ***************************** [^] OS_API [^] ***************************** */
 
 /* **************************** [v] WIN_CORE [v] **************************** */

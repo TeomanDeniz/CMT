@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2025/06/05 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/07/04 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/07/14 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -63,6 +63,11 @@
 |*| MOST COMPILERS DO NOT EXPOSE A CONSISTENT PLATFORM IDENTIFICATION MACRO. |*|
 |*|                                                                          |*|
 |*| I AM SO SORRY ABOUT THAT ;-;                                             |*|
+|*|                                                                          |*|
+|*| ALSO, AS AN EXTRA: IF YOU CAN'T FIND YOUR PLATFORM IN THE LIST, DON'T    |*|
+|*| WORRY; CMT ALSO PROVIDES A GO-LIKE MULTITASKING SYSTEM, OR ITS OWN       |*|
+|*| MULTITHREADING MANAGEMENT, FOR YOUR PLATFORM (FOR EXAMPLE, "MS-DOS"),    |*|
+|*| ALLOWING IT TO WORK ON PLATFORMS THAT AREN'T OFFICIALLY SUPPORTED.       |*|
 |*|__________________________________________________________________________|*|
 |*                                                                            *|
 \******************************************************************************/
@@ -73,10 +78,10 @@
 |* __________________________________________________________________________ *|
 |*| CONTENT                                                       | DOC LINE |*|
 |*|===============================================================|==========|*|
-|*| T_THREAD THREAD_CREATE(void *(*) (void *), void *);           | 87       |*|
+|*| T_THREAD THREAD_CREATE(void *(*) (void *), void *);           | 92       |*|
 |*| t_thread thread_create(void *(*) (void *), void *);           |          |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| int THREAD_JOIN(T_THREAD, void **);                           | 128      |*|
+|*| int THREAD_JOIN(T_THREAD, void **);                           | 133      |*|
 |*| int thread_join(t_thread, void **);                           |          |*|
 |*|---------------------------------------------------------------|----------|*|
 |*| typedef T_THREAD;                                             | N/A      |*|

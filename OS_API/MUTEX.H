@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2025/06/05 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/07/04 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/07/14 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -70,6 +70,11 @@
 |*| MOST COMPILERS DO NOT EXPOSE A CONSISTENT PLATFORM IDENTIFICATION MACRO. |*|
 |*|                                                                          |*|
 |*| I AM SO SORRY ABOUT THAT ;-;                                             |*|
+|*|                                                                          |*|
+|*| ALSO, AS AN EXTRA: IF YOU CAN'T FIND YOUR PLATFORM IN THE LIST, DON'T    |*|
+|*| WORRY; CMT ALSO PROVIDES A GO-LIKE MULTITASKING SYSTEM, OR ITS OWN       |*|
+|*| MULTITHREADING MANAGEMENT, FOR YOUR PLATFORM (FOR EXAMPLE, "MS-DOS"),    |*|
+|*| ALLOWING IT TO WORK ON PLATFORMS THAT AREN'T OFFICIALLY SUPPORTED.       |*|
 |*|__________________________________________________________________________|*|
 |*                                                                            *|
 \******************************************************************************/
@@ -80,16 +85,16 @@
 |* __________________________________________________________________________ *|
 |*| CONTENT                                                       | DOC LINE |*|
 |*|===============================================================|==========|*|
-|*| int MUTEX_CREATE(T_MUTEX *);                                  | 100      |*|
+|*| int MUTEX_CREATE(T_MUTEX *);                                  | 105      |*|
 |*| int mutex_create(t_mutex *);                                  |          |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| int MUTEX_DESTROY(T_MUTEX *);                                 | 131      |*|
+|*| int MUTEX_DESTROY(T_MUTEX *);                                 | 136      |*|
 |*| int mutex_destroy(t_mutex *);                                 |          |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| #define MUTEX_LOCK(MUTEX)                                     | 154      |*|
+|*| #define MUTEX_LOCK(MUTEX)                                     | 159      |*|
 |*| #define mutex_lock(MUTEX)                                     |          |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| #define MUTEX_UNLOCK(MUTEX)                                   | 173      |*|
+|*| #define MUTEX_UNLOCK(MUTEX)                                   | 178      |*|
 |*| #define mutex_unlock(MUTEX)                                   |          |*|
 |*|---------------------------------------------------------------|----------|*|
 |*| typedef T_MUTEX;                                              | N/A      |*|

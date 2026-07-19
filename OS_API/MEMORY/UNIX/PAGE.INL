@@ -1,6 +1,6 @@
 #ifndef MEMORY_H
 #error "ERROR - PLEASE DON'T USE THIS LIBRARY DIRECTLY!!!"
-#endif /* !ASM_H */
+#endif /* !MEMORY_H */
 
 /* **************************** [v] INCLUDES [v] **************************** */
 #include <unistd.h>
@@ -23,7 +23,7 @@ extern LET	MEMORY_PAGE_SIZE;
 	do\
 	{\
 		MEMORY_PAGE_SIZE = LOCALMACRO__PAGE_PREPARER;\
-	}
+	} while (0)
 
 #ifdef _SC_PAGESIZE
 #define LOCALMACRO__PAGE_PREPARER sysconf(_SC_PAGESIZE)

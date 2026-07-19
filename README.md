@@ -7000,12 +7000,13 @@ All definitions are conditional and portable. Unsupported types are not defined.
 
 Use these when you want **semantic clarity** instead of raw C types.
 
-| Name           | Description                                         |
-| -------------- | --------------------------------------------------- |
-| `BYTE`, `byte` | Unsigned one byte storage unit (char)               |
-| `LET`, `let`   | Type for array indexing and sizes (like `size_t`)   |
-| `VAR`, `var`   | Signed integer type with the same width as `void *` |
-| `PTR`, `ptr`   | Generic pointer type                                |
+| Name                 | Description                                         |
+| -------------------- | --------------------------------------------------- |
+| `BYTE`, `byte`       | Unsigned one byte storage unit (char)               |
+| `LET`, `let`         | Type for array indexing and sizes (like `size_t`)   |
+| `VAR`, `var`         | Signed integer type with the same width as `void *` |
+| `PTR`, `ptr`         | Generic pointer type                                |
+| `FAR_PTR`, `far_ptr` | Far pointer type                                    |
 
 ### Types with Fixed Sizes
 
@@ -7063,6 +7064,7 @@ Always guard usage with the corresponding `SUPPORTED__*` macro.
  - [128-bit computing - wikipedia.org](https://wikipedia.org/wiki/128-bit_computing)
  - [C data types - wikipedia.org](https://en.wikipedia.org/wiki/C_data_types)
  - [6.1.1 128-bit Integers - gnu.org](https://gcc.gnu.org/onlinedocs/gcc-16.1.0/gcc/_005f_005fint128.html)
+ - [FAR Keyword - CMT](#far)
 
 ----
 </details>
@@ -7276,7 +7278,7 @@ Far pointer functions are automatically downgrades to normal functions in 32-bit
 | `FAR_PTR FAR_ALLOC_EXE(PTR OP_CODES, LET);` |
 | `void FAR_FREE_EXE(FAR_PTR);`               |
 
-| Page Memory Management Functions     |
+| Page Memory Management Objects       |
 | ------------------------------------ |
 | `LET PAGE_SIZE;`                     |
 | `PTR ALLOC_PAGE(LET, INT32, INT32);` |
@@ -7426,6 +7428,8 @@ FREE(test_memory);
 > ```c
 > #include "CMT/OS_API/MUTEX.H"
 > ```
+
+[![](https://raw.githubusercontent.com/TeomanDeniz/TeomanDeniz/main/images/repo_projects/libcmt/AUTO_LINKER_MODULE_HEADER.png)](#cmt-auto-linker)
 
 ## Abstract
 
@@ -7599,6 +7603,8 @@ mutex_unlock(mutex);
 > #include "CMT/OS_API/THREAD.H"
 > ```
 
+[![](https://raw.githubusercontent.com/TeomanDeniz/TeomanDeniz/main/images/repo_projects/libcmt/AUTO_LINKER_MODULE_HEADER.png)](#cmt-auto-linker)
+
 ## Abstract
 
 <p align="center">
@@ -7746,6 +7752,8 @@ thread_join(thread, NULL);
 > ```c
 > #include "CMT/WIN_CORE/__PEB_LOADER__.H"
 > ```
+
+[![](https://raw.githubusercontent.com/TeomanDeniz/TeomanDeniz/main/images/repo_projects/libcmt/AUTO_LINKER_MODULE_HEADER.png)](#cmt-auto-linker)
 
 ## Abstract
 

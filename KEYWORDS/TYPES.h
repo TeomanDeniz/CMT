@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2025/11/27 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/07/11 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/07/20 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -37,20 +37,23 @@
 |*    ....................................................................    *|
 |*  .'                           STANDARD TYPES                           '.  *|
 |*.:........................................................................:.*|
-|* NAME :                             DESCRIPTION                             *|
-|*......:.....................................................................*|
-|* BYTE : UNSIGNED ONE BYTE STORAGE UNIT (CHAR)                               *|
-|* byte :                                                                     *|
-|*......:.....................................................................*|
-|* LET  : TYPE FOR ARRAY INDEXING AND SIZES (LIKE size_t)                     *|
-|* let  :                                                                     *|
-|*......:.....................................................................*|
-|* VAR  : SIGNED INTEGER TYPE WITH THE SAME WIDTH AS "void *"                 *|
-|* var  :                                                                     *|
-|*......:.....................................................................*|
-|* PTR  : GENERIC POINTER TYPE                                                *|
-|* ptr  :                                                                     *|
-|*......:.....................................................................*|
+|*  NAME   :                           DESCRIPTION                            *|
+|*.........:..................................................................*|
+|* BYTE    : UNSIGNED ONE BYTE STORAGE UNIT (CHAR)                            *|
+|* byte    :                                                                  *|
+|*.........:..................................................................*|
+|* LET     : TYPE FOR ARRAY INDEXING AND SIZES (LIKE size_t)                  *|
+|* let     :                                                                  *|
+|*.........:..................................................................*|
+|* VAR     : SIGNED INTEGER TYPE WITH THE SAME WIDTH AS "void *"              *|
+|* var     :                                                                  *|
+|*.........:..................................................................*|
+|* PTR     : GENERIC POINTER TYPE                                             *|
+|* ptr     :                                                                  *|
+|*.........:..................................................................*|
+|* FAR_PTR : FAR POINTER TYPE                                                 *|
+|* far_ptr :                                                                  *|
+|*.........:..................................................................*|
 |*                                                                            *|
 |*    ....................................................................    *|
 |*  .'                       TYPES WITH FIXED SIZES                       '.  *|
@@ -152,6 +155,11 @@
  * #define false
  * #define __bool_true_false_are_defined
  */
+#include "../ATTRIBUTES/FAR.H"
+/******* """""""""""""""""""""
+ * #define FAR
+ * #define IS__FAR__SUPPORTED
+ */
 /* **************************** [^] INCLUDES [^] **************************** */
 
 #ifdef __SYSTEM_8_BIT__
@@ -171,8 +179,8 @@ typedef float			FLOAT32;
 typedef FLOAT32			float32;
 #endif /* __SYSTEM_8_BIT__ */
 
-/* *********************** [v] LOCALMACRO__INT32 [v] ************************ */
 #ifdef __SYSTEM_16_BIT__
+/* *********************** [v] LOCALMACRO__INT32 [v] ************************ */
 #ifdef __MSDOS__
 #define LOCALMACRO__INT32
 #else /* !__MSDOS__ */
@@ -320,8 +328,31 @@ typedef BIT64		bit64;
 #endif /* __HAS_64_BIT__ */
 #endif /* __SYSTEM_64_BIT__ */
 
-typedef void	*PTR;
-typedef void	*ptr;
+/* ****************************** [v] PTR [v] ******************************* */
+#ifndef KNR_STYLE /* STANDARD C */
+typedef void		*PTR;
+typedef void		*ptr;
+
+#ifdef IS__FAR__SUPPORTED
+typedef void FAR	*FAR_PTR;
+typedef void FAR	*far_ptr;
+#else /* !IS__FAR__SUPPORTED */
+typedef void		*FAR_PTR;
+typedef void		*far_ptr;
+#endif /* IS__FAR__SUPPORTED */
+#else /* K&R */
+typedef char		*PTR;
+typedef char		*ptr;
+
+#ifdef IS__FAR__SUPPORTED
+typedef char FAR	*FAR_PTR;
+typedef char FAR	*far_ptr;
+#else /* !IS__FAR__SUPPORTED */
+typedef char		*FAR_PTR;
+typedef char		*far_ptr;
+#endif /* IS__FAR__SUPPORTED */
+#endif /* !KNR_STYLE */
+/* ****************************** [^] PTR [^] ******************************* */
 
 #ifdef __HAS_128_BIT__
 typedef __int128	BIT128;

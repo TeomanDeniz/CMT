@@ -1,6 +1,14 @@
 #ifndef MEMORY_H
 #error "ERROR - PLEASE DON'T USE THIS LIBRARY DIRECTLY!!!"
-#endif /* !ASM_H */
+#endif /* !MEMORY_H */
+
+#ifndef _POSIX_C_SOURCE
+#define _POSIX_C_SOURCE 200809L
+#endif /* !_POSIX_C_SOURCE */
+
+#ifndef _DEFAULT_SOURCE
+#define _DEFAULT_SOURCE 1
+#endif /* !_DEFAULT_SOURCE */
 
 #include "UNIX/PAGE.INL"
 

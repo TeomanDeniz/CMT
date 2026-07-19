@@ -1,74 +1,86 @@
 #ifndef MEMORY_H
 #error "ERROR - PLEASE DON'T USE THIS LIBRARY DIRECTLY!!!"
-#endif /* !ASM_H */
+#endif /* !MEMORY_H */
 
-#include "WINDOWS/PAGE.INL"
-
-/* ****************************** [v] EXE [v] ******************************* */
-#ifndef LOCALFUNCTION__ALLOC_EXE
-#include "WINDOWS/EXE/ALLOC_EXE.INL"
-#endif /* !LOCALFUNCTION__ALLOC_EXE */
-
-#ifndef LOCALFUNCTION__FREE_EXE
-#include "WINDOWS/EXE/FREE_EXE.INL"
-#endif /* !LOCALFUNCTION__FREE_EXE */
-
-#ifndef LOCALFUNCTION__LENGTH_EXE
-#include "WINDOWS/EXE/LENGTH_EXE.INL"
-#endif /* !LOCALFUNCTION__LENGTH_EXE */
-/* ****************************** [^] EXE [^] ******************************* */
-
-/* ****************************** [v] FAR [v] ******************************* */
-#ifndef LOCALFUNCTION__ALLOC_FAR
-#include "WINDOWS/FAR/ALLOC_FAR.INL"
-#endif /* !LOCALFUNCTION__ALLOC_FAR */
-
-#ifndef LOCALFUNCTION__CALLOC_FAR
-#include "WINDOWS/FAR/CALLOC_FAR.INL"
-#endif /* !LOCALFUNCTION__CALLOC_FAR */
-
-#ifndef LOCALFUNCTION__FREE_FAR
-#include "WINDOWS/FAR/FREE_FAR.INL"
-#endif /* !LOCALFUNCTION__FREE_FAR */
-
-#ifndef LOCALFUNCTION__LENGTH_FAR
-#include "WINDOWS/FAR/LENGTH_FAR.INL"
-#endif /* !LOCALFUNCTION__LENGTH_FAR */
-
-#ifndef LOCALFUNCTION__REALLOC_FAR
-#include "WINDOWS/FAR/REALLOC_FAR.INL"
-#endif /* !LOCALFUNCTION__REALLOC_FAR */
-
-#ifndef LOCALFUNCTION__PROTECT_FAR
-#include "WINDOWS/FAR/PROTECT_FAR.INL"
-#endif /* !LOCALFUNCTION__PROTECT_FAR */
-/* ****************************** [^] FAR [^] ******************************* */
-
-/* ***************************** [v] NORMAL [v] ***************************** */
 #ifndef LOCALFUNCTION__ALLOC
-#include "WINDOWS/NORMAL/ALLOC.INL"
+#include "WINDOWS/ALLOC.INL"
 #endif /* !LOCALFUNCTION__ALLOC */
 
+#ifndef LOCALFUNCTION__ALLOC_EXE
+#include "WINDOWS/ALLOC_EXE.INL"
+#endif /* !LOCALFUNCTION__ALLOC_EXE */
+
+#ifndef LOCALFUNCTION__ALLOC_PAGE
+#include "WINDOWS/ALLOC_PAGE.INL"
+#endif /* !LOCALFUNCTION__ALLOC_PAGE */
+
 #ifndef LOCALFUNCTION__CALLOC
-#include "WINDOWS/NORMAL/CALLOC.INL"
+#include "WINDOWS/CALLOC.INL"
 #endif /* !LOCALFUNCTION__CALLOC */
 
+#ifndef LOCALFUNCTION__FAR_ALLOC
+#include "WINDOWS/FAR_ALLOC.INL"
+#endif /* !LOCALFUNCTION__FAR_ALLOC */
+
+#ifndef LOCALFUNCTION__FAR_ALLOC_EXE
+#include "WINDOWS/FAR_ALLOC_EXE.INL"
+#endif /* !LOCALFUNCTION__FAR_ALLOC_EXE */
+
+#ifndef LOCALFUNCTION__FAR_CALLOC
+#include "WINDOWS/FAR_CALLOC.INL"
+#endif /* !LOCALFUNCTION__FAR_CALLOC */
+
+#ifndef LOCALFUNCTION__FAR_FREE
+#include "WINDOWS/FAR_FREE.INL"
+#endif /* !LOCALFUNCTION__FAR_FREE */
+
+#ifndef LOCALFUNCTION__FAR_FREE_EXE
+#include "WINDOWS/FAR_FREE_EXE.INL"
+#endif /* !LOCALFUNCTION__FAR_FREE_EXE */
+
+#ifndef LOCALFUNCTION__FAR_LENGTH
+#include "WINDOWS/FAR_LENGTH.INL"
+#endif /* !LOCALFUNCTION__FAR_LENGTH */
+
+#ifndef LOCALFUNCTION__FAR_MEMORY_MODE
+#include "WINDOWS/FAR_MEMORY_MODE.INL"
+#endif /* !LOCALFUNCTION__FAR_MEMORY_MODE */
+
+#ifndef LOCALFUNCTION__FAR_REALLOC
+#include "WINDOWS/FAR_REALLOC.INL"
+#endif /* !LOCALFUNCTION__FAR_REALLOC */
+
 #ifndef LOCALFUNCTION__FREE
-#include "WINDOWS/NORMAL/FREE.INL"
+#include "WINDOWS/FREE.INL"
 #endif /* !LOCALFUNCTION__FREE */
 
+#ifndef LOCALFUNCTION__FREE_EXE
+#include "WINDOWS/FREE_EXE.INL"
+#endif /* !LOCALFUNCTION__FREE_EXE */
+
+#ifndef LOCALFUNCTION__FREE_PAGE
+#include "WINDOWS/FREE_PAGE.INL"
+#endif /* !LOCALFUNCTION__FREE_PAGE */
+
+#ifndef LOCALFUNCTION__GET_PAGE_SIZE
+#include "WINDOWS/GET_PAGE_SIZE.INL"
+#endif /* !LOCALFUNCTION__GET_PAGE_SIZE */
+
 #ifndef LOCALFUNCTION__LENGTH
-#include "WINDOWS/NORMAL/LENGTH.INL"
+#include "WINDOWS/LENGTH.INL"
 #endif /* !LOCALFUNCTION__LENGTH */
 
-#ifndef LOCALFUNCTION__REALLOC
-#include "WINDOWS/NORMAL/REALLOC.INL"
-#endif /* !LOCALFUNCTION__REALLOC */
+#ifndef LOCALFUNCTION__LENGTH_EXE
+#include "WINDOWS/LENGTH_EXE.INL"
+#endif /* !LOCALFUNCTION__LENGTH_EXE */
 
-#ifndef LOCALFUNCTION__PROTECT
-#include "WINDOWS/NORMAL/PROTECT.INL"
-#endif /* !LOCALFUNCTION__PROTECT */
-/* ***************************** [^] NORMAL [^] ***************************** */
+#ifndef LOCALFUNCTION__MEMORY_MODE
+#include "WINDOWS/MEMORY_MODE.INL"
+#endif /* !LOCALFUNCTION__MEMORY_MODE */
+
+#ifndef LOCALFUNCTION__REALLOC
+#include "WINDOWS/REALLOC.INL"
+#endif /* !LOCALFUNCTION__REALLOC */
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\
  * * AT THE ALL END OF FILES, I AM ADDING A SPECIAL BYTE <0X1A> TO END THE  * *
