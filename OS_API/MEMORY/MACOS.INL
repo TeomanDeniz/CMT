@@ -2,19 +2,31 @@
 #error "ERROR - PLEASE DON'T USE THIS LIBRARY DIRECTLY!!!"
 #endif /* !MEMORY_H */
 
-/* ****************************** [v] EXE [v] ******************************* */
-#ifndef LOCALFUNCTION__ALLOC_EXE
-#include "MACOS/EXE/ALLOC_EXE.INL"
-#endif /* !LOCALFUNCTION__ALLOC_EXE */
+/* *************************** [v] MVS LINKER [v] *************************** */
+/* **** MVS LINKER DOES NOT SUPPORT EXTERNAL NAMES LARGER THAN 8 BYTES!! **** */
+#ifdef __MVS__ /* IBM Z/OS XL C/C++ */
+#define G_MUTEX_ALLOC_EXE G_MALEXE
+#endif /* __MVS__ */
+/* *************************** [^] MVS LINKER [^] *************************** */
 
-#ifndef LOCALFUNCTION__FREE_EXE
-#include "MACOS/EXE/FREE_EXE.INL"
-#endif /* !LOCALFUNCTION__FREE_EXE */
+/* **************************** [v] EXTERNS [v] ***************************** */
+EXTERN_C_START
+extern T_MUTEX			G_MUTEX_ALLOC_EXE;
+extern struct S_SLAB	*G_SLABS;
+EXTERN_C_END
+/* **************************** [^] EXTERNS [^] ***************************** */
 
-#ifndef LOCALFUNCTION__LENGTH_EXE
-#include "MACOS/EXE/LENGTH_EXE.INL"
-#endif /* !LOCALFUNCTION__LENGTH_EXE */
-/* ****************************** [^] EXE [^] ******************************* */
+#define LOCALCONSTRUCTOR__MEMORY_ALLOC_EXE MUTEX_CREATE(&G_MUTEX_ALLOC_EXE);
+#define LOCALMACRO__MEMORY_ALLOC_EXE \
+	T_MUTEX			G_MUTEX_ALLOC_EXE;\
+	struct S_SLAB	*G_SLABS = (struct S_SLAB *)0;
+
+#include "MACOS/ALLOC_EXE.INL"
+#include "MACOS/FAR_ALLOC_EXE.INL"
+#include "MACOS/FAR_FREE_EXE.INL"
+#include "MACOS/FAR_LENGTH_EXE.INL"
+#include "MACOS/FREE_EXE.INL"
+#include "MACOS/LENGTH_EXE.INL"
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\
  * * AT THE ALL END OF FILES, I AM ADDING A SPECIAL BYTE <0X1A> TO END THE  * *

@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2026/07/07 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/07/13 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/07/22 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -208,6 +208,7 @@
 #define bool _Bool
 #define true 1
 #define false 0
+#define BOOLEAN bool
 #else /* __cplusplus */
 #ifdef __GNUC__
 #ifndef __STRICT_ANSI__
@@ -218,7 +219,11 @@
 #define false false
 #define true true
 #endif /* __cplusplus < 201103L */
+#else /* __STRICT_ANSI__ */
+#undef LOCALMACRO__BOOLEAN_DEFINED
 #endif /* !__STRICT_ANSI__ */
+#else /* !__GNUC__ */
+#undef LOCALMACRO__BOOLEAN_DEFINED
 #endif /* __GNUC__ */
 #endif /* !__cplusplus */
 #else /* __STDBOOL_H */
@@ -305,6 +310,8 @@
 #else /* __cplusplus */
 #define _Bool bool
 #endif /* __cplusplus */
+
+#define BOOLEAN bool
 #else /* _STDBOOL_H */
 #undef _STDBOOL_H
 #define BOOLEAN bool

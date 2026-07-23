@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2026/05/19 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/06/19 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/07/23 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -53,7 +53,7 @@
 \******************************************************************************/
 
 #ifndef KERNEL32_H
-#define KERNEL32_H 202606 /* VERSION */
+#define KERNEL32_H 202607 /* VERSION */
 
 /* *********************** [v] TI CGT CCS (PUSH) [v] ************************ */
 #ifdef __TI_COMPILER_VERSION__
@@ -71,6 +71,11 @@
 /******* """""""""""""""""""""""""
  * #define STDCALL
  */
+#include "../ATTRIBUTES/EXTERN_C.H"
+/******* """"""""""""""""""""""""""
+ * #define EXTERN_C_START
+ * #define EXTERN_C_END
+ */
 #include "../ENVIRONMENTS/KNR_STYLE.H"
 /******* """""""""""""""""""""""""""""
  * #define KNR_STYLE
@@ -80,13 +85,19 @@
  */
 #include "../KEYWORDS/TYPES.H"
 /******* """""""""""""""""""""
- * typeof	PTR;
- * typeof	LET;
- * typeof	VAR;
+ * typedef	PTR;
+ * typedef	LET;
+ * typedef	VAR;
+ */
+#include "../ENVIRONMENTS/PLATFORM.H"
+/******* """"""""""""""""""""""""""""
+ * #define __PLATFORM_WINDOWS__
  */
 /* **************************** [^] INCLUDES [^] **************************** */
 
+#ifdef __PLATFORM_WINDOWS__
 /* **************************** [v] STRUCTS [v] ***************************** */
+EXTERN_C_START
 struct S_WIN_SYSTEM_INFO
 {
 	union
@@ -109,10 +120,20 @@ struct S_WIN_SYSTEM_INFO
 	unsigned short		PROCESSOR_REVISION;
 };
 
+struct S_WIN_CRITICAL_SECTION
+{
+	PTR				DEBUG_INFO;
+	unsigned long	LOCK_COUNT;
+	unsigned long	RECURSION_COUNT;
+	PTR				OWNING_THREAD;
+	PTR				LOCK_SEMAPHORE;
+	LET				SPIN_COUNT;
+};
+
 struct S_KERNEL32
 {
 #ifndef KNR_STYLE /* STANDARD C */
-	PTR				SELF_ADDRESS;
+	PTR				SELF;
 	PTR				(STDCALL *LoadLibraryA)(const char *);
 	PTR				(STDCALL *LoadLibraryExA)(
 		const char*,
@@ -226,12 +247,27 @@ struct S_KERNEL32
 	int				(STDCALL *FlushInstructionCache)(PTR, const PTR, VAR);
 	void			(STDCALL *GetSystemInfo)(struct S_WIN_SYSTEM_INFO *);
 	int				(STDCALL *GetExitCodeThread)(PTR, unsigned long *);
-	void			(STDCALL *InitializeCriticalSection)(PTR);
+	void			(STDCALL *InitializeCriticalSection)(
+		struct S_WIN_CRITICAL_SECTION *
+	);
 	void			(STDCALL *DeleteCriticalSection)(PTR);
 	void			(STDCALL *EnterCriticalSection)(PTR);
 	void			(STDCALL *LeaveCriticalSection)(PTR);
+	PTR				(STDCALL *GlobalAlloc)(unsigned long, LET);
+	PTR				(STDCALL *GlobalLock)(PTR);
+	int				(STDCALL *GlobalUnlock)(PTR);
+	PTR				(STDCALL *GlobalReAlloc)(PTR, LET, unsigned long);
+	PTR				(STDCALL *GlobalFree)(PTR);
+	PTR				(STDCALL *CreateFileMappingA)(
+		PTR, PTR, unsigned long, unsigned long,
+		unsigned long, const char *
+	);
+	PTR				(STDCALL *MapViewOfFile)(
+		PTR, unsigned long, unsigned long, unsigned long, LET
+	);
+	int				(STDCALL *UnmapViewOfFile)(PTR);
 #else /* K&R */
-	char			*SELF_ADDRESS;
+	char			*SELF;
 	PTR				(STDCALL *LoadLibraryA)();
 	PTR				(STDCALL *LoadLibraryExA)();
 	int				(STDCALL *FreeLibrary)();
@@ -282,9 +318,27 @@ struct S_KERNEL32
 	int				(STDCALL *DeleteCriticalSection)();
 	int				(STDCALL *EnterCriticalSection)();
 	int				(STDCALL *LeaveCriticalSection)();
+	PTR				(STDCALL *GlobalAlloc)();
+	PTR				(STDCALL *GlobalLock)();
+	int				(STDCALL *GlobalUnlock)();
+	PTR				(STDCALL *GlobalReAlloc)();
+	PTR				(STDCALL *GlobalFree)();
+	PTR				(STDCALL *CreateFileMappingA)();
+	PTR				(STDCALL *MapViewOfFile)();
+	int				(STDCALL *UnmapViewOfFile)();
 #endif /* !KNR_STYLE */
 };
+EXTERN_C_END
 /* **************************** [^] STRUCTS [^] ***************************** */
+
+
+
+
+/* **************************** [v] EXTERNS [v] ***************************** */
+EXTERN_C_START
+extern struct S_KERNEL32	KERNEL32;
+EXTERN_C_END
+/* **************************** [^] EXTERNS [^] ***************************** */
 
 /**@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@**\
 |**@                                                                        @**|
@@ -316,10 +370,6 @@ struct S_KERNEL32
  */
 /* **************************** [^] INCLUDES [^] **************************** */
 
-/* **************************** [v] EXTERNS [v] ***************************** */
-extern struct S_KERNEL32	KERNEL32;
-/* **************************** [^] EXTERNS [^] ***************************** */
-
 /* ******************* [v] LOCALMACRO__SETUP_LINKABLE [v] ******************* */
 #ifdef CMT_SETUP
 #define LOCALMACRO__SETUP_LINKABLE
@@ -338,106 +388,122 @@ extern struct S_KERNEL32	KERNEL32;
 #define GLOBALCONSTRUCTOR__KERNEL32 \
 	do\
 	{\
-		KERNEL32.SELF_ADDRESS = PEB_GET_MODULE_BASE("KERNEL32.DLL");\
+		KERNEL32.SELF = PEB_GET_MODULE_BASE("KERNEL32.DLL");\
 		KERNEL32.GetCurrentProcess = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "GetCurrentProcess");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "GetCurrentProcess");\
 		KERNEL32.FlushInstructionCache = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "FlushInstructionCache");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "FlushInstructionCache");\
 		KERNEL32.LoadLibraryA = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "LoadLibraryA");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "LoadLibraryA");\
 		KERNEL32.LoadLibraryExA = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "LoadLibraryExA");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "LoadLibraryExA");\
 		KERNEL32.FreeLibrary = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "FreeLibrary");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "FreeLibrary");\
 		KERNEL32.GetProcAddress = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "GetProcAddress");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "GetProcAddress");\
 		KERNEL32.GetModuleHandleA = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "GetModuleHandleA");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "GetModuleHandleA");\
 		KERNEL32.GetCurrentProcessId = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "GetCurrentProcessId");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "GetCurrentProcessId");\
 		KERNEL32.TerminateProcess = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "TerminateProcess");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "TerminateProcess");\
 		KERNEL32.ExitProcess = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "ExitProcess");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "ExitProcess");\
 		KERNEL32.CreateThread = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "CreateThread");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "CreateThread");\
 		KERNEL32.GetCurrentThread = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "GetCurrentThread");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "GetCurrentThread");\
 		KERNEL32.GetCurrentThreadId = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "GetCurrentThreadId");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "GetCurrentThreadId");\
 		KERNEL32.ExitThread = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "ExitThread");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "ExitThread");\
 		KERNEL32.SuspendThread = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "SuspendThread");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "SuspendThread");\
 		KERNEL32.ResumeThread = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "ResumeThread");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "ResumeThread");\
 		KERNEL32.VirtualAlloc = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "VirtualAlloc");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "VirtualAlloc");\
 		KERNEL32.VirtualFree = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "VirtualFree");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "VirtualFree");\
 		KERNEL32.VirtualProtect = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "VirtualProtect");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "VirtualProtect");\
 		KERNEL32.RtlMoveMemory = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "RtlMoveMemory");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "RtlMoveMemory");\
 		KERNEL32.RtlCopyMemory = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "RtlCopyMemory");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "RtlCopyMemory");\
 		KERNEL32.RtlZeroMemory = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "RtlZeroMemory");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "RtlZeroMemory");\
 		KERNEL32.GetProcessHeap = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "GetProcessHeap");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "GetProcessHeap");\
 		KERNEL32.HeapAlloc = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "HeapAlloc");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "HeapAlloc");\
 		KERNEL32.HeapFree = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "HeapFree");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "HeapFree");\
 		KERNEL32.CreateFileA = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "CreateFileA");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "CreateFileA");\
 		KERNEL32.ReadFile = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "ReadFile");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "ReadFile");\
 		KERNEL32.WriteFile = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "WriteFile");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "WriteFile");\
 		KERNEL32.CloseHandle = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "CloseHandle");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "CloseHandle");\
 		KERNEL32.GetFileSize = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "GetFileSize");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "GetFileSize");\
 		KERNEL32.DeleteFileA = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "DeleteFileA");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "DeleteFileA");\
 		KERNEL32.GetStdHandle = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "GetStdHandle");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "GetStdHandle");\
 		KERNEL32.WriteConsoleA = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "WriteConsoleA");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "WriteConsoleA");\
 		KERNEL32.WaitForSingleObject = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "WaitForSingleObject");\
-		KERNEL32.Sleep = PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "Sleep");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "WaitForSingleObject");\
+		KERNEL32.Sleep = PEB_GET_EXPORT(KERNEL32.SELF, "Sleep");\
 		KERNEL32.GetSystemTime = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "GetSystemTime");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "GetSystemTime");\
 		KERNEL32.GetLocalTime = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "GetLocalTime");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "GetLocalTime");\
 		KERNEL32.QueryPerformanceCounter = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "QueryPerformanceCounter");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "QueryPerformanceCounter");\
 		KERNEL32.QueryPerformanceFrequency = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "QueryPerformanceFrequency");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "QueryPerformanceFrequency");\
 		KERNEL32.GetLastError = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "GetLastError");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "GetLastError");\
 		KERNEL32.SetLastError = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "SetLastError");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "SetLastError");\
 		KERNEL32.lstrcmpA = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "lstrcmpA");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "lstrcmpA");\
 		KERNEL32.lstrcpyA = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "lstrcpyA");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "lstrcpyA");\
 		KERNEL32.lstrlenA = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "lstrlenA");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "lstrlenA");\
 		KERNEL32.GetSystemInfo = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "GetSystemInfo");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "GetSystemInfo");\
 		KERNEL32.GetExitCodeThread = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "GetExitCodeThread");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "GetExitCodeThread");\
 		KERNEL32.InitializeCriticalSection = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "InitializeCriticalSection");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "InitializeCriticalSection");\
 		KERNEL32.DeleteCriticalSection = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "DeleteCriticalSection");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "DeleteCriticalSection");\
 		KERNEL32.EnterCriticalSection = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "EnterCriticalSection");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "EnterCriticalSection");\
 		KERNEL32.LeaveCriticalSection = \
-			PEB_GET_EXPORT(KERNEL32.SELF_ADDRESS, "LeaveCriticalSection");\
+			PEB_GET_EXPORT(KERNEL32.SELF, "LeaveCriticalSection");\
+		KERNEL32.GlobalAlloc = \
+			PEB_GET_EXPORT(KERNEL32.SELF, "GlobalAlloc");\
+		KERNEL32.GlobalLock = \
+			PEB_GET_EXPORT(KERNEL32.SELF, "GlobalLock");\
+		KERNEL32.GlobalUnlock = \
+			PEB_GET_EXPORT(KERNEL32.SELF, "GlobalUnlock");\
+		KERNEL32.GlobalReAlloc = \
+			PEB_GET_EXPORT(KERNEL32.SELF, "GlobalReAlloc");\
+		KERNEL32.GlobalFree = \
+			PEB_GET_EXPORT(KERNEL32.SELF, "GlobalFree");\
+		KERNEL32.CreateFileMappingA = \
+			PEB_GET_EXPORT(KERNEL32.SELF, "CreateFileMappingA");\
+		KERNEL32.MapViewOfFile = \
+			PEB_GET_EXPORT(KERNEL32.SELF, "MapViewOfFile");\
+		KERNEL32.UnmapViewOfFile = \
+			PEB_GET_EXPORT(KERNEL32.SELF, "UnmapViewOfFile");\
 	}\
 	while (0);
 
@@ -464,7 +530,9 @@ extern struct S_KERNEL32	KERNEL32;
 #ifdef CMT_SETUP
 
 /* [v] %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% /!\ IMPORTANT /!\ */
+EXTERN_C_START
 LOCALLINKER__KERNEL32
+EXTERN_C_END
 /* [^] %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% /!\ IMPORTANT /!\ */
 
 #else /* !CMT_SETUP */
@@ -489,13 +557,13 @@ LOCALLINKER__KERNEL32
 |**@ /_/    \_\____/   |_|  \____/  |______|_____|_| \_|_|\_\______|_|  \_\ @**|
 |**@                                                                        @**|
 \**@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@**/
+#endif /* !__PLATFORM_WINDOWS__ */
 
 /* ************************ [v] TI CGT CCS (POP) [v] ************************ */
 #ifdef __TI_COMPILER_VERSION__
 #pragma diag_pop /* TI CGT CCS COMPILER DIRECTIVES */
 #endif /* __TI_COMPILER_VERSION__ */
 /* ************************ [^] TI CGT CCS (POP) [^] ************************ */
-
 #endif /* !KERNEL32_H */
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\

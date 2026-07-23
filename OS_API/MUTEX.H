@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2025/06/05 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/07/14 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/07/20 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -221,6 +221,11 @@
  * #define void
  * #define unsigned
  */
+#include "../ATTRIBUTES/EXTERN_C.H"
+/******* """"""""""""""""""""""""""
+ * #define EXTERN_C_START
+ * #define EXTERN_C_END
+ */
 /* **************************** [^] INCLUDES [^] **************************** */
 
 /* ****************** [v] LOCALMACRO_MUTEX_FOR_WINDOWS [v] ****************** */
@@ -400,6 +405,24 @@
 #undef LOCALMACRO_MUTEX_TI_RTOS
 #endif /* LOCALMACRO_MUTEX_TI_RTOS */
 
+/* *************************** [v] MVS LINKER [v] *************************** */
+/* **** MVS LINKER DOES NOT SUPPORT EXTERNAL NAMES LARGER THAN 8 BYTES!! **** */
+#ifdef __MVS__ /* IBM Z/OS XL C/C++ */
+#define MUTEX_CREATE CMTMTXCE
+#define MUTEX_DESTROY CMTMTXDY
+#endif /* __MVS__ */
+/* *************************** [^] MVS LINKER [^] *************************** */
+
+/* **************************** [v] EXTERNS [v] ***************************** */
+#ifndef KNR_STYLE /* STANDARD C */
+extern int	MUTEX_CREATE(T_MUTEX *);
+extern int	MUTEX_DESTROY(T_MUTEX *);
+#else /* K&R */
+extern int	MUTEX_CREATE();
+extern int	MUTEX_DESTROY();
+#endif /* !KNR_STYLE */
+/* **************************** [^] EXTERNS [^] ***************************** */
+
 /**@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@**\
 |**@                                                                        @**|
 |**@            @@@@@@@@@   @@@@@  @@@@@ @@@@@@@@@@@    @@@@@@@             @**|
@@ -421,24 +444,6 @@
 |**@::::::::::: ::::: :::::    ::::: :::::   :::: :::::::::: :::::   :::::  @**|
 |**@                                                                        @**|
 \**@@[v]*[v]*[v]*[v]*[v]*[v]*[v]*[v]*[v][v]*[v]*[v]*[v]*[v]*[v]*[v]*[v]*[v]@@**/
-
-/* *************************** [v] MVS LINKER [v] *************************** */
-/* **** MVS LINKER DOES NOT SUPPORT EXTERNAL NAMES LARGER THAN 8 BYTES!! **** */
-#ifdef __MVS__ /* IBM Z/OS XL C/C++ */
-#define MUTEX_CREATE CMTMTXCE
-#define MUTEX_DESTROY CMTMTXDY
-#endif /* __MVS__ */
-/* *************************** [^] MVS LINKER [^] *************************** */
-
-/* **************************** [v] EXTERNS [v] ***************************** */
-#ifndef KNR_STYLE /* STANDARD C */
-extern int	MUTEX_CREATE(T_MUTEX *);
-extern int	MUTEX_DESTROY(T_MUTEX *);
-#else /* K&R */
-extern int	MUTEX_CREATE();
-extern int	MUTEX_DESTROY();
-#endif /* !KNR_STYLE */
-/* **************************** [^] EXTERNS [^] ***************************** */
 
 /* ******************* [v] LOCALMACRO__SETUP_LINKABLE [v] ******************* */
 #ifdef CMT_SETUP
@@ -468,7 +473,9 @@ extern int	MUTEX_DESTROY();
 #ifdef CMT_SETUP
 
 /* [v] %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% /!\ IMPORTANT /!\ */
+EXTERN_C_START
 LOCALLINKER__MUTEX
+EXTERN_C_END
 /* [^] %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% /!\ IMPORTANT /!\ */
 
 #else /* !CMT_SETUP */

@@ -10,34 +10,33 @@
 /* **************************** [^] INCLUDES [^] **************************** */
 
 /* **************************** [v] EXTERNS [v] ***************************** */
+EXTERN_C_START
 #ifndef KNR_STYLE /* ANSI C */
 extern void	*calloc(size_t, size_t);
 #else /* K&R */
 extern char	*calloc();
 #endif /* !KNR_STYLE */
+EXTERN_C_END
 /* **************************** [^] EXTERNS [^] ***************************** */
 
 #ifndef KNR_STYLE /* ANSI C */
-extern PTR	CALLOC(register LET, register LET);
 #define FUNCTION_HEADER__CALLOC \
-	PTR	CALLOC(register LET MULTIPLICATION, register LET SIZE)
+	PTR	CALLOC(LET SIZE)
 #else /* K&R */
-extern PTR	CALLOC();
 #define FUNCTION_HEADER__CALLOC \
-	PTR	CALLOC(MULTIPLICATION, SIZE) \
-	register LET	MULTIPLICATION;
-	register LET	SIZE;
+	PTR	CALLOC(SIZE) \
+	LET	SIZE;
 #endif /* !KNR_STYLE */
 
 #define LOCALFUNCTION__CALLOC \
 	FUNCTION_HEADER__CALLOC \
 	{\
-		const PTR	RESULT = calloc(1, (MULTIPLICATION * SIZE) + sizeof(LET));\
+		const PTR	RESULT = calloc(1, SIZE + sizeof(LET));\
 		\
 		if (!RESULT)\
 			return ((PTR)0);\
 		\
-		(*((LET *)RESULT)) = MULTIPLICATION * SIZE;\
+		(*((LET *)RESULT)) = SIZE;\
 		return (((LET *)RESULT) + 1);\
 	}
 

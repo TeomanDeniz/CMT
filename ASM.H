@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2024/02/27 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/06/23 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/07/23 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -474,6 +474,10 @@ Still planning PTR
 
 \* @@@@@@@@@@@@@@@@@@@@@ TODO | PLEASE IGNORE THIS PART @@@@@@@@@@@@@@@@@@@@@ */
 
+#ifndef ASM_H
+#define ASM_H 202607 /* VERSION */
+#endif /* !ASM_H */
+
 /* *********************** [v] TI CGT CCS (PUSH) [v] ************************ */
 #ifdef __TI_COMPILER_VERSION__
 #pragma diag_push /* TI CGT CCS COMPILER DIRECTIVES */
@@ -537,9 +541,6 @@ Still planning PTR
 #endif /* !INCL_CMT_ASM_OP */
 
 #include "ASM/OP.INL"
-
-#ifndef ASM_H
-#define ASM_H 202606 /* VERSION */
 
 /* **************************** [v] INCLUDES [v] **************************** */
 #include "ENVIRONMENTS/CPU.H"
@@ -787,7 +788,6 @@ extern LET STDCALL	VirtualQuery();
 
 #endif /* !CMT_CANT_USE_INLINE_ASM_FOR_SECTIONS */
 #endif /* INCL_CMT_ASM_INLINE */
-#endif /* !ASM_H */
 
 #ifndef INCL_CMT_ASM_DISABLE_AUTO_DOWNGRADER
 #include "ASM/AUTO_DOWNGRADER.INL"

@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2026/06/12 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/07/20 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/07/23 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -63,14 +63,44 @@
  * #define EXTERN_C_START
  * #define EXTERN_C_END
  */
+#include "../ATTRIBUTES/ALIGN.H"
+/******* """""""""""""""""""""""
+ * #define ALIGN_UP(VALUE)
+ */
 #include "../KEYWORDS/TYPES.H"
 /******* """""""""""""""""""""
  * #define BOOLEAN
  * typedef	BIT32;
+ * typedef	LET;
+ * typedef	VAR;
  * typedef	PTR;
  * typedef	FAR_PTR;
  */
+#include "CLEAR_INSTRUCTION_CACHE.H"
+/******* """""""""""""""""""""""""""
+ * #define CLEAR_INSTRUCTION_CACHE(BEGIN, END)
+ */
+#include "MUTEX.H"
+/******* """""""""
+ * #define MUTEX_LOCK(MUTEX)
+ * #define MUTEX_UNLOCK(MUTEX)
+ * int		MUTEX_CREATE(T_MUTEX *);
+ * int		MUTEX_DESTROY(T_MUTEX *);
+ * typedef	T_MUTEX;
+ */
 /* **************************** [^] INCLUDES [^] **************************** */
+
+/* v FOR NOW, WILL REMOVED IN THE FUTURE v */
+EXTERN_C_START
+#ifndef KNR_STYLE /* STANDARD C */
+extern PTR	memset(PTR, int, LET);
+extern PTR	memcpy(PTR, const void *, LET);
+#else /* K&R */ /* TODO */
+extern PTR	memset();
+extern PTR	memcpy();
+#endif /* !KNR_STYLE */
+EXTERN_C_END
+/* ^ FOR NOW, WILL REMOVED IN THE FUTURE ^ */
 
 /* ***************************** [v] STDLIB [v] ***************************** */
 #ifdef __STDC_HOSTED__
@@ -336,6 +366,47 @@
 #endif /* !LOCALMACRO__PLATFORM_FOUND */
 /* ***************************** [^] MSDOS [^] ****************************** */
 
+/* **************************** [v] STRUCTS [v] ***************************** */
+EXTERN_C_START
+struct S_MEM_BLOCK
+{
+	LET					SIZE;
+	int					FREED;
+	struct S_MEM_BLOCK	*NEXT;
+	struct S_MEM_BLOCK	*PREV;
+	struct S_MEM_PAGE	*PAGE;
+};
+
+struct S_MEM_PAGE
+{
+	LET					SIZE;
+	LET					USED;
+	struct S_MEM_PAGE	*NEXT;
+	struct S_MEM_PAGE	*PREV;
+	struct S_MEM_BLOCK	*BLOCKS;
+};
+
+struct S_SEGMENT
+{
+	LET					SIZE;
+	int					FREE;
+	struct S_SEGMENT	*NEXT;
+	struct S_SEGMENT	*PREV;
+};
+
+struct S_SLAB
+{
+	BYTE				*RW;
+	BYTE				*RX;
+	LET					SIZE;
+	int					MODE;
+	struct S_SEGMENT	*SEGMENTS;
+	struct S_SLAB		*NEXT;
+	struct S_SLAB		*PREV;
+};
+EXTERN_C_END
+/* **************************** [^] STRUCTS [^] ***************************** */
+
 #ifndef LOCALMACRO__PLATFORM_FOUND
 #warning "CMT - MEMORY.H: PLATFORM COULDN'T DETECTED. USING DEFAULT AS 'UNIX'"
 #define LOCALMACRO__PLATFORM_UNIX
@@ -344,7 +415,6 @@
 #endif /* !LOCALMACRO__PLATFORM_FOUND */
 
 #ifdef LOCALMACRO__STDLIB
-#undef LOCALMACRO__STDLIB
 #include "MEMORY/STDLIB.INL"
 #endif /* LOCALMACRO__STDLIB */
 
@@ -365,8 +435,12 @@
 
 #ifdef LOCALMACRO__PLATFORM_MSDOS
 #undef LOCALMACRO__PLATFORM_MSDOS
+#error "CMT/MEMORY: MS-DOS / 16-bit backend not implemented yet (needs \
+compiler-specific INT 21h AH=48h/49h allocation, deferred for now)"
 #include "MEMORY/MSDOS.INL"
 #endif /* LOCALMACRO__PLATFORM_MSDOS */
+
+#undef LOCALMACRO__STDLIB
 
 /* *************************** [v] MVS LINKER [v] *************************** */
 /* **** MVS LINKER DOES NOT SUPPORT EXTERNAL NAMES LARGER THAN 8 BYTES!! **** */
@@ -380,7 +454,6 @@
 #define ALLOC_EXE CMTEXEAL
 #define FAR_ALLOC_EXE CMTFEXEA
 #define FAR_FREE_EXE CMTFEXEF
-#define PAGE_SIZE CMTPGSIZ
 #define ALLOC_PAGE CMTALLOP
 #define FREE_PAGE CMTFPAGE
 #define GET_PAGE_SIZE CMTGPGSI
@@ -436,9 +509,6 @@ extern LET		LENGTH_EXE();
 extern BOOLEAN	MEMORY_MODE();
 extern PTR		REALLOC();
 #endif /* !KNR_STYLE */
-
-extern LET		PAGE_SIZE;
-
 EXTERN_C_END
 /* **************************** [^] EXTERNS [^] ***************************** */
 
@@ -464,7 +534,121 @@ EXTERN_C_END
 |**@                                                                        @**|
 \**@@[v]*[v]*[v]*[v]*[v]*[v]*[v]*[v]*[v][v]*[v]*[v]*[v]*[v]*[v]*[v]*[v]*[v]@@**/
 
+/* ******************* [v] LOCALMACRO__SETUP_LINKABLE [v] ******************* */
+#ifdef CMT_SETUP
+#define LOCALMACRO__SETUP_LINKABLE
+#else /* !CMT_SETUP */
+#ifndef CMT_EXTERN /* MEANS BOTH NOT DEFINED */
+#define LOCALMACRO__SETUP_LINKABLE
+#endif /* !CMT_EXTERN */
+#endif /* !CMT_SETUP */
+/* ******************* [^] LOCALMACRO__SETUP_LINKABLE [^] ******************* */
 
+/* .,,,,. #==========================================================# .,,,,. */
+/*  \\//  |                  SETUP MEMBER CREATION                   |  \\//  */
+/*   \/   #==========================================================#   \/   */
+
+#ifndef LOCALCONSTRUCTOR__MEMORY_ALLOC
+#define LOCALCONSTRUCTOR__MEMORY_ALLOC
+#endif /* !LOCALCONSTRUCTOR__MEMORY_ALLOC */
+
+#ifndef LOCALCONSTRUCTOR__MEMORY_ALLOC_EXE
+#define LOCALCONSTRUCTOR__MEMORY_ALLOC_EXE
+#endif /* !LOCALCONSTRUCTOR__MEMORY_ALLOC_EXE */
+
+#ifndef LOCALCONSTRUCTOR__ALLOC_PAGE
+#define LOCALCONSTRUCTOR__ALLOC_PAGE
+#endif /* !LOCALCONSTRUCTOR__ALLOC_PAGE */
+
+#undef GLOBALCONSTRUCTOR__MEMORY
+#define GLOBALCONSTRUCTOR__MEMORY \
+	LOCALCONSTRUCTOR__MEMORY_ALLOC \
+	LOCALCONSTRUCTOR__MEMORY_ALLOC_EXE \
+	LOCALCONSTRUCTOR__ALLOC_PAGE
+
+/*   /\   #==========================================================#   /\   */
+/*  //\\  |                  SETUP MEMBER CREATION                   |  //\\  */
+/* '""""' #==========================================================# '""""' */
+
+#ifdef LOCALMACRO__SETUP_LINKABLE
+#undef LOCALMACRO__SETUP_LINKABLE
+
+/* .,,,,. #==========================================================# .,,,,. */
+/*  \\//  |                 LINKABLE MEMBER CREATION                 |  \\//  */
+/*   \/   #==========================================================#   \/   */
+
+#ifndef LOCALMACRO__MEMORY_ALLOC
+#define LOCALMACRO__MEMORY_ALLOC
+#endif /* !LOCALMACRO__MEMORY_ALLOC */
+
+#ifndef LOCALMACRO__MEMORY_ALLOC_EXE
+#define LOCALMACRO__MEMORY_ALLOC_EXE
+#endif /* !LOCALMACRO__MEMORY_ALLOC_EXE */
+
+#ifndef LOCALMACRO__MEMORY_ALLOC_PAGE
+#define LOCALMACRO__MEMORY_ALLOC_PAGE
+#endif /* !LOCALMACRO__MEMORY_ALLOC_PAGE */
+
+#define LOCALLINKER__MEMORY \
+	LOCALMACRO__MEMORY_ALLOC \
+	LOCALMACRO__MEMORY_ALLOC_EXE \
+	LOCALMACRO__MEMORY_ALLOC_PAGE \
+	LOCALFUNCTION__ALLOC \
+	LOCALFUNCTION__ALLOC_EXE \
+	LOCALFUNCTION__ALLOC_PAGE \
+	LOCALFUNCTION__CALLOC \
+	LOCALFUNCTION__FAR_ALLOC \
+	LOCALFUNCTION__FAR_ALLOC_EXE \
+	LOCALFUNCTION__FAR_CALLOC \
+	LOCALFUNCTION__FAR_FREE \
+	LOCALFUNCTION__FAR_FREE_EXE \
+	LOCALFUNCTION__FAR_LENGTH \
+	LOCALFUNCTION__FAR_LENGTH_EXE \
+	LOCALFUNCTION__FAR_MEMORY_MODE \
+	LOCALFUNCTION__FAR_REALLOC \
+	LOCALFUNCTION__FREE \
+	LOCALFUNCTION__FREE_EXE \
+	LOCALFUNCTION__FREE_PAGE \
+	LOCALFUNCTION__GET_PAGE_SIZE \
+	LOCALFUNCTION__LENGTH \
+	LOCALFUNCTION__LENGTH_EXE \
+	LOCALFUNCTION__MEMORY_MODE \
+	LOCALFUNCTION__REALLOC
+
+/*   /\   #==========================================================#   /\   */
+/*  //\\  |                 LINKABLE MEMBER CREATION                 |  //\\  */
+/* '""""' #==========================================================# '""""' */
+
+#ifdef CMT_SETUP
+
+/* [v] %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% /!\ IMPORTANT /!\ */
+EXTERN_C_START
+LOCALLINKER__MEMORY
+EXTERN_C_END
+/* [^] %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% /!\ IMPORTANT /!\ */
+
+#else /* !CMT_SETUP */
+
+/* [v] %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% /!\ IMPORTANT /!\ */
+#undef GLOBALLINKER__MEMORY
+#define GLOBALLINKER__MEMORY LOCALLINKER__MEMORY
+/* [^] %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% /!\ IMPORTANT /!\ */
+
+#include "../CMT_AUTO_LINKER.INL"
+#endif /* CMT_SETUP */
+#else /* !LOCALMACRO__SETUP_LINKABLE */
+#include "../../../CMT_AUTO_CONSTRUCTOR.INL"
+#endif /* LOCALMACRO__SETUP_LINKABLE */
+
+/**@@[^]*[^]*[^]*[^]*[^]*[^]*[^]*[^]*[^][^]*[^]*[^]*[^]*[^]*[^]*[^]*[^]*[^]@@**\
+|**@          _    _ _______ ____    _      _____ _   _ _  ________ _____   @**|
+|**@     /\  | |  | |__   __/ __ \  | |    |_   _| \ | | |/ /  ____|  __ \  @**|
+|**@    /  \ | |  | |  | | | |  | |_| |      | | |  \| | ' /| |__  | |__) | @**|
+|**@   / /\ \| |  | |  | | | |  | |_| |      | | | . ` |  < |  __| |  _  /  @**|
+|**@  / ____ \ |__| |  | | | |__| | | |____ _| |_| |\  | . \| |____| | \ \  @**|
+|**@ /_/    \_\____/   |_|  \____/  |______|_____|_| \_|_|\_\______|_|  \_\ @**|
+|**@                                                                        @**|
+\**@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@**/
 
 #endif /* !MEMORY_H */
 

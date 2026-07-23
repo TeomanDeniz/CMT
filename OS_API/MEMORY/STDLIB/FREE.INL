@@ -3,18 +3,18 @@
 #endif /* !ASM_H */
 
 /* **************************** [v] EXTERNS [v] ***************************** */
+EXTERN_C_START
 #ifndef KNR_STYLE /* ANSI C */
 extern void	free(void *);
 #else /* K&R */
 extern		free();
 #endif /* !KNR_STYLE */
+EXTERN_C_END
 /* **************************** [^] EXTERNS [^] ***************************** */
 
 #ifndef KNR_STYLE /* ANSI C */
-extern void	FREE(PTR);
 #define FUNCTION_HEADER__FREE void	FREE(PTR ADDRESS)
 #else /* K&R */
-extern		FREE();
 #define FUNCTION_HEADER__FREE \
 	FREE(ADDRESS) \
 	PTR	ADDRESS;

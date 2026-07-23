@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2026/03/16 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/06/12 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/07/20 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -245,25 +245,8 @@
 |*                                                                            *|
 \******************************************************************************/
 
-/* * * * * * * * * * * * * * * * * * * ** * * * * * * * * * * * * * * * * * * *\
-|* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ *|
-|* @                              TEST REPORT                               @ *|
-|* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ *|
-|*                                                                            *|
-|* #===============================================================#========# *|
-|* | ENVIRONMENTS                                                  | RESULT | *|
-|* #===============================================================#========# *|
-|* |                                                               |        | *|
-|* |_______________________________________________________________|________| *|
-|*                                                                            *|
-|*  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  *|
-|*                                                                            *|
-|*  /!\ No noteworthy issues were encountered to report.                      *|
-|*                                                                            *|
-\* * * * * * * * * * * * * * * * * * * ** * * * * * * * * * * * * * * * * * * */
-
 #ifndef CPUID_H
-#define CPUID_H 202606 /* VERSION */
+#define CPUID_H 202607 /* VERSION */
 
 /* ********************** [v] VENDOR STRINGS (CPUS) [v] ********************* */
 #define CPUID_VENDOR_AMD "AuthenticAMD"
@@ -405,10 +388,14 @@
  * #define KNR_STYLE
  * #define unsigned
  */
+#include "../../../ATTRIBUTES/EXTERN_C.H"
+/******* """"""""""""""""""""""""""""""""
+ * #define EXTERN_C_START
+ * #define EXTERN_C_END
+ */
 /* **************************** [^] INCLUDES [^] **************************** */
 
 #ifndef __SYSTEM_16_BIT__
-
 #ifdef INLINE_ASM_TYPE__WATCOM
 #undef IS__INLINE_ASM__SUPPORTED
 #endif /* INLINE_ASM_TYPE__WATCOM */
@@ -560,6 +547,35 @@
 #define IS__INLINE_ASM__SUPPORTED
 #endif /* INLINE_ASM_TYPE__WATCOM */
 
+/* **************************** [v] INCLUDES [v] **************************** */
+#include "../../../ENVIRONMENTS/KNR_STYLE.H"
+/******* """""""""""""""""""""""""""""""""""
+ * #define KNR_STYLE
+ * #define void
+ */
+#include "../../../ASM/CAN_CMT_USE_INLINE_ASM_FOR_SECTIONS.INL"
+/******* """"""""""""""""""""""""""""""""""""""""""""""""""""""
+ * #define CMT_CANT_USE_INLINE_ASM_FOR_SECTIONS
+ */
+/* **************************** [^] INCLUDES [^] **************************** */
+
+/* *************************** [v] MVS LINKER [v] *************************** */
+/* **** MVS LINKER DOES NOT SUPPORT EXTERNAL NAMES LARGER THAN 8 BYTES!! **** */
+#ifdef __MVS__ /* IBM Z/OS XL C/C++ */
+#define LOCALFUNCTION__GET_CPUID L_GCPUID
+#endif /* __MVS__ */
+/* *************************** [^] MVS LINKER [^] *************************** */
+
+/* **************************** [v] EXTERNS [v] ***************************** */
+EXTERN_C_START
+#ifndef KNR_STYLE /* STANDARD C */
+extern void	LOCALFUNCTION__GET_CPUID(BIT32, BIT32 *, BIT32 *, BIT32 *, BIT32 *);
+#else /* K&R */
+extern int	LOCALFUNCTION__GET_CPUID();
+#endif /* !KNR_STYLE */
+EXTERN_C_END
+/* **************************** [^] EXTERNS [^] ***************************** */
+
 /**@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@**\
 |**@                                                                        @**|
 |**@            @@@@@@@@@   @@@@@  @@@@@ @@@@@@@@@@@    @@@@@@@             @**|
@@ -581,33 +597,6 @@
 |**@::::::::::: ::::: :::::    ::::: :::::   :::: :::::::::: :::::   :::::  @**|
 |**@                                                                        @**|
 \**@@[v]*[v]*[v]*[v]*[v]*[v]*[v]*[v]*[v][v]*[v]*[v]*[v]*[v]*[v]*[v]*[v]*[v]@@**/
-
-/* **************************** [v] INCLUDES [v] **************************** */
-#include "../../../ENVIRONMENTS/KNR_STYLE.H"
-/******* """""""""""""""""""""""""""""""""""
- * #define KNR_STYLE
- * #define void
- */
-#include "../../../ASM/CAN_CMT_USE_INLINE_ASM_FOR_SECTIONS.INL"
-/******* """"""""""""""""""""""""""""""""""""""""""""""""""""""
- * #define CMT_CANT_USE_INLINE_ASM_FOR_SECTIONS
- */
-/* **************************** [^] INCLUDES [^] **************************** */
-
-/* *************************** [v] MVS LINKER [v] *************************** */
-/* **** MVS LINKER DOES NOT SUPPORT EXTERNAL NAMES LARGER THAN 8 BYTES!! **** */
-#ifdef __MVS__ /* IBM Z/OS XL C/C++ */
-#define LOCALFUNCTION__GET_CPUID L_GCPUID
-#endif /* __MVS__ */
-/* *************************** [^] MVS LINKER [^] *************************** */
-
-/* **************************** [v] EXTERNS [v] ***************************** */
-#ifndef KNR_STYLE /* STANDARD C */
-extern void	LOCALFUNCTION__GET_CPUID(BIT32, BIT32 *, BIT32 *, BIT32 *, BIT32 *);
-#else /* K&R */
-extern int	LOCALFUNCTION__GET_CPUID();
-#endif /* !KNR_STYLE */
-/* **************************** [^] EXTERNS [^] ***************************** */
 
 /* ******************* [v] LOCALMACRO__SETUP_LINKABLE [v] ******************* */
 #ifdef CMT_SETUP
@@ -830,7 +819,9 @@ extern int	LOCALFUNCTION__GET_CPUID();
 #ifdef CMT_SETUP
 
 /* [v] %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% /!\ IMPORTANT /!\ */
+EXTERN_C_START
 LOCALLINKER__CPUID
+EXTERN_C_END
 /* [^] %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% /!\ IMPORTANT /!\ */
 
 #include "../../../CMT_AUTO_CONSTRUCTOR.INL"
@@ -880,13 +871,21 @@ LOCALLINKER__CPUID
 #endif /* IS__INLINE_ASM__SUPPORTED */
 
 #else /* __SYSTEM_16_BIT__ */
+#include "../../../CMT_WARNER.INL"
+
 #define GET_CPUID(LEAF, AX, BX, CX, DX) \
-	"ERROR - 16-BIT INTEL CPU MOSTLY NOT SUPPORT CPUID >:I"
+	CMT_WARN(\
+		"ERROR - 16-BIT INTEL CPU MOSTLY NOT SUPPORT CPUID >:I"\
+	)
 #endif /* !__SYSTEM_16_BIT__ */
 
 #else /* !__CPU_INTEL__ */
+#include "../../../CMT_WARNER.INL"
+
 #define GET_CPUID(LEAF, AX, BX, CX, DX) \
-	"ERROR - YOU'RE NOT USING AN INTEL CPU TO USE THIS COMMAND >:("
+	CMT_WARN(\
+		"ERROR - YOU'RE NOT USING AN INTEL CPU TO USE THIS COMMAND >:("\
+	)
 #endif /* __CPU_INTEL__ */
 
 /* *************************** [v] LOWERCASE [v] **************************** */

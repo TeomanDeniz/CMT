@@ -9,12 +9,13 @@
  */
 #include "../../WIN_CORE/KERNEL32.H"
 /******* """""""""""""""""""""""""""
+ * struct S_WIN_CRITICAL_SECTION;
  * struct S_KERNEL32	KERNEL32;
  */
 /* **************************** [^] INCLUDES [^] **************************** */
 
 /* **************************** [v] TYPEDEFS [v] **************************** */
-typedef PTR	T_MUTEX;
+typedef struct S_WIN_CRITICAL_SECTION	T_MUTEX;
 /* **************************** [^] TYPEDEFS [^] **************************** */
 
 #ifndef KNR_STYLE /* STANDARD C */
@@ -41,7 +42,7 @@ typedef PTR	T_MUTEX;
 		if (!MUTEX)\
 			return (1);\
 		\
-		KERNEL32.InitializeCriticalSection(*MUTEX);\
+		KERNEL32.InitializeCriticalSection(MUTEX);\
 		return (0);\
 	}
 
@@ -49,16 +50,16 @@ typedef PTR	T_MUTEX;
 	FUNCTION_HEADER__MUTEX_DESTROY \
 	{\
 		if (!MUTEX)\
-			return (-1);\
+			return (1);\
 		\
-		KERNEL32.DeleteCriticalSection(*MUTEX);\
+		KERNEL32.DeleteCriticalSection(MUTEX);\
 		return (0);\
 	}
 
 #define MUTEX_LOCK(__MUTEX_LOCK__) \
-	KERNEL32.EnterCriticalSection((__MUTEX_LOCK__))
+	KERNEL32.EnterCriticalSection(&(__MUTEX_LOCK__))
 #define MUTEX_UNLOCK(__MUTEX_UNLOCK__) \
-	KERNEL32.LeaveCriticalSection((__MUTEX_UNLOCK__))
+	KERNEL32.LeaveCriticalSection(&(__MUTEX_UNLOCK__))
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\
  * * AT THE ALL END OF FILES, I AM ADDING A SPECIAL BYTE <0X1A> TO END THE  * *

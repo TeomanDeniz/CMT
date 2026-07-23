@@ -10,19 +10,19 @@
 /* **************************** [^] INCLUDES [^] **************************** */
 
 /* **************************** [v] EXTERNS [v] ***************************** */
+EXTERN_C_START
 #ifndef KNR_STYLE /* ANSI C */
 extern void	*malloc(size_t);
 #else /* K&R */
 extern char	*malloc();
 #endif /* !KNR_STYLE */
+EXTERN_C_END
 /* **************************** [^] EXTERNS [^] ***************************** */
 
 #ifndef KNR_STYLE /* ANSI C */
-extern PTR	ALLOC(register LET);
 #define FUNCTION_HEADER__ALLOC \
 	PTR	ALLOC(register LET SIZE)
 #else /* K&R */
-extern PTR	ALLOC();
 #define FUNCTION_HEADER__ALLOC \
 	PTR	ALLOC(SIZE) \
 	register LET	SIZE;

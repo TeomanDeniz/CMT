@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2026/03/10 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/06/09 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/07/20 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -62,7 +62,7 @@
 \******************************************************************************/
 
 #ifndef MIDR_H
-#define MIDR_H 202606 /* VERSION */
+#define MIDR_H 202607 /* VERSION */
 
 /* **************************** [v] INCLUDES [v] **************************** */
 #include "../../../ENVIRONMENTS/CPU.H"
@@ -72,7 +72,6 @@
 /* **************************** [^] INCLUDES [^] **************************** */
 
 #ifdef __CPU_ARM__
-
 /* **************************** [v] INCLUDES [v] **************************** */
 #include "../../../ENVIRONMENTS/ARCHITECTURE.H"
 /******* """"""""""""""""""""""""""""""""""""""
@@ -88,10 +87,14 @@
 /******* """""""""""""""""""""""""""
  * typedef PTR;
  */
+#include "../../../ATTRIBUTES/EXTERN_C.H"
+/******* """"""""""""""""""""""""""""""""
+ * #define EXTERN_C_START
+ * #define EXTERN_C_END
+ */
 /* **************************** [^] INCLUDES [^] **************************** */
 
 #ifdef IS__INLINE_ASM__SUPPORTED
-
 #ifdef INLINE_ASM_TYPE__GNU_EXTENDED
 #ifdef __SYSTEM_64_BIT__
 #define LOCALMACRO__MIDR_GET(__REGISTER__) \
@@ -121,8 +124,12 @@
 /* TODO: ADD MORE ASSEMBLY VARIANTS */
 
 #ifndef LOCALMACRO__MIDR_GET
+#include "../../../CMT_WARNER.INL"
+
 #define GET_MIDR(_) \
-	"ERROR - CMT (MIDR.H) IS NOT SUPPORTED IN YOUR COMPILER YET :l"
+	CMT_WARN(\
+		"ERROR - CMT (MIDR.H) IS NOT SUPPORTED IN YOUR COMPILER YET :l"\
+	)
 #else /* LOCALMACRO__MIDR_GET */
 #define GET_MIDR(VARIABLE) \
 	do\
@@ -136,6 +143,34 @@
 #endif /* !LOCALMACRO__MIDR_GET */
 
 #else /* !IS__INLINE_ASM__SUPPORTED */
+
+/* **************************** [v] INCLUDES [v] **************************** */
+#include "../../../ENVIRONMENTS/KNR_STYLE.H"
+/******* """""""""""""""""""""""""""""""""""
+ * #define KNR_STYLE
+ */
+#include "../../../ASM/CAN_CMT_USE_INLINE_ASM_FOR_SECTIONS.INL"
+/******* """"""""""""""""""""""""""""""""""""""""""""""""""""""
+ * #define CMT_CANT_USE_INLINE_ASM_FOR_SECTIONS
+ */
+/* **************************** [^] INCLUDES [^] **************************** */
+
+/* *************************** [v] MVS LINKER [v] *************************** */
+/* **** MVS LINKER DOES NOT SUPPORT EXTERNAL NAMES LARGER THAN 8 BYTES!! **** */
+#ifdef __MVS__ /* IBM Z/OS XL C/C++ */
+#define LOCALMACRO__MIDR_GET LMIDRGET
+#endif /* __MVS__ */
+/* *************************** [^] MVS LINKER [^] *************************** */
+
+/* **************************** [v] EXTERNS [v] ***************************** */
+EXTERN_C_START
+#ifndef KNR_STYLE /* STANDARD C */
+extern PTR	LOCALMACRO__MIDR_GET(void);
+#else /* K&R */
+extern PTR	LOCALMACRO__MIDR_GET();
+#endif /* !KNR_STYLE */
+EXTERN_C_END
+/* **************************** [^] EXTERNS [^] ***************************** */
 
 /**@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@**\
 |**@                                                                        @**|
@@ -158,32 +193,6 @@
 |**@::::::::::: ::::: :::::    ::::: :::::   :::: :::::::::: :::::   :::::  @**|
 |**@                                                                        @**|
 \**@@[v]*[v]*[v]*[v]*[v]*[v]*[v]*[v]*[v][v]*[v]*[v]*[v]*[v]*[v]*[v]*[v]*[v]@@**/
-
-/* **************************** [v] INCLUDES [v] **************************** */
-#include "../../../ENVIRONMENTS/KNR_STYLE.H"
-/******* """""""""""""""""""""""""""""""""""
- * #define KNR_STYLE
- */
-#include "../../../ASM/CAN_CMT_USE_INLINE_ASM_FOR_SECTIONS.INL"
-/******* """"""""""""""""""""""""""""""""""""""""""""""""""""""
- * #define CMT_CANT_USE_INLINE_ASM_FOR_SECTIONS
- */
-/* **************************** [^] INCLUDES [^] **************************** */
-
-/* *************************** [v] MVS LINKER [v] *************************** */
-/* **** MVS LINKER DOES NOT SUPPORT EXTERNAL NAMES LARGER THAN 8 BYTES!! **** */
-#ifdef __MVS__ /* IBM Z/OS XL C/C++ */
-#define LOCALMACRO__MIDR_GET LMIDRGET
-#endif /* __MVS__ */
-/* *************************** [^] MVS LINKER [^] *************************** */
-
-/* **************************** [v] EXTERNS [v] ***************************** */
-#ifndef KNR_STYLE /* STANDARD C */
-extern PTR	LOCALMACRO__MIDR_GET(void);
-#else /* K&R */
-extern PTR	LOCALMACRO__MIDR_GET();
-#endif /* !KNR_STYLE */
-/* **************************** [^] EXTERNS [^] ***************************** */
 
 /* ******************* [v] LOCALMACRO__SETUP_LINKABLE [v] ******************* */
 #ifdef CMT_SETUP
@@ -265,7 +274,9 @@ extern PTR	LOCALMACRO__MIDR_GET();
 #ifdef CMT_SETUP
 
 /* [v] %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% /!\ IMPORTANT /!\ */
+EXTERN_C_START
 LOCALLINKER__MIDR
+EXTERN_C_END
 /* [^] %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% /!\ IMPORTANT /!\ */
 
 #include "../../../CMT_AUTO_CONSTRUCTOR.INL"
@@ -305,8 +316,12 @@ LOCALLINKER__MIDR
 
 #endif /* IS__INLINE_ASM__SUPPORTED */
 #else /* !__CPU_ARM__ */
+#include "../../../CMT_WARNER.INL"
+
 #define GET_MIDR(_) \
-	"ERROR - YOU'RE NOT USING AN ARM CPU TO USE THIS COMMAND >:("
+	CMT_WARN(\
+		"ERROR - YOU'RE NOT USING AN ARM CPU TO USE THIS COMMAND >:("\
+	)
 #endif /* __CPU_ARM__ */
 
 /* *************************** [v] LOWERCASE [v] **************************** */

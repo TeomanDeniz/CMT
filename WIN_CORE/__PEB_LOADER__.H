@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2026/05/19 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/07/20 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/07/23 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -138,6 +138,7 @@
 
 #ifndef PEB_LOADER_H
 #define PEB_LOADER_H 202607 /* VERSION */
+#define LOCALMACRO__MAX_FORWARD_DEPTH 4
 
 /* *********************** [v] TI CGT CCS (PUSH) [v] ************************ */
 #ifdef __TI_COMPILER_VERSION__
@@ -167,6 +168,11 @@
  * #define __SYSTEM_32_BIT__
  * #define __SYSTEM_64_BIT__
  */
+#include "../ATTRIBUTES/EXTERN_C.H"
+/******* """"""""""""""""""""""""""
+ * #define EXTERN_C_START
+ * #define EXTERN_C_END
+ */
 /* **************************** [^] INCLUDES [^] **************************** */
 
 #ifdef __SYSTEM_32_BIT__
@@ -178,6 +184,7 @@
 #endif /* __SYSTEM_32_BIT__ */
 
 /* **************************** [v] STRUCTS [v] ***************************** */
+EXTERN_C_START
 struct S_LIST_ENTRY
 {
 	struct S_LIST_ENTRY	*FLINK;
@@ -221,6 +228,7 @@ struct S_PEB
 	unsigned char			RESERVED[LOCALMACRO__PEB_RESERVED_SIZE];
 	struct S_PEB_LDR_DATA	*LDR;
 };
+EXTERN_C_END
 /* **************************** [^] STRUCTS [^] ***************************** */
 
 /* *************************** [v] MVS LINKER [v] *************************** */
@@ -505,58 +513,216 @@ extern unsigned long	READ_GS_QWORD();
 #define LOCALLINKER__PEB_GET_EXPORT \
 	FUNCTION_HEADER__PEB_GET_EXPORT\
 	{\
-		if (*(unsigned short *)MODULE != 0X5A4D)\
-			return (0);\
+		unsigned char	*CURRENT_MODULE;\
+		const char		*CURRENT_NAME;\
+		char			FORWARD_MODULE[64];\
+		long			ORDINAL;\
+		int				DEPTH;\
 		\
-		unsigned long	EXPORT_RVA = (unsigned long)0;\
+		CURRENT_MODULE = (unsigned char *)MODULE;\
+		CURRENT_NAME = (const char *)FUNCTION_NAME;\
+		ORDINAL = -1;\
 		\
+		for (DEPTH = 0; DEPTH < LOCALMACRO__MAX_FORWARD_DEPTH; DEPTH++)\
 		{\
-			const unsigned char		*const NT =\
-				MODULE + *((unsigned long *)(MODULE + 0X3C));\
-			const unsigned short	MAGIC = *(unsigned short *)(NT + 0X18);\
+			unsigned long	EXPORT_RVA;\
+			unsigned long	EXPORT_SIZE;\
+			unsigned long	FUNCTION_RVA;\
 			\
-			if (MAGIC == 0X10B) /* PE32 */\
-				EXPORT_RVA = *(unsigned long *)(NT + 0X78);\
-			else if (MAGIC == 0X20B) /* PE32+ */\
-				EXPORT_RVA = *(unsigned long *)(NT + 0X88);\
-			else\
+			if (!CURRENT_MODULE)\
 				return (0);\
-		}\
-		\
-		if (!EXPORT_RVA)\
-			return (0);\
-		\
-		const unsigned char		*const EXPORT = MODULE + EXPORT_RVA;\
-		const unsigned long		*const NAMES =\
-			(unsigned long *)(MODULE + *(unsigned long *)(EXPORT + 0X20));\
-		const unsigned long		*const FUNCTIONS =\
-			(unsigned long *)(MODULE + *(unsigned long *)(EXPORT + 0X1C));\
-		const unsigned short	*const OLD =\
-			(unsigned short *)(MODULE + *(unsigned long *)(EXPORT + 0X24));\
-		const unsigned long		COUNT = *(unsigned long *)(EXPORT + 0X18);\
-		unsigned long			INDEX;\
-		\
-		for (INDEX = 0; INDEX < COUNT; INDEX++)\
-		{\
-			const char	*FUNCTION_ADDRESS = (char *)(MODULE + NAMES[INDEX]);\
-			const char	*FUNCTION_NAME_ITERATION = FUNCTION_NAME;\
 			\
-			if (!FUNCTION_ADDRESS || !FUNCTION_NAME)\
-				continue ;\
+			if (*(unsigned short *)CURRENT_MODULE != 0X5A4D)\
+				return (0);\
 			\
-			while (\
-				*FUNCTION_ADDRESS && *FUNCTION_NAME_ITERATION &&\
-				*FUNCTION_ADDRESS == *FUNCTION_NAME_ITERATION\
-			)\
+			EXPORT_RVA = (unsigned long)0;\
+			EXPORT_SIZE = (unsigned long)0;\
+			\
 			{\
-				++FUNCTION_ADDRESS;\
-				++FUNCTION_NAME_ITERATION;\
+				const unsigned char		*const NT =\
+					CURRENT_MODULE +\
+					*((unsigned long *)(CURRENT_MODULE + 0X3C));\
+				const unsigned short	MAGIC =\
+					*(unsigned short *)(NT + 0X18);\
+				\
+				if (MAGIC == 0X10B) /* PE32 */\
+				{\
+					EXPORT_RVA = *(unsigned long *)(NT + 0X78);\
+					EXPORT_SIZE = *(unsigned long *)(NT + 0X7C);\
+				}\
+				else if (MAGIC == 0X20B) /* PE32+ */\
+				{\
+					EXPORT_RVA = *(unsigned long *)(NT + 0X88);\
+					EXPORT_SIZE = *(unsigned long *)(NT + 0X8C);\
+				}\
+				else\
+					return (0);\
 			}\
 			\
-			if (*FUNCTION_ADDRESS == 0 && *FUNCTION_NAME_ITERATION == 0)\
-				return ((unsigned char *)MODULE + FUNCTIONS[OLD[INDEX]]);\
+			if (!EXPORT_RVA || !EXPORT_SIZE)\
+				return (0);\
+			\
+			FUNCTION_RVA = (unsigned long)0;\
+			\
+			{\
+				const unsigned char		*const EXPORT =\
+					CURRENT_MODULE + EXPORT_RVA;\
+				const unsigned long		*const FUNCTIONS =\
+					(unsigned long *)(\
+						CURRENT_MODULE + *(unsigned long *)(EXPORT + 0X1C)\
+					);\
+				\
+				if (ORDINAL >= 0)\
+				{\
+					/*\
+					 * "MODULE.#123" FORWARDS BY ORDINAL, SO THE NAME TABLE\
+					 * IS USELESS HERE AND THE FUNCTION TABLE IS INDEXED\
+					 * DIRECTLY AFTER SUBTRACTING "Base".\
+					 */\
+					const unsigned long	BASE_ORDINAL =\
+						*(unsigned long *)(EXPORT + 0X10);\
+					const unsigned long	COUNT_FUNCTIONS =\
+						*(unsigned long *)(EXPORT + 0X14);\
+					\
+					if ((unsigned long)ORDINAL < BASE_ORDINAL)\
+						return (0);\
+					\
+					if (\
+						(unsigned long)ORDINAL - BASE_ORDINAL >=\
+						COUNT_FUNCTIONS\
+					)\
+						return (0);\
+					\
+					FUNCTION_RVA =\
+						FUNCTIONS[(unsigned long)ORDINAL - BASE_ORDINAL];\
+				}\
+				else\
+				{\
+					const unsigned long		*const NAMES =\
+						(unsigned long *)(\
+							CURRENT_MODULE + *(unsigned long *)(EXPORT + 0X20)\
+						);\
+					const unsigned short	*const OLD =\
+						(unsigned short *)(\
+							CURRENT_MODULE + *(unsigned long *)(EXPORT + 0X24)\
+						);\
+					const unsigned long		COUNT =\
+						*(unsigned long *)(EXPORT + 0X18);\
+					unsigned long			INDEX;\
+					\
+					if (!CURRENT_NAME)\
+						return (0);\
+					\
+					for (INDEX = 0; INDEX < COUNT; INDEX++)\
+					{\
+						const char	*FUNCTION_ADDRESS =\
+							(char *)(CURRENT_MODULE + NAMES[INDEX]);\
+						const char	*FUNCTION_NAME_ITERATION = CURRENT_NAME;\
+						\
+						if (!FUNCTION_ADDRESS)\
+							continue ;\
+						\
+						while (\
+							*FUNCTION_ADDRESS && *FUNCTION_NAME_ITERATION &&\
+							*FUNCTION_ADDRESS == *FUNCTION_NAME_ITERATION\
+						)\
+						{\
+							++FUNCTION_ADDRESS;\
+							++FUNCTION_NAME_ITERATION;\
+						}\
+						\
+						if (\
+							*FUNCTION_ADDRESS == 0 &&\
+							*FUNCTION_NAME_ITERATION == 0\
+						)\
+						{\
+							FUNCTION_RVA = FUNCTIONS[OLD[INDEX]];\
+							break ;\
+						}\
+					}\
+				}\
+			}\
+			\
+			if (!FUNCTION_RVA)\
+				return (0);\
+			\
+			/*\
+			 * OUTSIDE THE EXPORT DIRECTORY - A NORMAL EXPORT POINTING AT\
+			 * REAL CODE. THIS IS THE PATH EVERY NON FORWARDED SYMBOL TAKES,\
+			 * AND IT BEHAVES EXACTLY LIKE THE OLD VERSION DID.\
+			 */\
+			if (\
+				!(FUNCTION_RVA >= EXPORT_RVA &&\
+				FUNCTION_RVA < EXPORT_RVA + EXPORT_SIZE)\
+			)\
+				return (CURRENT_MODULE + FUNCTION_RVA);\
+			\
+			/* INSIDE IT - A FORWARDER STRING, SO FOLLOW IT */\
+			{\
+				const char		*FORWARD =\
+					(const char *)(CURRENT_MODULE + FUNCTION_RVA);\
+				unsigned long	SPLIT;\
+				unsigned long	COPY;\
+				\
+				SPLIT = 0;\
+				\
+				while (FORWARD[SPLIT] && FORWARD[SPLIT] != '.')\
+					SPLIT++;\
+				\
+				/* NO DOT, OR A MODULE NAME TOO LONG TO BE REAL */\
+				if (FORWARD[SPLIT] != '.')\
+					return (0);\
+				\
+				if (SPLIT > (unsigned long)(sizeof(FORWARD_MODULE) - 5))\
+					return (0);\
+				\
+				for (COPY = 0; COPY < SPLIT; COPY++)\
+					FORWARD_MODULE[COPY] = FORWARD[COPY];\
+				\
+				/*\
+				 * THE STRING CARRIES NO EXTENSION, AND THE LOADER LIST\
+				 * STORES "ntdll.dll". "PEB_GET_MODULE_BASE" ALREADY\
+				 * COMPARES CASE INSENSITIVELY, SO ONLY THE SUFFIX HAS TO\
+				 * BE ADDED HERE.\
+				 */\
+				FORWARD_MODULE[SPLIT + 0] = '.';\
+				FORWARD_MODULE[SPLIT + 1] = 'd';\
+				FORWARD_MODULE[SPLIT + 2] = 'l';\
+				FORWARD_MODULE[SPLIT + 3] = 'l';\
+				FORWARD_MODULE[SPLIT + 4] = 0;\
+				\
+				if (FORWARD[SPLIT + 1] == '#')\
+				{\
+					unsigned long	DIGIT;\
+					\
+					ORDINAL = 0;\
+					DIGIT = SPLIT + 2;\
+					\
+					while (FORWARD[DIGIT] >= '0' && FORWARD[DIGIT] <= '9')\
+					{\
+						ORDINAL = (ORDINAL * 10) + (FORWARD[DIGIT] - '0');\
+						DIGIT++;\
+					}\
+					\
+					CURRENT_NAME = (const char *)0;\
+				}\
+				else\
+				{\
+					ORDINAL = -1;\
+					CURRENT_NAME = &FORWARD[SPLIT + 1];\
+				}\
+				\
+				/*\
+				 * THE OLD MODULE STAYS MAPPED, SO "CURRENT_NAME" MAY KEEP\
+				 * POINTING INTO ITS EXPORT DIRECTORY ACROSS THE HOP.\
+				 */\
+				CURRENT_MODULE = (unsigned char *)PEB_GET_MODULE_BASE(\
+					(char *)FORWARD_MODULE\
+				);\
+			}\
 		}\
 		\
+		/* FORWARDER CHAIN TOO LONG - MALFORMED OR HOSTILE IMAGE */\
 		return (0);\
 	}
 
@@ -569,7 +735,9 @@ extern unsigned long	READ_GS_QWORD();
 #ifdef CMT_SETUP
 
 /* [v] %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% /!\ IMPORTANT /!\ */
+EXTERN_C_START
 LOCALLINKER__PEB_LOADER
+EXTERN_C_END
 /* [^] %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% /!\ IMPORTANT /!\ */
 
 #include "../CMT_AUTO_CONSTRUCTOR.INL"

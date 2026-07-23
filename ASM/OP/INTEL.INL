@@ -51,52 +51,52 @@
 
 #ifdef INCL_CMT_ASM_SIZEOF
 #ifdef INCL_CMT_ASM_ADD
-#ifndef SEAL_ASM_OP_ADD
-#define SEAL_ASM_OP_ADD
+#ifndef SEAL_ASM_SIZE_ADD
+#define SEAL_ASM_SIZE_ADD
 #include "INTEL/SIZES/ADD.INL"
-#endif /* !SEAL_ASM_OP_ADD */
+#endif /* !SEAL_ASM_SIZE_ADD */
 #endif /* INCL_CMT_ASM_ADD */
 
 #ifdef INCL_CMT_ASM_JMP
-#ifndef SEAL_ASM_OP_JMP
-#define SEAL_ASM_OP_JMP
+#ifndef SEAL_ASM_SIZE_JMP
+#define SEAL_ASM_SIZE_JMP
 #include "INTEL/SIZES/JMP.INL"
-#endif /* !SEAL_ASM_OP_JMP */
+#endif /* !SEAL_ASM_SIZE_JMP */
 #endif /* INCL_CMT_ASM_JMP */
 
 #ifdef INCL_CMT_ASM_MOV
-#ifndef SEAL_ASM_OP_MOV
-#define SEAL_ASM_OP_MOV
+#ifndef SEAL_ASM_SIZE_MOV
+#define SEAL_ASM_SIZE_MOV
 #include "INTEL/SIZES/MOV.INL"
-#endif /* !SEAL_ASM_OP_MOV */
+#endif /* !SEAL_ASM_SIZE_MOV */
 #endif /* INCL_CMT_ASM_MOV */
 
 #ifdef INCL_CMT_ASM_MOVABS
-#ifndef SEAL_ASM_OP_MOVABS
-#define SEAL_ASM_OP_MOVABS
+#ifndef SEAL_ASM_SIZE_MOVABS
+#define SEAL_ASM_SIZE_MOVABS
 #include "INTEL/SIZES/MOVABS.INL"
-#endif /* !SEAL_ASM_OP_MOVABS */
+#endif /* !SEAL_ASM_SIZE_MOVABS */
 #endif /* INCL_CMT_ASM_MOVABS */
 
 #ifdef INCL_CMT_ASM_OTHERS
-#ifndef SEAL_ASM_OP_OTHERS
-#define SEAL_ASM_OP_OTHERS
+#ifndef SEAL_ASM_SIZE_OTHERS
+#define SEAL_ASM_SIZE_OTHERS
 #include "INTEL/SIZES/OTHERS.INL"
-#endif /* !SEAL_ASM_OP_OTHERS */
+#endif /* !SEAL_ASM_SIZE_OTHERS */
 #endif /* INCL_CMT_ASM_OTHERS */
 
 #ifdef INCL_CMT_ASM_PUSH
-#ifndef SEAL_ASM_OP_PUSH
-#define SEAL_ASM_OP_PUSH
+#ifndef SEAL_ASM_SIZE_PUSH
+#define SEAL_ASM_SIZE_PUSH
 #include "INTEL/SIZES/PUSH.INL"
-#endif /* !SEAL_ASM_OP_PUSH */
+#endif /* !SEAL_ASM_SIZE_PUSH */
 #endif /* INCL_CMT_ASM_PUSH */
 
 #ifdef INCL_CMT_ASM_POP
-#ifndef SEAL_ASM_OP_POP
-#define SEAL_ASM_OP_POP
+#ifndef SEAL_ASM_SIZE_POP
+#define SEAL_ASM_SIZE_POP
 #include "INTEL/SIZES/POP.INL"
-#endif /* !SEAL_ASM_OP_POP */
+#endif /* !SEAL_ASM_SIZE_POP */
 #endif /* INCL_CMT_ASM_POP */
 #endif /* INCL_CMT_ASM_SIZEOF */
 

@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2025/06/22 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/07/20 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/07/21 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -52,7 +52,9 @@
 #ifndef INCL_CMT_BOOLEAN
 #ifndef INCL_CMT_MUTEX
 #ifndef INCL_CMT_THREAD
+#ifndef INCL_CMT_MEMORY
 #define LOCALMACRO_DEFINE_ALL_TRY_1
+#endif /* !INCL_CMT_MEMORY */
 #endif /* !INCL_CMT_THREAD */
 #endif /* !INCL_CMT_MUTEX */
 #endif /* !INCL_CMT_BOOLEAN */
@@ -253,6 +255,10 @@
 #ifndef INCL_CMT_THREAD
 #define INCL_CMT_THREAD
 #endif /* !INCL_CMT_THREAD */
+
+#ifndef INCL_CMT_MEMORY
+#define INCL_CMT_MEMORY
+#endif /* !INCL_CMT_MEMORY */
 #endif /* INCL_CMT_OS_API */
 /* ***************************** [^] OS_API [^] ***************************** */
 
@@ -867,6 +873,43 @@
  */
 #undef INCL_CMT_THREAD
 #endif /* INCL_CMT_THREAD */
+
+#ifdef INCL_CMT_MEMORY
+#include "OS_API/MEMORY.H"
+/******* """""""""""""""""
+ * #define PTR_MODE_NONE
+ * #define PTR_MODE_R
+ * #define PTR_MODE_W
+ * #define PTR_MODE_X
+ * #define PTR_MODE_RW
+ * #define PTR_MODE_RX
+ * #define PTR_MODE_WX
+ * #define PTR_MODE_RWX
+ * PTR		ALLOC(LET);
+ * PTR		ALLOC_EXE(const PTR, LET);
+ * PTR		ALLOC_PAGE(LET, BIT32, BIT32);
+ * PTR		CALLOC(LET);
+ * FAR_PTR	FAR_ALLOC(LET);
+ * FAR_PTR	FAR_ALLOC_EXE(const PTR, LET);
+ * FAR_PTR	FAR_CALLOC(LET);
+ * void		FAR_FREE(FAR_PTR);
+ * void		FAR_FREE_EXE(FAR_PTR);
+ * LET		FAR_LENGTH(FAR_PTR);
+ * LET		FAR_LENGTH_EXE(FAR_PTR);
+ * BOOLEAN	FAR_MEMORY_MODE(FAR_PTR, LET, BIT32);
+ * FAR_PTR	FAR_REALLOC(FAR_PTR, LET);
+ * void		FREE(PTR);
+ * void		FREE_EXE(PTR);
+ * void		FREE_PAGE(PTR);
+ * LET		GET_PAGE_SIZE(void);
+ * LET		LENGTH(PTR);
+ * LET		LENGTH_EXE(PTR);
+ * BOOLEAN	MEMORY_MODE(PTR, LET, BIT32);
+ * PTR		REALLOC(PTR, LET);
+ * LET		PAGE_SIZE;
+ */
+#undef INCL_CMT_MEMORY
+#endif /* INCL_CMT_MEMORY */
 /* ***************************** [^] OS_API [^] ***************************** */
 
 /* **************************** [v] WIN_CORE [v] **************************** */

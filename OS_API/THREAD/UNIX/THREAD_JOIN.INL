@@ -20,7 +20,7 @@
 		if (!THREAD)\
 			return (1);\
 		\
-		return (pthread_join(THREAD, RETURN_VALUE););\
+		return (pthread_join(THREAD, RETURN_VALUE));\
 	}
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\

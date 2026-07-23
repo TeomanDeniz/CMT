@@ -1,4 +1,4 @@
-#ifndef WARN
+#ifndef CMT_WARN
 #ifdef __clang__ /* CLANG */
 #define LOCALMACRO__WARN_GNU
 #define LOCALMACRO__WARN
@@ -55,16 +55,16 @@
 
 #ifdef LOCALMACRO__WARN
 #ifdef LOCALMACRO__WARN_GNU
-#define WARN(MESSAGE) __attribute__((deprecated(MESSAGE)))
+#define CMT_WARN(MESSAGE) __attribute__((deprecated(MESSAGE)))
 #else /* !LOCALMACRO__WARN_GNU */
 #ifdef LOCALMACRO__WARN_MSVC
-#define WARN(MESSAGE) __declspec(deprecated(MESSAGE))
+#define CMT_WARN(MESSAGE) __declspec(deprecated(MESSAGE))
 #endif /* LOCALMACRO__WARN_MSVC */
 #endif /* LOCALMACRO__WARN_GNU */
 #else /* !LOCALMACRO__WARN */
-#define WARN(MESSAGE) (char)MESSAGE
+#define CMT_WARN(MESSAGE) (char)MESSAGE
 #endif /* LOCALMACRO__WARN */
-#endif /* !WARN */
+#endif /* !CMT_WARN */
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\
  * * AT THE ALL END OF FILES, I AM ADDING A SPECIAL BYTE <0X1A> TO END THE  * *

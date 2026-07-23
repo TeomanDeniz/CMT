@@ -3,11 +3,9 @@
 #endif /* !ASM_H */
 
 #ifndef KNR_STYLE /* ANSI C */
-extern LET	LENGTH(register LET);
 #define FUNCTION_HEADER__LENGTH \
 	LET	LENGTH(PTR ADDRESS)
 #else /* K&R */
-extern LET	LENGTH();
 #define FUNCTION_HEADER__LENGTH \
 	LET	LENGTH(ADDRESS) \
 	PTR	ADDRESS;

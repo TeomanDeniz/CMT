@@ -42,7 +42,7 @@ typedef pthread_mutex_t	T_MUTEX;
 		if (!MUTEX)\
 			return (1);\
 		\
-		pthread_mutex_init(*MUTEX, (pthread_mutexattr_t *)0);\
+		pthread_mutex_init(MUTEX, (pthread_mutexattr_t *)0);\
 		return (0);\
 	}
 
@@ -52,12 +52,13 @@ typedef pthread_mutex_t	T_MUTEX;
 		if (!MUTEX)\
 			return (1);\
 		\
-		pthread_mutex_destroy(*MUTEX);\
+		pthread_mutex_destroy(MUTEX);\
 		return (0);\
 	}
 
-#define MUTEX_LOCK(__MUTEX_LOCK__) pthread_mutex_lock((__MUTEX_LOCK__));
-#define MUTEX_UNLOCK(__MUTEX_UNLOCK__) pthread_mutex_unlock((__MUTEX_UNLOCK__));
+#define MUTEX_LOCK(__MUTEX_LOCK__) pthread_mutex_lock(&(__MUTEX_LOCK__));
+#define MUTEX_UNLOCK(__MUTEX_UNLOCK__) \
+	pthread_mutex_unlock(&(__MUTEX_UNLOCK__));
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\
  * * AT THE ALL END OF FILES, I AM ADDING A SPECIAL BYTE <0X1A> TO END THE  * *

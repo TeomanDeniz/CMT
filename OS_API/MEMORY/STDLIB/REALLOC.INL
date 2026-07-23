@@ -10,19 +10,19 @@
 /* **************************** [^] INCLUDES [^] **************************** */
 
 /* **************************** [v] EXTERNS [v] ***************************** */
+EXTERN_C_START
 #ifndef KNR_STYLE /* ANSI C */
 extern void	*realloc(PTR, size_t);
 #else /* K&R */
 extern char	*realloc();
 #endif /* !KNR_STYLE */
+EXTERN_C_END
 /* **************************** [^] EXTERNS [^] ***************************** */
 
 #ifndef KNR_STYLE /* ANSI C */
-extern PTR	REALLOC(PTR, register LET);
 #define FUNCTION_HEADER__REALLOC \
 	PTR	REALLOC(PTR ADDRESS, register LET SIZE)
 #else /* K&R */
-extern PTR	REALLOC();
 #define FUNCTION_HEADER__REALLOC \
 	PTR	REALLOC(ADDRESS, SIZE) \
 	PTR				ADDRESS;

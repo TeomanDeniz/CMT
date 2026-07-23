@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2025/06/05 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/07/14 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/07/20 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -189,6 +189,11 @@
  * #define KNR_STYLE
  * #define void
  * #define unsigned
+ */
+#include "../ATTRIBUTES/EXTERN_C.H"
+/******* """"""""""""""""""""""""""
+ * #define EXTERN_C_START
+ * #define EXTERN_C_END
  */
 /* **************************** [^] INCLUDES [^] **************************** */
 
@@ -388,6 +393,24 @@
 #undef LOCALMACRO_THREAD_TI_RTOS
 #endif /* LOCALMACRO_THREAD_TI_RTOS */
 
+/* *************************** [v] MVS LINKER [v] *************************** */
+/* **** MVS LINKER DOES NOT SUPPORT EXTERNAL NAMES LARGER THAN 8 BYTES!! **** */
+#ifdef __MVS__ /* IBM Z/OS XL C/C++ */
+#define THREAD_CREATE CMTTHRCE
+#define THREAD_JOIN CMTTHRJN
+#endif /* __MVS__ */
+/* *************************** [^] MVS LINKER [^] *************************** */
+
+/* **************************** [v] EXTERNS [v] ***************************** */
+#ifndef KNR_STYLE /* STANDARD C */
+extern T_THREAD	THREAD_CREATE(void *(*) (void *), void *);
+extern int		THREAD_JOIN(T_THREAD, void **);
+#else /* K&R */
+extern T_THREAD	THREAD_CREATE();
+extern int		THREAD_JOIN();
+#endif /* !KNR_STYLE */
+/* **************************** [^] EXTERNS [^] ***************************** */
+
 /**@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@**\
 |**@                                                                        @**|
 |**@            @@@@@@@@@   @@@@@  @@@@@ @@@@@@@@@@@    @@@@@@@             @**|
@@ -409,24 +432,6 @@
 |**@::::::::::: ::::: :::::    ::::: :::::   :::: :::::::::: :::::   :::::  @**|
 |**@                                                                        @**|
 \**@@[v]*[v]*[v]*[v]*[v]*[v]*[v]*[v]*[v][v]*[v]*[v]*[v]*[v]*[v]*[v]*[v]*[v]@@**/
-
-/* *************************** [v] MVS LINKER [v] *************************** */
-/* **** MVS LINKER DOES NOT SUPPORT EXTERNAL NAMES LARGER THAN 8 BYTES!! **** */
-#ifdef __MVS__ /* IBM Z/OS XL C/C++ */
-#define THREAD_CREATE CMTTHRCE
-#define THREAD_JOIN CMTTHRJN
-#endif /* __MVS__ */
-/* *************************** [^] MVS LINKER [^] *************************** */
-
-/* **************************** [v] EXTERNS [v] ***************************** */
-#ifndef KNR_STYLE /* STANDARD C */
-extern T_THREAD	THREAD_CREATE(void *(*) (void *), void *);
-extern int		THREAD_JOIN(T_THREAD, void **);
-#else /* K&R */
-extern T_THREAD	THREAD_CREATE();
-extern int		THREAD_JOIN();
-#endif /* !KNR_STYLE */
-/* **************************** [^] EXTERNS [^] ***************************** */
 
 /* ******************* [v] LOCALMACRO__SETUP_LINKABLE [v] ******************* */
 #ifdef CMT_SETUP
@@ -476,7 +481,9 @@ extern int		THREAD_JOIN();
 #ifdef CMT_SETUP
 
 /* [v] %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% /!\ IMPORTANT /!\ */
+EXTERN_C_START
 LOCALLINKER__THREAD
+EXTERN_C_END
 /* [^] %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% /!\ IMPORTANT /!\ */
 
 #else /* !CMT_SETUP */
