@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2026/05/19 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/07/23 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/07/28 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -95,7 +95,6 @@
  */
 /* **************************** [^] INCLUDES [^] **************************** */
 
-#ifdef __PLATFORM_WINDOWS__
 /* **************************** [v] STRUCTS [v] ***************************** */
 EXTERN_C_START
 struct S_WIN_SYSTEM_INFO
@@ -132,8 +131,8 @@ struct S_WIN_CRITICAL_SECTION
 
 struct S_KERNEL32
 {
-#ifndef KNR_STYLE /* STANDARD C */
 	PTR				SELF;
+#ifndef KNR_STYLE /* STANDARD C */
 	PTR				(STDCALL *LoadLibraryA)(const char *);
 	PTR				(STDCALL *LoadLibraryExA)(
 		const char*,
@@ -267,7 +266,6 @@ struct S_KERNEL32
 	);
 	int				(STDCALL *UnmapViewOfFile)(PTR);
 #else /* K&R */
-	char			*SELF;
 	PTR				(STDCALL *LoadLibraryA)();
 	PTR				(STDCALL *LoadLibraryExA)();
 	int				(STDCALL *FreeLibrary)();
@@ -331,9 +329,7 @@ struct S_KERNEL32
 EXTERN_C_END
 /* **************************** [^] STRUCTS [^] ***************************** */
 
-
-
-
+#ifdef __PLATFORM_WINDOWS__
 /* **************************** [v] EXTERNS [v] ***************************** */
 EXTERN_C_START
 extern struct S_KERNEL32	KERNEL32;
