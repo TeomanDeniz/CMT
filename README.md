@@ -432,7 +432,7 @@ List of the icons:
 [__TYPES_GIF__]: https://github.com/TeomanDeniz/CMT-DOCS/blob/main/IMAGES/32/TYPES.gif
 [__THREAD_GIF__]: https://github.com/TeomanDeniz/CMT-DOCS/blob/main/IMAGES/32/THREAD.gif
 [__WIN_CORE_GIF__]: https://github.com/TeomanDeniz/CMT-DOCS/blob/main/IMAGES/32/WIN_CORE.gif
-[__PEB_LOADER_GIF__]: https://github.com/TeomanDeniz/CMT-DOCS/blob/main/IMAGES/32/.gif
+[__PEB_LOADER_GIF__]: https://github.com/TeomanDeniz/CMT-DOCS/blob/main/IMAGES/32/__PEB_LOADER__.gif
 [__USER32_GIF__]: https://github.com/TeomanDeniz/CMT-DOCS/blob/main/IMAGES/32/USER32.gif
 [__PUSH_POP_GIF__]: https://github.com/TeomanDeniz/CMT-DOCS/blob/main/IMAGES/32/PUSH_POP.gif
 <!-- ICONS -->
