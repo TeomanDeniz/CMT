@@ -186,6 +186,30 @@ List of the icons:
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/LOCAL.gif" ALT="LOCAL"/>
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/MEMORY.gif" ALT="MEMORY"/>
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/MUTEX.gif" ALT="MUTEX"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/OBJECT.gif" ALT="OBJECT"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/OBJECTS.gif" ALT="OBJECTS"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/OS_API.gif" ALT="OS_API"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/PACK.gif" ALT="PACK"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/PASCAL.gif" ALT="PASCAL"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/PLATFORM.gif" ALT="PLATFORM"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/POWERPC_ASM.gif" ALT="POWERPC_ASM"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/PUSH_POP.gif" ALT="PUSH_POP"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/READ_FILE.gif" ALT="READ_FILE"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/REGPARM.gif" ALT="REGPARM"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/REGPASS.gif" ALT="REGPASS"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/ROM.gif" ALT="ROM"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/STDCALL.gif" ALT="STDCALL"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/STRINGIFICATION.gif" ALT="STRINGIFICATION"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/THREAD.gif" ALT="THREAD"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/TOKEN_PASTING.gif" ALT="TOKEN_PASTING"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/TRY_CATCH.gif" ALT="TRY_CATCH"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/TYPES.gif" ALT="TYPES"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/UNUSED.gif" ALT="UNUSED"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/USER32.gif" ALT="USER32"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/VA_ARGS.gif" ALT="VA_ARGS"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/WIN_CORE.gif" ALT="WIN_CORE"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/W_XOR_X.gif" ALT="W_XOR_X"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/__PEB_LOADER__.gif" ALT="__PEB_LOADER__"/>
 </details>
 
 <details>
@@ -201,7 +225,7 @@ List of the icons:
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/ATTRIBUTES.gif" ALT="ATTRIBUTES"/>
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/BOOLEAN.gif" ALT="BOOLEAN"/>
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/CDECL.gif" ALT="CDECL"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGEwS/128/CHECK_FEATURE.gif" ALT="CHECK_FEATURE"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/CHECK_FEATURE.gif" ALT="CHECK_FEATURE"/>
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/CLEAR_INSTRUCTION_CACHE.gif" ALT="CLEAR_INSTRUCTION_CACHE"/>
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/COMMA_OPERATOR.gif" ALT="COMMA_OPERATOR"/>
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/CPU.gif" ALT="CPU"/>
@@ -221,6 +245,30 @@ List of the icons:
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/LOCAL.gif" ALT="LOCAL"/>
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/MEMORY.gif" ALT="MEMORY"/>
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/MUTEX.gif" ALT="MUTEX"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/OBJECT.gif" ALT="OBJECT"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/OBJECTS.gif" ALT="OBJECTS"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/OS_API.gif" ALT="OS_API"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/PACK.gif" ALT="PACK"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/PASCAL.gif" ALT="PASCAL"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/PLATFORM.gif" ALT="PLATFORM"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/POWERPC_ASM.gif" ALT="POWERPC_ASM"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/PUSH_POP.gif" ALT="PUSH_POP"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/READ_FILE.gif" ALT="READ_FILE"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/REGPARM.gif" ALT="REGPARM"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/REGPASS.gif" ALT="REGPASS"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/ROM.gif" ALT="ROM"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/STDCALL.gif" ALT="STDCALL"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/STRINGIFICATION.gif" ALT="STRINGIFICATION"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/THREAD.gif" ALT="THREAD"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/TOKEN_PASTING.gif" ALT="TOKEN_PASTING"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/TRY_CATCH.gif" ALT="TRY_CATCH"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/TYPES.gif" ALT="TYPES"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/UNUSED.gif" ALT="UNUSED"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/USER32.gif" ALT="USER32"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/VA_ARGS.gif" ALT="VA_ARGS"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/WIN_CORE.gif" ALT="WIN_CORE"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/W_XOR_X.gif" ALT="W_XOR_X"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/__PEB_LOADER__.gif" ALT="__PEB_LOADER__"/>
 </details>
 
 ---
