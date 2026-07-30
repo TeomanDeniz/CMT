@@ -1,7 +1,7 @@
 # REGPARM
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/REGPARM.gif"/>
+<img src="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/REGPARM.gif"/>
 </p>
 
 > ## ⚠️ Important

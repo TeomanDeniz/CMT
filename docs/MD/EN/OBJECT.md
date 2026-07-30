@@ -1,7 +1,7 @@
 # OBJECT
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/OBJECT.gif"/>
+<img src="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/OBJECT.gif"/>
 </p>
 
 > ## ⚠️ Important
@@ -385,4 +385,4 @@ int	main(void)
 
 ## References
 
- - [**BOUND_METHODS_IN_ISO_C_VIA_TRAMPOLINES.pdf** - CMT](https://docs.google.com/viewer?url=https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/ARTICLES/EN/BOUND_METHODS_IN_ISO_C_VIA_TRAMPOLINES.pdf)
+ - [**BOUND_METHODS_IN_ISO_C_VIA_TRAMPOLINES.pdf** - CMT](https://docs.google.com/viewer?url=https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/ARTICLES/EN/BOUND_METHODS_IN_ISO_C_VIA_TRAMPOLINES.pdf)

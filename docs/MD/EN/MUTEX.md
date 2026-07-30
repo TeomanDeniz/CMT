@@ -1,7 +1,7 @@
 # MUTEX
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/MUTEX.gif"/>
+<img src="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/MUTEX.gif"/>
 </p>
 
 > ## ⚠️ Important
@@ -17,7 +17,7 @@
 > #include "CMT/OS_API/MUTEX.H"
 > ```
 
-[![](https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/BANNERS/AUTO_LINKER_MODULE_HEADER.png)](https://github.com/TeomanDeniz/CMT-DOCS/tree/main#cmt-auto-linker)
+[![](https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/BANNERS/AUTO_LINKER_MODULE_HEADER.png)](https://github.com/TeomanDeniz/CMT/tree/main#cmt-auto-linker)
 
 ## Abstract
 
@@ -166,4 +166,4 @@ mutex_unlock(mutex);
  - [semMLib - ee.torontomu.ca](https://www.ee.torontomu.ca/~courses/ee8205/Data-Sheets/Tornado-VxWorks/vxworks/ref/semMLib.html)
  - [Critical Section Objects - microsoft.com](https://learn.microsoft.com/en-us/windows/win32/sync/critical-section-objects)
  - [Mutexes - docs.zephyrproject.org](https://docs.zephyrproject.org/latest/kernel/services/synchronization/mutexes.html)
- - [**THREAD_SUPPORT_IN_NON_MULTI_THREAD_PLATFORMS.pdf** - CMT](https://docs.google.com/viewer?url=https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/ARTICLES/EN/THREAD_SUPPORT_IN_NON_MULTI_THREAD_PLATFORMS.pdf)
+ - [**THREAD_SUPPORT_IN_NON_MULTI_THREAD_PLATFORMS.pdf** - CMT](https://docs.google.com/viewer?url=https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/ARTICLES/EN/THREAD_SUPPORT_IN_NON_MULTI_THREAD_PLATFORMS.pdf)

@@ -1,7 +1,7 @@
 # TOKEN_PASTING
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/TOKEN_PASTING.gif"/>
+<img src="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/TOKEN_PASTING.gif"/>
 </p>
 
 > ## ⚠️ Important

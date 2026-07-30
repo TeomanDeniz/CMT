@@ -1,7 +1,7 @@
 # MIDR
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/ASM_CONTENT.gif"/>
+<img src="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/ASM_CONTENT.gif"/>
 </p>
 
 > ## ⚠️ Important
@@ -17,7 +17,7 @@
 > #include "CMT/ASM/C/ARM/MIDR.H"
 > ```
 
-[![](https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/BANNERS/AUTO_LINKER_MODULE_HEADER.png)](https://github.com/TeomanDeniz/CMT-DOCS/tree/main#cmt-auto-linker)
+[![](https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/BANNERS/AUTO_LINKER_MODULE_HEADER.png)](https://github.com/TeomanDeniz/CMT/tree/main#cmt-auto-linker)
 
 ## Abstract
 

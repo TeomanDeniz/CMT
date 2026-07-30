@@ -1,7 +1,7 @@
 # ASM
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/PUSH_POP.gif"/>
+<img src="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/PUSH_POP.gif"/>
 </p>
 
 > ## ⚠️ Important
@@ -19,7 +19,7 @@
 
 ## Abstract
 
-**⚠️ WARNING - Please use this addon If You TRULY know what are you doing!!! And most importantly, for love of Terry Davis Read ABI Rules at [`ABI.H`](https://github.com/TeomanDeniz/CMT-DOCS/blob/main/MD/EN/ABI.md) Module!!!**
+**⚠️ WARNING - Please use this addon If You TRULY know what are you doing!!! And most importantly, for love of Terry Davis Read ABI Rules at [`ABI.H`](https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/ABI.md) Module!!!**
 
 This header provides a unified macro layer that lets you write inline assembly with minimal compiler-specific boilerplate.
 
@@ -294,7 +294,7 @@ For example, `MOV_RBX_(IMM32)` becames `SIZEOF_MOV_RBX_` and `MOV_RAX_RBX` becam
 
 <details>
 <summary>
-	<img src="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/INTEL_ASM.gif">
+	<img src="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/INTEL_ASM.gif">
 	<b>Intel (2175 Assembly Codes in total)</b>
 </summary>
 
@@ -2585,7 +2585,7 @@ See `ENVIRONMENTS/ABI.H` to determine what `ARG$` expands to if you want.
 
 <details>
 <summary>
-	<img src="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/ARM_ASM.gif">
+	<img src="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/ARM_ASM.gif">
 	<b>ARM32 (1 Assembly Code in total)</b>
 </summary>
 
@@ -2611,7 +2611,7 @@ See `ENVIRONMENTS/ABI.H` to determine what `ARG$` expands to if you want.
 
 <details>
 <summary>
-	<img src="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/POWERPC_ASM.gif">
+	<img src="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/POWERPC_ASM.gif">
 	<b>PowerPC (2 Assembly Codes in total)</b>
 </summary>
 

@@ -1,7 +1,7 @@
 # COMMA_OPERATOR
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/COMMA_OPERATOR.gif"/>
+<img src="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/COMMA_OPERATOR.gif"/>
 </p>
 
 > ## ⚠️ Important

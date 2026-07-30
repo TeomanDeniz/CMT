@@ -245,23 +245,23 @@ Redundant definitions are safe:
 
 This section contains additional documentation explaining how I achieved the features in my ecosystem.
 
-## [**[📜 BOUND_METHODS_IN_ISO_C_VIA_TRAMPOLINES](https://docs.google.com/viewer?url=https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/ARTICLES/EN/BOUND_METHODS_IN_ISO_C_VIA_TRAMPOLINES.pdf)**]
+## [**[📜 BOUND_METHODS_IN_ISO_C_VIA_TRAMPOLINES](https://docs.google.com/viewer?url=https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/ARTICLES/EN/BOUND_METHODS_IN_ISO_C_VIA_TRAMPOLINES.pdf)**]
 
 It explains how I managed to create real OOP ergonomics in pure C.
 
 Instead of calling `struct.member(&struct, 42);`, you can simply write: `struct.member(42);`.
 
-## [**[📜 CROSS_COMPILER_AUTO_LINKING_AND_CONSTRUCTION_METHOD_WITH_MACROS_ONLY](https://docs.google.com/viewer?url=https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/ARTICLES/EN/CROSS_COMPILER_AUTO_LINKING_AND_CONSTRUCTION_METHOD_WITH_MACROS_ONLY.pdf)**]
+## [**[📜 CROSS_COMPILER_AUTO_LINKING_AND_CONSTRUCTION_METHOD_WITH_MACROS_ONLY](https://docs.google.com/viewer?url=https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/ARTICLES/EN/CROSS_COMPILER_AUTO_LINKING_AND_CONSTRUCTION_METHOD_WITH_MACROS_ONLY.pdf)**]
 
 It explains how I managed to define linkable functions and global variables only once, even though they are defined inside a header.
 
 It also explains how I created a custom constructor and destructor system that runs before and after the `main` function.
 
-## [**[📜 USE_ASSEMBLY_IN_PURE_C_WITHOUT_NEEDING_INLINE_ASSEMBLY](https://docs.google.com/viewer?url=https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/ARTICLES/EN/USE_ASSEMBLY_IN_PURE_C_WITHOUT_NEEDING_INLINE_ASSEMBLY.pdf)**]
+## [**[📜 USE_ASSEMBLY_IN_PURE_C_WITHOUT_NEEDING_INLINE_ASSEMBLY](https://docs.google.com/viewer?url=https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/ARTICLES/EN/USE_ASSEMBLY_IN_PURE_C_WITHOUT_NEEDING_INLINE_ASSEMBLY.pdf)**]
 
 It explains how I made Assembly code written in a `.c` file using my macro-based DSL continue to work even when the compiler does not support inline assembly.
 
-## [**[📜 THREAD_SUPPORT_IN_NON_MULTI_THREAD_PLATFORMS](https://docs.google.com/viewer?url=https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/ARTICLES/EN/THREAD_SUPPORT_IN_NON_MULTI_THREAD_PLATFORMS.pdf)**]
+## [**[📜 THREAD_SUPPORT_IN_NON_MULTI_THREAD_PLATFORMS](https://docs.google.com/viewer?url=https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/ARTICLES/EN/THREAD_SUPPORT_IN_NON_MULTI_THREAD_PLATFORMS.pdf)**]
 
 It explains how I implemented a custom threading system for platforms like MS-DOS that do not support multithreading at all.
 
@@ -359,118 +359,118 @@ List of the icons:
 <summary>
 	<h2>32x32 (Original Size)</h2>
 </summary>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/ABI.gif" ALT="ABI" TITLE="ABI"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/ALIGN.gif" ALT="ALIGN" TITLE="ALIGN"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/ARCHITECTURE.gif" ALT="ARCHITECTURE" TITLE="ARCHITECTURE"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/ARM_ASM.gif" ALT="ARM_ASM" TITLE="ARM_ASM"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/ASM.gif" ALT="ASM" TITLE="ASM"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/ASM_CONTENT.gif" ALT="ASM_CONTENT" TITLE="ASM_CONTENT"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/ATTRIBUTES.gif" ALT="ATTRIBUTES" TITLE="ATTRIBUTES"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/BOOLEAN.gif" ALT="BOOLEAN" TITLE="BOOLEAN"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/CDECL.gif" ALT="CDECL" TITLE="CDECL"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/CHECK_FEATURE.gif" ALT="CHECK_FEATURE" TITLE="CHECK_FEATURE"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/CLEAR_INSTRUCTION_CACHE.gif" ALT="CLEAR_INSTRUCTION_CACHE" TITLE="CLEAR_INSTRUCTION_CACHE"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/COMMA_OPERATOR.gif" ALT="COMMA_OPERATOR" TITLE="COMMA_OPERATOR"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/CPU.gif" ALT="CPU" TITLE="CPU"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/ENVIRONMENTS.gif" ALT="ENVIRONMENTS" TITLE="ENVIRONMENTS"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/EXTERN_C.gif" ALT="EXTERN_C" TITLE="EXTERN_C"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/FAR.gif" ALT="FAR" TITLE="FAR"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/FASTCALL.gif" ALT="FASTCALL" TITLE="FASTCALL"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/GENERAL.gif" ALT="GENERAL" TITLE="GENERAL"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/GRAPHICS.gif" ALT="GRAPHICS" TITLE="GRAPHICS"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/IGNORE_VAR.gif" ALT="IGNORE_VAR" TITLE="IGNORE_VAR"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/INLINE_ASM.gif" ALT="INLINE_ASM" TITLE="INLINE_ASM"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/INTEL_ASM.gif" ALT="INTEL_ASM" TITLE="INTEL_ASM"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/KERNEL32.gif" ALT="KERNEL32" TITLE="KERNEL32"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/KEYWORDS.gif" ALT="KEYWORDS" TITLE="KEYWORDS"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/KNR_STYLE.gif" ALT="KNR_STYLE" TITLE="KNR_STYLE"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/LIB.gif" ALT="LIB" TITLE="LIB"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/LOCAL.gif" ALT="LOCAL" TITLE="LOCAL"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/MEMORY.gif" ALT="MEMORY" TITLE="MEMORY"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/MUTEX.gif" ALT="MUTEX" TITLE="MUTEX"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/OBJECT.gif" ALT="OBJECT" TITLE="OBJECT"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/OBJECTS.gif" ALT="OBJECTS" TITLE="OBJECTS"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/OS_API.gif" ALT="OS_API" TITLE="OS_API"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/PACK.gif" ALT="PACK" TITLE="PACK"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/PASCAL.gif" ALT="PASCAL" TITLE="PASCAL"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/PLATFORM.gif" ALT="PLATFORM" TITLE="PLATFORM"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/POWERPC_ASM.gif" ALT="POWERPC_ASM" TITLE="POWERPC_ASM"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/PUSH_POP.gif" ALT="PUSH_POP" TITLE="PUSH_POP"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/READ_FILE.gif" ALT="READ_FILE" TITLE="READ_FILE"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/REGPARM.gif" ALT="REGPARM" TITLE="REGPARM"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/REGPASS.gif" ALT="REGPASS" TITLE="REGPASS"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/ROM.gif" ALT="ROM" TITLE="ROM"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/STDCALL.gif" ALT="STDCALL" TITLE="STDCALL"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/STRINGIFICATION.gif" ALT="STRINGIFICATION" TITLE="STRINGIFICATION"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/THREAD.gif" ALT="THREAD" TITLE="THREAD"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/TOKEN_PASTING.gif" ALT="TOKEN_PASTING" TITLE="TOKEN_PASTING"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/TRY_CATCH.gif" ALT="TRY_CATCH" TITLE="TRY_CATCH"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/TYPES.gif" ALT="TYPES" TITLE="TYPES"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/UNUSED.gif" ALT="UNUSED" TITLE="UNUSED"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/USER32.gif" ALT="USER32" TITLE="USER32"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/VA_ARGS.gif" ALT="VA_ARGS" TITLE="VA_ARGS"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/WIN_CORE.gif" ALT="WIN_CORE" TITLE="WIN_CORE"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/W_XOR_X.gif" ALT="W_XOR_X" TITLE="W_XOR_X"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/__PEB_LOADER__.gif" ALT="__PEB_LOADER__" TITLE="__PEB_LOADER__"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/ABI.gif" ALT="ABI" TITLE="ABI"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/ALIGN.gif" ALT="ALIGN" TITLE="ALIGN"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/ARCHITECTURE.gif" ALT="ARCHITECTURE" TITLE="ARCHITECTURE"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/ARM_ASM.gif" ALT="ARM_ASM" TITLE="ARM_ASM"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/ASM.gif" ALT="ASM" TITLE="ASM"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/ASM_CONTENT.gif" ALT="ASM_CONTENT" TITLE="ASM_CONTENT"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/ATTRIBUTES.gif" ALT="ATTRIBUTES" TITLE="ATTRIBUTES"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/BOOLEAN.gif" ALT="BOOLEAN" TITLE="BOOLEAN"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/CDECL.gif" ALT="CDECL" TITLE="CDECL"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/CHECK_FEATURE.gif" ALT="CHECK_FEATURE" TITLE="CHECK_FEATURE"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/CLEAR_INSTRUCTION_CACHE.gif" ALT="CLEAR_INSTRUCTION_CACHE" TITLE="CLEAR_INSTRUCTION_CACHE"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/COMMA_OPERATOR.gif" ALT="COMMA_OPERATOR" TITLE="COMMA_OPERATOR"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/CPU.gif" ALT="CPU" TITLE="CPU"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/ENVIRONMENTS.gif" ALT="ENVIRONMENTS" TITLE="ENVIRONMENTS"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/EXTERN_C.gif" ALT="EXTERN_C" TITLE="EXTERN_C"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/FAR.gif" ALT="FAR" TITLE="FAR"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/FASTCALL.gif" ALT="FASTCALL" TITLE="FASTCALL"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/GENERAL.gif" ALT="GENERAL" TITLE="GENERAL"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/GRAPHICS.gif" ALT="GRAPHICS" TITLE="GRAPHICS"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/IGNORE_VAR.gif" ALT="IGNORE_VAR" TITLE="IGNORE_VAR"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/INLINE_ASM.gif" ALT="INLINE_ASM" TITLE="INLINE_ASM"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/INTEL_ASM.gif" ALT="INTEL_ASM" TITLE="INTEL_ASM"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/KERNEL32.gif" ALT="KERNEL32" TITLE="KERNEL32"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/KEYWORDS.gif" ALT="KEYWORDS" TITLE="KEYWORDS"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/KNR_STYLE.gif" ALT="KNR_STYLE" TITLE="KNR_STYLE"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/LIB.gif" ALT="LIB" TITLE="LIB"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/LOCAL.gif" ALT="LOCAL" TITLE="LOCAL"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/MEMORY.gif" ALT="MEMORY" TITLE="MEMORY"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/MUTEX.gif" ALT="MUTEX" TITLE="MUTEX"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/OBJECT.gif" ALT="OBJECT" TITLE="OBJECT"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/OBJECTS.gif" ALT="OBJECTS" TITLE="OBJECTS"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/OS_API.gif" ALT="OS_API" TITLE="OS_API"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/PACK.gif" ALT="PACK" TITLE="PACK"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/PASCAL.gif" ALT="PASCAL" TITLE="PASCAL"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/PLATFORM.gif" ALT="PLATFORM" TITLE="PLATFORM"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/POWERPC_ASM.gif" ALT="POWERPC_ASM" TITLE="POWERPC_ASM"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/PUSH_POP.gif" ALT="PUSH_POP" TITLE="PUSH_POP"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/READ_FILE.gif" ALT="READ_FILE" TITLE="READ_FILE"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/REGPARM.gif" ALT="REGPARM" TITLE="REGPARM"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/REGPASS.gif" ALT="REGPASS" TITLE="REGPASS"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/ROM.gif" ALT="ROM" TITLE="ROM"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/STDCALL.gif" ALT="STDCALL" TITLE="STDCALL"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/STRINGIFICATION.gif" ALT="STRINGIFICATION" TITLE="STRINGIFICATION"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/THREAD.gif" ALT="THREAD" TITLE="THREAD"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/TOKEN_PASTING.gif" ALT="TOKEN_PASTING" TITLE="TOKEN_PASTING"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/TRY_CATCH.gif" ALT="TRY_CATCH" TITLE="TRY_CATCH"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/TYPES.gif" ALT="TYPES" TITLE="TYPES"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/UNUSED.gif" ALT="UNUSED" TITLE="UNUSED"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/USER32.gif" ALT="USER32" TITLE="USER32"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/VA_ARGS.gif" ALT="VA_ARGS" TITLE="VA_ARGS"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/WIN_CORE.gif" ALT="WIN_CORE" TITLE="WIN_CORE"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/W_XOR_X.gif" ALT="W_XOR_X" TITLE="W_XOR_X"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/__PEB_LOADER__.gif" ALT="__PEB_LOADER__" TITLE="__PEB_LOADER__"/>
 </details>
 
 <details>
 <summary>
 	<h2>128x128 (Extended for a better view)</h2>
 </summary>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/ABI.gif" ALT="ABI" TITLE="ABI"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/ALIGN.gif" ALT="ALIGN" TITLE="ALIGN"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/ARCHITECTURE.gif" ALT="ARCHITECTURE" TITLE="ARCHITECTURE"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/ARM_ASM.gif" ALT="ARM_ASM" TITLE="ARM_ASM"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/ASM.gif" ALT="ASM" TITLE="ASM"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/ASM_CONTENT.gif" ALT="ASM_CONTENT" TITLE="ASM_CONTENT"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/ATTRIBUTES.gif" ALT="ATTRIBUTES" TITLE="ATTRIBUTES"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/BOOLEAN.gif" ALT="BOOLEAN" TITLE="BOOLEAN"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/CDECL.gif" ALT="CDECL" TITLE="CDECL"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/CHECK_FEATURE.gif" ALT="CHECK_FEATURE" TITLE="CHECK_FEATURE"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/CLEAR_INSTRUCTION_CACHE.gif" ALT="CLEAR_INSTRUCTION_CACHE" TITLE="CLEAR_INSTRUCTION_CACHE"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/COMMA_OPERATOR.gif" ALT="COMMA_OPERATOR" TITLE="COMMA_OPERATOR"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/CPU.gif" ALT="CPU" TITLE="CPU"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/ENVIRONMENTS.gif" ALT="ENVIRONMENTS" TITLE="ENVIRONMENTS"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/EXTERN_C.gif" ALT="EXTERN_C" TITLE="EXTERN_C"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/FAR.gif" ALT="FAR" TITLE="FAR"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/FASTCALL.gif" ALT="FASTCALL" TITLE="FASTCALL"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/GENERAL.gif" ALT="GENERAL" TITLE="GENERAL"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/GRAPHICS.gif" ALT="GRAPHICS" TITLE="GRAPHICS"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/IGNORE_VAR.gif" ALT="IGNORE_VAR" TITLE="IGNORE_VAR"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/INLINE_ASM.gif" ALT="INLINE_ASM" TITLE="INLINE_ASM"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/INTEL_ASM.gif" ALT="INTEL_ASM" TITLE="INTEL_ASM"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/KERNEL32.gif" ALT="KERNEL32" TITLE="KERNEL32"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/KEYWORDS.gif" ALT="KEYWORDS" TITLE="KEYWORDS"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/KNR_STYLE.gif" ALT="KNR_STYLE" TITLE="KNR_STYLE"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/LIB.gif" ALT="LIB" TITLE="LIB"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/LOCAL.gif" ALT="LOCAL" TITLE="LOCAL"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/MEMORY.gif" ALT="MEMORY" TITLE="MEMORY"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/MUTEX.gif" ALT="MUTEX" TITLE="MUTEX"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/OBJECT.gif" ALT="OBJECT" TITLE="OBJECT"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/OBJECTS.gif" ALT="OBJECTS" TITLE="OBJECTS"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/OS_API.gif" ALT="OS_API" TITLE="OS_API"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/PACK.gif" ALT="PACK" TITLE="PACK"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/PASCAL.gif" ALT="PASCAL" TITLE="PASCAL"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/PLATFORM.gif" ALT="PLATFORM" TITLE="PLATFORM"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/POWERPC_ASM.gif" ALT="POWERPC_ASM" TITLE="POWERPC_ASM"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/PUSH_POP.gif" ALT="PUSH_POP" TITLE="PUSH_POP"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/READ_FILE.gif" ALT="READ_FILE" TITLE="READ_FILE"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/REGPARM.gif" ALT="REGPARM" TITLE="REGPARM"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/REGPASS.gif" ALT="REGPASS" TITLE="REGPASS"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/ROM.gif" ALT="ROM" TITLE="ROM"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/STDCALL.gif" ALT="STDCALL" TITLE="STDCALL"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/STRINGIFICATION.gif" ALT="STRINGIFICATION" TITLE="STRINGIFICATION"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/THREAD.gif" ALT="THREAD" TITLE="THREAD"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/TOKEN_PASTING.gif" ALT="TOKEN_PASTING" TITLE="TOKEN_PASTING"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/TRY_CATCH.gif" ALT="TRY_CATCH" TITLE="TRY_CATCH"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/TYPES.gif" ALT="TYPES" TITLE="TYPES"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/UNUSED.gif" ALT="UNUSED" TITLE="UNUSED"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/USER32.gif" ALT="USER32" TITLE="USER32"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/VA_ARGS.gif" ALT="VA_ARGS" TITLE="VA_ARGS"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/WIN_CORE.gif" ALT="WIN_CORE" TITLE="WIN_CORE"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/W_XOR_X.gif" ALT="W_XOR_X" TITLE="W_XOR_X"/>
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/__PEB_LOADER__.gif" ALT="__PEB_LOADER__" TITLE="__PEB_LOADER__"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/ABI.gif" ALT="ABI" TITLE="ABI"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/ALIGN.gif" ALT="ALIGN" TITLE="ALIGN"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/ARCHITECTURE.gif" ALT="ARCHITECTURE" TITLE="ARCHITECTURE"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/ARM_ASM.gif" ALT="ARM_ASM" TITLE="ARM_ASM"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/ASM.gif" ALT="ASM" TITLE="ASM"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/ASM_CONTENT.gif" ALT="ASM_CONTENT" TITLE="ASM_CONTENT"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/ATTRIBUTES.gif" ALT="ATTRIBUTES" TITLE="ATTRIBUTES"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/BOOLEAN.gif" ALT="BOOLEAN" TITLE="BOOLEAN"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/CDECL.gif" ALT="CDECL" TITLE="CDECL"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/CHECK_FEATURE.gif" ALT="CHECK_FEATURE" TITLE="CHECK_FEATURE"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/CLEAR_INSTRUCTION_CACHE.gif" ALT="CLEAR_INSTRUCTION_CACHE" TITLE="CLEAR_INSTRUCTION_CACHE"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/COMMA_OPERATOR.gif" ALT="COMMA_OPERATOR" TITLE="COMMA_OPERATOR"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/CPU.gif" ALT="CPU" TITLE="CPU"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/ENVIRONMENTS.gif" ALT="ENVIRONMENTS" TITLE="ENVIRONMENTS"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/EXTERN_C.gif" ALT="EXTERN_C" TITLE="EXTERN_C"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/FAR.gif" ALT="FAR" TITLE="FAR"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/FASTCALL.gif" ALT="FASTCALL" TITLE="FASTCALL"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/GENERAL.gif" ALT="GENERAL" TITLE="GENERAL"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/GRAPHICS.gif" ALT="GRAPHICS" TITLE="GRAPHICS"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/IGNORE_VAR.gif" ALT="IGNORE_VAR" TITLE="IGNORE_VAR"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/INLINE_ASM.gif" ALT="INLINE_ASM" TITLE="INLINE_ASM"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/INTEL_ASM.gif" ALT="INTEL_ASM" TITLE="INTEL_ASM"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/KERNEL32.gif" ALT="KERNEL32" TITLE="KERNEL32"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/KEYWORDS.gif" ALT="KEYWORDS" TITLE="KEYWORDS"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/KNR_STYLE.gif" ALT="KNR_STYLE" TITLE="KNR_STYLE"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/LIB.gif" ALT="LIB" TITLE="LIB"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/LOCAL.gif" ALT="LOCAL" TITLE="LOCAL"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/MEMORY.gif" ALT="MEMORY" TITLE="MEMORY"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/MUTEX.gif" ALT="MUTEX" TITLE="MUTEX"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/OBJECT.gif" ALT="OBJECT" TITLE="OBJECT"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/OBJECTS.gif" ALT="OBJECTS" TITLE="OBJECTS"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/OS_API.gif" ALT="OS_API" TITLE="OS_API"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/PACK.gif" ALT="PACK" TITLE="PACK"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/PASCAL.gif" ALT="PASCAL" TITLE="PASCAL"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/PLATFORM.gif" ALT="PLATFORM" TITLE="PLATFORM"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/POWERPC_ASM.gif" ALT="POWERPC_ASM" TITLE="POWERPC_ASM"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/PUSH_POP.gif" ALT="PUSH_POP" TITLE="PUSH_POP"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/READ_FILE.gif" ALT="READ_FILE" TITLE="READ_FILE"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/REGPARM.gif" ALT="REGPARM" TITLE="REGPARM"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/REGPASS.gif" ALT="REGPASS" TITLE="REGPASS"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/ROM.gif" ALT="ROM" TITLE="ROM"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/STDCALL.gif" ALT="STDCALL" TITLE="STDCALL"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/STRINGIFICATION.gif" ALT="STRINGIFICATION" TITLE="STRINGIFICATION"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/THREAD.gif" ALT="THREAD" TITLE="THREAD"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/TOKEN_PASTING.gif" ALT="TOKEN_PASTING" TITLE="TOKEN_PASTING"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/TRY_CATCH.gif" ALT="TRY_CATCH" TITLE="TRY_CATCH"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/TYPES.gif" ALT="TYPES" TITLE="TYPES"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/UNUSED.gif" ALT="UNUSED" TITLE="UNUSED"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/USER32.gif" ALT="USER32" TITLE="USER32"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/VA_ARGS.gif" ALT="VA_ARGS" TITLE="VA_ARGS"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/WIN_CORE.gif" ALT="WIN_CORE" TITLE="WIN_CORE"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/W_XOR_X.gif" ALT="W_XOR_X" TITLE="W_XOR_X"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/__PEB_LOADER__.gif" ALT="__PEB_LOADER__" TITLE="__PEB_LOADER__"/>
 </details>
 
 ---

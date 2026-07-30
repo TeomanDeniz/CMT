@@ -1,7 +1,7 @@
 # INLINE_ASM
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/INLINE_ASM.gif"/>
+<img src="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/INLINE_ASM.gif"/>
 </p>
 
 > ## ⚠️ Important

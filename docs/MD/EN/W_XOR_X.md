@@ -1,7 +1,7 @@
 # W_XOR_X
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/W_XOR_X.gif"/>
+<img src="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/W_XOR_X.gif"/>
 </p>
 
 > ## ⚠️ Important

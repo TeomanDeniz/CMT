@@ -1,7 +1,7 @@
 # IGNORE_VAR
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/IGNORE_VAR.gif"/>
+<img src="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/IGNORE_VAR.gif"/>
 </p>
 
 > ## ⚠️ Important

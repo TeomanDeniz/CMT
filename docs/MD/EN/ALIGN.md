@@ -1,7 +1,7 @@
 # ALIGN
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/ALIGN.gif"/>
+<img src="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/ALIGN.gif"/>
 </p>
 
 > ## ⚠ Important

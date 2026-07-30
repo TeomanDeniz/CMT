@@ -1,7 +1,7 @@
 # REGPASS
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/128/REGPASS.gif"/>
+<img src="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/REGPASS.gif"/>
 </p>
 
 > ## ⚠️ Important
@@ -61,5 +61,5 @@ test = (int (REGPASS *)(int))pointer;
 
 ## References
 
- - [![](https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/FASTCALL.gif) **FASTCALL** - CMT](https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/MD/EN/FASTCALL.md)
- - [![](https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/IMAGES/32/REGPARM.gif) **REGPARM** - CMT](https://raw.githubusercontent.com/TeomanDeniz/CMT-DOCS/main/MD/EN/REGPASS.md)
+ - [![](https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/FASTCALL.gif) **FASTCALL** - CMT](https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/MD/EN/FASTCALL.md)
+ - [![](https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/REGPARM.gif) **REGPARM** - CMT](https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/MD/EN/REGPASS.md)
