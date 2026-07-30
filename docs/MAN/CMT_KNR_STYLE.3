@@ -1,0 +1,49 @@
+.TH CMT_KNR_STYLE 3 "CMT" "CMT_KNR_STYLE" "K&R Style Detection"
+
+.SH NAME
+CMT_KNR_STYLE \- Detect K&R (pre-ANSI) C compiler style
+
+.SH SYNOPSIS
+.B #define INCL_CMT_KNR_STYLE
+.br
+.B #include <CMT/CMT.H>
+
+.SH FILES
+CMT/ENVIRONMENTS/KNR_STYLE.H
+
+.SH DESCRIPTION
+This header defines a macro indicating whether the compiler is using K&R (Kernighan & Ritchie, pre-ANSI 1989) style C syntax.
+
+.TP
+.B KNR_STYLE
+Defined if the compiler uses K&R style syntax.
+
+.TP
+.B void
+Redefined under K&R‐only compilers.
+
+.TP
+.B const
+Redefined under K&R‐only compilers.
+
+.TP
+.B volatile
+Redefined under K&R‐only compilers.
+
+.TP
+.B signed
+Redefined under K&R‐only compilers.
+
+.TP
+.B unsigned
+Redefined when using Microsoft C Compiler version 1.0 or 2.0.
+
+.SH USAGE
+Useful for writing portable code that needs to distinguish between ANSI/ISO C and older K&R compilers.
+
+.SH SEE ALSO
+.B CMT_VA_ARGS(3),
+.B CMT(3)
+
+.SH AUTHOR
+Teoman Deniz <te.odenizgml@gmail.com>

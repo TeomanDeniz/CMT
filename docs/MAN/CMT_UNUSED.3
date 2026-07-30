@@ -1,0 +1,42 @@
+.TH CMT_UNUSED 3 "CMT" "CMT_UNUSED" "Function Attributes"
+
+.SH NAME
+CMT_UNUSED \- Marks functions as possibly unused to suppress compiler warnings
+
+.SH SYNOPSIS
+.B #define INCL_CMT_UNUSED
+.br
+.B #include <CMT/CMT.H>
+
+.SH FILES
+CMT/KEYWORDS/UNUSED.H
+
+.SH DESCRIPTION
+Provides macros to tag functions that may not be used in the program. 
+This allows the compiler to suppress unused function warnings.
+
+.TP
+.B UNUSED, unused
+Place at the beginning of a function definition to mark it as unused.
+
+.SH USAGE
+.nf
+UNUSED void my_function(void) {
+    // code
+}
+
+unused void my_function(void) {
+    // code
+}
+.fi
+
+.SH NOTES
+- Only affects compiler warnings, not runtime behavior.
+- Useful for optional functions, callbacks, or platform-specific code.
+
+.SH SEE ALSO
+.B CMT_IGNORE_VAR(3),
+.B CMT(3)
+
+.SH AUTHOR
+Teoman Deniz <te.odenizgml@gmail.com>

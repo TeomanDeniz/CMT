@@ -1,0 +1,61 @@
+.TH CMT_PREFETCH 3 "CMT" "CMT_PREFETCH" "Prefetch Memory Functions"
+
+.SH NAME
+CMT_PREFETCH \- Reduce cache-miss latency by preloading memory into CPU cache
+
+.SH SYNOPSIS
+.B #define INCL_CMT_PREFETCH
+.br
+.B #include <CMT/CMT.H>
+
+.SH FILES
+CMT/FUNCTIONS/PREFETCH.H
+
+.SH DESCRIPTION
+Macros and functions to hint the CPU to preload memory into its cache for faster access.
+
+.TP
+.B PREFETCH, prefetch()
+Load a specific memory value into the CPU cache before use.
+
+.TP
+.B PREFETCHW, prefetchw()
+Same as PREFETCH, but indicates the data may be modified.
+
+.TP
+.B SPIN_LOCK_PREFETCH, spin_lock_prefetch()
+Prefetch spin locks (UNIX only).
+
+.TP
+.B PREFETCH_RANGE, prefetch_range()
+Prefetch a block or range of memory.
+
+.SH USAGE
+Prefetch a single value:
+.nf
+int variable[9471];
+int number = 42;
+
+PREFETCH(variable[0]);
+// or
+prefetch(number);
+.fi
+
+Prefetch a memory block or array:
+.nf
+PREFETCH_RANGE(variable, sizeof(variable));
+// or
+prefetch_range(variable, 100);
+.fi
+
+.SH NOTES
+- PREFETCH only hints the CPU; it does not guarantee data placement in cache.
+- Use PREFETCH_RANGE for large arrays or buffers to minimize cache misses.
+
+.SH SEE ALSO
+.B CMT_ARCHITECTURE(3),
+.B CMT_CPU(3),
+.B CMT(3)
+
+.SH AUTHOR
+Teoman Deniz <te.odenizgml@gmail.com>

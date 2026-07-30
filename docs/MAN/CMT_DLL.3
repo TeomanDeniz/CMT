@@ -1,0 +1,74 @@
+.TH CMT_DLL 3 "CMT" "CMT_DLL" "Dynamic Link Library Handling"
+
+.SH NAME
+CMT_DLL \- Cross-platform dynamic link library functions
+
+.SH SYNOPSIS
+.B #define INCL_CMT_DLL
+.br
+.B #include <CMT/CMT.H>
+
+.SH FILES
+CMT/FUNCTIONS/DLL.H
+
+.SH DESCRIPTION
+Provides macros and typedefs for handling dynamic link libraries (DLLs) across different platforms.
+
+.TP
+.B DLL, dll
+Typedef for a variable representing an opened DLL.
+
+.TP
+.B OPEN_DLL, open_dll()
+Open a DLL file.
+
+.TP
+.B READ_DLL, read_dll()
+Retrieve a function pointer from the DLL.
+
+.TP
+.B CLOSE_DLL, close_dll()
+Close a DLL file.
+
+.TP
+.B DYNAMIC, dynamic
+Mark a function or variable as dynamically linkable.
+
+.SH USAGE
+Create a DLL:
+.nf
+#include <stdio.h>
+
+void dynamic my_write(void) {
+    printf("TEST\n");
+}
+.fi
+
+Compile:
+.nf
+gcc -c my_dll.c -o my_dll.o
+gcc -shared my_dll.o -o my_dll.dll
+.fi
+
+Connect and call function:
+.nf
+dll dll_file;
+dll_file = open_dll("my_dll.dll");
+
+void (*my_write)();
+my_write = (void (*)()) read_dll(dll_file, "my_write");
+
+my_write();
+close_dll(dll_file);
+.fi
+
+.SH NOTES
+- Ensure the DLL is open before calling functions from it to avoid segmentation faults.
+- OS/2 16-bit or AmigaOS-3 may require retrieving functions by ordinal number.
+- This system abstracts cross-platform DLL keywords and function access.
+
+.SH SEE ALSO
+.B CMT(3)
+
+.SH AUTHOR
+Teoman Deniz <te.odenizgml@gmail.com>

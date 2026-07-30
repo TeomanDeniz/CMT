@@ -1,0 +1,98 @@
+.TH CMT_THREAD 3 "CMT" "CMT_THREAD" "Thread and Mutex Management"
+
+.SH NAME
+CMT_THREAD \- Cross-platform thread and mutex management
+
+.SH SYNOPSIS
+.B #define INCL_CMT_THREAD
+.br
+.B #include <CMT/CMT.H>
+
+.SH FILES
+CMT/FUNCTIONS/THREAD.H
+
+.SH DESCRIPTION
+Provides a unified interface for creating and managing threads and mutexes across platforms.
+
+.TP
+.B THREAD_CREATE, thread_create()
+Creates a new thread. Returns a thread handle (t_thread) or NULL on failure.
+
+.TP
+.B THREAD_JOIN, thread_join()
+Waits for a thread to finish and optionally retrieves its return value.
+
+.TP
+.B MUTEX_CREATE, mutex_create()
+Creates a new mutex and returns a mutex handle (t_mutex).
+
+.TP
+.B MUTEX_DESTROY, mutex_destroy()
+Destroys a mutex.
+
+.TP
+.B MUTEX_LOCK, mutex_lock()
+Locks a mutex.
+
+.TP
+.B MUTEX_UNLOCK, mutex_unlock()
+Unlocks a mutex.
+
+.TP
+.B T_THREAD, t_thread
+Thread ID type (handle).
+
+.TP
+.B T_MUTEX, t_mutex
+Mutex ID type (handle).
+
+.SH USAGE
+.nf
+void *my_thread(void *arg) {
+    // thread code
+    return 0;
+}
+
+{
+    t_thread thread = thread_create(my_thread, NULL);
+    if (!thread) { /* handle error */ }
+
+    void *ret;
+    thread_join(thread, &ret);
+
+    t_mutex mutex = mutex_create();
+    if (!mutex) { /* handle error */ }
+
+    mutex_lock(mutex);
+    // critical section
+    mutex_unlock(mutex);
+
+    mutex_destroy(mutex);
+}
+.fi
+
+.SH NOTES
+- Always join threads to avoid resource leaks.
+- Always destroy mutexes after use.
+- Handles (t_thread, t_mutex) are pointers; do not copy.
+- Some functions have platform-specific limitations (see platform table below).
+
+.SH SUPPORTED PLATFORMS
+| PLATFORM       | NOTES                                                          |
+| -------------- | -------------------------------------------------------------- |
+| UNIX           | POSIX 1003.1C compliant; older versions may have limitations   |
+| WINDOWS/WINAPI | Fully supported                                                |
+| OS/2 - 32-bit  | Fully supported                                                |
+| OS/2 - 16-bit  | THREAD_JOIN not supported; THREAD_CREATE cannot pass arguments |
+| HAIKU          | Fully supported                                                |
+| PLAN9          | Fully supported                                                |
+| FREERTOS       | THREAD_JOIN not supported                                      |
+| ZEPHYR         | THREAD_JOIN cannot retrieve return value                       |
+| VXWORKS        | THREAD_JOIN not supported                                      |
+| TI-RTOS        | THREAD_JOIN not supported                                      |
+
+.SH SEE ALSO
+.B CMT(3)
+
+.SH AUTHOR
+Teoman Deniz <te.odenizgml@gmail.com>

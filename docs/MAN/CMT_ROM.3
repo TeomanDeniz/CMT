@@ -1,0 +1,42 @@
+.TH ROM 3 "CMT" "ROM" "Memory Placement"
+
+.SH NAME
+ROM \- Place constants in read-only / program memory when possible
+
+.SH SYNOPSIS
+.B #define INCL_CMT_ROM
+.br
+.B #include <CMT/CMT.H>
+
+.SH FILES
+CMT/KEYWORDS/ROM.H
+
+.SH DESCRIPTION
+Provides a macro that places variables into read-only memory or program
+flash using the most appropriate mechanism for the target compiler and
+architecture.
+
+This allows constants, lookup tables, and static data to reside in
+non-writable memory, conserving RAM and enforcing immutability.
+
+.TP
+.B ROM
+Macro for declaring data objects in read-only or flash memory.
+
+.SH USAGE
+.nf
+ROM int table[] = { 1, 2, 3, 4 };
+
+ROM char message[] = "Hello";
+.fi
+
+.SH NOTES
+- Intended for data objects, not functions.
+- Runtime access semantics may differ between platforms.
+- On AVR targets, PROGMEM data may require special access macros.
+
+.SH SEE ALSO
+.B CMT(3)
+
+.SH AUTHOR
+Teoman Deniz <te.odenizgml@gmail.com>

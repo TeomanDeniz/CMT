@@ -1,0 +1,51 @@
+.TH CMT_X17 3 "CMT" "CMT_X17" "Register Access Macros"
+
+.SH NAME
+CMT_X17 \- Read or write CPU register X17
+
+.SH SYNOPSIS
+.B #define INCL_CMT_X17
+.br
+.B #include <CMT/CMT.H>
+
+.SH FILES
+CMT/ASM/X17.H
+
+.SH DESCRIPTION
+CMT_X17 provides macros for reading from and writing to the ARM64 X17 register.
+It supports:
+- ARM_64: X17
+
+.SH MACROS
+.TP
+.B GET_X17(var), get_x17(var)
+Moves the value from the active accumulator register into the provided variable.
+Operand size adapts automatically to architecture.
+
+.TP
+.B SET_X17(val), set_x17(val)
+Moves the provided value or variable into the X17 register.
+
+.SH NOTES
+On 32-bit systems, it will throw an error.
+
+.SH EXAMPLES
+Read 64-bit X17:
+.nf
+uint64_t v;
+GET_X17(v);
+.fi
+
+Write 64-bit X17:
+.nf
+uint64_t v = 0x1234;
+SET_X17(v);
+.fi
+
+.SH SEE ALSO
+.B CMT_ARCHITECTURE(3),
+.B CMT_CPU(3),
+.B CMT(3)
+
+.SH AUTHOR
+Teoman Deniz <te.odenizgml@gmail.com>

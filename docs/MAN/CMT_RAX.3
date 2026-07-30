@@ -1,0 +1,57 @@
+.TH CMT_RAX 3 "CMT" "CMT_RAX" "Register Access Macros"
+
+.SH NAME
+CMT_RAX \- Read or write CPU register RAX/EAX/AX
+
+.SH SYNOPSIS
+.B #define INCL_CMT_RAX
+.br
+.B #include <CMT/CMT.H>
+
+.SH FILES
+CMT/ASM/RAX.H
+
+.SH DESCRIPTION
+CMT_RAX provides macros for reading from and writing to the Intel primary accumulator register.
+It supports:
+- x86_64: RAX
+- x86_32: EAX
+
+.SH MACROS
+.TP
+.B GET_RAX(var), get_rax(var)
+Moves the value from the active accumulator register into the provided variable.
+Operand size adapts automatically to architecture.
+
+.TP
+.B SET_RAX(val), set_rax(val)
+Moves the provided value or variable into the accumulator register.
+
+.SH NOTES
+On 32-bit systems, EAX is used.
+
+.SH EXAMPLES
+Read 64-bit RAX:
+.nf
+uint64_t v;
+GET_RAX(v);
+.fi
+
+Read 32-bit EAX:
+.nf
+unsigned int v32;
+GET_RAX(v32);
+.fi
+
+Write 64/32-bit RAX/EAX:
+.nf
+uint64_t x = 0x1234;
+SET_RAX(x);
+.fi
+
+.SH SEE ALSO
+.B CMT_ARCHITECTURE(3),
+.B CMT(3)
+
+.SH AUTHOR
+Teoman Deniz <te.odenizgml@gmail.com>

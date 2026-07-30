@@ -1,0 +1,72 @@
+.TH CMT_FAR 3 "CMT" "CMT_FAR" "FAR Memory Attribute"
+
+.SH NAME
+CMT_FAR \- FAR pointer/memory qualifier for 16-bit segmented systems
+
+.SH SYNOPSIS
+.B #define INCL_CMT_FAR
+.br
+.B #include <CMT/CMT.H>
+
+.SH FILES
+CMT/ATTRIBUTES/FAR.H
+
+.SH DESCRIPTION
+CMT_FAR provides the FAR qualifier used on 16-bit architectures to access memory beyond the current 64KB segment.
+On modern 32/64-bit systems it normally expands to an empty token.
+
+.SH MACROS
+.TP
+.B FAR
+Marks a variable, pointer, struct, or function pointer as far.
+On 16-bit systems this expands to "far" or compiler-specific equivalents.
+.TP
+.B IS__FAR__SUPPORTED
+Defined if FAR keyword is supported.
+
+.SH USAGE
+On real-mode/16-bit compilers it enables addressability of memory outside the current segment.
+On modern systems it is ignored but remains syntactically valid for portability.
+
+.SH EXAMPLES
+Far variable:
+.nf
+FAR int far_var;
+.fi
+
+Far pointer:
+.nf
+FAR char *far_ptr;
+.fi
+
+Far struct:
+.nf
+struct FAR S {
+    int id;
+    char name[20];
+};
+.fi
+
+Far function pointer:
+.nf
+FAR void (*far_function)(void);
+.fi
+
+Near vs far:
+.nf
+int near_ptr;
+int FAR far_ptr;
+.fi
+
+.SH NOTES
+- Near pointers use 16-bit offsets.
+- Far pointers use segment:offset addressing (32-bit).
+- Far pointers are slower due to segment switching.
+- Only required when targeting real-mode, MS-DOS, Turbo C, Watcom, or any memory-segmented 16-bit environment.
+- This file avoids conditional compilation to maximize compatibility with older toolchains.
+
+.SH SEE ALSO
+.B CMT(3)
+
+.SH AUTHOR
+Teoman Deniz <te.odenizgml@gmail.com>

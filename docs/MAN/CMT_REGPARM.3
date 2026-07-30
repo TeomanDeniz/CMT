@@ -1,0 +1,81 @@
+.TH CMT_REGPARM 3 "CMT" "CMT_REGPARM" "Register-Passing Attribute"
+
+.SH NAME
+CMT_REGPARM \- Pass function arguments through CPU registers
+
+.SH SYNOPSIS
+.B #define INCL_CMT_REGPARM
+.br
+.B #include <CMT/CMT.H>
+
+.SH FILES
+CMT/ATTRIBUTES/REGPARM.H
+
+.SH DESCRIPTION
+REGPARM applies a compiler attribute that forces a function to receive its parameters through CPU registers instead of stack memory.
+
+You must specify how many arguments should be passed via registers:
+.B REGPARM(<count>)
+
+.SH MACROS
+.TP
+.B REGPARM(n), regparm(n)
+Marks a function so that the first
+.I n
+arguments are passed through registers.
+
+.SH USAGE
+Optionally combine with the C
+.B register
+keyword for parameters.
+
+Apply the same REGPARM attribute to both the function definition and its prototype.
+
+.SH EXAMPLES
+Basic:
+.nf
+void REGPARM(1) func(int b)
+{
+    ...
+}
+
+void REGPARM(2) func(int a, int b)
+{
+    ...
+}
+
+void regparm(4) func(int a, float b, long c, char *d)
+{
+    ...
+}
+.fi
+
+Optimized:
+.nf
+void regparm(2) func(
+    register int a,
+    register float b,
+    register char *c
+)
+{
+    ...
+}
+.fi
+
+Prototype requirement:
+.nf
+void REGPARM(2) FUNCT(int A, int B) { ... }
+extern void REGPARM(2) FUNCT(int A, int B);
+.fi
+
+.SH NOTES
+- Minimizes stack operations by keeping arguments in registers.
+- Reduces memory loads/pushes during function calls.
+- Behavior depends on compiler and architecture.
+- Mark prototypes and definitions consistently.
+
+.SH SEE ALSO
+.B CMT(3)
+
+.SH AUTHOR
+Teoman Deniz <te.odenizgml@gmail.com> 

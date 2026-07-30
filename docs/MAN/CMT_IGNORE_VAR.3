@@ -1,0 +1,42 @@
+.TH CMT_IGNORE_VAR 3 "CMT" "CMT_IGNORE_VAR" "Ignore Unused Variables"
+
+.SH NAME
+CMT_IGNORE_VAR \- Tag variables to ignore unused warnings
+
+.SH SYNOPSIS
+.B #define INCL_CMT_IGNORE_VAR
+.br
+.B #include <CMT/CMT.H>
+
+.SH FILES
+CMT/KEYWORDS/IGNORE_VAR.H
+
+.SH DESCRIPTION
+Provides a macro to mark variables that may not be used, preventing compiler warnings.
+
+.TP
+.B IGNORE_VAR, ignore_var
+Marks a variable as intentionally unused.
+
+.SH USAGE
+.nf
+IGNORE_VAR void *unused_pointer;
+
+ignore_var int unused_counter;
+
+int main(int argc, char **argv) {
+    ignore_var argc;
+    // rest of code
+}
+.fi
+
+.SH NOTES
+- This macro does not change the variable's behavior or allocation.
+- Useful for function parameters that are unused or for temporary variables during development.
+
+.SH SEE ALSO
+.B CMT_UNUSED(3),
+.B CMT(3)
+
+.SH AUTHOR
+Teoman Deniz <te.odenizgml@gmail.com>

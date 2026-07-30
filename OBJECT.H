@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2025/05/25 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/07/23 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/07/30 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -17,10 +17,12 @@
 |*|                                  OBJECT                                  |*|
 |*|__________________________________________________________________________|*|
 |*|                                                                          |*|
-|*| THIS HEADER PROVIDES C-STYLE OBJECT-ORIENTED PROGRAMMING:                |*|
-|*| :                       ______                    ___                    |*|
-|*| :.. OBJECT DEFINITIONS (OBJECT) AND CONSTRUCTORS (NEW)                   |*|
-|*| :.. DYNAMIC FUNCTION TABLES FOR RUNTIME BINDING                          |*|
+|*| O - THIS HEADER PROVIDES C-STYLE OBJECT-ORIENTED PROGRAMMING             |*|
+|*| :                       ______                                           |*|
+|*| :.. OBJECT DEFINITIONS (OBJECT)                                          |*|
+|*| :          ___            ___                                            |*|
+|*| :.. STACK (OBJ) AND HEAP (NEW) CONSTRUCTORS                              |*|
+|*| :.. BOUND METHODS THROUGH RUNTIME GENERATED TRAMPOLINES                  |*|
 |*| :.. ASSEMBLY-LEVEL INJECTION FOR PERFORMANCE                             |*|
 |*| :.. MEMORY-EFFICIENT AND FLEXIBLE                                        |*|
 |*|__________________________________________________________________________|*|
@@ -33,28 +35,23 @@
 |* __________________________________________________________________________ *|
 |*| CONTENT                                                       | DOC LINE |*|
 |*|===============================================================|==========|*|
-|*| #define OBJECT                                                | 61       |*|
+|*| #define OBJECT                                                | 58       |*|
 |*| #define object                                                |          |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| #define NEW(NAME, TYPE)                                       | 86       |*|
-|*| #define new(name, type)                                       |          |*|
+|*| #define OBJ(OBJECT_NAME, VARIABLE_NAME)                       | 83       |*|
+|*| #define obj(object_name, variable_name)                       |          |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| #define OBJECT__CONNECT(OBJECT_TYPE_NAME)                     | 141      |*|
+|*| #define NEW(OBJECT_NAME, VARIABLE_NAME)                       | 150      |*|
+|*| #define new(object_name, variable_name)                       |          |*|
+|*|---------------------------------------------------------------|----------|*|
+|*| #define OBJECT__CONNECT(OBJECT_TYPE_NAME)                     | 213      |*|
 |*| #define object__connect(object_type_name)                     |          |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| #define OBJECT__INJECT(MEMBER)                                | 175      |*|
-|*| #define object__inject(member)                                |          |*|
-|*| #define OBJECT__INJECT_2(MEMBER, FUNCTION)                    |          |*|
-|*| #define object__inject_2(member, function)                    |          |*|
-|*| #define OBJECT__INJECT_3(                                     |          |*|
-|*|             OBJECT_PTR, MEMBER, FUNCTION                      |          |*|
-|*|         )                                                     |          |*|
-|*| #define object__inject_3(                                     |          |*|
-|*|             object_ptr, member, function                      |          |*|
-|*|         )                                                     |          |*|
+|*| #define OBJECT__INJECT(TARGET, SOURCE)                        | 251      |*|
+|*| #define object__inject(target, source)                        |          |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| #define OBJECT__EJECT(MEMBER)                                 | 212      |*|
-|*| #define object__eject(member)                                 |          |*|
+|*| #define OBJECT__EJECT(MEMBER_NAME)                            | 297      |*|
+|*| #define object__eject(member_name)                            |          |*|
 |*|_______________________________________________________________|__________|*|
 |*                                                                            *|
 |*                                 ..........                                 *|
@@ -77,23 +74,27 @@
 |* : 2| object o_object                                                     : *|
 |* : 3| {                                                                   : *|
 |* : 4|     void (*worked)(int);                                            : *|
-|* : 5|     int value;                                                      : *|
+|* : 5|     int  value;                                                     : *|
 |* : 6| };                                                                  : *|
 |* : 7|                                                                     : *|
 |* :........................................................................: *|
 |*                                                                            *|
 |*                                  .......                                   *|
-|* .................................: NEW :.................................. *|
+|* .................................: OBJ :.................................. *|
 |* :                                '''''''                                 : *|
 |* :  v [C LANGUAGE]                                                        : *|
 |* : 1|                                                                     : *|
-|* : 2| #define NEW(NAME, TYPE)                                             : *|
-|* : 3| #define new(name, type)                                             : *|
+|* : 2| #define OBJ(OBJECT_NAME, VARIABLE_NAME)                             : *|
+|* : 3| #define obj(object_name, variable_name)                             : *|
 |* : 4|                                                                     : *|
 |* :                                                                        : *|
-|* : USED TO INSTANTIATE AN OBJECT.                                         : *|
+|* : INSTANTIATES AN OBJECT ON THE STACK.                                   : *|
+|* :                                                                        : *|
+|* : THE VARIABLE IS A PLAIN OBJECT VALUE, SO ITS MEMBERS ARE REACHED WITH  : *|
+|* : ..                                                                     : *|
+|* :      ^                                                                 : *|
 |* :         ___                                                            : *|
-|* : CALLING NEW AUTOMATICALLY INVOKES THE CONSTRUCTOR.                     : *|
+|* : CALLING OBJ AUTOMATICALLY INVOKES THE CONSTRUCTOR.                     : *|
 |* :                                                                        : *|
 |* : THE CONSTRUCTOR MUST BE NAMED EXACTLY THE SAME AS THE OBJECT TYPE.     : *|
 |* :                                                                        : *|
@@ -126,15 +127,86 @@
 |* :                                                                        : *|
 |* :  v [C LANGUAGE]                                                        : *|
 |* : 1|                                                                     : *|
-|* : 2| new (o_object, test) ();                                            : *|
+|* : 2| obj (o_test, test) ();                                              : *|
 |* : 3|                                                                     : *|
 |* :                                                                        : *|
 |* : WITH PARAMETERS:                                                       : *|
 |* :                                                                        : *|
 |* :  v [C LANGUAGE]                                                        : *|
 |* : 1|                                                                     : *|
-|* : 2| new (o_object, test) (42, "test");                                  : *|
+|* : 2| obj (o_test, test) (42, "test");                                    : *|
 |* : 3|                                                                     : *|
+|* :                                                                        : *|
+|* : SINCE THE MACRO EXPANDS TO AN ORDINARY DECLARATION, QUALIFIERS AND     : *|
+|* : ATTRIBUTES MAY BE WRITTEN IN FRONT OF IT:                              : *|
+|* :                                                                        : *|
+|* :  v [C LANGUAGE]                                                        : *|
+|* : 1|                                                                     : *|
+|* : 2| const obj (o_test, test) (42);                                      : *|
+|* : 3|                                                                     : *|
+|* :........................................................................: *|
+|*                                                                            *|
+|*                                  .......                                   *|
+|* .................................: NEW :.................................. *|
+|* :                                '''''''                                 : *|
+|* :  v [C LANGUAGE]                                                        : *|
+|* : 1|                                                                     : *|
+|* : 2| #define NEW(OBJECT_NAME, VARIABLE_NAME)                             : *|
+|* : 3| #define new(object_name, variable_name)                             : *|
+|* : 4|                                                                     : *|
+|* :                                                                        : *|
+|* : INSTANTIATES AN OBJECT ON THE HEAP.                                    : *|
+|* :                                                                        : *|
+|* : THE VARIABLE IS A POINTER TO THE OBJECT, SO ITS MEMBERS ARE REACHED    : *|
+|* : WITH ->.                                                               : *|
+|* :      ^^                                                                : *|
+|* :         ___                                                            : *|
+|* : CALLING NEW AUTOMATICALLY INVOKES THE CONSTRUCTOR.                     : *|
+|* :                                                                        : *|
+|* : THE CONSTRUCTOR MUST BE NAMED EXACTLY THE SAME AS THE OBJECT TYPE.     : *|
+|* :                                                           _____        : *|
+|* : THE ALLOCATION IS CHECKED BEFORE THE CONSTRUCTOR RUNS: IF ALLOC FAILS, : *|
+|* : THE VARIABLE IS NULL AND THE CONSTRUCTOR IS NEVER CALLED.              : *|
+|* :                                                                        : *|
+|* : USAGE:                                                                 : *|
+|* :                                                                        : *|
+|* :  v [C LANGUAGE]                                                        : *|
+|* : 1|                                                                     : *|
+|* : 2| new (o_test, test) ();                                              : *|
+|* : 3|                                                                     : *|
+|* :                                                                        : *|
+|* : WITH PARAMETERS:                                                       : *|
+|* :                                                                        : *|
+|* :  v [C LANGUAGE]                                                        : *|
+|* : 1|                                                                     : *|
+|* : 2| new (o_test, test) (42, "test");                                    : *|
+|* : 3|                                                                     : *|
+|* :                                                                        : *|
+|* : BECAUSE THE OBJECT LIVES ON THE HEAP, IT CAN OUTLIVE THE SCOPE IT WAS  : *|
+|* : CREATED IN AND BE RETURNED FROM A FUNCTION:                            : *|
+|* :                                                                        : *|
+|* :  v [C LANGUAGE]                                                        : *|
+|* : 1|                                                                     : *|
+|* : 2| void *a_function(void)                                              : *|
+|* : 3| {                                                                   : *|
+|* : 4|     new (test_object_type, result) (1);                             : *|
+|* : 5|                                                                     : *|
+|* : 6|     return (result);                                                : *|
+|* : 7| }                                                                   : *|
+|* : 8|                                                                     : *|
+|* :                                     _____                              : *|
+|* : QUALIFIERS WORK HERE TOO. NOTE THAT const MAKES THE OBJECT READ-ONLY,  : *|
+|* : SO ITS FIELDS CAN NO LONGER BE ASSIGNED DIRECTLY AND HAVE TO GO        : *|
+|* : THROUGH A METHOD:                                                      : *|
+|* :                                                                        : *|
+|* :  v [C LANGUAGE]                                                        : *|
+|* : 1|                                                                     : *|
+|* : 2| const new (test_object_type, test) (42);                            : *|
+|* : 3|                                                                     : *|
+|* : 4| test->set(33);                                                      : *|
+|* : 5| // test->value = 33;                                                : *|
+|* : 6| // error: assignment of member 'value' in read-only object          : *|
+|* : 7|                                                                     : *|
 |* :........................................................................: *|
 |*                                                                            *|
 |*                            ...................                             *|
@@ -147,9 +219,13 @@
 |* : 4|                                                                     : *|
 |* :                                                                        : *|
 |* : CONNECTS A FUNCTION TO AN OBJECT INSTANCE.                             : *|
-|* :                                                                        : *|
-|* : THIS MACRO AUTOMATICALLY DEFINES A POINTER NAMED `THIS` THAT REFERS TO : *|
+|* :                                                  ____                  : *|
+|* : THIS MACRO AUTOMATICALLY DEFINES A POINTER NAMED THIS THAT REFERS TO   : *|
 |* : THE PARENT OBJECT.                                                     : *|
+|* :                                                                        : *|
+|* : IT READS THE OBJECT ADDRESS STRAIGHT OUT OF THE REGISTER THE           : *|
+|* : TRAMPOLINE PLACED IT IN, SO IT MUST BE THE FIRST STATEMENT OF THE      : *|
+|* : FUNCTION.                                                              : *|
 |* :                                                                        : *|
 |* : EXAMPLES:                                                              : *|
 |* :                                                                        : *|
@@ -171,23 +247,23 @@
 |* : 15|                                                                    : *|
 |* :........................................................................: *|
 |*                                                                            *|
-|*           ......................................................           *|
-|* ..........: OBJECT__INJECT, OBJECT__INJECT_2, OBJECT__INJECT_3 :.......... *|
-|* :         ''''''''''''''''''''''''''''''''''''''''''''''''''''''         : *|
+|*                             ..................                             *|
+|* ............................: OBJECT__INJECT :............................ *|
+|* :                           ''''''''''''''''''                           : *|
 |* :  v [C LANGUAGE]                                                        : *|
 |* : 1|                                                                     : *|
-|* : 2| #define OBJECT__INJECT(MEMBER)                                      : *|
-|* : 3| #define object__inject(member)                                      : *|
-|* : 4| #define OBJECT__INJECT_2(MEMBER, FUNCTION)                          : *|
-|* : 5| #define object__inject_2(member, function)                          : *|
-|* : 6| #define OBJECT__INJECT_3(OBJECT_PTR, MEMBER, FUNCTION)              : *|
-|* : 7| #define object__inject_3(object_ptr, member, function)              : *|
-|* : 8|                                                                     : *|
+|* : 2| #define OBJECT__INJECT(TARGET, SOURCE)                              : *|
+|* : 3| #define object__inject(target, source)                              : *|
+|* : 4|                                                                     : *|
 |* :                                                                        : *|
-|* : USED TO INJECT FUNCTIONS INTO AN OBJECT INSTANCE.                      : *|
-|* :                                                                        : *|
-|* : FUNCTIONS ARE **NOT** AUTOMATICALLY BOUND; INJECTION MUST BE DONE      : *|
-|* : MANUALLY.                                                              : *|
+|* : USED TO INJECT A FUNCTION INTO AN OBJECT INSTANCE.                     : *|
+|* :               ___                                                      : *|
+|* : FUNCTIONS ARE NOT AUTOMATICALLY BOUND; INJECTION MUST BE DONE          : *|
+|* : MANUALLY, USUALLY INSIDE THE CONSTRUCTOR.                              : *|
+|* : ______                                                ______           : *|
+|* : TARGET IS THE MEMBER THAT WILL HOLD THE BOUND METHOD, SOURCE IS THE    : *|
+|* : PLAIN FUNCTION THAT IMPLEMENTS IT. BOTH NAMES ARE GIVEN EXPLICITLY, SO : *|
+|* : THE MEMBER AND THE FUNCTION DO NOT HAVE TO SHARE A NAME.               : *|
 |* :                                                                        : *|
 |* : EXAMPLE:                                                               : *|
 |* :                                                                        : *|
@@ -197,15 +273,24 @@
 |* :  3| {                                                                  : *|
 |* :  4|     object__connect (o_object);                                    : *|
 |* :  5|                                                                    : *|
-|* :  6|     object__inject (test);        // this->test = test;            : *|
-|* :  7|     object__inject_2 (abc, test); // this->abc = test;             : *|
-|* :  8|     object__inject_3 (                                             : *|
-|* :  9|         struct_ptr, abc, test     // struct_ptr->abc = test;       : *|
-|* : 10|     );                                                             : *|
-|* : 11|                                                                    : *|
-|* : 12|     this->value = a;                                               : *|
-|* : 13| }                                                                  : *|
-|* : 14|                                                                    : *|
+|* :  6|     object__inject (this->test, test);      // this->test = test;  : *|
+|* :  7|     object__inject (this->abc, test);       // this->abc = test;   : *|
+|* :  8|     object__inject (struct_ptr->abc, test); // ANY LVALUE WORKS    : *|
+|* :  9|                                                                    : *|
+|* : 10|     this->value = a;                                               : *|
+|* : 11| }                                                                  : *|
+|* : 12|                                                                    : *|
+|* :                                                                        : *|
+|* : UNDER THE HOOD THE MACRO ASSEMBLES A SMALL TRAMPOLINE THAT LOADS THE   : *|
+|* : OBJECT ADDRESS INTO A REGISTER AND JUMPS TO SOURCE, THEN COPIES IT     : *|
+|* : INTO EXECUTABLE MEMORY WITH ALLOC_EXE. THAT IS WHAT LETS               : *|
+|* : OBJECT__CONNECT RECOVER THIS, AND IT IS WHY EVERY INJECTED MEMBER OWNS : *|
+|* : A SMALL EXECUTABLE ALLOCATION THAT HAS TO BE RELEASED AGAIN WITH       : *|
+|* : OBJECT__EJECT.                                                         : *|
+|* : ^^^^^^^^^^^^^                                                          : *|
+|* :           ________________     ________________                        : *|
+|* : THE OLDER OBJECT__INJECT_2 AND OBJECT__INJECT_3 VARIANTS NO LONGER     : *|
+|* : EXIST; THE TWO-ARGUMENT FORM REPLACES ALL OF THEM.                     : *|
 |* :........................................................................: *|
 |*                                                                            *|
 |*                             .................                              *|
@@ -213,13 +298,17 @@
 |* :                           '''''''''''''''''                            : *|
 |* :  v [C LANGUAGE]                                                        : *|
 |* : 1|                                                                     : *|
-|* : 2| #define OBJECT__EJECT(MEMBER)                                       : *|
-|* : 3| #define object__eject(member)                                       : *|
+|* : 2| #define OBJECT__EJECT(MEMBER_NAME)                                  : *|
+|* : 3| #define object__eject(member_name)                                  : *|
 |* : 4|                                                                     : *|
 |* :                                                                        : *|
-|* : SINCE NO AUTOMATIC DESTRUCTOR EXISTS, MEMBERS MUST BE EJECTED MANUALLY : *|
+|* : SINCE NO AUTOMATIC DESTRUCTOR EXISTS, MEMBERS MUST BE EJECTED          : *|
+|* : MANUALLY.                                                              : *|
 |* :                                                                        : *|
 |* : A CUSTOM DESTRUCTOR MUST BE IMPLEMENTED BY THE USER.                   : *|
+|* :                                                                        : *|
+|* : EJECTING RELEASES THE TRAMPOLINE BEHIND A MEMBER, SO THE MEMBER THAT   : *|
+|* : HOLDS THE DESTRUCTOR ITSELF HAS TO BE EJECTED LAST.                    : *|
 |* :                                                                        : *|
 |* : EXAMPLE:                                                               : *|
 |* :                                                                        : *|
@@ -227,31 +316,35 @@
 |* :  1|                                                                    : *|
 |* :  2| object o_test                                                      : *|
 |* :  3| {                                                                  : *|
-|* :  4|     void (*free)();                                                : *|
-|* :  5|     void (*test)();                                                : *|
+|* :  4|     void (*free)(void);                                            : *|
+|* :  5|     void (*test)(void);                                            : *|
 |* :  6| };                                                                 : *|
 |* :  7|                                                                    : *|
-|* :  8| void test()                                                        : *|
+|* :  8| void test(void)                                                    : *|
 |* :  9| {                                                                  : *|
 |* : 10|     object__connect (o_test);                                      : *|
 |* : 11| }                                                                  : *|
 |* : 12|                                                                    : *|
-|* : 13| void test_free()                                                   : *|
+|* : 13| void test_free(void)                                               : *|
 |* : 14| {                                                                  : *|
 |* : 15|     object__connect (o_test);                                      : *|
 |* : 16|                                                                    : *|
-|* : 17|     object__eject (test);                                          : *|
-|* : 18|     object__eject (free); // Always on the end!                    : *|
+|* : 17|     object__eject (this->test);                                    : *|
+|* : 18|     object__eject (this->free); // Always on the end!              : *|
 |* : 19| }                                                                  : *|
 |* : 20|                                                                    : *|
-|* : 21| void o_test()                                                      : *|
+|* : 21| void o_test(void)                                                  : *|
 |* : 22| {                                                                  : *|
 |* : 23|     object__connect (o_test);                                      : *|
 |* : 24|                                                                    : *|
-|* : 25|     object__inject (test);                                         : *|
-|* : 26|     object__inject_2 (free, test_free);                            : *|
+|* : 25|     object__inject (this->test, test);                             : *|
+|* : 26|     object__inject (this->free, test_free);                        : *|
 |* : 27| }                                                                  : *|
 |* : 28|                                                                    : *|
+|* :                          ___                                           : *|
+|* : FOR OBJECTS CREATED WITH new, EJECTING ONLY GIVES BACK THE EXECUTABLE  : *|
+|* : MEMORY OF THE INJECTED METHODS. THE OBJECT ALLOCATION ITSELF STILL     : *|
+|* : BELONGS TO THE CALLER.                                                 : *|
 |* :........................................................................: *|
 |*                                                                            *|
 |*    ______________                                                          *|
@@ -259,52 +352,101 @@
 |* | '""""""""""""""'                                                       | *|
 |* |   v [C LANGUAGE]                                                       | *|
 |* |  1|                                                                    | *|
-|* |  2| struct test_object_type                                            | *|
-|* |  3| {                                                                  | *|
-|* |  4|     void (*add)(int);                                              | *|
-|* |  5|     int  value;                                                    | *|
-|* |  6|     void (*free)(void);                                            | *|
-|* |  7| };                                                                 | *|
-|* |  8|                                                                    | *|
-|* |  9| void add(int value)                                                | *|
-|* | 10| {                                                                  | *|
-|* | 11|     object__connect (test_object_type);                            | *|
-|* | 12|                                                                    | *|
-|* | 13|     this->value += value;                                          | *|
-|* | 14| }                                                                  | *|
-|* | 15|                                                                    | *|
-|* | 16| void free_self(void)                                               | *|
-|* | 17| {                                                                  | *|
-|* | 18|     object__connect (test_object_type);                            | *|
-|* | 19|                                                                    | *|
-|* | 20|     object__eject (this->add);                                     | *|
-|* | 21|     object__eject (this->free);                                    | *|
-|* | 22| }                                                                  | *|
-|* | 23|                                                                    | *|
-|* | 24| void test_object_type(int start_var)                               | *|
-|* | 25| {                                                                  | *|
-|* | 26|     object__connect (test_object_type);                            | *|
+|* |  2| #define INCL_CMT_OBJECT // DEFINE OOP                              | *|
+|* |  3| #include "CMT/CMT.H"                                               | *|
+|* |  4| #include <stdio.h>                                                 | *|
+|* |  5|                                                                    | *|
+|* |  6| object test_object_type                                            | *|
+|* |  7| {                                                                  | *|
+|* |  8|     void (*add)(int);                                              | *|
+|* |  9|     void (*set)(int);                                              | *|
+|* | 10|     int  value;                                                    | *|
+|* | 11|     void (*free)(void);                                            | *|
+|* | 12| };                                                                 | *|
+|* | 13|                                                                    | *|
+|* | 14| void add(int value)                                                | *|
+|* | 15| {                                                                  | *|
+|* | 16|     object__connect (test_object_type);                            | *|
+|* | 17|                                                                    | *|
+|* | 18|     this->value += value;                                          | *|
+|* | 19| }                                                                  | *|
+|* | 20|                                                                    | *|
+|* | 21| void set(int value)                                                | *|
+|* | 22| {                                                                  | *|
+|* | 23|     object__connect (test_object_type);                            | *|
+|* | 24|                                                                    | *|
+|* | 25|     this->value = value;                                           | *|
+|* | 26| }                                                                  | *|
 |* | 27|                                                                    | *|
-|* | 28|     object__inject (add);                                          | *|
-|* | 29|     object__inject_2 (free, free_self);                            | *|
-|* | 30|     this->value = start_var;                                       | *|
-|* | 31| }                                                                  | *|
-|* | 32|                                                                    | *|
-|* | 33| int main(void)                                                     | *|
-|* | 34| {                                                                  | *|
-|* | 35|     new (test_object_type, test1) (42);                            | *|
-|* | 36|     new (test_object_type, test2) (10);                            | *|
-|* | 37|                                                                    | *|
-|* | 38|     printf("%d\n", test1.value); // 42                             | *|
-|* | 39|     test1.add(42);                                                 | *|
-|* | 40|     printf("%d\n", test2.value); // 10                             | *|
-|* | 41|     printf("%d\n", test1.value); // 82                             | *|
-|* | 42|                                                                    | *|
-|* | 43|     test1.free();                                                  | *|
-|* | 44|     test2.free();                                                  | *|
-|* | 45|     return (0);                                                    | *|
-|* | 46| }                                                                  | *|
-|* | 47|                                                                    | *|
+|* | 28| void free_self(void)                                               | *|
+|* | 29| {                                                                  | *|
+|* | 30|     object__connect (test_object_type);                            | *|
+|* | 31|                                                                    | *|
+|* | 32|     object__eject (this->add);                                     | *|
+|* | 33|     object__eject (this->set);                                     | *|
+|* | 34|     object__eject (this->free); // Always on the end!              | *|
+|* | 35| }                                                                  | *|
+|* | 36|                                                                    | *|
+|* | 37| void test_object_type(int start_var)                               | *|
+|* | 38| {                                                                  | *|
+|* | 39|     object__connect (test_object_type);                            | *|
+|* | 40|                                                                    | *|
+|* | 41|     object__inject (this->add, add);                               | *|
+|* | 42|     object__inject (this->set, set);                               | *|
+|* | 43|     object__inject (this->free, free_self);                        | *|
+|* | 44|     this->value = start_var;                                       | *|
+|* | 45| }                                                                  | *|
+|* | 46|                                                                    | *|
+|* | 47| void *a_function(void)                                             | *|
+|* | 48| {                                                                  | *|
+|* | 49|     new (test_object_type, result) (1); // Heap                    | *|
+|* | 50|                                                                    | *|
+|* | 51|     return (result);                                               | *|
+|* | 52| }                                                                  | *|
+|* | 53|                                                                    | *|
+|* | 54| int main(void)                                                     | *|
+|* | 55| {                                                                  | *|
+|* | 56|     object test_object_type *a;                                    | *|
+|* | 57|                                                                    | *|
+|* | 58|     // Yeah, variable attributes works too                         | *|
+|* | 59|     const new (test_object_type, test_h) (42); // Heap             | *|
+|* | 60|     obj (test_object_type, test_s) (22);       // Stack            | *|
+|* | 61|                                                                    | *|
+|* | 62|     printf("%d\n", test_h->value); // 42                           | *|
+|* | 63|     test_h->add(42);                                               | *|
+|* | 64|     printf("%d\n", test_h->value); // 84                           | *|
+|* | 65|     printf("%d\n", test_s.value);  // 22                           | *|
+|* | 66|                                                                    | *|
+|* | 67|     test_s.value = 33;                                             | *|
+|* | 68|     test_h->set(33); // I needed to do this in C++ way.            | *|
+|* | 69|     // test_h->value = 33;                                         | *|
+|* | 70|     // error: assignment of member 'value' in read-only object     | *|
+|* | 71|                                                                    | *|
+|* | 72|     printf("%d\n", test_h->value); // 33                           | *|
+|* | 73|     printf("%d\n", test_s.value);  // 33                           | *|
+|* | 74|                                                                    | *|
+|* | 75|     test_h->free();                                                | *|
+|* | 76|     test_s.free();                                                 | *|
+|* | 77|                                                                    | *|
+|* | 78|     a = a_function();                                              | *|
+|* | 79|     printf("%d\n", a->value); // 1                                 | *|
+|* | 80|     a->free();                                                     | *|
+|* | 81|     return (0);                                                    | *|
+|* | 82| }                                                                  | *|
+|* | 83|                                                                    | *|
+|* |________________________________________________________________________| *|
+|*                                                                            *|
+|*    _______                                                                 *|
+|*  _| NOTES |______________________________________________________________  *|
+|* | '"""""""'                                                              | *|
+|* |                                                                        | *|
+|* | TRAMPOLINES ARE CURRENTLY GENERATED FOR INTEL CPUS IN 16, 32 AND       | *|
+|* | 64-BIT MODE. ARM AND POWERPC ARE WORK IN PROGRESS.                     | *|
+|* |                                                                        | *|
+|* | THE HEADER SUPPRESSES THE STACK PROTECTOR AROUND ITS OWN CODE, BECAUSE | *|
+|* | GCC'S CANARY PROLOGUE CLOBBERS THE REGISTER THE TRAMPOLINE DELIVERS    | *|
+|* | THE OBJECT POINTER IN. THE SUPPRESSION IS PUSHED AND POPPED, SO IT     | *|
+|* | LEAK INTO THE TRANSLATION UNIT THAT INCLUDED THE HEADER.               | *|
 |* |________________________________________________________________________| *|
 |*                                                                            *|
 \******************************************************************************/
@@ -416,6 +558,7 @@
  */
 #include "OS_API/MEMORY.H"
 /******* """""""""""""""""
+ * PTR	*ALLOC(LET);
  * PTR	*ALLOC_EXE(PTR, LET);
  * void	FREE_EXE(PTR);
  */
@@ -524,45 +667,62 @@ CMT_NO_SSP_PUSH
 
 #ifdef LOCALMACRO__GCC_C23
 #undef LOCALMACRO__GCC_C23
-#define NEW(OBJECT_NAME, VARIABLE_NAME) \
+#define OBJ(OBJECT_NAME, VARIABLE_NAME) \
 	OBJECT OBJECT_NAME	VARIABLE_NAME;\
 	\
 	SET_RAX(&VARIABLE_NAME);\
 	OBJECT_NAME
 #else /* !LOCALMACRO__GCC_C23 */
-#define NEW(OBJECT_NAME, VARIABLE_NAME) \
+#define OBJ(OBJECT_NAME, VARIABLE_NAME) \
 	OBJECT OBJECT_NAME	VARIABLE_NAME;\
 	extern void			OBJECT_NAME();\
 	\
 	SET_RAX(&VARIABLE_NAME);\
 	OBJECT_NAME
+
+#define NEW(OBJECT_NAME, VARIABLE_NAME) \
+	OBJECT OBJECT_NAME	*VARIABLE_NAME = \
+		(OBJECT OBJECT_NAME *)ALLOC(sizeof(OBJECT OBJECT_NAME));\
+	extern void			OBJECT_NAME();\
+	\
+	if (VARIABLE_NAME)\
+		SET_RAX(&VARIABLE_NAME);\
+	\
+	if (VARIABLE_NAME)\
+		OBJECT_NAME
 #endif /* LOCALMACRO__GCC_C23 */
 
+#define obj(object_name, variable_name) OBJ(object_name, variable_name)
 #define new(object_name, variable_name) NEW(object_name, variable_name)
 
-#define OBJECT__INJECT_3(OBJECT_PTR, TARGET, SOURCE) \
+#define OBJECT__INJECT(TARGET, SOURCE) \
 	do\
 	{\
 		register LET	INDEX;\
 		BYTE			__OP__[LOCALMACRO__FUNCTION_SIZE];\
 		\
 		INDEX = 0;\
-		LOCALMACRO__INJECTOR(OBJECT_PTR, SOURCE) \
-		((OBJECT_PTR)->TARGET) = ALLOC_EXE(__OP__, LOCALMACRO__FUNCTION_SIZE);\
+		LOCALMACRO__INJECTOR(THIS, SOURCE) \
+		(TARGET) = ALLOC_EXE(__OP__, LOCALMACRO__FUNCTION_SIZE);\
 		/* DO NOT BE AFRAID MY CHILD, IT IS W^X SAFE. I KNOW WHAT I AM DOING */\
 	}\
 	while (0)
-#define object__inject_3(object_ptr, target, source) \
-	OBJECT__INJECT_3(object_ptr, target, source)
 
-#define OBJECT__INJECT_2(TARGET, SOURCE) OBJECT__INJECT_3(THIS, TARGET, SOURCE)
-#define object__inject_2(TARGET, SOURCE) object__inject_3(this, TARGET, SOURCE)
+#define object__inject(target, source) \
+	do\
+	{\
+		register LET	INDEX;\
+		BYTE			__OP__[LOCALMACRO__FUNCTION_SIZE];\
+		\
+		INDEX = 0;\
+		LOCALMACRO__INJECTOR(this, source) \
+		(target) = ALLOC_EXE(__OP__, LOCALMACRO__FUNCTION_SIZE);\
+		/* DO NOT BE AFRAID MY CHILD, IT IS W^X SAFE. I KNOW WHAT I AM DOING */\
+	}\
+	while (0)
 
-#define OBJECT__INJECT(TARGET) OBJECT__INJECT_2(TARGET, TARGET)
-#define object__inject(TARGET) object__inject_2(TARGET, TARGET)
-
-#define OBJECT__EJECT(MEMBER_NAME) FREE_EXE(THIS->MEMBER_NAME)
-#define object__eject(member_name) FREE_EXE(this->member_name)
+#define OBJECT__EJECT(MEMBER_NAME) FREE_EXE(MEMBER_NAME)
+#define object__eject(member_name) FREE_EXE(member_name)
 
 /* ####################### [v] TRAMPOLINE CONTENT [v] ####################### */
 #ifdef __CPU_INTEL__

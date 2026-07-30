@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2025/06/22 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/07/21 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/07/30 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -293,18 +293,16 @@
 #ifdef INCL_CMT_OBJECT
 #include "OBJECT.H"
 /******* """"""""""
- * #define NEW(OBJECT_NAME, VARIABLE_NAME)
- * #define new(object_name, variable_name)
  * #define OBJECT
  * #define object
- * #define OBJECT__CONNECT(OBJECT_NAME)
- * #define object__connect(object_name)
- * #define OBJECT__INJECT(FUNCTION_NAME)
- * #define object__inject(function_name)
- * #define OBJECT__INJECT_2(THIS_FUNCTION, FUNCTION_NAME)
- * #define object__inject_2(this_function, function_name)
- * #define OBJECT__INJECT_3(OBJECT_THIS, THIS_FUNCTION, FUNCTION_NAME)
- * #define object__inject_3(object_this, this_function, function_name)
+ * #define OBJ(OBJECT_NAME, VARIABLE_NAME)
+ * #define obj(object_name, variable_name)
+ * #define NEW(OBJECT_NAME, VARIABLE_NAME)
+ * #define new(object_name, variable_name)
+ * #define OBJECT__CONNECT(OBJECT_TYPE_NAME)
+ * #define object__connect(object_type_name)
+ * #define OBJECT__INJECT(TARGET, SOURCE)
+ * #define object__inject(target, source)
  * #define OBJECT__EJECT(MEMBER_NAME)
  * #define object__eject(member_name)
  */

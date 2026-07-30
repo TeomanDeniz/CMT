@@ -1,0 +1,115 @@
+.TH CMT_CPU 3 "CMT" "CMT_CPU" "CPU Information Detection"
+
+.SH NAME
+CMT_CPU \- Detect CPU architecture and runtime vendor/version
+
+.SH SYNOPSIS
+.B #define INCL_CMT_CPU
+.br
+.B #include <CMT/CMT.H>
+
+.SH FILES
+CMT/ENVIRONMENTS/CPU.H
+
+.SH DESCRIPTION
+Provides compile-time and runtime CPU detection for multiple architectures.
+
+Compile-time macros define the target CPU:
+
+.TP
+.B __CPU_INTEL__
+Intel x86/x86-64
+
+.TP
+.B __CPU_ARM__
+ARM (AArch32/AArch64)
+
+.TP
+.B __CPU_AMD_X86__
+AMD x86
+
+.TP
+.B __CPU_POWERPC__
+IBM PowerPC
+
+.TP
+.B __CPU_RISCV__
+RISC-V
+
+.TP
+.B __CPU_HC12__
+HC12
+
+.TP
+.B __CPU_HCS08__
+HCS08
+
+.TP
+.B __CPU_COLDFIRE__
+ColdFire
+
+.TP
+.B __CPU_M68K__
+Motorola 68K
+
+.TP
+.B __CPU_SH__
+SuperH
+
+.TP
+.B __CPU_MIPS__
+MIPS
+
+.TP
+.B __CPU_SPARC__
+SPARC
+
+.TP
+.B __CPU_6502__
+6502 Microprocessor
+
+.TP
+.B __CPU_Z80__
+Z80
+
+.TP
+.B __CPU_TI__
+TI MCU Processor
+
+.TP
+.B __CPU_SHARC__
+SHARC DSP
+
+.TP
+.B __CPU_BLACKFIN__
+Blackfin DSP
+
+.TP
+.B __CPU_DSP56K__
+Motorola DSP56000
+
+.TP
+.B __CPU_VER__
+Function returning a static C-string with CPU vendor, model, and version at runtime. Signature is the same on Intel and ARM.
+
+.SH USAGE
+- Compile-time macros allow conditional compilation for CPU-specific code.
+- `__CPU_VER__()` returns a consistent runtime string describing the CPU without using OS APIs or printf.
+
+.SH EXAMPLES
+.nf
+#include "CMT/CMT.H"
+
+#ifdef __CPU_INTEL__
+printf("Running on Intel CPU\n");
+#endif
+
+printf("CPU Info: %s\n", __CPU_VER__());
+.fi
+
+.SH SEE ALSO
+.B CMT_ARCHITECTURE(3),
+.B CMT(3)
+
+.SH AUTHOR
+Teoman Deniz <te.odenizgml@gmail.com>

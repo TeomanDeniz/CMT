@@ -1,0 +1,79 @@
+.TH CMT_PACK 3 "CMT" "CMT_PACK" "Struct Packing Macros"
+
+.SH NAME
+CMT_PACK \- Macros for struct packing and padding removal
+
+.SH SYNOPSIS
+.B #define INCL_CMT_PACK
+.br
+.B #include <CMT/CMT.H>
+
+.SH FILES
+CMT/ATTRIBUTES/PACK.H
+
+.SH DESCRIPTION
+CMT_PACK provides macros that wrap compiler-specific packing directives.
+They allow removing padding bytes from structures for binary layouts, network protocols, or memory-constrained formats.
+
+.SH MACROS
+.TP
+.B PRAGMA_PACK_PUSH
+Begins a packed region (equivalent to "#pragma pack(push)").
+
+.TP
+.B PRAGMA_PACK_POP
+Ends a packed region (equivalent to "#pragma pack(pop)").
+
+.TP
+.B PACK
+Applies packing to a struct declaration.
+
+.SH USAGE
+Use PACK together with PRAGMA_PACK_PUSH/PRAGMA_PACK_POP around the structure being packed.
+
+.SH EXAMPLES
+Basic:
+.nf
+PRAGMA_PACK_PUSH
+struct test {
+    ...
+} PACK;
+PRAGMA_PACK_POP
+.fi
+
+Typedef form:
+.nf
+PRAGMA_PACK_PUSH
+typedef struct test {
+    ...
+} PACK t_test;
+PRAGMA_PACK_POP
+.fi
+
+.SH NOTES
+- Packed structs remove padding, reducing memory size.
+- Padding normally aligns fields for faster access.
+- Removing padding may cause slower or unaligned memory access on some systems.
+- Use packing only when required for binary compatibility or external data formats.
+
+Example:
+.nf
+struct A {
+    int a;  // size 4
+    char b; // size 1 + 3 padding = 8 total
+}
+
+PRAGMA_PACK_PUSH
+struct B {
+    int a;
+    char b;
+} PACK;
+PRAGMA_PACK_POP
+// size = 5 (no padding)
+.fi
+
+.SH SEE ALSO
+.B CMT(3)
+
+.SH AUTHOR
+Teoman Deniz <te.odenizgml@gmail.com> 

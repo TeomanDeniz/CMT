@@ -1,0 +1,137 @@
+.TH CMT_OBJECT 3 "CMT" "CMT_OBJECT" "Object-Oriented Macros for C"
+.SH NAME
+CMT_OBJECT \- OBJECT / OBJECT.H OOP macro system for C
+
+.SH SYNOPSIS
+.B #define INCL_CMT_OBJECT
+.br
+.B #include <CMT/CMT.H>
+.br
+or
+.br
+.B #include <CMT/OBJECT.H>
+
+.SH DESCRIPTION
+The OBJECT subsystem provides lightweight object-oriented programming constructs for C.  
+It implements dynamic function tables, constructor invocation, function injection,  
+and implicit "this" pointers via macros.
+
+.SH MACROS
+.TP
+.B OBJECT, object
+Alias for "struct". Declares an object type.
+
+.TP
+.B NEW(TYPE, VAR) (...)
+Instantiates an object and invokes its constructor.
+
+.TP
+.B DESTROY(VAR)
+Destroys the object instance.
+
+.TP
+.B OBJECT__READY(VAR), object__ready(VAR)
+Checks if the object was successfully allocated. Returns 1 on success.
+
+.TP
+.B I_AM_AN_OBJECT, i_am_an_object
+Declares hidden function pointer storage inside the object struct.  
+Place at the top of every object type.
+
+.TP
+.B OBJECT__CONNECT(TYPE), object__connect(TYPE)
+Connects "this" (or THIS) to the active object instance.  
+Call at the top of object functions.
+
+.TP
+.B OBJECT__INJECT(MEMBER), object__inject(MEMBER)
+Injects a function pointer with the same name.
+
+.TP
+.B OBJECT__INJECT_2(MEMBER, FUNCTION), object__inject_2(MEMBER, FUNCTION)
+Injects a function pointer using a different function name.
+
+.TP
+.B OBJECT__INJECT_3(OBJ, MEMBER, FUNCTION), object__inject_3(OBJ, MEMBER, FUNCTION)
+Injects a function pointer directly into a specific object instance.
+
+.SH SETUP
+Define
+.B SETUP_OBJECT
+exactly once in a single C file (often main.c) if you want OBJECT to define  
+internal globals automatically.
+
+Example:
+.nf
+    #define SETUP_OBJECT
+    #include <CMT/OBJECT.H>
+.fi
+
+This is optional when using ARM 32-bit environments or when main is redefined.
+
+.SH FEATURES
+- Pure C object-oriented programming  
+- Fast function injection (inline/assembly when applicable)  
+- Supports 32/64-bit targets (likely 16-bit too)  
+- Dynamic function tables  
+- No virtual tables; all bindings are manual  
+- Portable across GCC, MSVC, TI CGT/CCS
+
+.SH USAGE EXAMPLES
+Basic object type:
+.nf
+object test {
+    i_am_an_object;
+    void (*worked)(int);
+    int value;
+};
+.fi
+
+Constructor and functions:
+.nf
+static void test() {
+    object__connect(test);
+    object__inject(worked);
+    this->value = 0;
+}
+
+void worked(int n) {
+    OBJECT__CONNECT(test);
+    THIS->value += n;
+}
+.fi
+
+Instantiation:
+.nf
+new (test, obj) ();
+obj.worked(42);
+destroy (obj);
+.fi
+
+Multiple instances:
+.nf
+new (test, A) ();
+new (test, B) ();
+
+A.worked(42);
+B.worked(42);
+
+destroy(A);
+destroy(B);
+.fi
+
+.SH NOTES
+- Terminate object__table(...) with 0  
+- Index 0 of the function table is the constructor  
+- Use object__connect(TYPE) inside any function that accesses SELF  
+- __OBJECT_MAX_FUNCTION_LIMIT__ controls maximum functions per object  
+
+.SH FILES
+CMT/OBJECT.H  
+CMT/CMT.H
+
+.SH SEE ALSO
+.B CMT(3)
+
+.SH AUTHOR
+Teoman Deniz <te.odenizgml@gmail.com>
