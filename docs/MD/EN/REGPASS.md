@@ -61,5 +61,5 @@ test = (int (REGPASS *)(int))pointer;
 
 ## References
 
- - [![](https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/FASTCALL.gif) **FASTCALL** - CMT](https://github.com/TeomanDeniz/CMT/main/docs/MD/EN/FASTCALL.md)
- - [![](https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/REGPARM.gif) **REGPARM** - CMT](https://github.com/TeomanDeniz/CMT/main/docs/MD/EN/REGPASS.md)
+ - [![](https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/FASTCALL.gif) **FASTCALL** - CMT](https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/FASTCALL.md)
+ - [![](https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/REGPARM.gif) **REGPARM** - CMT](https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/REGPASS.md)
