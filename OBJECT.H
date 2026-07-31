@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2025/05/25 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/07/30 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/07/31 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -672,6 +672,16 @@ CMT_NO_SSP_PUSH
 	\
 	SET_RAX(&VARIABLE_NAME);\
 	OBJECT_NAME
+
+#define NEW(OBJECT_NAME, VARIABLE_NAME) \
+	OBJECT OBJECT_NAME	*VARIABLE_NAME = \
+		(OBJECT OBJECT_NAME *)ALLOC(sizeof(OBJECT OBJECT_NAME));\
+	\
+	if (VARIABLE_NAME)\
+		SET_RAX(&VARIABLE_NAME);\
+	\
+	if (VARIABLE_NAME)\
+		OBJECT_NAME
 #else /* !LOCALMACRO__GCC_C23 */
 #define OBJ(OBJECT_NAME, VARIABLE_NAME) \
 	OBJECT OBJECT_NAME	VARIABLE_NAME;\

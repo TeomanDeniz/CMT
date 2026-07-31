@@ -104,4 +104,4 @@ Always guard usage with the corresponding `SUPPORTED__*` macro.
  - [128-bit computing - wikipedia.org](https://wikipedia.org/wiki/128-bit_computing)
  - [C data types - wikipedia.org](https://en.wikipedia.org/wiki/C_data_types)
  - [6.1.1 128-bit Integers - gnu.org](https://gcc.gnu.org/onlinedocs/gcc-16.1.0/gcc/_005f_005fint128.html)
- - [![](https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/FAR.gif) **FAR** - CMT](https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/MD/EN/FAR.md)
+ - [![](https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/FAR.gif) **FAR** - CMT](https://github.com/TeomanDeniz/CMT/main/docs/MD/EN/FAR.md)
