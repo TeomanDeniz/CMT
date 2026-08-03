@@ -294,7 +294,7 @@ For example, `MOV_RBX_(IMM32)` becames `SIZEOF_MOV_RBX_` and `MOV_RAX_RBX` becam
 
 <details>
 <summary>
-	<img src="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/INTEL_ASM.gif">
+	<img src="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/INTEL_ASM.gif">
 	<b>Intel (2175 Assembly Codes in total)</b>
 </summary>
 
@@ -2597,7 +2597,7 @@ See `ENVIRONMENTS/ABI.H` to determine what `ARG$` expands to if you want.
 
 <details>
 <summary>
-	<img src="IMAGES/32/ARM_ASM.gif">
+	<img src="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/ARM_ASM.gif">
 	<b>ARM64 (3 Assembly Codes in total)</b>
 </summary>
 

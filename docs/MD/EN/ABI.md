@@ -25,7 +25,7 @@ It detects and exposes platform-specific properties including:
 
 * **Endianness** (little-endian vs big-endian)
 
-<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/ENDIANS_TABLE.png" ALT="Endian Table" STYLE="WIDTH: 100%;"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/ENDIANS_TABLE.png" ALT="Endian Table" STYLE="WIDTH: 100%;"/>
 
 * **Register conventions**, especially callee-saved vs caller-saved registers
 
