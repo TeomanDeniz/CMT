@@ -2,23 +2,6 @@
 #error "ERROR - PLEASE DON'T USE THIS LIBRARY DIRECTLY!!!"
 #endif /* !ASM_H */
 
-/* **************************** [v] INCLUDES [v] **************************** */
-#include <stddef.h>
-/******* """"""""""
- * typedef	size_t;
- */
-/* **************************** [^] INCLUDES [^] **************************** */
-
-/* **************************** [v] EXTERNS [v] ***************************** */
-EXTERN_C_START
-#ifndef KNR_STYLE /* ANSI C */
-extern void	*calloc(size_t, size_t);
-#else /* K&R */
-extern char	*calloc();
-#endif /* !KNR_STYLE */
-EXTERN_C_END
-/* **************************** [^] EXTERNS [^] ***************************** */
-
 #ifndef KNR_STYLE /* ANSI C */
 #define FUNCTION_HEADER__CALLOC \
 	PTR	CALLOC(LET SIZE)
@@ -32,12 +15,43 @@ EXTERN_C_END
 	FUNCTION_HEADER__CALLOC \
 	{\
 		const PTR	RESULT = calloc(1, SIZE + sizeof(LET));\
+		PTR			USER_PTR;\
 		\
 		if (!RESULT)\
 			return ((PTR)0);\
 		\
 		(*((LET *)RESULT)) = SIZE;\
-		return (((LET *)RESULT) + 1);\
+		USER_PTR = (PTR)(((LET *)RESULT) + 1);\
+		\
+		if (G_HEAP_COUNT >= G_HEAP_CAPACITY)\
+		{\
+			LET	NEW_CAP;\
+			PTR	*NEW_PTRS;\
+			\
+			if (G_HEAP_CAPACITY == (LET)0)\
+				NEW_CAP = (LET)64;\
+			else\
+				NEW_CAP = (G_HEAP_CAPACITY * (LET)2);\
+			\
+			NEW_PTRS = (PTR *)realloc(\
+				(PTR)G_HEAP_PTRS,\
+				(LET)(NEW_CAP * sizeof(PTR))\
+			);\
+			\
+			if (NEW_PTRS)\
+			{\
+				G_HEAP_PTRS = NEW_PTRS;\
+				G_HEAP_CAPACITY = NEW_CAP;\
+			}\
+		}\
+		\
+		if (G_HEAP_COUNT < G_HEAP_CAPACITY)\
+		{\
+			G_HEAP_PTRS[G_HEAP_COUNT] = (USER_PTR);\
+			G_HEAP_COUNT += 1;\
+		}\
+		\
+		return (USER_PTR);\
 	}
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\

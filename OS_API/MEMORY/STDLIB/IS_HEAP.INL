@@ -3,30 +3,29 @@
 #endif /* !ASM_H */
 
 #ifndef KNR_STYLE /* ANSI C */
-#define FUNCTION_HEADER__FREE void	FREE(PTR ADDRESS)
+#define FUNCTION_HEADER__IS_HEAP \
+	BOOLEAN	IS_HEAP(PTR POINTER)
 #else /* K&R */
-#define FUNCTION_HEADER__FREE \
-	FREE(ADDRESS) \
-	PTR	ADDRESS;
+#define FUNCTION_HEADER__IS_HEAP \
+	BOOLEAN	IS_HEAP(POINTER) \
+	PTR	POINTER;
 #endif /* !KNR_STYLE */
 
-#define LOCALFUNCTION__FREE \
-	FUNCTION_HEADER__FREE \
+#define LOCALFUNCTION__IS_HEAP \
+	FUNCTION_HEADER__IS_HEAP \
 	{\
-		LET	TRACK_I;\
+		LET	I;\
 		\
-		for (TRACK_I = 0; TRACK_I < G_HEAP_COUNT; TRACK_I += 1)\
+		if (POINTER == (PTR)0)\
+			return ((BOOLEAN)0);\
+		\
+		for (I = 0; I < G_HEAP_COUNT; I += 1)\
 		{\
-			if (G_HEAP_PTRS[TRACK_I] == ADDRESS)\
-			{\
-				G_HEAP_PTRS[TRACK_I] =\
-					G_HEAP_PTRS[G_HEAP_COUNT - 1];\
-				G_HEAP_COUNT -= 1;\
-				break ;\
-			}\
+			if (G_HEAP_PTRS[I] == POINTER)\
+				return ((BOOLEAN)1);\
 		}\
 		\
-		free((PTR)(((LET *)ADDRESS) - 1));\
+		return ((BOOLEAN)0);\
 	}
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\

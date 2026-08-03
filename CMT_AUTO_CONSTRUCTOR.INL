@@ -156,46 +156,56 @@ extern int	__SETUP__();
 #endif /* !KNR_STYLE */
 
 #undef main
+#undef WinMain
+
+#ifndef KNR_STYLE /* STANDARD C */
+#else /* K&R */
+#endif /* !KNR_STYLE */
 #define main \
 	CMT_AUTO_LINKER\
 	LOCALMACRO__MAIN\
 	{\
-		__SETUP__();\
+		CMT_AUTO_CONSTRUCTOR\
 		\
-		extern int	__MAIN__();\
 		/* TODO: HANDLE ENV */\
-		return (((int (*)(int, char **))__MAIN__)(ARGC, ARGV));\
+		extern int	__MAIN__();\
+		\
+		return (__MAIN__(ARGC, ARGV));\
 	}\
 	int	__MAIN__
-#undef WinMain
 #define WinMain \
 	CMT_AUTO_LINKER\
 	LOCALMACRO__WINMAIN\
 	{\
-		__SETUP__();\
+		CMT_AUTO_CONSTRUCTOR\
 		\
 		extern int	__WIN_MAIN__();\
 		return (\
-			(\
-				(int (*)(void *, void *, char *, int))\
-				__WIN_MAIN__\
-			)(HANDLE_INSTANCE, HANDLE_PREVIOUS_INSTANCE, CMD_LINE, CMD_SHOW));\
+			__WIN_MAIN__(\
+				HANDLE_INSTANCE, HANDLE_PREVIOUS_INSTANCE, CMD_LINE, CMD_SHOW\
+			)\
+		);\
 	}\
 	int __WIN_MAIN__
 #else /* !CMT_EXTERN */
 #undef main
+#undef WinMain
+
+#ifndef KNR_STYLE /* STANDARD C */
 #define main \
 	CMT_AUTO_LINKER\
 	LOCALMACRO__MAIN\
 	{\
 		CMT_AUTO_CONSTRUCTOR\
 		\
-		extern int	__MAIN__();\
 		/* TODO: HANDLE ENV */\
-		return (((int (*)(int, char **))__MAIN__)(ARGC, ARGV));\
+		extern int	__MAIN__();\
+		\
+		int	(*__RUN_MAIN__)(int, char **) = \
+			(int (*)(int, char **))(PTR)__MAIN__;\
+		return (__RUN_MAIN__(ARGC, ARGV));\
 	}\
 	int	__MAIN__
-#undef WinMain
 #define WinMain \
 	CMT_AUTO_LINKER\
 	LOCALMACRO__WINMAIN\
@@ -210,6 +220,34 @@ extern int	__SETUP__();
 			)(HANDLE_INSTANCE, HANDLE_PREVIOUS_INSTANCE, CMD_LINE, CMD_SHOW));\
 	}\
 	int __WIN_MAIN__
+#else /* K&R */
+#define main \
+	CMT_AUTO_LINKER\
+	LOCALMACRO__MAIN\
+	{\
+		CMT_AUTO_CONSTRUCTOR\
+		\
+		/* TODO: HANDLE ENV */\
+		extern int	__MAIN__();\
+		\
+		return (__MAIN__(ARGC, ARGV));\
+	}\
+	int	__MAIN__
+#define WinMain \
+	CMT_AUTO_LINKER\
+	LOCALMACRO__WINMAIN\
+	{\
+		CMT_AUTO_CONSTRUCTOR\
+		\
+		extern int	__WIN_MAIN__();\
+		return (\
+			__WIN_MAIN__(\
+				HANDLE_INSTANCE, HANDLE_PREVIOUS_INSTANCE, CMD_LINE, CMD_SHOW\
+			)\
+		);\
+	}\
+	int __WIN_MAIN__
+#endif /* !KNR_STYLE */
 #endif /* CMT_EXTERN */
 #endif /* CMT_SETUP */
 

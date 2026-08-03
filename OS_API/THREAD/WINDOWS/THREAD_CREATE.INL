@@ -17,13 +17,11 @@
 #define LOCALFUNCTION__THREAD_CREATE \
 	FUNCTION_HEADER__THREAD_CREATE \
 	{\
-		T_THREAD	THREAD;\
-		\
 		return (\
 			(T_THREAD)KERNEL32.CreateThread(\
 				(PTR)0,\
 				(unsigned long)0,\
-				(unsigned long (STDCALL *)(void *))FUNCTION,\
+				(long unsigned int (STDCALL *)(void *))(PTR)FUNCTION,\
 				ARG,\
 				(unsigned long)0,\
 				(unsigned long *)0\

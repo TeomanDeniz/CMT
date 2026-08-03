@@ -27,6 +27,8 @@ EXTERN_C_END
 #include "MACOS/FAR_LENGTH_EXE.INL"
 #include "MACOS/FREE_EXE.INL"
 #include "MACOS/LENGTH_EXE.INL"
+#include "MACOS/IS_HEAP_EXE.INL"
+#include "MACOS/IS_HEAP_FAR_EXE.INL"
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\
  * * AT THE ALL END OF FILES, I AM ADDING A SPECIAL BYTE <0X1A> TO END THE  * *

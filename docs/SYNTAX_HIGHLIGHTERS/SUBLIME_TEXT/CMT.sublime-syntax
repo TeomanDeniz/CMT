@@ -77,7 +77,7 @@ variables:
   modifiers: '{{storage_classes}}|{{type_qualifier}}|{{compiler_directive}}'
   non_func_keywords: 'if|for|switch|while|decltype|typeof|typeof_unqual|_Atomic|_BitInt|sizeof|alignof|_Alignof|alignas|_Alignas|static_assert|_Static_assert|__declspec|__attribute__|ignore_var|IGNORE_VAR'
   cmt_types: '(?i:var|let|ptr|far_ptr|boolean|byte|bit8|bit16|bit32|bit64|bit128|float32|float64|float128)'
-  cmt_oop: '(?i:new|obj|object__connect|object__inject|object__eject)'
+  cmt_oop: '(?i:new|obj|destroy|object__connect|object__inject|object__eject)'
 contexts:
   main:
     - include: preprocessor-global

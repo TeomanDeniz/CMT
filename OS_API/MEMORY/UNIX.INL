@@ -25,7 +25,23 @@
  * #define PROT_EXEC
  * #define PROT_NONE
  */
+#include <stddef.h>
+/******* """"""""""
+ * typedef	size_t;
+ */
 /* **************************** [^] INCLUDES [^] **************************** */
+
+/* v FOR NOW, WILL REMOVED IN THE FUTURE v */
+EXTERN_C_START
+#ifndef KNR_STYLE /* STANDARD C */
+extern PTR	memset(PTR, int, size_t);
+extern PTR	memcpy(PTR, const void *, size_t);
+#else /* K&R */ /* TODO */
+extern PTR	memset();
+extern PTR	memcpy();
+#endif /* !KNR_STYLE */
+EXTERN_C_END
+/* ^ FOR NOW, WILL REMOVED IN THE FUTURE ^ */
 
 /* ************************* [v] POINTER MODES [v] ************************** */
 #define PTR_MODE_NONE (PROT_NONE)
@@ -174,6 +190,22 @@ EXTERN_C_END
 #ifndef LOCALFUNCTION__REALLOC
 #include "UNIX/REALLOC.INL"
 #endif /* !LOCALFUNCTION__REALLOC */
+
+#ifndef LOCALFUNCTION__IS_HEAP
+#include "UNIX/IS_HEAP.INL"
+#endif /* !LOCALFUNCTION__IS_HEAP */
+
+#ifndef LOCALFUNCTION__IS_HEAP_FAR
+#include "UNIX/IS_HEAP_FAR.INL"
+#endif /* !LOCALFUNCTION__IS_HEAP_FAR */
+
+#ifndef LOCALFUNCTION__IS_HEAP_EXE
+#include "UNIX/IS_HEAP_EXE.INL"
+#endif /* !LOCALFUNCTION__IS_HEAP_EXE */
+
+#ifndef LOCALFUNCTION__IS_HEAP_FAR_EXE
+#include "UNIX/IS_HEAP_FAR_EXE.INL"
+#endif /* !LOCALFUNCTION__IS_HEAP_FAR_EXE */
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\
  * * AT THE ALL END OF FILES, I AM ADDING A SPECIAL BYTE <0X1A> TO END THE  * *

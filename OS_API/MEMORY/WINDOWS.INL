@@ -162,6 +162,22 @@ EXTERN_C_END
 #include "WINDOWS/REALLOC.INL"
 #endif /* !LOCALFUNCTION__REALLOC */
 
+#ifndef LOCALFUNCTION__IS_HEAP
+#include "WINDOWS/IS_HEAP.INL"
+#endif /* !LOCALFUNCTION__IS_HEAP */
+
+#ifndef LOCALFUNCTION__IS_HEAP_FAR
+#include "WINDOWS/IS_HEAP_FAR.INL"
+#endif /* !LOCALFUNCTION__IS_HEAP_FAR */
+
+#ifndef LOCALFUNCTION__IS_HEAP_EXE
+#include "WINDOWS/IS_HEAP_EXE.INL"
+#endif /* !LOCALFUNCTION__IS_HEAP_EXE */
+
+#ifndef LOCALFUNCTION__IS_HEAP_FAR_EXE
+#include "WINDOWS/IS_HEAP_FAR_EXE.INL"
+#endif /* !LOCALFUNCTION__IS_HEAP_FAR_EXE */
+
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\
  * * AT THE ALL END OF FILES, I AM ADDING A SPECIAL BYTE <0X1A> TO END THE  * *
  * *                       FILE IN DOS, CP/M SYSTEMS                        * *

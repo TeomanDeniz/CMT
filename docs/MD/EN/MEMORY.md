@@ -62,14 +62,14 @@ Far pointer functions are automatically downgrades to normal functions in 32-bit
 | `BOOLEAN MEMORY_MODE(PTR, LET, BIT32);`         |
 | `BOOLEAN FAR_MEMORY_MODE(FAR_PTR, LET, BIT32);` |
 
-| Executable Memory Allocation Functions          |
-| ----------------------------------------------- |
-| `PTR ALLOC_EXE(const PTR OP_CODES, LET);`       |
-| `LET LENGTH_EXE(PTR);`                          |
-| `void FREE_EXE(PTR);`                           |
+| Executable Memory Allocation Functions            |
+| ------------------------------------------------- |
+| `PTR ALLOC_EXE(const PTR OP_CODES, LET);`         |
+| `LET LENGTH_EXE(PTR);`                            |
+| `void FREE_EXE(PTR);`                             |
 | `FAR_PTR FAR_ALLOC_EXE(const PTR OP_CODES, LET);` |
-| `LET FAR_LENGTH_EXE(FAR_PTR);`                  |
-| `void FAR_FREE_EXE(FAR_PTR);`                   |
+| `LET FAR_LENGTH_EXE(FAR_PTR);`                    |
+| `void FAR_FREE_EXE(FAR_PTR);`                     |
 
 | Page Memory Management Objects       |
 | ------------------------------------ |
@@ -77,6 +77,52 @@ Far pointer functions are automatically downgrades to normal functions in 32-bit
 | `PTR ALLOC_PAGE(LET, BIT32, BIT32);` |
 | `void FREE_PAGE(PTR);`               |
 | `LET GET_PAGE_SIZE(void)`            |
+
+| Memory Guarantee Functions          |
+| ----------------------------------- |
+| `BOOLEAN IS_HEAP(PTR);`             |
+| `BOOLEAN IS_HEAP_FAR(FAR_PTR);`     |
+| `BOOLEAN IS_HEAP_EXE(PTR);`         |
+| `BOOLEAN IS_HEAP_FAR_EXE(FAR_PTR);` |
+
+----
+
+### PTR_MODE
+
+```c
+#define PTR_MODE_NONE
+#define PTR_MODE_R
+#define PTR_MODE_W
+#define PTR_MODE_X
+#define PTR_MODE_RW
+#define PTR_MODE_RX
+#define PTR_MODE_WX
+#define PTR_MODE_RWX
+```
+
+Protection flags describing what the CPU is allowed to do with a region of memory: **R**ead, **W**rite, e**X**ecute.
+
+They are consumed by [`MEMORY_MODE`](#memory_mode), [`FAR_MEMORY_MODE`](#far_memory_mode) and [`ALLOC_PAGE`](#alloc_page).
+
+| Constant        | Meaning                               |
+| --------------- | ------------------------------------- |
+| `PTR_MODE_NONE` | No access at all. Any touch faults.   |
+| `PTR_MODE_R`    | Read only.                            |
+| `PTR_MODE_W`    | Write only.                           |
+| `PTR_MODE_X`    | Execute only.                         |
+| `PTR_MODE_RW`   | Read and write. Ordinary data memory. |
+| `PTR_MODE_RX`   | Read and execute. Finished code.      |
+| `PTR_MODE_WX`   | Write and execute.                    |
+| `PTR_MODE_RWX`  | Read, write and execute.              |
+
+> ⚠️ **Do not combine these with `|`.**
+>
+> On UNIX these expand to `PROT_*` bit flags, so `PTR_MODE_R | PTR_MODE_X` happens to work. On Windows they expand to `PAGE_*` **enumerated values**, where `PTR_MODE_R | PTR_MODE_X` produces the number `18`, which is not a valid protection constant and makes the call fail. Always pass one of the combined constants directly.
+
+Two more platform notes worth knowing:
+
+* Most hardware cannot express "write but not read". On Windows `PTR_MODE_W` is the same value as `PTR_MODE_RW`, and on most UNIX kernels `PROT_WRITE` implies read as well. Treat `PTR_MODE_W` as "at least writable", never as a way to hide data from a reader.
+* `PTR_MODE_X` alone is likewise unavailable on many targets and is usually widened to `PTR_MODE_RX` by the kernel.
 
 ----
 
@@ -344,45 +390,6 @@ FAR_PTR	buffer = FAR_ALLOC(70000);
 if (FAR_LENGTH(buffer) < needed)
 	buffer = FAR_REALLOC(buffer, needed);
 ```
-
-----
-
-### PTR_MODE
-
-```c
-#define PTR_MODE_NONE
-#define PTR_MODE_R
-#define PTR_MODE_W
-#define PTR_MODE_X
-#define PTR_MODE_RW
-#define PTR_MODE_RX
-#define PTR_MODE_WX
-#define PTR_MODE_RWX
-```
-
-Protection flags describing what the CPU is allowed to do with a region of memory: **R**ead, **W**rite, e**X**ecute.
-
-They are consumed by [`MEMORY_MODE`](#memory_mode), [`FAR_MEMORY_MODE`](#far_memory_mode) and [`ALLOC_PAGE`](#alloc_page).
-
-| Constant       | Meaning                                             |
-| -------------- | --------------------------------------------------- |
-| `PTR_MODE_NONE` | No access at all. Any touch faults.                |
-| `PTR_MODE_R`   | Read only.                                          |
-| `PTR_MODE_W`   | Write only.                                         |
-| `PTR_MODE_X`   | Execute only.                                       |
-| `PTR_MODE_RW`  | Read and write. Ordinary data memory.               |
-| `PTR_MODE_RX`  | Read and execute. Finished code.                    |
-| `PTR_MODE_WX`  | Write and execute.                                  |
-| `PTR_MODE_RWX` | Read, write and execute.                            |
-
-> ⚠️ **Do not combine these with `|`.**
->
-> On UNIX these expand to `PROT_*` bit flags, so `PTR_MODE_R | PTR_MODE_X` happens to work. On Windows they expand to `PAGE_*` **enumerated values**, where `PTR_MODE_R | PTR_MODE_X` produces the number `18`, which is not a valid protection constant and makes the call fail. Always pass one of the combined constants directly.
-
-Two more platform notes worth knowing:
-
-* Most hardware cannot express "write but not read". On Windows `PTR_MODE_W` is the same value as `PTR_MODE_RW`, and on most UNIX kernels `PROT_WRITE` implies read as well. Treat `PTR_MODE_W` as "at least writable", never as a way to hide data from a reader.
-* `PTR_MODE_X` alone is likewise unavailable on many targets and is usually widened to `PTR_MODE_RX` by the kernel.
 
 ----
 
@@ -739,6 +746,104 @@ PTR	region = ALLOC_PAGE(4096, PTR_MODE_RW, 0);
 
 FREE_PAGE(region);
 region = (PTR)0;
+```
+
+----
+
+----
+
+### IS_HEAP
+
+```c
+BOOLEAN	IS_HEAP(PTR);
+```
+
+Returns whether `PTR` points to a valid heap allocation.
+
+This function can be used to verify that a pointer originates from the heap before passing it to functions that require heap-allocated memory.
+
+Returns `TRUE` if the pointer belongs to the heap, otherwise `FALSE`.
+
+Example:
+```c
+char *memory = (char *)ALLOC(64);
+
+if (IS_HEAP(memory))
+{
+	FREE(memory);
+}
+```
+
+----
+
+### IS_HEAP_FAR
+
+```c
+BOOLEAN	IS_HEAP_FAR(FAR_PTR);
+```
+
+Returns whether `FAR_PTR` points to a valid heap allocation.
+
+This is the far-pointer equivalent of `IS_HEAP()`.
+
+Returns `TRUE` if the pointer belongs to the heap, otherwise `FALSE`.
+
+Example:
+```c
+FAR_PTR memory = ...;
+
+if (IS_HEAP_FAR(memory))
+{
+	...
+}
+```
+
+----
+
+### IS_HEAP_EXE
+
+```c
+BOOLEAN	IS_HEAP_EXE(PTR);
+```
+
+Returns whether `PTR` points to heap memory allocated by the currently running executable.
+
+Unlike `IS_HEAP()`, this function rejects heap pointers originating from other loaded executables or modules.
+
+Returns `TRUE` if the pointer belongs to the current executable's heap, otherwise `FALSE`.
+
+Example:
+```c
+char *memory = (char *)ALLOC(64);
+
+if (IS_HEAP_EXE(memory))
+{
+	FREE(memory);
+}
+```
+
+----
+
+### IS_HEAP_FAR_EXE
+
+```c
+BOOLEAN	IS_HEAP_FAR_EXE(FAR_PTR);
+```
+
+Returns whether `FAR_PTR` points to heap memory allocated by the currently running executable.
+
+This is the far-pointer equivalent of `IS_HEAP_EXE()`.
+
+Returns `TRUE` if the pointer belongs to the current executable's heap, otherwise `FALSE`.
+
+Example:
+```c
+FAR_PTR memory = ...;
+
+if (IS_HEAP_FAR_EXE(memory))
+{
+	...
+}
 ```
 
 ## References

@@ -8,12 +8,12 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2025/06/22 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/07/30 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/08/03 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
 #ifndef CMT_H
-#define CMT_H 202607 /* VERSION */
+#define CMT_H 202608 /* VERSION */
 #endif /* !CMT_H */
 
 /* ****************** [v] LOCALMACRO_DEFINE_ALL_TRY_1 [v] ******************* */
@@ -299,6 +299,8 @@
  * #define obj(object_name, variable_name)
  * #define NEW(OBJECT_NAME, VARIABLE_NAME)
  * #define new(object_name, variable_name)
+ * #define DESTROY(THE_OBJECT)
+ * #define destroy(the_object)
  * #define OBJECT__CONNECT(OBJECT_TYPE_NAME)
  * #define object__connect(object_type_name)
  * #define OBJECT__INJECT(TARGET, SOURCE)
@@ -905,6 +907,10 @@
  * BOOLEAN	MEMORY_MODE(PTR, LET, BIT32);
  * PTR		REALLOC(PTR, LET);
  * LET		PAGE_SIZE;
+ * BOOLEAN	IS_HEAP(PTR);
+ * BOOLEAN	IS_HEAP_FAR(FAR_PTR);
+ * BOOLEAN	IS_HEAP_EXE(PTR);
+ * BOOLEAN	IS_HEAP_FAR_EXE(FAR_PTR);
  */
 #undef INCL_CMT_MEMORY
 #endif /* INCL_CMT_MEMORY */

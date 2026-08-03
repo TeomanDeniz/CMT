@@ -1,32 +1,22 @@
 #ifndef MEMORY_H
 #error "ERROR - PLEASE DON'T USE THIS LIBRARY DIRECTLY!!!"
-#endif /* !ASM_H */
+#endif /* !MEMORY_H */
 
-#ifndef KNR_STYLE /* ANSI C */
-#define FUNCTION_HEADER__FREE void	FREE(PTR ADDRESS)
+#ifndef KNR_STYLE /* STANDARD C */
+#define FUNCTION_HEADER__IS_HEAP_FAR_EXE \
+	BOOLEAN\
+		IS_HEAP_FAR_EXE(FAR_PTR POINTER)
 #else /* K&R */
-#define FUNCTION_HEADER__FREE \
-	FREE(ADDRESS) \
-	PTR	ADDRESS;
+#define FUNCTION_HEADER__IS_HEAP_FAR_EXE \
+	BOOLEAN\
+		IS_HEAP_FAR_EXE(POINTER)\
+		FAR_PTR	POINTER;
 #endif /* !KNR_STYLE */
 
-#define LOCALFUNCTION__FREE \
-	FUNCTION_HEADER__FREE \
+#define LOCALFUNCTION__IS_HEAP_FAR_EXE \
+	FUNCTION_HEADER__IS_HEAP_FAR_EXE \
 	{\
-		LET	TRACK_I;\
-		\
-		for (TRACK_I = 0; TRACK_I < G_HEAP_COUNT; TRACK_I += 1)\
-		{\
-			if (G_HEAP_PTRS[TRACK_I] == ADDRESS)\
-			{\
-				G_HEAP_PTRS[TRACK_I] =\
-					G_HEAP_PTRS[G_HEAP_COUNT - 1];\
-				G_HEAP_COUNT -= 1;\
-				break ;\
-			}\
-		}\
-		\
-		free((PTR)(((LET *)ADDRESS) - 1));\
+		return (IS_HEAP_EXE((PTR)POINTER));\
 	}
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\
