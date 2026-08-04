@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2025/03/07 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/05/16 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/08/04 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -23,13 +23,13 @@
 |*|                                                                          |*|
 |*| V IN 16-BIT COMPILERS (MS-DOS, TURBO C, WATCOM, ETC.), POINTERS ARE:     |*|
 |*| :                                                                        |*|
-|*| :.. NEAR: WITHIN A SINGLE SEGMENT                                        |*|
-|*| :.. FAR: ACROSS SEGMENTS                                                 |*|
+|*| :.., NEAR: WITHIN A SINGLE SEGMENT                                       |*|
+|*| :.., FAR: ACROSS SEGMENTS                                                |*|
 |*|                                                                          |*|
 |*| V MEMORY SEGMENTATION IN 16-BIT SYSTEMS USES 64KB SEGMENTS:              |*|
 |*| :                                                                        |*|
-|*| :.. NEAR POINTER -> 16-BIT OFFSET                                        |*|
-|*| :.. FAR POINTER -> 32-BIT (SEGMENT:OFFSET)                               |*|
+|*| :.., NEAR POINTER -> 16-BIT OFFSET                                       |*|
+|*| :.., FAR POINTER -> 32-BIT (SEGMENT:OFFSET)                              |*|
 |*|                ___                                                       |*|
 |*| IT DEFINES THE FAR MACRO TO ANNOTATE FAR MEMORY QUALIFIERS WHERE         |*|
 |*| SUPPORTED, AND THE IS__FAR__SUPPORTED MACRO TO ALLOW COMPILE-TIME        |*|
@@ -52,18 +52,18 @@
 |*|       ALWAYS CONSULT AND TRUST YOUR COMPILER AND TARGET HARDWARE         |*|
 |*|       DOCUMENTATION.                                                     |*|
 |*|                                                                          |*|
-|*| O PRO-TIP                                                                |*|
+|*| O - PRO-TIP                                                              |*|
 |*| :                                                                        |*|
-|*| :.. CHECK YOUR COMPILER DOCUMENTATION FOR MEMORY MODELS AND POINTER      |*|
-|*| : : TYPES.                                                               |*|
+|*| :.., CHECK YOUR COMPILER DOCUMENTATION FOR MEMORY MODELS AND POINTER     |*|
+|*| :  : TYPES.                                                              |*|
 |*| :                                                                        |*|
-|*| :.. ON **MODERN SYSTEMS** (32/64-BIT), FAR POINTERS ARE OBSOLETE AND     |*|
-|*| : : MOSTLY IGNORED.                                                      |*|
+|*| :.., ON **MODERN SYSTEMS** (32/64-BIT), FAR POINTERS ARE OBSOLETE AND    |*|
+|*| :  : MOSTLY IGNORED.                                                     |*|
 |*| :                                                                        |*|
-|*| :.. FAR POINTERS ARE SLOWER (DUE TO SEGMENT SWITCHING).                  |*|
+|*| :.., FAR POINTERS ARE SLOWER (DUE TO SEGMENT SWITCHING).                 |*|
 |*| :                                                                        |*|
-|*| :.. USE `FAR` ONLY IF YOU'RE PLANNING TO COMPILE YOUR CODE ON 16-BIT     |*|
-|*|   : REAL MODE ENVIRONMENTS.                                              |*|
+|*| :.., USE `FAR` ONLY IF YOU'RE PLANNING TO COMPILE YOUR CODE ON 16-BIT    |*|
+|*|    : REAL MODE ENVIRONMENTS.                                             |*|
 |*|__________________________________________________________________________|*|
 |*                                                                            *|
 \******************************************************************************/
@@ -132,12 +132,12 @@
 |* : THIS INDICATES THAT THE COMPILER TRULY SUPPORTS THE far KEYWORD.       : *|
 |* :                                                                        : *|
 |* : O - NOTE:                                                              : *|
-|* : :            __________________                                        : *|
-|* : :.. CHECKING IS__FAR__SUPPORTED ALONE IS NOT SUFFICIENT.               : *|
+|* : :             __________________                                       : *|
+|* : :.., CHECKING IS__FAR__SUPPORTED ALONE IS NOT SUFFICIENT.              : *|
 |* : :                                                                      : *|
-|* : :.. YOU MUST ALSO VERIFY THAT YOUR TARGET ARCHITECTURE AND COMPILER    : *|
-|* :   : RUNTIME SUPPORT FAR MEMORY ALLOCATION AND MEMORY ACCESS ROUTINES   : *|
-|* :   : COMPATIBLE WITH FAR POINTERS.                                      : *|
+|* : :.., YOU MUST ALSO VERIFY THAT YOUR TARGET ARCHITECTURE AND COMPILER   : *|
+|* :    : RUNTIME SUPPORT FAR MEMORY ALLOCATION AND MEMORY ACCESS ROUTINES  : *|
+|* :    : COMPATIBLE WITH FAR POINTERS.                                     : *|
 |* :                                                                        : *|
 |* : EXAMPLE:                                                               : *|
 |* :                                                                        : *|
@@ -160,45 +160,8 @@
 |*                                                                            *|
 \******************************************************************************/
 
-/* * * * * * * * * * * * * * * * * * * ** * * * * * * * * * * * * * * * * * * *\
-|* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ *|
-|* @                              TEST REPORT                               @ *|
-|* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ *|
-|*                                                                            *|
-|* #===============================================================#========# *|
-|* | ENVIRONMENTS                                                  | RESULT | *|
-|* #===============================================================#========# *|
-|* | WINDOWS 11 25H2 | INTEL X64 I5-13420H | GCC 8.1.0 MINGW-W64   | PASSED | *|
-|* |---------------------------------------------------------------|--------| *|
-|* | WINDOWS 2000 SERVICE PACK 4 | INTEL X86 PENTIUM 4 | GCC 3.4.2 |        | *|
-|* | MINGW SPECIAL EDITION                                         | PASSED | *|
-|* |---------------------------------------------------------------|--------| *|
-|* | WINDOWS 2000 SERVICE PACK 4 | INTEL X86 PENTIUM 4 | MICROSOFT |        | *|
-|* | C COMPILER (MC1.EXE MC2.EXE) VERSION 2.03                     | PASSED | *|
-|* |---------------------------------------------------------------|--------| *|
-|* | UBUNTU 22.04.5 LTS | INTEL X64 I5-13420H | PCC 1.2.0.DEVEL    | PASSED | *|
-|* |---------------------------------------------------------------|--------| *|
-|* | UBUNTU 22.04.5 LTS | INTEL X64 I5-13420H | CLANG              |        | *|
-|* | 14.0.0-1UBUNTU1.1                                             | PASSED | *|
-|* |---------------------------------------------------------------|--------| *|
-|* | TRSDOS | ZLOG Z80 8BIT 48KB RAM | CMOC                        | PASSED | *|
-|* |---------------------------------------------------------------|--------| *|
-|* | APPLE MACOS 26 | APPLE SILICON M2 2.2.1 | CLANG LLVM - 5.0.2  | PASSED | *|
-|* |_______________________________________________________________|________| *|
-|*                                                                            *|
-|*  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  *|
-|*                                                                            *|
-|*  /!\ No noteworthy issues were encountered to report.                      *|
-|*                                                                            *|
-\* * * * * * * * * * * * * * * * * * * ** * * * * * * * * * * * * * * * * * * */
-
-/* TODO (SELF NOTE): ALL TEST REPORTS ARE GOING TO CARRIED TO TESTS FOLDER  */
-/*                   THIS IS BECAUSE GIVING MORE DETAILS IN TESTS, AND      */
-/*                   LEAVING MORE SPACES ON HEADER FILES WHEN COMPILERS ARE */
-/*                   USING THE FILES TO COMPILE YOUR PROJECT.               */
-
 #ifndef FAR_H
-#define FAR_H 202605 /* VERSION */
+#define FAR_H 202608 /* VERSION */
 
 /* *********************** [v] TI CGT CCS (PUSH) [v] ************************ */
 #ifdef __TI_COMPILER_VERSION__

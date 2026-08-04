@@ -203,6 +203,7 @@ Redundant definitions are safe:
  * [![][__EXTERN_C_GIF__] **EXTERN_C**][__EXTERN_C_MD__]
  * [![][__FAR_GIF__] **FAR**][__FAR_MD__]
  * [![][__FASTCALL_GIF__] **FASTCALL**][__FASTCALL_MD__]
+ * [![][__NOINLINE_GIF__] **NOINLINE**][__NOINLINE_MD__]
  * [![][__PACK_GIF__] **PACK**][__PACK_MD__]
  * [![][__PASCAL_GIF__] **PASCAL**][__PASCAL_MD__]
  * [![][__REGPARM_GIF__] **REGPARM**][__REGPARM_MD__]
@@ -412,6 +413,7 @@ List of the icons:
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/WIN_CORE.gif" ALT="WIN_CORE" TITLE="WIN_CORE"/>
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/W_XOR_X.gif" ALT="W_XOR_X" TITLE="W_XOR_X"/>
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/__PEB_LOADER__.gif" ALT="__PEB_LOADER__" TITLE="__PEB_LOADER__"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/NOINLINE.gif" ALT="NOINLINE" TITLE="NOINLINE"/>
 </details>
 
 <details>
@@ -471,6 +473,7 @@ List of the icons:
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/WIN_CORE.gif" ALT="WIN_CORE" TITLE="WIN_CORE"/>
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/W_XOR_X.gif" ALT="W_XOR_X" TITLE="W_XOR_X"/>
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/__PEB_LOADER__.gif" ALT="__PEB_LOADER__" TITLE="__PEB_LOADER__"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/NOINLINE.gif" ALT="NOINLINE" TITLE="NOINLINE"/>
 </details>
 
 ---
@@ -501,6 +504,7 @@ List of the icons:
 [__EXTERN_C_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/EXTERN_C.md
 [__FAR_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/FAR.md
 [__FASTCALL_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/FASTCALL.md
+[__NOINLINE_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/NOINLINE.md
 [__PACK_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/PACK.md
 [__PASCAL_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/PASCAL.md
 [__REGPARM_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/REGPARM.md
@@ -544,6 +548,7 @@ List of the icons:
 [__EXTERN_C_GIF__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/IMAGES/32/EXTERN_C.gif
 [__FAR_GIF__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/IMAGES/32/FAR.gif
 [__FASTCALL_GIF__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/IMAGES/32/FASTCALL.gif
+[__NOINLINE_GIF__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/IMAGES/32/NOINLINE.gif
 [__GENERAL_GIF__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/IMAGES/32/GENERAL.gif
 [__GRAPHICS_GIF__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/IMAGES/32/GRAPHICS.gif
 [__IGNORE_VAR_GIF__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/IMAGES/32/IGNORE_VAR.gif

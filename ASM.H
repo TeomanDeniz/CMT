@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2024/02/27 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/08/03 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/08/04 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -628,7 +628,7 @@ Still planning PTR
  */
 /* **************************** [^] INCLUDES [^] **************************** */
 
-#ifndef KNR_STYLE
+#ifndef KNR_STYLE /* STANDARD C */
 #define SECTION(RETURN_TYPE, NAME, ARGUMENTS) \
 	EXTERN_C_START\
 	__declspec(naked) RETURN_TYPE NAME ARGUMENTS\
@@ -641,7 +641,7 @@ Still planning PTR
 		__asm {
 #define SECTION_KNR(RETURN_TYPE, NAME, ARGUMENTS)
 #define STATIC_SECTION_KNR(RETURN_TYPE, NAME, ARGUMENTS)
-#else /* KNR_STYLE */
+#else /* K&R */
 #define SECTION(RETURN_TYPE, NAME, ARGUMENTS)
 #define STATIC_SECTION(RETURN_TYPE, NAME, ARGUMENTS)
 #define SECTION_KNR(RETURN_TYPE, NAME, ARGUMENTS) \
@@ -655,6 +655,7 @@ Still planning PTR
 	{\
 		__asm {
 #endif /* !KNR_STYLE */
+
 #define END \
 		}\
 	}\
@@ -672,6 +673,10 @@ Still planning PTR
 
 #else /* CMT_CANT_USE_INLINE_ASM_FOR_SECTIONS */
 
+#ifndef INCL_ASM_ABI_OP
+#define INCL_ASM_ABI_OP
+#endif /* !INCL_ASM_ABI_OP */
+
 /* **************************** [v] INCLUDES [v] **************************** */
 #include "OS_API/CLEAR_INSTRUCTION_CACHE.H"
 /******* """"""""""""""""""""""""""""""""""
@@ -682,97 +687,91 @@ Still planning PTR
  * typedef	PTR;
  * typedef	LET;
  */
+#include "ENVIRONMENTS/PLATFORM.H"
+/******* """""""""""""""""""""""""
+ * #define __PLATFORM_WINDOWS__
+ */
+#include "OS_API/MEMORY.H"
+/******* """""""""""""""""
+ * #define PTR_MODE_RWX
+ * #define PTR_MODE_RW
+ * #define PTR_MODE_RX
+ * LET		PAGE_SIZE;
+ * BOOLEAN	MEMORY_MODE(PTR, LET, BIT32);
+ * LET		GET_PAGE_SIZE(void);
+ */
+#include "ATTRIBUTES/NOINLINE.H"
+/******* """""""""""""""""""""""
+ * #define NOINLINE
+ */
 /* **************************** [^] INCLUDES [^] **************************** */
 
-#ifdef _WIN32
-/* **************************** [v] INCLUDES [v] **************************** */
-#include "ATTRIBUTES/STDCALL.H"
-/******* """"""""""""""""""""""
- * #define STDCALL
- */
-#include "WIN_CORE/KERNEL32.H"
-/******* """""""""""""""""""""
- * struct S_WIN_SYSTEM_INFO;
- */
-/* **************************** [^] INCLUDES [^] **************************** */
+#define LOCALMACRO__EXTRA_PAGE_JOB PAGE_SIZE
 
-#ifndef KNR_STYLE
-extern void STDCALL	GetSystemInfo(struct S_WIN_SYSTEM_INFO *);
-extern int STDCALL	VirtualProtect(
-	PTR, unsigned long, unsigned long, unsigned long *
-);
-extern LET STDCALL	VirtualQuery(PTR, struct S_MEMORY_BASIC_INFORMATION *, LET);
-#else /* KNR_STYLE */
-extern void STDCALL	GetSystemInfo();
-extern int STDCALL	VirtualProtect();
-extern LET STDCALL	VirtualQuery();
-#endif /* !KNR_STYLE */
-
-#define __INLINE_ASM__PREPARE_PAGE__ \
-	struct S_WIN_SYSTEM_INFO	__SYSTEM_INFO__;\
-	unsigned long				OLD_MEMORY;\
-	register LET				PAGE_SIZE;\
-	\
-	GetSystemInfo(&__SYSTEM_INFO__);\
-	PAGE_SIZE = __SYSTEM_INFO__.PAGE_SIZE / 2;\
-	\
-	if (!VirtualProtect(__OP__, MEMORY_PAGE_SIZE, 64, &OLD_MEMORY))\
-		return (1);
-#define __INLINE_ASM__END_PAGE__ \
-	if (!VirtualProtect(__OP__, MEMORY_PAGE_SIZE, 32, &OLD_MEMORY))\
-		return (1);
-#else /* !_WIN32  */
 #ifdef __unix__
-#define __INLINE_ASM__PREPARE_PAGE__ \
-	register LET	PAGE = (LET)(((LET)__OP__) & ~(MEMORY_PAGE_SIZE - 1));\
-	\
-	if (mprotect((PTR)PAGE, MEMORY_PAGE_SIZE, 3) != 0)\
-		return (1);
-#define __INLINE_ASM__END_PAGE__ \
-	if (mprotect((PTR)PAGE, MEMORY_PAGE_SIZE, 5) != 0)\
-		return (1);
-#else /* DOS */
-#define __INLINE_ASM__PREPARE_PAGE__ /* EMPTY */
-#define __INLINE_ASM__END_PAGE__ /* EMPTY */
-#endif /* __UNIX__ */
-#endif /* _WIN32 */
+#define LOCALMACRO__ASM_MODERN_OS
+#undef LOCALMACRO__EXTRA_PAGE_JOB
+#define LOCALMACRO__EXTRA_PAGE_JOB (LET)(((LET)__OP__) & ~(PAGE_SIZE - 1))
+#else /* !__unix__ */
+#ifdef __PLATFORM_WINDOWS__
+#define LOCALMACRO__ASM_MODERN_OS
+#endif /* __PLATFORM_WINDOWS__ */
+#endif /* __unix__ */
 
+#ifdef LOCALMACRO__ASM_MODERN_OS
+#undef LOCALMACRO__ASM_MODERN_OS
 #define LOCALMACRO__SECTION_START(NAME) \
 	{\
 		register LET	INDEX = 0;\
 		BYTE			*__OP__ = (BYTE *)(NAME);\
-		__INLINE_ASM__PREPARE_PAGE__
+		LET				PAGE = LOCALMACRO__EXTRA_PAGE_JOB;\
+		\
+		if (\
+			!MEMORY_MODE(__OP__, PAGE, PTR_MODE_RWX) &&\
+			!MEMORY_MODE(__OP__, PAGE, PTR_MODE_RW)\
+		)\
+			return (1);
+#define END \
+		if (!MEMORY_MODE(__OP__, PAGE, PTR_MODE_RX))\
+			return (1);\
+		\
+		CLEAR_INSTRUCTION_CACHE(__OP__, PAGE);\
+	}\
+	EXTERN_C_END
+#else /* !LOCALMACRO__ASM_MODERN_OS */
+#define LOCALMACRO__SECTION_START(NAME) \
+	{\
+		register LET	INDEX = 0;\
+		BYTE			*__OP__ = (BYTE *)(NAME);
+#define END \
+	}\
+	EXTERN_C_END
+#endif /* LOCALMACRO__ASM_MODERN_OS */
 
-#ifndef KNR_STYLE
+#ifndef KNR_STYLE /* STANDARD C */
 #define SECTION(RETURN_TYPE, NAME, ARGUMENTS) \
 	EXTERN_C_START \
-	RETURN_TYPE NAME ARGUMENTS \
+	RETURN_TYPE NOINLINE NAME ARGUMENTS \
 	LOCALMACRO__SECTION_START(NAME)
 
 #define STATIC_SECTION(RETURN_TYPE, NAME, ARGUMENTS) \
 	EXTERN_C_START\
-	static RETURN_TYPE NAME ARGUMENTS \
+	static RETURN_TYPE NOINLINE NAME ARGUMENTS \
 	LOCALMACRO__SECTION_START(NAME)
 #define SECTION_KNR(RETURN_TYPE, NAME, ARGUMENTS)
 #define STATIC_SECTION_KNR(RETURN_TYPE, NAME, ARGUMENTS)
-#else /* KNR_STYLE */
+#else /* K&R */
 #define SECTION(RETURN_TYPE, NAME, ARGUMENTS)
 #define STATIC_SECTION(RETURN_TYPE, NAME, ARGUMENTS)
 #define SECTION_KNR(RETURN_TYPE, NAME, ARGUMENTS) \
 	EXTERN_C_START\
-	RETURN_TYPE NAME ARGUMENTS \
+	RETURN_TYPE NOINLINE NAME ARGUMENTS \
 	LOCALMACRO__SECTION_START(NAME)
 #define STATIC_SECTION_KNR(RETURN_TYPE, NAME, ARGUMENTS) \
 	EXTERN_C_START\
-	static RETURN_TYPE NAME ARGUMENTS \
+	static RETURN_TYPE NOINLINE NAME ARGUMENTS \
 	LOCALMACRO__SECTION_START(NAME)
 #endif /* !KNR_STYLE */
-
-#define END \
-		__INLINE_ASM__END_PAGE__ \
-		CLEAR_INSTRUCTION_CACHE(__OP__, PAGE_SIZE);\
-	}\
-	EXTERN_C_END
 
 #ifdef __CPU_INTEL__
 #include "ASM/INLINE_ASM/OP_PURE/INTEL.INL"
@@ -793,7 +792,6 @@ extern LET STDCALL	VirtualQuery();
 #include "ASM/AUTO_DOWNGRADER.INL"
 #endif /* !INCL_CMT_ASM_DISABLE_AUTO_DOWNGRADER */
 
-#ifdef INCL_CMT_ASM_MOV_ABI
 #ifdef ABI_H
 #ifndef __ABI__PASS_REG_WINDOWS__
 #ifndef __ABI__PASS_REG_UNIX__
@@ -813,7 +811,6 @@ extern LET STDCALL	VirtualQuery();
 #endif /* ABI_H */
 
 #include "ASM/ABI.INL"
-#endif /* INCL_CMT_ASM_MOV_ABI */
 
 /* ************************ [v] TI CGT CCS (POP) [v] ************************ */
 #ifdef __TI_COMPILER_VERSION__

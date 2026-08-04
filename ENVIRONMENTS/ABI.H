@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2025/09/15 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/07/18 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/08/04 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -511,7 +511,7 @@
 \******************************************************************************/
 
 #ifndef ABI_H
-#define ABI_H 202607 /* VERSION */
+#define ABI_H 202608 /* VERSION */
 
 /* **************************** [v] INCLUDES [v] **************************** */
 #include "PLATFORM.H"
@@ -981,10 +981,17 @@
 #undef LOCALMACRO__BYTE_ORDER
 #undef LOCALMACRO__BIG_ORDERING
 #undef LOCALMACRO__LITTLE_ORDERING
-
 #endif /* LOCALMACRO__BYTE_ORDER */
 #endif /* LOCALMACRO__BIG_ENDIAN */
 #endif /* LOCALMACRO__LITTLE_ENDIAN */
+
+#ifndef LOCALMACRO__ENDIAN
+#ifdef __TINYC__ /* TINY C COMPILER */
+#define LOCALMACRO__ENDIAN
+#define __ABI__LITTLE_ENDIAN__
+#define __ABI__ENDIAN__ 1
+#endif /* __TINYC__ */
+#endif /* !LOCALMACRO__ENDIAN */
 
 #ifndef LOCALMACRO__ENDIAN /* DEFAULT */
 #warning "CMT - ABI.H: ENDIAN NOT FOUND. USING DEFAULT SETTINGS: LITTLE ENDIAN."

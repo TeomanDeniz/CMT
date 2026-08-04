@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2025/09/15 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/07/23 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/08/04 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -98,7 +98,7 @@
 \******************************************************************************/
 
 #ifndef RAX_H
-#define RAX_H 202607 /* VERSION */
+#define RAX_H 202608 /* VERSION */
 
 /* **************************** [v] INCLUDES [v] **************************** */
 #include "../../../ENVIRONMENTS/CPU.H"
@@ -333,7 +333,17 @@ EXTERN_C_END
 /*  \\//  |                 LINKABLE MEMBER CREATION                 |  \\//  */
 /*   \/   #==========================================================#   \/   */
 
+#ifdef INCL_CMT_ASM_MOV_ABI
+#undef INCL_CMT_ASM_MOV_ABI
+#endif /* INCL_CMT_ASM_MOV_ABI */
+
+#ifdef INCL_CMT_ASM_OTHERS
+#undef INCL_CMT_ASM_OTHERS
+#endif /* INCL_CMT_ASM_OTHERS */
+
 /* **************************** [v] INCLUDES [v] **************************** */
+#define INCL_CMT_ASM_MOV_ABI
+#define INCL_CMT_ASM_OTHERS
 #include "../../../ASM.H"
 /******* """"""""""""""""
  * #define SECTION(RETURN_TYPE, NAME, ARGUMENTS)

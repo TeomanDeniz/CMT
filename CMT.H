@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2025/06/22 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/08/03 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/08/04 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -53,7 +53,11 @@
 #ifndef INCL_CMT_MUTEX
 #ifndef INCL_CMT_THREAD
 #ifndef INCL_CMT_MEMORY
+#ifndef INCL_CMT_NOINLINE
+#ifndef INCL_CMT_USER32
 #define LOCALMACRO_DEFINE_ALL_TRY_1
+#endif /* !INCL_CMT_USER32 */
+#endif /* !INCL_CMT_NOINLINE */
 #endif /* !INCL_CMT_MEMORY */
 #endif /* !INCL_CMT_THREAD */
 #endif /* !INCL_CMT_MUTEX */
@@ -171,6 +175,10 @@
 #ifndef INCL_CMT_PASCAL
 #define INCL_CMT_PASCAL
 #endif /* !INCL_CMT_PASCAL */
+
+#ifndef INCL_CMT_NOINLINE
+#define INCL_CMT_NOINLINE
+#endif /* !INCL_CMT_NOINLINE */
 #endif /* INCL_CMT_ATTRIBUTES */
 /* *************************** [^] ATTRIBUTES [^] *************************** */
 
@@ -272,6 +280,10 @@
 #ifndef INCL_CMT_KERNEL32
 #define INCL_CMT_KERNEL32
 #endif /* !INCL_CMT_KERNEL32 */
+
+#ifndef INCL_CMT_USER32
+#define INCL_CMT_USER32
+#endif /* !INCL_CMT_USER32 */
 #endif /* INCL_CMT_WIN_CORE */
 /* **************************** [^] WIN_CORE [^] **************************** */
 
@@ -558,6 +570,14 @@
  */
 #undef INCL_CMT_PASCAL
 #endif /* INCL_CMT_PASCAL */
+
+#ifdef INCL_CMT_NOINLINE
+#include "ATTRIBUTES/NOINLINE.H"
+/******* """""""""""""""""""""""
+ * #define NOINLINE
+ */
+#undef INCL_CMT_NOINLINE
+#endif /* INCL_CMT_NOINLINE */
 /* *************************** [^] ATTRIBUTES [^] *************************** */
 
 /* ************************* [v] CHECK FEATURE [v] ************************** */
@@ -936,6 +956,15 @@
  */
 #undef INCL_CMT_KERNEL32
 #endif /* INCL_CMT_KERNEL32 */
+
+#ifdef INCL_CMT_USER32
+#include "WIN_CORE/USER32.H"
+/******* """""""""""""""""""
+ * struct S_USER32;
+ * struct S_USER32	USER32;
+ */
+#undef INCL_CMT_USER32
+#endif /* INCL_CMT_USER32 */
 /* **************************** [^] WIN_CORE [^] **************************** */
 
 #undef LOCALMACRO_DEFINE_ALL
