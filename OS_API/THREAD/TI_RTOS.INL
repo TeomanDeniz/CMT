@@ -1,6 +1,6 @@
-#ifndef MEMORY_H
+#ifndef THREAD_H
 #error "ERROR - PLEASE DON'T USE THIS LIBRARY DIRECTLY!!!"
-#endif /* !ASM_H */
+#endif /* !THREAD_H */
 
 /* **************************** [v] INCLUDES [v] **************************** */
 #include <ti/sysbios/knl/Task.h>

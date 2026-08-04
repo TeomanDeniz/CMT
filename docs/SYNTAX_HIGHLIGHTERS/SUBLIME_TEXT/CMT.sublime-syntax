@@ -10,7 +10,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2026/06/12 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/06/12 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/08/04 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 #******************************************************************************#
 
@@ -71,11 +71,11 @@ variables:
   wchar: 'wchar_t|wint_t|wctrans_t|wctype_t'
   uchar: 'mbstate_t|char8_t|char16_t|char32_t'
   declspec: '__declspec\(\s*\w+(?:\([^)]+\))?\s*\)'
-  storage_classes: 'static|extern|register|thread_local|_Thread_local|constexpr|{{declspec}}|(?i:cdecl)|(?i:far)'
+  storage_classes: 'static|extern|register|thread_local|_Thread_local|constexpr|{{declspec}}'
   type_qualifier: 'const|volatile|_Atomic'
-  compiler_directive: 'inline|restrict|__restrict__|__restrict|_Noreturn|noreturn|(?i:fastcall)|(?i:stdcall)|(?i:regpass)|(?i:regparm)'
+  compiler_directive: '(?i:INLINE)|restrict|__restrict__|__restrict|_Noreturn|noreturn|(?i:FASTCALL)|(?i:STDCALL)|(?i:REGPASS)|(?i:REGPARM)|(?i:IGNORE_VAR)|(?i:CDECL)|(?i:FAR)|(?i:STDCALL)|(?i:NOINLINE)|(?i:PASCAL)|(?i:EXTERN_C_START)|(?i:EXTERN_C_END)|(?i:PACK)|(?i:PRAGMA_PACK_PUSH)|(?i:PRAGMA_PACK_POP)|(?i:ALIGN_UP)|(?i:ALIGN_VARIABLE)|(?i:ALIGN_STRUCT_PUSH)|(?i:ALIGN_STRUCT_POP)'
   modifiers: '{{storage_classes}}|{{type_qualifier}}|{{compiler_directive}}'
-  non_func_keywords: 'if|for|switch|while|decltype|typeof|typeof_unqual|_Atomic|_BitInt|sizeof|alignof|_Alignof|alignas|_Alignas|static_assert|_Static_assert|__declspec|__attribute__|ignore_var|IGNORE_VAR'
+  non_func_keywords: 'if|for|switch|while|decltype|typeof|typeof_unqual|_Atomic|_BitInt|sizeof|alignof|_Alignof|alignas|_Alignas|static_assert|_Static_assert|__declspec|__attribute__'
   cmt_types: '(?i:var|let|ptr|far_ptr|boolean|byte|bit8|bit16|bit32|bit64|bit128|float32|float64|float128)'
   cmt_oop: '(?i:new|obj|destroy|object__connect|object__inject|object__eject)'
 contexts:
@@ -857,7 +857,7 @@ contexts:
           push: data-structures
         - include: expressions
   function-call:
-    - match: '\bthis\b'
+    - match: '\b(?i:this)\b'
       scope: variable.language.this.cmt
     - match: (?={{identifier}}\s*\()
       push:

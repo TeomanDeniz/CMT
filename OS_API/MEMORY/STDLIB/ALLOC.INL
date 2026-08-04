@@ -1,6 +1,6 @@
 #ifndef MEMORY_H
 #error "ERROR - PLEASE DON'T USE THIS LIBRARY DIRECTLY!!!"
-#endif /* !ASM_H */
+#endif /* !MEMORY_H */
 
 #ifndef KNR_STYLE /* ANSI C */
 #define FUNCTION_HEADER__ALLOC \

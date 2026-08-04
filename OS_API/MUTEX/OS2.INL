@@ -1,6 +1,6 @@
-#ifndef MEMORY_H
+#ifndef MUTEX_H
 #error "ERROR - PLEASE DON'T USE THIS LIBRARY DIRECTLY!!!"
-#endif /* !ASM_H */
+#endif /* !MUTEX_H */
 
 /* **************************** [v] INCLUDES [v] **************************** */
 #define INCL_DOS

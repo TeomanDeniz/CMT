@@ -1,6 +1,6 @@
-#ifndef MEMORY_H
+#ifndef THREAD_H
 #error "ERROR - PLEASE DON'T USE THIS LIBRARY DIRECTLY!!!"
-#endif /* !ASM_H */
+#endif /* !THREAD_H */
 
 #ifndef KNR_STYLE /* STANDARD C */
 #define FUNCTION_HEADER__THREAD_CREATE \
