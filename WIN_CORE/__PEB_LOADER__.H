@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2026/05/19 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/07/23 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/08/05 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -137,7 +137,7 @@
 \******************************************************************************/
 
 #ifndef PEB_LOADER_H
-#define PEB_LOADER_H 202607 /* VERSION */
+#define PEB_LOADER_H 202608 /* VERSION */
 #define LOCALMACRO__MAX_FORWARD_DEPTH 4
 
 /* *********************** [v] TI CGT CCS (PUSH) [v] ************************ */
@@ -740,7 +740,7 @@ LOCALLINKER__PEB_LOADER
 EXTERN_C_END
 /* [^] %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% /!\ IMPORTANT /!\ */
 
-#include "../CMT_AUTO_CONSTRUCTOR.INL"
+#include "../CMT/CONSTRUCTOR.INL"
 #else /* !CMT_SETUP */
 
 /* [v] %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% /!\ IMPORTANT /!\ */
@@ -752,10 +752,10 @@ EXTERN_C_END
 /*  //\\  |                 LINKABLE MEMBER CREATION                 |  //\\  */
 /* '""""' #==========================================================# '""""' */
 
-#include "../CMT_AUTO_LINKER.INL"
+#include "../CMT/LINKER.INL"
 #endif /* CMT_SETUP */
 #else /* !LOCALMACRO__SETUP_LINKABLE */
-#include "../CMT_AUTO_CONSTRUCTOR.INL"
+#include "../CMT/CONSTRUCTOR.INL"
 #endif /* LOCALMACRO__SETUP_LINKABLE */
 
 /**@@[^]*[^]*[^]*[^]*[^]*[^]*[^]*[^]*[^][^]*[^]*[^]*[^]*[^]*[^]*[^]*[^]*[^]@@**\

@@ -272,7 +272,7 @@ It explains how I implemented a custom threading system for platforms like MS-DO
 
 ## CMT Auto-Linker
 
-<IMG SRC="https://github.com/TeomanDeniz/CMT-DOCS/blob/main/IMAGES/BANNERS/AUTO_LINKER_HEADER.png" ALT="Header" STYLE="WIDTH: 100%;"/>
+<IMG SRC="https://github.com/TeomanDeniz/CMT/blob/main/docs/IMAGES/BANNERS/AUTO_LINKER_HEADER.png" ALT="Header" STYLE="WIDTH: 100%;"/>
 
 If you encounter a module marked with the **`AUTO-LINKER`** tag, it indicates that the module contains functions or global variables designed to be shared (linked) across your entire project.
 

@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2025/06/05 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/07/20 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/08/05 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -201,7 +201,7 @@
  */
 
 #ifndef MUTEX_H
-#define MUTEX_H 202607 /* VERSION */
+#define MUTEX_H 202608 /* VERSION */
 
 /* *********************** [v] TI CGT CCS (PUSH) [v] ************************ */
 #ifdef __TI_COMPILER_VERSION__
@@ -478,6 +478,7 @@ LOCALLINKER__MUTEX
 EXTERN_C_END
 /* [^] %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% /!\ IMPORTANT /!\ */
 
+#include "../CMT/CONSTRUCTOR.INL"
 #else /* !CMT_SETUP */
 
 /* [v] %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% /!\ IMPORTANT /!\ */
@@ -485,10 +486,10 @@ EXTERN_C_END
 #define GLOBALLINKER__MUTEX LOCALLINKER__MUTEX
 /* [^] %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% /!\ IMPORTANT /!\ */
 
-#include "../CMT_AUTO_LINKER.INL"
+#include "../CMT/LINKER.INL"
 #endif /* CMT_SETUP */
 #else /* !LOCALMACRO__SETUP_LINKABLE */
-#include "../../../CMT_AUTO_CONSTRUCTOR.INL"
+#include "../CMT/CONSTRUCTOR.INL"
 #endif /* LOCALMACRO__SETUP_LINKABLE */
 
 /**@@[^]*[^]*[^]*[^]*[^]*[^]*[^]*[^]*[^][^]*[^]*[^]*[^]*[^]*[^]*[^]*[^]*[^]@@**\

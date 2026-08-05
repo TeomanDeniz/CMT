@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2025/09/15 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/07/20 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/08/05 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -91,7 +91,7 @@
 \******************************************************************************/
 
 #ifndef X17_H
-#define X17_H 202607 /* VERSION */
+#define X17_H 202608 /* VERSION */
 
 /* **************************** [v] INCLUDES [v] **************************** */
 #include "../../../ENVIRONMENTS/CPU.H"
@@ -159,7 +159,7 @@
 /* TODO: ADD MORE ASSEMBLY VARIANTS */
 
 #ifndef LOCALMACRO__X17_GET
-#include "../../../CMT_WARNER.INL"
+#include "../../../CMT/WARNER.INL"
 
 #define GET_X17(_) \
 	CMT_WARN(\
@@ -333,7 +333,7 @@ LOCALLINKER__X17
 EXTERN_C_END
 /* [^] %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% /!\ IMPORTANT /!\ */
 
-#include "../../../CMT_AUTO_CONSTRUCTOR.INL"
+#include "../../../CMT/CONSTRUCTOR.INL"
 #else /* !CMT_SETUP */
 
 /* [v] %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% /!\ IMPORTANT /!\ */
@@ -345,10 +345,10 @@ EXTERN_C_END
 /*  //\\  |                 LINKABLE MEMBER CREATION                 |  //\\  */
 /* '""""' #==========================================================# '""""' */
 
-#include "../../../CMT_AUTO_LINKER.INL"
+#include "../../../CMT/LINKER.INL"
 #endif /* CMT_SETUP */
 #else /* !LOCALMACRO__SETUP_LINKABLE */
-#include "../../../CMT_AUTO_CONSTRUCTOR.INL"
+#include "../../../CMT/CONSTRUCTOR.INL"
 #endif /* LOCALMACRO__SETUP_LINKABLE */
 
 /**@@[^]*[^]*[^]*[^]*[^]*[^]*[^]*[^]*[^][^]*[^]*[^]*[^]*[^]*[^]*[^]*[^]*[^]@@**\
@@ -379,7 +379,7 @@ EXTERN_C_END
 #endif /* IS__INLINE_ASM__SUPPORTED */
 
 #else /* !__SYSTEM_64_BIT__ */
-#include "../../../CMT_WARNER.INL"
+#include "../../../CMT/WARNER.INL"
 
 #define GET_X17(_) \
 	CMT_WARN(\
@@ -391,7 +391,7 @@ EXTERN_C_END
 	)
 #endif /* __SYSTEM_64_BIT__ */
 #else /* !__CPU_ARM__ */
-#include "../../../CMT_WARNER.INL"
+#include "../../../CMT/WARNER.INL"
 
 #define GET_X17(_) \
 	CMT_WARN(\
