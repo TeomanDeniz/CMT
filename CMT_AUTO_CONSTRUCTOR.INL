@@ -22,7 +22,7 @@
  */
 #include "ENVIRONMENTS/KNR_STYLE.H"
 /******* """"""""""""""""""""""""""
- * #define STDCALL
+ * #define KNR_STYLE
  */
 /* **************************** [^] INCLUDES [^] **************************** */
 
@@ -80,7 +80,7 @@
 #endif /* !GLOBALCONSTRUCTOR__MEMORY */
 /* ***************** [^] FILL UNDEFINED GLOBAL LINKERS [^] ****************** */
 
-/* ************* [v] CONNECT GLOBAL LINKERS AND DEFINE MAIN [v] ************* */
+/* ****************** [v] CONNECT CONSTRUCTORS EVENTS [v] ******************* */
 #undef CMT_AUTO_CONSTRUCTOR
 #define CMT_AUTO_CONSTRUCTOR \
 	GLOBALCONSTRUCTOR__PEB_LOADER \
@@ -94,7 +94,12 @@
 	GLOBALCONSTRUCTOR__CPU \
 	GLOBALCONSTRUCTOR__THREAD \
 	GLOBALCONSTRUCTOR__MEMORY
-/* ************* [^] CONNECT GLOBAL LINKERS AND DEFINE MAIN [^] ************* */
+/* ****************** [^] CONNECT CONSTRUCTORS EVENTS [^] ******************* */
+
+/* ******************* [v] CONNECT DESTRUCTOR EVENTS [v] ******************** */
+#undef CMT_AUTO_DESTRUCTOR
+#define CMT_AUTO_DESTRUCTOR
+/* ******************* [^] CONNECT DESTRUCTOR EVENTS [^] ******************** */
 
 #ifndef KNR_STYLE /* STANDARD C */
 #define LOCALMACRO__MAIN CMT_NO_SSP_POP int main(int ARGC, char **ARGV)
@@ -138,6 +143,12 @@
 	{\
 		CMT_AUTO_CONSTRUCTOR\
 	}
+	\
+	void\
+		__END_OF_PROGRAM__(void)\
+	{\
+		CMT_AUTO_DESTRUCTOR\
+	}
 #else /* K&R */
 #define CMT_SETUP \
 	int\
@@ -145,48 +156,96 @@
 	{\
 		CMT_AUTO_CONSTRUCTOR\
 	}
+	\
+	int\
+		__END_OF_PROGRAM__()\
+	{\
+		CMT_AUTO_DESTRUCTOR\
+	}
 #endif /* !KNR_STYLE */
-#else /* !CMT_SETUP */
-#ifdef CMT_EXTERN
 
+#else /* !CMT_SETUP */
+
+#ifdef CMT_EXTERN
 #ifndef KNR_STYLE /* STANDARD C */
 extern void	__SETUP__(void);
+extern void	__END_OF_PROGRAM__(void);
 #else /* K&R */
 extern int	__SETUP__();
+extern int	__END_OF_PROGRAM__();
 #endif /* !KNR_STYLE */
 
 #undef main
 #undef WinMain
 
 #ifndef KNR_STYLE /* STANDARD C */
-#else /* K&R */
-#endif /* !KNR_STYLE */
 #define main \
 	CMT_AUTO_LINKER\
 	LOCALMACRO__MAIN\
 	{\
-		CMT_AUTO_CONSTRUCTOR\
+		__SETUP__()\
 		\
 		/* TODO: HANDLE ENV */\
 		extern int	__MAIN__();\
 		\
-		return (__MAIN__(ARGC, ARGV));\
+		int	RESULT = ((int (*)(int, char **))(void *)__MAIN__)(ARGC, ARGV);\
+		\
+		__END_OF_PROGRAM__()\
+		return (RESULT);\
 	}\
 	int	__MAIN__
 #define WinMain \
 	CMT_AUTO_LINKER\
 	LOCALMACRO__WINMAIN\
 	{\
-		CMT_AUTO_CONSTRUCTOR\
+		__SETUP__()\
 		\
 		extern int	__WIN_MAIN__();\
-		return (\
-			__WIN_MAIN__(\
+		\
+		int	RESULT = \
+		(\
+			((int (*)(void *, void *, char *, int))(void *)__WIN_MAIN__)(\
 				HANDLE_INSTANCE, HANDLE_PREVIOUS_INSTANCE, CMD_LINE, CMD_SHOW\
 			)\
 		);\
+		\
+		__END_OF_PROGRAM__()\
+		return (RESULT);\
 	}\
 	int __WIN_MAIN__
+#else /* K&R */
+#define main \
+	CMT_AUTO_LINKER\
+	LOCALMACRO__MAIN\
+	{\
+		__SETUP__()\
+		\
+		/* TODO: HANDLE ENV */\
+		extern int	__MAIN__();\
+		\
+		int	RESULT = __MAIN__(ARGC, ARGV);\
+		\
+		__END_OF_PROGRAM__()\
+		return (RESULT);\
+	}\
+	int	__MAIN__
+#define WinMain \
+	CMT_AUTO_LINKER\
+	LOCALMACRO__WINMAIN\
+	{\
+		__SETUP__()\
+		\
+		extern int	__WIN_MAIN__();\
+		\
+		int	RESULT = __WIN_MAIN__(\
+			HANDLE_INSTANCE, HANDLE_PREVIOUS_INSTANCE, CMD_LINE, CMD_SHOW\
+		);\
+		\
+		__END_OF_PROGRAM__()\
+		return (RESULT);\
+	}\
+	int __WIN_MAIN__
+#endif /* !KNR_STYLE */
 #else /* !CMT_EXTERN */
 #undef main
 #undef WinMain
@@ -201,9 +260,10 @@ extern int	__SETUP__();
 		/* TODO: HANDLE ENV */\
 		extern int	__MAIN__();\
 		\
-		int	(*__RUN_MAIN__)(int, char **) = \
-			(int (*)(int, char **))(PTR)__MAIN__;\
-		return (__RUN_MAIN__(ARGC, ARGV));\
+		int	RESULT = ((int (*)(int, char **))(void *)__MAIN__)(ARGC, ARGV);\
+		\
+		CMT_AUTO_DESTRUCTOR\
+		return (RESULT);\
 	}\
 	int	__MAIN__
 #define WinMain \
@@ -213,11 +273,16 @@ extern int	__SETUP__();
 		CMT_AUTO_CONSTRUCTOR\
 		\
 		extern int	__WIN_MAIN__();\
-		return (\
-			(\
-				(int (*)(void *, void *, char *, int))\
-				__WIN_MAIN__\
-			)(HANDLE_INSTANCE, HANDLE_PREVIOUS_INSTANCE, CMD_LINE, CMD_SHOW));\
+		\
+		int	RESULT = \
+		(\
+			((int (*)(void *, void *, char *, int))(void *)__WIN_MAIN__)(\
+				HANDLE_INSTANCE, HANDLE_PREVIOUS_INSTANCE, CMD_LINE, CMD_SHOW\
+			)\
+		);\
+		\
+		CMT_AUTO_DESTRUCTOR\
+		return (RESULT);\
 	}\
 	int __WIN_MAIN__
 #else /* K&R */

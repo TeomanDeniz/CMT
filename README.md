@@ -24,24 +24,26 @@ The repository includes multiple documentation formats, test matrices across com
 >       - [Available Section Macros](#available-section-macros)
 >   - [Default Behavior](#default-behavior)
 > - [CMT Contents](#cmt-contents)
->   - [General](#general)
->   - [Assembly](#assembly)
->   - [Check Feature](#check-feature)
->   - [Attributes](#attributes)
->   - [Check Feature](#check-feature)
->   - [Environments](#environments)
->   - [Keywords](#keywords)
->   - [LIB](#lib)
->   - [OS_API](#os_api)
->   - [WINDOWS CORE](#windows-core)
+>   - [General](#-general)
+>   - [Assembly](#-assembly)
+>   - [Check Feature](#-check-feature)
+>   - [Attributes](#-attributes)
+>   - [Check Feature](#-check-feature)
+>   - [Environments](#-environments)
+>   - [Keywords](#-keywords)
+>   - [LIB](#-lib)
+>   - [OS_API](#-os_api)
+>   - [WINDOWS CORE](#-windows-core)
 > - [Documentations](#documentations)
->   - [BOUND_METHODS_IN_ISO_C_VIA_TRAMPOLINES](#bound_methods_in_iso_c_via_trampolines)
->   - [CROSS_COMPILER_AUTO_LINKING_AND_CONSTRUCTION_METHOD_WITH_MACROS_ONLY](#cross_compiler_auto_linking_and_construction_method_with_macros_only)
->   - [USE_ASSEMBLY_IN_PURE_C_WITHOUT_NEEDING_INLINE_ASSEMBLY](#use_assembly_in_pure_c_without_needing_inline_assembly)
->   - [THREAD_SUPPORT_IN_NON_MULTI_THREAD_PLATFORMS](#thread_support_in_non_multi_thread_platforms)
+>   - [BOUND_METHODS_IN_ISO_C_VIA_TRAMPOLINES](#-bound_methods_in_iso_c_via_trampolines)
+>   - [CROSS_COMPILER_AUTO_LINKING_AND_CONSTRUCTION_METHOD_WITH_MACROS_ONLY](#-cross_compiler_auto_linking_and_construction_method_with_macros_only)
+>   - [USE_ASSEMBLY_IN_PURE_C_WITHOUT_NEEDING_INLINE_ASSEMBLY](#-use_assembly_in_pure_c_without_needing_inline_assembly)
+>   - [THREAD_SUPPORT_IN_NON_MULTI_THREAD_PLATFORMS](#-thread_support_in_non_multi_thread_platforms)
 > - [Extras](#extras)
 >   - [CMT Auto-Linker](#cmt-auto-linker)
 >   - [Icons](#icons)
+>     - [32x32 (Original Size)](#32x32-original-size)
+>     - [128x128 (Extended for a better view))](#128x128-extended-for-a-better-view)
 >   - [Openning Issues and Reporting Bugs](#openning-issues-and-reporting-bugs)
 >   - [Copyright](#copyright)
 
@@ -358,7 +360,7 @@ List of the icons:
 
 <details>
 <summary>
-	<h2>32x32 (Original Size)</h2>
+	<h3>32x32 (Original Size)</h3>
 </summary>
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/ABI.gif" ALT="ABI" TITLE="ABI"/>
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/ALIGN.gif" ALT="ALIGN" TITLE="ALIGN"/>
@@ -418,7 +420,7 @@ List of the icons:
 
 <details>
 <summary>
-	<h2>128x128 (Extended for a better view)</h2>
+	<h3>128x128 (Extended for a better view)</h3>
 </summary>
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/ABI.gif" ALT="ABI" TITLE="ABI"/>
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/ALIGN.gif" ALT="ALIGN" TITLE="ALIGN"/>

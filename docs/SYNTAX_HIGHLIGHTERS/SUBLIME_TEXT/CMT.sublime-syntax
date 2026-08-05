@@ -76,8 +76,8 @@ variables:
   compiler_directive: '(?i:INLINE)|restrict|__restrict__|__restrict|_Noreturn|noreturn|(?i:FASTCALL)|(?i:STDCALL)|(?i:REGPASS)|(?i:REGPARM)|(?i:IGNORE_VAR)|(?i:CDECL)|(?i:FAR)|(?i:STDCALL)|(?i:NOINLINE)|(?i:PASCAL)|(?i:EXTERN_C_START)|(?i:EXTERN_C_END)|(?i:PACK)|(?i:PRAGMA_PACK_PUSH)|(?i:PRAGMA_PACK_POP)|(?i:ALIGN_UP)|(?i:ALIGN_VARIABLE)|(?i:ALIGN_STRUCT_PUSH)|(?i:ALIGN_STRUCT_POP)'
   modifiers: '{{storage_classes}}|{{type_qualifier}}|{{compiler_directive}}'
   non_func_keywords: 'if|for|switch|while|decltype|typeof|typeof_unqual|_Atomic|_BitInt|sizeof|alignof|_Alignof|alignas|_Alignas|static_assert|_Static_assert|__declspec|__attribute__'
-  cmt_types: '(?i:var|let|ptr|far_ptr|boolean|byte|bit8|bit16|bit32|bit64|bit128|float32|float64|float128)'
-  cmt_oop: '(?i:new|obj|destroy|object__connect|object__inject|object__eject)'
+  cmt_types: '(?i:var)|(?i:let)|(?i:ptr)|(?i:far_ptr)|(?i:boolean)|(?i:byte)|(?i:bit8)|(?i:bit16)|(?i:bit32)|(?i:bit64)|(?i:bit128)|(?i:float32)|(?i:float64)|(?i:float128)'
+  cmt_oop: '(?i:new)|(?i:obj)|(?i:destroy)|(?i:object__connect)|(?i:object__inject)|(?i:object__eject)'
 contexts:
   main:
     - include: preprocessor-global
