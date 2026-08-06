@@ -14,14 +14,14 @@
 #define LOCALFUNCTION__CALLOC \
 	FUNCTION_HEADER__CALLOC \
 	{\
-		const PTR	RESULT = calloc(1, SIZE + sizeof(LET));\
+		const PTR	RESULT = calloc(1, SIZE + ALIGN_UP(sizeof(LET)));\
 		PTR			USER_PTR;\
 		\
 		if (!RESULT)\
 			return ((PTR)0);\
 		\
 		(*((LET *)RESULT)) = SIZE;\
-		USER_PTR = (PTR)(((LET *)RESULT) + 1);\
+		USER_PTR = (PTR)(((BYTE *)RESULT) + ALIGN_UP(sizeof(LET)));\
 		\
 		if (G_HEAP_COUNT >= G_HEAP_CAPACITY)\
 		{\
@@ -35,7 +35,7 @@
 			\
 			NEW_PTRS = (PTR *)realloc(\
 				(PTR)G_HEAP_PTRS,\
-				(LET)(NEW_CAP * sizeof(PTR))\
+				(size_t)(NEW_CAP * sizeof(PTR))\
 			);\
 			\
 			if (NEW_PTRS)\

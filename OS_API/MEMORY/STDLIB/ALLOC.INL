@@ -14,14 +14,14 @@
 #define LOCALFUNCTION__ALLOC \
 	FUNCTION_HEADER__ALLOC \
 	{\
-		const PTR	RESULT = malloc(SIZE + sizeof(LET));\
+		const PTR	RESULT = malloc(SIZE + ALIGN_UP(sizeof(LET)));\
 		PTR			USER_PTR;\
 		\
 		if (!RESULT)\
 			return ((PTR)0);\
 		\
 		(*((LET *)RESULT)) = SIZE;\
-		USER_PTR = (PTR)(((LET *)RESULT) + 1);\
+		USER_PTR = (PTR)(((BYTE *)RESULT) + ALIGN_UP(sizeof(LET)));\
 		\
 		if (G_HEAP_COUNT >= G_HEAP_CAPACITY)\
 		{\

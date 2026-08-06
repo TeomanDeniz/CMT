@@ -26,7 +26,7 @@
 			}\
 		}\
 		\
-		free((PTR)(((LET *)ADDRESS) - 1));\
+		free((PTR)(((BYTE *)ADDRESS) - ALIGN_UP(sizeof(LET))));\
 	}
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\

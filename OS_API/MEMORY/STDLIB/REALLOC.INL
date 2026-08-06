@@ -15,8 +15,15 @@
 #define LOCALFUNCTION__REALLOC \
 	FUNCTION_HEADER__REALLOC \
 	{\
-		const PTR	RESULT = realloc(ADDRESS, SIZE + sizeof(LET));\
+		PTR			RAW;\
 		PTR			USER_PTR;\
+		\
+		if (ADDRESS)\
+			RAW = (PTR)(((BYTE *)ADDRESS) - ALIGN_UP(sizeof(LET)));\
+		else\
+			RAW = (PTR)0;\
+		\
+		const PTR	RESULT = realloc(RAW, SIZE + ALIGN_UP(sizeof(LET)));\
 		\
 		if (!RESULT)\
 			return ((PTR)0);\
@@ -37,7 +44,7 @@
 		}\
 		\
 		(*((LET *)RESULT)) = SIZE;\
-		USER_PTR = (PTR)(((LET *)RESULT) + 1);\
+		USER_PTR = (PTR)(((BYTE *)RESULT) + ALIGN_UP(sizeof(LET)));\
 		\
 		if (G_HEAP_COUNT >= G_HEAP_CAPACITY)\
 		{\

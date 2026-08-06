@@ -14,7 +14,7 @@
 #define LOCALFUNCTION__LENGTH \
 	FUNCTION_HEADER__LENGTH \
 	{\
-		return (*(((LET *)ADDRESS) - 1));\
+		return (*(LET *)(((BYTE *)ADDRESS) - ALIGN_UP(sizeof(LET))));\
 	}
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\

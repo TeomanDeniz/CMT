@@ -56,7 +56,11 @@
 #ifndef INCL_CMT_NOINLINE
 #ifndef INCL_CMT_USER32
 #ifndef INCL_CMT_LOCAL
+#ifndef INCL_CMT_TRY_CATCH
+#ifndef INCL_CMT_UNUSED
 #define LOCALMACRO_DEFINE_ALL_TRY_1
+#endif /* !INCL_CMT_UNUSED */
+#endif /* !INCL_CMT_TRY_CATCH */
 #endif /* !INCL_CMT_LOCAL */
 #endif /* !INCL_CMT_USER32 */
 #endif /* !INCL_CMT_NOINLINE */
@@ -185,6 +189,10 @@
 #ifndef INCL_CMT_LOCAL
 #define INCL_CMT_LOCAL
 #endif /* !INCL_CMT_LOCAL */
+
+#ifndef INCL_CMT_UNUSED
+#define INCL_CMT_UNUSED
+#endif /* !INCL_CMT_UNUSED */
 #endif /* INCL_CMT_ATTRIBUTES */
 /* *************************** [^] ATTRIBUTES [^] *************************** */
 
@@ -252,6 +260,10 @@
 #ifndef INCL_CMT_BOOLEAN
 #define INCL_CMT_BOOLEAN
 #endif /* !INCL_CMT_BOOLEAN */
+
+#ifndef INCL_CMT_TRY_CATCH
+#define INCL_CMT_TRY_CATCH
+#endif /* !INCL_CMT_TRY_CATCH */
 #endif /* INCL_CMT_KEYWORDS */
 /* **************************** [^] KEYWORDS [^] **************************** */
 
@@ -593,6 +605,14 @@
  */
 #undef INCL_CMT_LOCAL
 #endif /* INCL_CMT_LOCAL */
+
+#ifdef INCL_CMT_UNUSED
+#include "ATTRIBUTES/UNUSED.H"
+/******* """""""""""""""""""""
+ * #define UNUSED
+ */
+#undef INCL_CMT_UNUSED
+#endif /* INCL_CMT_UNUSED */
 /* *************************** [^] ATTRIBUTES [^] *************************** */
 
 /* ************************* [v] CHECK FEATURE [v] ************************** */
@@ -867,6 +887,21 @@
  */
 #undef INCL_CMT_BOOLEAN
 #endif /* INCL_CMT_BOOLEAN */
+
+#ifdef INCL_CMT_TRY_CATCH
+#include "KEYWORDS/TRY_CATCH.H"
+/******* """"""""""""""""""""
+ * #define TRY
+ * #define try
+ * #define CATCH(ERROR_VARIABLE)
+ * #define catch(error_variable)
+ * #define IS_IN_TRY
+ * #define is_in_try
+ * static int	THROW(VAR);
+ * static int	throw(var);
+ */
+#undef INCL_CMT_TRY_CATCH
+#endif /* INCL_CMT_TRY_CATCH */
 /* **************************** [^] KEYWORDS [^] **************************** */
 
 /* ***************************** [v] OS_API [v] ***************************** */

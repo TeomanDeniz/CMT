@@ -212,6 +212,7 @@ Redundant definitions are safe:
  * [![][__REGPARM_GIF__] **REGPARM**][__REGPARM_MD__]
  * [![][__REGPASS_GIF__] **REGPASS**][__REGPASS_MD__]
  * [![][__STDCALL_GIF__] **STDCALL**][__STDCALL_MD__]
+ * [![][__UNUSED_GIF__] **UNUSED**][__UNUSED_MD__]
 
 ## ![][__CHECK_FEATURE_GIF__] Check Feature
  * [![][__COMMA_OPERATOR_GIF__] **COMMA_OPERATOR**][__COMMA_OPERATOR_MD__]
@@ -230,6 +231,7 @@ Redundant definitions are safe:
 ## ![][__KEYWORDS_GIF__] Keywords
  * [![][__BOOLEAN_GIF__] **BOOLEAN**][__BOOLEAN_MD__]
  * [![][__IGNORE_VAR_GIF__] **IGNORE_VAR**][__IGNORE_VAR_MD__]
+ * [![][__TRY_CATCH_GIF__] **TRY_CATCH**][__TRY_CATCH_MD__]
  * [![][__TYPES_GIF__] **TYPES**][__TYPES_MD__]
 
 ## ![][__LIB_GIF__] LIB
@@ -534,6 +536,8 @@ List of the icons:
 [__KERNEL32_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/KERNEL32.md
 [__USER32_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/USER32.md
 [__LOCAL_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/LOCAL.md
+[__TRY_CATCH_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/TRY_CATCH.md
+[__UNUSED_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/UNUSED.md
 <!-- MARKDOWNS -->
 
 <!-- ICONS -->
@@ -586,4 +590,6 @@ List of the icons:
 [__PEB_LOADER_GIF__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/IMAGES/32/__PEB_LOADER__.gif
 [__USER32_GIF__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/IMAGES/32/USER32.gif
 [__PUSH_POP_GIF__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/IMAGES/32/PUSH_POP.gif
+[__TRY_CATCH_GIF__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/IMAGES/32/TRY_CATCH.gif
+[__UNUSED_GIF__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/IMAGES/32/UNUSED.gif
 <!-- ICONS -->
