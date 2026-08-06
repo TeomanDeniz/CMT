@@ -1,0 +1,6 @@
+
+| **Macro**         | **Unified Assembly Syntax (UAS)**  | **OP-Size** |
+| ----------------- | ---------------------------------- | ----------- |
+| `MOV_X0_X17`      | `mov x0, x17`                      | (4)         |
+| `MOV_X17_X0`      | `mov x17, x0`                      | (4)         |
+| `MRS_X0_MIDR_EL1` | `mrs x0, midr_el1`                 | (4)         |
