@@ -331,15 +331,15 @@ Icons at the list works like that:
 - **(❌)** Doesn't exist.
 - **(⚠️)** Doesn't exist but automatically loweres to smaller/bigger architecture.
 
-#### [Go to the list of Intel Commands](https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/TXT/ASM/INTEL.txt)
+## [Go to the list of Intel Commands](https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/TXT/ASM_LIST/INTEL.txt)
 
 </details>
 
-[![](https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/ARM_ASM.gif) **ARM32 (1 Assembly Code in total)**](https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/TXT/ASM/ARM32.txt)
+[![](https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/ARM_ASM.gif) **ARM32 (1 Assembly Code in total)**](https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/TXT/ASM_LIST/ARM32.txt)
 
-[![](https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/ARM_ASM.gif) **ARM64 (3 Assembly Code in total)**](https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/TXT/ASM/ARM64.txt)
+[![](https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/ARM_ASM.gif) **ARM64 (3 Assembly Code in total)**](https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/TXT/ASM_LIST/ARM64.txt)
 
-[![](https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/POWERPC_ASM.gif) **PowerPC (2 Assembly Code in total)**](https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/TXT/ASM/POWERPC.txt)
+[![](https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/POWERPC_ASM.gif) **PowerPC (2 Assembly Code in total)**](https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/TXT/ASM_LIST/POWERPC.txt)
 
 ----
 
