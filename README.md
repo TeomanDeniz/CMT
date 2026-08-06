@@ -205,6 +205,7 @@ Redundant definitions are safe:
  * [![][__EXTERN_C_GIF__] **EXTERN_C**][__EXTERN_C_MD__]
  * [![][__FAR_GIF__] **FAR**][__FAR_MD__]
  * [![][__FASTCALL_GIF__] **FASTCALL**][__FASTCALL_MD__]
+ * [![][__LOCAL_GIF__] **LOCAL**][__LOCAL_MD__]
  * [![][__NOINLINE_GIF__] **NOINLINE**][__NOINLINE_MD__]
  * [![][__PACK_GIF__] **PACK**][__PACK_MD__]
  * [![][__PASCAL_GIF__] **PASCAL**][__PASCAL_MD__]
@@ -532,6 +533,7 @@ List of the icons:
 [__PEB_LOADER_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/__PEB_LOADER__.md
 [__KERNEL32_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/KERNEL32.md
 [__USER32_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/USER32.md
+[__LOCAL_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/LOCAL.md
 <!-- MARKDOWNS -->
 
 <!-- ICONS -->

@@ -3,6 +3,7 @@
 #endif /* !ASM_H */
 
 /* ************************ [v] 8-BIT REGISTERS [v] ************************* */
+#ifdef __SYSTEM_16_BIT__
 #define MOV_AL_AL mov al, al
 #define MOV_AL_BL mov al, bl
 #define MOV_AL_CL mov al, cl
@@ -27,8 +28,40 @@
 #define MOV_BL_(VALUE) mov bl, VALUE
 #define MOV_CL_(VALUE) mov cl, VALUE
 #define MOV_DL_(VALUE) mov dl, VALUE
+#endif /* __SYSTEM_16_BIT__ */
+
+#ifdef __SYSTEM_32_BIT__
+#define MOV_AL_AL mov al, al
+#define MOV_AL_BL mov al, bl
+#define MOV_AL_CL mov al, cl
+#define MOV_AL_DL mov al, dl
+
+#define MOV_BL_AL mov bl, al
+#define MOV_BL_BL mov bl, bl
+#define MOV_BL_CL mov bl, cl
+#define MOV_BL_DL mov bl, dl
+
+#define MOV_CL_AL mov cl, al
+#define MOV_CL_BL mov cl, bl
+#define MOV_CL_CL mov cl, cl
+#define MOV_CL_DL mov cl, dl
+
+#define MOV_DL_AL mov dl, al
+#define MOV_DL_BL mov dl, bl
+#define MOV_DL_CL mov dl, cl
+#define MOV_DL_DL mov dl, dl
+
+#define MOV_AL_(VALUE) mov al, VALUE
+#define MOV_BL_(VALUE) mov bl, VALUE
+#define MOV_CL_(VALUE) mov cl, VALUE
+#define MOV_DL_(VALUE) mov dl, VALUE
+#endif /* __SYSTEM_32_BIT__ */
 
 #ifdef __SYSTEM_64_BIT__
+#define MOV_AL_AL mov al, al
+#define MOV_AL_BL mov al, bl
+#define MOV_AL_CL mov al, cl
+#define MOV_AL_DL mov al, dl
 #define MOV_AL_DIL mov al, dil
 #define MOV_AL_SIL mov al, sil
 #define MOV_AL_BPL mov al, bpl
@@ -42,6 +75,10 @@
 #define MOV_AL_R14B mov al, r14b
 #define MOV_AL_R15B mov al, r15b
 
+#define MOV_BL_AL mov bl, al
+#define MOV_BL_BL mov bl, bl
+#define MOV_BL_CL mov bl, cl
+#define MOV_BL_DL mov bl, dl
 #define MOV_BL_DIL mov bl, dil
 #define MOV_BL_SIL mov bl, sil
 #define MOV_BL_BPL mov bl, bpl
@@ -55,6 +92,10 @@
 #define MOV_BL_R14B mov bl, r14b
 #define MOV_BL_R15B mov bl, r15b
 
+#define MOV_CL_AL mov cl, al
+#define MOV_CL_BL mov cl, bl
+#define MOV_CL_CL mov cl, cl
+#define MOV_CL_DL mov cl, dl
 #define MOV_CL_DIL mov cl, dil
 #define MOV_CL_SIL mov cl, sil
 #define MOV_CL_BPL mov cl, bpl
@@ -68,6 +109,10 @@
 #define MOV_CL_R14B mov cl, r14b
 #define MOV_CL_R15B mov cl, r15b
 
+#define MOV_DL_AL mov dl, al
+#define MOV_DL_BL mov dl, bl
+#define MOV_DL_CL mov dl, cl
+#define MOV_DL_DL mov dl, dl
 #define MOV_DL_DIL mov dl, dil
 #define MOV_DL_SIL mov dl, sil
 #define MOV_DL_BPL mov dl, bpl
@@ -123,7 +168,6 @@
 #define MOV_BPL_SIL mov bpl, sil
 #define MOV_BPL_BPL mov bpl, bpl
 #define MOV_BPL_SPL mov bpl, spl
-#define MOV_BPL_BPL mov bpl, bpl
 #define MOV_BPL_R8B mov bpl, r8b
 #define MOV_BPL_R9B mov bpl, r9b
 #define MOV_BPL_R10B mov bpl, r10b
@@ -270,9 +314,9 @@
 #define MOV_R14B_R15B mov r14b, r15b
 
 #define MOV_R15B_AL mov r15b, al
-#define MOV_R15B_BL mov r15b, al
-#define MOV_R15B_CL mov r15b, al
-#define MOV_R15B_DL mov r15b, al
+#define MOV_R15B_BL mov r15b, bl
+#define MOV_R15B_CL mov r15b, cl
+#define MOV_R15B_DL mov r15b, dl
 #define MOV_R15B_DIL mov r15b, dil
 #define MOV_R15B_SIL mov r15b, sil
 #define MOV_R15B_BPL mov r15b, bpl
@@ -286,6 +330,10 @@
 #define MOV_R15B_R14B mov r15b, r14b
 #define MOV_R15B_R15B mov r15b, r15b
 
+#define MOV_AL_(VALUE) mov al, VALUE
+#define MOV_BL_(VALUE) mov bl, VALUE
+#define MOV_CL_(VALUE) mov cl, VALUE
+#define MOV_DL_(VALUE) mov dl, VALUE
 #define MOV_DIL_(VALUE) mov dil, VALUE
 #define MOV_SIL_(VALUE) mov sil, VALUE
 #define MOV_BPL_(VALUE) mov bpl, VALUE
@@ -302,6 +350,7 @@
 /* ************************ [^] 8-BIT REGISTERS [^] ************************* */
 
 /* ************************ [v] 16-BIT REGISTERS [v] ************************ */
+#ifdef __SYSTEM_16_BIT__
 #define MOV_AX_AX mov ax, ax
 #define MOV_AX_BX mov ax, bx
 #define MOV_AX_CX mov ax, cx
@@ -382,8 +431,100 @@
 #define MOV_SI_(VALUE) mov si, VALUE
 #define MOV_BP_(VALUE) mov bp, VALUE
 #define MOV_SP_(VALUE) mov sp, VALUE
+#endif /* __SYSTEM_16_BIT__ */
+
+#ifdef __SYSTEM_32_BIT__
+#define MOV_AX_AX mov ax, ax
+#define MOV_AX_BX mov ax, bx
+#define MOV_AX_CX mov ax, cx
+#define MOV_AX_DX mov ax, dx
+#define MOV_AX_DI mov ax, di
+#define MOV_AX_SI mov ax, si
+#define MOV_AX_BP mov ax, bp
+#define MOV_AX_SP mov ax, sp
+
+#define MOV_BX_AX mov bx, ax
+#define MOV_BX_BX mov bx, bx
+#define MOV_BX_CX mov bx, cx
+#define MOV_BX_DX mov bx, dx
+#define MOV_BX_DI mov bx, di
+#define MOV_BX_SI mov bx, si
+#define MOV_BX_BP mov bx, bp
+#define MOV_BX_SP mov bx, sp
+
+#define MOV_CX_AX mov cx, ax
+#define MOV_CX_BX mov cx, bx
+#define MOV_CX_CX mov cx, cx
+#define MOV_CX_DX mov cx, dx
+#define MOV_CX_DI mov cx, di
+#define MOV_CX_SI mov cx, si
+#define MOV_CX_BP mov cx, bp
+#define MOV_CX_SP mov cx, sp
+
+#define MOV_DX_AX mov dx, ax
+#define MOV_DX_BX mov dx, bx
+#define MOV_DX_CX mov dx, cx
+#define MOV_DX_DX mov dx, dx
+#define MOV_DX_DI mov dx, di
+#define MOV_DX_SI mov dx, si
+#define MOV_DX_BP mov dx, bp
+#define MOV_DX_SP mov dx, sp
+
+#define MOV_DI_AX mov di, ax
+#define MOV_DI_BX mov di, bx
+#define MOV_DI_CX mov di, cx
+#define MOV_DI_DX mov di, dx
+#define MOV_DI_DI mov di, di
+#define MOV_DI_SI mov di, si
+#define MOV_DI_BP mov di, bp
+#define MOV_DI_SP mov di, sp
+
+#define MOV_SI_AX mov si, ax
+#define MOV_SI_BX mov si, bx
+#define MOV_SI_CX mov si, cx
+#define MOV_SI_DX mov si, dx
+#define MOV_SI_DI mov si, di
+#define MOV_SI_SI mov si, si
+#define MOV_SI_BP mov si, bp
+#define MOV_SI_SP mov si, sp
+
+#define MOV_BP_AX mov bp, ax
+#define MOV_BP_BX mov bp, bx
+#define MOV_BP_CX mov bp, cx
+#define MOV_BP_DX mov bp, dx
+#define MOV_BP_DI mov bp, di
+#define MOV_BP_SI mov bp, si
+#define MOV_BP_BP mov bp, bp
+#define MOV_BP_SP mov bp, sp
+
+#define MOV_SP_AX mov sp, ax
+#define MOV_SP_BX mov sp, bx
+#define MOV_SP_CX mov sp, cx
+#define MOV_SP_DX mov sp, dx
+#define MOV_SP_DI mov sp, di
+#define MOV_SP_SI mov sp, si
+#define MOV_SP_BP mov sp, bp
+#define MOV_SP_SP mov sp, sp
+
+#define MOV_AX_(VALUE) mov ax, VALUE
+#define MOV_BX_(VALUE) mov bx, VALUE
+#define MOV_CX_(VALUE) mov cx, VALUE
+#define MOV_DX_(VALUE) mov dx, VALUE
+#define MOV_DI_(VALUE) mov di, VALUE
+#define MOV_SI_(VALUE) mov si, VALUE
+#define MOV_BP_(VALUE) mov bp, VALUE
+#define MOV_SP_(VALUE) mov sp, VALUE
+#endif /* __SYSTEM_32_BIT__ */
 
 #ifdef __SYSTEM_64_BIT__
+#define MOV_AX_AX mov ax, ax
+#define MOV_AX_BX mov ax, bx
+#define MOV_AX_CX mov ax, cx
+#define MOV_AX_DX mov ax, dx
+#define MOV_AX_DI mov ax, di
+#define MOV_AX_SI mov ax, si
+#define MOV_AX_BP mov ax, bp
+#define MOV_AX_SP mov ax, sp
 #define MOV_AX_R8W mov ax, r8w
 #define MOV_AX_R9W mov ax, r9w
 #define MOV_AX_R10W mov ax, r10w
@@ -393,6 +534,14 @@
 #define MOV_AX_R14W mov ax, r14w
 #define MOV_AX_R15W mov ax, r15w
 
+#define MOV_BX_AX mov bx, ax
+#define MOV_BX_BX mov bx, bx
+#define MOV_BX_CX mov bx, cx
+#define MOV_BX_DX mov bx, dx
+#define MOV_BX_DI mov bx, di
+#define MOV_BX_SI mov bx, si
+#define MOV_BX_BP mov bx, bp
+#define MOV_BX_SP mov bx, sp
 #define MOV_BX_R8W mov bx, r8w
 #define MOV_BX_R9W mov bx, r9w
 #define MOV_BX_R10W mov bx, r10w
@@ -402,6 +551,14 @@
 #define MOV_BX_R14W mov bx, r14w
 #define MOV_BX_R15W mov bx, r15w
 
+#define MOV_CX_AX mov cx, ax
+#define MOV_CX_BX mov cx, bx
+#define MOV_CX_CX mov cx, cx
+#define MOV_CX_DX mov cx, dx
+#define MOV_CX_DI mov cx, di
+#define MOV_CX_SI mov cx, si
+#define MOV_CX_BP mov cx, bp
+#define MOV_CX_SP mov cx, sp
 #define MOV_CX_R8W mov cx, r8w
 #define MOV_CX_R9W mov cx, r9w
 #define MOV_CX_R10W mov cx, r10w
@@ -411,6 +568,14 @@
 #define MOV_CX_R14W mov cx, r14w
 #define MOV_CX_R15W mov cx, r15w
 
+#define MOV_DX_AX mov dx, ax
+#define MOV_DX_BX mov dx, bx
+#define MOV_DX_CX mov dx, cx
+#define MOV_DX_DX mov dx, dx
+#define MOV_DX_DI mov dx, di
+#define MOV_DX_SI mov dx, si
+#define MOV_DX_BP mov dx, bp
+#define MOV_DX_SP mov dx, sp
 #define MOV_DX_R8W mov dx, r8w
 #define MOV_DX_R9W mov dx, r9w
 #define MOV_DX_R10W mov dx, r10w
@@ -420,15 +585,14 @@
 #define MOV_DX_R14W mov dx, r14w
 #define MOV_DX_R15W mov dx, r15w
 
-#define MOV_SI_R8W mov si, r8w
-#define MOV_SI_R9W mov si, r9w
-#define MOV_SI_R10W mov si, r10w
-#define MOV_SI_R11W mov si, r11w
-#define MOV_SI_R12W mov si, r12w
-#define MOV_SI_R13W mov si, r13w
-#define MOV_SI_R14W mov si, r14w
-#define MOV_SI_R15W mov si, r15w
-
+#define MOV_DI_AX mov di, ax
+#define MOV_DI_BX mov di, bx
+#define MOV_DI_CX mov di, cx
+#define MOV_DI_DX mov di, dx
+#define MOV_DI_DI mov di, di
+#define MOV_DI_SI mov di, si
+#define MOV_DI_BP mov di, bp
+#define MOV_DI_SP mov di, sp
 #define MOV_DI_R8W mov di, r8w
 #define MOV_DI_R9W mov di, r9w
 #define MOV_DI_R10W mov di, r10w
@@ -438,6 +602,31 @@
 #define MOV_DI_R14W mov di, r14w
 #define MOV_DI_R15W mov di, r15w
 
+#define MOV_SI_AX mov si, ax
+#define MOV_SI_BX mov si, bx
+#define MOV_SI_CX mov si, cx
+#define MOV_SI_DX mov si, dx
+#define MOV_SI_DI mov si, di
+#define MOV_SI_SI mov si, si
+#define MOV_SI_BP mov si, bp
+#define MOV_SI_SP mov si, sp
+#define MOV_SI_R8W mov si, r8w
+#define MOV_SI_R9W mov si, r9w
+#define MOV_SI_R10W mov si, r10w
+#define MOV_SI_R11W mov si, r11w
+#define MOV_SI_R12W mov si, r12w
+#define MOV_SI_R13W mov si, r13w
+#define MOV_SI_R14W mov si, r14w
+#define MOV_SI_R15W mov si, r15w
+
+#define MOV_BP_AX mov bp, ax
+#define MOV_BP_BX mov bp, bx
+#define MOV_BP_CX mov bp, cx
+#define MOV_BP_DX mov bp, dx
+#define MOV_BP_DI mov bp, di
+#define MOV_BP_SI mov bp, si
+#define MOV_BP_BP mov bp, bp
+#define MOV_BP_SP mov bp, sp
 #define MOV_BP_R8W mov bp, r8w
 #define MOV_BP_R9W mov bp, r9w
 #define MOV_BP_R10W mov bp, r10w
@@ -447,6 +636,14 @@
 #define MOV_BP_R14W mov bp, r14w
 #define MOV_BP_R15W mov bp, r15w
 
+#define MOV_SP_AX mov sp, ax
+#define MOV_SP_BX mov sp, bx
+#define MOV_SP_CX mov sp, cx
+#define MOV_SP_DX mov sp, dx
+#define MOV_SP_DI mov sp, di
+#define MOV_SP_SI mov sp, si
+#define MOV_SP_BP mov sp, bp
+#define MOV_SP_SP mov sp, sp
 #define MOV_SP_R8W mov sp, r8w
 #define MOV_SP_R9W mov sp, r9w
 #define MOV_SP_R10W mov sp, r10w
@@ -460,8 +657,8 @@
 #define MOV_R8W_BX mov r8w, bx
 #define MOV_R8W_CX mov r8w, cx
 #define MOV_R8W_DX mov r8w, dx
-#define MOV_R8W_SI mov r8w, si
 #define MOV_R8W_DI mov r8w, di
+#define MOV_R8W_SI mov r8w, si
 #define MOV_R8W_BP mov r8w, bp
 #define MOV_R8W_SP mov r8w, sp
 #define MOV_R8W_R8W mov r8w, r8w
@@ -477,8 +674,8 @@
 #define MOV_R9W_BX mov r9w, bx
 #define MOV_R9W_CX mov r9w, cx
 #define MOV_R9W_DX mov r9w, dx
-#define MOV_R9W_SI mov r9w, si
 #define MOV_R9W_DI mov r9w, di
+#define MOV_R9W_SI mov r9w, si
 #define MOV_R9W_BP mov r9w, bp
 #define MOV_R9W_SP mov r9w, sp
 #define MOV_R9W_R8W mov r9w, r8w
@@ -494,8 +691,8 @@
 #define MOV_R10W_BX mov r10w, bx
 #define MOV_R10W_CX mov r10w, cx
 #define MOV_R10W_DX mov r10w, dx
-#define MOV_R10W_SI mov r10w, si
 #define MOV_R10W_DI mov r10w, di
+#define MOV_R10W_SI mov r10w, si
 #define MOV_R10W_BP mov r10w, bp
 #define MOV_R10W_SP mov r10w, sp
 #define MOV_R10W_R8W mov r10w, r8w
@@ -511,8 +708,8 @@
 #define MOV_R11W_BX mov r11w, bx
 #define MOV_R11W_CX mov r11w, cx
 #define MOV_R11W_DX mov r11w, dx
-#define MOV_R11W_SI mov r11w, si
 #define MOV_R11W_DI mov r11w, di
+#define MOV_R11W_SI mov r11w, si
 #define MOV_R11W_BP mov r11w, bp
 #define MOV_R11W_SP mov r11w, sp
 #define MOV_R11W_R8W mov r11w, r8w
@@ -528,8 +725,8 @@
 #define MOV_R12W_BX mov r12w, bx
 #define MOV_R12W_CX mov r12w, cx
 #define MOV_R12W_DX mov r12w, dx
-#define MOV_R12W_SI mov r12w, si
 #define MOV_R12W_DI mov r12w, di
+#define MOV_R12W_SI mov r12w, si
 #define MOV_R12W_BP mov r12w, bp
 #define MOV_R12W_SP mov r12w, sp
 #define MOV_R12W_R8W mov r12w, r8w
@@ -545,8 +742,8 @@
 #define MOV_R13W_BX mov r13w, bx
 #define MOV_R13W_CX mov r13w, cx
 #define MOV_R13W_DX mov r13w, dx
-#define MOV_R13W_SI mov r13w, si
 #define MOV_R13W_DI mov r13w, di
+#define MOV_R13W_SI mov r13w, si
 #define MOV_R13W_BP mov r13w, bp
 #define MOV_R13W_SP mov r13w, sp
 #define MOV_R13W_R8W mov r13w, r8w
@@ -562,8 +759,8 @@
 #define MOV_R14W_BX mov r14w, bx
 #define MOV_R14W_CX mov r14w, cx
 #define MOV_R14W_DX mov r14w, dx
-#define MOV_R14W_SI mov r14w, si
 #define MOV_R14W_DI mov r14w, di
+#define MOV_R14W_SI mov r14w, si
 #define MOV_R14W_BP mov r14w, bp
 #define MOV_R14W_SP mov r14w, sp
 #define MOV_R14W_R8W mov r14w, r8w
@@ -579,8 +776,8 @@
 #define MOV_R15W_BX mov r15w, bx
 #define MOV_R15W_CX mov r15w, cx
 #define MOV_R15W_DX mov r15w, dx
-#define MOV_R15W_SI mov r15w, si
 #define MOV_R15W_DI mov r15w, di
+#define MOV_R15W_SI mov r15w, si
 #define MOV_R15W_BP mov r15w, bp
 #define MOV_R15W_SP mov r15w, sp
 #define MOV_R15W_R8W mov r15w, r8w
@@ -592,6 +789,14 @@
 #define MOV_R15W_R14W mov r15w, r14w
 #define MOV_R15W_R15W mov r15w, r15w
 
+#define MOV_AX_(VALUE) mov ax, VALUE
+#define MOV_BX_(VALUE) mov bx, VALUE
+#define MOV_CX_(VALUE) mov cx, VALUE
+#define MOV_DX_(VALUE) mov dx, VALUE
+#define MOV_DI_(VALUE) mov di, VALUE
+#define MOV_SI_(VALUE) mov si, VALUE
+#define MOV_BP_(VALUE) mov bp, VALUE
+#define MOV_SP_(VALUE) mov sp, VALUE
 #define MOV_R8W_(VALUE) mov r8w, VALUE
 #define MOV_R9W_(VALUE) mov r9w, VALUE
 #define MOV_R10W_(VALUE) mov r10w, VALUE
@@ -602,226 +807,6 @@
 #define MOV_R15W_(VALUE) mov r15w, VALUE
 #endif /* __SYSTEM_64_BIT__ */
 /* ************************ [^] 16-BIT REGISTERS [^] ************************ */
-
-/* ************************** [v] 8-BIT MEMORY [v] ************************** */
-#define MOV_AL_FROM_PTR_(VALUE) mov al, byte ptr [VALUE]
-#define MOV_BL_FROM_PTR_(VALUE) mov bl, byte ptr [VALUE]
-#define MOV_CL_FROM_PTR_(VALUE) mov cl, byte ptr [VALUE]
-#define MOV_DL_FROM_PTR_(VALUE) mov dl, byte ptr [VALUE]
-
-#define MOV_AL_TO_PTR_(VALUE) mov byte ptr [VALUE], al
-#define MOV_BL_TO_PTR_(VALUE) mov byte ptr [VALUE], bl
-#define MOV_CL_TO_PTR_(VALUE) mov byte ptr [VALUE], cl
-#define MOV_DL_TO_PTR_(VALUE) mov byte ptr [VALUE], dl
-
-#ifndef __SYSTEM_64_BIT__
-#define MOV_AL_FROM_PTR_BP_(VALUE) mov al, byte ptr [VALUE + bp]
-#define MOV_BL_FROM_PTR_BP_(VALUE) mov bl, byte ptr [VALUE + bp]
-#define MOV_CL_FROM_PTR_BP_(VALUE) mov cl, byte ptr [VALUE + bp]
-#define MOV_DL_FROM_PTR_BP_(VALUE) mov dl, byte ptr [VALUE + bp]
-
-#define MOV_AL_TO_PTR_BP_(VALUE) mov byte ptr [VALUE + bp], al
-#define MOV_BL_TO_PTR_BP_(VALUE) mov byte ptr [VALUE + bp], bl
-#define MOV_CL_TO_PTR_BP_(VALUE) mov byte ptr [VALUE + bp], cl
-#define MOV_DL_TO_PTR_BP_(VALUE) mov byte ptr [VALUE + bp], dl
-#endif /* !__SYSTEM_64_BIT__ */
-/* ************************** [^] 8-BIT MEMORY [^] ************************** */
-
-/* ************************* [v] 16-BIT MEMORY [v] ************************** */
-#define MOV_AX_FROM_PTR_(VALUE) mov ax, word ptr [VALUE]
-#define MOV_BX_FROM_PTR_(VALUE) mov bx, word ptr [VALUE]
-#define MOV_CX_FROM_PTR_(VALUE) mov cx, word ptr [VALUE]
-#define MOV_DX_FROM_PTR_(VALUE) mov dx, word ptr [VALUE]
-#define MOV_SI_FROM_PTR_(VALUE) mov si, word ptr [VALUE]
-#define MOV_DI_FROM_PTR_(VALUE) mov di, word ptr [VALUE]
-#define MOV_BP_FROM_PTR_(VALUE) mov bp, word ptr [VALUE]
-#define MOV_SP_FROM_PTR_(VALUE) mov sp, word ptr [VALUE]
-
-#define MOV_AX_TO_PTR_(VALUE) mov word ptr [VALUE], ax
-#define MOV_BX_TO_PTR_(VALUE) mov word ptr [VALUE], bx
-#define MOV_CX_TO_PTR_(VALUE) mov word ptr [VALUE], cx
-#define MOV_DX_TO_PTR_(VALUE) mov word ptr [VALUE], dx
-#define MOV_SI_TO_PTR_(VALUE) mov word ptr [VALUE], si
-#define MOV_DI_TO_PTR_(VALUE) mov word ptr [VALUE], di
-#define MOV_BP_TO_PTR_(VALUE) mov word ptr [VALUE], bp
-#define MOV_SP_TO_PTR_(VALUE) mov word ptr [VALUE], sp
-
-#ifndef __SYSTEM_64_BIT__
-#define MOV_AX_FROM_PTR_BP_(VALUE) mov ax, word ptr [VALUE + bp]
-#define MOV_BX_FROM_PTR_BP_(VALUE) mov bx, word ptr [VALUE + bp]
-#define MOV_CX_FROM_PTR_BP_(VALUE) mov cx, word ptr [VALUE + bp]
-#define MOV_DX_FROM_PTR_BP_(VALUE) mov dx, word ptr [VALUE + bp]
-#define MOV_SI_FROM_PTR_BP_(VALUE) mov si, word ptr [VALUE + bp]
-#define MOV_DI_FROM_PTR_BP_(VALUE) mov di, word ptr [VALUE + bp]
-#define MOV_BP_FROM_PTR_BP_(VALUE) mov bp, word ptr [VALUE + bp]
-#define MOV_SP_FROM_PTR_BP_(VALUE) mov sp, word ptr [VALUE + bp]
-
-#define MOV_AX_TO_PTR_BP_(VALUE) mov word ptr [VALUE + bp], ax
-#define MOV_BX_TO_PTR_BP_(VALUE) mov word ptr [VALUE + bp], bx
-#define MOV_CX_TO_PTR_BP_(VALUE) mov word ptr [VALUE + bp], cx
-#define MOV_DX_TO_PTR_BP_(VALUE) mov word ptr [VALUE + bp], dx
-#define MOV_SI_TO_PTR_BP_(VALUE) mov word ptr [VALUE + bp], si
-#define MOV_DI_TO_PTR_BP_(VALUE) mov word ptr [VALUE + bp], di
-#define MOV_BP_TO_PTR_BP_(VALUE) mov word ptr [VALUE + bp], bp
-#define MOV_SP_TO_PTR_BP_(VALUE) mov word ptr [VALUE + bp], sp
-#endif /* !__SYSTEM_64_BIT__ */
-/* ************************* [^] 16-BIT MEMORY [^] ************************** */
-
-/* ************************* [v] 8-BIT SEGMENTS [v] ************************* */
-#define MOV_AL_FROM_PTR_FS_(VALUE) mov al, byte ptr fs:[VALUE]
-#define MOV_BL_FROM_PTR_FS_(VALUE) mov bl, byte ptr fs:[VALUE]
-#define MOV_CL_FROM_PTR_FS_(VALUE) mov cl, byte ptr fs:[VALUE]
-#define MOV_DL_FROM_PTR_FS_(VALUE) mov dl, byte ptr fs:[VALUE]
-
-#define MOV_AL_FROM_PTR_GS_(VALUE) mov al, byte ptr gs:[VALUE]
-#define MOV_BL_FROM_PTR_GS_(VALUE) mov bl, byte ptr gs:[VALUE]
-#define MOV_CL_FROM_PTR_GS_(VALUE) mov cl, byte ptr gs:[VALUE]
-#define MOV_DL_FROM_PTR_GS_(VALUE) mov dl, byte ptr gs:[VALUE]
-
-#define MOV_AL_TO_PTR_FS_(VALUE) mov byte ptr fs:[VALUE], al
-#define MOV_BL_TO_PTR_FS_(VALUE) mov byte ptr fs:[VALUE], bl
-#define MOV_CL_TO_PTR_FS_(VALUE) mov byte ptr fs:[VALUE], cl
-#define MOV_DL_TO_PTR_FS_(VALUE) mov byte ptr fs:[VALUE], dl
-
-#define MOV_AL_TO_PTR_GS_(VALUE) mov byte ptr gs:[VALUE], al
-#define MOV_BL_TO_PTR_GS_(VALUE) mov byte ptr gs:[VALUE], bl
-#define MOV_CL_TO_PTR_GS_(VALUE) mov byte ptr gs:[VALUE], cl
-#define MOV_DL_TO_PTR_GS_(VALUE) mov byte ptr gs:[VALUE], dl
-
-#ifdef __SYSTEM_64_BIT__
-#define MOV_SIL_FROM_PTR_FS_(VALUE) mov sil, byte ptr fs:[VALUE]
-#define MOV_DIL_FROM_PTR_FS_(VALUE) mov dil, byte ptr fs:[VALUE]
-#define MOV_BPL_FROM_PTR_FS_(VALUE) mov bpl, byte ptr fs:[VALUE]
-#define MOV_SPL_FROM_PTR_FS_(VALUE) mov spl, byte ptr fs:[VALUE]
-
-#define MOV_R8B_FROM_PTR_FS_(VALUE) mov r8b, byte ptr fs:[VALUE]
-#define MOV_R9B_FROM_PTR_FS_(VALUE) mov r9b, byte ptr fs:[VALUE]
-#define MOV_R10B_FROM_PTR_FS_(VALUE) mov r10b, byte ptr fs:[VALUE]
-#define MOV_R11B_FROM_PTR_FS_(VALUE) mov r11b, byte ptr fs:[VALUE]
-#define MOV_R12B_FROM_PTR_FS_(VALUE) mov r12b, byte ptr fs:[VALUE]
-#define MOV_R13B_FROM_PTR_FS_(VALUE) mov r13b, byte ptr fs:[VALUE]
-#define MOV_R14B_FROM_PTR_FS_(VALUE) mov r14b, byte ptr fs:[VALUE]
-#define MOV_R15B_FROM_PTR_FS_(VALUE) mov r15b, byte ptr fs:[VALUE]
-
-#define MOV_SIL_FROM_PTR_GS_(VALUE) mov sil, byte ptr gs:[VALUE]
-#define MOV_DIL_FROM_PTR_GS_(VALUE) mov dil, byte ptr gs:[VALUE]
-#define MOV_BPL_FROM_PTR_GS_(VALUE) mov bpl, byte ptr gs:[VALUE]
-#define MOV_SPL_FROM_PTR_GS_(VALUE) mov spl, byte ptr gs:[VALUE]
-
-#define MOV_R8B_FROM_PTR_GS_(VALUE) mov r8b, byte ptr gs:[VALUE]
-#define MOV_R9B_FROM_PTR_GS_(VALUE) mov r9b, byte ptr gs:[VALUE]
-#define MOV_R10B_FROM_PTR_GS_(VALUE) mov r10b, byte ptr gs:[VALUE]
-#define MOV_R11B_FROM_PTR_GS_(VALUE) mov r11b, byte ptr gs:[VALUE]
-#define MOV_R12B_FROM_PTR_GS_(VALUE) mov r12b, byte ptr gs:[VALUE]
-#define MOV_R13B_FROM_PTR_GS_(VALUE) mov r13b, byte ptr gs:[VALUE]
-#define MOV_R14B_FROM_PTR_GS_(VALUE) mov r14b, byte ptr gs:[VALUE]
-#define MOV_R15B_FROM_PTR_GS_(VALUE) mov r15b, byte ptr gs:[VALUE]
-
-#define MOV_SIL_TO_PTR_FS_(VALUE) mov byte ptr fs:[VALUE], sil
-#define MOV_DIL_TO_PTR_FS_(VALUE) mov byte ptr fs:[VALUE], dil
-#define MOV_BPL_TO_PTR_FS_(VALUE) mov byte ptr fs:[VALUE], bpl
-#define MOV_SPL_TO_PTR_FS_(VALUE) mov byte ptr fs:[VALUE], spl
-
-#define MOV_R8B_TO_PTR_FS_(VALUE) mov byte ptr fs:[VALUE], r8b
-#define MOV_R9B_TO_PTR_FS_(VALUE) mov byte ptr fs:[VALUE], r9b
-#define MOV_R10B_TO_PTR_FS_(VALUE) mov byte ptr fs:[VALUE], r10b
-#define MOV_R11B_TO_PTR_FS_(VALUE) mov byte ptr fs:[VALUE], r11b
-#define MOV_R12B_TO_PTR_FS_(VALUE) mov byte ptr fs:[VALUE], r12b
-#define MOV_R13B_TO_PTR_FS_(VALUE) mov byte ptr fs:[VALUE], r13b
-#define MOV_R14B_TO_PTR_FS_(VALUE) mov byte ptr fs:[VALUE], r14b
-#define MOV_R15B_TO_PTR_FS_(VALUE) mov byte ptr fs:[VALUE], r15b
-
-#define MOV_SIL_TO_PTR_GS_(VALUE) mov byte ptr gs:[VALUE], sil
-#define MOV_DIL_TO_PTR_GS_(VALUE) mov byte ptr gs:[VALUE], dil
-#define MOV_BPL_TO_PTR_GS_(VALUE) mov byte ptr gs:[VALUE], bpl
-#define MOV_SPL_TO_PTR_GS_(VALUE) mov byte ptr gs:[VALUE], spl
-
-#define MOV_R8B_TO_PTR_GS_(VALUE) mov byte ptr gs:[VALUE], r8b
-#define MOV_R9B_TO_PTR_GS_(VALUE) mov byte ptr gs:[VALUE], r9b
-#define MOV_R10B_TO_PTR_GS_(VALUE) mov byte ptr gs:[VALUE], r10b
-#define MOV_R11B_TO_PTR_GS_(VALUE) mov byte ptr gs:[VALUE], r11b
-#define MOV_R12B_TO_PTR_GS_(VALUE) mov byte ptr gs:[VALUE], r12b
-#define MOV_R13B_TO_PTR_GS_(VALUE) mov byte ptr gs:[VALUE], r13b
-#define MOV_R14B_TO_PTR_GS_(VALUE) mov byte ptr gs:[VALUE], r14b
-#define MOV_R15B_TO_PTR_GS_(VALUE) mov byte ptr gs:[VALUE], r15b
-#endif /* __SYSTEM_64_BIT__ */
-/* ************************* [^] 8-BIT SEGMENTS [^] ************************* */
-
-/* ************************ [v] 16-BIT SEGMENTS [v] ************************* */
-#define MOV_AX_FROM_PTR_FS_(VALUE) mov ax, word ptr fs:[VALUE]
-#define MOV_BX_FROM_PTR_FS_(VALUE) mov bx, word ptr fs:[VALUE]
-#define MOV_CX_FROM_PTR_FS_(VALUE) mov cx, word ptr fs:[VALUE]
-#define MOV_DX_FROM_PTR_FS_(VALUE) mov dx, word ptr fs:[VALUE]
-#define MOV_SI_FROM_PTR_FS_(VALUE) mov si, word ptr fs:[VALUE]
-#define MOV_DI_FROM_PTR_FS_(VALUE) mov di, word ptr fs:[VALUE]
-#define MOV_BP_FROM_PTR_FS_(VALUE) mov bp, word ptr fs:[VALUE]
-#define MOV_SP_FROM_PTR_FS_(VALUE) mov sp, word ptr fs:[VALUE]
-
-#define MOV_AX_FROM_PTR_GS_(VALUE) mov ax, word ptr gs:[VALUE]
-#define MOV_BX_FROM_PTR_GS_(VALUE) mov bx, word ptr gs:[VALUE]
-#define MOV_CX_FROM_PTR_GS_(VALUE) mov cx, word ptr gs:[VALUE]
-#define MOV_DX_FROM_PTR_GS_(VALUE) mov dx, word ptr gs:[VALUE]
-#define MOV_SI_FROM_PTR_GS_(VALUE) mov si, word ptr gs:[VALUE]
-#define MOV_DI_FROM_PTR_GS_(VALUE) mov di, word ptr gs:[VALUE]
-#define MOV_BP_FROM_PTR_GS_(VALUE) mov bp, word ptr gs:[VALUE]
-#define MOV_SP_FROM_PTR_GS_(VALUE) mov sp, word ptr gs:[VALUE]
-
-#define MOV_AX_TO_PTR_FS_(VALUE) mov word ptr fs:[VALUE], ax
-#define MOV_BX_TO_PTR_FS_(VALUE) mov word ptr fs:[VALUE], bx
-#define MOV_CX_TO_PTR_FS_(VALUE) mov word ptr fs:[VALUE], cx
-#define MOV_DX_TO_PTR_FS_(VALUE) mov word ptr fs:[VALUE], dx
-#define MOV_SI_TO_PTR_FS_(VALUE) mov word ptr fs:[VALUE], si
-#define MOV_DI_TO_PTR_FS_(VALUE) mov word ptr fs:[VALUE], di
-#define MOV_BP_TO_PTR_FS_(VALUE) mov word ptr fs:[VALUE], bp
-#define MOV_SP_TO_PTR_FS_(VALUE) mov word ptr fs:[VALUE], sp
-
-#define MOV_AX_TO_PTR_GS_(VALUE) mov word ptr gs:[VALUE], ax
-#define MOV_BX_TO_PTR_GS_(VALUE) mov word ptr gs:[VALUE], bx
-#define MOV_CX_TO_PTR_GS_(VALUE) mov word ptr gs:[VALUE], cx
-#define MOV_DX_TO_PTR_GS_(VALUE) mov word ptr gs:[VALUE], dx
-#define MOV_SI_TO_PTR_GS_(VALUE) mov word ptr gs:[VALUE], si
-#define MOV_DI_TO_PTR_GS_(VALUE) mov word ptr gs:[VALUE], di
-#define MOV_BP_TO_PTR_GS_(VALUE) mov word ptr gs:[VALUE], bp
-#define MOV_SP_TO_PTR_GS_(VALUE) mov word ptr gs:[VALUE], sp
-
-#ifdef __SYSTEM_64_BIT__
-#define MOV_R8W_FROM_PTR_FS_(VALUE) mov r8w, word ptr fs:[VALUE]
-#define MOV_R9W_FROM_PTR_FS_(VALUE) mov r9w, word ptr fs:[VALUE]
-#define MOV_R10W_FROM_PTR_FS_(VALUE) mov r10w, word ptr fs:[VALUE]
-#define MOV_R11W_FROM_PTR_FS_(VALUE) mov r11w, word ptr fs:[VALUE]
-#define MOV_R12W_FROM_PTR_FS_(VALUE) mov r12w, word ptr fs:[VALUE]
-#define MOV_R13W_FROM_PTR_FS_(VALUE) mov r13w, word ptr fs:[VALUE]
-#define MOV_R14W_FROM_PTR_FS_(VALUE) mov r14w, word ptr fs:[VALUE]
-#define MOV_R15W_FROM_PTR_FS_(VALUE) mov r15w, word ptr fs:[VALUE]
-
-#define MOV_R8W_FROM_PTR_GS_(VALUE) mov r8w, word ptr gs:[VALUE]
-#define MOV_R9W_FROM_PTR_GS_(VALUE) mov r9w, word ptr gs:[VALUE]
-#define MOV_R10W_FROM_PTR_GS_(VALUE) mov r10w, word ptr gs:[VALUE]
-#define MOV_R11W_FROM_PTR_GS_(VALUE) mov r11w, word ptr gs:[VALUE]
-#define MOV_R12W_FROM_PTR_GS_(VALUE) mov r12w, word ptr gs:[VALUE]
-#define MOV_R13W_FROM_PTR_GS_(VALUE) mov r13w, word ptr gs:[VALUE]
-#define MOV_R14W_FROM_PTR_GS_(VALUE) mov r14w, word ptr gs:[VALUE]
-#define MOV_R15W_FROM_PTR_GS_(VALUE) mov r15w, word ptr gs:[VALUE]
-
-#define MOV_R8W_TO_PTR_FS_(VALUE) mov word ptr fs:[VALUE], r8w
-#define MOV_R9W_TO_PTR_FS_(VALUE) mov word ptr fs:[VALUE], r9w
-#define MOV_R10W_TO_PTR_FS_(VALUE) mov word ptr fs:[VALUE], r10w
-#define MOV_R11W_TO_PTR_FS_(VALUE) mov word ptr fs:[VALUE], r11w
-#define MOV_R12W_TO_PTR_FS_(VALUE) mov word ptr fs:[VALUE], r12w
-#define MOV_R13W_TO_PTR_FS_(VALUE) mov word ptr fs:[VALUE], r13w
-#define MOV_R14W_TO_PTR_FS_(VALUE) mov word ptr fs:[VALUE], r14w
-#define MOV_R15W_TO_PTR_FS_(VALUE) mov word ptr fs:[VALUE], r15w
-
-#define MOV_R8W_TO_PTR_GS_(VALUE) mov word ptr gs:[VALUE], r8w
-#define MOV_R9W_TO_PTR_GS_(VALUE) mov word ptr gs:[VALUE], r9w
-#define MOV_R10W_TO_PTR_GS_(VALUE) mov word ptr gs:[VALUE], r10w
-#define MOV_R11W_TO_PTR_GS_(VALUE) mov word ptr gs:[VALUE], r11w
-#define MOV_R12W_TO_PTR_GS_(VALUE) mov word ptr gs:[VALUE], r12w
-#define MOV_R13W_TO_PTR_GS_(VALUE) mov word ptr gs:[VALUE], r13w
-#define MOV_R14W_TO_PTR_GS_(VALUE) mov word ptr gs:[VALUE], r14w
-#define MOV_R15W_TO_PTR_GS_(VALUE) mov word ptr gs:[VALUE], r15w
-#endif /* __SYSTEM_64_BIT__ */
-/* ************************ [^] 16-BIT SEGMENTS [^] ************************* */
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\
  * * AT THE ALL END OF FILES, I AM ADDING A SPECIAL BYTE <0X1A> TO END THE  * *

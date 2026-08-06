@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2025/06/22 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/08/04 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/08/06 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -55,7 +55,9 @@
 #ifndef INCL_CMT_MEMORY
 #ifndef INCL_CMT_NOINLINE
 #ifndef INCL_CMT_USER32
+#ifndef INCL_CMT_LOCAL
 #define LOCALMACRO_DEFINE_ALL_TRY_1
+#endif /* !INCL_CMT_LOCAL */
 #endif /* !INCL_CMT_USER32 */
 #endif /* !INCL_CMT_NOINLINE */
 #endif /* !INCL_CMT_MEMORY */
@@ -179,6 +181,10 @@
 #ifndef INCL_CMT_NOINLINE
 #define INCL_CMT_NOINLINE
 #endif /* !INCL_CMT_NOINLINE */
+
+#ifndef INCL_CMT_LOCAL
+#define INCL_CMT_LOCAL
+#endif /* !INCL_CMT_LOCAL */
 #endif /* INCL_CMT_ATTRIBUTES */
 /* *************************** [^] ATTRIBUTES [^] *************************** */
 
@@ -578,6 +584,15 @@
  */
 #undef INCL_CMT_NOINLINE
 #endif /* INCL_CMT_NOINLINE */
+
+#ifdef INCL_CMT_LOCAL
+#include "ATTRIBUTES/LOCAL.H"
+/******* """"""""""""""""""""
+ * #define LOCAL
+ * #define local
+ */
+#undef INCL_CMT_LOCAL
+#endif /* INCL_CMT_LOCAL */
 /* *************************** [^] ATTRIBUTES [^] *************************** */
 
 /* ************************* [v] CHECK FEATURE [v] ************************** */

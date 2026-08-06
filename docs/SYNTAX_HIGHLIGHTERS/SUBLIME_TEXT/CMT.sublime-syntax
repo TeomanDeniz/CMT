@@ -10,7 +10,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2026/06/12 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/08/04 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/08/06 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 #******************************************************************************#
 
@@ -51,7 +51,7 @@ variables:
   integer_suffix: 'u?wb|[lL]{1,2}[uU]?|[uU][lL]{0,2}'
   identifier: \b[[:alpha:]_][[:alnum:]_]*\b
   macro_identifier: \b[[:upper:]_][[:upper:][:digit:]_]{2,}\b
-  control_keywords: 'break|case|continue|default|do|else|for|goto|if|_Pragma|return|switch|while|(?i:\b(?:try|catch|throw)\b)'
+  control_keywords: 'break|case|continue|default|do|else|for|goto|if|_Pragma|return|switch|while'
   basic_types: 'asm|__asm__|auto|bool|_Bool|char|_Complex|double|float|_Imaginary|_Decimal(32|64|128)|int|long|short|signed|unsigned|void|(?i:object)'
   before_tag: 'struct|union|enum'
   microsoft_types: '__int8|__int16|__int32|__int64'
@@ -71,13 +71,13 @@ variables:
   wchar: 'wchar_t|wint_t|wctrans_t|wctype_t'
   uchar: 'mbstate_t|char8_t|char16_t|char32_t'
   declspec: '__declspec\(\s*\w+(?:\([^)]+\))?\s*\)'
-  storage_classes: 'static|extern|register|thread_local|_Thread_local|constexpr|{{declspec}}'
+  storage_classes: 'static|extern|register|thread_local|_Thread_local|constexpr|{{declspec}}|(?i:LOCAL)|(?i:TRY)|(?i:CATCH)|(?i:THROW)|(?i:IS_IN_TRY)'
   type_qualifier: 'const|volatile|_Atomic'
   compiler_directive: '(?i:INLINE)|restrict|__restrict__|__restrict|_Noreturn|noreturn|(?i:FASTCALL)|(?i:STDCALL)|(?i:REGPASS)|(?i:REGPARM)|(?i:IGNORE_VAR)|(?i:CDECL)|(?i:FAR)|(?i:STDCALL)|(?i:NOINLINE)|(?i:PASCAL)|(?i:EXTERN_C_START)|(?i:EXTERN_C_END)|(?i:PACK)|(?i:PRAGMA_PACK_PUSH)|(?i:PRAGMA_PACK_POP)|(?i:ALIGN_UP)|(?i:ALIGN_VARIABLE)|(?i:ALIGN_STRUCT_PUSH)|(?i:ALIGN_STRUCT_POP)'
   modifiers: '{{storage_classes}}|{{type_qualifier}}|{{compiler_directive}}'
   non_func_keywords: 'if|for|switch|while|decltype|typeof|typeof_unqual|_Atomic|_BitInt|sizeof|alignof|_Alignof|alignas|_Alignas|static_assert|_Static_assert|__declspec|__attribute__'
-  cmt_types: '(?i:var)|(?i:let)|(?i:ptr)|(?i:far_ptr)|(?i:boolean)|(?i:byte)|(?i:bit8)|(?i:bit16)|(?i:bit32)|(?i:bit64)|(?i:bit128)|(?i:float32)|(?i:float64)|(?i:float128)'
-  cmt_oop: '(?i:new)|(?i:obj)|(?i:destroy)|(?i:object__connect)|(?i:object__inject)|(?i:object__eject)'
+  cmt_types: '(?i:VAR)|(?i:LET)|(?i:PTR)|(?i:FAR_PTR)|(?i:BOOLEAN)|(?i:BYTE)|(?i:BIT8)|(?i:BIT16)|(?i:BIT32)|(?i:BIT64)|(?i:BIT128)|(?i:FLOAT32)|(?i:FLOAT64)|(?i:FLOAT128)'
+  cmt_oop: '(?i:NEW)|(?i:OBJ)|(?i:DESTROY)|(?i:OBJECT__CONNECT)|(?i:OBJECT__INJECT)|(?i:OBJECT__EJECT)'
 contexts:
   main:
     - include: preprocessor-global

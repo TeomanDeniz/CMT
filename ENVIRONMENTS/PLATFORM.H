@@ -1039,4 +1039,4 @@
  * *       HANDLING "//" SYNTAX WHICH IS NOT SUPPORTED ON OLD SYSTEMS       * *
 \* * * * * * * * * * * * * * * * * * *  * * * * * * * * * * * * * * * * * * * */
 #undef __CMT__END_OF_FILE__
-#define __CMT__END_OF_FILE__ // 
+#define __CMT__END_OF_FILE__ //

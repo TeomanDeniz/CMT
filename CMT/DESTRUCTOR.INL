@@ -42,15 +42,15 @@
 #define CMT_AUTO_CONSTRUCTOR
 #endif /* CMT_AUTO_CONSTRUCTOR */
 
-#ifndef GLOBALDESTRUCTOR__IDK
-#define GLOBALDESTRUCTOR__IDK
-#endif /* !GLOBALDESTRUCTOR__IDK */
+#ifndef GLOBALDESTRUCTOR__TRY_CATCH
+#define GLOBALDESTRUCTOR__TRY_CATCH
+#endif /* !GLOBALDESTRUCTOR__TRY_CATCH */
 /* ***************** [^] FILL UNDEFINED GLOBAL LINKERS [^] ****************** */
 
 /* ******************* [v] CONNECT DESTRUCTOR EVENTS [v] ******************** */
 #undef CMT_AUTO_DESTRUCTOR
 #define CMT_AUTO_DESTRUCTOR \
-	GLOBALDESTRUCTOR__IDK
+	GLOBALDESTRUCTOR__TRY_CATCH
 /* ******************* [^] CONNECT DESTRUCTOR EVENTS [^] ******************** */
 
 #ifndef KNR_STYLE /* STANDARD C */

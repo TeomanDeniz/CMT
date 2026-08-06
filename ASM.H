@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2024/02/27 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/08/04 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/08/06 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -41,15 +41,15 @@
 |*| :  :                                                                     |*|
 |*| :  :.. MSVC (__ASM{} INTEL SYNTAX)                                       |*|
 |*| :                                                                        |*|
-|*| :.. PROVIDES STABLE NAMES FOR REGISTERS THAT CHANGE SIZE ACROSS          |*|
-|*| :   ARCHITECTURES                                                        |*|
+|*| :.., PROVIDES STABLE NAMES FOR REGISTERS THAT CHANGE SIZE ACROSS         |*|
+|*| :    ARCHITECTURES                                                       |*|
 |*| :                                                                        |*|
-|*| :.. ALLOWS MACRO-STYLE 8/16/32/64-BIT OPS WITHOUT MANUAL SYNTAX          |*|
-|*| :   BRANCHING                                                            |*|
+|*| :.., ALLOWS MACRO-STYLE 8/16/32/64-BIT OPS WITHOUT MANUAL SYNTAX         |*|
+|*| :    BRANCHING                                                           |*|
 |*| :                                                                        |*|
-|*| :.. PROVIDES UNIFIED MEMORY ADDRESSING PATTERNS                          |*|
+|*| :.., PROVIDES UNIFIED MEMORY ADDRESSING PATTERNS                         |*|
 |*| :                                                                        |*|
-|*| :.. ENABLES PLATFORM-INDEPENDENT SECTION CREATION FOR ASM ENTRY POINTS   |*|
+|*| :.., ENABLES PLATFORM-INDEPENDENT SECTION CREATION FOR ASM ENTRY POINTS  |*|
 |*|                                                                          |*|
 |*| ######################################################################## |*|
 |*| #           COMPILE-TIME MODULE SELECTION SYSTEM (IMPORTANT)           # |*|
@@ -520,6 +520,12 @@ Still planning PTR
 #endif /* !INCL_CMT_ASM_JMP */
 #endif /* !INCL_CMT_ASM_ADD */
 
+#ifdef INCL_CMT_ASM_MOV_ABI
+#ifndef INCL_CMT_ASM_MOV_PTR
+#define INCL_CMT_ASM_MOV_PTR
+#endif /* !INCL_CMT_ASM_MOV_PTR */
+#endif /* INCL_CMT_ASM_MOV_ABI */
+
 #ifndef INCL_CMT_ASM_INLINE
 #ifndef INCL_CMT_ASM_SIZEOF
 #ifndef INCL_CMT_ASM_OP
@@ -673,9 +679,9 @@ Still planning PTR
 
 #else /* CMT_CANT_USE_INLINE_ASM_FOR_SECTIONS */
 
-#ifndef INCL_ASM_ABI_OP
-#define INCL_ASM_ABI_OP
-#endif /* !INCL_ASM_ABI_OP */
+#ifndef INCL_CMT_ASM_OP
+#define INCL_CMT_ASM_OP
+#endif /* !INCL_CMT_ASM_OP */
 
 /* **************************** [v] INCLUDES [v] **************************** */
 #include "OS_API/CLEAR_INSTRUCTION_CACHE.H"
@@ -811,6 +817,22 @@ Still planning PTR
 #endif /* ABI_H */
 
 #include "ASM/ABI.INL"
+
+/* ***************************** [v] RESET [v] ****************************** */
+#undef INCL_CMT_ASM_ADD
+#undef INCL_CMT_ASM_JMP
+#undef INCL_CMT_ASM_MOV
+#undef INCL_CMT_ASM_MOVABS
+#undef INCL_CMT_ASM_OTHERS
+#undef INCL_CMT_ASM_PUSH
+#undef INCL_CMT_ASM_POP
+#undef INCL_CMT_ASM_MOV_PTR
+#undef INCL_CMT_ASM_MOV_PTR_SEGMENT
+#undef INCL_CMT_ASM_MOV_ABI
+#undef INCL_CMT_ASM_OP
+#undef INCL_CMT_ASM_SIZEOF
+#undef INCL_CMT_ASM_INLINE
+/* ***************************** [^] RESET [^] ****************************** */
 
 /* ************************ [v] TI CGT CCS (POP) [v] ************************ */
 #ifdef __TI_COMPILER_VERSION__
