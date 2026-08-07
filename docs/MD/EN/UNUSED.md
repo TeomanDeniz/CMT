@@ -19,7 +19,7 @@
 
 ## Abstract
 
-This keyword tells the compiler that the function may not be used in the program.
+This macro tells the compiler that the function may not be used in the program.
 
 If unused, the compiler ignores this function and continues compiling the program without giving any warnings.
 
@@ -37,11 +37,6 @@ Just put this tag at the beginning of the function.
 
 **Example**:
 ```c
-UNUSED void function(void)
-{
-	. . .
-}
-
 UNUSED void function(void)
 {
 	. . .
