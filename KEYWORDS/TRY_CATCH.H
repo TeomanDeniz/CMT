@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2025/04/25 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/08/06 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/08/07 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -265,6 +265,43 @@
 |* : 14|     printf("err_2: %d\n", error);                                  : *|
 |* : 15| }                                                                  : *|
 |* : 16|                                                                    : *|
+|* :         ___     _____                                                  : *|
+|* : BETWEEN try AND catch                                                  : *|
+|* :                                                                        : *|
+|* :   v [C LANGUAGE]                                                       : *|
+|* :  1|                                                                    : *|
+|* :  2| void test()                                                        : *|
+|* :  3| {                                                                  : *|
+|* :  4|     throw (0);                                                     : *|
+|* :  5| }                                                                  : *|
+|* :  6|                                                                    : *|
+|* :  7| int main(void)                                                     : *|
+|* :  8| {                                                                  : *|
+|* :  9|     try                                                            : *|
+|* : 10|     {                                                              : *|
+|* : 11|         try                                                        : *|
+|* : 12|         {                                                          : *|
+|* : 13|             test();                                                : *|
+|* : 14|         }                                                          : *|
+|* : 15|         catch (ptr error_message)                                  : *|
+|* : 16|         {                                                          : *|
+|* : 17|             printf("[%s]\n", error_message);                       : *|
+|* : 18|         }                                                          : *|
+|* : 19|                                                                    : *|
+|* : 20|         throw ("2");                                               : *|
+|* : 21|     }                                                              : *|
+|* : 22|                                                                    : *|
+|* : 23|     printf("Test\n"); // Yeah, you can also do that,               : *|
+|* : 24|                       // it always prints "Test"                   : *|
+|* : 25|                                                                    : *|
+|* : 26|     catch (ptr error_message)                                      : *|
+|* : 27|     {                                                              : *|
+|* : 28|         printf("[%s]\n", error_message);                           : *|
+|* : 29|     }                                                              : *|
+|* : 30|                                                                    : *|
+|* : 31|     return (0);                                                    : *|
+|* : 32| }                                                                  : *|
+|* : 33|                                                                    : *|
 |* :........................................................................: *|
 |*                                                                            *|
 \******************************************************************************/
@@ -319,10 +356,19 @@
 #include "TYPES.H"
 /******* """""""""
  * typedef	PTR;
+ * typedef	BOOLEAN;
  * typedef	VAR;
  * typedef	var;
  */
 /* **************************** [^] INCLUDES [^] **************************** */
+
+/* ***************************** [v] STRUCT [v] ***************************** */
+struct S_TRY_CATCH_STATE
+{
+	PTR		VALUE;
+	BOOLEAN	THROWN;
+};
+/* ***************************** [^] STRUCT [^] ***************************** */
 
 #define __TRY_CATCH_SHRINK__() \
 	do\
@@ -351,13 +397,19 @@
 	while (0)
 
 #define TRY \
-	if (\
-		LOCALFUNCTION__TRY_CATCH_GROW__() && \
-		!setjmp(G__TRY_CATCH_BUFFER__[G__TRY_CATCH_INDEX__++])\
-	)
+    if (!LOCALFUNCTION__TRY_CATCH_GROW__()) \
+        ; \
+    else \
+    {\
+        G__TRY_CATCH_INDEX__++;\
+        G__TRY_CATCH_STATE__.THROWN = (BOOLEAN)0;\
+        \
+        if (setjmp(G__TRY_CATCH_BUFFER__[G__TRY_CATCH_INDEX__ - 1]) == 0)
 
 #define CATCH(ERROR_VARIABLE) \
-	if (G__TRY_CATCH_VALUE__ == (PTR)0)\
+    }\
+	\
+	if (!G__TRY_CATCH_STATE__.THROWN)\
 	{\
 		if (G__TRY_CATCH_INDEX__)\
 		{\
@@ -367,15 +419,16 @@
 	}\
 	else\
 		for (\
-			ERROR_VARIABLE = G__TRY_CATCH_VALUE__;\
-			G__TRY_CATCH_VALUE__;\
-			G__TRY_CATCH_VALUE__ = (PTR)0\
+			ERROR_VARIABLE = G__TRY_CATCH_STATE__.VALUE;\
+			G__TRY_CATCH_STATE__.THROWN;\
+			G__TRY_CATCH_STATE__.THROWN = (BOOLEAN)0\
 		)
 
 #define LOCALMACRO__THROW_CONTENT(__THROW_VALUE__) \
 	if (G__TRY_CATCH_INDEX__ != 0)\
 	{\
-		G__TRY_CATCH_VALUE__ = (PTR)(__THROW_VALUE__);\
+		G__TRY_CATCH_STATE__.VALUE = (PTR)(__THROW_VALUE__);\
+		G__TRY_CATCH_STATE__.THROWN = (BOOLEAN)1;\
 		\
 		--G__TRY_CATCH_INDEX__;\
 		__TRY_CATCH_SHRINK__();\
@@ -395,17 +448,17 @@
 #ifdef __MVS__ /* IBM Z/OS XL C/C++ */
 #define G__TRY_CATCH_BUFFER__ G_TRYBFR
 #define G__TRY_CATCH_INDEX__ G_TRYIND
-#define G__TRY_CATCH_VALUE__ G_TRYVAL
+#define G__TRY_CATCH_STATE__ G_TRYSTA
 #define G__TRY_CATCH_INDEX_LIMIT__ G_TRYILM;
 #endif /* __MVS__ */
 /* *************************** [^] MVS LINKER [^] *************************** */
 
 /* **************************** [v] EXTERNS [v] ***************************** */
 EXTERN_C_START
-extern LOCAL jmp_buf	*G__TRY_CATCH_BUFFER__;
-extern LOCAL LET		G__TRY_CATCH_INDEX__;
-extern LOCAL LET		G__TRY_CATCH_INDEX_LIMIT__;
-extern LOCAL PTR		G__TRY_CATCH_VALUE__;
+extern LOCAL jmp_buf					*G__TRY_CATCH_BUFFER__;
+extern LOCAL LET						G__TRY_CATCH_INDEX__;
+extern LOCAL LET						G__TRY_CATCH_INDEX_LIMIT__;
+extern LOCAL struct S_TRY_CATCH_STATE	G__TRY_CATCH_STATE__;
 EXTERN_C_END
 /* **************************** [^] EXTERNS [^] ***************************** */
 
@@ -453,6 +506,8 @@ EXTERN_C_END
 	{\
 		G__TRY_CATCH_BUFFER__ = \
 			(jmp_buf *)ALLOC(CMT_TRY_CATCH_MEMORY_PAGE_SIZE * sizeof(jmp_buf));\
+		G__TRY_CATCH_STATE__.VALUE = (PTR)0;\
+		G__TRY_CATCH_STATE__.THROWN = (BOOLEAN)0;\
 	}\
 	while (0);
 
@@ -476,11 +531,11 @@ EXTERN_C_END
 /*   \/   #==========================================================#   \/   */
 
 #define LOCALLINKER__TRY_CATCH \
-	LOCAL jmp_buf	*G__TRY_CATCH_BUFFER__ = (jmp_buf *)0;\
-	LOCAL LET		G__TRY_CATCH_INDEX__ = 0;\
-	LOCAL LET		G__TRY_CATCH_INDEX_LIMIT__ = \
+	LOCAL jmp_buf					*G__TRY_CATCH_BUFFER__ = (jmp_buf *)0;\
+	LOCAL LET						G__TRY_CATCH_INDEX__ = 0;\
+	LOCAL LET						G__TRY_CATCH_INDEX_LIMIT__ = \
 		CMT_TRY_CATCH_MEMORY_PAGE_SIZE;\
-	LOCAL PTR		G__TRY_CATCH_VALUE__ = (PTR)0;\
+	LOCAL struct S_TRY_CATCH_STATE	G__TRY_CATCH_STATE__;
 
 /*   /\   #==========================================================#   /\   */
 /*  //\\  |                 LINKABLE MEMBER CREATION                 |  //\\  */

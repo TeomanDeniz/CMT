@@ -238,3 +238,40 @@ catch (var error)
 	printf("err_2: %d\n", error);
 }
 ```
+
+----
+
+#### Between `try` and `catch`
+
+```cpp
+void test()
+{
+	throw (0);
+}
+
+int	main(void)
+{
+	try
+	{
+		try
+		{
+			test();
+		}
+		catch (ptr error_message)
+		{
+			printf("[%s]\n", error_message);
+		}
+
+		throw ("2");
+	}
+
+	printf("Test\n"); // Yeah, you can also do that, it always prints "Test"
+
+	catch (ptr error_message)
+	{
+		printf("[%s]\n", error_message);
+	}
+
+	return (0);
+}
+```
