@@ -46,6 +46,8 @@
 | `#define object__inject(target, source)`         |
 | `#define OBJECT__EJECT(MEMBER_NAME)`             |
 | `#define object__eject(member_name)`             |
+| `#define OBJECT__INITIALIZE(VARIABLE, TYPE)`     |
+| `#define object__initialize(variable, type)`     |
 
 ### OBJECT
 
@@ -389,6 +391,109 @@ For objects created with `new`, ejecting only gives back the executable memory
 of the injected methods. The object allocation itself is released with
 `DESTROY`, either by the caller or as the last statement of the member that
 does the ejecting.
+
+----
+
+### OBJECT__INITIALIZE
+
+```c
+#define OBJECT__INITIALIZE(VARIABLE, TYPE)
+#define object__initialize(variable, type)
+```
+
+Used to initialize or modify a variable that is normally declared as
+`const`, while keeping the variable read-only to normal user code.
+
+`VARIABLE` is the variable or object member to initialize, and `TYPE` is its
+declared type:
+
+```cpp
+object test_object_type
+{
+	void        (*add)(int);
+	const int   value;
+	void        (*free)(void);
+};
+
+void test_object_type(int start_var)
+{
+	object__connect (test_object_type);
+
+	object__initialize (this->value, int) = start_var;
+}
+```
+
+Once initialized, `value` can be read normally:
+
+```cpp
+printf("%d\n", test.value);
+```
+
+But attempting to modify it directly is rejected by the compiler:
+
+```cpp
+test.value = 33; /* Error: value is const */
+```
+
+When modification is required internally, `object__initialize` can be used
+again to access the underlying storage:
+
+```cpp
+object__initialize (test.value, int) = 33;
+```
+
+The macro works by taking the address of `VARIABLE`, casting that address to
+a pointer to `TYPE`, and dereferencing it:
+
+```c
+*(TYPE *)(&VARIABLE)
+```
+
+This allows the object implementation to write to storage declared as
+`const` without removing the `const` qualifier from the public object
+interface.
+
+The intended use is for object members that should be **readable by the
+user but only writable by the object implementation**, such as internal
+state, configuration values, or constructor-initialized properties.
+
+For example:
+
+```cpp
+object test_object_type
+{
+	const int value;
+};
+
+void test_object_type(int start_var)
+{
+	object__connect (test_object_type);
+
+	object__initialize (this->value, int) = start_var;
+}
+```
+
+The user can then read the value:
+
+```cpp
+printf("%d\n", test.value);
+```
+
+while direct modification is prevented:
+
+```cpp
+test.value = 33; /* Error */
+```
+
+The implementation can still explicitly initialize or update the value:
+
+```cpp
+object__initialize (test.value, int) = 33;
+```
+
+> `OBJECT__INITIALIZE` and `object__initialize` are equivalent forms. The
+> uppercase form follows the macro naming convention, while the lowercase
+> form is intended for normal object-oriented usage.
 
 ## Full Example
 

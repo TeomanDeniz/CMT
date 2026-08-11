@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2025/06/22 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/08/06 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/08/11 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -337,6 +337,8 @@
  * #define object__inject(target, source)
  * #define OBJECT__EJECT(MEMBER_NAME)
  * #define object__eject(member_name)
+ * #define object__initialize(variable, type)
+ * #define OBJECT__INITIALIZE(VARIABLE, TYPE)
  */
 #undef INCL_CMT_OBJECT
 #endif /* INCL_CMT_OBJECT */

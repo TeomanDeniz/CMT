@@ -10,7 +10,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2026/06/12 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/08/07 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/08/11 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 #******************************************************************************#
 
@@ -71,13 +71,16 @@ variables:
   wchar: 'wchar_t|wint_t|wctrans_t|wctype_t'
   uchar: 'mbstate_t|char8_t|char16_t|char32_t'
   declspec: '__declspec\(\s*\w+(?:\([^)]+\))?\s*\)'
-  storage_classes: 'static|extern|register|thread_local|_Thread_local|constexpr|{{declspec}}|(?i:LOCAL)|(?i:TRY)|(?i:CATCH)|(?i:THROW)|(?i:IS_IN_TRY)'
+  storage_classes: 'static|extern|register|thread_local|_Thread_local|constexpr|{{declspec}}'
   type_qualifier: 'const|volatile|_Atomic'
-  compiler_directive: '(?i:INLINE)|restrict|__restrict__|__restrict|_Noreturn|noreturn|(?i:FASTCALL)|(?i:STDCALL)|(?i:REGPASS)|(?i:REGPARM)|(?i:IGNORE_VAR)|(?i:CDECL)|(?i:FAR)|(?i:STDCALL)|(?i:NOINLINE)|(?i:PASCAL)|(?i:EXTERN_C_START)|(?i:EXTERN_C_END)|(?i:PACK)|(?i:PRAGMA_PACK_PUSH)|(?i:PRAGMA_PACK_POP)|(?i:ALIGN_UP)|(?i:ALIGN_VARIABLE)|(?i:ALIGN_STRUCT_PUSH)|(?i:ALIGN_STRUCT_POP)|UNUSED'
-  modifiers: '{{storage_classes}}|{{type_qualifier}}|{{compiler_directive}}'
+  compiler_directive: '(?i:INLINE)|restrict|__restrict__|__restrict|_Noreturn|noreturn'
   non_func_keywords: 'if|for|switch|while|decltype|typeof|typeof_unqual|_Atomic|_BitInt|sizeof|alignof|_Alignof|alignas|_Alignas|static_assert|_Static_assert|__declspec|__attribute__'
-  cmt_types: '(?i:VAR)|(?i:LET)|(?i:PTR)|(?i:FAR_PTR)|(?i:BOOLEAN)|(?i:BYTE)|(?i:BIT8)|(?i:BIT16)|(?i:BIT32)|(?i:BIT64)|(?i:BIT128)|(?i:FLOAT32)|(?i:FLOAT64)|(?i:FLOAT128)'
-  cmt_oop: '(?i:NEW)|(?i:OBJ)|(?i:DESTROY)|(?i:OBJECT__CONNECT)|(?i:OBJECT__INJECT)|(?i:OBJECT__EJECT)'
+  cmt_namespaces: 'KERNEL32|USER32|(?i:CONSOLE)'
+  cmt_attributes: '(?i:FASTCALL)|(?i:STDCALL)|(?i:REGPASS)|(?i:REGPARM)|(?i:IGNORE_VAR)|(?i:CDECL)|(?i:FAR)|(?i:STDCALL)|(?i:NOINLINE)|(?i:PASCAL)|(?i:EXTERN_C_START)|(?i:EXTERN_C_END)|(?i:PACK)|(?i:PRAGMA_PACK_PUSH)|(?i:PRAGMA_PACK_POP)|(?i:ALIGN_UP)|(?i:ALIGN_VARIABLE)|(?i:ALIGN_STRUCT_PUSH)|(?i:ALIGN_STRUCT_POP)|UNUSED'
+  cmt_keywords: '(?i:TRY)|(?i:CATCH)|(?i:THROW)|(?i:IS_IN_TRY)|(?i:LOCAL)'
+  cmt_types: '(?i:VAR)|(?i:LET)|(?i:PTR)|(?i:FAR_PTR)|(?i:BOOLEAN)|(?i:BYTE)|(?i:BIT8)|(?i:BIT16)|(?i:BIT32)|(?i:BIT64)|(?i:BIT128)|(?i:FLOAT32)|(?i:FLOAT64)|(?i:FLOAT128)|{{cmt_namespaces}}'
+  cmt_oop: '(?i:NEW)|(?i:OBJ)|(?i:DESTROY)|(?i:OBJECT__CONNECT)|(?i:OBJECT__INJECT)|(?i:OBJECT__EJECT)|(?i:OBJECT__INITIALIZE)'
+  modifiers: '{{storage_classes}}|{{cmt_keywords}}|{{type_qualifier}}|{{compiler_directive}}|{{cmt_attributes}}'
 contexts:
   main:
     - include: preprocessor-global

@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2025/04/25 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/08/07 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/08/09 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -365,7 +365,7 @@
 /* ***************************** [v] STRUCT [v] ***************************** */
 struct S_TRY_CATCH_STATE
 {
-	PTR		VALUE;
+	VAR		VALUE;
 	BOOLEAN	THROWN;
 };
 /* ***************************** [^] STRUCT [^] ***************************** */
@@ -397,17 +397,17 @@ struct S_TRY_CATCH_STATE
 	while (0)
 
 #define TRY \
-    if (!LOCALFUNCTION__TRY_CATCH_GROW__()) \
-        ; \
-    else \
-    {\
-        G__TRY_CATCH_INDEX__++;\
-        G__TRY_CATCH_STATE__.THROWN = (BOOLEAN)0;\
-        \
-        if (setjmp(G__TRY_CATCH_BUFFER__[G__TRY_CATCH_INDEX__ - 1]) == 0)
+	if (!LOCALFUNCTION__TRY_CATCH_GROW__()) \
+		; \
+	else \
+	{\
+		G__TRY_CATCH_INDEX__++;\
+		G__TRY_CATCH_STATE__.THROWN = (BOOLEAN)0;\
+		\
+		if (setjmp(G__TRY_CATCH_BUFFER__[G__TRY_CATCH_INDEX__ - 1]) == 0)
 
 #define CATCH(ERROR_VARIABLE) \
-    }\
+	}\
 	\
 	if (!G__TRY_CATCH_STATE__.THROWN)\
 	{\
@@ -427,7 +427,7 @@ struct S_TRY_CATCH_STATE
 #define LOCALMACRO__THROW_CONTENT(__THROW_VALUE__) \
 	if (G__TRY_CATCH_INDEX__ != 0)\
 	{\
-		G__TRY_CATCH_STATE__.VALUE = (PTR)(__THROW_VALUE__);\
+		G__TRY_CATCH_STATE__.VALUE = (VAR)(__THROW_VALUE__);\
 		G__TRY_CATCH_STATE__.THROWN = (BOOLEAN)1;\
 		\
 		--G__TRY_CATCH_INDEX__;\
@@ -506,7 +506,7 @@ EXTERN_C_END
 	{\
 		G__TRY_CATCH_BUFFER__ = \
 			(jmp_buf *)ALLOC(CMT_TRY_CATCH_MEMORY_PAGE_SIZE * sizeof(jmp_buf));\
-		G__TRY_CATCH_STATE__.VALUE = (PTR)0;\
+		G__TRY_CATCH_STATE__.VALUE = (VAR)0;\
 		G__TRY_CATCH_STATE__.THROWN = (BOOLEAN)0;\
 	}\
 	while (0);
@@ -604,10 +604,10 @@ UNUSED static int
 
 UNUSED static int
 #ifndef KNR_STYLE /* STANDARD C */
-	THROW(PTR THROW_VALUE)
+	THROW(VAR THROW_VALUE)
 #else /* K&R */
 	THROW(THROW_VALUE)
-	PTR	THROW_VALUE;
+	VAR	THROW_VALUE;
 #endif /* !KNR_STYLE */
 {
 	LOCALMACRO__THROW_CONTENT(THROW_VALUE);
@@ -615,10 +615,10 @@ UNUSED static int
 
 UNUSED static int
 #ifndef KNR_STYLE /* STANDARD C */
-	throw(ptr throw_value)
+	throw(var throw_value)
 #else /* K&R */
 	throw(throw_value)
-	ptr	throw_value;
+	var	throw_value;
 #endif /* !KNR_STYLE */
 {
 	LOCALMACRO__THROW_CONTENT(throw_value);

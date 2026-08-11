@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2025/05/25 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/08/03 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/08/11 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -17,14 +17,19 @@
 |*|                                  OBJECT                                  |*|
 |*|__________________________________________________________________________|*|
 |*|                                                                          |*|
-|*| OBJECT PROVIDES C-STYLE OBJECT-ORIENTED PROGRAMMING:                     |*|
-|*| ^^^^^^          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                      |*|
-|*| :.. OBJECT DEFINITIONS (OBJECT)                                          |*|
-|*| :.. STACK CONSTRUCTORS (OBJ) AND HEAP CONSTRUCTORS (NEW)                 |*|
-|*| :.. BOUND METHODS THROUGH RUNTIME GENERATED TRAMPOLINES                  |*|
-|*| :.. ASSEMBLY-LEVEL INJECTION FOR PERFORMANCE                             |*|
-|*| :.. CROSS-PLATFORM SUPPORT (16/32/64-BIT INTEL) AND MAJOR COMPILERS      |*|
-|*| :.. MEMORY-EFFICIENT AND FLEXIBLE                                        |*|
+|*| O - OBJECT PROVIDES C-STYLE OBJECT-ORIENTED PROGRAMMING:                 |*|
+|*| :   ^^^^^^          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                  |*|
+|*| :.., OBJECT DEFINITIONS (OBJECT)                                         |*|
+|*| :                                                                        |*|
+|*| :.., STACK CONSTRUCTORS (OBJ) AND HEAP CONSTRUCTORS (NEW)                |*|
+|*| :                                                                        |*|
+|*| :.., BOUND METHODS THROUGH RUNTIME GENERATED TRAMPOLINES                 |*|
+|*| :                                                                        |*|
+|*| :.., ASSEMBLY-LEVEL INJECTION FOR PERFORMANCE                            |*|
+|*| :                                                                        |*|
+|*| :.., CROSS-PLATFORM SUPPORT (16/32/64-BIT INTEL) AND MAJOR COMPILERS     |*|
+|*| :                                                                        |*|
+|*| :.., MEMORY-EFFICIENT AND FLEXIBLE                                       |*|
 |*|__________________________________________________________________________|*|
 |*                                                                            *|
 \******************************************************************************/
@@ -35,26 +40,29 @@
 |* __________________________________________________________________________ *|
 |*| CONTENT                                                       | DOC LINE |*|
 |*|===============================================================|==========|*|
-|*| #define OBJECT                                                | 61       |*|
+|*| #define OBJECT                                                | 69       |*|
 |*| #define object                                                |          |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| #define OBJ(OBJECT_NAME, VARIABLE_NAME)                       | 86       |*|
+|*| #define OBJ(OBJECT_NAME, VARIABLE_NAME)                       | 94       |*|
 |*| #define obj(object_name, variable_name)                       |          |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| #define NEW(OBJECT_NAME, VARIABLE_NAME)                       | 156      |*|
+|*| #define NEW(OBJECT_NAME, VARIABLE_NAME)                       | 164      |*|
 |*| #define new(object_name, variable_name)                       |          |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| #define DESTROY(THE_OBJECT)                                   | 220      |*|
+|*| #define DESTROY(THE_OBJECT)                                   | 228      |*|
 |*| #define destroy(the_object)                                   |          |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| #define OBJECT__CONNECT(OBJECT_TYPE_NAME)                     | 313      |*|
+|*| #define OBJECT__CONNECT(OBJECT_TYPE_NAME)                     | 321      |*|
 |*| #define object__connect(object_type_name)                     |          |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| #define OBJECT__INJECT(TARGET, SOURCE)                        | 349      |*|
+|*| #define OBJECT__INJECT(TARGET, SOURCE)                        | 357      |*|
 |*| #define object__inject(target, source)                        |          |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| #define OBJECT__EJECT(MEMBER_NAME)                            | 393      |*|
+|*| #define OBJECT__EJECT(MEMBER_NAME)                            | 401      |*|
 |*| #define object__eject(member_name)                            |          |*|
+|*|---------------------------------------------------------------|----------|*|
+|*| #define OBJECT__INITIALIZE(VARIABLE, TYPE)                    | 461      |*|
+|*| #define object__initialize(variable, type)                    |          |*|
 |*|_______________________________________________________________|__________|*|
 |*                                                                            *|
 |*                                 ..........                                 *|
@@ -449,6 +457,120 @@
 |* : STATEMENT OF THE MEMBER THAT DOES THE EJECTING.                        : *|
 |* :........................................................................: *|
 |*                                                                            *|
+|*                           ......................                           *|
+|* ..........................: OBJECT__INITIALIZE :.......................... *|
+|* :                         ''''''''''''''''''''''                         : *|
+|* :  v [C LANGUAGE]                                                        : *|
+|* : 1|                                                                     : *|
+|* : 2| #define OBJECT__INITIALIZE(VARIABLE, TYPE)                          : *|
+|* : 3| #define object__initialize(variable, type)                          : *|
+|* : 4|                                                                     : *|
+|* :                                                                        : *|
+|* : USED TO INITIALIZE OR MODIFY A VARIABLE THAT IS NORMALLY DECLARED AS   : *|
+|* : const, WHILE KEEPING THE VARIABLE READ-ONLY TO NORMAL USER CODE.       : *|
+|* : ^^^^^                                                                  : *|
+|* : <VARIABLE> IS THE VARIABLE OR OBJECT MEMBER TO INITIALIZE, AND <TYPE>  : *|
+|* : IS ITS DECLARED TYPE:                                                  : *|
+|* :                                                                        : *|
+|* :   v [C LANGUAGE]                                                       : *|
+|* :  1|                                                                    : *|
+|* :  2| object test_object_type                                            : *|
+|* :  3| {                                                                  : *|
+|* :  4|     void        (*add)(int);                                       : *|
+|* :  5|     const int   value;                                             : *|
+|* :  6|     void        (*free)(void);                                     : *|
+|* :  7| };                                                                 : *|
+|* :  8|                                                                    : *|
+|* :  9| void test_object_type(int start_var)                               : *|
+|* : 10| {                                                                  : *|
+|* : 11|     object__connect (test_object_type);                            : *|
+|* : 12|                                                                    : *|
+|* : 13|     object__initialize (this->value, int) = start_var;             : *|
+|* : 14| }                                                                  : *|
+|* : 15|                                                                    : *|
+|* :                                                                        : *|
+|* : ONCE INITIALIZED, value CAN BE READ NORMALLY:                          : *|
+|* :                   ^^^^^                                                : *|
+|* :  v [C LANGUAGE]                                                        : *|
+|* : 1|                                                                     : *|
+|* : 2| printf("%d\n", test.value);                                         : *|
+|* : 3|                                                                     : *|
+|* :                                                                        : *|
+|* : BUT ATTEMPTING TO MODIFY IT DIRECTLY IS REJECTED BY THE COMPILER:      : *|
+|* :                                                                        : *|
+|* :  v [C LANGUAGE]                                                        : *|
+|* : 1|                                                                     : *|
+|* : 2| test.value = 33; // Error: value is const                           : *|
+|* : 3|                                                                     : *|
+|* :                                           __________________           : *|
+|* : WHEN MODIFICATION IS REQUIRED INTERNALLY, object__initialize CAN BE    : *|
+|* : USED AGAIN TO ACCESS THE UNDERLYING STORAGE:                           : *|
+|* :                                                                        : *|
+|* :  v [C LANGUAGE]                                                        : *|
+|* : 1|                                                                     : *|
+|* : 2| object__initialize (test.value, int) = 33;                          : *|
+|* : 3|                                                                     : *|
+|* :                                          ________                      : *|
+|* : THE MACRO WORKS BY TAKING THE ADDRESS OF VARIABLE, CASTING THAT        : *|
+|* : ADDRESS TO A POINTER TO TYPE, AND DEREFERENCING IT:                    : *|
+|* :                         ^^^^                                           : *|
+|* :  v [C LANGUAGE]                                                        : *|
+|* : 1|                                                                     : *|
+|* : 2| *(TYPE *)(&VARIABLE)                                                : *|
+|* : 3|                                                                     : *|
+|* :                                                                        : *|
+|* : THIS ALLOWS THE OBJECT IMPLEMENTATION TO WRITE TO STORAGE DECLARED AS  : *|
+|* : <const> WITHOUT REMOVING THE <const> QUALIFIER FROM THE PUBLIC OBJECT  : *|
+|* : INTERFACE.                                                             : *|
+|* :                                                       _______________  : *|
+|* : THE INTENDED USE IS FOR OBJECT MEMBERS THAT SHOULD BE READABLE BY THE  : *|
+|* : USER BUT ONLY WRITABLE BY THE OBJECT IMPLEMENTATION, SUCH AS INTERNAL  : *|
+|* : STATE, CONFIGURATION VALUES, OR CONSTRUCTOR-INITIALIZED PROPERTIES.    : *|
+|* :                                                                        : *|
+|* : FOR EXAMPLE:                                                           : *|
+|* :                                                                        : *|
+|* :   v [C LANGUAGE]                                                       : *|
+|* :  1|                                                                    : *|
+|* :  2| object test_object_type                                            : *|
+|* :  3| {                                                                  : *|
+|* :  4|     const int value;                                               : *|
+|* :  5| };                                                                 : *|
+|* :  6|                                                                    : *|
+|* :  7| void test_object_type(int start_var)                               : *|
+|* :  8| {                                                                  : *|
+|* :  9|     object__connect (test_object_type);                            : *|
+|* : 10|                                                                    : *|
+|* : 11|     object__initialize (this->value, int) = start_var;             : *|
+|* : 12| }                                                                  : *|
+|* : 13|                                                                    : *|
+|* :                                                                        : *|
+|* : THE USER CAN THEN READ THE VALUE:                                      : *|
+|* :                                                                        : *|
+|* :  v [C LANGUAGE]                                                        : *|
+|* : 1|                                                                     : *|
+|* : 2| printf("%d\n", test.value);                                         : *|
+|* : 3|                                                                     : *|
+|* :                                                                        : *|
+|* : WHILE DIRECT MODIFICATION IS PREVENTED:                                : *|
+|* :                                                                        : *|
+|* :  v [C LANGUAGE]                                                        : *|
+|* : 1|                                                                     : *|
+|* : 2| test.value = 33; // Error                                           : *|
+|* : 3|                                                                     : *|
+|* :                                                                        : *|
+|* : THE IMPLEMENTATION CAN STILL EXPLICITLY INITIALIZE OR UPDATE THE       : *|
+|* : VALUE:                                                                 : *|
+|* :                                                                        : *|
+|* :  v [C LANGUAGE]                                                        : *|
+|* : 1|                                                                     : *|
+|* : 2| object__initialize (test.value, int) = 33;                          : *|
+|* : 3|                                                                     : *|
+|* : __________________     __________________                              : *|
+|* : OBJECT__INITIALIZE AND object__initialize ARE EQUIVALENT FORMS.        : *|
+|* : THE UPPERCASE FORM FOLLOWS THE MACRO NAMING CONVENTION, WHILE THE      : *|
+|* : LOWERCASE FORM IS INTENDED FOR NORMAL OBJECT-ORIENTED USAGE.           : *|
+|* :........................................................................: *|
+|*                                                                            *|
 |*    ______________                                                          *|
 |*  _| FULL EXAMPLE |_______________________________________________________  *|
 |* | '""""""""""""""'                                                       | *|
@@ -810,6 +932,9 @@ CMT_NO_SSP_PUSH
 	if (IS_HEAP(THE_OBJECT))\
 		FREE(THE_OBJECT)
 #endif /* LOCALMACRO__GCC_C23 */
+
+#define object__initialize(variable, type) *(type *)(&variable)
+#define OBJECT__INITIALIZE(VARIABLE, TYPE) *(TYPE *)(&VARIABLE)
 
 #define obj(object_name, variable_name) OBJ(object_name, variable_name)
 #define new(object_name, variable_name) NEW(object_name, variable_name)
