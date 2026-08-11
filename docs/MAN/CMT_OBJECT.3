@@ -91,6 +91,12 @@ T}
 T{
 \f[CR]#define object__eject(member_name)\f[R]
 T}
+T{
+\f[CR]#define OBJECT__INITIALIZE(VARIABLE, TYPE)\f[R]
+T}
+T{
+\f[CR]#define object__initialize(variable, type)\f[R]
+T}
 .TE
 .SS OBJECT
 .IP
@@ -460,6 +466,113 @@ executable memory of the injected methods.
 The object allocation itself is released with \f[CR]DESTROY\f[R], either
 by the caller or as the last statement of the member that does the
 ejecting.
+.PP
+   *   *   *   *   *
+.SS OBJECT__INITIALIZE
+.IP
+.EX
+#define OBJECT__INITIALIZE(VARIABLE, TYPE)
+#define object__initialize(variable, type)
+.EE
+.PP
+Used to initialize or modify a variable that is normally declared as
+\f[CR]const\f[R], while keeping the variable read\-only to normal user
+code.
+.PP
+\f[CR]VARIABLE\f[R] is the variable or object member to initialize, and
+\f[CR]TYPE\f[R] is its declared type:
+.IP
+.EX
+object test_object_type
+{
+    void        (*add)(int);
+    const int   value;
+    void        (*free)(void);
+};
+
+void test_object_type(int start_var)
+{
+    object__connect (test_object_type);
+
+    object__initialize (\f[B]this\f[R]\->value, int) = start_var;
+}
+.EE
+.PP
+Once initialized, \f[CR]value\f[R] can be read normally:
+.IP
+.EX
+printf(\(dq%d\(rsn\(dq, test.value);
+.EE
+.PP
+But attempting to modify it directly is rejected by the compiler:
+.IP
+.EX
+test.value = 33; \f[I]/* Error: value is const */\f[R]
+.EE
+.PP
+When modification is required internally, \f[CR]object__initialize\f[R]
+can be used again to access the underlying storage:
+.IP
+.EX
+object__initialize (test.value, int) = 33;
+.EE
+.PP
+The macro works by taking the address of \f[CR]VARIABLE\f[R], casting
+that address to a pointer to \f[CR]TYPE\f[R], and dereferencing it:
+.IP
+.EX
+*(TYPE *)(&VARIABLE)
+.EE
+.PP
+This allows the object implementation to write to storage declared as
+\f[CR]const\f[R] without removing the \f[CR]const\f[R] qualifier from
+the public object interface.
+.PP
+The intended use is for object members that should be \f[B]readable by
+the user but only writable by the object implementation\f[R], such as
+internal state, configuration values, or constructor\-initialized
+properties.
+.PP
+For example:
+.IP
+.EX
+object test_object_type
+{
+    const int value;
+};
+
+void test_object_type(int start_var)
+{
+    object__connect (test_object_type);
+
+    object__initialize (\f[B]this\f[R]\->value, int) = start_var;
+}
+.EE
+.PP
+The user can then read the value:
+.IP
+.EX
+printf(\(dq%d\(rsn\(dq, test.value);
+.EE
+.PP
+while direct modification is prevented:
+.IP
+.EX
+test.value = 33; \f[I]/* Error */\f[R]
+.EE
+.PP
+The implementation can still explicitly initialize or update the value:
+.IP
+.EX
+object__initialize (test.value, int) = 33;
+.EE
+.RS
+.PP
+\f[CR]OBJECT__INITIALIZE\f[R] and \f[CR]object__initialize\f[R] are
+equivalent forms.
+The uppercase form follows the macro naming convention, while the
+lowercase form is intended for normal object\-oriented usage.
+.RE
 .SS Full Example
 .IP
 .EX
