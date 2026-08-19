@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2025/09/15 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/08/05 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/08/19 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -25,8 +25,9 @@
 |*|                                                                          |*|
 |*| /!\ NOTE                                                                 |*|
 |*|  :                                                                       |*|
-|*|  :.. ON INTEL 32-BIT, EAX REGISTER IS USED.                              |*|
-|*|  :.. ON INTEL 16-BIT, AX REGISTER IS USED.                               |*|
+|*|  :.., ON INTEL 32-BIT, EAX REGISTER IS USED.                             |*|
+|*|  :                                                                       |*|
+|*|  :.., ON INTEL 16-BIT, AX REGISTER IS USED.                              |*|
 |*|__________________________________________________________________________|*|
 |*                                                                            *|
 \******************************************************************************/
@@ -37,10 +38,10 @@
 |* __________________________________________________________________________ *|
 |*| CONTENT                                                       | DOC LINE |*|
 |*|===============================================================|==========|*|
-|*| #define GET_RAX(VARIABLE)                                     | 48       |*|
+|*| #define GET_RAX(VARIABLE)                                     | 49       |*|
 |*| #define get_rax(variable)                                     |          |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| #define SET_RAX(VALUE)                                        | 73       |*|
+|*| #define SET_RAX(VALUE)                                        | 74       |*|
 |*| #define set_rax(value)                                        |          |*|
 |*|_______________________________________________________________|__________|*|
 |*                                                                            *|
@@ -317,9 +318,10 @@ EXTERN_C_END
 /*   \/   #==========================================================#   \/   */
 
 #ifdef CMT_CANT_USE_INLINE_ASM_FOR_SECTIONS
+#undef GLOBALCONSTRUCTOR__RAX
 #define GLOBALCONSTRUCTOR__RAX \
-	((int (*)())LOCALMACRO__RAX_GET)(); \
-	((int (*)())LOCALMACRO__RAX_SET)();
+	((void *(*)())(void *)LOCALMACRO__RAX_GET)(); \
+	((void *(*)())(void *)LOCALMACRO__RAX_SET)();
 #endif /* CMT_CANT_USE_INLINE_ASM_FOR_SECTIONS */
 
 /*   /\   #==========================================================#   /\   */
@@ -350,6 +352,8 @@ EXTERN_C_END
  * #define SECTION_KNR(RETURN_TYPE, NAME, ARGUMENTS)
  * #define END
  * #define MOV_ARG1_RAX
+ * #define MOV_EAX_FROM_PTR_ESP_(IMM32)
+ * #define MOV_AX_FROM_PTR_SP_(IMM16)
  * #define RET
  */
 /* **************************** [^] INCLUDES [^] **************************** */
@@ -375,6 +379,7 @@ EXTERN_C_END
 		RET\
 	END
 
+#ifdef __SYSTEM_64_BIT__
 #define LOCALLINKER__RAX_SET \
 	SECTION(\
 		void, LOCALMACRO__RAX_SET, (PTR ARG1)\
@@ -386,6 +391,35 @@ EXTERN_C_END
 		MOV_ARG1_RAX\
 		RET\
 	END
+#else /* !__SYSTEM_64_BIT__ */
+#ifdef __SYSTEM_32_BIT__
+#define LOCALLINKER__RAX_SET \
+	SECTION(\
+		void, LOCALMACRO__RAX_SET, (PTR ARG1)\
+	)\
+	SECTION_KNR(\
+		void, LOCALMACRO__RAX_SET, (ARG1)\
+		PTR	ARG1;\
+	)\
+		MOV_EAX_FROM_PTR_ESP_(4)\
+		RET\
+	END
+#else /* !__SYSTEM_32_BIT__ */
+#ifdef __SYSTEM_16_BIT__
+#define LOCALLINKER__RAX_SET \
+	SECTION(\
+		void, LOCALMACRO__RAX_SET, (PTR ARG1)\
+	)\
+	SECTION_KNR(\
+		void, LOCALMACRO__RAX_SET, (ARG1)\
+		PTR	ARG1;\
+	)\
+		MOV_AX_FROM_PTR_SP_(2)\
+		RET\
+	END
+#endif /* __SYSTEM_16_BIT__ */
+#endif /* __SYSTEM_32_BIT__ */
+#endif /* __SYSTEM_64_BIT__ */
 
 #define LOCALLINKER__RAX \
 	LOCALLINKER__RAX_HIGHC LOCALLINKER__RAX_GET LOCALLINKER__RAX_SET
@@ -429,7 +463,7 @@ EXTERN_C_END
 #define GET_RAX(VARIABLE) \
 	do\
 	{\
-		(VARIABLE) = LOCALMACRO__RAX_GET();\
+		((PTR)VARIABLE) = (PTR)LOCALMACRO__RAX_GET();\
 	}\
 	while (0)
 #define SET_RAX(VALUE) \

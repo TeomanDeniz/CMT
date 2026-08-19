@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2024/02/27 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/08/06 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/08/19 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -35,11 +35,11 @@
 |*| WHAT THIS SYSTEM DOES:                                                   |*|
 |*| :.., ENSURES YOUR INLINE ASM CAN COMPILE ACROSS:                         |*|
 |*| :  :                                                                     |*|
-|*| :  :.. GCC / CLANG (AT&T SYNTAX)                                         |*|
+|*| :  :.., GCC / CLANG (AT&T SYNTAX)                                        |*|
 |*| :  :                                                                     |*|
-|*| :  :.. ICC (AT&T OR INTEL DEPENDING ON BUILD)                            |*|
+|*| :  :.., ICC (AT&T OR INTEL DEPENDING ON BUILD)                           |*|
 |*| :  :                                                                     |*|
-|*| :  :.. MSVC (__ASM{} INTEL SYNTAX)                                       |*|
+|*| :  :.., MSVC (__ASM{} INTEL SYNTAX)                                      |*|
 |*| :                                                                        |*|
 |*| :.., PROVIDES STABLE NAMES FOR REGISTERS THAT CHANGE SIZE ACROSS         |*|
 |*| :    ARCHITECTURES                                                       |*|
@@ -629,8 +629,8 @@ Still planning PTR
 /* **************************** [v] INCLUDES [v] **************************** */
 #include "KEYWORDS/TYPES.H"
 /******* """"""""""""""""""
- * typedef PTR;
- * typedef BYTE;
+ * typedef	PTR;
+ * typedef	BYTE;
  */
 /* **************************** [^] INCLUDES [^] **************************** */
 
@@ -679,6 +679,9 @@ Still planning PTR
 
 #else /* CMT_CANT_USE_INLINE_ASM_FOR_SECTIONS */
 
+#ifndef OP_FORCED__ASM_H
+#define OP_FORCED__ASM_H
+
 #ifndef INCL_CMT_ASM_OP
 #define INCL_CMT_ASM_OP
 #endif /* !INCL_CMT_ASM_OP */
@@ -692,7 +695,9 @@ Still planning PTR
 /******* """"""""""""""""""
  * typedef	PTR;
  * typedef	LET;
+ * typedef	BYTE;
  */
+
 #include "ENVIRONMENTS/PLATFORM.H"
 /******* """""""""""""""""""""""""
  * #define __PLATFORM_WINDOWS__
@@ -712,12 +717,15 @@ Still planning PTR
  */
 /* **************************** [^] INCLUDES [^] **************************** */
 
-#define LOCALMACRO__EXTRA_PAGE_JOB PAGE_SIZE
+#ifndef LOCALMACRO__EXTRA_PAGE_JOB_FOR_ASM
+#define LOCALMACRO__EXTRA_PAGE_JOB_FOR_ASM PAGE_SIZE
+#endif /* !LOCALMACRO__EXTRA_PAGE_JOB_FOR_ASM */
 
 #ifdef __unix__
+#undef LOCALMACRO__EXTRA_PAGE_JOB_FOR_ASM
 #define LOCALMACRO__ASM_MODERN_OS
-#undef LOCALMACRO__EXTRA_PAGE_JOB
-#define LOCALMACRO__EXTRA_PAGE_JOB (LET)(((LET)__OP__) & ~(PAGE_SIZE - 1))
+#define LOCALMACRO__EXTRA_PAGE_JOB_FOR_ASM \
+	(LET)(((LET)__OP__) & ~(PAGE_SIZE - 1))
 #else /* !__unix__ */
 #ifdef __PLATFORM_WINDOWS__
 #define LOCALMACRO__ASM_MODERN_OS
@@ -726,22 +734,65 @@ Still planning PTR
 
 #ifdef LOCALMACRO__ASM_MODERN_OS
 #undef LOCALMACRO__ASM_MODERN_OS
+
+/* **************************** [v] INCLUDES [v] **************************** */
+#include "KEYWORDS/BOOLEAN.H"
+/******* """"""""""""""""""""
+ * #define TRUE
+ * #define FALSE
+ * #define BOOLEAN
+ */
+#include "ATTRIBUTES/LOCAL.H"
+/******* """"""""""""""""""""
+ * #define LOCAL
+ */
+/* **************************** [^] INCLUDES [^] **************************** */
+
+/* **************************** [v] EXTERNS [v] ***************************** */
+EXTERN_C_START
+extern LOCAL BOOLEAN	G_ASM_MEMORY_MODE_ERROR;
+EXTERN_C_END
+/* **************************** [^] EXTERNS [^] ***************************** */
+
+#undef GLOBALLINKER__ASM
+#define GLOBALLINKER__ASM LOCAL BOOLEAN	G_ASM_MEMORY_MODE_ERROR = FALSE;
+#define LOCALMACRO__ASM_FILLING_CONDITION if (G_ASM_MEMORY_MODE_ERROR == FALSE)
 #define LOCALMACRO__SECTION_START(NAME) \
 	{\
-		register LET	INDEX = 0;\
-		BYTE			*__OP__ = (BYTE *)(NAME);\
-		LET				PAGE = LOCALMACRO__EXTRA_PAGE_JOB;\
+		if (PAGE_SIZE == 0)\
+			PAGE_SIZE = 4096;\
+		\
+		LET		INDEX = 0;\
+		BYTE	*__OP__ = (BYTE *)(NAME);\
+		LET		PAGE = LOCALMACRO__EXTRA_PAGE_JOB_FOR_ASM;\
+		\
+	TRY_AGAIN:\
+		\
+		if (INDEX != 0)\
+			PAGE = INDEX;\
 		\
 		if (\
 			!MEMORY_MODE(__OP__, PAGE, PTR_MODE_RWX) &&\
 			!MEMORY_MODE(__OP__, PAGE, PTR_MODE_RW)\
 		)\
-			return (1);
-#define END \
-		if (!MEMORY_MODE(__OP__, PAGE, PTR_MODE_RX))\
-			return (1);\
+		{\
+			if (INDEX == PAGE)\
+				return ((PTR)1);\
+			else\
+				G_ASM_MEMORY_MODE_ERROR = TRUE;\
+		}\
 		\
+		INDEX = 0;
+#define END \
+		if (G_ASM_MEMORY_MODE_ERROR == TRUE)\
+			goto TRY_AGAIN;\
+		\
+		if (!MEMORY_MODE(__OP__, PAGE, PTR_MODE_RX))\
+			return ((PTR)1);\
+		\
+		G_ASM_MEMORY_MODE_ERROR = FALSE;\
 		CLEAR_INSTRUCTION_CACHE(__OP__, PAGE);\
+		return ((PTR)0);\
 	}\
 	EXTERN_C_END
 #else /* !LOCALMACRO__ASM_MODERN_OS */
@@ -780,6 +831,11 @@ Still planning PTR
 #endif /* !KNR_STYLE */
 
 #ifdef __CPU_INTEL__
+#ifndef INCL_CMT_ASM_MOV_PTR
+#define INCL_CMT_ASM_MOV_PTR
+#include "ASM/OP.INL" /* JUST IN CASE... */
+#endif /* INCL_CMT_ASM_MOV_PTR */
+
 #include "ASM/INLINE_ASM/OP_PURE/INTEL.INL"
 #endif /* __CPU_INTEL__ */
 
@@ -790,7 +846,7 @@ Still planning PTR
 #ifdef __CPU_POWERPC__
 #include "ASM/INLINE_ASM/OP_PURE/POWERPC.INL"
 #endif /* __CPU_POWERPC__ */
-
+#endif /* !OP_FORCED__ASM_H */
 #endif /* !CMT_CANT_USE_INLINE_ASM_FOR_SECTIONS */
 #endif /* INCL_CMT_ASM_INLINE */
 
@@ -817,22 +873,6 @@ Still planning PTR
 #endif /* ABI_H */
 
 #include "ASM/ABI.INL"
-
-/* ***************************** [v] RESET [v] ****************************** */
-#undef INCL_CMT_ASM_ADD
-#undef INCL_CMT_ASM_JMP
-#undef INCL_CMT_ASM_MOV
-#undef INCL_CMT_ASM_MOVABS
-#undef INCL_CMT_ASM_OTHERS
-#undef INCL_CMT_ASM_PUSH
-#undef INCL_CMT_ASM_POP
-#undef INCL_CMT_ASM_MOV_PTR
-#undef INCL_CMT_ASM_MOV_PTR_SEGMENT
-#undef INCL_CMT_ASM_MOV_ABI
-#undef INCL_CMT_ASM_OP
-#undef INCL_CMT_ASM_SIZEOF
-#undef INCL_CMT_ASM_INLINE
-/* ***************************** [^] RESET [^] ****************************** */
 
 /* ************************ [v] TI CGT CCS (POP) [v] ************************ */
 #ifdef __TI_COMPILER_VERSION__

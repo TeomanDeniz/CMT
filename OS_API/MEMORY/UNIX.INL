@@ -60,6 +60,9 @@ EXTERN_C_END
 #ifdef __MVS__ /* IBM Z/OS XL C/C++ */
 #define G_MUTEX_ALLOC G_MUALLO
 #define G_MEM_PAGES G_MEMPAG
+#define G_MEM_EMPTY_BYTES G_MEEMBY
+#define G_QUICKLIST G_QCKLIT
+#define G_QUICKLIST_COUNT G_QCKLCT
 #endif /* __MVS__ */
 /* *************************** [^] MVS LINKER [^] *************************** */
 
@@ -67,13 +70,20 @@ EXTERN_C_END
 EXTERN_C_START
 extern T_MUTEX				G_MUTEX_ALLOC;
 extern struct S_MEM_PAGE	*G_MEM_PAGES;
+extern LET					G_MEM_EMPTY_BYTES;
+extern struct S_MEM_BLOCK	*G_QUICKLIST[CMT_MEMORY_QUICKLIST_CLASSES];
+extern LET					G_QUICKLIST_COUNT[CMT_MEMORY_QUICKLIST_CLASSES];
 EXTERN_C_END
 /* **************************** [^] EXTERNS [^] ***************************** */
 
 #define LOCALCONSTRUCTOR__MEMORY_ALLOC MUTEX_CREATE(&G_MUTEX_ALLOC);
+#define LOCALDESTRUCTOR__MEMORY_ALLOC MUTEX_DESTROY(&G_MUTEX_ALLOC);
 #define LOCALMACRO__MEMORY_ALLOC \
 	T_MUTEX				G_MUTEX_ALLOC;\
-	struct S_MEM_PAGE	*G_MEM_PAGES = (struct S_MEM_PAGE *)0;
+	struct S_MEM_PAGE	*G_MEM_PAGES = (struct S_MEM_PAGE *)0;\
+	LET					G_MEM_EMPTY_BYTES = (LET)0;\
+	struct S_MEM_BLOCK	*G_QUICKLIST[CMT_MEMORY_QUICKLIST_CLASSES] = {0};\
+	LET					G_QUICKLIST_COUNT[CMT_MEMORY_QUICKLIST_CLASSES] = {0};
 #include "UNIX/ALLOC.INL"
 #endif /* !LOCALFUNCTION__ALLOC */
 
@@ -82,6 +92,7 @@ EXTERN_C_END
 /* **** MVS LINKER DOES NOT SUPPORT EXTERNAL NAMES LARGER THAN 8 BYTES!! **** */
 #ifdef __MVS__ /* IBM Z/OS XL C/C++ */
 #define G_MUTEX_ALLOC_EXE G_MALEXE
+#define G_MEM_EMPTY_SLAB_BYTES G_MEEMSB
 #endif /* __MVS__ */
 /* *************************** [^] MVS LINKER [^] *************************** */
 
@@ -89,13 +100,16 @@ EXTERN_C_END
 EXTERN_C_START
 extern T_MUTEX			G_MUTEX_ALLOC_EXE;
 extern struct S_SLAB	*G_SLABS;
+extern LET				G_MEM_EMPTY_SLAB_BYTES;
 EXTERN_C_END
 /* **************************** [^] EXTERNS [^] ***************************** */
 
 #define LOCALCONSTRUCTOR__MEMORY_ALLOC_EXE MUTEX_CREATE(&G_MUTEX_ALLOC_EXE);
+#define LOCALDESTRUCTOR__MEMORY_ALLOC_EXE MUTEX_DESTROY(&G_MUTEX_ALLOC_EXE);
 #define LOCALMACRO__MEMORY_ALLOC_EXE \
 	T_MUTEX			G_MUTEX_ALLOC_EXE;\
-	struct S_SLAB	*G_SLABS = (struct S_SLAB *)0;
+	struct S_SLAB	*G_SLABS = (struct S_SLAB *)0;\
+	LET				G_MEM_EMPTY_SLAB_BYTES = (LET)0;
 #include "UNIX/ALLOC_EXE.INL"
 #endif /* !LOCALFUNCTION__ALLOC_EXE */
 

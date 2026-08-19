@@ -1,7 +1,15 @@
 #ifdef INCL_CMT_ASM_OP
 #ifndef SEAL_ASM_OP
 #define SEAL_ASM_OP
-#define __ASM__OP__(OP_CODE) __OP__[INDEX] = ((unsigned char)OP_CODE); ++INDEX;
+
+#ifndef LOCALMACRO__ASM_FILLING_CONDITION
+#define LOCALMACRO__ASM_FILLING_CONDITION
+#endif /* !LOCALMACRO__ASM_FILLING_CONDITION */
+
+#define __ASM__OP__(OP_CODE) \
+	LOCALMACRO__ASM_FILLING_CONDITION\
+	__OP__[INDEX] = ((unsigned char)OP_CODE);\
+	++INDEX;
 #define __ASM__IMM8__(VALUE) __ASM__OP__((VALUE) & 0XFF)
 #define __ASM__IMM16__(VALUE) \
 	__ASM__OP__((VALUE) & 0XFF)\

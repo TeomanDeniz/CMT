@@ -91,22 +91,35 @@
 			\
 			if (\
 				SLAB->SEGMENTS == SEGMENT && SEGMENT->FREE &&\
-				SEGMENT->SIZE == SLAB->SIZE - ALIGN_UP(sizeof(struct S_SEGMENT))\
+				SEGMENT->SIZE == (\
+					SLAB->SIZE - ALIGN_UP(sizeof(struct S_SEGMENT))\
+				)\
 			)\
 			{\
-				if (SLAB->NEXT)\
-					SLAB->NEXT->PREV = SLAB->PREV;\
-				\
-				if (SLAB->PREV)\
-					SLAB->PREV->NEXT = SLAB->NEXT;\
+				if (\
+					G_MEM_EMPTY_SLAB_BYTES + SLAB->SIZE > \
+					CMT_MEMORY_MAX_EMPTY_SLAB_BYTES\
+				)\
+				{\
+					if (SLAB->NEXT)\
+						SLAB->NEXT->PREV = SLAB->PREV;\
+					\
+					if (SLAB->PREV)\
+						SLAB->PREV->NEXT = SLAB->NEXT;\
+					else\
+						G_SLABS = SLAB->NEXT;\
+					\
+					if (SLAB->RX != SLAB->RW)\
+						munmap(SLAB->RX, SLAB->SIZE);\
+					\
+					munmap(SLAB->RW, SLAB->SIZE);\
+					FREE((PTR)SLAB);\
+				}\
 				else\
-					G_SLABS = SLAB->NEXT;\
-				\
-				if (SLAB->RX != SLAB->RW)\
-					munmap(SLAB->RX, SLAB->SIZE);\
-				\
-				munmap(SLAB->RW, SLAB->SIZE);\
-				FREE(SLAB);\
+				{\
+					SLAB->RETAINED_EMPTY = 1;\
+					G_MEM_EMPTY_SLAB_BYTES += SLAB->SIZE;\
+				}\
 			}\
 			\
 			MUTEX_UNLOCK(G_MUTEX_ALLOC_EXE);\

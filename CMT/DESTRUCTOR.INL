@@ -45,12 +45,22 @@
 #ifndef GLOBALDESTRUCTOR__TRY_CATCH
 #define GLOBALDESTRUCTOR__TRY_CATCH
 #endif /* !GLOBALDESTRUCTOR__TRY_CATCH */
+
+#ifndef GLOBALDESTRUCTOR__CONSOLE
+#define GLOBALDESTRUCTOR__CONSOLE
+#endif /* !GLOBALDESTRUCTOR__CONSOLE */
+
+#ifndef GLOBALDESTRUCTOR__MEMORY
+#define GLOBALDESTRUCTOR__MEMORY
+#endif /* !GLOBALDESTRUCTOR__MEMORY */
 /* ***************** [^] FILL UNDEFINED GLOBAL LINKERS [^] ****************** */
 
 /* ******************* [v] CONNECT DESTRUCTOR EVENTS [v] ******************** */
 #undef CMT_AUTO_DESTRUCTOR
 #define CMT_AUTO_DESTRUCTOR \
-	GLOBALDESTRUCTOR__TRY_CATCH
+	GLOBALDESTRUCTOR__TRY_CATCH \
+	GLOBALDESTRUCTOR__CONSOLE \
+	GLOBALDESTRUCTOR__MEMORY
 /* ******************* [^] CONNECT DESTRUCTOR EVENTS [^] ******************** */
 
 #ifndef KNR_STYLE /* STANDARD C */
@@ -209,8 +219,11 @@ extern int	__CMT_DESTRUCTOR__();
 		\
 		/* TODO: HANDLE ENV */\
 		extern int	__MAIN__();\
+		int			(*__MAIN_CALLER__)(int, char **);\
 		\
-		int	RESULT = ((int (*)(int, char **))(void *)__MAIN__)(ARGC, ARGV);\
+		__MAIN_CALLER__ = (int (*)(int, char **))(void *)__MAIN__;\
+		\
+		int	RESULT = __MAIN_CALLER__(ARGC, (char **)ARGV);\
 		\
 		CMT_AUTO_DESTRUCTOR\
 		return (RESULT);\

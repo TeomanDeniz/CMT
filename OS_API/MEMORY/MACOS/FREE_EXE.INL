@@ -107,16 +107,27 @@
 				 */\
 				LOCALMACRO__EXE_SEAL(SLAB)\
 				\
-				if (SLAB->NEXT)\
-					SLAB->NEXT->PREV = SLAB->PREV;\
-				\
-				if (SLAB->PREV)\
-					SLAB->PREV->NEXT = SLAB->NEXT;\
+				if (\
+					G_MEM_EMPTY_SLAB_BYTES + SLAB->SIZE > \
+					CMT_MEMORY_MAX_EMPTY_SLAB_BYTES\
+				)\
+				{\
+					if (SLAB->NEXT)\
+						SLAB->NEXT->PREV = SLAB->PREV;\
+					\
+					if (SLAB->PREV)\
+						SLAB->PREV->NEXT = SLAB->NEXT;\
+					else\
+						G_SLABS = SLAB->NEXT;\
+					\
+					munmap((PTR)SLAB->RW, (size_t)SLAB->SIZE);\
+					FREE((PTR)SLAB);\
+				}\
 				else\
-					G_SLABS = SLAB->NEXT;\
-				\
-				munmap((PTR)SLAB->RW, (size_t)SLAB->SIZE);\
-				FREE((PTR)SLAB);\
+				{\
+					SLAB->RETAINED_EMPTY = 1;\
+					G_MEM_EMPTY_SLAB_BYTES += SLAB->SIZE;\
+				}\
 			}\
 			else\
 				LOCALMACRO__EXE_SEAL(SLAB)\

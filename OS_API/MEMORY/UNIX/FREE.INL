@@ -46,9 +46,40 @@
 		\
 		PAGE = BLOCK->PAGE;\
 		PAGE->USED -= BLOCK->SIZE;\
-		BLOCK->FREED = 1;\
 		\
-		if (BLOCK->NEXT && BLOCK->NEXT->FREED)\
+		{\
+			register int	Q_CLASS = -1;\
+			\
+			{\
+				register LET	INDEX;\
+				\
+				for (INDEX = 0; INDEX < CMT_MEMORY_QUICKLIST_CLASSES; INDEX++)\
+				{\
+					if (BLOCK->SIZE == CMT_MEMORY__QUICKLIST_LIMIT[INDEX])\
+					{\
+						Q_CLASS = (int)INDEX;\
+						break ;\
+					}\
+				}\
+			}\
+			\
+			if (\
+				Q_CLASS >= 0 && \
+				G_QUICKLIST_COUNT[Q_CLASS] < CMT_MEMORY_QUICKLIST_CAP\
+			)\
+			{\
+				BLOCK->FREED = 2;\
+				BLOCK->QUICK_NEXT = G_QUICKLIST[Q_CLASS];\
+				G_QUICKLIST[Q_CLASS] = BLOCK;\
+				G_QUICKLIST_COUNT[Q_CLASS]++;\
+				MUTEX_UNLOCK(G_MUTEX_ALLOC);\
+				return ;\
+			}\
+			\
+			BLOCK->FREED = 1;\
+		}\
+		\
+		if (BLOCK->NEXT && BLOCK->NEXT->FREED == 1)\
 		{\
 			BLOCK->SIZE +=\
 				ALIGN_UP(sizeof(struct S_MEM_BLOCK)) + BLOCK->NEXT->SIZE;\
@@ -58,7 +89,7 @@
 				BLOCK->NEXT->PREV = BLOCK;\
 		}\
 		\
-		if (BLOCK->PREV && BLOCK->PREV->FREED)\
+		if (BLOCK->PREV && BLOCK->PREV->FREED == 1)\
 		{\
 			BLOCK->PREV->SIZE +=\
 				ALIGN_UP(sizeof(struct S_MEM_BLOCK)) + BLOCK->SIZE;\
@@ -75,15 +106,47 @@
 		\
 		if (PAGE->USED == 0)\
 		{\
-			if (PAGE->NEXT)\
-				PAGE->NEXT->PREV = PAGE->PREV;\
-			\
-			if (PAGE->PREV)\
-				PAGE->PREV->NEXT = PAGE->NEXT;\
+			if (G_MEM_EMPTY_BYTES + PAGE->SIZE > CMT_MEMORY_MAX_EMPTY_BYTES)\
+			{\
+				if (PAGE->NEXT)\
+					PAGE->NEXT->PREV = PAGE->PREV;\
+				\
+				if (PAGE->PREV)\
+					PAGE->PREV->NEXT = PAGE->NEXT;\
+				else\
+					G_MEM_PAGES = PAGE->NEXT;\
+				\
+				{\
+					register int	PURGE_CLASS;\
+					\
+					for (\
+						PURGE_CLASS = 0;\
+						PURGE_CLASS < (int)CMT_MEMORY_QUICKLIST_CLASSES;\
+						++PURGE_CLASS\
+					)\
+					{\
+						struct S_MEM_BLOCK	**LINK = &G_QUICKLIST[PURGE_CLASS];\
+						\
+						while (*LINK)\
+						{\
+							if ((*LINK)->PAGE == PAGE)\
+							{\
+								*LINK = (*LINK)->QUICK_NEXT;\
+								G_QUICKLIST_COUNT[PURGE_CLASS]--;\
+							}\
+							else\
+								LINK = &(*LINK)->QUICK_NEXT;\
+						}\
+					}\
+				}\
+				\
+				munmap(PAGE, PAGE->SIZE);\
+			}\
 			else\
-				G_MEM_PAGES = PAGE->NEXT;\
-			\
-			munmap(PAGE, PAGE->SIZE);\
+			{\
+				PAGE->RETAINED_EMPTY = 1;\
+				G_MEM_EMPTY_BYTES += PAGE->SIZE;\
+			}\
 		}\
 		\
 		MUTEX_UNLOCK(G_MUTEX_ALLOC);\

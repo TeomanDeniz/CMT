@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2025/12/24 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/06/11 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/08/18 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -128,7 +128,7 @@
 \******************************************************************************/
 
 #ifndef CLEAR_INSTRUCTION_CACHE_H
-#define CLEAR_INSTRUCTION_CACHE_H 202606 /* VERSION */
+#define CLEAR_INSTRUCTION_CACHE_H 202608 /* VERSION */
 
 /* **************************** [v] INCLUDES [v] **************************** */
 #include "../ENVIRONMENTS/PLATFORM.H"
@@ -149,24 +149,20 @@
  */
 #include "../KEYWORDS/TYPES.H"
 /******* """""""""""""""""""""
- * typedef	VAR;
+ * typedef	LET;
  * typedef	PTR;
+ */
+#include "../WIN_CORE/KERNEL32.H"
+/******* """"""""""""""""""""""""
+ * struct S_KERNEL32	KERNEL32;
  */
 /* **************************** [^] INCLUDES [^] **************************** */
 
-#ifndef KNR_STYLE /* STANDARD C */
-extern PTR	STDCALL *GetCurrentProcess(void);
-extern int	STDCALL *FlushInstructionCache(PTR, const PTR, VAR);
-#else /* K&R */
-extern PTR	STDCALL *GetCurrentProcess();
-extern int	STDCALL *FlushInstructionCache();
-#endif /* !KNR_STYLE */
-
 #define CLEAR_INSTRUCTION_CACHE(BEGIN, END) \
-	FlushInstructionCache(\
-		GetCurrentProcess(),\
+	KERNEL32.FlushInstructionCache(\
+		KERNEL32.GetCurrentProcess(),\
 		(PTR)(BEGIN),\
-		(VAR)((char *)(END) - (char *)(BEGIN))\
+		(LET)((char *)(END) - (char *)(BEGIN))\
 	)
 #else /* !__PLATFORM_WINDOWS__ */
 #ifdef __GNUC__

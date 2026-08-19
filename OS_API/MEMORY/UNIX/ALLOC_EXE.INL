@@ -83,6 +83,12 @@
 				if (!SEGMENT->FREE || SEGMENT->SIZE < REQUEST)\
 					continue ;\
 				\
+				if (SCAN->RETAINED_EMPTY)\
+				{\
+					SCAN->RETAINED_EMPTY = 0;\
+					G_MEM_EMPTY_SLAB_BYTES -= SCAN->SIZE;\
+				}\
+				\
 				if (\
 					SEGMENT->SIZE >=\
 					(\
@@ -309,6 +315,7 @@
 					NEW_SLAB->SEGMENTS->PREV = (struct S_SEGMENT *)0;\
 					NEW_SLAB->PREV = (struct S_SLAB *)0;\
 					NEW_SLAB->NEXT = (struct S_SLAB *)0;\
+					NEW_SLAB->RETAINED_EMPTY = 0;\
 					SLAB = NEW_SLAB;\
 				}\
 			}\
@@ -330,6 +337,32 @@
 		MUTEX_UNLOCK(G_MUTEX_ALLOC_EXE);\
 		return (RESULT);\
 	}
+
+#define LOCALDESTRUCTOR__EXE_MEMORY_GARBAGE_COLLECTOR \
+	do\
+	{\
+		struct S_SLAB	*SLAB;\
+		struct S_SLAB	*NEXT_SLAB;\
+		\
+		MUTEX_LOCK(G_MUTEX_ALLOC_EXE);\
+		SLAB = G_SLABS;\
+		\
+		while (SLAB)\
+		{\
+			NEXT_SLAB = SLAB->NEXT;\
+			\
+			if (SLAB->RX != SLAB->RW)\
+				munmap(SLAB->RX, SLAB->SIZE);\
+			\
+			munmap(SLAB->RW, SLAB->SIZE);\
+			FREE(SLAB);\
+			SLAB = NEXT_SLAB;\
+		}\
+		\
+		G_SLABS = (struct S_SLAB *)0;\
+		MUTEX_UNLOCK(G_MUTEX_ALLOC_EXE);\
+	}\
+	while (0);
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\
  * * AT THE ALL END OF FILES, I AM ADDING A SPECIAL BYTE <0X1A> TO END THE  * *

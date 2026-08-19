@@ -85,32 +85,43 @@
 				ALIGN_UP(sizeof(struct S_SEGMENT))\
 			)\
 			{\
-				if (SLAB->NEXT)\
-					SLAB->NEXT->PREV = SLAB->PREV;\
-				\
-				if (SLAB->PREV)\
-					SLAB->PREV->NEXT = SLAB->NEXT;\
-				else\
-					G_SLABS = SLAB->NEXT;\
-				\
-				/*\
-				 * A TIER 1 SLAB IS ONE "VirtualAlloc" RESERVATION, WHILE A\
-				 * TIER 2 SLAB IS TWO MAPPED VIEWS OF A SECTION. THEY ARE\
-				 * NOT RELEASED THE SAME WAY.\
-				 */\
-				if (SLAB->RX != SLAB->RW)\
+				if (\
+					G_MEM_EMPTY_SLAB_BYTES + SLAB->SIZE > \
+					CMT_MEMORY_MAX_EMPTY_SLAB_BYTES\
+				)\
 				{\
-					KERNEL32.UnmapViewOfFile((PTR)SLAB->RX);\
-					KERNEL32.UnmapViewOfFile((PTR)SLAB->RW);\
+					if (SLAB->NEXT)\
+						SLAB->NEXT->PREV = SLAB->PREV;\
+					\
+					if (SLAB->PREV)\
+						SLAB->PREV->NEXT = SLAB->NEXT;\
+					else\
+						G_SLABS = SLAB->NEXT;\
+					\
+					/*\
+					 * A TIER 1 SLAB IS ONE "VirtualAlloc" RESERVATION, WHILE A\
+					 * TIER 2 SLAB IS TWO MAPPED VIEWS OF A SECTION. THEY ARE\
+					 * NOT RELEASED THE SAME WAY.\
+					 */\
+					if (SLAB->RX != SLAB->RW)\
+					{\
+						KERNEL32.UnmapViewOfFile((PTR)SLAB->RX);\
+						KERNEL32.UnmapViewOfFile((PTR)SLAB->RW);\
+					}\
+					else\
+					{\
+						KERNEL32.VirtualFree(\
+							(PTR)SLAB->RW, 0, (unsigned long)0X00008000\
+						);\
+					}\
+					\
+					FREE((PTR)SLAB);\
 				}\
 				else\
 				{\
-					KERNEL32.VirtualFree(\
-						(PTR)SLAB->RW, 0, (unsigned long)0X00008000\
-					);\
+					SLAB->RETAINED_EMPTY = 1;\
+					G_MEM_EMPTY_SLAB_BYTES += SLAB->SIZE;\
 				}\
-				\
-				FREE((PTR)SLAB);\
 			}\
 			\
 			MUTEX_UNLOCK(G_MUTEX_ALLOC_EXE);\

@@ -54,6 +54,30 @@
 		return (USER_PTR);\
 	}
 
+#define LOCALDESTRUCTOR__MEMORY_GARBAGE_COLLECTOR \
+	do\
+	{\
+		LET	INDEX;\
+		\
+		for (INDEX = 0; INDEX < G_HEAP_COUNT; INDEX++)\
+		{\
+			if (G_HEAP_PTRS[INDEX])\
+			{\
+				free(\
+					(PTR)(\
+						((BYTE *)G_HEAP_PTRS[INDEX]) - ALIGN_UP(sizeof(LET))\
+					)\
+				);\
+			}\
+		}\
+		\
+		free((PTR)G_HEAP_PTRS);\
+		G_HEAP_PTRS = (PTR *)0;\
+		G_HEAP_COUNT = (LET)0;\
+		G_HEAP_CAPACITY = (LET)0;\
+	}\
+	while (0);
+
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\
  * * AT THE ALL END OF FILES, I AM ADDING A SPECIAL BYTE <0X1A> TO END THE  * *
  * *                       FILE IN DOS, CP/M SYSTEMS                        * *

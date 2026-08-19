@@ -19,12 +19,47 @@
 		struct S_MEM_PAGE	*PAGE;\
 		struct S_MEM_BLOCK	*BLOCK;\
 		PTR					RESULT;\
-		const LET			REQUEST = ALIGN_UP(SIZE);\
+		LET					REQUEST = ALIGN_UP(SIZE);\
+		register int		Q_CLASS = -1;\
 		\
 		if (REQUEST == 0)\
 			return ((PTR)0);\
 		\
 		MUTEX_LOCK(G_MUTEX_ALLOC);\
+		\
+		{\
+			register LET	INDEX;\
+			\
+			for (INDEX = 0; INDEX < CMT_MEMORY_QUICKLIST_CLASSES; INDEX++)\
+			{\
+				if (REQUEST <= CMT_MEMORY__QUICKLIST_LIMIT[INDEX])\
+				{\
+					Q_CLASS = (int)INDEX;\
+					break ;\
+				}\
+			}\
+		}\
+		\
+		if (Q_CLASS >= 0)\
+			REQUEST = CMT_MEMORY__QUICKLIST_LIMIT[Q_CLASS];\
+		\
+		if (Q_CLASS >= 0 && G_QUICKLIST[Q_CLASS])\
+		{\
+			BLOCK = G_QUICKLIST[Q_CLASS];\
+			G_QUICKLIST[Q_CLASS] = BLOCK->QUICK_NEXT;\
+			G_QUICKLIST_COUNT[Q_CLASS]--;\
+			BLOCK->FREED = 0;\
+			\
+			if (BLOCK->PAGE)\
+				BLOCK->PAGE->USED += BLOCK->SIZE;\
+			\
+			RESULT = (PTR)(\
+				((BYTE *)(BLOCK)) + ALIGN_UP(sizeof(struct S_MEM_BLOCK))\
+			);\
+			MUTEX_UNLOCK(G_MUTEX_ALLOC);\
+			return (RESULT);\
+		}\
+		\
 		BLOCK = (struct S_MEM_BLOCK *)0;\
 		PAGE = (struct S_MEM_PAGE *)0;\
 		\
@@ -44,7 +79,7 @@
 					TEMP_BLOCK = TEMP_BLOCK->NEXT\
 				)\
 				{\
-					if (TEMP_BLOCK->FREED && TEMP_BLOCK->SIZE >= REQUEST)\
+					if (TEMP_BLOCK->FREED == 1 && TEMP_BLOCK->SIZE >= REQUEST)\
 					{\
 						BLOCK = TEMP_BLOCK;\
 						PAGE = TEMP_PAGE;\
@@ -55,6 +90,12 @@
 		}\
 		\
 	BLOCK_FOUND:\
+		\
+		if (BLOCK && PAGE->RETAINED_EMPTY)\
+		{\
+			PAGE->RETAINED_EMPTY = 0;\
+			G_MEM_EMPTY_BYTES -= PAGE->SIZE;\
+		}\
 		\
 		if (!BLOCK)\
 		{\
@@ -151,6 +192,45 @@
 		MUTEX_UNLOCK(G_MUTEX_ALLOC);\
 		return (RESULT);\
 	}
+
+#define LOCALDESTRUCTOR__MEMORY_GARBAGE_COLLECTOR \
+	do\
+	{\
+		struct S_MEM_PAGE	*PAGE;\
+		struct S_MEM_PAGE	*NEXT_PAGE;\
+		int					PURGE_CLASS;\
+		\
+		MUTEX_LOCK(G_MUTEX_ALLOC);\
+		PAGE = G_MEM_PAGES;\
+		\
+		while (PAGE)\
+		{\
+			NEXT_PAGE = PAGE->NEXT;\
+			\
+			for (PURGE_CLASS = 0; PURGE_CLASS < (int)CMT_MEMORY_QUICKLIST_CLASSES; PURGE_CLASS++)\
+			{\
+				struct S_MEM_BLOCK	**LINK = &G_QUICKLIST[PURGE_CLASS];\
+				\
+				while (LINK && *LINK)\
+				{\
+					if (LINK && (*LINK)->PAGE == PAGE)\
+					{\
+						*LINK = (*LINK)->QUICK_NEXT;\
+						G_QUICKLIST_COUNT[PURGE_CLASS]--;\
+					}\
+					else\
+						LINK = &(*LINK)->QUICK_NEXT;\
+				}\
+			}\
+			\
+			KERNEL32.VirtualFree(PAGE, 0, (unsigned long)0X00008000);\
+			PAGE = NEXT_PAGE;\
+		}\
+		\
+		G_MEM_PAGES = (struct S_MEM_PAGE *)0;\
+		MUTEX_UNLOCK(G_MUTEX_ALLOC);\
+	}\
+	while (0);
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\
  * * AT THE ALL END OF FILES, I AM ADDING A SPECIAL BYTE <0X1A> TO END THE  * *

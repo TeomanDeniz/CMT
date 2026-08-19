@@ -41,8 +41,6 @@ EXTERN_C_END
 /* *************************** [v] MVS LINKER [v] *************************** */
 /* **** MVS LINKER DOES NOT SUPPORT EXTERNAL NAMES LARGER THAN 8 BYTES!! **** */
 #ifdef __MVS__ /* IBM Z/OS XL C/C++ */
-#define G_MUTEX_ALLOC G_MUALLO
-#define G_MEM_PAGES G_MEMPAG
 #define G_HEAP_PTRS G_HPPTRS
 #define G_HEAP_COUNT G_HPCOUT
 #define G_HEAP_CAPACITY G_HPCAPA

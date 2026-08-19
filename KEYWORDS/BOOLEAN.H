@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2026/07/07 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/07/22 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/08/18 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -119,7 +119,7 @@
 \******************************************************************************/
 
 #ifndef BOOLEAN_H
-#define BOOLEAN_H 202607 /* VERSION */
+#define BOOLEAN_H 202608 /* VERSION */
 
 #ifdef __WATCOMC__ /* WATCOM C++ */
 #ifndef _ENABLE_AUTODEPEND /* IF AUTO DEPENDENCY TRACKING IS OFF */
@@ -373,6 +373,7 @@ typedef unsigned char	BOOLEAN;
 #undef LOCALMACRO__BOOLEAN_DEFINED
 #endif /* !LOCALMACRO__BOOLEAN_DEFINED */
 
+#undef boolean
 #define boolean BOOLEAN
 
 #ifndef true

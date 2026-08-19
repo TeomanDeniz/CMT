@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2026/06/12 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/08/06 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/08/18 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -33,6 +33,12 @@
 |*| ^^^^^^  ^^^^^^      ^^^^                                                 |*|
 |*| FAR POINTER FUNCTIONS ARE AUTOMATICALLY DOWNGRADES TO NORMAL FUNCTIONS   |*|
 |*| IN 32-BIT AND 64-BIT ARCHITECTURES.                                      |*|
+|*| _______                  _____________            ____                   |*|
+|*| WARNING! MEMORY MIGHT BE PRE-ALLOCATED BEFORE THE main FUNCTION STARTS.  |*|
+|*|                                                                          |*|
+|*| IF YOU WANT TO DISABLE THIS FEATURE, YOU CAN DEFINE THE                  |*|
+|*| CMT_DISABLE_PRE_ALLOCATE MACRO BEFORE INCLUDING MEMORY.H.                |*|
+|*| ^^^^^^^^^^^^^^^^^^^^^^^^                        ^^^^^^^^                 |*|
 |*|__________________________________________________________________________|*|
 |*                                                                            *|
 \******************************************************************************/
@@ -43,7 +49,7 @@
 |* __________________________________________________________________________ *|
 |*| CONTENT                                                       | DOC LINE |*|
 |*|===============================================================|==========|*|
-|*| #define PTR_MODE_NONE                                         | 109      |*|
+|*| #define PTR_MODE_NONE                                         | 115      |*|
 |*| #define PTR_MODE_RWX                                          |          |*|
 |*| #define PTR_MODE_RW                                           |          |*|
 |*| #define PTR_MODE_RX                                           |          |*|
@@ -52,57 +58,57 @@
 |*| #define PTR_MODE_W                                            |          |*|
 |*| #define PTR_MODE_X                                            |          |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| PTR ALLOC(LEN);                                               | 169      |*|
+|*| PTR ALLOC(LEN);                                               | 175      |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| PTR CALLOC(LEN);                                              | 203      |*|
+|*| PTR CALLOC(LEN);                                              | 209      |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| PTR REALLOC(PTR, LEN);                                        | 240      |*|
+|*| PTR REALLOC(PTR, LEN);                                        | 246      |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| void FREE(PTR);                                               | 287      |*|
+|*| void FREE(PTR);                                               | 293      |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| LET LENGTH(PTR);                                              | 314      |*|
+|*| LET LENGTH(PTR);                                              | 320      |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| FAR_PTR FAR_ALLOC(LEN);                                       | 362      |*|
+|*| FAR_PTR FAR_ALLOC(LEN);                                       | 368      |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| FAR_PTR FAR_CALLOC(LEN);                                      | 397      |*|
+|*| FAR_PTR FAR_CALLOC(LEN);                                      | 403      |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| FAR_PTR FAR_REALLOC(FAR_PTR, LEN);                            | 425      |*|
+|*| FAR_PTR FAR_REALLOC(FAR_PTR, LEN);                            | 431      |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| void FAR_FREE(FAR_PTR);                                       | 455      |*|
+|*| void FAR_FREE(FAR_PTR);                                       | 461      |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| LET FAR_LENGTH(FAR_PTR);                                      | 483      |*|
+|*| LET FAR_LENGTH(FAR_PTR);                                      | 489      |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| BOOLEAN MEMORY_MODE(PTR, LET, BIT32);                         | 511      |*|
+|*| BOOLEAN MEMORY_MODE(PTR, LET, BIT32);                         | 517      |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| BOOLEAN FAR_MEMORY_MODE(FAR_PTR, LET, BIT32);                 | 561      |*|
+|*| BOOLEAN FAR_MEMORY_MODE(FAR_PTR, LET, BIT32);                 | 567      |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| PTR ALLOC_EXE(PTR, LET);                                      | 586      |*|
+|*| PTR ALLOC_EXE(PTR, LET);                                      | 592      |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| LET LENGTH_EXE(PTR);                                          | 680      |*|
+|*| LET LENGTH_EXE(PTR);                                          | 686      |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| void FREE_EXE(PTR);                                           | 713      |*|
+|*| void FREE_EXE(PTR);                                           | 719      |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| FAR_PTR FAR_ALLOC_EXE(PTR, LET);                              | 750      |*|
+|*| FAR_PTR FAR_ALLOC_EXE(PTR, LET);                              | 756      |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| LET FAR_LENGTH_EXE(FAR_PTR);                                  | 776      |*|
+|*| LET FAR_LENGTH_EXE(FAR_PTR);                                  | 782      |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| void FAR_FREE_EXE(FAR_PTR);                                   | 799      |*|
+|*| void FAR_FREE_EXE(FAR_PTR);                                   | 805      |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| LET PAGE_SIZE;                                                | 822      |*|
+|*| LET PAGE_SIZE;                                                | 828      |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| LET GET_PAGE_SIZE(void);                                      | 856      |*|
+|*| LET GET_PAGE_SIZE(void);                                      | 862      |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| PTR ALLOC_PAGE(LET, BIT32, BIT32);                            | 884      |*|
+|*| PTR ALLOC_PAGE(LET, BIT32, BIT32);                            | 890      |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| void FREE_PAGE(PTR);                                          | 933      |*|
+|*| void FREE_PAGE(PTR);                                          | 939      |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| BOOLEAN IS_HEAP(PTR);                                         | 967      |*|
+|*| BOOLEAN IS_HEAP(PTR);                                         | 973      |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| BOOLEAN IS_HEAP_FAR(FAR_PTR);                                 | 996      |*|
+|*| BOOLEAN IS_HEAP_FAR(FAR_PTR);                                 | 1002     |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| BOOLEAN IS_HEAP_EXE(PTR);                                     | 1023     |*|
+|*| BOOLEAN IS_HEAP_EXE(PTR);                                     | 1029     |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| BOOLEAN IS_HEAP_FAR_EXE(FAR_PTR);                             | 1053     |*|
+|*| BOOLEAN IS_HEAP_FAR_EXE(FAR_PTR);                             | 1059     |*|
 |*|_______________________________________________________________|__________|*|
 |*                                                                            *|
 |*                                ............                                *|
@@ -1159,20 +1165,6 @@
  */
 /* **************************** [^] INCLUDES [^] **************************** */
 
-/* ***************************** [v] STDLIB [v] ***************************** */
-#ifdef __STDC_HOSTED__
-#if (__STDC_HOSTED__ == 1)
-#define LOCALMACRO__STDLIB
-#endif /* __STDC_HOSTED__ == 1 */
-#else /* !__STDC_HOSTED__ */
-#ifdef __has_include
-#if (__has_include(<stdlib.h>))
-#define LOCALMACRO__STDLIB
-#endif /* __has_include(<stdlib.h>) */
-#endif /* __has_include */
-#endif /* __STDC_HOSTED__ */
-/* ***************************** [^] STDLIB [^] ***************************** */
-
 /* ****************************** [v] UNIX [v] ****************************** */
 #ifdef __PLATFORM_AIX__
 #define LOCALMACRO__PLATFORM_FOUND
@@ -1398,6 +1390,22 @@
 #endif /* !LOCALMACRO__PLATFORM_FOUND */
 /* ****************************** [^] UNIX [^] ****************************** */
 
+/* ***************************** [v] STDLIB [v] ***************************** */
+#ifdef LOCALMACRO__PLATFORM_UNIX
+#ifdef __STDC_HOSTED__
+#if (__STDC_HOSTED__ == 1)
+#define LOCALMACRO__STDLIB
+#endif /* __STDC_HOSTED__ == 1 */
+#else /* !__STDC_HOSTED__ */
+#ifdef __has_include
+#if (__has_include(<stdlib.h>))
+#define LOCALMACRO__STDLIB
+#endif /* __has_include(<stdlib.h>) */
+#endif /* __has_include */
+#endif /* __STDC_HOSTED__ */
+#endif /* LOCALMACRO__PLATFORM_UNIX */
+/* ***************************** [^] STDLIB [^] ***************************** */
+
 /* **************************** [v] WINDOWS [v] ***************************** */
 #ifndef LOCALMACRO__PLATFORM_FOUND
 #ifdef __PLATFORM_WINDOWS__
@@ -1432,6 +1440,7 @@ struct S_MEM_BLOCK
 	struct S_MEM_BLOCK	*NEXT;
 	struct S_MEM_BLOCK	*PREV;
 	struct S_MEM_PAGE	*PAGE;
+	struct S_MEM_BLOCK	*QUICK_NEXT;
 };
 
 struct S_MEM_PAGE
@@ -1441,6 +1450,7 @@ struct S_MEM_PAGE
 	struct S_MEM_PAGE	*NEXT;
 	struct S_MEM_PAGE	*PREV;
 	struct S_MEM_BLOCK	*BLOCKS;
+	int					RETAINED_EMPTY;
 };
 
 struct S_SEGMENT
@@ -1460,6 +1470,7 @@ struct S_SLAB
 	struct S_SEGMENT	*SEGMENTS;
 	struct S_SLAB		*NEXT;
 	struct S_SLAB		*PREV;
+	int					RETAINED_EMPTY;
 };
 EXTERN_C_END
 /* **************************** [^] STRUCTS [^] ***************************** */
@@ -1471,12 +1482,54 @@ EXTERN_C_START
 extern PTR	memset(PTR, int, LET);
 extern PTR	memcpy(PTR, const void *, LET);
 #endif /* !LOCALMACRO__PLATFORM_UNIX */
-#else /* K&R */ /* TODO */
+#else /* K&R */ /* TODO (UPDATE THIS AREA AFTER CREATING STRINGS.H) */
 extern PTR	memset();
 extern PTR	memcpy();
 #endif /* !KNR_STYLE */
 EXTERN_C_END
 /* ^ FOR NOW, WILL REMOVED IN THE FUTURE ^ */
+
+#ifndef CMT_MEMORY_MAX_EMPTY_PAGES
+#define CMT_MEMORY_MAX_EMPTY_PAGES ((LET)4)
+#endif /* !CMT_MEMORY_MAX_EMPTY_PAGES */
+
+#ifndef CMT_MEMORY_MAX_EMPTY_SLAB_BYTES
+#define CMT_MEMORY_MAX_EMPTY_SLAB_BYTES ((LET)16777216) /* (16 * 1024 * 1024) */
+#endif /* !CMT_MEMORY_MAX_EMPTY_SLAB_BYTES */
+
+#ifndef CMT_MEMORY_QUICKLIST_CAP
+#define CMT_MEMORY_QUICKLIST_CAP ((LET)64)
+#endif /* !CMT_MEMORY_QUICKLIST_CAP */
+
+#ifndef CMT_MEMORY_MAX_EMPTY_BYTES
+#define CMT_MEMORY_MAX_EMPTY_BYTES ((LET)16777216) /* (16 * 1024 * 1024) */
+#endif /* !CMT_MEMORY_MAX_EMPTY_BYTES */
+
+#define CMT_MEMORY_QUICKLIST_CLASSES ((LET)7)
+
+#ifndef CMT_DISABLE_PRE_ALLOCATE
+#define LOCALCONSTRUCTOR__PRE_ALLOCATE \
+	CMT_MEMORY__QUICKLIST_LIMIT[0] = (LET)16;\
+	CMT_MEMORY__QUICKLIST_LIMIT[1] = (LET)32;\
+	CMT_MEMORY__QUICKLIST_LIMIT[2] = (LET)64;\
+	CMT_MEMORY__QUICKLIST_LIMIT[3] = (LET)128;\
+	CMT_MEMORY__QUICKLIST_LIMIT[4] = (LET)256;\
+	CMT_MEMORY__QUICKLIST_LIMIT[5] = (LET)512;\
+	CMT_MEMORY__QUICKLIST_LIMIT[6] = (LET)1024;\
+	\
+	const PTR	__DUMMY_PRELOADER_PTR__ = ALLOC(16);\
+	const PTR	__DUMMY_PRELOADER_PTR_EXE__ = \
+		ALLOC_EXE(__DUMMY_PRELOADER_PTR__, 16);
+#define LOCALDESTRUCTOR__PRE_ALLOCATE \
+	FREE(__DUMMY_PRELOADER_PTR__);\
+	FREE_EXE(__DUMMY_PRELOADER_PTR_EXE__);
+#else /* CMT_DISABLE_PRE_ALLOCATE */
+#define LOCALCONSTRUCTOR__PRE_ALLOCATE
+#define LOCALDESTRUCTOR__PRE_ALLOCATE
+#endif /* !CMT_DISABLE_PRE_ALLOCATE */
+
+#define LOCALMACRO__MEMORY_QUICKLIST_LIMIT \
+	LET	CMT_MEMORY__QUICKLIST_LIMIT[CMT_MEMORY_QUICKLIST_CLASSES];
 
 #ifndef LOCALMACRO__PLATFORM_FOUND
 #warning "CMT - MEMORY.H: PLATFORM COULDN'T DETECTED. USING DEFAULT AS 'UNIX'"
@@ -1485,14 +1538,14 @@ EXTERN_C_END
 #undef LOCALMACRO__PLATFORM_FOUND
 #endif /* !LOCALMACRO__PLATFORM_FOUND */
 
-#ifdef LOCALMACRO__STDLIB
-#include "MEMORY/STDLIB.INL"
-#endif /* LOCALMACRO__STDLIB */
-
 #ifdef LOCALMACRO__PLATFORM_MACOS
 #undef LOCALMACRO__PLATFORM_MACOS
 #include "MEMORY/MACOS.INL"
 #endif /* LOCALMACRO__PLATFORM_MACOS */
+
+#ifdef LOCALMACRO__STDLIB
+#include "MEMORY/STDLIB.INL"
+#endif /* LOCALMACRO__STDLIB */
 
 #ifdef LOCALMACRO__PLATFORM_UNIX
 #undef LOCALMACRO__PLATFORM_UNIX
@@ -1510,8 +1563,6 @@ EXTERN_C_END
 compiler-specific INT 21h AH=48h/49h allocation, deferred for now)"
 #include "MEMORY/MSDOS.INL"
 #endif /* LOCALMACRO__PLATFORM_MSDOS */
-
-#undef LOCALMACRO__STDLIB
 
 /* *************************** [v] MVS LINKER [v] *************************** */
 /* **** MVS LINKER DOES NOT SUPPORT EXTERNAL NAMES LARGER THAN 8 BYTES!! **** */
@@ -1534,6 +1585,8 @@ compiler-specific INT 21h AH=48h/49h allocation, deferred for now)"
 /* *************************** [^] MVS LINKER [^] *************************** */
 
 /* **************************** [v] EXTERNS [v] ***************************** */
+extern LET	CMT_MEMORY__QUICKLIST_LIMIT[CMT_MEMORY_QUICKLIST_CLASSES];
+
 EXTERN_C_START
 #ifndef KNR_STYLE /* STANDARD C */
 extern PTR		ALLOC(LET);
@@ -1641,9 +1694,30 @@ EXTERN_C_END
 
 #undef GLOBALCONSTRUCTOR__MEMORY
 #define GLOBALCONSTRUCTOR__MEMORY \
+	LOCALCONSTRUCTOR__ALLOC_PAGE \
 	LOCALCONSTRUCTOR__MEMORY_ALLOC \
 	LOCALCONSTRUCTOR__MEMORY_ALLOC_EXE \
-	LOCALCONSTRUCTOR__ALLOC_PAGE
+	LOCALCONSTRUCTOR__PRE_ALLOCATE
+
+#ifndef LOCALDESTRUCTOR__MEMORY_ALLOC
+#define LOCALDESTRUCTOR__MEMORY_ALLOC
+#endif /* !LOCALDESTRUCTOR__MEMORY_ALLOC */
+
+#ifndef LOCALDESTRUCTOR__MEMORY_GARBAGE_COLLECTOR
+#define LOCALDESTRUCTOR__MEMORY_GARBAGE_COLLECTOR
+#endif /* !LOCALDESTRUCTOR__MEMORY_GARBAGE_COLLECTOR */
+
+#ifndef LOCALDESTRUCTOR__EXE_MEMORY_GARBAGE_COLLECTOR
+#define LOCALDESTRUCTOR__EXE_MEMORY_GARBAGE_COLLECTOR
+#endif /* !LOCALDESTRUCTOR__EXE_MEMORY_GARBAGE_COLLECTOR */
+
+#undef GLOBALDESTRUCTOR__MEMORY
+#define GLOBALDESTRUCTOR__MEMORY \
+	LOCALDESTRUCTOR__PRE_ALLOCATE \
+	LOCALDESTRUCTOR__EXE_MEMORY_GARBAGE_COLLECTOR \
+	LOCALDESTRUCTOR__MEMORY_GARBAGE_COLLECTOR \
+	LOCALDESTRUCTOR__MEMORY_ALLOC_EXE \
+	LOCALDESTRUCTOR__MEMORY_ALLOC
 
 /*   /\   #==========================================================#   /\   */
 /*  //\\  |                  SETUP MEMBER CREATION                   |  //\\  */
@@ -1672,6 +1746,7 @@ EXTERN_C_END
 	LOCALMACRO__MEMORY_ALLOC \
 	LOCALMACRO__MEMORY_ALLOC_EXE \
 	LOCALMACRO__MEMORY_ALLOC_PAGE \
+	LOCALMACRO__MEMORY_QUICKLIST_LIMIT \
 	LOCALFUNCTION__ALLOC \
 	LOCALFUNCTION__ALLOC_EXE \
 	LOCALFUNCTION__ALLOC_PAGE \

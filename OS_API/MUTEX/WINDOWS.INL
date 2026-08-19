@@ -9,13 +9,13 @@
  */
 #include "../../WIN_CORE/KERNEL32.H"
 /******* """""""""""""""""""""""""""
- * struct S_WIN_CRITICAL_SECTION;
+ * struct S_CRITICAL_SECTION;
  * struct S_KERNEL32	KERNEL32;
  */
 /* **************************** [^] INCLUDES [^] **************************** */
 
 /* **************************** [v] TYPEDEFS [v] **************************** */
-typedef struct S_WIN_CRITICAL_SECTION	T_MUTEX;
+typedef struct S_CRITICAL_SECTION	T_MUTEX;
 /* **************************** [^] TYPEDEFS [^] **************************** */
 
 #ifndef KNR_STYLE /* STANDARD C */

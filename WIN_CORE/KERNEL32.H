@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2026/05/19 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/08/05 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/08/18 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -51,6 +51,59 @@
 |*|__________________________________________________________________________|*|
 |*                                                                            *|
 \******************************************************************************/
+
+/* (SELF NOTE, IGNORE THIS PART)
+typedef unsigned char       BYTE;
+typedef unsigned char       UCHAR;
+typedef char                CHAR;
+typedef char                CCHAR;
+typedef wchar_t             WCHAR;
+typedef short               SHORT;
+typedef unsigned short      USHORT;
+typedef int                 INT;
+typedef unsigned int        UINT;
+typedef long                LONG;
+typedef unsigned long       ULONG;
+typedef float               FLOAT;
+typedef int                 BOOL;
+typedef unsigned short      WORD;
+typedef unsigned long       DWORD;
+typedef signed char         INT8;
+typedef signed short        INT16;
+typedef signed int          INT32;
+typedef signed __int64      INT64;
+typedef unsigned char       UINT8;
+typedef unsigned short      UINT16;
+typedef unsigned int        UINT32;
+typedef unsigned __int64    UINT64;
+typedef signed int          LONG32;
+typedef __int64             LONG64;
+typedef unsigned int        ULONG32;
+typedef unsigned __int64    ULONG64;
+typedef __int64             LONGLONG;
+typedef unsigned __int64    ULONGLONG;
+typedef unsigned __int64    DWORDLONG;
+typedef unsigned __int64    DWORD64;
+typedef unsigned __int64    QWORD;
+#ifdef _WIN64
+typedef __int64          INT_PTR;
+typedef unsigned __int64 UINT_PTR;
+typedef __int64          LONG_PTR;
+typedef unsigned __int64 ULONG_PTR;
+typedef int              HALF_PTR;
+typedef unsigned int     UHALF_PTR;
+#else
+typedef int              INT_PTR;
+typedef unsigned int     UINT_PTR;
+typedef long             LONG_PTR;
+typedef unsigned long    ULONG_PTR;
+typedef short            HALF_PTR;
+typedef unsigned short   UHALF_PTR;
+#endif
+typedef ULONG_PTR DWORD_PTR;
+typedef ULONG_PTR SIZE_T;
+typedef LONG_PTR  SSIZE_T;
+*/
 
 #ifndef KERNEL32_H
 #define KERNEL32_H 202608 /* VERSION */
@@ -96,39 +149,23 @@
 /* **************************** [^] INCLUDES [^] **************************** */
 
 /* **************************** [v] STRUCTS [v] ***************************** */
+#include "STRUCTS/SYSTEM_INFO.H"
+/******* """""""""""""""""""""""
+ * struct S_SYSTEM_INFO;
+ */
+#include "STRUCTS/CRITICAL_SECTION.H"
+/******* """"""""""""""""""""""""""""
+ * struct S_CRITICAL_SECTION;
+ */
+#include "STRUCTS/CONSOLE_SCREEN_BUFFER_INFO.H"
+/******* """"""""""""""""""""""""""""""""""""""
+ * struct S_CONSOLE_SCREEN_BUFFER_INFO;
+ */
+
+struct S_SYSTEM_INFO test1;
+struct S_CRITICAL_SECTION test2;
+
 EXTERN_C_START
-struct S_WIN_SYSTEM_INFO
-{
-	union
-	{
-		unsigned long	OEM_ID;
-		struct
-		{
-			unsigned short	PROCESSOR_ARCHITECTURE;
-			unsigned short	RESERVED;
-		}	DUMMYSTRUCTNAME;
-	}	DUMMYUNIONNAME;
-	unsigned long		PAGE_SIZE;
-	PTR					MINIMUM_APPLICATION_ADDRESS;
-	PTR					MAXIMUM_APPLICATION_ADDRESS;
-	LET					ACTIVE_PROCESSOR_MASK;
-	unsigned long		NUMBER_OF_PROCESSORS;
-	unsigned long		PROCESSOR_TYPE;
-	unsigned long		ALLOCATION_GRANULARITY;
-	unsigned short		PROCESSOR_LEVEL;
-	unsigned short		PROCESSOR_REVISION;
-};
-
-struct S_WIN_CRITICAL_SECTION
-{
-	PTR				DEBUG_INFO;
-	unsigned long	LOCK_COUNT;
-	unsigned long	RECURSION_COUNT;
-	PTR				OWNING_THREAD;
-	PTR				LOCK_SEMAPHORE;
-	LET				SPIN_COUNT;
-};
-
 struct S_KERNEL32
 {
 	PTR				SELF;
@@ -243,11 +280,11 @@ struct S_KERNEL32
 	int				(STDCALL *lstrcmpA)(const char *, const char *);
 	char			*(STDCALL *lstrcpyA)(char *, const char *);
 	unsigned long	(STDCALL *lstrlenA)(const char *);
-	int				(STDCALL *FlushInstructionCache)(PTR, const PTR, VAR);
-	void			(STDCALL *GetSystemInfo)(struct S_WIN_SYSTEM_INFO *);
+	int				(STDCALL *FlushInstructionCache)(PTR, const PTR, LET);
+	void			(STDCALL *GetSystemInfo)(struct S_SYSTEM_INFO *);
 	int				(STDCALL *GetExitCodeThread)(PTR, unsigned long *);
 	void			(STDCALL *InitializeCriticalSection)(
-		struct S_WIN_CRITICAL_SECTION *
+		struct S_CRITICAL_SECTION *
 	);
 	void			(STDCALL *DeleteCriticalSection)(PTR);
 	void			(STDCALL *EnterCriticalSection)(PTR);
@@ -265,6 +302,10 @@ struct S_KERNEL32
 		PTR, unsigned long, unsigned long, unsigned long, LET
 	);
 	int				(STDCALL *UnmapViewOfFile)(PTR);
+	int				(STDCALL *SetConsoleTextAttribute)(PTR, unsigned short);
+	int				(STDCALL *GetConsoleScreenBufferInfo)(
+		PTR, struct S_CONSOLE_SCREEN_BUFFER_INFO *
+	);
 #else /* K&R */
 	PTR				(STDCALL *LoadLibraryA)();
 	PTR				(STDCALL *LoadLibraryExA)();
@@ -324,6 +365,8 @@ struct S_KERNEL32
 	PTR				(STDCALL *CreateFileMappingA)();
 	PTR				(STDCALL *MapViewOfFile)();
 	int				(STDCALL *UnmapViewOfFile)();
+	int				(STDCALL *SetConsoleTextAttribute)();
+	int				(STDCALL *GetConsoleScreenBufferInfo)();
 #endif /* !KNR_STYLE */
 };
 EXTERN_C_END
@@ -500,6 +543,10 @@ EXTERN_C_END
 			PEB_GET_EXPORT(KERNEL32.SELF, "MapViewOfFile");\
 		KERNEL32.UnmapViewOfFile = \
 			PEB_GET_EXPORT(KERNEL32.SELF, "UnmapViewOfFile");\
+		KERNEL32.SetConsoleTextAttribute = \
+			PEB_GET_EXPORT(KERNEL32.SELF, "SetConsoleTextAttribute");\
+		KERNEL32.GetConsoleScreenBufferInfo = \
+			PEB_GET_EXPORT(KERNEL32.SELF, "GetConsoleScreenBufferInfo");\
 	}\
 	while (0);
 

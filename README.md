@@ -1,4 +1,3 @@
-
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/BANNERS/HEADER.png" ALT="Header" STYLE="WIDTH: 100%;"/>
 
 **CMT (C Maximum Tension)** is a header-only systems programming library for C that pushes the language far beyond its conventional limits without sacrificing portability or performance. It introduces a unified runtime layer that enhances ergonomics, abstraction, and developer control while staying compatible with both ANSI and K&R C.
@@ -11,41 +10,45 @@ Designed with longevity in mind, the project maintains support for legacy system
 
 The repository includes multiple documentation formats, test matrices across compilers and architectures, and a stripped release variant optimized for minimal footprint.
 
-> # Contents
-> - [Clone or Download CMT and Use it](#clone-or-download-cmt-and-use-it)
->   - [Download](#download)
->   - [Clone](#clone)
->     - [Clone as HTTPS](#clone-as-https)
->     - [Clone as SSH](#clone-as-ssh)
->   - [Usage](#usage)
->     - [Include Everything](#include-everything)
->     - [Modular Include](#modular-include)
->     - [Sectional Include](#sectional-include)
->       - [Available Section Macros](#available-section-macros)
->   - [Default Behavior](#default-behavior)
-> - [CMT Contents](#cmt-contents)
->   - [General](#-general)
->   - [Assembly](#-assembly)
->   - [Check Feature](#-check-feature)
->   - [Attributes](#-attributes)
->   - [Check Feature](#-check-feature)
->   - [Environments](#-environments)
->   - [Keywords](#-keywords)
->   - [LIB](#-lib)
->   - [OS_API](#-os_api)
->   - [WINDOWS CORE](#-windows-core)
-> - [Documentations](#documentations)
->   - [BOUND_METHODS_IN_ISO_C_VIA_TRAMPOLINES](#-bound_methods_in_iso_c_via_trampolines)
->   - [CROSS_COMPILER_AUTO_LINKING_AND_CONSTRUCTION_METHOD_WITH_MACROS_ONLY](#-cross_compiler_auto_linking_and_construction_method_with_macros_only)
->   - [USE_ASSEMBLY_IN_PURE_C_WITHOUT_NEEDING_INLINE_ASSEMBLY](#-use_assembly_in_pure_c_without_needing_inline_assembly)
->   - [THREAD_SUPPORT_IN_NON_MULTI_THREAD_PLATFORMS](#-thread_support_in_non_multi_thread_platforms)
-> - [Extras](#extras)
->   - [CMT Auto-Linker](#cmt-auto-linker)
->   - [Icons](#icons)
->     - [32x32 (Original Size)](#32x32-original-size)
->     - [128x128 (Extended for a better view))](#128x128-extended-for-a-better-view)
->   - [Openning Issues and Reporting Bugs](#openning-issues-and-reporting-bugs)
->   - [Copyright](#copyright)
+<details>
+  <summary><strong>Table of Contents</strong></summary>
+
+- [Clone or Download CMT and Use it](#clone-or-download-cmt-and-use-it)
+  - [Download](#download)
+  - [Clone](#clone)
+    - [Clone as HTTPS](#clone-as-https)
+    - [Clone as SSH](#clone-as-ssh)
+  - [Usage](#usage)
+    - [Include Everything](#include-everything)
+    - [Modular Include](#modular-include)
+    - [Sectional Include](#sectional-include)
+      - [Available Section Macros](#available-section-macros)
+    - [Default Behavior](#default-behavior)
+    - [C vs C-OOP vs CPP](#c-vs-c-oop-vs-cpp)
+- [CMT Contents](#cmt-contents)
+  - [![][__GENERAL_GIF__] General](#-general)
+  - [![][__ASSEMBLY_GIF__] Assembly](#-assembly)
+  - [![][__ATTRIBUTES_GIF__] Attributes](#-attributes)
+  - [![][__CHECK_FEATURE_GIF__] Check Feature](#-check-feature)
+  - [![][__ENVIRONMENTS_GIF__] Environments](#-environments)
+  - [![][__KEYWORDS_GIF__] Keywords](#-keywords)
+  - [![][__LIB_GIF__] LIB](#-lib)
+  - [![][__OS_API_GIF__] OS_API](#-os_api)
+  - [![][__WINDOWS_GIF__] WINDOWS CORE](#-windows-core)
+- [Documentations](#documentations)
+  - [BOUND_METHODS_IN_ISO_C_VIA_TRAMPOLINES](#-bound_methods_in_iso_c_via_trampolines)
+  - [CROSS_COMPILER_AUTO_LINKING_AND_CONSTRUCTION_METHOD_WITH_MACROS_ONLY](#-cross_compiler_auto_linking_and_construction_method_with_macros_only)
+  - [USE_ASSEMBLY_IN_PURE_C_WITHOUT_NEEDING_INLINE_ASSEMBLY](#-use_assembly_in_pure_c_without_needing_inline_assembly)
+  - [THREAD_SUPPORT_IN_NON_MULTI_THREAD_PLATFORMS](#-thread_support_in_non_multi_thread_platforms)
+- [Extras](#extras)
+  - [CMT Auto-Linker](#cmt-auto-linker)
+  - [Icons](#icons)
+    - [32x32 (Original Size)](#32x32-original-size)
+    - [128x128 (Extended for a better view))](#128x128-extended-for-a-better-view)
+  - [Openning Issues and Reporting Bugs](#openning-issues-and-reporting-bugs)
+  - [Copyright](#copyright)
+
+</details>
 
 # Clone or Download CMT and Use it
 
@@ -100,7 +103,7 @@ But since it is a heavy macro library, it might slow the compiling process if yo
 ```c
 #include "CMT/CMT.H"   // C
 // or
-#include "CMT/CMT.HPP" // C++
+#include "CMT/CMT.HPP" // C++ || C-OOP
 ```
 
 This does not include modules such as `PNG`, `MAP`, `SERVER`, `GRAPHICS`, `AUDIO` etc., which depend on the `OBJECT` module.
@@ -179,6 +182,21 @@ Redundant definitions are safe:
 
 * Defining a module that belongs to an already-included section has **no effect**
 * No warnings or errors are generated
+
+---
+
+### C vs C-OOP vs CPP
+
+If you include an `HPP` file in C Language, you will get objects made with `OBJECT.H`.
+
+If you include an `HPP` file in C++, you will get objects made with classes.
+
+If you include an `H` file in both C and C++, you just get stright functions or macros.
+
+| Compiler | `.H`                | `.HPP`             |
+| -------- | ------------------- | ------------------ |
+| **C**    | C API / macros      | CMT object model   |
+| **C++**  | Same C API / macros | Native C++ classes |
 
 # CMT Contents
 

@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2026/05/19 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/08/05 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/08/18 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -303,14 +303,14 @@ extern unsigned long	READ_GS_QWORD();
 /*  \\//  |                  SETUP MEMBER CREATION                   |  \\//  */
 /*   \/   #==========================================================#   \/   */
 
+#undef GLOBALCONSTRUCTOR__PEB_LOADER
+
 #ifdef CMT_CANT_USE_INLINE_ASM_FOR_SECTIONS
 #ifndef __TINYC__
 #ifdef __SYSTEM_32_BIT__
-#undef GLOBALCONSTRUCTOR__PEB_LOADER
 #define GLOBALCONSTRUCTOR__PEB_LOADER ((int (*)())READ_FS_DWORD)();
 #else /* !__SYSTEM_32_BIT__ */
 #ifdef __SYSTEM_64_BIT__
-#undef GLOBALCONSTRUCTOR__PEB_LOADER
 #define GLOBALCONSTRUCTOR__PEB_LOADER ((int (*)())READ_GS_QWORD)();
 #endif /* __SYSTEM_64_BIT__ */
 #endif /* __SYSTEM_32_BIT__ */

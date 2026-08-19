@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2025/05/25 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/08/11 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/08/12 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -880,14 +880,14 @@ CMT_NO_SSP_PUSH
 #ifdef __CPU_INTEL__
 #define OBJECT__CONNECT(OBJECT_TYPE_NAME) \
 	register PTR				LOCALMACRO__SELF__;\
-	GET_RAX(LOCALMACRO__SELF__);\
+	LOCALMACRO__OBJECT_RECEIVER(LOCALMACRO__SELF__);\
 	OBJECT OBJECT_TYPE_NAME	*const THIS = \
-		(OBJECT OBJECT_TYPE_NAME *)LOCALMACRO__SELF__
+		(OBJECT OBJECT_TYPE_NAME * const)LOCALMACRO__SELF__
 #define object__connect(object_type_name) \
 	register PTR				LOCALMACRO__SELF__;\
-	GET_RAX(LOCALMACRO__SELF__);\
+	LOCALMACRO__OBJECT_RECEIVER(LOCALMACRO__SELF__);\
 	OBJECT object_type_name	*const this = \
-		(OBJECT object_type_name *)LOCALMACRO__SELF__
+		(OBJECT object_type_name * const)LOCALMACRO__SELF__
 #endif /* __CPU_INTEL__ */
 
 #ifdef LOCALMACRO__GCC_C23
@@ -895,7 +895,7 @@ CMT_NO_SSP_PUSH
 #define OBJ(OBJECT_NAME, VARIABLE_NAME) \
 	OBJECT OBJECT_NAME	VARIABLE_NAME;\
 	\
-	SET_RAX(&VARIABLE_NAME);\
+	LOCALMACRO__OBJECT_SENDER(VARIABLE_NAME);\
 	OBJECT_NAME
 
 #define NEW(OBJECT_NAME, VARIABLE_NAME) \
@@ -903,7 +903,7 @@ CMT_NO_SSP_PUSH
 		(OBJECT OBJECT_NAME *)ALLOC(sizeof(OBJECT OBJECT_NAME));\
 	\
 	if (VARIABLE_NAME)\
-		SET_RAX(&VARIABLE_NAME);\
+		LOCALMACRO__OBJECT_SENDER(VARIABLE_NAME);\
 	\
 	if (VARIABLE_NAME)\
 		OBJECT_NAME
@@ -914,7 +914,7 @@ CMT_NO_SSP_PUSH
 	OBJECT OBJECT_NAME	VARIABLE_NAME;\
 	extern void			OBJECT_NAME();\
 	\
-	SET_RAX(&VARIABLE_NAME);\
+	LOCALMACRO__OBJECT_SENDER(VARIABLE_NAME);\
 	OBJECT_NAME
 
 #define NEW(OBJECT_NAME, VARIABLE_NAME) \
@@ -923,7 +923,7 @@ CMT_NO_SSP_PUSH
 	extern void			OBJECT_NAME();\
 	\
 	if (VARIABLE_NAME)\
-		SET_RAX(&VARIABLE_NAME);\
+		LOCALMACRO__OBJECT_SENDER(VARIABLE_NAME);\
 	\
 	if (VARIABLE_NAME)\
 		OBJECT_NAME
@@ -949,7 +949,7 @@ CMT_NO_SSP_PUSH
 		BYTE			__OP__[LOCALMACRO__FUNCTION_SIZE];\
 		\
 		INDEX = 0;\
-		LOCALMACRO__INJECTOR(THIS, SOURCE) \
+		LOCALMACRO__OBJECT_INJECTOR(THIS, SOURCE) \
 		(TARGET) = ALLOC_EXE(__OP__, LOCALMACRO__FUNCTION_SIZE);\
 		/* DO NOT BE AFRAID MY CHILD, IT IS W^X SAFE. I KNOW WHAT I AM DOING */\
 	}\
@@ -962,7 +962,7 @@ CMT_NO_SSP_PUSH
 		BYTE			__OP__[LOCALMACRO__FUNCTION_SIZE];\
 		\
 		INDEX = 0;\
-		LOCALMACRO__INJECTOR(this, source) \
+		LOCALMACRO__OBJECT_INJECTOR(this, source) \
 		(target) = ALLOC_EXE(__OP__, LOCALMACRO__FUNCTION_SIZE);\
 		/* DO NOT BE AFRAID MY CHILD, IT IS W^X SAFE. I KNOW WHAT I AM DOING */\
 	}\
@@ -973,20 +973,25 @@ CMT_NO_SSP_PUSH
 
 /* ####################### [v] TRAMPOLINE CONTENT [v] ####################### */
 #ifdef __CPU_INTEL__
+#define LOCALMACRO__OBJECT_SENDER(OBJECT_VARIABLE) \
+	SET_RAX(&(OBJECT_VARIABLE))
+#define LOCALMACRO__OBJECT_RECEIVER(__SELF__) \
+	GET_RAX(__SELF__)
+
 #ifdef __SYSTEM_64_BIT__
-#define LOCALMACRO__INJECTOR(OBJECT_PTR, SOURCE) \
+#define LOCALMACRO__OBJECT_INJECTOR(OBJECT_PTR, SOURCE) \
 	_MOVABS_RAX_(OBJECT_PTR)\
 	_MOVABS_R11_(SOURCE)\
 	_JMP_R11
 #else /* !__SYSTEM_64_BIT__ */
 #ifdef __SYSTEM_32_BIT__
-#define LOCALMACRO__INJECTOR(OBJECT_PTR, SOURCE) \
+#define LOCALMACRO__OBJECT_INJECTOR(OBJECT_PTR, SOURCE) \
 	_MOV_EAX_(OBJECT_PTR)\
 	_MOV_EDX_(SOURCE)\
 	_JMP_EDX
 #else /* !__SYSTEM_32_BIT__ */
 #ifdef __SYSTEM_16_BIT__ /* IT IS SLOW, BUT WORKS... */
-#define LOCALMACRO__INJECTOR(OBJECT_PTR, SOURCE) \
+#define LOCALMACRO__OBJECT_INJECTOR(OBJECT_PTR, SOURCE) \
 	_MOV_AX_(OBJECT_PTR)\
 	_PUSH_(SOURCE)\
 	_RET
@@ -998,9 +1003,10 @@ CMT_NO_SSP_PUSH
 /* WIP: ARM, POWERPC, ETC... */
 /* ####################### [^] TRAMPOLINE CONTENT [^] ####################### */
 
-#ifndef LOCALMACRO__INJECTOR
-#define LOCALMACRO__INJECTOR "ERROR: CMT-OBJECTS DOESN'T SUPPORT YOUR CPU (YET)"
-#endif /* !LOCALMACRO__INJECTOR */
+#ifndef LOCALMACRO__OBJECT_INJECTOR
+#define LOCALMACRO__OBJECT_INJECTOR \
+	"ERROR: CMT-OBJECTS DOESN'T SUPPORT YOUR CPU (YET)"
+#endif /* !LOCALMACRO__OBJECT_INJECTOR */
 
 /* ************************ [v] TI CGT CCS (POP) [v] ************************ */
 #ifdef __TI_COMPILER_VERSION__

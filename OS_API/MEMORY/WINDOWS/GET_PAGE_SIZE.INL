@@ -18,7 +18,7 @@
 		if (PAGE_SIZE)\
 			return (PAGE_SIZE);\
 		\
-		struct S_WIN_SYSTEM_INFO	INFO;\
+		struct S_SYSTEM_INFO	INFO;\
 		\
 		KERNEL32.GetSystemInfo(&INFO);\
 		return ((LET)INFO.PAGE_SIZE);\

@@ -17,6 +17,8 @@
 > #include "CMT/OS_API/MEMORY.H"
 > ```
 
+<h2><a href="https://github.com/TeomanDeniz/CMT-TESTS/tree/main/MEMORY">Jump to Tests Folder</a></h2>
+
 [![](https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/BANNERS/AUTO_LINKER_MODULE_HEADER.png)](https://github.com/TeomanDeniz/CMT/tree/main#cmt-auto-linker)
 
 ## Abstract
@@ -30,6 +32,10 @@ Designed to work across 16-bit, 32-bit, and 64-bit environments with automatic a
 If `stdlib` exists in your compiler, the function will simply uses the `malloc`, `calloc`, and `free` functions for best performance.
 
 Far pointer functions are automatically downgrades to normal functions in 32-bit and 64-bit architectures.
+
+**Warning!** Memory might be **pre-allocated** before the `main` function starts.
+
+If you want to disable this feature, you can define the `CMT_DISABLE_PRE_ALLOCATE` macro before including `MEMORY.H`.
 
 ## Contents
 

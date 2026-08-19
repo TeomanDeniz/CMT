@@ -6,6 +6,7 @@
 /* **** MVS LINKER DOES NOT SUPPORT EXTERNAL NAMES LARGER THAN 8 BYTES!! **** */
 #ifdef __MVS__ /* IBM Z/OS XL C/C++ */
 #define G_MUTEX_ALLOC_EXE G_MALEXE
+#define G_MEM_EMPTY_SLAB_BYTES G_MEEMSB
 #endif /* __MVS__ */
 /* *************************** [^] MVS LINKER [^] *************************** */
 
@@ -13,13 +14,16 @@
 EXTERN_C_START
 extern T_MUTEX			G_MUTEX_ALLOC_EXE;
 extern struct S_SLAB	*G_SLABS;
+extern LET				G_MEM_EMPTY_SLAB_BYTES;
 EXTERN_C_END
 /* **************************** [^] EXTERNS [^] ***************************** */
 
 #define LOCALCONSTRUCTOR__MEMORY_ALLOC_EXE MUTEX_CREATE(&G_MUTEX_ALLOC_EXE);
+#define LOCALDESTRUCTOR__MEMORY_ALLOC_EXE MUTEX_DESTROY(&G_MUTEX_ALLOC_EXE);
 #define LOCALMACRO__MEMORY_ALLOC_EXE \
 	T_MUTEX			G_MUTEX_ALLOC_EXE;\
-	struct S_SLAB	*G_SLABS = (struct S_SLAB *)0;
+	struct S_SLAB	*G_SLABS = (struct S_SLAB *)0;\
+	LET				G_MEM_EMPTY_SLAB_BYTES = (LET)0;
 
 #include "MACOS/ALLOC_EXE.INL"
 #include "MACOS/FAR_ALLOC_EXE.INL"

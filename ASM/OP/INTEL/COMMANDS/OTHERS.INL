@@ -1,4 +1,4 @@
-#define _RET __ASM__OP__(0X66) __ASM__OP__(0XC3)
+#define _RET __ASM__OP__(0XC3)
 #define _CPUID __ASM__OP__(0X0F) __ASM__OP__(0XA2)
 #define _INT_(VALUE) __ASM__OP__(0XCD) __ASM__IMM8__(VALUE)
 
