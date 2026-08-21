@@ -6,10 +6,10 @@
 	LET				LENGTH;\
 	unsigned long	WRITTEN;\
 	unsigned int	*X = &(\
-		OBJECT__INITIALIZE (THIS->cursor.get.x, unsigned int)\
+		OBJECT__INITIALIZE (THIS->get.cursor.x, unsigned int)\
 	);\
 	unsigned int	*Y = &(\
-		OBJECT__INITIALIZE (THIS->cursor.get.y, unsigned int)\
+		OBJECT__INITIALIZE (THIS->get.cursor.y, unsigned int)\
 	);\
 	\
 	LENGTH = (LET)0;\

@@ -8,7 +8,7 @@
 	\
 	FOREGROUND = (unsigned short)(COLOR_VALUE & 0X0F);\
 	BACKGROUND = (unsigned short)((COLOR_VALUE >> 4) & 0X0F);\
-	OBJECT__INITIALIZE (THIS->cursor.get.color, unsigned int) = COLOR_VALUE;\
+	OBJECT__INITIALIZE (THIS->get.cursor.color, unsigned int) = COLOR_VALUE;\
 	\
 	KERNEL32.SetConsoleTextAttribute(\
 		THIS->_OUT_HANDLE,\

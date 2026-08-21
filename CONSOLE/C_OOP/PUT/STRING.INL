@@ -2,15 +2,30 @@
 #error "ERROR - PLEASE DON'T USE THIS LIBRARY DIRECTLY!!!"
 #endif /* !CONSOLE_HPP */
 
-#define LOCALMACRO__CMT_CONSOLE__FREE_CONTENT \
-	OBJECT__EJECT (THIS->free);\
-	OBJECT__EJECT (THIS->log);\
-	OBJECT__EJECT (THIS->warning);\
-	OBJECT__EJECT (THIS->warning_at);\
-	OBJECT__EJECT (THIS->error);\
-	OBJECT__EJECT (THIS->cursor.color);\
-	OBJECT__EJECT (THIS->cursor.default_color);\
- 	DESTROY (THIS);
+#ifndef KNR_STYLE /* STANDARD C */
+#define FUNCTION_HEADER__CMT_CONSOLE_C_OOP__PUT_STRING \
+	OBJECT CMT_CONSOLE\
+		*CMT_CONSOLE_C_OOP__PUT_STRING(\
+			char *STRING, unsigned int X, unsigned int Y\
+		)
+#else /* K&R */
+#define FUNCTION_HEADER__CMT_CONSOLE_C_OOP__PUT_STRING \
+	OBJECT CMT_CONSOLE\
+		*CMT_CONSOLE_C_OOP__PUT_STRING(STRING, X, Y)\
+		char			*STRING;\
+		unsigned int	X;\
+		unsigned int	Y;
+#endif /* !KNR_STYLE */
+
+#define LOCALFUNCTION__CMT_CONSOLE_C_OOP__PUT_STRING \
+	FUNCTION_HEADER__CMT_CONSOLE_C_OOP__PUT_STRING \
+	{\
+		OBJECT__CONNECT (CMT_CONSOLE);\
+		\
+		LOCALMACRO__CMT_CONSOLE__PUT_STRING_CONTENT\
+		\
+		return (THIS);\
+	}
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\
  * * AT THE ALL END OF FILES, I AM ADDING A SPECIAL BYTE <0X1A> TO END THE  * *

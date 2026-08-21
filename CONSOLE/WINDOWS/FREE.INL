@@ -2,8 +2,17 @@
 #error "ERROR - PLEASE DON'T USE THIS LIBRARY DIRECTLY!!!"
 #endif /* !CONSOLE_HPP */
 
-#define LOCALMACRO__CMT_CONSOLE__CURSOR_DEFAULT_COLOR_CONTENT \
-	THIS->cursor.color(THIS->cursor.get.default_color);
+#define LOCALMACRO__CMT_CONSOLE__FREE_CONTENT \
+	OBJECT__EJECT (THIS->free);\
+	OBJECT__EJECT (THIS->log);\
+	OBJECT__EJECT (THIS->warning);\
+	OBJECT__EJECT (THIS->warning_at);\
+	OBJECT__EJECT (THIS->error);\
+	OBJECT__EJECT (THIS->error_at);\
+	OBJECT__EJECT (THIS->cursor.color);\
+	OBJECT__EJECT (THIS->cursor.default_color);\
+	OBJECT__EJECT (THIS->put.string);\
+ 	DESTROY (THIS);
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\
  * * AT THE ALL END OF FILES, I AM ADDING A SPECIAL BYTE <0X1A> TO END THE  * *

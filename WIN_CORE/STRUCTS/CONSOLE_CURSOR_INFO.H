@@ -1,5 +1,5 @@
 /******************************************************************************\
-# H - COORD                                      #       Maximum Tension       #
+# H - CONSOLE_CURSOR_INFO                        #       Maximum Tension       #
 ################################################################################
 #                                                #      -__            __-     #
 # Teoman Deniz                                   #  :    :!1!-_    _-!1!:    : #
@@ -12,10 +12,14 @@
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
-#ifndef STRUCT_COORD_H
-#define STRUCT_COORD_H 202608 /* VERSION */
+#ifndef STRUCT_CONSOLE_CURSOR_INFO_H
+#define STRUCT_CONSOLE_CURSOR_INFO_H 202608 /* VERSION */
 
 /* **************************** [v] INCLUDES [v] **************************** */
+#include "../../KEYWORDS/BOOLEAN.H"
+/******* """"""""""""""""""""""""""
+ * #define BOOLEAN
+ */
 #include "../../ATTRIBUTES/EXTERN_C.H"
 /******* """""""""""""""""""""""""""""
  * #define EXTERN_C_START
@@ -24,14 +28,14 @@
 /* **************************** [^] INCLUDES [^] **************************** */
 
 EXTERN_C_START
-struct S_COORD
+struct S_CONSOLE_CURSOR_INFO
 {
-	short	X;
-	short	Y;
+	unsigned long	SIZE;
+	BOOLEAN			VISIBLE;
 };
 EXTERN_C_END
 
-#endif /* !STRUCT_COORD_H */
+#endif /* !STRUCT_CONSOLE_CURSOR_INFO_H */
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\
  * * AT THE ALL END OF FILES, I AM ADDING A SPECIAL BYTE <0X1A> TO END THE  * *

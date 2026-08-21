@@ -8,6 +8,7 @@
 #include "../OBJECT.H"
 /******* """""""""""""
  * #define object
+ * #define OBJECT
  * #define OBJECT__CONNECT(OBJECT_TYPE_NAME)
  * #define OBJECT__INJECT(TARGET, SOURCE)
  * #define OBJECT__EJECT(MEMBER_NAME)
@@ -15,14 +16,18 @@
  */
 /* **************************** [^] INCLUDES [^] **************************** */
 
-OBJECT CMT_CONSOLE
+object CMT_CONSOLE
 {
 	OBJECT CMT_CONSOLE	*(*color)(unsigned int);
+	OBJECT CMT_CONSOLE	*(*clear)(void);
 	OBJECT CMT_CONSOLE	*(*default_color)(void);
 	OBJECT CMT_CONSOLE	*(*x)(int);
 	OBJECT CMT_CONSOLE	*(*y)(int);
 	OBJECT CMT_CONSOLE	*(*width)(unsigned int);
 	OBJECT CMT_CONSOLE	*(*height)(unsigned int);
+
+	PTR					(*export)(void);
+	OBJECT CMT_CONSOLE	*(*import)(PTR);
 
 	OBJECT CMT_CONSOLE	*(*log)(char *);
 	OBJECT CMT_CONSOLE	*(*error)(char *);
@@ -32,91 +37,164 @@ OBJECT CMT_CONSOLE
 
 	OBJECT CMT_CONSOLE	*(*highlighter)(BOOLEAN);
 
-	struct
+	struct /* put */
 	{
-		OBJECT CMT_CONSOLE	*(*string)(unsigned int, unsigned int, char *);
-		OBJECT CMT_CONSOLE	*(*character)(unsigned int, unsigned int, char);
-		OBJECT CMT_CONSOLE	*(*color)(unsigned int, unsigned int, unsigned int);
-
-		OBJECT CMT_CONSOLE	*(*string_with_color)(
-			unsigned int, unsigned int, char *, unsigned int
+		OBJECT CMT_CONSOLE	*(*string)(char *, unsigned int, unsigned int);
+		OBJECT CMT_CONSOLE	*(*line)(
+			char,
+			unsigned int,
+			unsigned int,
+			unsigned int,
+			unsigned int
 		);
-		OBJECT CMT_CONSOLE	*(*character_with_color)(
-			unsigned int, unsigned int, char, unsigned int
+		OBJECT CMT_CONSOLE	*(*curve)(
+			char,
+			unsigned int,
+			unsigned int,
+			unsigned int,
+			unsigned int,
+			float,
+			float
+		);
+		OBJECT CMT_CONSOLE	*(*frame)(
+			char,
+			unsigned int,
+			unsigned int,
+			unsigned int,
+			unsigned int
+		);
+		OBJECT CMT_CONSOLE	*(*frame_radius)(
+			char,
+			unsigned int,
+			unsigned int,
+			unsigned int,
+			unsigned int,
+			unsigned int
+		);
+		OBJECT CMT_CONSOLE	*(*rectangle)(
+			char,
+			unsigned int,
+			unsigned int,
+			unsigned int,
+			unsigned int
+		);
+		OBJECT CMT_CONSOLE	*(*rectangle_radius)(
+			char,
+			unsigned int,
+			unsigned int,
+			unsigned int,
+			unsigned int,
+			unsigned int
+		);
+		OBJECT CMT_CONSOLE	*(*circle)(
+			char,
+			unsigned int,
+			unsigned int,
+			unsigned int,
+			unsigned int
+		);
+		OBJECT CMT_CONSOLE	*(*ellipse)(
+			char,
+			unsigned int,
+			unsigned int,
+			unsigned int,
+			unsigned int
 		);
 
-		struct
+		struct /* colored */
 		{
-			OBJECT CMT_CONSOLE	*(*character)(
-				unsigned int, unsigned int, char, unsigned int, unsigned int
+			OBJECT CMT_CONSOLE	*(*string)(
+				char *, unsigned int, unsigned int, unsigned int
 			);
-			OBJECT CMT_CONSOLE	*(*color)(
+			OBJECT CMT_CONSOLE	*(*line)(
+				char,
 				unsigned int,
 				unsigned int,
 				unsigned int,
 				unsigned int,
 				unsigned int
 			);
-
-		} line;
-
-		struct
-		{
-			OBJECT CMT_CONSOLE	*(*character)(
-				unsigned int, unsigned int, char, unsigned int, unsigned int
+			OBJECT CMT_CONSOLE	*(*curve)(
+				char,
+				unsigned int,
+				unsigned int,
+				unsigned int,
+				unsigned int,
+				unsigned int,
+				float,
+				float
 			);
-			OBJECT CMT_CONSOLE	*(*color)(
+			OBJECT CMT_CONSOLE	*(*frame)(
+				char,
 				unsigned int,
 				unsigned int,
 				unsigned int,
 				unsigned int,
 				unsigned int
 			);
-
-		} frame;
-
-		struct
-		{
-			OBJECT CMT_CONSOLE	*(*character)(
-				unsigned int, unsigned int, char, unsigned int, unsigned int
-			);
-			OBJECT CMT_CONSOLE	*(*color)(
+			OBJECT CMT_CONSOLE	*(*frame_radius)(
+				char,
+				unsigned int,
 				unsigned int,
 				unsigned int,
 				unsigned int,
 				unsigned int,
 				unsigned int
 			);
-
-		} square;
+			OBJECT CMT_CONSOLE	*(*rectangle)(
+				char,
+				unsigned int,
+				unsigned int,
+				unsigned int,
+				unsigned int,
+				unsigned int
+			);
+			OBJECT CMT_CONSOLE	*(*rectangle_radius)(
+				char,
+				unsigned int,
+				unsigned int,
+				unsigned int,
+				unsigned int,
+				unsigned int,
+				unsigned int
+			);
+			OBJECT CMT_CONSOLE	*(*circle)(
+				char,
+				unsigned int,
+				unsigned int,
+				unsigned int,
+				unsigned int,
+				unsigned int
+			);
+			OBJECT CMT_CONSOLE	*(*ellipse)(
+				char,
+				unsigned int,
+				unsigned int,
+				unsigned int,
+				unsigned int,
+				unsigned int
+			);
+		} colored;
 	} put;
 
-	struct
+	struct /* cursor */
 	{
-		OBJECT CMT_CONSOLE	*(*x)(unsigned int);
-		OBJECT CMT_CONSOLE	*(*y)(unsigned int);
 		OBJECT CMT_CONSOLE	*(*color)(unsigned int);
 		OBJECT CMT_CONSOLE	*(*default_color)();
 
-		OBJECT CMT_CONSOLE	*(*goto_xy)(unsigned int, unsigned int);
-		OBJECT CMT_CONSOLE	*(*goto_x)(unsigned int);
-		OBJECT CMT_CONSOLE	*(*goto_y)(unsigned int);
+		OBJECT CMT_CONSOLE	*(*xy)(unsigned int, unsigned int);
+		OBJECT CMT_CONSOLE	*(*x)(unsigned int);
+		OBJECT CMT_CONSOLE	*(*y)(unsigned int);
 
 		OBJECT CMT_CONSOLE	*(*move_xy)(unsigned int, unsigned int);
 		OBJECT CMT_CONSOLE	*(*move_x)(unsigned int);
 		OBJECT CMT_CONSOLE	*(*move_y)(unsigned int);
 
-		struct
-		{
-			const int			x;
-			const int			y;
-			const unsigned int	color;
-			const unsigned int	default_color;
-			const unsigned int	size;
-		} get;
+		OBJECT CMT_CONSOLE	*(*show)(BOOLEAN);
+		OBJECT CMT_CONSOLE	*(*hide)(BOOLEAN);
 	} cursor;
 
-	struct
+	struct /* get */
 	{
 		const int			x;
 		const int			y;
@@ -124,11 +202,21 @@ OBJECT CMT_CONSOLE
 		const unsigned int	default_color;
 		const unsigned int	width;
 		const unsigned int	height;
+
+		struct /* cursor */
+		{
+			const unsigned long	size;
+			const int			x;
+			const int			y;
+			const unsigned int	color;
+			const unsigned int	default_color;
+			const BOOLEAN		visible;
+		} cursor;
 	} get;
 
 	void					(*free)(void);
-	BOOLEAN					_HIGHLIGHTER;
 	T_CONSOLE_OUT_HANDLE	_OUT_HANDLE;
+	BOOLEAN					_HIGHLIGHTER;
 };
 
 /* *************************** [v] MVS LINKER [v] *************************** */
@@ -140,8 +228,10 @@ OBJECT CMT_CONSOLE
 #define CMT_CONSOLE_C_OOP__WARNING MTCOPWAR
 #define CMT_CONSOLE_C_OOP__WARNING_AT MTCOPWAT
 #define CMT_CONSOLE_C_OOP__ERROR MTCOPERR
+#define CMT_CONSOLE_C_OOP__ERROR_AT MTCOPEAT
 #define CMT_CONSOLE_C_OOP__CURSOR_COLOR MTCOPCCO
 #define CMT_CONSOLE_C_OOP__CURSOR_DEFAULT_COLOR MTCOPCDC
+#define CMT_CONSOLE_C_OOP__PUT_STRING MTCOPPTS
 #endif /* __MVS__ */
 /* *************************** [^] MVS LINKER [^] *************************** */
 
@@ -157,8 +247,14 @@ extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__WARNING_AT(\
 	char *, char *, unsigned int\
 );
 extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__ERROR(char *);
+extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__ERROR_AT(\
+	char *, char *, unsigned int\
+);
 extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__CURSOR_COLOR(unsigned int);
 extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__CURSOR_DEFAULT_COLOR(void);
+extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__PUT_STRING(\
+	char *, unsigned int, unsigned int\
+);
 #else /* K&R */
 extern CMT_CONSOLE_C_OOP__FREE();
 extern CMT_CONSOLE(void);
@@ -166,8 +262,10 @@ extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__LOG();
 extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__WARNING();
 extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__WARNING_AT();
 extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__ERROR();
+extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__ERROR_AT();
 extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__CURSOR_COLOR();
 extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__CURSOR_DEFAULT_COLOR();
+extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__PUT_STRING();
 #endif /* !KNR_STYLE */
 /* **************************** [^] EXTERNS [^] ***************************** */
 
@@ -177,9 +275,12 @@ extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__CURSOR_DEFAULT_COLOR();
 #include "C_OOP/WARNING.INL"
 #include "C_OOP/WARNING_AT.INL"
 #include "C_OOP/ERROR.INL"
+#include "C_OOP/ERROR_AT.INL"
 
 #include "C_OOP/CURSOR/COLOR.INL"
 #include "C_OOP/CURSOR/DEFAULT_COLOR.INL"
+
+#include "C_OOP/PUT/STRING.INL"
 
 #define LOCALCONSTRUCTOR__CONSOLE \
 	LOCALMACRO__OBJECT_SENDER (console);\
@@ -199,8 +300,10 @@ extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__CURSOR_DEFAULT_COLOR();
 	LOCALFUNCTION__CMT_CONSOLE_C_OOP__WARNING \
 	LOCALFUNCTION__CMT_CONSOLE_C_OOP__WARNING_AT \
 	LOCALFUNCTION__CMT_CONSOLE_C_OOP__ERROR \
+	LOCALFUNCTION__CMT_CONSOLE_C_OOP__ERROR_AT \
 	LOCALFUNCTION__CMT_CONSOLE_C_OOP__CURSOR_COLOR \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__CURSOR_DEFAULT_COLOR
+	LOCALFUNCTION__CMT_CONSOLE_C_OOP__CURSOR_DEFAULT_COLOR \
+	LOCALFUNCTION__CMT_CONSOLE_C_OOP__PUT_STRING
 
 /*   /\   #==========================================================#   /\   */
 /*  //\\  |                 LINKABLE MEMBER CREATION                 |  //\\  */

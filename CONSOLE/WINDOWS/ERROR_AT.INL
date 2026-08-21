@@ -2,7 +2,7 @@
 #error "ERROR - PLEASE DON'T USE THIS LIBRARY DIRECTLY!!!"
 #endif /* !CONSOLE_HPP */
 
-#define LOCALMACRO__CMT_CONSOLE__WARNING_AT_CONTENT \
+#define LOCALMACRO__CMT_CONSOLE__ERROR_AT_CONTENT \
 	char	INT_STR[12];\
 	\
 	{\
@@ -42,14 +42,17 @@
 	}\
 	\
 	if (THIS->_HIGHLIGHTER)\
-		THIS->cursor.color(0XF)\
+		THIS->cursor.color(0XB)\
 			->log("\n ")\
 			->log(THE_FILE)\
-			->log(":(")\
+			->cursor.default_color()\
+			->log(" (")\
+			->cursor.color(0XB)\
 			->log(INT_STR)\
+			->cursor.default_color()\
 			->log("): ")\
-			->cursor.color(0XD)\
-			->log("WARNING")\
+			->cursor.color(0XC)\
+			->log("ERROR")\
 			->cursor.default_color()\
 			->log(": ")\
 			->cursor.color(0XF)\
@@ -61,7 +64,7 @@
 			->log(":(")\
 			->log(INT_STR)\
 			->log("): ")\
-			->log("WARNING: ")\
+			->log("ERROR: ")\
 			->log(STRING);
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\

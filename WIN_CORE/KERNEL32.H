@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2026/05/19 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/08/18 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/08/20 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -161,6 +161,14 @@ typedef LONG_PTR  SSIZE_T;
 /******* """"""""""""""""""""""""""""""""""""""
  * struct S_CONSOLE_SCREEN_BUFFER_INFO;
  */
+#include "STRUCTS/COORD.H"
+/******* """""""""""""""""
+ * struct S_COORD;
+ */
+#include "STRUCTS/CONSOLE_CURSOR_INFO.H"
+/******* """""""""""""""""""""""""""""""
+ * struct S_CONSOLE_CURSOR_INFO;
+ */
 
 struct S_SYSTEM_INFO test1;
 struct S_CRITICAL_SECTION test2;
@@ -306,6 +314,13 @@ struct S_KERNEL32
 	int				(STDCALL *GetConsoleScreenBufferInfo)(
 		PTR, struct S_CONSOLE_SCREEN_BUFFER_INFO *
 	);
+	int				(STDCALL *SetConsoleCursorPosition)(PTR, struct S_COORD);
+	int				(STDCALL *SetConsoleCursorInfo)(\
+		PTR, struct S_CONSOLE_CURSOR_INFO *\
+	);
+	int				(STDCALL *GetConsoleCursorInfo)(\
+		PTR, struct S_CONSOLE_CURSOR_INFO *\
+	);
 #else /* K&R */
 	PTR				(STDCALL *LoadLibraryA)();
 	PTR				(STDCALL *LoadLibraryExA)();
@@ -367,6 +382,9 @@ struct S_KERNEL32
 	int				(STDCALL *UnmapViewOfFile)();
 	int				(STDCALL *SetConsoleTextAttribute)();
 	int				(STDCALL *GetConsoleScreenBufferInfo)();
+	int				(STDCALL *SetConsoleCursorPosition)();
+	int				(STDCALL *SetConsoleCursorInfo)();
+	int				(STDCALL *GetConsoleCursorInfo)();
 #endif /* !KNR_STYLE */
 };
 EXTERN_C_END
@@ -432,12 +450,10 @@ EXTERN_C_END
 			PEB_GET_EXPORT(KERNEL32.SELF, "GetCurrentProcess");\
 		KERNEL32.FlushInstructionCache = \
 			PEB_GET_EXPORT(KERNEL32.SELF, "FlushInstructionCache");\
-		KERNEL32.LoadLibraryA = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "LoadLibraryA");\
+		KERNEL32.LoadLibraryA = PEB_GET_EXPORT(KERNEL32.SELF, "LoadLibraryA");\
 		KERNEL32.LoadLibraryExA = \
 			PEB_GET_EXPORT(KERNEL32.SELF, "LoadLibraryExA");\
-		KERNEL32.FreeLibrary = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "FreeLibrary");\
+		KERNEL32.FreeLibrary = PEB_GET_EXPORT(KERNEL32.SELF, "FreeLibrary");\
 		KERNEL32.GetProcAddress = \
 			PEB_GET_EXPORT(KERNEL32.SELF, "GetProcAddress");\
 		KERNEL32.GetModuleHandleA = \
@@ -446,24 +462,18 @@ EXTERN_C_END
 			PEB_GET_EXPORT(KERNEL32.SELF, "GetCurrentProcessId");\
 		KERNEL32.TerminateProcess = \
 			PEB_GET_EXPORT(KERNEL32.SELF, "TerminateProcess");\
-		KERNEL32.ExitProcess = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "ExitProcess");\
-		KERNEL32.CreateThread = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "CreateThread");\
+		KERNEL32.ExitProcess = PEB_GET_EXPORT(KERNEL32.SELF, "ExitProcess");\
+		KERNEL32.CreateThread = PEB_GET_EXPORT(KERNEL32.SELF, "CreateThread");\
 		KERNEL32.GetCurrentThread = \
 			PEB_GET_EXPORT(KERNEL32.SELF, "GetCurrentThread");\
 		KERNEL32.GetCurrentThreadId = \
 			PEB_GET_EXPORT(KERNEL32.SELF, "GetCurrentThreadId");\
-		KERNEL32.ExitThread = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "ExitThread");\
+		KERNEL32.ExitThread = PEB_GET_EXPORT(KERNEL32.SELF, "ExitThread");\
 		KERNEL32.SuspendThread = \
 			PEB_GET_EXPORT(KERNEL32.SELF, "SuspendThread");\
-		KERNEL32.ResumeThread = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "ResumeThread");\
-		KERNEL32.VirtualAlloc = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "VirtualAlloc");\
-		KERNEL32.VirtualFree = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "VirtualFree");\
+		KERNEL32.ResumeThread = PEB_GET_EXPORT(KERNEL32.SELF, "ResumeThread");\
+		KERNEL32.VirtualAlloc = PEB_GET_EXPORT(KERNEL32.SELF, "VirtualAlloc");\
+		KERNEL32.VirtualFree = PEB_GET_EXPORT(KERNEL32.SELF, "VirtualFree");\
 		KERNEL32.VirtualProtect = \
 			PEB_GET_EXPORT(KERNEL32.SELF, "VirtualProtect");\
 		KERNEL32.RtlMoveMemory = \
@@ -474,24 +484,15 @@ EXTERN_C_END
 			PEB_GET_EXPORT(KERNEL32.SELF, "RtlZeroMemory");\
 		KERNEL32.GetProcessHeap = \
 			PEB_GET_EXPORT(KERNEL32.SELF, "GetProcessHeap");\
-		KERNEL32.HeapAlloc = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "HeapAlloc");\
-		KERNEL32.HeapFree = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "HeapFree");\
-		KERNEL32.CreateFileA = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "CreateFileA");\
-		KERNEL32.ReadFile = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "ReadFile");\
-		KERNEL32.WriteFile = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "WriteFile");\
-		KERNEL32.CloseHandle = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "CloseHandle");\
-		KERNEL32.GetFileSize = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "GetFileSize");\
-		KERNEL32.DeleteFileA = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "DeleteFileA");\
-		KERNEL32.GetStdHandle = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "GetStdHandle");\
+		KERNEL32.HeapAlloc = PEB_GET_EXPORT(KERNEL32.SELF, "HeapAlloc");\
+		KERNEL32.HeapFree = PEB_GET_EXPORT(KERNEL32.SELF, "HeapFree");\
+		KERNEL32.CreateFileA = PEB_GET_EXPORT(KERNEL32.SELF, "CreateFileA");\
+		KERNEL32.ReadFile = PEB_GET_EXPORT(KERNEL32.SELF, "ReadFile");\
+		KERNEL32.WriteFile = PEB_GET_EXPORT(KERNEL32.SELF, "WriteFile");\
+		KERNEL32.CloseHandle = PEB_GET_EXPORT(KERNEL32.SELF, "CloseHandle");\
+		KERNEL32.GetFileSize = PEB_GET_EXPORT(KERNEL32.SELF, "GetFileSize");\
+		KERNEL32.DeleteFileA = PEB_GET_EXPORT(KERNEL32.SELF, "DeleteFileA");\
+		KERNEL32.GetStdHandle = PEB_GET_EXPORT(KERNEL32.SELF, "GetStdHandle");\
 		KERNEL32.WriteConsoleA = \
 			PEB_GET_EXPORT(KERNEL32.SELF, "WriteConsoleA");\
 		KERNEL32.WaitForSingleObject = \
@@ -499,22 +500,16 @@ EXTERN_C_END
 		KERNEL32.Sleep = PEB_GET_EXPORT(KERNEL32.SELF, "Sleep");\
 		KERNEL32.GetSystemTime = \
 			PEB_GET_EXPORT(KERNEL32.SELF, "GetSystemTime");\
-		KERNEL32.GetLocalTime = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "GetLocalTime");\
+		KERNEL32.GetLocalTime = PEB_GET_EXPORT(KERNEL32.SELF, "GetLocalTime");\
 		KERNEL32.QueryPerformanceCounter = \
 			PEB_GET_EXPORT(KERNEL32.SELF, "QueryPerformanceCounter");\
 		KERNEL32.QueryPerformanceFrequency = \
 			PEB_GET_EXPORT(KERNEL32.SELF, "QueryPerformanceFrequency");\
-		KERNEL32.GetLastError = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "GetLastError");\
-		KERNEL32.SetLastError = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "SetLastError");\
-		KERNEL32.lstrcmpA = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "lstrcmpA");\
-		KERNEL32.lstrcpyA = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "lstrcpyA");\
-		KERNEL32.lstrlenA = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "lstrlenA");\
+		KERNEL32.GetLastError = PEB_GET_EXPORT(KERNEL32.SELF, "GetLastError");\
+		KERNEL32.SetLastError = PEB_GET_EXPORT(KERNEL32.SELF, "SetLastError");\
+		KERNEL32.lstrcmpA = PEB_GET_EXPORT(KERNEL32.SELF, "lstrcmpA");\
+		KERNEL32.lstrcpyA = PEB_GET_EXPORT(KERNEL32.SELF, "lstrcpyA");\
+		KERNEL32.lstrlenA = PEB_GET_EXPORT(KERNEL32.SELF, "lstrlenA");\
 		KERNEL32.GetSystemInfo = \
 			PEB_GET_EXPORT(KERNEL32.SELF, "GetSystemInfo");\
 		KERNEL32.GetExitCodeThread = \
@@ -527,16 +522,12 @@ EXTERN_C_END
 			PEB_GET_EXPORT(KERNEL32.SELF, "EnterCriticalSection");\
 		KERNEL32.LeaveCriticalSection = \
 			PEB_GET_EXPORT(KERNEL32.SELF, "LeaveCriticalSection");\
-		KERNEL32.GlobalAlloc = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "GlobalAlloc");\
-		KERNEL32.GlobalLock = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "GlobalLock");\
-		KERNEL32.GlobalUnlock = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "GlobalUnlock");\
+		KERNEL32.GlobalAlloc = PEB_GET_EXPORT(KERNEL32.SELF, "GlobalAlloc");\
+		KERNEL32.GlobalLock = PEB_GET_EXPORT(KERNEL32.SELF, "GlobalLock");\
+		KERNEL32.GlobalUnlock = PEB_GET_EXPORT(KERNEL32.SELF, "GlobalUnlock");\
 		KERNEL32.GlobalReAlloc = \
 			PEB_GET_EXPORT(KERNEL32.SELF, "GlobalReAlloc");\
-		KERNEL32.GlobalFree = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "GlobalFree");\
+		KERNEL32.GlobalFree = PEB_GET_EXPORT(KERNEL32.SELF, "GlobalFree");\
 		KERNEL32.CreateFileMappingA = \
 			PEB_GET_EXPORT(KERNEL32.SELF, "CreateFileMappingA");\
 		KERNEL32.MapViewOfFile = \
@@ -547,6 +538,12 @@ EXTERN_C_END
 			PEB_GET_EXPORT(KERNEL32.SELF, "SetConsoleTextAttribute");\
 		KERNEL32.GetConsoleScreenBufferInfo = \
 			PEB_GET_EXPORT(KERNEL32.SELF, "GetConsoleScreenBufferInfo");\
+		KERNEL32.SetConsoleCursorPosition = \
+			PEB_GET_EXPORT(KERNEL32.SELF, "SetConsoleCursorPosition");\
+		KERNEL32.SetConsoleCursorInfo = \
+			PEB_GET_EXPORT(KERNEL32.SELF, "SetConsoleCursorInfo");\
+		KERNEL32.GetConsoleCursorInfo = \
+			PEB_GET_EXPORT(KERNEL32.SELF, "GetConsoleCursorInfo");\
 	}\
 	while (0);
 

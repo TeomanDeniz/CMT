@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2026/08/10 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/08/19 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/08/20 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -86,6 +86,15 @@
 #define ERROR_HERE(STRING) error_at((STRING), LOG_CURRENT)
 #define warning_here(STRING) WARNING_HERE(STRING)
 #define error_here(STRING) ERROR_HERE(STRING)
+
+/* ********************* [v] METAWARE HIGH C LINKER [v] ********************* */
+/* * METAWARE LINKER DOES NOT SUPPORT LOWER CASE NAMES ON FUNCTION NAMES!!! * */
+#ifdef __HIGHC__ /* METAWARE HIGH C/C++ */
+#define LOCALLINKER__CONSOLE_HIGHC pragma Alias(console, "CONSOLE");
+#else /* !__HIGHC__ */
+#define LOCALLINKER__CONSOLE_HIGHC
+#endif /* __HIGHC__ */
+/* ********************* [^] METAWARE HIGH C LINKER [^] ********************* */
 
 /* ****************************** [v] UNIX [v] ****************************** */
 #ifdef __PLATFORM_AIX__
@@ -423,6 +432,7 @@
 
 /* [v] %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% /!\ IMPORTANT /!\ */
 EXTERN_C_START
+LOCALLINKER__CONSOLE_HIGHC
 LOCALLINKER__CONSOLE
 EXTERN_C_END
 /* [^] %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% /!\ IMPORTANT /!\ */
@@ -432,7 +442,7 @@ EXTERN_C_END
 
 /* [v] %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% /!\ IMPORTANT /!\ */
 #undef GLOBALLINKER__CONSOLE
-#define GLOBALLINKER__CONSOLE LOCALLINKER__CONSOLE
+#define GLOBALLINKER__CONSOLE LOCALLINKER__CONSOLE_HIGHC LOCALLINKER__CONSOLE
 /* [^] %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% /!\ IMPORTANT /!\ */
 
 #include "CMT/LINKER.INL"
