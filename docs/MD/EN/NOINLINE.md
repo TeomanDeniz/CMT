@@ -46,7 +46,7 @@ NOINLINE void log_message(const char *message)
  - [noinline - clang.llvm.org](https://clang.llvm.org/docs/AttributeReference.html#noinline)
  - [noinline - ibm.com](https://www.ibm.com/docs/en/xl-c-and-cpp-linux/16.1.1?topic=attributes-noinline)
  - [The noinline function attribute - ibm.com](https://www.ibm.com/docs/en/i/7.5.0?topic=attributes-noinline-function-attribute)
- - [noinline - microsoft.com](https://learn.microsoft.com/en-us/cpp/cpp/noinline?view=msvc-170)
+ - [noinline - microsoft.com](https://learn.microsoft.com/en-us/cpp/cpp/noinline)
  - [\_\_attribute\_\_((noinline)) function attribute - arm.com](https://support.arm.com/documentation/dui0472/k/Compiler-specific-Features/--attribute----noinline---function-attribute)
  - [noinline - gcc.gnu.org](https://gcc.gnu.org/onlinedocs/gcc/Common-Attributes.html#index-noinline)
  - [Intel® C++ Compiler Classic Developer

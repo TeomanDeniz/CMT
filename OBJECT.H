@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2025/05/25 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/08/12 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/08/31 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -728,7 +728,7 @@
 #define INCL_CMT_ASM_PUSH
 #include "ASM.H"
 /******* """""""
- * #define _MOVABS_RAX_(SELF)
+ * #define _MOVABS_R10_(SELF)
  * #define _MOVABS_R11_(TARGET)
  * #define _JMP_R11
  * #define _MOV_EAX_(SELF)
@@ -737,7 +737,7 @@
  * #define _MOV_AX_(SELF)
  * #define _PUSH_(TARGET)
  * #define _RET
- * #define SIZEOF_MOVABS_RAX_
+ * #define SIZEOF_MOVABS_R10_
  * #define SIZEOF_MOVABS_R11_
  * #define SIZEOF_JMP_R11
  * #define SIZEOF_MOV_EAX_
@@ -770,10 +770,6 @@
  * #define __SYSTEM_32_BIT__
  * #define __SYSTEM_16_BIT__
  */
-#include "ASM/C/INTEL/RAX.H"
-/******* """""""""""""""""""
- * #define GET_RAX(VAR)
- */
 #include "KEYWORDS/TYPES.H"
 /******* """"""""""""""""""
  * typedef PTR;
@@ -790,8 +786,8 @@
 /* **************************** [^] INCLUDES [^] **************************** */
 
 /* ****************** [v] STACK PROTECTOR SUPPRESSION [v] ******************* *\
-|* **** THE TRAMPOLINE RECEIVES ITS VALUE IN "RAX", BUT GCC'S CANARY      *** *|
-|* **** PROLOGUE LOADS THROUGH "RAX" AND THEN ZEROES IT, DESTROYING THE   *** *|
+|* **** THE TRAMPOLINE RECEIVES ITS VALUE IN "R10", BUT GCC'S CANARY      *** *|
+|* **** PROLOGUE LOADS THROUGH "R10" AND THEN ZEROES IT, DESTROYING THE   *** *|
 |* **** VALUE BEFORE ANY USER CODE RUNS. "push_options" / "pop_options"   *** *|
 |* **** KEEP THE SUPPRESSION FROM LEAKING INTO ANYTHING ELSE - WITHOUT    *** *|
 |* **** THEM EVERY FUNCTION DEFINED LATER IN THE TRANSLATION UNIT LOSES   *** *|
@@ -859,7 +855,7 @@ CMT_NO_SSP_PUSH
 #ifdef __CPU_INTEL__
 #ifdef __SYSTEM_64_BIT__
 #define LOCALMACRO__FUNCTION_SIZE \
-	(SIZEOF_MOVABS_RAX_ + SIZEOF_MOVABS_R11_ + SIZEOF_JMP_R11)
+	(SIZEOF_MOVABS_R10_ + SIZEOF_MOVABS_R11_ + SIZEOF_JMP_R11)
 #endif /* __SYSTEM_64_BIT__ */
 
 #ifdef __SYSTEM_32_BIT__
@@ -973,14 +969,33 @@ CMT_NO_SSP_PUSH
 
 /* ####################### [v] TRAMPOLINE CONTENT [v] ####################### */
 #ifdef __CPU_INTEL__
+#ifdef __SYSTEM_64_BIT__
+#include "ASM/C/INTEL/R10.H"
+/******* """""""""""""""""""
+ * #define GET_R10(VALUE)
+ * #define SET_R10(VARIABLE)
+ */
+
+#define LOCALMACRO__OBJECT_SENDER(OBJECT_VARIABLE) \
+	SET_R10(&(OBJECT_VARIABLE))
+#define LOCALMACRO__OBJECT_RECEIVER(__SELF__) \
+	GET_R10(__SELF__)
+#else /* !__SYSTEM_64_BIT__ */
+#include "ASM/C/INTEL/RAX.H"
+/******* """""""""""""""""""
+ * #define GET_RAX(VALUE)
+ * #define SET_RAX(VARIABLE)
+ */
+
 #define LOCALMACRO__OBJECT_SENDER(OBJECT_VARIABLE) \
 	SET_RAX(&(OBJECT_VARIABLE))
 #define LOCALMACRO__OBJECT_RECEIVER(__SELF__) \
 	GET_RAX(__SELF__)
+#endif /* __SYSTEM_64_BIT__ */
 
 #ifdef __SYSTEM_64_BIT__
 #define LOCALMACRO__OBJECT_INJECTOR(OBJECT_PTR, SOURCE) \
-	_MOVABS_RAX_(OBJECT_PTR)\
+	_MOVABS_R10_(OBJECT_PTR)\
 	_MOVABS_R11_(SOURCE)\
 	_JMP_R11
 #else /* !__SYSTEM_64_BIT__ */

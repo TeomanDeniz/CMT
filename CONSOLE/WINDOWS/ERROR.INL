@@ -3,7 +3,7 @@
 #endif /* !CONSOLE_HPP */
 
 #define LOCALMACRO__CMT_CONSOLE__ERROR_CONTENT \
-	if (THIS->_HIGHLIGHTER)\
+	if (THIS->highlighter)\
 		THIS->cursor.color(0XC)\
 			->log(" ERROR")\
 			->cursor.default_color()\

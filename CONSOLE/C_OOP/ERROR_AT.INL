@@ -7,17 +7,15 @@
 	OBJECT CMT_CONSOLE\
 		*CMT_CONSOLE_C_OOP__ERROR_AT(\
 			char *STRING,\
-			char *THE_FILE, \
-			unsigned int THE_LINE \
+			char *THE_FILE,\
+			unsigned int THE_LINE\
 		)
 #else /* K&R */
 #define FUNCTION_HEADER__CMT_CONSOLE_C_OOP__ERROR_AT \
 	OBJECT CMT_CONSOLE\
-		*CMT_CONSOLE_C_OOP__ERROR_AT(\
-			STRING, THE_FILE, THE_LINE\
-		)\
+		*CMT_CONSOLE_C_OOP__ERROR_AT(STRING, THE_FILE, THE_LINE)\
 		char			*STRING;\
-		char			*THE_FILE; \
+		char			*THE_FILE;\
 		unsigned int	THE_LINE;
 #endif /* !KNR_STYLE */
 

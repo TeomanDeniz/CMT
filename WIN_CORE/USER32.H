@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2026/07/28 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/08/05 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/08/22 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -95,6 +95,11 @@
 /* **************************** [^] INCLUDES [^] **************************** */
 
 /* **************************** [v] STRUCTS [v] ***************************** */
+#include "STRUCTS/RECT.H"
+/******* """"""""""""""""
+ * struct S_RECT;
+ */
+
 EXTERN_C_START
 struct S_USER32
 {
@@ -129,7 +134,7 @@ struct S_USER32
 	int				(STDCALL *SetWindowPos)(
 		PTR, PTR, int, int, int, int, unsigned int
 	);
-	int				(STDCALL *GetWindowRect)(PTR, PTR);
+	int				(STDCALL *GetWindowRect)(PTR, struct S_RECT *);
 	int				(STDCALL *GetClientRect)(PTR, PTR);
 	int				(STDCALL *AdjustWindowRectEx)(
 		PTR, unsigned long, int, unsigned long

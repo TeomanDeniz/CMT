@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2026/08/10 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/08/20 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/08/28 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -67,8 +67,9 @@
  */
 #include "KEYWORDS/BOOLEAN.H"
 /******* """"""""""""""""""""
- * #define boolean
- * #define true
+ * #define BOOLEAN
+ * #define TRUE
+ * #define FALSE
  */
 #include "KEYWORDS/TYPES.H"
 /******* """"""""""""""""""
@@ -78,6 +79,22 @@
  * typedef	VAR;
  * typedef	PTR;
  * typedef	FAR_PTR;
+ */
+#include "KEYWORDS/VA_ARGS.H"
+/******* """"""""""""""""""""
+ * #define VA_ARG
+ * #define VA_COPY
+ * #define VA_BEGIN
+ * #define VA_END
+ * #define VA_ARGS
+ * #define VA_DECLARE
+ * typedef	VA_LIST;
+ */
+#include "OS_API/MEMORY.H"
+/******* """""""""""""""""
+ * PTR	ALLOC(LET);
+ * void	FREE(PTR);
+ * PTR	REALLOC(PTR, LET);
  */
 /* **************************** [^] INCLUDES [^] **************************** */
 

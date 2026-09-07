@@ -210,6 +210,7 @@ If you include an `H` file in both C and C++, you just get stright functions or 
  * [![][__ASM_GIF__] **ASM**][__ASM_MD__]
    * ![][__INTEL_ASM_GIF__] Intel
      * [![][__ASM_CONTENT_GIF__] **RAX**][__RAX_MD__]
+     * [![][__ASM_CONTENT_GIF__] **R10**][__R10_MD__]
      * [![][__ASM_CONTENT_GIF__] **CPUID**][__CPUID_MD__]
    * ![][__ARM_ASM_GIF__] ARM
      * [![][__ASM_CONTENT_GIF__] **MIDR**][__MIDR_MD__]
@@ -223,6 +224,7 @@ If you include an `H` file in both C and C++, you just get stright functions or 
  * [![][__EXTERN_C_GIF__] **EXTERN_C**][__EXTERN_C_MD__]
  * [![][__FAR_GIF__] **FAR**][__FAR_MD__]
  * [![][__FASTCALL_GIF__] **FASTCALL**][__FASTCALL_MD__]
+ * [![][__INLINE_GIF__] **INLINE**][__INLINE_MD__]
  * [![][__LOCAL_GIF__] **LOCAL**][__LOCAL_MD__]
  * [![][__NOINLINE_GIF__] **NOINLINE**][__NOINLINE_MD__]
  * [![][__PACK_GIF__] **PACK**][__PACK_MD__]
@@ -251,6 +253,7 @@ If you include an `H` file in both C and C++, you just get stright functions or 
  * [![][__IGNORE_VAR_GIF__] **IGNORE_VAR**][__IGNORE_VAR_MD__]
  * [![][__TRY_CATCH_GIF__] **TRY_CATCH**][__TRY_CATCH_MD__]
  * [![][__TYPES_GIF__] **TYPES**][__TYPES_MD__]
+ * [![][__VA_ARGS_GIF__] **VA_ARGS**][__VA_ARGS_MD__]
 
 ## ![][__LIB_GIF__] LIB
 
@@ -269,23 +272,23 @@ If you include an `H` file in both C and C++, you just get stright functions or 
 
 This section contains additional documentation explaining how I achieved the features in my ecosystem.
 
-## [**[📜 BOUND_METHODS_IN_ISO_C_VIA_TRAMPOLINES](https://docs.google.com/viewer?url=https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/ARTICLES/EN/BOUND_METHODS_IN_ISO_C_VIA_TRAMPOLINES.pdf)**]
+## [**[📜 BOUND_METHODS_IN_ISO_C_VIA_TRAMPOLINES.pdf](https://docs.google.com/viewer?url=https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/ARTICLES/EN/BOUND_METHODS_IN_ISO_C_VIA_TRAMPOLINES.pdf)**]
 
 It explains how I managed to create real OOP ergonomics in pure C.
 
 Instead of calling `struct.member(&struct, 42);`, you can simply write: `struct.member(42);`.
 
-## [**[📜 CROSS_COMPILER_AUTO_LINKING_AND_CONSTRUCTION_METHOD_WITH_MACROS_ONLY](https://docs.google.com/viewer?url=https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/ARTICLES/EN/CROSS_COMPILER_AUTO_LINKING_AND_CONSTRUCTION_METHOD_WITH_MACROS_ONLY.pdf)**]
+## [**[📜 CROSS_COMPILER_AUTO_LINKING_AND_CONSTRUCTION_METHOD_WITH_MACROS_ONLY.pdf](https://docs.google.com/viewer?url=https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/ARTICLES/EN/CROSS_COMPILER_AUTO_LINKING_AND_CONSTRUCTION_METHOD_WITH_MACROS_ONLY.pdf)**]
 
 It explains how I managed to define linkable functions and global variables only once, even though they are defined inside a header.
 
 It also explains how I created a custom constructor and destructor system that runs before and after the `main` function.
 
-## [**[📜 USE_ASSEMBLY_IN_PURE_C_WITHOUT_NEEDING_INLINE_ASSEMBLY](https://docs.google.com/viewer?url=https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/ARTICLES/EN/USE_ASSEMBLY_IN_PURE_C_WITHOUT_NEEDING_INLINE_ASSEMBLY.pdf)**]
+## [**[📜 USE_ASSEMBLY_IN_PURE_C_WITHOUT_NEEDING_INLINE_ASSEMBLY.pdf](https://docs.google.com/viewer?url=https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/ARTICLES/EN/USE_ASSEMBLY_IN_PURE_C_WITHOUT_NEEDING_INLINE_ASSEMBLY.pdf)**]
 
 It explains how I made Assembly code written in a `.c` file using my macro-based DSL continue to work even when the compiler does not support inline assembly.
 
-## [**[📜 THREAD_SUPPORT_IN_NON_MULTI_THREAD_PLATFORMS](https://docs.google.com/viewer?url=https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/ARTICLES/EN/THREAD_SUPPORT_IN_NON_MULTI_THREAD_PLATFORMS.pdf)**]
+## [**[📜 THREAD_SUPPORT_IN_NON_MULTI_THREAD_PLATFORMS.pdf](https://docs.google.com/viewer?url=https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/ARTICLES/EN/THREAD_SUPPORT_IN_NON_MULTI_THREAD_PLATFORMS.pdf)**]
 
 It explains how I implemented a custom threading system for platforms like MS-DOS that do not support multithreading at all.
 
@@ -437,6 +440,7 @@ List of the icons:
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/W_XOR_X.gif" ALT="W_XOR_X" TITLE="W_XOR_X"/>
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/__PEB_LOADER__.gif" ALT="__PEB_LOADER__" TITLE="__PEB_LOADER__"/>
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/NOINLINE.gif" ALT="NOINLINE" TITLE="NOINLINE"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/INLINE.gif" ALT="INLINE" TITLE="INLINE"/>
 </details>
 
 <details>
@@ -497,6 +501,7 @@ List of the icons:
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/W_XOR_X.gif" ALT="W_XOR_X" TITLE="W_XOR_X"/>
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/__PEB_LOADER__.gif" ALT="__PEB_LOADER__" TITLE="__PEB_LOADER__"/>
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/NOINLINE.gif" ALT="NOINLINE" TITLE="NOINLINE"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/INLINE.gif" ALT="INLINE" TITLE="INLINE"/>
 </details>
 
 ---
@@ -512,7 +517,7 @@ List of the icons:
 - This means it can be freely used in open source projects compatible with GPL-3.0.
 - If you want to use CMT in proprietary or closed-source software, a commercial license is required.
 - For commercial licensing inquiries, contact me.
-- *© Maximum Tension all rights NOT reserved - 2023*
+- *© Maximum Tension™ all rights NOT reserved - 2023*
 
 <!-- MARKDOWNS -->
 [__OBJECT_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/OBJECT.md
@@ -556,6 +561,9 @@ List of the icons:
 [__LOCAL_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/LOCAL.md
 [__TRY_CATCH_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/TRY_CATCH.md
 [__UNUSED_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/UNUSED.md
+[__INLINE_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/INLINE.md
+[__VA_ARGS_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/VA_ARGS.md
+[__R10_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/R10.md
 <!-- MARKDOWNS -->
 
 <!-- ICONS -->
@@ -610,4 +618,6 @@ List of the icons:
 [__PUSH_POP_GIF__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/IMAGES/32/PUSH_POP.gif
 [__TRY_CATCH_GIF__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/IMAGES/32/TRY_CATCH.gif
 [__UNUSED_GIF__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/IMAGES/32/UNUSED.gif
+[__INLINE_GIF__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/IMAGES/32/INLINE.gif
+[__VA_ARGS_GIF__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/IMAGES/32/VA_ARGS.gif
 <!-- ICONS -->

@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2025/06/22 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/08/11 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/08/29 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -27,6 +27,7 @@
 #ifndef INCL_CMT_ARCHITECTURE
 #ifndef INCL_CMT_CPU
 #ifndef INCL_CMT_RAX
+#ifndef INCL_CMT_R10
 #ifndef INCL_CMT_X17
 #ifndef INCL_CMT_STDCALL
 #ifndef INCL_CMT_COMMA_OPERATOR
@@ -58,7 +59,13 @@
 #ifndef INCL_CMT_LOCAL
 #ifndef INCL_CMT_TRY_CATCH
 #ifndef INCL_CMT_UNUSED
+#ifndef INCL_CMT_INLINE
+#ifndef INCL_CMT_VA_ARGS
+#ifndef INCL_CMT_CONSOLE
 #define LOCALMACRO_DEFINE_ALL_TRY_1
+#endif /* !INCL_CMT_CONSOLE */
+#endif /* !INCL_CMT_VA_ARGS */
+#endif /* !INCL_CMT_INLINE */
 #endif /* !INCL_CMT_UNUSED */
 #endif /* !INCL_CMT_TRY_CATCH */
 #endif /* !INCL_CMT_LOCAL */
@@ -90,6 +97,7 @@
 #endif /* !INCL_CMT_COMMA_OPERATOR */
 #endif /* !INCL_CMT_STDCALL */
 #endif /* !INCL_CMT_X17 */
+#endif /* !INCL_CMT_R10 */
 #endif /* !INCL_CMT_RAX */
 #endif /* !INCL_CMT_CPU */
 #endif /* !INCL_CMT_ARCHITECTURE */
@@ -193,6 +201,10 @@
 #ifndef INCL_CMT_UNUSED
 #define INCL_CMT_UNUSED
 #endif /* !INCL_CMT_UNUSED */
+
+#ifndef INCL_CMT_INLINE
+#define INCL_CMT_INLINE
+#endif /* !INCL_CMT_INLINE */
 #endif /* INCL_CMT_ATTRIBUTES */
 /* *************************** [^] ATTRIBUTES [^] *************************** */
 
@@ -264,6 +276,10 @@
 #ifndef INCL_CMT_TRY_CATCH
 #define INCL_CMT_TRY_CATCH
 #endif /* !INCL_CMT_TRY_CATCH */
+
+#ifndef INCL_CMT_VA_ARGS
+#define INCL_CMT_VA_ARGS
+#endif /* !INCL_CMT_VA_ARGS */
 #endif /* INCL_CMT_KEYWORDS */
 /* **************************** [^] KEYWORDS [^] **************************** */
 
@@ -319,7 +335,7 @@
 #endif /* INCL_CMT_ASM */
 /* ****************************** [^] ASM [^] ******************************* */
 
-/* ***************************** [v] OBJECT [v] ***************************** */
+/* **************************** [v] GENERAL [v] ***************************** */
 #ifdef INCL_CMT_OBJECT
 #include "OBJECT.H"
 /******* """"""""""
@@ -342,7 +358,18 @@
  */
 #undef INCL_CMT_OBJECT
 #endif /* INCL_CMT_OBJECT */
-/* ***************************** [^] OBJECT [^] ***************************** */
+/* **************************** [^] GENERAL [^] ***************************** */
+
+/* ********************* [v] SUPER MASSIVE MODULES [v] ********************** */
+#ifdef INCL_CMT_CONSOLE
+#include "CONSOLE.H"
+/******* """""""""""
+ * object cmt_console;
+ * object cmt_console	console;
+ */
+#undef INCL_CMT_CONSOLE
+#endif /* INCL_CMT_CONSOLE */
+/* ********************* [^] SUPER MASSIVE MODULES [^] ********************** */
 
 /* ****************************** [v] ASM [v] ******************************* */
 #ifdef INCL_CMT_RAX
@@ -355,6 +382,17 @@
  */
 #undef INCL_CMT_RAX
 #endif /* INCL_CMT_RAX */
+
+#ifdef INCL_CMT_R10
+#include "ASM/C/INTEL/R10.H"
+/******* """""""""""""""""""
+ * #define GET_R10(VARIABLE)
+ * #define get_r10(variable)
+ * #define SET_R10(VALUE)
+ * #define set_r10(value)
+ */
+#undef INCL_CMT_R10
+#endif /* INCL_CMT_R10 */
 
 #ifdef INCL_CMT_CPUID
 #include "ASM/C/INTEL/CPUID.H"
@@ -615,6 +653,15 @@
  */
 #undef INCL_CMT_UNUSED
 #endif /* INCL_CMT_UNUSED */
+
+#ifdef INCL_CMT_INLINE
+#include "ATTRIBUTES/INLINE.H"
+/******* """""""""""""""""""""
+ * #define INLINE
+ * #define FORCE_INLINE
+ */
+#undef INCL_CMT_INLINE
+#endif /* INCL_CMT_INLINE */
 /* *************************** [^] ATTRIBUTES [^] *************************** */
 
 /* ************************* [v] CHECK FEATURE [v] ************************** */
@@ -904,6 +951,27 @@
  */
 #undef INCL_CMT_TRY_CATCH
 #endif /* INCL_CMT_TRY_CATCH */
+
+#ifdef INCL_CMT_VA_ARGS
+#include "KEYWORDS/VA_ARGS.H"
+/******* """"""""""""""""""""
+ * #define VA_ARG
+ * #define va_arg
+ * #define VA_COPY
+ * #define va_copy
+ * #define VA_BEGIN
+ * #define va_begin
+ * #define VA_END
+ * #define va_end
+ * #define VA_ARGS
+ * #define va_args
+ * #define VA_DECLARE
+ * #define va_declare
+ * typedef	VA_LIST;
+ * typedef	va_list;
+ */
+#undef INCL_CMT_VA_ARGS
+#endif /* INCL_CMT_VA_ARGS */
 /* **************************** [^] KEYWORDS [^] **************************** */
 
 /* ***************************** [v] OS_API [v] ***************************** */

@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2026/05/19 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/08/20 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/09/03 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -57,7 +57,7 @@ typedef unsigned char       BYTE;
 typedef unsigned char       UCHAR;
 typedef char                CHAR;
 typedef char                CCHAR;
-typedef wchar_t             WCHAR;
+typedef unsigned short      WCHAR;
 typedef short               SHORT;
 typedef unsigned short      USHORT;
 typedef int                 INT;
@@ -85,6 +85,8 @@ typedef unsigned __int64    ULONGLONG;
 typedef unsigned __int64    DWORDLONG;
 typedef unsigned __int64    DWORD64;
 typedef unsigned __int64    QWORD;
+typedef char                *LPSTR;
+typedef const char          *LPCSTR;
 #ifdef _WIN64
 typedef __int64          INT_PTR;
 typedef unsigned __int64 UINT_PTR;
@@ -106,7 +108,7 @@ typedef LONG_PTR  SSIZE_T;
 */
 
 #ifndef KERNEL32_H
-#define KERNEL32_H 202608 /* VERSION */
+#define KERNEL32_H 202609 /* VERSION */
 
 /* *********************** [v] TI CGT CCS (PUSH) [v] ************************ */
 #ifdef __TI_COMPILER_VERSION__
@@ -168,6 +170,10 @@ typedef LONG_PTR  SSIZE_T;
 #include "STRUCTS/CONSOLE_CURSOR_INFO.H"
 /******* """""""""""""""""""""""""""""""
  * struct S_CONSOLE_CURSOR_INFO;
+ */
+#include "STRUCTS/INPUT_RECORD.H"
+/******* """"""""""""""""""""""""
+ * struct S_INPUT_RECORD;
  */
 
 struct S_SYSTEM_INFO test1;
@@ -321,6 +327,45 @@ struct S_KERNEL32
 	int				(STDCALL *GetConsoleCursorInfo)(\
 		PTR, struct S_CONSOLE_CURSOR_INFO *\
 	);
+	PTR				(STDCALL *GetConsoleWindow)(void);
+	int				(STDCALL *SetConsoleScreenBufferSize)(PTR, struct S_COORD);
+	int				(STDCALL *SetConsoleWindowInfo)(\
+		PTR, int, const struct S_SMALL_RECT *\
+	);
+	struct S_COORD	(STDCALL *GetLargestConsoleWindowSize)(PTR);
+	int				(STDCALL *FillConsoleOutputCharacterA)(\
+		PTR, char, unsigned long, struct S_COORD, unsigned long *\
+	);
+	int				(STDCALL *FillConsoleOutputAttribute)(\
+		PTR, unsigned short, unsigned long, struct S_COORD, unsigned long *\
+	);
+	int				(STDCALL *WriteConsoleOutputCharacterA)(\
+		PTR, const char *, unsigned long, struct S_COORD, unsigned long *\
+	);
+	int				(STDCALL *WriteConsoleOutputAttribute)(\
+		PTR, const unsigned short *, \
+		unsigned long, \
+		struct S_COORD, \
+		unsigned long *\
+	);
+	int				(STDCALL *ReadConsoleOutputCharacterA)(\
+		PTR, char *, unsigned long, struct S_COORD, unsigned long *\
+	);
+	int				(STDCALL *ReadConsoleOutputAttribute)(\
+		PTR, unsigned short *, unsigned long, struct S_COORD, unsigned long *\
+	);
+	int				(STDCALL *ReadConsoleInputA)(\
+		PTR, struct S_INPUT_RECORD *, unsigned long, unsigned long *\
+	);
+	int				(STDCALL *GetConsoleMode)(PTR, unsigned long *);
+	int				(STDCALL *SetConsoleMode)(PTR, unsigned long);
+	PTR				(STDCALL *HeapReAlloc)(\
+		PTR, unsigned long, PTR, unsigned long\
+	);
+	int				(STDCALL *SetConsoleTitleA)(const char *);
+	unsigned long	(STDCALL *GetEnvironmentVariableA)(\
+		const char *, char *, unsigned long\
+	);
 #else /* K&R */
 	PTR				(STDCALL *LoadLibraryA)();
 	PTR				(STDCALL *LoadLibraryExA)();
@@ -385,6 +430,22 @@ struct S_KERNEL32
 	int				(STDCALL *SetConsoleCursorPosition)();
 	int				(STDCALL *SetConsoleCursorInfo)();
 	int				(STDCALL *GetConsoleCursorInfo)();
+	PTR				(STDCALL *GetConsoleWindow)();
+	int				(STDCALL *SetConsoleScreenBufferSize)();
+	int				(STDCALL *SetConsoleWindowInfo)();
+	struct S_COORD	(STDCALL *GetLargestConsoleWindowSize)();
+	int				(STDCALL *FillConsoleOutputCharacterA)();
+	int				(STDCALL *FillConsoleOutputAttribute)();
+	int				(STDCALL *WriteConsoleOutputCharacterA)();
+	int				(STDCALL *WriteConsoleOutputAttribute)();
+	int				(STDCALL *ReadConsoleOutputCharacterA)();
+	int				(STDCALL *ReadConsoleOutputAttribute)();
+	int				(STDCALL *ReadConsoleInputA)();
+	int				(STDCALL *GetConsoleMode)();
+	int				(STDCALL *SetConsoleMode)();
+	PTR				(STDCALL *HeapReAlloc)();
+	int				(STDCALL *SetConsoleTitleA)();
+	unsigned long	(STDCALL *GetEnvironmentVariableA)();
 #endif /* !KNR_STYLE */
 };
 EXTERN_C_END
@@ -544,9 +605,39 @@ EXTERN_C_END
 			PEB_GET_EXPORT(KERNEL32.SELF, "SetConsoleCursorInfo");\
 		KERNEL32.GetConsoleCursorInfo = \
 			PEB_GET_EXPORT(KERNEL32.SELF, "GetConsoleCursorInfo");\
+		KERNEL32.GetConsoleWindow = \
+			PEB_GET_EXPORT(KERNEL32.SELF, "GetConsoleWindow");\
+		KERNEL32.SetConsoleScreenBufferSize = \
+			PEB_GET_EXPORT(KERNEL32.SELF, "SetConsoleScreenBufferSize");\
+		KERNEL32.SetConsoleWindowInfo = \
+			PEB_GET_EXPORT(KERNEL32.SELF, "SetConsoleWindowInfo");\
+		KERNEL32.GetLargestConsoleWindowSize = \
+			PEB_GET_EXPORT(KERNEL32.SELF, "GetLargestConsoleWindowSize");\
+		KERNEL32.FillConsoleOutputCharacterA = \
+			PEB_GET_EXPORT(KERNEL32.SELF, "FillConsoleOutputCharacterA");\
+		KERNEL32.FillConsoleOutputAttribute = \
+			PEB_GET_EXPORT(KERNEL32.SELF, "FillConsoleOutputAttribute");\
+		KERNEL32.WriteConsoleOutputCharacterA = \
+			PEB_GET_EXPORT(KERNEL32.SELF, "WriteConsoleOutputCharacterA");\
+		KERNEL32.WriteConsoleOutputAttribute = \
+			PEB_GET_EXPORT(KERNEL32.SELF, "WriteConsoleOutputAttribute");\
+		KERNEL32.ReadConsoleOutputCharacterA = \
+			PEB_GET_EXPORT(KERNEL32.SELF, "ReadConsoleOutputCharacterA");\
+		KERNEL32.ReadConsoleOutputAttribute = \
+			PEB_GET_EXPORT(KERNEL32.SELF, "ReadConsoleOutputAttribute");\
+		KERNEL32.ReadConsoleInputA = \
+			PEB_GET_EXPORT(KERNEL32.SELF, "ReadConsoleInputA");\
+		KERNEL32.GetConsoleMode = \
+			PEB_GET_EXPORT(KERNEL32.SELF, "GetConsoleMode");\
+		KERNEL32.SetConsoleMode = \
+			PEB_GET_EXPORT(KERNEL32.SELF, "SetConsoleMode");\
+		KERNEL32.HeapReAlloc = PEB_GET_EXPORT(KERNEL32.SELF, "HeapReAlloc");\
+		KERNEL32.SetConsoleTitleA = \
+			PEB_GET_EXPORT(KERNEL32.SELF, "SetConsoleTitleA");\
+		KERNEL32.GetEnvironmentVariableA = \
+			PEB_GET_EXPORT(KERNEL32.SELF, "GetEnvironmentVariableA");\
 	}\
 	while (0);
-
 /*   /\   #==========================================================#   /\   */
 /*  //\\  |                  SETUP MEMBER CREATION                   |  //\\  */
 /* '""""' #==========================================================# '""""' */

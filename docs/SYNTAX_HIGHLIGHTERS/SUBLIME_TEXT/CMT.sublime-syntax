@@ -10,7 +10,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2026/06/12 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/08/21 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/08/28 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 #******************************************************************************#
 
@@ -60,7 +60,7 @@ variables:
   fenv: 'fenv_t|fexcept_t'
   setjmp: 'jmp_buf'
   signal: 'sig_atomic_t'
-  stdarg: 'va_list'
+  stdarg: '(?i:VA_LIST)'
   stdatomic: 'atomic_(bool|char|schar|uchar|short|ushort|int|uint|long|ulong|llong|ullong|char8_t|char16_t|char32_t|wchar_t|int_least8_t|uint_least8_t|int_least16_t|uint_least16_t|int_least32_t|uint_least32_t|int_least64_t|uint_least64_t|int_fast8_t|uint_fast8_t|int_fast16_t|uint_fast16_t|int_fast32_t|uint_fast32_t|int_fast64_t|uint_fast64_t|intptr_t|uintptr_t|size_t|ptrdiff_t|intmax_t|uintmax_t|flag)|memory_order'
   stdint: 'int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t'
   stdio: 'FILE|fpos_t'
@@ -76,8 +76,8 @@ variables:
   compiler_directive: '(?i:INLINE)|restrict|__restrict__|__restrict|_Noreturn|noreturn'
   non_func_keywords: 'if|for|switch|while|decltype|typeof|typeof_unqual|_Atomic|_BitInt|sizeof|alignof|_Alignof|alignas|_Alignas|static_assert|_Static_assert|__declspec|__attribute__'
   cmt_namespaces: 'KERNEL32|USER32|(?i:CONSOLE)'
-  cmt_attributes: '(?i:FASTCALL)|(?i:STDCALL)|(?i:REGPASS)|(?i:REGPARM)|(?i:IGNORE_VAR)|(?i:CDECL)|(?i:FAR)|(?i:STDCALL)|(?i:NOINLINE)|(?i:PASCAL)|(?i:EXTERN_C_START)|(?i:EXTERN_C_END)|(?i:PACK)|(?i:PRAGMA_PACK_PUSH)|(?i:PRAGMA_PACK_POP)|(?i:ALIGN_UP)|(?i:ALIGN_VARIABLE)|(?i:ALIGN_STRUCT_PUSH)|(?i:ALIGN_STRUCT_POP)|UNUSED'
-  cmt_keywords: '(?i:TRY)|(?i:CATCH)|(?i:THROW)|(?i:IS_IN_TRY)|(?i:LOCAL)'
+  cmt_attributes: '(?i:FASTCALL)|(?i:STDCALL)|(?i:REGPASS)|(?i:REGPARM)|(?i:IGNORE_VAR)|(?i:CDECL)|(?i:FAR)|(?i:STDCALL)|(?i:NOINLINE)|(?i:PASCAL)|(?i:EXTERN_C_START)|(?i:EXTERN_C_END)|(?i:PACK)|(?i:PRAGMA_PACK_PUSH)|(?i:PRAGMA_PACK_POP)|(?i:ALIGN_UP)|(?i:ALIGN_VARIABLE)|(?i:ALIGN_STRUCT_PUSH)|(?i:ALIGN_STRUCT_POP)|UNUSED|INLINE|FORCE_INLINE'
+  cmt_keywords: '(?i:TRY)|(?i:CATCH)|(?i:THROW)|(?i:IS_IN_TRY)|(?i:LOCAL)|(?i:VA_ARGS)|(?i:VA_ARG)|(?i:VA_BEGIN)|(?i:VA_END)|(?i:VA_DECLARE)'
   cmt_types: '(?i:VAR)|(?i:LET)|(?i:PTR)|(?i:FAR_PTR)|(?i:BOOLEAN)|(?i:BYTE)|(?i:BIT8)|(?i:BIT16)|(?i:BIT32)|(?i:BIT64)|(?i:BIT128)|(?i:FLOAT32)|(?i:FLOAT64)|(?i:FLOAT128)|{{cmt_namespaces}}'
   cmt_oop: '(?i:NEW)|(?i:OBJ)|(?i:DESTROY)|(?i:OBJECT__CONNECT)|(?i:OBJECT__INJECT)|(?i:OBJECT__EJECT)|(?i:OBJECT__INITIALIZE)'
   modifiers: '{{storage_classes}}|{{cmt_keywords}}|{{type_qualifier}}|{{compiler_directive}}|{{cmt_attributes}}'

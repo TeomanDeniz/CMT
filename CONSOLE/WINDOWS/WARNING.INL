@@ -3,7 +3,7 @@
 #endif /* !CONSOLE_HPP */
 
 #define LOCALMACRO__CMT_CONSOLE__WARNING_CONTENT \
-	if (THIS->_HIGHLIGHTER)\
+	if (THIS->highlighter)\
 		THIS->cursor.color(0XD)\
 			->log(" WARNING")\
 			->cursor.default_color()\

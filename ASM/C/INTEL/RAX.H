@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2025/09/15 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/08/19 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/08/28 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -222,10 +222,16 @@
 /* TODO: ADD MORE ASSEMBLY VARIANTS */
 
 #ifndef LOCALMACRO__RAX_GET
+#include "../../../CMT/WARNER.INL"
+
 #define GET_RAX(_) \
-	"ERROR - CMT (RAX.H) IS NOT SUPPORTED IN YOUR COMPILER YET :l"
+	CMT_WARN(\
+		"ERROR - CMT (RAX.H) IS NOT SUPPORTED IN YOUR COMPILER YET :l"\
+	)
 #define SET_RAX(_) \
-	"ERROR - CMT (RAX.H) IS NOT SUPPORTED IN YOUR COMPILER YET :l"
+	CMT_WARN(\
+		"ERROR - CMT (RAX.H) IS NOT SUPPORTED IN YOUR COMPILER YET :l"\
+	)
 #else /* LOCALMACRO__RAX_GET */
 #define GET_RAX(VARIABLE) \
 	do\
@@ -343,9 +349,14 @@ EXTERN_C_END
 #undef INCL_CMT_ASM_OTHERS
 #endif /* INCL_CMT_ASM_OTHERS */
 
+#ifdef INCL_CMT_ASM_MOV_PTR
+#undef INCL_CMT_ASM_MOV_PTR
+#endif /* INCL_CMT_ASM_MOV_PTR */
+
 /* **************************** [v] INCLUDES [v] **************************** */
 #define INCL_CMT_ASM_MOV_ABI
 #define INCL_CMT_ASM_OTHERS
+#define INCL_CMT_ASM_MOV_PTR
 #include "../../../ASM.H"
 /******* """"""""""""""""
  * #define SECTION(RETURN_TYPE, NAME, ARGUMENTS)

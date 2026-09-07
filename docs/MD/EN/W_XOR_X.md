@@ -82,3 +82,7 @@ Always defined, 0 or 1. Same information as W_NOT_TO_X, usable in runtime expres
 
  - [W^X - wikipedia.org](https://wikipedia.org/wiki/W%5EX)
  - [Enforcing a write-xor-execute memory policy from usermode - labs.portcullis.co.uk](https://labs.portcullis.co.uk/blog/enforcing-a-write-xor-execute-memory-policy-from-usermode/)
+ - [2.1. Machine-Level ISA, Version 1.13 - riscv.org](https://docs.riscv.org/reference/isa/v20260120/priv/machine.html)
+ - [mprotect(2) — Linux manual page - man7.org](https://man7.org/linux/man-pages/man2/mprotect.2.html)
+ - [mprotect(3p) — Linux manual page - man7.org](https://man7.org/linux/man-pages/man3/mprotect.3p.html)
+ - [VirtualProtect function (memoryapi.h) - microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-virtualprotect)

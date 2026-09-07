@@ -22,7 +22,7 @@
 		do\
 		{\
 			INT_STR[INDEX_2++] = 48 + (THE_LINE % 10);\
-			THE_LINE /= 10;\
+			THE_LINE = THE_LINE / 10;\
 		}\
 		while (THE_LINE);\
 		\
@@ -41,7 +41,7 @@
 		}\
 	}\
 	\
-	if (THIS->_HIGHLIGHTER)\
+	if (THIS->highlighter)\
 		THIS->cursor.color(0XB)\
 			->log("\n ")\
 			->log(THE_FILE)\

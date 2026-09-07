@@ -41,7 +41,7 @@
 		}\
 	}\
 	\
-	if (THIS->_HIGHLIGHTER)\
+	if (THIS->highlighter)\
 		THIS->cursor.color(0XB)\
 			->log("\n ")\
 			->log(THE_FILE)\

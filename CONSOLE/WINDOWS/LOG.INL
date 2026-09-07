@@ -17,7 +17,7 @@
 	while (STRING[LENGTH] != 0)\
 	{\
 		const char		__CHARACTER__ = STRING[LENGTH];\
-		\
+	\
 		if (__CHARACTER__ == '\n')\
 		{\
 			(*X) = 0;\
@@ -33,15 +33,62 @@
 		else\
 		{\
 			(*X)++;\
-			\
+	\
 			if ((*X) >= THIS->get.width)\
 			{\
 				(*X) = 0;\
 				(*Y)++;\
 			}\
 		}\
-		\
+	\
 		++LENGTH;\
+	}\
+	\
+	if (THIS->_PUSH_DEPTH)\
+	{\
+		const unsigned long	NEEDED =\
+			THIS->_PUSH_SIZE + (unsigned long)LENGTH + (unsigned long)1;\
+		\
+		if (THIS->_PUSH_CAPACITY < NEEDED)\
+		{\
+			unsigned long	TARGET;\
+			PTR				BLOCK;\
+			\
+			if (THIS->_PUSH_CAPACITY)\
+				TARGET = THIS->_PUSH_CAPACITY;\
+			else\
+				TARGET = (unsigned long)1024;\
+			\
+			while (TARGET < NEEDED)\
+				TARGET = TARGET * (unsigned long)2;\
+			\
+			if (!THIS->_PUSH_DATA)\
+				BLOCK = ALLOC((LET)TARGET);\
+			else\
+				BLOCK = REALLOC(THIS->_PUSH_DATA, (LET)TARGET);\
+			\
+			if (BLOCK)\
+			{\
+				THIS->_PUSH_DATA = BLOCK;\
+				THIS->_PUSH_CAPACITY = TARGET;\
+			}\
+		}\
+		\
+		if (THIS->_PUSH_CAPACITY >= NEEDED)\
+		{\
+			char	*TAIL = ((char *)THIS->_PUSH_DATA) + THIS->_PUSH_SIZE;\
+			LET		INDEX = (LET)0;\
+			\
+			while (INDEX < LENGTH)\
+			{\
+				TAIL[INDEX] = STRING[INDEX];\
+				++INDEX;\
+			}\
+			\
+			THIS->_PUSH_SIZE += (unsigned long)LENGTH;\
+			((char *)THIS->_PUSH_DATA)[THIS->_PUSH_SIZE] = (char)0;\
+			return (THIS);\
+		}\
 	}\
 	\
 	if (\
