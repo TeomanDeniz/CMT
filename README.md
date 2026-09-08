@@ -42,7 +42,7 @@ The repository includes multiple documentation formats, test matrices across com
   - [THREAD_SUPPORT_IN_NON_MULTI_THREAD_PLATFORMS](#-thread_support_in_non_multi_thread_platforms)
 - [Extras](#extras)
   - [CMT Auto-Linker](#cmt-auto-linker)
-  - [Icons](#icons)
+  - [Icons and Headers](#icons-and-headers)
     - [32x32 (Original Size)](#32x32-original-size)
     - [128x128 (Extended for a better view))](#128x128-extended-for-a-better-view)
   - [Openning Issues and Reporting Bugs](#openning-issues-and-reporting-bugs)
@@ -373,7 +373,9 @@ In short, while the auto-linker feature is convenient, relying on a dedicated se
 
 Important note: It is not recommended to SETUP the entire CMT unless you're actually not using all modules.
 
-## Icons
+## Icons and Headers
+
+The header images are made with [Bejamas's AI ASCII Art Generator](https://bejamas.com/tools/ai-ascii-art-generator).
 
 * Yes, you can use them for free.
 * These icons are inspired by the style of Windows 95 icons.
@@ -513,9 +515,8 @@ List of the icons:
 
 ## Copyright
 
-- CMT is licensed under the GPL-3.0 License.
+- CMT is licensed under the GPL-3.0 License. (Will change in the future to make it more freely usable)
 - This means it can be freely used in open source projects compatible with GPL-3.0.
-- If you want to use CMT in proprietary or closed-source software, a commercial license is required.
 - For commercial licensing inquiries, contact me.
 - *© Maximum Tension™ all rights NOT reserved - 2023*
 

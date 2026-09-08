@@ -2,30 +2,6 @@
 #error "ERROR - PLEASE DON'T USE THIS LIBRARY DIRECTLY!!!"
 #endif /* !CONSOLE_HPP */
 
-/******************************************************************************\
-|* NOTHING IN CMT BUILDS USER32 ON OUR BEHALF, AND THIS MODULE IS THE ONLY    *|
-|* THING IN THE CONSOLE THAT NEEDS IT. SO IT BUILDS IT ITSELF, ONCE, THE      *|
-|* FIRST TIME A MEMBER ACTUALLY WANTS A WINDOW. THAT KEEPS CONSOLE.X/Y/XY     *|
-|* WORKING WITHOUT THE CALLER HAVING TO KNOW THAT GLOBALCONSTRUCTOR__USER32   *|
-|* EXISTS.                                                                    *|
-|*                                                                            *|
-|* CHEAP AFTER THE FIRST CALL: ONE POINTER TEST.                              *|
-\******************************************************************************/
-
-#define LOCALMACRO__CMT_CONSOLE__NEED_USER32(RESULT) \
-	do\
-	{\
-		if (!USER32.GetWindowRect || !USER32.MoveWindow)\
-		{\
-			GLOBALCONSTRUCTOR__USER32\
-		}\
-		\
-		(RESULT) = (BOOLEAN)(\
-			(USER32.GetWindowRect != 0) && (USER32.MoveWindow != 0)\
-		);\
-	}\
-	while (0);
-
 #define LOCALMACRO__CMT_CONSOLE__IS_TERMINAL(RESULT) \
 	do\
 	{\
