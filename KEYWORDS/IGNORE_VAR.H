@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2024/05/28 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/06/17 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/09/08 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -53,7 +53,7 @@
 \******************************************************************************/
 
 #ifndef IGNORE_VAR_H
-#define IGNORE_VAR_H 202606 /* VERSION */
+#define IGNORE_VAR_H 202609 /* VERSION */
 
 /* **************************** [v] INCLUDES [v] **************************** */
 #include "../ENVIRONMENTS/KNR_STYLE.H"
@@ -61,17 +61,6 @@
  * #define KNR_STYLE
  */
 /* **************************** [^] INCLUDES [^] **************************** */
-
-/* *********************** [v] TI CGT CCS (PUSH) [v] ************************ */
-#ifdef __TI_COMPILER_VERSION__
-#pragma diag_push /* TI CGT CCS COMPILER DIRECTIVES */
-#pragma CHECK_MISRA("5.4") /* TAG NAMES SHALL BE A UNIQUE IDENTIFIER */
-#pragma CHECK_MISRA("19.3") /*
-# THE #INCLUDE DIRECTIVE SHALL BE FOLLOWED BY EITHER A <FILENAME> OR "FILENAME"
-# SEQUENCE
-# */
-#endif /* __TI_COMPILER_VERSION__ */
-/* *********************** [^] TI CGT CCS (PUSH) [^] ************************ */
 
 #ifdef _MSC_VER /* MICROSOFT C++ */
 #define IGNORE_VAR(VARIABLE) __pragma(warning(suppress:4100)) (void)(VARIABLE)
@@ -86,12 +75,6 @@
 /* **************************** [v] LOWERCASE [v] *************************** */
 #define ignore_var(variable) IGNORE_VAR(variable)
 /* **************************** [^] LOWERCASE [^] *************************** */
-
-/* ************************ [v] TI CGT CCS (POP) [v] ************************ */
-#ifdef __TI_COMPILER_VERSION__
-#pragma diag_pop /* TI CGT CCS COMPILER DIRECTIVES */
-#endif /* __TI_COMPILER_VERSION__ */
-/* ************************ [^] TI CGT CCS (POP) [^] ************************ */
 
 #endif /* !IGNORE_VAR_H */
 
