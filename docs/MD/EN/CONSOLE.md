@@ -23,9 +23,9 @@
 > This page is the **module overview**. It explains what `CONSOLE` is, which of the three interfaces you get, and how the same code looks in each one. The member-by-member reference lives in the interface pages.
 >
 > * **CONSOLE.md** - module overview *(you are here)*
-> * [**CONSOLE_C.md**](https://github.com/TeomanDeniz/CMT/tree/main/docs/MD/EN/CONSOLE_C.md) - plain C functions, no object
-> * [**CONSOLE_OOP.md**](https://github.com/TeomanDeniz/CMT/tree/main/docs/MD/EN/CONSOLE_OOP.md) - C with the CMT object system
-> * [**CONSOLE_CPP.md**](https://github.com/TeomanDeniz/CMT/tree/main/docs/MD/EN/CONSOLE_CPP.md) - the C++ class
+> * [**CONSOLE_C.md**](https://github.com/TeomanDeniz/CMT/tree/main/docs/MD/EN/CONSOLE/C.md) - plain C functions, no object
+> * [**CONSOLE_OOP.md**](https://github.com/TeomanDeniz/CMT/tree/main/docs/MD/EN/CONSOLE/OOP.md) - C with the CMT object system
+> * [**CONSOLE_CPP.md**](https://github.com/TeomanDeniz/CMT/tree/main/docs/MD/EN/CONSOLE/CPP.md) - the C++ class
 
 [![](https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/BANNERS/AUTO_LINKER_MODULE_HEADER.png)](https://github.com/TeomanDeniz/CMT/tree/main#cmt-auto-linker)
 
@@ -41,9 +41,9 @@ One header ships **three interfaces over one implementation**. You do not pick a
 
 | You are compiling             | You get                 | Reference page                                                                               |
 | ----------------------------- | ----------------------- | -------------------------------------------------------------------------------------------- |
-| C++                           | The `CMT_CONSOLE` class | [**CONSOLE_CPP.md**](https://github.com/TeomanDeniz/CMT/tree/main/docs/MD/EN/CONSOLE_CPP.md) |
-| C *(default)*                 | The CMT object          | [**CONSOLE_OOP.md**](https://github.com/TeomanDeniz/CMT/tree/main/docs/MD/EN/CONSOLE_OOP.md) |
-| C, with the object system off | Plain functions         | [**CONSOLE_C.md**](https://github.com/TeomanDeniz/CMT/tree/main/docs/MD/EN/CONSOLE_C.md)     |
+| C++                           | The `CMT_CONSOLE` class | [**CONSOLE_CPP.md**](https://github.com/TeomanDeniz/CMT/tree/main/docs/MD/EN/CONSOLE/CPP.md) |
+| C *(default)*                 | The CMT object          | [**CONSOLE_OOP.md**](https://github.com/TeomanDeniz/CMT/tree/main/docs/MD/EN/CONSOLE/OOP.md) |
+| C, with the object system off | Plain functions         | [**CONSOLE_C.md**](https://github.com/TeomanDeniz/CMT/tree/main/docs/MD/EN/CONSOLE/C.md)     |
 
 ### Choosing
 
