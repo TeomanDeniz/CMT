@@ -5,7 +5,7 @@
 </p>
 
 > ## ⚠️ Important
-> ### File location: [**[📜 CMT/CONSOLE.HPP](https://github.com/TeomanDeniz/CMT/blob/main/CONSOLE.HPP)**]
+> ### File locations: [**[📜 CMT/CONSOLE.H](https://github.com/TeomanDeniz/CMT/blob/main/CONSOLE.H)**] and [**[📜 CMT/CONSOLE.HPP](https://github.com/TeomanDeniz/CMT/blob/main/CONSOLE.HPP)**]
 > ### How to include:
 > Recommended (via master header):
 > ```c
@@ -16,6 +16,8 @@
 > ```
 > Direct include:
 > ```c
+> #include "CMT/CONSOLE.H"
+> // or/and
 > #include "CMT/CONSOLE.HPP"
 > ```
 
