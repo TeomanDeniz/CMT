@@ -205,6 +205,7 @@ If you include an `H` file in both C and C++, you just get stright functions or 
 
 ## ![][__GENERAL_GIF__] General
  * [![][__OBJECT_GIF__] **OBJECT**][__OBJECT_MD__]
+ * [![][__CONSOLE_GIF__] **CONSOLE**][__CONSOLE_MD__]
 
 ## ![][__PUSH_POP_GIF__] Assembly
  * [![][__ASM_GIF__] **ASM**][__ASM_MD__]
@@ -448,6 +449,7 @@ List of the icons:
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/VOLATILE.gif" ALT="VOLATILE" TITLE="VOLATILE"/>
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/MAYBE_ARGS.gif" ALT="MAYBE_ARGS" TITLE="MAYBE_ARGS"/>
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/SETJMP.gif" ALT="SETJMP" TITLE="SETJMP"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/CONSOLE.gif" ALT="CONSOLE" TITLE="CONSOLE"/>
 </details>
 
 <details>
@@ -512,6 +514,7 @@ List of the icons:
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/VOLATILE.gif" ALT="VOLATILE" TITLE="VOLATILE"/>
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/MAYBE_ARGS.gif" ALT="MAYBE_ARGS" TITLE="MAYBE_ARGS"/>
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/SETJMP.gif" ALT="SETJMP" TITLE="SETJMP"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/CONSOLE.gif" ALT="CONSOLE" TITLE="CONSOLE"/>
 </details>
 
 ---
@@ -576,6 +579,7 @@ List of the icons:
 [__VOLATILE_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/VOLATILE.md
 [__MAYBE_ARGS_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/MAYBE_ARGS.md
 [__SETJMP_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/SETJMP.md
+[__CONSOLE_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/CONSOLE.md
 <!-- MARKDOWNS -->
 
 <!-- ICONS -->
@@ -635,4 +639,5 @@ List of the icons:
 [__VOLATILE_GIF__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/IMAGES/32/VOLATILE.gif
 [__MAYBE_ARGS_GIF__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/IMAGES/32/MAYBE_ARGS.gif
 [__SETJMP_GIF__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/IMAGES/32/SETJMP.gif
+[__CONSOLE_GIF__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/IMAGES/32/CONSOLE.gif
 <!-- ICONS -->
