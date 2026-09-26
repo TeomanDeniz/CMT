@@ -1129,6 +1129,9 @@
 
 | **Macro**                       | **Intel Syntax**                    | **16-BIT** | **32-BIT**  | **64-BIT** | **OP-Size 16-BIT** | **OP-Size 32-BIT** | **OP-Size 64-BIT** |
 | ------------------------------- | ----------------------------------- | ---------- | ----------- | ---------- | ------------------ | ------------------ | ------------------ |
+| `MOV_PTR8_(?, IMM8)`            | `mov byte ptr [?], imm8`            | ✅         | ✅         | ✅         | 3 + 2 + 1 (6)      | 2 + 4 + 1 (7)      | 3 + 4 + 1 (8)      |
+| `MOV_PTR16_(?, IMM16)`          | `mov word ptr [?], imm16`           | ✅         | ✅         | ✅         | 3 + 2 + 2 (7)      | 1 + 4 + 2 (7)      | 4 + 4 + 2 (10)     |
+| `MOV_PTR32_(IMM32, IMM32)`      | `mov dword ptr [imm32], imm32`      | ⚠️         | ✅         | ✅         | ---                | 2 + 4 + 4 (10)     | 3 + 4 + 4 (11)     |
 | `MOV_RAX_FROM_PTR_(IMM32)`      | `mov rax, qword ptr [imm32]`        | ⚠️         | ⚠️         | ✅         | ---                | ---                | 4 + 4 (8)          |
 | `MOV_RBX_FROM_PTR_(IMM32)`      | `mov rbx, qword ptr [imm32]`        | ⚠️         | ⚠️         | ✅         | ---                | ---                | 4 + 4 (8)          |
 | `MOV_RCX_FROM_PTR_(IMM32)`      | `mov rcx, qword ptr [imm32]`        | ⚠️         | ⚠️         | ✅         | ---                | ---                | 4 + 4 (8)          |
@@ -12983,3 +12986,5 @@ See `ENVIRONMENTS/ABI.H` to determine what `ARG$` expands to if you want.
 | `CPUID`                        | `cpuid`                            | 💥 CRASH | ✅       | ✅       | (2)                | (2)                | (2)                |
 | `INT_(IMM8)`                   | `int IMM8`                         | ✅       | ✅       | ✅       | (2)                | (2)                | (2)                |
 | `RET`                          | `ret`                              | ✅       | ✅       | ✅       | (2)                | (1)                | (1)                |
+| `ENDBR64`                      | `endbr64`                          | ❌       | ❌       | ✅       | ---                | ---                | (4)                |
+| `ENDBR32`                      | `endbr32`                          | ❌       | ✅       | ✅       | ---                | (4)                | (4)                |

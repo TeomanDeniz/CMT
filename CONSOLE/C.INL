@@ -1,205 +1,72 @@
-#ifndef CONSOLE_HPP
 #ifndef CONSOLE_H
 #error "ERROR - PLEASE DON'T USE THIS LIBRARY DIRECTLY!!!"
 #endif /* !CONSOLE_H */
-#endif /* !CONSOLE_HPP */
 
-/* **************************** [v] INCLUDES [v] **************************** */
-#include "../OBJECT.H"
-/******* """""""""""""
- * #define object
- * #define OBJECT
- * #define OBJECT__CONNECT(OBJECT_TYPE_NAME)
- * #define OBJECT__INJECT(TARGET, SOURCE)
- * #define OBJECT__EJECT(MEMBER_NAME)
- * #define OBJECT__INITIALIZE(VARIABLE, TYPE)
- */
-/* **************************** [^] INCLUDES [^] **************************** */
+#ifndef SEAL_CMT_CONSOLE_C
+#define SEAL_CMT_CONSOLE_C
+
+#ifndef OBJECT__INITIALIZE
+#define OBJECT__INITIALIZE(VARIABLE, TYPE) *(TYPE *)(&VARIABLE)
+#endif /* !OBJECT__INITIALIZE */
 
 #ifndef KNR_STYLE /* STANDARD C */
-object CMT_CONSOLE
+struct S_CONSOLE
 {
-	OBJECT CMT_CONSOLE	*(*x)(int);
-	OBJECT CMT_CONSOLE	*(*y)(int);
-	OBJECT CMT_CONSOLE	*(*xy)(int, int);
-	OBJECT CMT_CONSOLE	*(*width)(unsigned int);
-	OBJECT CMT_CONSOLE	*(*height)(unsigned int);
-	OBJECT CMT_CONSOLE	*(*title)(const char *);
-
-	OBJECT CMT_CONSOLE	*(*color)(unsigned int);
-	OBJECT CMT_CONSOLE	*(*default_color)(void);
-	OBJECT CMT_CONSOLE	*(*clear)(void);
-
-	PTR					(*export)(void);
-	OBJECT CMT_CONSOLE	*(*import)(PTR);
-
-	OBJECT CMT_CONSOLE	*(*push)(void);
-	OBJECT CMT_CONSOLE	*(*pop)(void);
-
-	OBJECT CMT_CONSOLE	*(*log)(char *);
-	OBJECT CMT_CONSOLE	*(*error)(char *);
-	OBJECT CMT_CONSOLE	*(*error_at)(char *, char *, unsigned int);
-	OBJECT CMT_CONSOLE	*(*warning)(char *);
-	OBJECT CMT_CONSOLE	*(*warning_at)(char *, char *, unsigned int);
-	OBJECT CMT_CONSOLE	*(*print)(const char *, VA_ARGS);
-
-	struct /* put */
+	struct /* EVENT */
 	{
-		OBJECT CMT_CONSOLE	*(*string)(char *, unsigned int, unsigned int);
-		OBJECT CMT_CONSOLE	*(*line)(
-			char,
-			unsigned int,
-			unsigned int,
-			unsigned int,
-			unsigned int
-		);
-		OBJECT CMT_CONSOLE	*(*curve)(
-			char,
-			unsigned int,
-			unsigned int,
-			unsigned int,
-			unsigned int,
-			float,
-			float
-		);
-		OBJECT CMT_CONSOLE	*(*frame)(
-			char,
-			unsigned int,
-			unsigned int,
-			unsigned int,
-			unsigned int
-		);
-		OBJECT CMT_CONSOLE	*(*frame_radius)(
-			char,
-			unsigned int,
-			unsigned int,
-			unsigned int,
-			unsigned int,
-			unsigned int
-		);
-		OBJECT CMT_CONSOLE	*(*rectangle)(
-			char,
-			unsigned int,
-			unsigned int,
-			unsigned int,
-			unsigned int
-		);
-		OBJECT CMT_CONSOLE	*(*rectangle_radius)(
-			char,
-			unsigned int,
-			unsigned int,
-			unsigned int,
-			unsigned int,
-			unsigned int
-		);
-		OBJECT CMT_CONSOLE	*(*circle)(
-			char,
-			unsigned int,
-			unsigned int,
-			unsigned int,
-			unsigned int
-		);
-		OBJECT CMT_CONSOLE	*(*ellipse)(
-			char,
-			unsigned int,
-			unsigned int,
-			unsigned int,
-			unsigned int
-		);
+		void	(*ON_RESIZE)(unsigned int, unsigned int);
+		void	(*ON_MOVE)(int, int);
+		void	(*ON_CLOSE)(void);
+		void	(*ON_FOCUS)(void);
+		void	(*ON_BLUR)(void);
+		void	(*ON_KEY)(unsigned int);
+		void	(*ON_MOUSE)(unsigned int, unsigned int, unsigned int);
+	} EVENT;
 
-		struct /* colored */
+	struct /* INPUT */
+	{
+		struct /* GET */
 		{
-			OBJECT CMT_CONSOLE	*(*string)(
-				char *, unsigned int, unsigned int, unsigned int
-			);
-			OBJECT CMT_CONSOLE	*(*line)(
-				char,
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int
-			);
-			OBJECT CMT_CONSOLE	*(*curve)(
-				char,
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				float,
-				float
-			);
-			OBJECT CMT_CONSOLE	*(*frame)(
-				char,
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int
-			);
-			OBJECT CMT_CONSOLE	*(*frame_radius)(
-				char,
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int
-			);
-			OBJECT CMT_CONSOLE	*(*rectangle)(
-				char,
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int
-			);
-			OBJECT CMT_CONSOLE	*(*rectangle_radius)(
-				char,
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int
-			);
-			OBJECT CMT_CONSOLE	*(*circle)(
-				char,
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int
-			);
-			OBJECT CMT_CONSOLE	*(*ellipse)(
-				char,
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int
-			);
-		} colored;
-	} put;
+			const unsigned int	KEY;
+			const unsigned int	MOUSE;
+			const unsigned int	MOUSE_X;
+			const unsigned int	MOUSE_Y;
+		} GET;
+	} INPUT;
 
-	struct /* cursor */
+	struct /* GET */
 	{
-		OBJECT CMT_CONSOLE	*(*color)(unsigned int);
-		OBJECT CMT_CONSOLE	*(*default_color)(void);
+		const BOOLEAN		ACTIVE;
+		const BOOLEAN		TERMINAL;
+		const unsigned int	ROWS;
+		const unsigned int	COLUMNS;
+		const unsigned int	PIXEL_WIDTH;
+		const unsigned int	PIXEL_HEIGHT;
+		const int			X;
+		const int			Y;
+		const unsigned int	COLOR;
+		const unsigned int	DEFAULT_COLOR;
+		const unsigned int	WIDTH;
+		const unsigned int	HEIGHT;
 
-		OBJECT CMT_CONSOLE	*(*x)(unsigned int);
-		OBJECT CMT_CONSOLE	*(*y)(unsigned int);
-		OBJECT CMT_CONSOLE	*(*xy)(unsigned int, unsigned int);
+		struct /* CURSOR */
+		{
+			const unsigned long	SIZE;
+			const int			X;
+			const int			Y;
+			const unsigned int	COLOR;
+			const unsigned int	DEFAULT_COLOR;
+			const BOOLEAN		VISIBLE;
+		} CURSOR;
+	} GET;
 
-		OBJECT CMT_CONSOLE	*(*move_x)(int);
-		OBJECT CMT_CONSOLE	*(*move_y)(int);
-		OBJECT CMT_CONSOLE	*(*move_xy)(int, int);
+	BOOLEAN					HIGHLIGHTER;
 
-		OBJECT CMT_CONSOLE	*(*show)(BOOLEAN);
-		OBJECT CMT_CONSOLE	*(*size)(unsigned long);
-	} cursor;
+	LOCALMACRO__CMT_CONSOLE__PRIVATE_VARIABLES
+};
 
+struct s_console
+{
 	struct /* event */
 	{
 		void	(*on_resize)(unsigned int, unsigned int);
@@ -213,15 +80,6 @@ object CMT_CONSOLE
 
 	struct /* input */
 	{
-		struct /* wait */
-		{
-			OBJECT CMT_CONSOLE	*(*any)(void);
-			OBJECT CMT_CONSOLE	*(*key)(void);
-			OBJECT CMT_CONSOLE	*(*mouse)(void);
-			OBJECT CMT_CONSOLE	*(*mouse_action)(void);
-			OBJECT CMT_CONSOLE	*(*mouse_move)(void);
-		} wait;
-
 		struct /* get */
 		{
 			const unsigned int	key;
@@ -233,15 +91,8 @@ object CMT_CONSOLE
 
 	struct /* get */
 	{
-		char				*(*line)(\
-			unsigned int, unsigned int, unsigned int, unsigned int\
-		);
-		char				**(*area)(\
-			unsigned int, unsigned int, unsigned int, unsigned int\
-		);
-
-		const BOOLEAN		active;
-		const BOOLEAN		terminal;
+		const boolean		active;
+		const boolean		terminal;
 		const unsigned int	rows;
 		const unsigned int	columns;
 		const unsigned int	pixel_width;
@@ -260,98 +111,72 @@ object CMT_CONSOLE
 			const int			y;
 			const unsigned int	color;
 			const unsigned int	default_color;
-			const BOOLEAN		visible;
+			const boolean		visible;
 		} cursor;
 	} get;
 
-	void					(*free)(void);
-	BOOLEAN					highlighter;
+	boolean					highlighter;
 
-	/**/ /* [v] PRIVATE ***************************************************** */
-	/**/
-	/**/ T_CONSOLE_OUT_HANDLE	_OUT_HANDLE;
-	/**/ T_CONSOLE_IN_HANDLE	_IN_HANDLE;
-	/**/ unsigned long			_IN_MODE;
-	/**/ PTR					_PUSH_DATA;
-	/**/ unsigned long			_PUSH_SIZE;
-	/**/ unsigned long			_PUSH_CAPACITY;
-	/**/ unsigned int			_PUSH_DEPTH;
-	/**/ PTR					_SCRATCH_DATA;
-	/**/ unsigned long			_SCRATCH_SIZE;
-	/**/ BOOLEAN				_ACTIVE;
-	/**/ BOOLEAN				_VT;
-	/**/ BOOLEAN				_OWNED;
-	/**/ BOOLEAN				_TERMINAL;
-	/**/
-	/**/ /* [^] PRIVATE ***************************************************** */
+	LOCALMACRO__CMT_CONSOLE__PRIVATE_VARIABLES
 };
 #else /* K&R */
-object CMT_CONSOLE
+struct S_CONSOLE
 {
-	OBJECT CMT_CONSOLE	*(*x)();
-	OBJECT CMT_CONSOLE	*(*y)();
-	OBJECT CMT_CONSOLE	*(*xy)();
-	OBJECT CMT_CONSOLE	*(*width)();
-	OBJECT CMT_CONSOLE	*(*height)();
-	OBJECT CMT_CONSOLE	*(*title)();
-
-	OBJECT CMT_CONSOLE	*(*color)();
-	OBJECT CMT_CONSOLE	*(*default_color)();
-	OBJECT CMT_CONSOLE	*(*clear)();
-
-	PTR					(*export)();
-	OBJECT CMT_CONSOLE	*(*import)();
-
-	OBJECT CMT_CONSOLE	*(*push)();
-	OBJECT CMT_CONSOLE	*(*pop)();
-
-	OBJECT CMT_CONSOLE	*(*log)();
-	OBJECT CMT_CONSOLE	*(*error)();
-	OBJECT CMT_CONSOLE	*(*error_at)();
-	OBJECT CMT_CONSOLE	*(*warning)();
-	OBJECT CMT_CONSOLE	*(*warning_at)();
-	OBJECT CMT_CONSOLE	*(*print)();
-
-	struct /* put */
+	struct /* EVENT */
 	{
-		OBJECT CMT_CONSOLE	*(*string)();
-		OBJECT CMT_CONSOLE	*(*line)();
-		OBJECT CMT_CONSOLE	*(*curve)();
-		OBJECT CMT_CONSOLE	*(*frame)();
-		OBJECT CMT_CONSOLE	*(*frame_radius)();
-		OBJECT CMT_CONSOLE	*(*rectangle)();
-		OBJECT CMT_CONSOLE	*(*rectangle_radius)();
-		OBJECT CMT_CONSOLE	*(*circle)();
-		OBJECT CMT_CONSOLE	*(*ellipse)();
+		void	(*ON_RESIZE)();
+		void	(*ON_MOVE)();
+		void	(*ON_CLOSE)();
+		void	(*ON_FOCUS)();
+		void	(*ON_BLUR)();
+		void	(*ON_KEY)();
+		void	(*ON_MOUSE)();
+	} EVENT;
 
-		struct /* colored */
+	struct /* INPUT */
+	{
+		struct /* GET */
 		{
-			OBJECT CMT_CONSOLE	*(*string)();
-			OBJECT CMT_CONSOLE	*(*line)();
-			OBJECT CMT_CONSOLE	*(*curve)();
-			OBJECT CMT_CONSOLE	*(*frame)();
-			OBJECT CMT_CONSOLE	*(*frame_radius)();
-			OBJECT CMT_CONSOLE	*(*rectangle)();
-			OBJECT CMT_CONSOLE	*(*rectangle_radius)();
-			OBJECT CMT_CONSOLE	*(*circle)();
-			OBJECT CMT_CONSOLE	*(*ellipse)();
-		} colored;
-	} put;
+			const unsigned int	KEY;
+			const unsigned int	MOUSE;
+			const unsigned int	MOUSE_X;
+			const unsigned int	MOUSE_Y;
+		} GET;
+	} INPUT;
 
-	struct /* cursor */
+	struct /* GET */
 	{
-		OBJECT CMT_CONSOLE	*(*color)();
-		OBJECT CMT_CONSOLE	*(*default_color)();
-		OBJECT CMT_CONSOLE	*(*x)();
-		OBJECT CMT_CONSOLE	*(*y)();
-		OBJECT CMT_CONSOLE	*(*xy)();
-		OBJECT CMT_CONSOLE	*(*move_x)();
-		OBJECT CMT_CONSOLE	*(*move_y)();
-		OBJECT CMT_CONSOLE	*(*move_xy)();
-		OBJECT CMT_CONSOLE	*(*show)();
-		OBJECT CMT_CONSOLE	*(*size)();
-	} cursor;
+		const BOOLEAN		ACTIVE;
+		const BOOLEAN		TERMINAL;
+		const unsigned int	ROWS;
+		const unsigned int	COLUMNS;
+		const unsigned int	PIXEL_WIDTH;
+		const unsigned int	PIXEL_HEIGHT;
+		const int			X;
+		const int			Y;
+		const unsigned int	COLOR;
+		const unsigned int	DEFAULT_COLOR;
+		const unsigned int	WIDTH;
+		const unsigned int	HEIGHT;
 
+		struct /* CURSOR */
+		{
+			const unsigned long	SIZE;
+			const int			X;
+			const int			Y;
+			const unsigned int	COLOR;
+			const unsigned int	DEFAULT_COLOR;
+			const BOOLEAN		VISIBLE;
+		} CURSOR;
+	} GET;
+
+	BOOLEAN					HIGHLIGHTER;
+
+	LOCALMACRO__CMT_CONSOLE__PRIVATE_VARIABLES
+};
+
+struct s_console
+{
 	struct /* event */
 	{
 		void	(*on_resize)();
@@ -365,15 +190,6 @@ object CMT_CONSOLE
 
 	struct /* input */
 	{
-		struct /* wait */
-		{
-			OBJECT CMT_CONSOLE	*(*any)();
-			OBJECT CMT_CONSOLE	*(*key)();
-			OBJECT CMT_CONSOLE	*(*mouse)();
-			OBJECT CMT_CONSOLE	*(*mouse_action)();
-			OBJECT CMT_CONSOLE	*(*mouse_move)();
-		} wait;
-
 		struct /* get */
 		{
 			const unsigned int	key;
@@ -385,10 +201,8 @@ object CMT_CONSOLE
 
 	struct /* get */
 	{
-		char				*(*line)();
-		char				**(*area)();
-
-		const BOOLEAN		active;
+		const boolean		active;
+		const boolean		terminal;
 		const unsigned int	rows;
 		const unsigned int	columns;
 		const unsigned int	pixel_width;
@@ -407,351 +221,776 @@ object CMT_CONSOLE
 			const int			y;
 			const unsigned int	color;
 			const unsigned int	default_color;
-			const BOOLEAN		visible;
+			const boolean		visible;
 		} cursor;
 	} get;
 
-							(*free)();
-	BOOLEAN					highlighter;
+	boolean					highlighter;
 
-	/**/ /* [v] PRIVATE ***************************************************** */
-	/**/
-	/**/ T_CONSOLE_OUT_HANDLE	_OUT_HANDLE;
-	/**/ T_CONSOLE_IN_HANDLE	_IN_HANDLE;
-	/**/ unsigned long			_IN_MODE;
-	/**/ PTR					_PUSH_DATA;
-	/**/ unsigned long			_PUSH_SIZE;
-	/**/ unsigned long			_PUSH_CAPACITY;
-	/**/ unsigned int			_PUSH_DEPTH;
-	/**/ PTR					_SCRATCH_DATA;
-	/**/ unsigned long			_SCRATCH_SIZE;
-	/**/
-	/**/ /* [^] PRIVATE ***************************************************** */
+	LOCALMACRO__CMT_CONSOLE__PRIVATE_VARIABLES
 };
 #endif /* !KNR_STYLE */
 
 /* *************************** [v] MVS LINKER [v] *************************** */
 /* **** MVS LINKER DOES NOT SUPPORT EXTERNAL NAMES LARGER THAN 8 BYTES!! **** */
 #ifdef __MVS__ /* IBM Z/OS XL C/C++ */
-#define CMT_CONSOLE CMTCOCOP
-#define CMT_CONSOLE_C_OOP__FREE MTCOPFRE
-#define CMT_CONSOLE_C_OOP__LOG MTCOPLOG
-#define CMT_CONSOLE_C_OOP__WARNING MTCOPWAR
-#define CMT_CONSOLE_C_OOP__WARNING_AT MTCOPWAT
-#define CMT_CONSOLE_C_OOP__ERROR MTCOPERR
-#define CMT_CONSOLE_C_OOP__ERROR_AT MTCOPEAT
-#define CMT_CONSOLE_C_OOP__CURSOR_COLOR MTCOPCCO
-#define CMT_CONSOLE_C_OOP__CURSOR_DEFAULT_COLOR MTCOPCDC
-#define CMT_CONSOLE_C_OOP__PUT_STRING MTCOPPTS
-#define CMT_CONSOLE_C_OOP__X MTCOPX01
-#define CMT_CONSOLE_C_OOP__Y MTCOPY01
-#define CMT_CONSOLE_C_OOP__XY MTCOPXY1
-#define CMT_CONSOLE_C_OOP__WIDTH MTCOPWID
-#define CMT_CONSOLE_C_OOP__HEIGHT MTCOPHEI
-#define CMT_CONSOLE_C_OOP__COLOR MTCOPCOL
-#define CMT_CONSOLE_C_OOP__DEFAULT_COLOR MTCOPDCO
-#define CMT_CONSOLE_C_OOP__TITLE MTCOPTIL
-#define CMT_CONSOLE_C_OOP__CLEAR MTCOPCLR
-#define CMT_CONSOLE_C_OOP__EXPORT MTCOPEXP
-#define CMT_CONSOLE_C_OOP__IMPORT MTCOPIMP
-#define CMT_CONSOLE_C_OOP__PUSH MTCOPPSH
-#define CMT_CONSOLE_C_OOP__POP MTCOPPOP
-#define CMT_CONSOLE_C_OOP__PRINT MTCOPPRI
-#define CMT_CONSOLE_C_OOP__CURSOR_X MTCOPCX1
-#define CMT_CONSOLE_C_OOP__CURSOR_Y MTCOPCY1
-#define CMT_CONSOLE_C_OOP__CURSOR_XY MTCOPCXY
-#define CMT_CONSOLE_C_OOP__CURSOR_MOVE_X MTCOPCMX
-#define CMT_CONSOLE_C_OOP__CURSOR_MOVE_Y MTCOPCMY
-#define CMT_CONSOLE_C_OOP__CURSOR_MOVE_XY MTCOPCMZ
-#define CMT_CONSOLE_C_OOP__CURSOR_SHOW MTCOPCSH
-#define CMT_CONSOLE_C_OOP__CURSOR_SIZE MTCOPCSZ
-#define CMT_CONSOLE_C_OOP__PUT_LINE MTCOPPTL
-#define CMT_CONSOLE_C_OOP__PUT_CURVE MTCOPPTC
-#define CMT_CONSOLE_C_OOP__PUT_FRAME MTCOPPTF
-#define CMT_CONSOLE_C_OOP__PUT_FRAME_RADIUS MTCOPPFR
-#define CMT_CONSOLE_C_OOP__PUT_RECTANGLE MTCOPPTR
-#define CMT_CONSOLE_C_OOP__PUT_RECTANGLE_RADIUS MTCOPPRR
-#define CMT_CONSOLE_C_OOP__PUT_CIRCLE MTCOPPTI
-#define CMT_CONSOLE_C_OOP__PUT_ELLIPSE MTCOPPTE
-#define CMT_CONSOLE_C_OOP__PUT_COLORED_STRING MTCOPCTS
-#define CMT_CONSOLE_C_OOP__PUT_COLORED_LINE MTCOPCTL
-#define CMT_CONSOLE_C_OOP__PUT_COLORED_CURVE MTCOPCTC
-#define CMT_CONSOLE_C_OOP__PUT_COLORED_FRAME MTCOPCTF
-#define CMT_CONSOLE_C_OOP__PUT_COLORED_FRAME_RADIUS MTCOPCFR
-#define CMT_CONSOLE_C_OOP__PUT_COLORED_RECTANGLE MTCOPCTR
-#define CMT_CONSOLE_C_OOP__PUT_COLORED_RECTANGLE_RADIUS MTCOPCRR
-#define CMT_CONSOLE_C_OOP__PUT_COLORED_CIRCLE MTCOPCTI
-#define CMT_CONSOLE_C_OOP__PUT_COLORED_ELLIPSE MTCOPCTE
-#define CMT_CONSOLE_C_OOP__INPUT_WAIT_ANY MTCOPIWA
-#define CMT_CONSOLE_C_OOP__INPUT_WAIT_KEY MTCOPIWK
-#define CMT_CONSOLE_C_OOP__INPUT_WAIT_MOUSE MTCOPIWM
-#define CMT_CONSOLE_C_OOP__INPUT_WAIT_MOUSE_ACTION MTCOPIMA
-#define CMT_CONSOLE_C_OOP__INPUT_WAIT_MOUSE_MOVE MTCOPIMM
-#define CMT_CONSOLE_C_OOP__GET_LINE MTCOPGTL
-#define CMT_CONSOLE_C_OOP__GET_AREA MTCOPGTA
+#define CONSOLE_INIT CMTCINIT
+#define CONSOLE_DESTORY CMTCCDES
+#define CONSOLE_LOG CMTCCLOG
+#define CONSOLE_WARNING CMTCCWAR
+#define CONSOLE_WARNING_AT CMTCCWAT
+#define CONSOLE_ERROR CMTCCERR
+#define CONSOLE_ERROR_AT CMTCCEAT
+#define CONSOLE_CURSOR_COLOR CMTCCCCO
+#define CONSOLE_CURSOR_DEFAULT_COLOR CMTCCCDC
+#define CONSOLE_PUT_STRING CMTCCPTS
+#define CONSOLE_X CMTCCX01
+#define CONSOLE_Y CMTCCY01
+#define CONSOLE_XY CMTCCXY1
+#define CONSOLE_WIDTH CMTCCWID
+#define CONSOLE_HEIGHT CMTCCHEI
+#define CONSOLE_COLOR CMTCCCOL
+#define CONSOLE_DEFAULT_COLOR CMTCCDCO
+#define CONSOLE_TITLE CMTCCTIL
+#define CONSOLE_CLEAR CMTCCCLR
+#define CONSOLE_EXPORT CMTCCEXP
+#define CONSOLE_IMPORT CMTCCIMP
+#define CONSOLE_PUSH CMTCCPSH
+#define CONSOLE_POP CMTCCPOP
+#define CONSOLE_PRINT CMTCCPRI
+#define CONSOLE_CURSOR_X CMTCCCX1
+#define CONSOLE_CURSOR_Y CMTCCCY1
+#define CONSOLE_CURSOR_XY CMTCCCXY
+#define CONSOLE_CURSOR_MOVE_X CMTCCCMX
+#define CONSOLE_CURSOR_MOVE_Y CMTCCCMY
+#define CONSOLE_CURSOR_MOVE_XY CMTCCCMZ
+#define CONSOLE_CURSOR_SHOW CMTCCCSH
+#define CONSOLE_CURSOR_SIZE CMTCCCSZ
+#define CONSOLE_PUT_LINE CMTCCPTL
+#define CONSOLE_PUT_CURVE CMTCCPTC
+#define CONSOLE_PUT_FRAME CMTCCPTF
+#define CONSOLE_PUT_FRAME_RADIUS CMTCCPFR
+#define CONSOLE_PUT_RECTANGLE CMTCCPTR
+#define CONSOLE_PUT_RECTANGLE_RADIUS CMTCCPRR
+#define CONSOLE_PUT_CIRCLE CMTCCPTI
+#define CONSOLE_PUT_ELLIPSE CMTCCPTE
+#define CONSOLE_PUT_COLORED_STRING CMTCCCTS
+#define CONSOLE_PUT_COLORED_LINE CMTCCCTL
+#define CONSOLE_PUT_COLORED_CURVE CMTCCCTC
+#define CONSOLE_PUT_COLORED_FRAME CMTCCCTF
+#define CONSOLE_PUT_COLORED_FRAME_RADIUS CMTCCCFR
+#define CONSOLE_PUT_COLORED_RECTANGLE CMTCCCTR
+#define CONSOLE_PUT_COLORED_RECTANGLE_RADIUS CMTCCCRR
+#define CONSOLE_PUT_COLORED_CIRCLE CMTCCCTI
+#define CONSOLE_PUT_COLORED_ELLIPSE CMTCCCTE
+#define CONSOLE_INPUT_WAIT_ANY CMTCCIWA
+#define CONSOLE_INPUT_WAIT_KEY CMTCCIWK
+#define CONSOLE_INPUT_WAIT_MOUSE CMTCCIWM
+#define CONSOLE_INPUT_WAIT_MOUSE_ACTION CMTCCIMA
+#define CONSOLE_INPUT_WAIT_MOUSE_MOVE CMTCCIMM
+#define CONSOLE_GET_LINE CMTCCGTL
+#define CONSOLE_GET_AREA CMTCCGTA
+#define console_init mtlcinit
+#define console_destory mtlccdes
+#define console_log mtlcclog
+#define console_warning mtlccwar
+#define console_warning_at mtlccwat
+#define console_error mtlccerr
+#define console_error_at mtlcceat
+#define console_cursor_color mtlcccco
+#define console_cursor_default_color mtlcccdc
+#define console_put_string mtlccpts
+#define console_x mtlccx01
+#define console_y mtlccy01
+#define console_xy mtlccxy1
+#define console_width mtlccwid
+#define console_height mtlcchei
+#define console_color mtlcccol
+#define console_default_color mtlccdco
+#define console_title mtlcctil
+#define console_clear mtlccclr
+#define console_export mtlccexp
+#define console_import mtlccimp
+#define console_push mtlccpsh
+#define console_pop mtlccpop
+#define console_print mtlccpri
+#define console_cursor_x mtlcccx1
+#define console_cursor_y mtlcccy1
+#define console_cursor_xy mtlcccxy
+#define console_cursor_move_x mtlcccmx
+#define console_cursor_move_y mtlcccmy
+#define console_cursor_move_xy mtlcccmz
+#define console_cursor_show mtlcccsh
+#define console_cursor_size mtlcccsz
+#define console_put_line mtlccptl
+#define console_put_curve mtlccptc
+#define console_put_frame mtlccptf
+#define console_put_frame_radius mtlccpfr
+#define console_put_rectangle mtlccptr
+#define console_put_rectangle_radius mtlccprr
+#define console_put_circle mtlccpti
+#define console_put_ellipse mtlccpte
+#define console_put_colored_string mtlcccts
+#define console_put_colored_line mtlccctl
+#define console_put_colored_curve mtlccctc
+#define console_put_colored_frame mtlccctf
+#define console_put_colored_frame_radius mtlcccfr
+#define console_put_colored_rectangle mtlccctr
+#define console_put_colored_rectangle_radius mtlcccrr
+#define console_put_colored_circle mtlcccti
+#define console_put_colored_ellipse mtlcccte
+#define console_input_wait_any mtlcciwa
+#define console_input_wait_key mtlcciwk
+#define console_input_wait_mouse mtlcciwm
+#define console_input_wait_mouse_action mtlccima
+#define console_input_wait_mouse_move mtlccimm
+#define console_get_line mtlccgtl
+#define console_get_area mtlccgta
 #endif /* __MVS__ */
 /* *************************** [^] MVS LINKER [^] *************************** */
 
-/* **************************** [v] EXTERNS [v] ***************************** */
-extern OBJECT CMT_CONSOLE	console;
+/* ********************* [v] METAWARE HIGH C LINKER [v] ********************* */
+/* * METAWARE LINKER DOES NOT SUPPORT LOWER CASE NAMES ON FUNCTION NAMES!!! * */
+#ifdef __HIGHC__ /* METAWARE HIGH C/C++ */
+#define LOCALLINKER__CONSOLE_HIGHC \
+	pragma Alias(console_init, "L_CONSOLE_INIT");\
+	pragma Alias(console_destory, "L_CONSOLE_DESTORY");\
+	pragma Alias(console_log, "L_CONSOLE_LOG");\
+	pragma Alias(console_warning, "L_CONSOLE_WARNING");\
+	pragma Alias(console_warning_at, "L_CONSOLE_WARNING_AT");\
+	pragma Alias(console_error, "L_CONSOLE_ERROR");\
+	pragma Alias(console_error_at, "L_CONSOLE_ERROR_AT");\
+	pragma Alias(console_cursor_color, "L_CONSOLE_CURSOR_COLOR");\
+	pragma Alias(\
+		console_cursor_default_color, "L_CONSOLE_CURSOR_DEFAULT_COLOR"\
+	);\
+	pragma Alias(console_put_string, "L_CONSOLE_PUT_STRING");\
+	pragma Alias(console_x, "L_CONSOLE_X");\
+	pragma Alias(console_y, "L_CONSOLE_Y");\
+	pragma Alias(console_xy, "L_CONSOLE_XY");\
+	pragma Alias(console_width, "L_CONSOLE_WIDTH");\
+	pragma Alias(console_height, "L_CONSOLE_HEIGHT");\
+	pragma Alias(console_color, "L_CONSOLE_COLOR");\
+	pragma Alias(console_default_color, "L_CONSOLE_DEFAULT_COLOR");\
+	pragma Alias(console_title, "L_CONSOLE_TITLE");\
+	pragma Alias(console_clear, "L_CONSOLE_CLEAR");\
+	pragma Alias(console_export, "L_CONSOLE_EXPORT");\
+	pragma Alias(console_import, "L_CONSOLE_IMPORT");\
+	pragma Alias(console_push, "L_CONSOLE_PUSH");\
+	pragma Alias(console_pop, "L_CONSOLE_POP");\
+	pragma Alias(console_print, "L_CONSOLE_PRINT");\
+	pragma Alias(console_cursor_x, "L_CONSOLE_CURSOR_X");\
+	pragma Alias(console_cursor_y, "L_CONSOLE_CURSOR_Y");\
+	pragma Alias(console_cursor_xy, "L_CONSOLE_CURSOR_XY");\
+	pragma Alias(console_cursor_move_x, "L_CONSOLE_CURSOR_MOVE_X");\
+	pragma Alias(console_cursor_move_y, "L_CONSOLE_CURSOR_MOVE_Y");\
+	pragma Alias(console_cursor_move_xy, "L_CONSOLE_CURSOR_MOVE_XY");\
+	pragma Alias(console_cursor_show, "L_CONSOLE_CURSOR_SHOW");\
+	pragma Alias(console_cursor_size, "L_CONSOLE_CURSOR_SIZE");\
+	pragma Alias(console_put_line, "L_CONSOLE_PUT_LINE");\
+	pragma Alias(console_put_curve, "L_CONSOLE_PUT_CURVE");\
+	pragma Alias(console_put_frame, "L_CONSOLE_PUT_FRAME");\
+	pragma Alias(console_put_frame_radius, "L_CONSOLE_PUT_FRAME_RADIUS");\
+	pragma Alias(console_put_rectangle, "L_CONSOLE_PUT_RECTANGLE");\
+	pragma Alias(\
+		console_put_rectangle_radius, "L_CONSOLE_PUT_RECTANGLE_RADIUS"\
+	);\
+	pragma Alias(console_put_circle, "L_CONSOLE_PUT_CIRCLE");\
+	pragma Alias(console_put_ellipse, "L_CONSOLE_PUT_ELLIPSE");\
+	pragma Alias(console_put_colored_string, "L_CONSOLE_PUT_COLORED_STRING");\
+	pragma Alias(console_put_colored_line, "L_CONSOLE_PUT_COLORED_LINE");\
+	pragma Alias(console_put_colored_curve, "L_CONSOLE_PUT_COLORED_CURVE");\
+	pragma Alias(console_put_colored_frame, "L_CONSOLE_PUT_COLORED_FRAME");\
+	pragma Alias(\
+		console_put_colored_frame_radius, "L_CONSOLE_PUT_COLORED_FRAME_RADIUS"\
+	);\
+	pragma Alias(\
+		console_put_colored_rectangle, "L_CONSOLE_PUT_COLORED_RECTANGLE"\
+	);\
+	pragma Alias(\
+		console_put_colored_rectangle_radius, \
+		"L_CONSOLE_PUT_COLORED_RECTANGLE_RADIUS"\
+	);\
+	pragma Alias(console_put_colored_circle, "L_CONSOLE_PUT_COLORED_CIRCLE");\
+	pragma Alias(console_put_colored_ellipse, "L_CONSOLE_PUT_COLORED_ELLIPSE");\
+	pragma Alias(console_input_wait_any, "L_CONSOLE_INPUT_WAIT_ANY");\
+	pragma Alias(console_input_wait_key, "L_CONSOLE_INPUT_WAIT_KEY");\
+	pragma Alias(console_input_wait_mouse, "L_CONSOLE_INPUT_WAIT_MOUSE");\
+	pragma Alias(\
+		console_input_wait_mouse_action, "L_CONSOLE_INPUT_WAIT_MOUSE_ACTION"\
+	);\
+	pragma Alias(\
+		console_input_wait_mouse_move, "L_CONSOLE_INPUT_WAIT_MOUSE_MOVE"\
+	);\
+	pragma Alias(console_get_line, "L_CONSOLE_GET_LINE");\
+	pragma Alias(console_get_area, "L_CONSOLE_GET_AREA");
+#else /* !__HIGHC__ */
+#define LOCALLINKER__CONSOLE_HIGHC
+#endif /* __HIGHC__ */
+/* ********************* [^] METAWARE HIGH C LINKER [^] ********************* */
 
+/* **************************** [v] EXTERNS [v] ***************************** */
 #ifndef KNR_STYLE /* STANDARD C */
-extern void					CMT_CONSOLE(void);
-extern void					CMT_CONSOLE_C_OOP__FREE(void);
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__LOG(char *);
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__WARNING(char *);
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__WARNING_AT(\
-	char *, char *, unsigned int\
+extern void	CONSOLE_INIT(struct S_CONSOLE *);
+extern void	CONSOLE_DESTROY(struct S_CONSOLE *);
+extern void	CONSOLE_LOG(struct S_CONSOLE *, char *);
+extern void	CONSOLE_WARNING(struct S_CONSOLE *, char *);
+extern void	CONSOLE_WARNING_AT(\
+	struct S_CONSOLE *, char *, char *, unsigned int\
 );
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__ERROR(char *);
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__ERROR_AT(\
-	char *, char *, unsigned int\
+extern void	CONSOLE_ERROR(struct S_CONSOLE *, char *);
+extern void	CONSOLE_ERROR_AT(struct S_CONSOLE *, char *, char *, unsigned int);
+extern void	CONSOLE_CURSOR_COLOR(struct S_CONSOLE *, unsigned int);
+extern void	CONSOLE_CURSOR_DEFAULT_COLOR(struct S_CONSOLE *);
+extern void	CONSOLE_PUT_STRING(\
+	struct S_CONSOLE *, char *, unsigned int, unsigned int\
 );
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__CURSOR_COLOR(unsigned int);
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__CURSOR_DEFAULT_COLOR(void);
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__PUT_STRING(\
-	char *, unsigned int, unsigned int\
+extern void	CONSOLE_X(struct S_CONSOLE *, int);
+extern void	CONSOLE_Y(struct S_CONSOLE *, int);
+extern void	CONSOLE_XY(struct S_CONSOLE *, int, int);
+extern void	CONSOLE_WIDTH(struct S_CONSOLE *, unsigned int);
+extern void	CONSOLE_HEIGHT(struct S_CONSOLE *, unsigned int);
+extern void	CONSOLE_COLOR(struct S_CONSOLE *, unsigned int);
+extern void	CONSOLE_DEFAULT_COLOR(struct S_CONSOLE *);
+extern void	CONSOLE_CLEAR(struct S_CONSOLE *);
+extern void	CONSOLE_TITLE(struct S_CONSOLE *, const char *);
+extern PTR	CONSOLE_EXPORT(struct S_CONSOLE *);
+extern void	CONSOLE_IMPORT(struct S_CONSOLE *, PTR);
+extern void	CONSOLE_PUSH(struct S_CONSOLE *);
+extern void	CONSOLE_POP(struct S_CONSOLE *);
+extern void	CONSOLE_PRINT(struct S_CONSOLE *, const char *, VA_ARGS);
+extern void	CONSOLE_CURSOR_X(struct S_CONSOLE *, unsigned int);
+extern void	CONSOLE_CURSOR_Y(struct S_CONSOLE *, unsigned int);
+extern void	CONSOLE_CURSOR_XY(struct S_CONSOLE *, unsigned int, unsigned int);
+extern void	CONSOLE_CURSOR_MOVE_X(struct S_CONSOLE *, int);
+extern void	CONSOLE_CURSOR_MOVE_Y(struct S_CONSOLE *, int);
+extern void	CONSOLE_CURSOR_MOVE_XY(struct S_CONSOLE *, int, int);
+extern void	CONSOLE_CURSOR_SHOW(struct S_CONSOLE *, BOOLEAN);
+extern void	CONSOLE_CURSOR_SIZE(struct S_CONSOLE *, unsigned long);
+extern void	CONSOLE_PUT_LINE(\
+	struct S_CONSOLE *, \
+	char, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int\
 );
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__X(int);
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__Y(int);
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__XY(int, int);
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__WIDTH(unsigned int);
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__HEIGHT(unsigned int);
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__COLOR(unsigned int);
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__DEFAULT_COLOR(void);
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__CLEAR(void);
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__TITLE(const char *);
-extern PTR					CMT_CONSOLE_C_OOP__EXPORT(void);
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__IMPORT(PTR);
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__PUSH(void);
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__POP(void);
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__PRINT(const char *, VA_ARGS);
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__CURSOR_X(unsigned int);
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__CURSOR_Y(unsigned int);
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__CURSOR_XY(\
-	unsigned int, unsigned int\
-);
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__CURSOR_MOVE_X(int);
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__CURSOR_MOVE_Y(int);
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__CURSOR_MOVE_XY(int, int);
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__CURSOR_SHOW(BOOLEAN);
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__CURSOR_SIZE(unsigned long);
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__PUT_LINE(\
-	char, unsigned int, unsigned int, unsigned int, unsigned int\
-);
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__PUT_CURVE(\
-	char, unsigned int, unsigned int, unsigned int, unsigned int, float, float\
-);
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__PUT_FRAME(\
-	char, unsigned int, unsigned int, unsigned int, unsigned int\
-);
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__PUT_FRAME_RADIUS(\
-	char, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int\
-);
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__PUT_RECTANGLE(\
-	char, unsigned int, unsigned int, unsigned int, unsigned int\
-);
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__PUT_RECTANGLE_RADIUS(\
-	char, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int\
-);
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__PUT_CIRCLE(\
-	char, unsigned int, unsigned int, unsigned int, unsigned int\
-);
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__PUT_ELLIPSE(\
-	char, unsigned int, unsigned int, unsigned int, unsigned int\
-);
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__PUT_COLORED_STRING(\
-	char *, unsigned int, unsigned int, unsigned int\
-);
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__PUT_COLORED_LINE(\
-	char, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int\
-);
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__PUT_COLORED_CURVE(\
-	char,\
-	unsigned int,\
-	unsigned int,\
-	unsigned int,\
-	unsigned int,\
-	unsigned int,\
-	float,\
+extern void	CONSOLE_PUT_CURVE(\
+	struct S_CONSOLE *, \
+	char, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	float, \
 	float\
 );
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__PUT_COLORED_FRAME(\
-	char,\
-	unsigned int,\
-	unsigned int,\
-	unsigned int,\
-	unsigned int,\
+extern void	CONSOLE_PUT_FRAME(\
+	struct S_CONSOLE *, \
+	char, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
 	unsigned int\
 );
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__PUT_COLORED_FRAME_RADIUS(\
-	char,\
-	unsigned int,\
-	unsigned int,\
-	unsigned int,\
-	unsigned int,\
-	unsigned int,\
+extern void	CONSOLE_PUT_FRAME_RADIUS(\
+	struct S_CONSOLE *, \
+	char, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
 	unsigned int\
 );
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__PUT_COLORED_RECTANGLE(\
-	char, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int\
-);
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__PUT_COLORED_RECTANGLE_RADIUS(\
-	char,\
-	unsigned int,\
-	unsigned int,\
-	unsigned int,\
-	unsigned int,\
-	unsigned int,\
+extern void	CONSOLE_PUT_RECTANGLE(\
+	struct S_CONSOLE *, \
+	char, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
 	unsigned int\
 );
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__PUT_COLORED_CIRCLE(\
-	char, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int\
+extern void	CONSOLE_PUT_RECTANGLE_RADIUS(\
+	struct S_CONSOLE *, \
+	char, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int\
 );
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__PUT_COLORED_ELLIPSE(\
-	char, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int\
+extern void	CONSOLE_PUT_CIRCLE(\
+	struct S_CONSOLE *, \
+	char, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int\
 );
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__INPUT_WAIT_ANY(void);
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__INPUT_WAIT_KEY(void);
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__INPUT_WAIT_MOUSE(void);
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__INPUT_WAIT_MOUSE_ACTION(void);
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__INPUT_WAIT_MOUSE_MOVE(void);
-extern char					*CMT_CONSOLE_C_OOP__GET_LINE(\
-	unsigned int, unsigned int, unsigned int, unsigned int\
+extern void	CONSOLE_PUT_ELLIPSE(\
+	struct S_CONSOLE *, \
+	char, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int\
 );
-extern char					**CMT_CONSOLE_C_OOP__GET_AREA(\
-	unsigned int, unsigned int, unsigned int, unsigned int\
+extern void	CONSOLE_PUT_COLORED_STRING(\
+	struct S_CONSOLE *, char *, unsigned int, unsigned int, unsigned int\
+);
+extern void	CONSOLE_PUT_COLORED_LINE(\
+	struct S_CONSOLE *, \
+	char, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int\
+);
+extern void	CONSOLE_PUT_COLORED_CURVE(\
+	struct S_CONSOLE *, \
+	char, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	float, \
+	float\
+);
+extern void	CONSOLE_PUT_COLORED_FRAME(\
+	struct S_CONSOLE *, \
+	char, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int\
+);
+extern void	CONSOLE_PUT_COLORED_FRAME_RADIUS(\
+	struct S_CONSOLE *, \
+	char, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int\
+);
+extern void	CONSOLE_PUT_COLORED_RECTANGLE(\
+	struct S_CONSOLE *, \
+	char, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int\
+);
+extern void	CONSOLE_PUT_COLORED_RECTANGLE_RADIUS(\
+	struct S_CONSOLE *, \
+	char, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int\
+);
+extern void	CONSOLE_PUT_COLORED_CIRCLE(\
+	struct S_CONSOLE *, \
+	char, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int\
+);
+extern void	CONSOLE_PUT_COLORED_ELLIPSE(\
+	struct S_CONSOLE *, \
+	char, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int\
+);
+extern void	CONSOLE_INPUT_WAIT_ANY(struct S_CONSOLE *);
+extern void	CONSOLE_INPUT_WAIT_KEY(struct S_CONSOLE *);
+extern void	CONSOLE_INPUT_WAIT_MOUSE(struct S_CONSOLE *);
+extern void	CONSOLE_INPUT_WAIT_MOUSE_ACTION(struct S_CONSOLE *);
+extern void	CONSOLE_INPUT_WAIT_MOUSE_MOVE(struct S_CONSOLE *);
+extern char	*CONSOLE_GET_LINE(\
+	struct S_CONSOLE *, unsigned int, unsigned int, unsigned int, unsigned int\
+);
+extern char	**CONSOLE_GET_AREA(\
+	struct S_CONSOLE *, unsigned int, unsigned int, unsigned int, unsigned int\
+);
+extern void	console_init(struct s_console *);
+extern void	console_destroy(struct s_console *);
+extern void	console_log(struct s_console *, char *);
+extern void	console_warning(struct s_console *, char *);
+extern void	console_warning_at(\
+	struct s_console *, char *, char *, unsigned int\
+);
+extern void	console_error(struct s_console *, char *);
+extern void	console_error_at(struct s_console *, char *, char *, unsigned int);
+extern void	console_cursor_color(struct s_console *, unsigned int);
+extern void	console_cursor_default_color(struct s_console *);
+extern void	console_put_string(\
+	struct s_console *, char *, unsigned int, unsigned int\
+);
+extern void	console_x(struct s_console *, int);
+extern void	console_y(struct s_console *, int);
+extern void	console_xy(struct s_console *, int, int);
+extern void	console_width(struct s_console *, unsigned int);
+extern void	console_height(struct s_console *, unsigned int);
+extern void	console_color(struct s_console *, unsigned int);
+extern void	console_default_color(struct s_console *);
+extern void	console_clear(struct s_console *);
+extern void	console_title(struct s_console *, const char *);
+extern ptr	console_export(struct s_console *);
+extern void	console_import(struct s_console *, ptr);
+extern void	console_push(struct s_console *);
+extern void	console_pop(struct s_console *);
+extern void	console_print(struct s_console *, const char *, va_args);
+extern void	console_cursor_x(struct s_console *, unsigned int);
+extern void	console_cursor_y(struct s_console *, unsigned int);
+extern void	console_cursor_xy(struct s_console *, unsigned int, unsigned int);
+extern void	console_cursor_move_x(struct s_console *, int);
+extern void	console_cursor_move_y(struct s_console *, int);
+extern void	console_cursor_move_xy(struct s_console *, int, int);
+extern void	console_cursor_show(struct s_console *, boolean);
+extern void	console_cursor_size(struct s_console *, unsigned long);
+extern void	console_put_line(\
+	struct s_console *, \
+	char, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int\
+);
+extern void	console_put_curve(\
+	struct s_console *, \
+	char, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	float, \
+	float\
+);
+extern void	console_put_frame(\
+	struct s_console *, \
+	char, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int\
+);
+extern void	console_put_frame_radius(\
+	struct s_console *, \
+	char, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int\
+);
+extern void	console_put_rectangle(\
+	struct s_console *, \
+	char, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int\
+);
+extern void	console_put_rectangle_radius(\
+	struct s_console *, \
+	char, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int\
+);
+extern void	console_put_circle(\
+	struct s_console *, \
+	char, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int\
+);
+extern void	console_put_ellipse(\
+	struct s_console *, \
+	char, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int\
+);
+extern void	console_put_colored_string(\
+	struct s_console *, char *, unsigned int, unsigned int, unsigned int\
+);
+extern void	console_put_colored_line(\
+	struct s_console *, \
+	char, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int\
+);
+extern void	console_put_colored_curve(\
+	struct s_console *, \
+	char, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	float, \
+	float\
+);
+extern void	console_put_colored_frame(\
+	struct s_console *, \
+	char, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int\
+);
+extern void	console_put_colored_frame_radius(\
+	struct s_console *, \
+	char, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int\
+);
+extern void	console_put_colored_rectangle(\
+	struct s_console *, \
+	char, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int\
+);
+extern void	console_put_colored_rectangle_radius(\
+	struct s_console *, \
+	char, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int\
+);
+extern void	console_put_colored_circle(\
+	struct s_console *, \
+	char, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int\
+);
+extern void	console_put_colored_ellipse(\
+	struct s_console *, \
+	char, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int, \
+	unsigned int\
+);
+extern void	console_input_wait_any(struct s_console *);
+extern void	console_input_wait_key(struct s_console *);
+extern void	console_input_wait_mouse(struct s_console *);
+extern void	console_input_wait_mouse_action(struct s_console *);
+extern void	console_input_wait_mouse_move(struct s_console *);
+extern char	*console_get_line(\
+	struct s_console *, unsigned int, unsigned int, unsigned int, unsigned int\
+);
+extern char	**console_get_area(\
+	struct s_console *, unsigned int, unsigned int, unsigned int, unsigned int\
 );
 #else /* K&R */
-extern						CMT_CONSOLE();
-extern						CMT_CONSOLE_C_OOP__FREE();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__LOG();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__WARNING();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__WARNING_AT();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__ERROR();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__ERROR_AT();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__CURSOR_COLOR();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__CURSOR_DEFAULT_COLOR();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__PUT_STRING();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__X();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__Y();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__XY();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__WIDTH();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__HEIGHT();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__COLOR();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__DEFAULT_COLOR();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__CLEAR();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__TITLE();
-extern PTR					CMT_CONSOLE_C_OOP__EXPORT();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__IMPORT();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__PUSH();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__POP();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__PRINT();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__CURSOR_X();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__CURSOR_Y();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__CURSOR_XY();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__CURSOR_MOVE_X();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__CURSOR_MOVE_Y();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__CURSOR_MOVE_XY();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__CURSOR_SHOW();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__CURSOR_SIZE();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__PUT_LINE();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__PUT_CURVE();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__PUT_FRAME();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__PUT_FRAME_RADIUS();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__PUT_RECTANGLE();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__PUT_RECTANGLE_RADIUS();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__PUT_CIRCLE();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__PUT_ELLIPSE();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__PUT_COLORED_STRING();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__PUT_COLORED_LINE();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__PUT_COLORED_CURVE();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__PUT_COLORED_FRAME();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__PUT_COLORED_FRAME_RADIUS();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__PUT_COLORED_RECTANGLE();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__PUT_COLORED_RECTANGLE_RADIUS();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__PUT_COLORED_CIRCLE();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__PUT_COLORED_ELLIPSE();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__INPUT_WAIT_ANY();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__INPUT_WAIT_KEY();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__INPUT_WAIT_MOUSE();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__INPUT_WAIT_MOUSE_ACTION();
-extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__INPUT_WAIT_MOUSE_MOVE();
-extern char					*CMT_CONSOLE_C_OOP__GET_LINE();
-extern char					**CMT_CONSOLE_C_OOP__GET_AREA();
+extern		CONSOLE_INIT();
+extern		CONSOLE_DESTROY();
+extern		CONSOLE_LOG();
+extern		CONSOLE_WARNING();
+extern		CONSOLE_WARNING_AT();
+extern		CONSOLE_ERROR();
+extern		CONSOLE_ERROR_AT();
+extern		CONSOLE_CURSOR_COLOR();
+extern		CONSOLE_CURSOR_DEFAULT_COLOR();
+extern		CONSOLE_PUT_STRING();
+extern		CONSOLE_X();
+extern		CONSOLE_Y();
+extern		CONSOLE_XY();
+extern		CONSOLE_WIDTH();
+extern		CONSOLE_HEIGHT();
+extern		CONSOLE_COLOR();
+extern		CONSOLE_DEFAULT_COLOR();
+extern		CONSOLE_CLEAR();
+extern		CONSOLE_TITLE();
+extern PTR	CONSOLE_EXPORT();
+extern		CONSOLE_IMPORT();
+extern		CONSOLE_PUSH();
+extern		CONSOLE_POP();
+extern		CONSOLE_PRINT();
+extern		CONSOLE_CURSOR_X();
+extern		CONSOLE_CURSOR_Y();
+extern		CONSOLE_CURSOR_XY();
+extern		CONSOLE_CURSOR_MOVE_X();
+extern		CONSOLE_CURSOR_MOVE_Y();
+extern		CONSOLE_CURSOR_MOVE_XY();
+extern		CONSOLE_CURSOR_SHOW();
+extern		CONSOLE_CURSOR_SIZE();
+extern		CONSOLE_PUT_LINE();
+extern		CONSOLE_PUT_CURVE();
+extern		CONSOLE_PUT_FRAME();
+extern		CONSOLE_PUT_FRAME_RADIUS();
+extern		CONSOLE_PUT_RECTANGLE();
+extern		CONSOLE_PUT_RECTANGLE_RADIUS();
+extern		CONSOLE_PUT_CIRCLE();
+extern		CONSOLE_PUT_ELLIPSE();
+extern		CONSOLE_PUT_COLORED_STRING();
+extern		CONSOLE_PUT_COLORED_LINE();
+extern		CONSOLE_PUT_COLORED_CURVE();
+extern		CONSOLE_PUT_COLORED_FRAME();
+extern		CONSOLE_PUT_COLORED_FRAME_RADIUS();
+extern		CONSOLE_PUT_COLORED_RECTANGLE();
+extern		CONSOLE_PUT_COLORED_RECTANGLE_RADIUS();
+extern		CONSOLE_PUT_COLORED_CIRCLE();
+extern		CONSOLE_PUT_COLORED_ELLIPSE();
+extern		CONSOLE_INPUT_WAIT_ANY();
+extern		CONSOLE_INPUT_WAIT_KEY();
+extern		CONSOLE_INPUT_WAIT_MOUSE();
+extern		CONSOLE_INPUT_WAIT_MOUSE_ACTION();
+extern		CONSOLE_INPUT_WAIT_MOUSE_MOVE();
+extern char	*CONSOLE_GET_LINE();
+extern char	**CONSOLE_GET_AREA();
+extern		console_init();
+extern		console_destroy();
+extern		console_log();
+extern		console_warning();
+extern		console_warning_at();
+extern		console_error();
+extern		console_error_at();
+extern		console_cursor_color();
+extern		console_cursor_default_color();
+extern		console_put_string();
+extern		console_x();
+extern		console_y();
+extern		console_xy();
+extern		console_width();
+extern		console_height();
+extern		console_color();
+extern		console_default_color();
+extern		console_clear();
+extern		console_title();
+extern ptr	console_export();
+extern		console_import();
+extern		console_push();
+extern		console_pop();
+extern		console_print();
+extern		console_cursor_x();
+extern		console_cursor_y();
+extern		console_cursor_xy();
+extern		console_cursor_move_x();
+extern		console_cursor_move_y();
+extern		console_cursor_move_xy();
+extern		console_cursor_show();
+extern		console_cursor_size();
+extern		console_put_line();
+extern		console_put_curve();
+extern		console_put_frame();
+extern		console_put_frame_radius();
+extern		console_put_rectangle();
+extern		console_put_rectangle_radius();
+extern		console_put_circle();
+extern		console_put_ellipse();
+extern		console_put_colored_string();
+extern		console_put_colored_line();
+extern		console_put_colored_curve();
+extern		console_put_colored_frame();
+extern		console_put_colored_frame_radius();
+extern		console_put_colored_rectangle();
+extern		console_put_colored_rectangle_radius();
+extern		console_put_colored_circle();
+extern		console_put_colored_ellipse();
+extern		console_input_wait_any();
+extern		console_input_wait_key();
+extern		console_input_wait_mouse();
+extern		console_input_wait_mouse_action();
+extern		console_input_wait_mouse_move();
+extern char	*console_get_line();
+extern char	**console_get_area();
 #endif /* !KNR_STYLE */
 /* **************************** [^] EXTERNS [^] ***************************** */
 
-#include "C_OOP/CMT_CONSOLE.INL"
-
-#include "C_OOP/FREE.INL"
-#include "C_OOP/LOG.INL"
-#include "C_OOP/WARNING.INL"
-#include "C_OOP/WARNING_AT.INL"
-#include "C_OOP/ERROR.INL"
-#include "C_OOP/ERROR_AT.INL"
-
-#include "C_OOP/CURSOR/COLOR.INL"
-#include "C_OOP/CURSOR/DEFAULT_COLOR.INL"
-
-#include "C_OOP/PUT/STRING.INL"
-
-#include "C_OOP/X.INL"
-#include "C_OOP/Y.INL"
-#include "C_OOP/XY.INL"
-#include "C_OOP/WIDTH.INL"
-#include "C_OOP/HEIGHT.INL"
-#include "C_OOP/COLOR.INL"
-#include "C_OOP/DEFAULT_COLOR.INL"
-#include "C_OOP/CLEAR.INL"
-#include "C_OOP/TITLE.INL"
-#include "C_OOP/EXPORT.INL"
-#include "C_OOP/IMPORT.INL"
-#include "C_OOP/PUSH.INL"
-#include "C_OOP/POP.INL"
-#include "C_OOP/PRINT.INL"
-
-#include "C_OOP/CURSOR/X.INL"
-#include "C_OOP/CURSOR/Y.INL"
-#include "C_OOP/CURSOR/XY.INL"
-#include "C_OOP/CURSOR/MOVE_X.INL"
-#include "C_OOP/CURSOR/MOVE_Y.INL"
-#include "C_OOP/CURSOR/MOVE_XY.INL"
-#include "C_OOP/CURSOR/SHOW.INL"
-#include "C_OOP/CURSOR/SIZE.INL"
-
-#include "C_OOP/PUT/LINE.INL"
-#include "C_OOP/PUT/CURVE.INL"
-#include "C_OOP/PUT/FRAME.INL"
-#include "C_OOP/PUT/FRAME_RADIUS.INL"
-#include "C_OOP/PUT/RECTANGLE.INL"
-#include "C_OOP/PUT/RECTANGLE_RADIUS.INL"
-#include "C_OOP/PUT/CIRCLE.INL"
-#include "C_OOP/PUT/ELLIPSE.INL"
-
-#include "C_OOP/PUT/COLORED/STRING.INL"
-#include "C_OOP/PUT/COLORED/LINE.INL"
-#include "C_OOP/PUT/COLORED/CURVE.INL"
-#include "C_OOP/PUT/COLORED/FRAME.INL"
-#include "C_OOP/PUT/COLORED/FRAME_RADIUS.INL"
-#include "C_OOP/PUT/COLORED/RECTANGLE.INL"
-#include "C_OOP/PUT/COLORED/RECTANGLE_RADIUS.INL"
-#include "C_OOP/PUT/COLORED/CIRCLE.INL"
-#include "C_OOP/PUT/COLORED/ELLIPSE.INL"
-
-#include "C_OOP/INPUT/WAIT/ANY.INL"
-#include "C_OOP/INPUT/WAIT/KEY.INL"
-#include "C_OOP/INPUT/WAIT/MOUSE.INL"
-#include "C_OOP/INPUT/WAIT/MOUSE_ACTION.INL"
-#include "C_OOP/INPUT/WAIT/MOUSE_MOVE.INL"
-
-#include "C_OOP/GET/LINE.INL"
-#include "C_OOP/GET/AREA.INL"
-
-#define LOCALCONSTRUCTOR__CONSOLE \
-	LOCALMACRO__OBJECT_SENDER (console);\
-	CMT_CONSOLE();
-#define LOCALDESTRUCTOR__CONSOLE console.cursor.default_color()->free();
+#include "C/INIT.INL"
+#include "C/DESTRUCTOR.INL"
+#include "C/LOG.INL"
+#include "C/WARNING.INL"
+#include "C/WARNING_AT.INL"
+#include "C/ERROR.INL"
+#include "C/ERROR_AT.INL"
+#include "C/CURSOR/COLOR.INL"
+#include "C/CURSOR/DEFAULT_COLOR.INL"
+#include "C/PUT/STRING.INL"
+#include "C/X.INL"
+#include "C/Y.INL"
+#include "C/XY.INL"
+#include "C/WIDTH.INL"
+#include "C/HEIGHT.INL"
+#include "C/COLOR.INL"
+#include "C/DEFAULT_COLOR.INL"
+#include "C/CLEAR.INL"
+#include "C/TITLE.INL"
+#include "C/EXPORT.INL"
+#include "C/IMPORT.INL"
+#include "C/PUSH.INL"
+#include "C/POP.INL"
+#include "C/PRINT.INL"
+#include "C/CURSOR/X.INL"
+#include "C/CURSOR/Y.INL"
+#include "C/CURSOR/XY.INL"
+#include "C/CURSOR/MOVE_X.INL"
+#include "C/CURSOR/MOVE_Y.INL"
+#include "C/CURSOR/MOVE_XY.INL"
+#include "C/CURSOR/SHOW.INL"
+#include "C/CURSOR/SIZE.INL"
+#include "C/PUT/LINE.INL"
+#include "C/PUT/CURVE.INL"
+#include "C/PUT/FRAME.INL"
+#include "C/PUT/FRAME_RADIUS.INL"
+#include "C/PUT/RECTANGLE.INL"
+#include "C/PUT/RECTANGLE_RADIUS.INL"
+#include "C/PUT/CIRCLE.INL"
+#include "C/PUT/ELLIPSE.INL"
+#include "C/PUT/COLORED/STRING.INL"
+#include "C/PUT/COLORED/LINE.INL"
+#include "C/PUT/COLORED/CURVE.INL"
+#include "C/PUT/COLORED/FRAME.INL"
+#include "C/PUT/COLORED/FRAME_RADIUS.INL"
+#include "C/PUT/COLORED/RECTANGLE.INL"
+#include "C/PUT/COLORED/RECTANGLE_RADIUS.INL"
+#include "C/PUT/COLORED/CIRCLE.INL"
+#include "C/PUT/COLORED/ELLIPSE.INL"
+#include "C/INPUT/WAIT/ANY.INL"
+#include "C/INPUT/WAIT/KEY.INL"
+#include "C/INPUT/WAIT/MOUSE.INL"
+#include "C/INPUT/WAIT/MOUSE_ACTION.INL"
+#include "C/INPUT/WAIT/MOUSE_MOVE.INL"
+#include "C/GET/LINE.INL"
+#include "C/GET/AREA.INL"
 
 /* .,,,,. #==========================================================# .,,,,. */
 /*  \\//  |                 LINKABLE MEMBER CREATION                 |  \\//  */
@@ -759,67 +998,69 @@ extern char					**CMT_CONSOLE_C_OOP__GET_AREA();
 
 #undef LOCALLINKER__CONSOLE
 #define LOCALLINKER__CONSOLE \
-	OBJECT CMT_CONSOLE	console; \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__FREE \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__LOG \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__WARNING \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__WARNING_AT \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__ERROR \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__ERROR_AT \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__CURSOR_COLOR \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__CURSOR_DEFAULT_COLOR \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__PUT_STRING \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__X \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__Y \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__XY \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__WIDTH \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__HEIGHT \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__COLOR \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__DEFAULT_COLOR \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__CLEAR \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__TITLE \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__EXPORT \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__IMPORT \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__PUSH \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__POP \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__PRINT \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__CURSOR_X \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__CURSOR_Y \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__CURSOR_XY \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__CURSOR_MOVE_X \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__CURSOR_MOVE_Y \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__CURSOR_MOVE_XY \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__CURSOR_SHOW \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__CURSOR_SIZE \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__PUT_LINE \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__PUT_CURVE \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__PUT_FRAME \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__PUT_FRAME_RADIUS \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__PUT_RECTANGLE \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__PUT_RECTANGLE_RADIUS \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__PUT_CIRCLE \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__PUT_ELLIPSE \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__PUT_COLORED_STRING \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__PUT_COLORED_LINE \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__PUT_COLORED_CURVE \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__PUT_COLORED_FRAME \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__PUT_COLORED_FRAME_RADIUS \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__PUT_COLORED_RECTANGLE \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__PUT_COLORED_RECTANGLE_RADIUS \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__PUT_COLORED_CIRCLE \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__PUT_COLORED_ELLIPSE \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__INPUT_WAIT_ANY \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__INPUT_WAIT_KEY \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__INPUT_WAIT_MOUSE \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__INPUT_WAIT_MOUSE_ACTION \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__INPUT_WAIT_MOUSE_MOVE \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__GET_LINE \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__GET_AREA
+	LOCALLINKER__CONSOLE_HIGHC \
+	LOCALFUNCTION__CONSOLE_INIT \
+	LOCALFUNCTION__CONSOLE_DESTRUCTOR \
+	LOCALFUNCTION__CONSOLE_LOG \
+	LOCALFUNCTION__CONSOLE_WARNING \
+	LOCALFUNCTION__CONSOLE_WARNING_AT \
+	LOCALFUNCTION__CONSOLE_ERROR \
+	LOCALFUNCTION__CONSOLE_ERROR_AT \
+	LOCALFUNCTION__CONSOLE_CURSOR_COLOR \
+	LOCALFUNCTION__CONSOLE_CURSOR_DEFAULT_COLOR \
+	LOCALFUNCTION__CONSOLE_PUT_STRING \
+	LOCALFUNCTION__CONSOLE_X \
+	LOCALFUNCTION__CONSOLE_Y \
+	LOCALFUNCTION__CONSOLE_XY \
+	LOCALFUNCTION__CONSOLE_WIDTH \
+	LOCALFUNCTION__CONSOLE_HEIGHT \
+	LOCALFUNCTION__CONSOLE_COLOR \
+	LOCALFUNCTION__CONSOLE_DEFAULT_COLOR \
+	LOCALFUNCTION__CONSOLE_CLEAR \
+	LOCALFUNCTION__CONSOLE_TITLE \
+	LOCALFUNCTION__CONSOLE_EXPORT \
+	LOCALFUNCTION__CONSOLE_IMPORT \
+	LOCALFUNCTION__CONSOLE_PUSH \
+	LOCALFUNCTION__CONSOLE_POP \
+	LOCALFUNCTION__CONSOLE_PRINT \
+	LOCALFUNCTION__CONSOLE_CURSOR_X \
+	LOCALFUNCTION__CONSOLE_CURSOR_Y \
+	LOCALFUNCTION__CONSOLE_CURSOR_XY \
+	LOCALFUNCTION__CONSOLE_CURSOR_MOVE_X \
+	LOCALFUNCTION__CONSOLE_CURSOR_MOVE_Y \
+	LOCALFUNCTION__CONSOLE_CURSOR_MOVE_XY \
+	LOCALFUNCTION__CONSOLE_CURSOR_SHOW \
+	LOCALFUNCTION__CONSOLE_CURSOR_SIZE \
+	LOCALFUNCTION__CONSOLE_PUT_LINE \
+	LOCALFUNCTION__CONSOLE_PUT_CURVE \
+	LOCALFUNCTION__CONSOLE_PUT_FRAME \
+	LOCALFUNCTION__CONSOLE_PUT_FRAME_RADIUS \
+	LOCALFUNCTION__CONSOLE_PUT_RECTANGLE \
+	LOCALFUNCTION__CONSOLE_PUT_RECTANGLE_RADIUS \
+	LOCALFUNCTION__CONSOLE_PUT_CIRCLE \
+	LOCALFUNCTION__CONSOLE_PUT_ELLIPSE \
+	LOCALFUNCTION__CONSOLE_PUT_COLORED_STRING \
+	LOCALFUNCTION__CONSOLE_PUT_COLORED_LINE \
+	LOCALFUNCTION__CONSOLE_PUT_COLORED_CURVE \
+	LOCALFUNCTION__CONSOLE_PUT_COLORED_FRAME \
+	LOCALFUNCTION__CONSOLE_PUT_COLORED_FRAME_RADIUS \
+	LOCALFUNCTION__CONSOLE_PUT_COLORED_RECTANGLE \
+	LOCALFUNCTION__CONSOLE_PUT_COLORED_RECTANGLE_RADIUS \
+	LOCALFUNCTION__CONSOLE_PUT_COLORED_CIRCLE \
+	LOCALFUNCTION__CONSOLE_PUT_COLORED_ELLIPSE \
+	LOCALFUNCTION__CONSOLE_INPUT_WAIT_ANY \
+	LOCALFUNCTION__CONSOLE_INPUT_WAIT_KEY \
+	LOCALFUNCTION__CONSOLE_INPUT_WAIT_MOUSE \
+	LOCALFUNCTION__CONSOLE_INPUT_WAIT_MOUSE_ACTION \
+	LOCALFUNCTION__CONSOLE_INPUT_WAIT_MOUSE_MOVE \
+	LOCALFUNCTION__CONSOLE_GET_LINE \
+	LOCALFUNCTION__CONSOLE_GET_AREA
 
 /*   /\   #==========================================================#   /\   */
 /*  //\\  |                 LINKABLE MEMBER CREATION                 |  //\\  */
 /* '""""' #==========================================================# '""""' */
+
+#endif /* !SEAL_CMT_CONSOLE_C */
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\
  * * AT THE ALL END OF FILES, I AM ADDING A SPECIAL BYTE <0X1A> TO END THE  * *

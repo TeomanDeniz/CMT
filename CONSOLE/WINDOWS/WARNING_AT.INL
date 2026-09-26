@@ -6,10 +6,10 @@
 	char	INT_STR[12];\
 	\
 	{\
-		register int	INDEX_1 = 0;\
-		register int	INDEX_2;\
-		register int	INDEX_3;\
-		register int	INDEX_FOR;\
+		int	INDEX_1 = 0;\
+		int	INDEX_2;\
+		int	INDEX_3;\
+		int	INDEX_FOR;\
 		\
 		if (THE_LINE < 0)\
 		{\
@@ -32,7 +32,7 @@
 		\
 		while (INDEX_FOR < INDEX_3)\
 		{\
-			register char	CHARACTER = INT_STR[INDEX_FOR];\
+			const char	CHARACTER = INT_STR[INDEX_FOR];\
 			\
 			INT_STR[INDEX_FOR] = INT_STR[INDEX_3];\
 			INT_STR[INDEX_3] = CHARACTER;\
@@ -41,31 +41,31 @@
 		}\
 	}\
 	\
-	if (THIS->highlighter)\
-		THIS->cursor.color(0XB)\
-			->log("\n ")\
-			->log(THE_FILE)\
-			->cursor.default_color()\
-			->log(" (")\
-			->cursor.color(0XB)\
-			->log(INT_STR)\
-			->cursor.default_color()\
-			->log("): ")\
-			->cursor.color(0XD)\
-			->log("WARNING")\
-			->cursor.default_color()\
-			->log(": ")\
-			->cursor.color(0XF)\
-			->log(STRING)\
-			->cursor.default_color();\
+	if (THIS->HIGHLIGHTER)\
+		THIS->CURSOR.COLOR(0XB)\
+			->LOG("\n ")\
+			->LOG(THE_FILE)\
+			->CURSOR.DEFAULT_COLOR()\
+			->LOG(" (")\
+			->CURSOR.COLOR(0XB)\
+			->LOG(INT_STR)\
+			->CURSOR.DEFAULT_COLOR()\
+			->LOG("): ")\
+			->CURSOR.COLOR(0XD)\
+			->LOG("WARNING")\
+			->CURSOR.DEFAULT_COLOR()\
+			->LOG(": ")\
+			->CURSOR.COLOR(0XF)\
+			->LOG(STRING)\
+			->CURSOR.DEFAULT_COLOR();\
 	else\
-		THIS->log("\n ")\
-			->log(THE_FILE)\
-			->log(":(")\
-			->log(INT_STR)\
-			->log("): ")\
-			->log("WARNING: ")\
-			->log(STRING);
+		THIS->LOG("\n ")\
+			->LOG(THE_FILE)\
+			->LOG(":(")\
+			->LOG(INT_STR)\
+			->LOG("): ")\
+			->LOG("WARNING: ")\
+			->LOG(STRING);
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\
  * * AT THE ALL END OF FILES, I AM ADDING A SPECIAL BYTE <0X1A> TO END THE  * *

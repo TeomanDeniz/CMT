@@ -8,7 +8,7 @@
 \******************************************************************************/
 
 #define LOCALMACRO__CMT_CONSOLE__PUBLISH_ACTIVE \
-	OBJECT__INITIALIZE (THIS->get.active, BOOLEAN) = THIS->_ACTIVE;
+	OBJECT__INITIALIZE (THIS->GET.ACTIVE, BOOLEAN) = THIS->_ACTIVE;
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\
  * * AT THE ALL END OF FILES, I AM ADDING A SPECIAL BYTE <0X1A> TO END THE  * *

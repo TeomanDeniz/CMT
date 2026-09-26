@@ -3,9 +3,9 @@
 #endif /* !CONSOLE_HPP */
 
 #define LOCALMACRO__CMT_CONSOLE__PUT_FRAME_RADIUS_CONTENT \
-	THIS->put.colored.frame_radius(\
+	THIS->PUT.COLORED.FRAME_RADIUS(\
 		CHARACTER,\
-		THIS->get.cursor.color,\
+		THIS->GET.CURSOR.COLOR,\
 		START_X,\
 		START_Y,\
 		END_X,\

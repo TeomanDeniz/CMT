@@ -38,7 +38,7 @@
 #define CMT_NO_SSP_POP
 #endif /* !CMT_NO_SSP_POP */
 
-#ifndef CMT_AUTO_CONSTRUCTOR
+#ifndef CMT_AUTO_CONSTRUCTOR /* lkjuiiiiiiiiiiiiiiiioip <- CAT FOOT PRINT */
 #define CMT_AUTO_CONSTRUCTOR
 #endif /* CMT_AUTO_CONSTRUCTOR */
 

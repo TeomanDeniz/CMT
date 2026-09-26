@@ -97,8 +97,7 @@ Checks whether the `FAR` macro is defined as non-empty. This indicates that the 
 > 
 > You must also verify that your target architecture and compiler runtime support far memory allocation and memory access routines compatible with far pointers.
 
-Example:
-
+**Example**:
 ```c
 #ifdef IS__FAR__SUPPORTED
 void FAR *	test = far_malloc(128000);

@@ -9,11 +9,11 @@
 	\
 	COORDINATES.X = (short)X;\
 	COORDINATES.Y = (short)Y;\
-	ORG_COORDINATES.X = (short)THIS->get.cursor.x;\
-	ORG_COORDINATES.Y = (short)THIS->get.cursor.y;\
+	ORG_COORDINATES.X = (short)THIS->GET.CURSOR.X;\
+	ORG_COORDINATES.Y = (short)THIS->GET.CURSOR.Y;\
 	KERNEL32.SetConsoleCursorPosition(THIS->_OUT_HANDLE, COORDINATES);\
 	THIS->_PUSH_DEPTH = (unsigned)0;\
-	THIS->log(STRING);\
+	THIS->LOG(STRING);\
 	THIS->_PUSH_DEPTH = PUSHED;\
 	KERNEL32.SetConsoleCursorPosition(THIS->_OUT_HANDLE, ORG_COORDINATES);
 

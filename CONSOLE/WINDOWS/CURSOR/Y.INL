@@ -4,7 +4,7 @@
 
 #define LOCALMACRO__CMT_CONSOLE__CURSOR_Y_CONTENT \
 	struct S_COORD	COORDINATES;\
-	long			TARGET_X = (long)THIS->get.cursor.x;\
+	long			TARGET_X = (long)THIS->GET.CURSOR.X;\
 	long			TARGET_Y = (long)Y_VALUE;\
 	\
 	if (TARGET_X < (long)0)\
@@ -13,19 +13,19 @@
 	if (TARGET_Y < (long)0)\
 		TARGET_Y = (long)0;\
 	\
-	if (TARGET_X >= (long)THIS->get.width)\
-		TARGET_X = (long)THIS->get.width - (long)1;\
+	if (TARGET_X >= (long)THIS->GET.WIDTH)\
+		TARGET_X = (long)THIS->GET.WIDTH - (long)1;\
 	\
-	if (TARGET_Y >= (long)THIS->get.height)\
-		TARGET_Y = (long)THIS->get.height - (long)1;\
+	if (TARGET_Y >= (long)THIS->GET.HEIGHT)\
+		TARGET_Y = (long)THIS->GET.HEIGHT - (long)1;\
 	\
 	COORDINATES.X = (short)TARGET_X;\
 	COORDINATES.Y = (short)TARGET_Y;\
 	\
 	if (KERNEL32.SetConsoleCursorPosition(THIS->_OUT_HANDLE, COORDINATES))\
 	{\
-		OBJECT__INITIALIZE (THIS->get.cursor.x, int) = (int)TARGET_X;\
-		OBJECT__INITIALIZE (THIS->get.cursor.y, int) = (int)TARGET_Y;\
+		OBJECT__INITIALIZE (THIS->GET.CURSOR.X, int) = (int)TARGET_X;\
+		OBJECT__INITIALIZE (THIS->GET.CURSOR.Y, int) = (int)TARGET_Y;\
 	}
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\

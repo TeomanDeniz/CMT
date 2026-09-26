@@ -8,12 +8,12 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2025/06/22 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/08/29 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/09/25 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
 #ifndef CMT_H
-#define CMT_H 202608 /* VERSION */
+#define CMT_H 202609 /* VERSION */
 #endif /* !CMT_H */
 
 /* ****************** [v] LOCALMACRO_DEFINE_ALL_TRY_1 [v] ******************* */
@@ -62,7 +62,13 @@
 #ifndef INCL_CMT_INLINE
 #ifndef INCL_CMT_VA_ARGS
 #ifndef INCL_CMT_CONSOLE
+#ifndef INCL_CMT_VOLATILE
+#ifndef INCL_CMT_MAYBE_ARGS
+#ifndef INCL_CMT_SETJMP
 #define LOCALMACRO_DEFINE_ALL_TRY_1
+#endif /* !INCL_CMT_SETJMP */
+#endif /* !INCL_CMT_MAYBE_ARGS */
+#endif /* !INCL_CMT_VOLATILE */
 #endif /* !INCL_CMT_CONSOLE */
 #endif /* !INCL_CMT_VA_ARGS */
 #endif /* !INCL_CMT_INLINE */
@@ -120,7 +126,9 @@
 #ifndef INCL_CMT_WIN_CORE
 #ifndef INCL_CMT_KEYWORDS
 #ifndef INCL_CMT_OS_API
+#ifndef INCL_CMT_LIB
 #define LOCALMACRO_DEFINE_ALL
+#endif /* !INCL_CMT_LIB */
 #endif /* !INCL_CMT_OS_API */
 #endif /* !INCL_CMT_KEYWORDS */
 #endif /* !INCL_CMT_WIN_CORE */
@@ -144,6 +152,7 @@
 #define INCL_CMT_WIN_CORE
 #define INCL_CMT_KEYWORDS
 #define INCL_CMT_OS_API
+#define INCL_CMT_LIB
 #endif /* LOCALMACRO_DEFINE_ALL */
 /* ************************ [^] CMT JUST CALLED [^] ************************* */
 
@@ -205,6 +214,14 @@
 #ifndef INCL_CMT_INLINE
 #define INCL_CMT_INLINE
 #endif /* !INCL_CMT_INLINE */
+
+#ifndef INCL_CMT_VOLATILE
+#define INCL_CMT_VOLATILE
+#endif /* !INCL_CMT_VOLATILE */
+
+#ifndef INCL_CMT_MAYBE_ARGS
+#define INCL_CMT_MAYBE_ARGS
+#endif /* !INCL_CMT_MAYBE_ARGS */
 #endif /* INCL_CMT_ATTRIBUTES */
 /* *************************** [^] ATTRIBUTES [^] *************************** */
 
@@ -283,6 +300,14 @@
 #endif /* INCL_CMT_KEYWORDS */
 /* **************************** [^] KEYWORDS [^] **************************** */
 
+/* ****************************** [v] LIB [v] ******************************* */
+#ifdef INCL_CMT_LIB
+#ifndef INCL_CMT_SETJMP
+#define INCL_CMT_SETJMP
+#endif /* !INCL_CMT_SETJMP */
+#endif /* INCL_CMT_LIB */
+/* ****************************** [^] LIB [^] ******************************* */
+
 /* ***************************** [v] OS_API [v] ***************************** */
 #ifdef INCL_CMT_OS_API
 #undef INCL_CMT_OS_API
@@ -345,16 +370,24 @@
  * #define obj(object_name, variable_name)
  * #define NEW(OBJECT_NAME, VARIABLE_NAME)
  * #define new(object_name, variable_name)
+ * #define DELETE(OBJECT_POINTER)
+ * #define delete(object_pointer)
  * #define DESTROY(THE_OBJECT)
  * #define destroy(the_object)
  * #define OBJECT__CONNECT(OBJECT_TYPE_NAME)
  * #define object__connect(object_type_name)
+ * #define OBJECT__PROTOTYPE_ALLOC(ALLOC)
+ * #define object__prototype_alloc(alloc)
+ * #define OBJECT__PROTOTYPE_FREE(FREE)
+ * #define object__prototype_free(free)
  * #define OBJECT__INJECT(TARGET, SOURCE)
  * #define object__inject(target, source)
  * #define OBJECT__EJECT(MEMBER_NAME)
  * #define object__eject(member_name)
- * #define object__initialize(variable, type)
  * #define OBJECT__INITIALIZE(VARIABLE, TYPE)
+ * #define object__initialize(variable, type)
+ * #define OBJECT__COPY(DST, SRC)
+ * #define object__copy(dst, src)
  */
 #undef INCL_CMT_OBJECT
 #endif /* INCL_CMT_OBJECT */
@@ -662,6 +695,24 @@
  */
 #undef INCL_CMT_INLINE
 #endif /* INCL_CMT_INLINE */
+
+#ifdef INCL_CMT_VOLATILE
+#include "ATTRIBUTES/VOLATILE.H"
+/******* """""""""""""""""""""""
+ * #define VOLATILE
+ * #define IS__VOLATILE__SUPPORTED
+ */
+#undef INCL_CMT_VOLATILE
+#endif /* INCL_CMT_VOLATILE */
+
+#ifdef INCL_CMT_MAYBE_ARGS
+#include "ATTRIBUTES/MAYBE_ARGS.H"
+/******* """""""""""""""""""""""""
+ * #define MAYBE_ARGS
+ * #define maybe_args
+ */
+#undef INCL_CMT_MAYBE_ARGS
+#endif /* INCL_CMT_MAYBE_ARGS */
 /* *************************** [^] ATTRIBUTES [^] *************************** */
 
 /* ************************* [v] CHECK FEATURE [v] ************************** */
@@ -973,6 +1024,21 @@
 #undef INCL_CMT_VA_ARGS
 #endif /* INCL_CMT_VA_ARGS */
 /* **************************** [^] KEYWORDS [^] **************************** */
+
+/* ****************************** [v] LIB [v] ******************************* */
+#ifdef INCL_CMT_SETJMP
+#include "LIB/SETJMP.H"
+/******* """"""""""""""
+ * #define jmp_buf
+ * #define JMP_BUF
+ * #define setjmp(env)
+ * #define SETJMP(ENV)
+ * #define longjmp(env, val)
+ * #define LONGJMP(ENV, VAL)
+ */
+#undef INCL_CMT_SETJMP
+#endif /* INCL_CMT_SETJMP */
+/* ****************************** [^] LIB [^] ******************************* */
 
 /* ***************************** [v] OS_API [v] ***************************** */
 #ifdef INCL_CMT_CLEAR_INSTRUCTION_CACHE

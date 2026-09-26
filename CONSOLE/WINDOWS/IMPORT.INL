@@ -27,9 +27,9 @@
 	TEXT_BYTES = (CELLS + (unsigned long)1) & ~(unsigned long)1;\
 	TEXT = (char *)(SNAPSHOT + 1);\
 	ATTRIBUTES = (unsigned short *)(TEXT + TEXT_BYTES);\
-	ROOM = (unsigned long)THIS->get.width * (unsigned long)THIS->get.height;\
+	ROOM = (unsigned long)THIS->GET.WIDTH * (unsigned long)THIS->GET.HEIGHT;\
 	\
-	if (SNAPSHOT->WIDTH == (unsigned long)THIS->get.width)\
+	if (SNAPSHOT->WIDTH == (unsigned long)THIS->GET.WIDTH)\
 	{\
 		if (CELLS > ROOM)\
 			CELLS = ROOM;\
@@ -47,12 +47,12 @@
 	{\
 		unsigned long		ROW;\
 		unsigned long		SPAN = SNAPSHOT->WIDTH;\
-		const unsigned long	ROWS = (SNAPSHOT->HEIGHT > THIS->get.height)\
-			? (unsigned long)THIS->get.height\
+		const unsigned long	ROWS = (SNAPSHOT->HEIGHT > THIS->GET.HEIGHT)\
+			? (unsigned long)THIS->GET.HEIGHT\
 			: SNAPSHOT->HEIGHT;\
 		\
-		if (SPAN > (unsigned long)THIS->get.width)\
-			SPAN = (unsigned long)THIS->get.width;\
+		if (SPAN > (unsigned long)THIS->GET.WIDTH)\
+			SPAN = (unsigned long)THIS->GET.WIDTH;\
 		\
 		for (ROW = (unsigned long)0; ROW < ROWS; ++ROW)\
 		{\
@@ -80,17 +80,17 @@
 		CURSOR_INFO.VISIBLE = FALSE;\
 	\
 	KERNEL32.SetConsoleCursorInfo(THIS->_OUT_HANDLE, &CURSOR_INFO);\
-	OBJECT__INITIALIZE (THIS->get.cursor.size, unsigned long) = \
+	OBJECT__INITIALIZE (THIS->GET.CURSOR.SIZE, unsigned long) = \
 		CURSOR_INFO.SIZE;\
-	OBJECT__INITIALIZE (THIS->get.cursor.visible, BOOLEAN) = \
+	OBJECT__INITIALIZE (THIS->GET.CURSOR.VISIBLE, BOOLEAN) = \
 		(BOOLEAN)CURSOR_INFO.VISIBLE;\
-	OBJECT__INITIALIZE (THIS->get.default_color, unsigned int) = \
+	OBJECT__INITIALIZE (THIS->GET.DEFAULT_COLOR, unsigned int) = \
 		(unsigned int)SNAPSHOT->DEFAULT_COLOR;\
-	THIS->cursor.xy(\
+	THIS->CURSOR.XY(\
 		(unsigned int)SNAPSHOT->CURSOR_X, (unsigned int)SNAPSHOT->CURSOR_Y\
 	);\
-	THIS->cursor.color((unsigned int)SNAPSHOT->COLOR);\
-	OBJECT__INITIALIZE (THIS->get.color, unsigned int) = \
+	THIS->CURSOR.COLOR((unsigned int)SNAPSHOT->COLOR);\
+	OBJECT__INITIALIZE (THIS->GET.COLOR, unsigned int) = \
 		(unsigned int)SNAPSHOT->COLOR;
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\

@@ -3,8 +3,8 @@
 #endif /* !CONSOLE_HPP */
 
 #define LOCALMACRO__CMT_CONSOLE__GET_LINE_CONTENT \
-	const unsigned long	SPAN = (unsigned long)THIS->get.width;\
-	const unsigned long	ROOM = SPAN * (unsigned long)THIS->get.height;\
+	const unsigned long	SPAN = (unsigned long)THIS->GET.WIDTH;\
+	const unsigned long	ROOM = SPAN * (unsigned long)THIS->GET.HEIGHT;\
 	unsigned long		FROM = \
 		((unsigned long)START_Y * SPAN) + (unsigned long)START_X;\
 	unsigned long		TO = \
@@ -29,7 +29,7 @@
 		TO = ROOM - (unsigned long)1;\
 	\
 	COUNT = (TO - FROM) + (unsigned long)1;\
-	LOCALMACRO__CMT_CONSOLE__SCRATCH (BLOCK, COUNT + (unsigned long)1)\
+	LOCALMACRO__CMT_CONSOLE__SCRATCH(BLOCK, COUNT + (unsigned long)1)\
 	\
 	if (!BLOCK)\
 		return ((char *)0);\

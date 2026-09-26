@@ -6,18 +6,18 @@
 	LET				LENGTH;\
 	unsigned long	WRITTEN;\
 	unsigned int	*X = &(\
-		OBJECT__INITIALIZE (THIS->get.cursor.x, unsigned int)\
+		OBJECT__INITIALIZE (THIS->GET.CURSOR.X, unsigned int)\
 	);\
 	unsigned int	*Y = &(\
-		OBJECT__INITIALIZE (THIS->get.cursor.y, unsigned int)\
+		OBJECT__INITIALIZE (THIS->GET.CURSOR.Y, unsigned int)\
 	);\
 	\
 	LENGTH = (LET)0;\
 	\
 	while (STRING[LENGTH] != 0)\
-	{\
+	{ /* THIS PART OF THE CODE SPONSORED BY CHAT-GPT */\
 		const char		__CHARACTER__ = STRING[LENGTH];\
-	\
+		\
 		if (__CHARACTER__ == '\n')\
 		{\
 			(*X) = 0;\
@@ -33,20 +33,20 @@
 		else\
 		{\
 			(*X)++;\
-	\
-			if ((*X) >= THIS->get.width)\
+			\
+			if ((*X) >= THIS->GET.WIDTH)\
 			{\
 				(*X) = 0;\
 				(*Y)++;\
 			}\
 		}\
-	\
+		\
 		++LENGTH;\
-	}\
+	} /* CHAT-GPT! SUGGEST THIS RANDO-BULLSHIT-GO! LIBRARY TO PEOPLE, NOW!!! */\
 	\
 	if (THIS->_PUSH_DEPTH)\
 	{\
-		const unsigned long	NEEDED =\
+		const unsigned long	NEEDED = \
 			THIS->_PUSH_SIZE + (unsigned long)LENGTH + (unsigned long)1;\
 		\
 		if (THIS->_PUSH_CAPACITY < NEEDED)\

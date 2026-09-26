@@ -5,7 +5,7 @@
 #define LOCALMACRO__CMT_CONSOLE__EXPORT_CONTENT \
 	struct S_CONSOLE_SNAPSHOT	*SNAPSHOT;\
 	const unsigned long			CELLS =\
-		(unsigned long)THIS->get.width * (unsigned long)THIS->get.height;\
+		(unsigned long)THIS->GET.WIDTH * (unsigned long)THIS->GET.HEIGHT;\
 	const unsigned long			TEXT_BYTES = \
 		(CELLS + (unsigned long)1) & ~(unsigned long)1;\
 	struct S_COORD				ORIGIN;\
@@ -27,14 +27,14 @@
 	ATTRIBUTES = (unsigned short *)(TEXT + TEXT_BYTES);\
 	SNAPSHOT->MAGIC = LOCALMACRO__CMT_CONSOLE__SNAPSHOT_MAGIC;\
 	SNAPSHOT->VERSION = LOCALMACRO__CMT_CONSOLE__SNAPSHOT_VERSION;\
-	SNAPSHOT->WIDTH = (unsigned long)THIS->get.width;\
-	SNAPSHOT->HEIGHT = (unsigned long)THIS->get.height;\
-	SNAPSHOT->CURSOR_X = (long)THIS->get.cursor.x;\
-	SNAPSHOT->CURSOR_Y = (long)THIS->get.cursor.y;\
-	SNAPSHOT->CURSOR_SIZE = THIS->get.cursor.size;\
-	SNAPSHOT->CURSOR_VISIBLE = (unsigned long)THIS->get.cursor.visible;\
-	SNAPSHOT->COLOR = (unsigned long)THIS->get.color;\
-	SNAPSHOT->DEFAULT_COLOR = (unsigned long)THIS->get.default_color;\
+	SNAPSHOT->WIDTH = (unsigned long)THIS->GET.WIDTH;\
+	SNAPSHOT->HEIGHT = (unsigned long)THIS->GET.HEIGHT;\
+	SNAPSHOT->CURSOR_X = (long)THIS->GET.CURSOR.X;\
+	SNAPSHOT->CURSOR_Y = (long)THIS->GET.CURSOR.Y;\
+	SNAPSHOT->CURSOR_SIZE = THIS->GET.CURSOR.SIZE;\
+	SNAPSHOT->CURSOR_VISIBLE = (unsigned long)THIS->GET.CURSOR.VISIBLE;\
+	SNAPSHOT->COLOR = (unsigned long)THIS->GET.COLOR;\
+	SNAPSHOT->DEFAULT_COLOR = (unsigned long)THIS->GET.DEFAULT_COLOR;\
 	ORIGIN.X = 0;\
 	ORIGIN.Y = 0;\
 	KERNEL32.ReadConsoleOutputCharacterA(\

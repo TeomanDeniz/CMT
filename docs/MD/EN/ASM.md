@@ -101,6 +101,7 @@ If none of `INCL_CMT_ASM_OP`, `INCL_CMT_ASM_SIZEOF`, or `INCL_CMT_ASM_INLINE` ar
 | `#define SECTION_KNR(RETURN_TYPE, NAME, ARGUMENTS)`        |
 | `#define STATIC_SECTION_KNR(RETURN_TYPE, NAME, ARGUMENTS)` |
 | `#define END`                                              |
+| `#define SYBOL(OBJECT)`                                    |
 | `#define CMT_CANT_USE_INLINE_ASM_FOR_SECTIONS`             |
 
 ----
@@ -218,6 +219,24 @@ END
 
 ----
 
+### SYBOL
+
+```c
+#define SYBOL(OBJECT)
+```
+
+Use `SYMBOL()` when passing the address of a linkable object, such as a function or variable, to assembly code.
+
+**Examples**:
+```c
+SECTION(void, test, (int a, char b))
+	MOVABS_RAX_(SYBOL(test)) // RAX is now holding test's pointer
+	. . .
+END
+```
+
+----
+
 ### CMT_CANT_USE_INLINE_ASM_FOR_SECTIONS
 
 ```c
@@ -295,7 +314,7 @@ For example, `MOV_RBX_(IMM32)` becames `SIZEOF_MOV_RBX_` and `MOV_RAX_RBX` becam
 <details>
 <summary>
 	<img src="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/INTEL_ASM.gif">
-	<b>Intel (12920 Assembly Codes in total)</b>
+	<b>Intel (12925 Assembly Codes in total)</b>
 </summary>
 
 **Note**: `MOV_RAX_`, `ADD_RAX_`, `..._PTR_` etc. commands automatically downscale on 32/16-bit modes.

@@ -19,7 +19,7 @@
 			!KERNEL32.SetConsoleScreenBufferSize\
 		)\
 		{\
-			THIS->warning(\
+			THIS->WARNING(\
 				"console.width() - console sizing entry points were "\
 				"never resolved\n"\
 			);\
@@ -28,7 +28,7 @@
 		\
 		if (!KERNEL32.GetConsoleScreenBufferInfo(THIS->_OUT_HANDLE, &INFO))\
 		{\
-			THIS->warning(\
+			THIS->WARNING(\
 				"console.width() - GetConsoleScreenBufferInfo failed, "\
 				"output is probably redirected\n"\
 			);\
@@ -87,9 +87,9 @@
 		\
 		if (KERNEL32.GetConsoleScreenBufferInfo(THIS->_OUT_HANDLE, &INFO))\
 		{\
-			OBJECT__INITIALIZE (THIS->get.width, unsigned int) = \
+			OBJECT__INITIALIZE (THIS->GET.WIDTH, unsigned int) = \
 				(unsigned int)((INFO.WINDOW.RIGHT - INFO.WINDOW.LEFT) + 1);\
-			OBJECT__INITIALIZE (THIS->get.height, unsigned int) = \
+			OBJECT__INITIALIZE (THIS->GET.HEIGHT, unsigned int) = \
 				(unsigned int)((INFO.WINDOW.BOTTOM - INFO.WINDOW.TOP) + 1);\
 		}\
 	}\

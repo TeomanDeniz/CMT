@@ -10,7 +10,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2026/06/12 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/08/28 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/09/25 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 #******************************************************************************#
 
@@ -58,7 +58,7 @@ variables:
   windows_types: 'APIENTRY|ATOM|BOOL|BOOLEAN|BYTE|CALLBACK|CCHAR|CHAR|COLORREF|CONST|DWORD|DWORDLONG|DWORD_PTR|DWORD32|DWORD64|FLOAT|HACCEL|HALF_PTR|HANDLE|HBITMAP|HBRUSH|HCOLORSPACE|HCONV|HCONVLIST|HCURSOR|HDC|HDDEDATA|HDESK|HDROP|HDWP|HENHMETAFILE|HFILE|HFONT|HGDIOBJ|HGLOBAL|HHOOK|HICON|HINSTANCE|HKEY|HKL|HLOCAL|HMENU|HMETAFILE|HMODULE|HMONITOR|HPALETTE|HPEN|HRESULT|HRGN|HRSRC|HSZ|HWINSTA|HWND|INT|INT_PTR|INT8|INT16|INT32|INT64|LANGID|LCID|LCTYPE|LGRPID|LONG|LONGLONG|LONG_PTR|LONG32|LONG64|LPARAM|LPBOOL|LPBYTE|LPCOLORREF|LPCSTR|LPCTSTR|LPCVOID|LPCWSTR|LPDWORD|LPHANDLE|LPINT|LPLONG|LPSTR|LPTSTR|LPVOID|LPWORD|LPWSTR|LRESULT|PBOOL|PBOOLEAN|PBYTE|PCHAR|PCSTR|PCTSTR|PCWSTR|PDWORD|PDWORDLONG|PDWORD_PTR|PDWORD32|PDWORD64|PFLOAT|PHALF_PTR|PHANDLE|PHKEY|PINT|PINT_PTR|PINT8|PINT16|PINT32|PINT64|PLCID|PLONG|PLONGLONG|PLONG_PTR|PLONG32|PLONG64|POINTER_32|POINTER_64|POINTER_SIGNED|POINTER_UNSIGNED|PSHORT|PSIZE_T|PSSIZE_T|PSTR|PTBYTE|PTCHAR|PTSTR|PUCHAR|PUHALF_PTR|PUINT|PUINT_PTR|PUINT8|PUINT16|PUINT32|PUINT64|PULONG|PULONGLONG|PULONG_PTR|PULONG32|PULONG64|PUSHORT|PVOID|PWCHAR|PWORD|PWSTR|QWORD|SC_HANDLE|SC_LOCK|SERVICE_STATUS_HANDLE|SHORT|SIZE_T|SSIZE_T|TBYTE|TCHAR|UCHAR|UHALF_PTR|UINT|UINT_PTR|UINT8|UINT16|UINT32|UINT64|ULONG|ULONGLONG|ULONG_PTR|ULONG32|ULONG64|UNICODE_STRING|USHORT|USN|VOID|WCHAR|WINAPI|WORD|WPARAM'
   complex: 'complex|imaginary'
   fenv: 'fenv_t|fexcept_t'
-  setjmp: 'jmp_buf'
+  setjmp: '(?i:JMP_BUF)'
   signal: 'sig_atomic_t'
   stdarg: '(?i:VA_LIST)'
   stdatomic: 'atomic_(bool|char|schar|uchar|short|ushort|int|uint|long|ulong|llong|ullong|char8_t|char16_t|char32_t|wchar_t|int_least8_t|uint_least8_t|int_least16_t|uint_least16_t|int_least32_t|uint_least32_t|int_least64_t|uint_least64_t|int_fast8_t|uint_fast8_t|int_fast16_t|uint_fast16_t|int_fast32_t|uint_fast32_t|int_fast64_t|uint_fast64_t|intptr_t|uintptr_t|size_t|ptrdiff_t|intmax_t|uintmax_t|flag)|memory_order'
@@ -72,14 +72,16 @@ variables:
   uchar: 'mbstate_t|char8_t|char16_t|char32_t'
   declspec: '__declspec\(\s*\w+(?:\([^)]+\))?\s*\)'
   storage_classes: 'static|extern|register|thread_local|_Thread_local|constexpr|{{declspec}}'
-  type_qualifier: 'const|volatile|_Atomic'
+  type_qualifier: 'const|(?i:VOLATILE)|_Atomic'
   compiler_directive: '(?i:INLINE)|restrict|__restrict__|__restrict|_Noreturn|noreturn'
   non_func_keywords: 'if|for|switch|while|decltype|typeof|typeof_unqual|_Atomic|_BitInt|sizeof|alignof|_Alignof|alignas|_Alignas|static_assert|_Static_assert|__declspec|__attribute__'
   cmt_namespaces: 'KERNEL32|USER32|(?i:CONSOLE)'
-  cmt_attributes: '(?i:FASTCALL)|(?i:STDCALL)|(?i:REGPASS)|(?i:REGPARM)|(?i:IGNORE_VAR)|(?i:CDECL)|(?i:FAR)|(?i:STDCALL)|(?i:NOINLINE)|(?i:PASCAL)|(?i:EXTERN_C_START)|(?i:EXTERN_C_END)|(?i:PACK)|(?i:PRAGMA_PACK_PUSH)|(?i:PRAGMA_PACK_POP)|(?i:ALIGN_UP)|(?i:ALIGN_VARIABLE)|(?i:ALIGN_STRUCT_PUSH)|(?i:ALIGN_STRUCT_POP)|UNUSED|INLINE|FORCE_INLINE'
+  cmt_attributes: '(?i:FASTCALL)|(?i:STDCALL)|(?i:REGPASS)|(?i:REGPARM)|(?i:IGNORE_VAR)|(?i:CDECL)|(?i:FAR)|(?i:STDCALL)|(?i:NOINLINE)|(?i:PASCAL)|(?i:EXTERN_C_START)|(?i:EXTERN_C_END)|(?i:PACK)|(?i:PRAGMA_PACK_PUSH)|(?i:PRAGMA_PACK_POP)|(?i:ALIGN_UP)|(?i:ALIGN_VARIABLE)|(?i:ALIGN_STRUCT_PUSH)|(?i:ALIGN_STRUCT_POP)|UNUSED|INLINE|FORCE_INLINE|(?i:MAYBE_ARGS)'
   cmt_keywords: '(?i:TRY)|(?i:CATCH)|(?i:THROW)|(?i:IS_IN_TRY)|(?i:LOCAL)|(?i:VA_ARGS)|(?i:VA_ARG)|(?i:VA_BEGIN)|(?i:VA_END)|(?i:VA_DECLARE)'
   cmt_types: '(?i:VAR)|(?i:LET)|(?i:PTR)|(?i:FAR_PTR)|(?i:BOOLEAN)|(?i:BYTE)|(?i:BIT8)|(?i:BIT16)|(?i:BIT32)|(?i:BIT64)|(?i:BIT128)|(?i:FLOAT32)|(?i:FLOAT64)|(?i:FLOAT128)|{{cmt_namespaces}}'
-  cmt_oop: '(?i:NEW)|(?i:OBJ)|(?i:DESTROY)|(?i:OBJECT__CONNECT)|(?i:OBJECT__INJECT)|(?i:OBJECT__EJECT)|(?i:OBJECT__INITIALIZE)'
+  cmt_oop: '(?i:NEW)|(?i:OBJ)|(?i:DELETE)|(?i:DESTROY)|(?i:OBJECT__CONNECT)|(?i:OBJECT__INJECT)|(?i:OBJECT__EJECT)|(?i:OBJECT__INITIALIZE)|(?i:OBJECT__COPY)|(?i:OBJECT__PROTOTYPE_ALLOC)|(?i:OBJECT__PROTOTYPE_FREE)|__DESTRUCTOR__'
+  asm_section_open: 'STATIC_SECTION|SECTION'
+  asm_section_knr: 'STATIC_SECTION_KNR|SECTION_KNR'
   modifiers: '{{storage_classes}}|{{cmt_keywords}}|{{type_qualifier}}|{{compiler_directive}}|{{cmt_attributes}}'
 contexts:
   main:
@@ -565,13 +567,21 @@ contexts:
     - match: '(?=\S)'
       pop: true
   global-sections:
-    - match: '\bSECTION\b'
+    - match: '\b({{asm_section_knr}}|{{asm_section_open}})\b'
       scope: keyword.control.section.begin.cmt
       push: section-body
   section-body:
     - match: '\bEND\b'
       scope: keyword.control.section.end.cmt
       pop: true
+    # A new top-level opener means the previous section was left unclosed:
+    # stop here instead of swallowing the rest of the file.
+    - match: '^(?=\s*\b({{asm_section_open}})\b(?!_KNR))'
+      pop: true
+    - match: '\b({{asm_section_knr}})\b'
+      scope: keyword.control.section.begin.cmt
+    - include: types
+    - include: strings
     - match: '//'
       scope: punctuation.definition.comment.cmt
       push:

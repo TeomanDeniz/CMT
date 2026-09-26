@@ -60,7 +60,7 @@
 			const double	__CMT_CURVE_W3__ =\
 				__CMT_CURVE_T__ * __CMT_CURVE_T__ * __CMT_CURVE_T__;\
 			\
-			LOCALMACRO__CMT_CONSOLE__PLOT (\
+			LOCALMACRO__CMT_CONSOLE__PLOT(\
 				CHARACTER, COLOR_VALUE,\
 				(long)(\
 					((__CMT_CURVE_W0__ * __CMT_CURVE_AX__) +\

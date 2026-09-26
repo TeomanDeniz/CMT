@@ -14,7 +14,7 @@
 		INFO.VISIBLE = FALSE;\
 	\
 	if (KERNEL32.SetConsoleCursorInfo(THIS->_OUT_HANDLE, &INFO))\
-		OBJECT__INITIALIZE (THIS->get.cursor.visible, BOOLEAN) =\
+		OBJECT__INITIALIZE (THIS->GET.CURSOR.VISIBLE, BOOLEAN) =\
 			(BOOLEAN)INFO.VISIBLE;
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\

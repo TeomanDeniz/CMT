@@ -10,7 +10,7 @@
 		\
 		if (!KERNEL32.SetConsoleTitleA)\
 		{\
-			THIS->warning(\
+			THIS->WARNING(\
 				"console.title() - KERNEL32.SetConsoleTitleA was never "\
 				"resolved, add it to GLOBALCONSTRUCTOR__KERNEL32\n"\
 			);\

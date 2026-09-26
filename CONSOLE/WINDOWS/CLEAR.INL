@@ -4,9 +4,9 @@
 
 #define LOCALMACRO__CMT_CONSOLE__CLEAR_CONTENT \
 	const unsigned short	ATTRIBUTE =\
-		LOCALMACRO__CMT_CONSOLE__ATTRIBUTE (THIS->get.color);\
+		LOCALMACRO__CMT_CONSOLE__ATTRIBUTE (THIS->GET.COLOR);\
 	const unsigned long		CELLS =\
-		(unsigned long)THIS->get.width * (unsigned long)THIS->get.height;\
+		(unsigned long)THIS->GET.WIDTH * (unsigned long)THIS->GET.HEIGHT;\
 	struct S_COORD			ORIGIN;\
 	unsigned long			WRITTEN;\
 	\
@@ -19,8 +19,8 @@
 		THIS->_OUT_HANDLE, ATTRIBUTE, CELLS, ORIGIN, &WRITTEN\
 	);\
 	KERNEL32.SetConsoleCursorPosition(THIS->_OUT_HANDLE, ORIGIN);\
-	OBJECT__INITIALIZE (THIS->get.cursor.x, int) = 0;\
-	OBJECT__INITIALIZE (THIS->get.cursor.y, int) = 0;
+	OBJECT__INITIALIZE (THIS->GET.CURSOR.X, int) = 0;\
+	OBJECT__INITIALIZE (THIS->GET.CURSOR.Y, int) = 0;
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\
  * * AT THE ALL END OF FILES, I AM ADDING A SPECIAL BYTE <0X1A> TO END THE  * *

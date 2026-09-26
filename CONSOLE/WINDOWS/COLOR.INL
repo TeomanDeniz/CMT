@@ -7,7 +7,7 @@
 	const unsigned short	ATTRIBUTE =\
 		LOCALMACRO__CMT_CONSOLE__ATTRIBUTE (TARGET);\
 	const unsigned long		CELLS =\
-		(unsigned long)THIS->get.width * (unsigned long)THIS->get.height;\
+		(unsigned long)THIS->GET.WIDTH * (unsigned long)THIS->GET.HEIGHT;\
 	struct S_COORD			ORIGIN;\
 	unsigned long			WRITTEN;\
 	\
@@ -17,8 +17,8 @@
 		THIS->_OUT_HANDLE, ATTRIBUTE, CELLS, ORIGIN, &WRITTEN\
 	);\
 	KERNEL32.SetConsoleTextAttribute(THIS->_OUT_HANDLE, ATTRIBUTE);\
-	OBJECT__INITIALIZE (THIS->get.color, unsigned int) = TARGET;\
-	OBJECT__INITIALIZE (THIS->get.cursor.color, unsigned int) = TARGET;
+	OBJECT__INITIALIZE (THIS->GET.COLOR, unsigned int) = TARGET;\
+	OBJECT__INITIALIZE (THIS->GET.CURSOR.COLOR, unsigned int) = TARGET;
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\
  * * AT THE ALL END OF FILES, I AM ADDING A SPECIAL BYTE <0X1A> TO END THE  * *

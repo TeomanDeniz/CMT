@@ -54,7 +54,7 @@
 				);\
 			}\
 			\
-			LOCALMACRO__CMT_CONSOLE__RUN (\
+			LOCALMACRO__CMT_CONSOLE__RUN(\
 				CHARACTER, COLOR_VALUE,\
 				__CMT_SOFT_LEFT__ + __CMT_SOFT_INSET__,\
 				__CMT_SOFT_TOP__ + __CMT_SOFT_ROW__,\

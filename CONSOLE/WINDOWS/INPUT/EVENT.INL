@@ -42,12 +42,12 @@
 					((unsigned int)(unsigned char)\
 						(RECORD).EVENT.KEY_EVENT.CHAR.ASCII);\
 				\
-				OBJECT__INITIALIZE (THIS->input.get.key, unsigned int) = \
+				OBJECT__INITIALIZE (THIS->INPUT.GET.KEY, unsigned int) = \
 					__CMT_KEY__;\
 				(KIND) = LOCALMACRO__CMT_CONSOLE__EVENT_KEY;\
 				\
-				if (THIS->event.on_key)\
-					THIS->event.on_key(__CMT_KEY__);\
+				if (THIS->EVENT.ON_KEY)\
+					THIS->EVENT.ON_KEY(__CMT_KEY__);\
 			}\
 		}\
 		else if ((RECORD).EVENT_TYPE == LOCALMACRO__CMT_CONSOLE__RECORD_MOUSE)\
@@ -66,11 +66,11 @@
 			const unsigned int	__CMT_MOUSE_Y__ = (unsigned int)\
 				(RECORD).EVENT.MOUSE_EVENT.MOUSE_POSITION.Y;\
 			\
-			OBJECT__INITIALIZE (THIS->input.get.mouse, unsigned int) = \
+			OBJECT__INITIALIZE (THIS->INPUT.GET.MOUSE, unsigned int) = \
 				__CMT_MOUSE__;\
-			OBJECT__INITIALIZE (THIS->input.get.mouse_x, unsigned int) = \
+			OBJECT__INITIALIZE (THIS->INPUT.GET.MOUSE_X, unsigned int) = \
 				__CMT_MOUSE_X__;\
-			OBJECT__INITIALIZE (THIS->input.get.mouse_y, unsigned int) = \
+			OBJECT__INITIALIZE (THIS->INPUT.GET.MOUSE_Y, unsigned int) = \
 				__CMT_MOUSE_Y__;\
 			\
 			if (__CMT_FLAGS__ & LOCALMACRO__CMT_CONSOLE__MOUSE_MOVED)\
@@ -78,8 +78,8 @@
 			else\
 				(KIND) = LOCALMACRO__CMT_CONSOLE__EVENT_MOUSE_ACTION;\
 			\
-			if (THIS->event.on_mouse)\
-				THIS->event.on_mouse(\
+			if (THIS->EVENT.ON_MOUSE)\
+				THIS->EVENT.ON_MOUSE(\
 					__CMT_MOUSE__, __CMT_MOUSE_X__, __CMT_MOUSE_Y__\
 				);\
 		}\
@@ -90,12 +90,12 @@
 			const unsigned int	__CMT_HIGH__ = (unsigned int)\
 				(RECORD).EVENT.WINDOW_BUFFER_SIZE_EVENT.SIZE.Y;\
 			\
-			OBJECT__INITIALIZE (THIS->get.width, unsigned int) = __CMT_WIDE__;\
-			OBJECT__INITIALIZE (THIS->get.height, unsigned int) = __CMT_HIGH__;\
+			OBJECT__INITIALIZE (THIS->GET.WIDTH, unsigned int) = __CMT_WIDE__;\
+			OBJECT__INITIALIZE (THIS->GET.HEIGHT, unsigned int) = __CMT_HIGH__;\
 			(KIND) = LOCALMACRO__CMT_CONSOLE__EVENT_RESIZE;\
 			\
-			if (THIS->event.on_resize)\
-				THIS->event.on_resize(__CMT_WIDE__, __CMT_HIGH__);\
+			if (THIS->EVENT.ON_RESIZE)\
+				THIS->EVENT.ON_RESIZE(__CMT_WIDE__, __CMT_HIGH__);\
 		}\
 		else if ((RECORD).EVENT_TYPE == LOCALMACRO__CMT_CONSOLE__RECORD_FOCUS)\
 		{\
@@ -103,11 +103,11 @@
 			\
 			if ((RECORD).EVENT.FOCUS_EVENT.SET_FOCUS)\
 			{\
-				if (THIS->event.on_focus)\
-					THIS->event.on_focus();\
+				if (THIS->EVENT.ON_FOCUS)\
+					THIS->EVENT.ON_FOCUS();\
 			}\
-			else if (THIS->event.on_blur)\
-				THIS->event.on_blur();\
+			else if (THIS->EVENT.ON_BLUR)\
+				THIS->EVENT.ON_BLUR();\
 		}\
 		else\
 			(KIND) = LOCALMACRO__CMT_CONSOLE__EVENT_OTHER;\
@@ -126,17 +126,17 @@
 		)\
 		{\
 			if (\
-				((int)__CMT_MOVE_BOUNDS__.LEFT != THIS->get.x) || \
-				((int)__CMT_MOVE_BOUNDS__.TOP != THIS->get.y)\
+				((int)__CMT_MOVE_BOUNDS__.LEFT != THIS->GET.X) || \
+				((int)__CMT_MOVE_BOUNDS__.TOP != THIS->GET.Y)\
 			)\
 			{\
-				OBJECT__INITIALIZE (THIS->get.x, int) = \
+				OBJECT__INITIALIZE (THIS->GET.X, int) = \
 					(int)__CMT_MOVE_BOUNDS__.LEFT;\
-				OBJECT__INITIALIZE (THIS->get.y, int) = \
+				OBJECT__INITIALIZE (THIS->GET.Y, int) = \
 					(int)__CMT_MOVE_BOUNDS__.TOP;\
 				\
-				if (THIS->event.on_move)\
-					THIS->event.on_move(\
+				if (THIS->EVENT.ON_MOVE)\
+					THIS->EVENT.ON_MOVE(\
 						(int)__CMT_MOVE_BOUNDS__.LEFT,\
 						(int)__CMT_MOVE_BOUNDS__.TOP\
 					);\

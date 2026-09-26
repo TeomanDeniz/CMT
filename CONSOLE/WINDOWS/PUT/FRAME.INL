@@ -3,9 +3,9 @@
 #endif /* !CONSOLE_HPP */
 
 #define LOCALMACRO__CMT_CONSOLE__PUT_FRAME_CONTENT \
-	THIS->put.colored.frame(\
+	THIS->PUT.COLORED.FRAME(\
 		CHARACTER,\
-		THIS->get.cursor.color,\
+		THIS->GET.CURSOR.COLOR,\
 		START_X,\
 		START_Y,\
 		END_X,\

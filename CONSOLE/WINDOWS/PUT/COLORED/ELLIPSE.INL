@@ -30,7 +30,7 @@
 			);\
 			\
 			if (__CMT_OVAL_VALID__)\
-				LOCALMACRO__CMT_CONSOLE__RUN (\
+				LOCALMACRO__CMT_CONSOLE__RUN(\
 					CHARACTER, COLOR_VALUE, __CMT_OVAL_FROM__,\
 					__CMT_OVAL_ROW__,\
 					(__CMT_OVAL_TO__ - __CMT_OVAL_FROM__) + (long)1\

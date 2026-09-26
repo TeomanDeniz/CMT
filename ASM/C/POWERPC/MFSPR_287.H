@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2026/03/23 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/08/18 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/09/23 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -116,7 +116,7 @@
 \******************************************************************************/
 
 #ifndef MFSPR_287_H
-#define MFSPR_287_H 202608 /* VERSION */
+#define MFSPR_287_H 202609 /* VERSION */
 
 /* **************************** [v] INCLUDES [v] **************************** */
 #include "../../../ENVIRONMENTS/CPU.H"
@@ -168,7 +168,8 @@
 			: "=r"(RESULT) : : \
 		);\
 		(VARIABLE) = RESULT;\
-	} while (0)
+	}\
+	while (0)
 #endif /* INLINE_ASM_TYPE__GNU_EXTENDED */
 
 #ifndef GET_MFSPR_287
@@ -183,7 +184,8 @@
 			: "=r"(RESULT) : : \
 		);\
 		(VARIABLE) = RESULT;\
-	} while (0)
+	}\
+	while (0)
 #endif /* INLINE_ASM_TYPE__GNU_EXTENDED */
 #endif /* !GET_MFSPR_287 */
 
@@ -384,7 +386,8 @@ EXTERN_C_END
 	do\
 	{\
 		(VARIABLE) = LOCALMACRO__GET_MFSPR_287();\
-	} while (0)
+	}\
+	while (0)
 
 #endif /* IS__INLINE_ASM__SUPPORTED */
 

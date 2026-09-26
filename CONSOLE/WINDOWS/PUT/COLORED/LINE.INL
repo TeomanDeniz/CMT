@@ -13,7 +13,7 @@
 		if (__CMT_LINE_Y0__ == __CMT_LINE_Y1__)\
 		{\
 			LOCALMACRO__CMT_CONSOLE__SWAP(__CMT_LINE_X0__, __CMT_LINE_X1__);\
-			LOCALMACRO__CMT_CONSOLE__RUN (\
+			LOCALMACRO__CMT_CONSOLE__RUN(\
 				CHARACTER, COLOR_VALUE, __CMT_LINE_X0__, __CMT_LINE_Y0__,\
 				(__CMT_LINE_X1__ - __CMT_LINE_X0__) + (long)1\
 			);\
@@ -39,7 +39,7 @@
 			\
 			while (1)\
 			{\
-				LOCALMACRO__CMT_CONSOLE__PLOT (\
+				LOCALMACRO__CMT_CONSOLE__PLOT(\
 					CHARACTER, COLOR_VALUE, __CMT_LINE_X0__, __CMT_LINE_Y0__\
 				);\
 				\

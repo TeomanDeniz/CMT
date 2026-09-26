@@ -2,6 +2,9 @@
 #error "ERROR - PLEASE DON'T USE THIS LIBRARY DIRECTLY!!!"
 #endif /* !ASM_H */
 
+#define MOV_PTR8_(POINTER, VALUE) CMT_ASM("movb $" _(VALUE) ", " _(POINTER))
+#define MOV_PTR16_(POINTER, VALUE) CMT_ASM("movw $" _(VALUE) ", " _(POINTER))
+
 /* ************************** [v] 8-BIT MEMORY [v] ************************** */
 #ifdef __SYSTEM_16_BIT__
 #define MOV_AL_FROM_PTR_(VALUE) CMT_ASM("movb (" _(VALUE) "), %al")

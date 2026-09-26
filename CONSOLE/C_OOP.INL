@@ -1,8 +1,9 @@
 #ifndef CONSOLE_HPP
-#ifndef CONSOLE_H
 #error "ERROR - PLEASE DON'T USE THIS LIBRARY DIRECTLY!!!"
-#endif /* !CONSOLE_H */
 #endif /* !CONSOLE_HPP */
+
+#ifndef SEAL_CMT_CONSOLE_OOP
+#define SEAL_CMT_CONSOLE_OOP
 
 /* **************************** [v] INCLUDES [v] **************************** */
 #include "../OBJECT.H"
@@ -17,43 +18,39 @@
 /* **************************** [^] INCLUDES [^] **************************** */
 
 #ifndef KNR_STYLE /* STANDARD C */
-object CMT_CONSOLE
+OBJECT CMT_CONSOLE
 {
-	OBJECT CMT_CONSOLE	*(*x)(int);
-	OBJECT CMT_CONSOLE	*(*y)(int);
-	OBJECT CMT_CONSOLE	*(*xy)(int, int);
-	OBJECT CMT_CONSOLE	*(*width)(unsigned int);
-	OBJECT CMT_CONSOLE	*(*height)(unsigned int);
-	OBJECT CMT_CONSOLE	*(*title)(const char *);
+	OBJECT CMT_CONSOLE	*(*X)(int);
+	OBJECT CMT_CONSOLE	*(*Y)(int);
+	OBJECT CMT_CONSOLE	*(*XY)(int, int);
+	OBJECT CMT_CONSOLE	*(*WIDTH)(unsigned int);
+	OBJECT CMT_CONSOLE	*(*HEIGHT)(unsigned int);
+	OBJECT CMT_CONSOLE	*(*TITLE)(const char *);
+	OBJECT CMT_CONSOLE	*(*COLOR)(unsigned int);
+	OBJECT CMT_CONSOLE	*(*DEFAULT_COLOR)(void);
+	OBJECT CMT_CONSOLE	*(*CLEAR)(void);
+	PTR					(*EXPORT)(void);
+	OBJECT CMT_CONSOLE	*(*IMPORT)(PTR);
+	OBJECT CMT_CONSOLE	*(*PUSH)(void);
+	OBJECT CMT_CONSOLE	*(*POP)(void);
+	OBJECT CMT_CONSOLE	*(*LOG)(char *);
+	OBJECT CMT_CONSOLE	*(*ERROR)(char *);
+	OBJECT CMT_CONSOLE	*(*ERROR_AT)(char *, char *, unsigned int);
+	OBJECT CMT_CONSOLE	*(*WARNING)(char *);
+	OBJECT CMT_CONSOLE	*(*WARNING_AT)(char *, char *, unsigned int);
+	OBJECT CMT_CONSOLE	*(*PRINT)(const char *, VA_ARGS);
 
-	OBJECT CMT_CONSOLE	*(*color)(unsigned int);
-	OBJECT CMT_CONSOLE	*(*default_color)(void);
-	OBJECT CMT_CONSOLE	*(*clear)(void);
-
-	PTR					(*export)(void);
-	OBJECT CMT_CONSOLE	*(*import)(PTR);
-
-	OBJECT CMT_CONSOLE	*(*push)(void);
-	OBJECT CMT_CONSOLE	*(*pop)(void);
-
-	OBJECT CMT_CONSOLE	*(*log)(char *);
-	OBJECT CMT_CONSOLE	*(*error)(char *);
-	OBJECT CMT_CONSOLE	*(*error_at)(char *, char *, unsigned int);
-	OBJECT CMT_CONSOLE	*(*warning)(char *);
-	OBJECT CMT_CONSOLE	*(*warning_at)(char *, char *, unsigned int);
-	OBJECT CMT_CONSOLE	*(*print)(const char *, VA_ARGS);
-
-	struct /* put */
+	struct /* PUT */
 	{
-		OBJECT CMT_CONSOLE	*(*string)(char *, unsigned int, unsigned int);
-		OBJECT CMT_CONSOLE	*(*line)(
+		OBJECT CMT_CONSOLE	*(*STRING)(char *, unsigned int, unsigned int);
+		OBJECT CMT_CONSOLE	*(*LINE)(
 			char,
 			unsigned int,
 			unsigned int,
 			unsigned int,
 			unsigned int
 		);
-		OBJECT CMT_CONSOLE	*(*curve)(
+		OBJECT CMT_CONSOLE	*(*CURVE)(
 			char,
 			unsigned int,
 			unsigned int,
@@ -62,29 +59,14 @@ object CMT_CONSOLE
 			float,
 			float
 		);
-		OBJECT CMT_CONSOLE	*(*frame)(
+		OBJECT CMT_CONSOLE	*(*FRAME)(
 			char,
 			unsigned int,
 			unsigned int,
 			unsigned int,
 			unsigned int
 		);
-		OBJECT CMT_CONSOLE	*(*frame_radius)(
-			char,
-			unsigned int,
-			unsigned int,
-			unsigned int,
-			unsigned int,
-			unsigned int
-		);
-		OBJECT CMT_CONSOLE	*(*rectangle)(
-			char,
-			unsigned int,
-			unsigned int,
-			unsigned int,
-			unsigned int
-		);
-		OBJECT CMT_CONSOLE	*(*rectangle_radius)(
+		OBJECT CMT_CONSOLE	*(*FRAME_RADIUS)(
 			char,
 			unsigned int,
 			unsigned int,
@@ -92,14 +74,29 @@ object CMT_CONSOLE
 			unsigned int,
 			unsigned int
 		);
-		OBJECT CMT_CONSOLE	*(*circle)(
+		OBJECT CMT_CONSOLE	*(*RECTANGLE)(
 			char,
 			unsigned int,
 			unsigned int,
 			unsigned int,
 			unsigned int
 		);
-		OBJECT CMT_CONSOLE	*(*ellipse)(
+		OBJECT CMT_CONSOLE	*(*RECTANGLE_RADIUS)(
+			char,
+			unsigned int,
+			unsigned int,
+			unsigned int,
+			unsigned int,
+			unsigned int
+		);
+		OBJECT CMT_CONSOLE	*(*CIRCLE)(
+			char,
+			unsigned int,
+			unsigned int,
+			unsigned int,
+			unsigned int
+		);
+		OBJECT CMT_CONSOLE	*(*ELLIPSE)(
 			char,
 			unsigned int,
 			unsigned int,
@@ -107,12 +104,12 @@ object CMT_CONSOLE
 			unsigned int
 		);
 
-		struct /* colored */
+		struct /* COLORED */
 		{
-			OBJECT CMT_CONSOLE	*(*string)(
+			OBJECT CMT_CONSOLE	*(*STRING)(
 				char *, unsigned int, unsigned int, unsigned int
 			);
-			OBJECT CMT_CONSOLE	*(*line)(
+			OBJECT CMT_CONSOLE	*(*LINE)(
 				char,
 				unsigned int,
 				unsigned int,
@@ -120,7 +117,7 @@ object CMT_CONSOLE
 				unsigned int,
 				unsigned int
 			);
-			OBJECT CMT_CONSOLE	*(*curve)(
+			OBJECT CMT_CONSOLE	*(*CURVE)(
 				char,
 				unsigned int,
 				unsigned int,
@@ -130,7 +127,7 @@ object CMT_CONSOLE
 				float,
 				float
 			);
-			OBJECT CMT_CONSOLE	*(*frame)(
+			OBJECT CMT_CONSOLE	*(*FRAME)(
 				char,
 				unsigned int,
 				unsigned int,
@@ -138,24 +135,7 @@ object CMT_CONSOLE
 				unsigned int,
 				unsigned int
 			);
-			OBJECT CMT_CONSOLE	*(*frame_radius)(
-				char,
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int
-			);
-			OBJECT CMT_CONSOLE	*(*rectangle)(
-				char,
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int
-			);
-			OBJECT CMT_CONSOLE	*(*rectangle_radius)(
+			OBJECT CMT_CONSOLE	*(*FRAME_RADIUS)(
 				char,
 				unsigned int,
 				unsigned int,
@@ -164,7 +144,7 @@ object CMT_CONSOLE
 				unsigned int,
 				unsigned int
 			);
-			OBJECT CMT_CONSOLE	*(*circle)(
+			OBJECT CMT_CONSOLE	*(*RECTANGLE)(
 				char,
 				unsigned int,
 				unsigned int,
@@ -172,32 +152,292 @@ object CMT_CONSOLE
 				unsigned int,
 				unsigned int
 			);
-			OBJECT CMT_CONSOLE	*(*ellipse)(
+			OBJECT CMT_CONSOLE	*(*RECTANGLE_RADIUS)(
+				char,
+				unsigned int,
+				unsigned int,
+				unsigned int,
+				unsigned int,
+				unsigned int,
+				unsigned int
+			);
+			OBJECT CMT_CONSOLE	*(*CIRCLE)(
 				char,
 				unsigned int,
 				unsigned int,
 				unsigned int,
 				unsigned int,
 				unsigned int
+			);
+			OBJECT CMT_CONSOLE	*(*ELLIPSE)(
+				char,
+				unsigned int,
+				unsigned int,
+				unsigned int,
+				unsigned int,
+				unsigned int
+			);
+		} COLORED;
+	} PUT;
+
+	struct /* CURSOR */
+	{
+		OBJECT CMT_CONSOLE	*(*COLOR)(unsigned int);
+		OBJECT CMT_CONSOLE	*(*DEFAULT_COLOR)(void);
+		OBJECT CMT_CONSOLE	*(*X)(unsigned int);
+		OBJECT CMT_CONSOLE	*(*Y)(unsigned int);
+		OBJECT CMT_CONSOLE	*(*XY)(unsigned int, unsigned int);
+		OBJECT CMT_CONSOLE	*(*MOVE_X)(int);
+		OBJECT CMT_CONSOLE	*(*MOVE_Y)(int);
+		OBJECT CMT_CONSOLE	*(*MOVE_XY)(int, int);
+		OBJECT CMT_CONSOLE	*(*SHOW)(BOOLEAN);
+		OBJECT CMT_CONSOLE	*(*SIZE)(unsigned long);
+	} CURSOR;
+
+	struct /* EVENT */
+	{
+		void	(*ON_RESIZE)(unsigned int, unsigned int);
+		void	(*ON_MOVE)(int, int);
+		void	(*ON_CLOSE)(void);
+		void	(*ON_FOCUS)(void);
+		void	(*ON_BLUR)(void);
+		void	(*ON_KEY)(unsigned int);
+		void	(*ON_MOUSE)(unsigned int, unsigned int, unsigned int);
+	} EVENT;
+
+	struct /* INPUT */
+	{
+		struct /* WAIT */
+		{
+			OBJECT CMT_CONSOLE	*(*ANY)(void);
+			OBJECT CMT_CONSOLE	*(*KEY)(void);
+			OBJECT CMT_CONSOLE	*(*MOUSE)(void);
+			OBJECT CMT_CONSOLE	*(*MOUSE_ACTION)(void);
+			OBJECT CMT_CONSOLE	*(*MOUSE_MOVE)(void);
+		} WAIT;
+
+		struct /* GET */
+		{
+			const unsigned int	KEY;
+			const unsigned int	MOUSE;
+			const unsigned int	MOUSE_X;
+			const unsigned int	MOUSE_Y;
+		} GET;
+	} INPUT;
+
+	struct /* GET */
+	{
+		char				*(*LINE)(\
+			unsigned int, unsigned int, unsigned int, unsigned int\
+		);
+		char				**(*AREA)(\
+			unsigned int, unsigned int, unsigned int, unsigned int\
+		);
+
+		const BOOLEAN		ACTIVE;
+		const BOOLEAN		TERMINAL;
+		const unsigned int	ROWS;
+		const unsigned int	COLUMNS;
+		const unsigned int	PIXEL_WIDTH;
+		const unsigned int	PIXEL_HEIGHT;
+		const int			X;
+		const int			Y;
+		const unsigned int	COLOR;
+		const unsigned int	DEFAULT_COLOR;
+		const unsigned int	WIDTH;
+		const unsigned int	HEIGHT;
+
+		struct /* CURSOR */
+		{
+			const unsigned long	SIZE;
+			const int			X;
+			const int			Y;
+			const unsigned int	COLOR;
+			const unsigned int	DEFAULT_COLOR;
+			const BOOLEAN		VISIBLE;
+		} CURSOR;
+	} GET;
+
+	void					(*__DESTRUCTOR__)(void);
+	BOOLEAN					HIGHLIGHTER;
+
+	LOCALMACRO__CMT_CONSOLE__PRIVATE_VARIABLES
+};
+
+object cmt_console
+{
+	object cmt_console	*(*x)(int);
+	object cmt_console	*(*y)(int);
+	object cmt_console	*(*xy)(int, int);
+	object cmt_console	*(*width)(unsigned int);
+	object cmt_console	*(*height)(unsigned int);
+	object cmt_console	*(*title)(const char *);
+	object cmt_console	*(*color)(unsigned int);
+	object cmt_console	*(*default_color)(void);
+	object cmt_console	*(*clear)(void);
+	ptr					(*export)(void);
+	object cmt_console	*(*import)(ptr);
+	object cmt_console	*(*push)(void);
+	object cmt_console	*(*pop)(void);
+	object cmt_console	*(*log)(char *);
+	object cmt_console	*(*error)(char *);
+	object cmt_console	*(*error_at)(char *, char *, unsigned int);
+	object cmt_console	*(*warning)(char *);
+	object cmt_console	*(*warning_at)(char *, char *, unsigned int);
+	object cmt_console	*(*print)(const char *, va_args);
+
+	struct /* put */
+	{
+		object cmt_console	*(*string)(char *, unsigned int, unsigned int);
+		object cmt_console	*(*line)(\
+			char,\
+			unsigned int,\
+			unsigned int,\
+			unsigned int,\
+			unsigned int\
+		);
+		object cmt_console	*(*curve)(\
+			char,\
+			unsigned int,\
+			unsigned int,\
+			unsigned int,\
+			unsigned int,\
+			float,\
+			float\
+		);
+		object cmt_console	*(*frame)(\
+			char,\
+			unsigned int,\
+			unsigned int,\
+			unsigned int,\
+			unsigned int\
+		);
+		object cmt_console	*(*frame_radius)(\
+			char,\
+			unsigned int,\
+			unsigned int,\
+			unsigned int,\
+			unsigned int,\
+			unsigned int\
+		);
+		object cmt_console	*(*rectangle)(\
+			char,\
+			unsigned int,\
+			unsigned int,\
+			unsigned int,\
+			unsigned int\
+		);
+		object cmt_console	*(*rectangle_radius)(\
+			char,\
+			unsigned int,\
+			unsigned int,\
+			unsigned int,\
+			unsigned int,\
+			unsigned int\
+		);
+		object cmt_console	*(*circle)(\
+			char,\
+			unsigned int,\
+			unsigned int,\
+			unsigned int,\
+			unsigned int\
+		);
+		object cmt_console	*(*ellipse)(\
+			char,\
+			unsigned int,\
+			unsigned int,\
+			unsigned int,\
+			unsigned int\
+		);
+
+		struct /* colored */
+		{
+			object cmt_console	*(*string)(\
+				char *, unsigned int, unsigned int, unsigned int\
+			);
+			object cmt_console	*(*line)(\
+				char,\
+				unsigned int,\
+				unsigned int,\
+				unsigned int,\
+				unsigned int,\
+				unsigned int\
+			);
+			object cmt_console	*(*curve)(\
+				char,\
+				unsigned int,\
+				unsigned int,\
+				unsigned int,\
+				unsigned int,\
+				unsigned int,\
+				float,\
+				float\
+			);
+			object cmt_console	*(*frame)(\
+				char,\
+				unsigned int,\
+				unsigned int,\
+				unsigned int,\
+				unsigned int,\
+				unsigned int\
+			);
+			object cmt_console	*(*frame_radius)(\
+				char,\
+				unsigned int,\
+				unsigned int,\
+				unsigned int,\
+				unsigned int,\
+				unsigned int,\
+				unsigned int\
+			);
+			object cmt_console	*(*rectangle)(\
+				char,\
+				unsigned int,\
+				unsigned int,\
+				unsigned int,\
+				unsigned int,\
+				unsigned int\
+			);
+			object cmt_console	*(*rectangle_radius)(\
+				char,\
+				unsigned int,\
+				unsigned int,\
+				unsigned int,\
+				unsigned int,\
+				unsigned int,\
+				unsigned int\
+			);
+			object cmt_console	*(*circle)(\
+				char,\
+				unsigned int,\
+				unsigned int,\
+				unsigned int,\
+				unsigned int,\
+				unsigned int\
+			);
+			object cmt_console	*(*ellipse)(\
+				char,\
+				unsigned int,\
+				unsigned int,\
+				unsigned int,\
+				unsigned int,\
+				unsigned int\
 			);
 		} colored;
 	} put;
 
 	struct /* cursor */
 	{
-		OBJECT CMT_CONSOLE	*(*color)(unsigned int);
-		OBJECT CMT_CONSOLE	*(*default_color)(void);
-
-		OBJECT CMT_CONSOLE	*(*x)(unsigned int);
-		OBJECT CMT_CONSOLE	*(*y)(unsigned int);
-		OBJECT CMT_CONSOLE	*(*xy)(unsigned int, unsigned int);
-
-		OBJECT CMT_CONSOLE	*(*move_x)(int);
-		OBJECT CMT_CONSOLE	*(*move_y)(int);
-		OBJECT CMT_CONSOLE	*(*move_xy)(int, int);
-
-		OBJECT CMT_CONSOLE	*(*show)(BOOLEAN);
-		OBJECT CMT_CONSOLE	*(*size)(unsigned long);
+		object cmt_console	*(*color)(unsigned int);
+		object cmt_console	*(*default_color)(void);
+		object cmt_console	*(*x)(unsigned int);
+		object cmt_console	*(*y)(unsigned int);
+		object cmt_console	*(*xy)(unsigned int, unsigned int);
+		object cmt_console	*(*move_x)(int);
+		object cmt_console	*(*move_y)(int);
+		object cmt_console	*(*move_xy)(int, int);
+		object cmt_console	*(*show)(boolean);
+		object cmt_console	*(*size)(unsigned long);
 	} cursor;
 
 	struct /* event */
@@ -215,11 +455,11 @@ object CMT_CONSOLE
 	{
 		struct /* wait */
 		{
-			OBJECT CMT_CONSOLE	*(*any)(void);
-			OBJECT CMT_CONSOLE	*(*key)(void);
-			OBJECT CMT_CONSOLE	*(*mouse)(void);
-			OBJECT CMT_CONSOLE	*(*mouse_action)(void);
-			OBJECT CMT_CONSOLE	*(*mouse_move)(void);
+			object cmt_console	*(*any)(void);
+			object cmt_console	*(*key)(void);
+			object cmt_console	*(*mouse)(void);
+			object cmt_console	*(*mouse_action)(void);
+			object cmt_console	*(*mouse_move)(void);
 		} wait;
 
 		struct /* get */
@@ -240,8 +480,8 @@ object CMT_CONSOLE
 			unsigned int, unsigned int, unsigned int, unsigned int\
 		);
 
-		const BOOLEAN		active;
-		const BOOLEAN		terminal;
+		const boolean		active;
+		const boolean		terminal;
 		const unsigned int	rows;
 		const unsigned int	columns;
 		const unsigned int	pixel_width;
@@ -260,96 +500,204 @@ object CMT_CONSOLE
 			const int			y;
 			const unsigned int	color;
 			const unsigned int	default_color;
-			const BOOLEAN		visible;
+			const boolean		visible;
 		} cursor;
 	} get;
 
-	void					(*free)(void);
-	BOOLEAN					highlighter;
+	void					(*__DESTRUCTOR__)(void);
+	boolean					highlighter;
 
-	/**/ /* [v] PRIVATE ***************************************************** */
-	/**/
-	/**/ T_CONSOLE_OUT_HANDLE	_OUT_HANDLE;
-	/**/ T_CONSOLE_IN_HANDLE	_IN_HANDLE;
-	/**/ unsigned long			_IN_MODE;
-	/**/ PTR					_PUSH_DATA;
-	/**/ unsigned long			_PUSH_SIZE;
-	/**/ unsigned long			_PUSH_CAPACITY;
-	/**/ unsigned int			_PUSH_DEPTH;
-	/**/ PTR					_SCRATCH_DATA;
-	/**/ unsigned long			_SCRATCH_SIZE;
-	/**/ BOOLEAN				_ACTIVE;
-	/**/ BOOLEAN				_VT;
-	/**/ BOOLEAN				_OWNED;
-	/**/ BOOLEAN				_TERMINAL;
-	/**/
-	/**/ /* [^] PRIVATE ***************************************************** */
+	LOCALMACRO__CMT_CONSOLE__PRIVATE_VARIABLES
 };
 #else /* K&R */
-object CMT_CONSOLE
+OBJECT CMT_CONSOLE
 {
-	OBJECT CMT_CONSOLE	*(*x)();
-	OBJECT CMT_CONSOLE	*(*y)();
-	OBJECT CMT_CONSOLE	*(*xy)();
-	OBJECT CMT_CONSOLE	*(*width)();
-	OBJECT CMT_CONSOLE	*(*height)();
-	OBJECT CMT_CONSOLE	*(*title)();
+	OBJECT CMT_CONSOLE	*(*X)();
+	OBJECT CMT_CONSOLE	*(*Y)();
+	OBJECT CMT_CONSOLE	*(*XY)();
+	OBJECT CMT_CONSOLE	*(*WIDTH)();
+	OBJECT CMT_CONSOLE	*(*HEIGHT)();
+	OBJECT CMT_CONSOLE	*(*TITLE)();
+	OBJECT CMT_CONSOLE	*(*COLOR)();
+	OBJECT CMT_CONSOLE	*(*DEFAULT_COLOR)();
+	OBJECT CMT_CONSOLE	*(*CLEAR)();
+	PTR					(*EXPORT)();
+	OBJECT CMT_CONSOLE	*(*IMPORT)();
+	OBJECT CMT_CONSOLE	*(*PUSH)();
+	OBJECT CMT_CONSOLE	*(*POP)();
+	OBJECT CMT_CONSOLE	*(*LOG)();
+	OBJECT CMT_CONSOLE	*(*ERROR)();
+	OBJECT CMT_CONSOLE	*(*ERROR_AT)();
+	OBJECT CMT_CONSOLE	*(*WARNING)();
+	OBJECT CMT_CONSOLE	*(*WARNING_AT)();
+	OBJECT CMT_CONSOLE	*(*PRINT)();
 
-	OBJECT CMT_CONSOLE	*(*color)();
-	OBJECT CMT_CONSOLE	*(*default_color)();
-	OBJECT CMT_CONSOLE	*(*clear)();
+	struct /* PUT */
+	{
+		OBJECT CMT_CONSOLE	*(*STRING)();
+		OBJECT CMT_CONSOLE	*(*LINE)();
+		OBJECT CMT_CONSOLE	*(*CURVE)();
+		OBJECT CMT_CONSOLE	*(*FRAME)();
+		OBJECT CMT_CONSOLE	*(*FRAME_RADIUS)();
+		OBJECT CMT_CONSOLE	*(*RECTANGLE)();
+		OBJECT CMT_CONSOLE	*(*RECTANGLE_RADIUS)();
+		OBJECT CMT_CONSOLE	*(*CIRCLE)();
+		OBJECT CMT_CONSOLE	*(*ELLIPSE)();
 
-	PTR					(*export)();
-	OBJECT CMT_CONSOLE	*(*import)();
+		struct /* COLORED */
+		{
+			OBJECT CMT_CONSOLE	*(*STRING)();
+			OBJECT CMT_CONSOLE	*(*LINE)();
+			OBJECT CMT_CONSOLE	*(*CURVE)();
+			OBJECT CMT_CONSOLE	*(*FRAME)();
+			OBJECT CMT_CONSOLE	*(*FRAME_RADIUS)();
+			OBJECT CMT_CONSOLE	*(*RECTANGLE)();
+			OBJECT CMT_CONSOLE	*(*RECTANGLE_RADIUS)();
+			OBJECT CMT_CONSOLE	*(*CIRCLE)();
+			OBJECT CMT_CONSOLE	*(*ELLIPSE)();
+		} COLORED;
+	} PUT;
 
-	OBJECT CMT_CONSOLE	*(*push)();
-	OBJECT CMT_CONSOLE	*(*pop)();
+	struct /* CURSOR */
+	{
+		OBJECT CMT_CONSOLE	*(*COLOR)();
+		OBJECT CMT_CONSOLE	*(*DEFAULT_COLOR)();
+		OBJECT CMT_CONSOLE	*(*X)();
+		OBJECT CMT_CONSOLE	*(*Y)();
+		OBJECT CMT_CONSOLE	*(*XY)();
+		OBJECT CMT_CONSOLE	*(*MOVE_X)();
+		OBJECT CMT_CONSOLE	*(*MOVE_Y)();
+		OBJECT CMT_CONSOLE	*(*MOVE_XY)();
+		OBJECT CMT_CONSOLE	*(*SHOW)();
+		OBJECT CMT_CONSOLE	*(*SIZE)();
+	} CURSOR;
 
-	OBJECT CMT_CONSOLE	*(*log)();
-	OBJECT CMT_CONSOLE	*(*error)();
-	OBJECT CMT_CONSOLE	*(*error_at)();
-	OBJECT CMT_CONSOLE	*(*warning)();
-	OBJECT CMT_CONSOLE	*(*warning_at)();
-	OBJECT CMT_CONSOLE	*(*print)();
+	struct /* EVENT */
+	{
+		void	(*ON_RESIZE)();
+		void	(*ON_MOVE)();
+		void	(*ON_CLOSE)();
+		void	(*ON_FOCUS)();
+		void	(*ON_BLUR)();
+		void	(*ON_KEY)();
+		void	(*ON_MOUSE)();
+	} EVENT;
+
+	struct /* INPUT */
+	{
+		struct /* WAIT */
+		{
+			OBJECT CMT_CONSOLE	*(*ANY)();
+			OBJECT CMT_CONSOLE	*(*KEY)();
+			OBJECT CMT_CONSOLE	*(*MOUSE)();
+			OBJECT CMT_CONSOLE	*(*MOUSE_ACTION)();
+			OBJECT CMT_CONSOLE	*(*MOUSE_MOVE)();
+		} WAIT;
+
+		struct /* GET */
+		{
+			const unsigned int	KEY;
+			const unsigned int	MOUSE;
+			const unsigned int	MOUSE_X;
+			const unsigned int	MOUSE_Y;
+		} GET;
+	} INPUT;
+
+	struct /* GET */
+	{
+		char				*(*LINE)();
+		char				**(*AREA)();
+
+		const BOOLEAN		ACTIVE;
+		const BOOLEAN		TERMINAL;
+		const unsigned int	ROWS;
+		const unsigned int	COLUMNS;
+		const unsigned int	PIXEL_WIDTH;
+		const unsigned int	PIXEL_HEIGHT;
+		const int			X;
+		const int			Y;
+		const unsigned int	COLOR;
+		const unsigned int	DEFAULT_COLOR;
+		const unsigned int	WIDTH;
+		const unsigned int	HEIGHT;
+
+		struct /* CURSOR */
+		{
+			const unsigned long	SIZE;
+			const int			X;
+			const int			Y;
+			const unsigned int	COLOR;
+			const unsigned int	DEFAULT_COLOR;
+			const BOOLEAN		VISIBLE;
+		} CURSOR;
+	} GET;
+
+							(*__DESTRUCTOR__)();
+	BOOLEAN					HIGHLIGHTER;
+
+	LOCALMACRO__CMT_CONSOLE__PRIVATE_VARIABLES
+};
+
+object cmt_console
+{
+	object cmt_console	*(*x)();
+	object cmt_console	*(*y)();
+	object cmt_console	*(*xy)();
+	object cmt_console	*(*width)();
+	object cmt_console	*(*height)();
+	object cmt_console	*(*title)();
+	object cmt_console	*(*color)();
+	object cmt_console	*(*default_color)();
+	object cmt_console	*(*clear)();
+	ptr					(*export)();
+	object cmt_console	*(*import)();
+	object cmt_console	*(*push)();
+	object cmt_console	*(*pop)();
+	object cmt_console	*(*log)();
+	object cmt_console	*(*error)();
+	object cmt_console	*(*error_at)();
+	object cmt_console	*(*warning)();
+	object cmt_console	*(*warning_at)();
+	object cmt_console	*(*print)();
 
 	struct /* put */
 	{
-		OBJECT CMT_CONSOLE	*(*string)();
-		OBJECT CMT_CONSOLE	*(*line)();
-		OBJECT CMT_CONSOLE	*(*curve)();
-		OBJECT CMT_CONSOLE	*(*frame)();
-		OBJECT CMT_CONSOLE	*(*frame_radius)();
-		OBJECT CMT_CONSOLE	*(*rectangle)();
-		OBJECT CMT_CONSOLE	*(*rectangle_radius)();
-		OBJECT CMT_CONSOLE	*(*circle)();
-		OBJECT CMT_CONSOLE	*(*ellipse)();
+		object cmt_console	*(*string)();
+		object cmt_console	*(*line)();
+		object cmt_console	*(*curve)();
+		object cmt_console	*(*frame)();
+		object cmt_console	*(*frame_radius)();
+		object cmt_console	*(*rectangle)();
+		object cmt_console	*(*rectangle_radius)();
+		object cmt_console	*(*circle)();
+		object cmt_console	*(*ellipse)();
 
 		struct /* colored */
 		{
-			OBJECT CMT_CONSOLE	*(*string)();
-			OBJECT CMT_CONSOLE	*(*line)();
-			OBJECT CMT_CONSOLE	*(*curve)();
-			OBJECT CMT_CONSOLE	*(*frame)();
-			OBJECT CMT_CONSOLE	*(*frame_radius)();
-			OBJECT CMT_CONSOLE	*(*rectangle)();
-			OBJECT CMT_CONSOLE	*(*rectangle_radius)();
-			OBJECT CMT_CONSOLE	*(*circle)();
-			OBJECT CMT_CONSOLE	*(*ellipse)();
+			object cmt_console	*(*string)();
+			object cmt_console	*(*line)();
+			object cmt_console	*(*curve)();
+			object cmt_console	*(*frame)();
+			object cmt_console	*(*frame_radius)();
+			object cmt_console	*(*rectangle)();
+			object cmt_console	*(*rectangle_radius)();
+			object cmt_console	*(*circle)();
+			object cmt_console	*(*ellipse)();
 		} colored;
 	} put;
 
 	struct /* cursor */
 	{
-		OBJECT CMT_CONSOLE	*(*color)();
-		OBJECT CMT_CONSOLE	*(*default_color)();
-		OBJECT CMT_CONSOLE	*(*x)();
-		OBJECT CMT_CONSOLE	*(*y)();
-		OBJECT CMT_CONSOLE	*(*xy)();
-		OBJECT CMT_CONSOLE	*(*move_x)();
-		OBJECT CMT_CONSOLE	*(*move_y)();
-		OBJECT CMT_CONSOLE	*(*move_xy)();
-		OBJECT CMT_CONSOLE	*(*show)();
-		OBJECT CMT_CONSOLE	*(*size)();
+		object cmt_console	*(*color)();
+		object cmt_console	*(*default_color)();
+		object cmt_console	*(*x)();
+		object cmt_console	*(*y)();
+		object cmt_console	*(*xy)();
+		object cmt_console	*(*move_x)();
+		object cmt_console	*(*move_y)();
+		object cmt_console	*(*move_xy)();
+		object cmt_console	*(*show)();
+		object cmt_console	*(*size)();
 	} cursor;
 
 	struct /* event */
@@ -367,11 +715,11 @@ object CMT_CONSOLE
 	{
 		struct /* wait */
 		{
-			OBJECT CMT_CONSOLE	*(*any)();
-			OBJECT CMT_CONSOLE	*(*key)();
-			OBJECT CMT_CONSOLE	*(*mouse)();
-			OBJECT CMT_CONSOLE	*(*mouse_action)();
-			OBJECT CMT_CONSOLE	*(*mouse_move)();
+			object cmt_console	*(*any)();
+			object cmt_console	*(*key)();
+			object cmt_console	*(*mouse)();
+			object cmt_console	*(*mouse_action)();
+			object cmt_console	*(*mouse_move)();
 		} wait;
 
 		struct /* get */
@@ -388,7 +736,8 @@ object CMT_CONSOLE
 		char				*(*line)();
 		char				**(*area)();
 
-		const BOOLEAN		active;
+		const boolean		active;
+		const boolean		terminal;
 		const unsigned int	rows;
 		const unsigned int	columns;
 		const unsigned int	pixel_width;
@@ -407,34 +756,21 @@ object CMT_CONSOLE
 			const int			y;
 			const unsigned int	color;
 			const unsigned int	default_color;
-			const BOOLEAN		visible;
+			const boolean		visible;
 		} cursor;
 	} get;
 
-							(*free)();
-	BOOLEAN					highlighter;
+							(*__DESTRUCTOR__)();
+	boolean					highlighter;
 
-	/**/ /* [v] PRIVATE ***************************************************** */
-	/**/
-	/**/ T_CONSOLE_OUT_HANDLE	_OUT_HANDLE;
-	/**/ T_CONSOLE_IN_HANDLE	_IN_HANDLE;
-	/**/ unsigned long			_IN_MODE;
-	/**/ PTR					_PUSH_DATA;
-	/**/ unsigned long			_PUSH_SIZE;
-	/**/ unsigned long			_PUSH_CAPACITY;
-	/**/ unsigned int			_PUSH_DEPTH;
-	/**/ PTR					_SCRATCH_DATA;
-	/**/ unsigned long			_SCRATCH_SIZE;
-	/**/
-	/**/ /* [^] PRIVATE ***************************************************** */
-};
+	LOCALMACRO__CMT_CONSOLE__PRIVATE_VARIABLES
 #endif /* !KNR_STYLE */
 
 /* *************************** [v] MVS LINKER [v] *************************** */
 /* **** MVS LINKER DOES NOT SUPPORT EXTERNAL NAMES LARGER THAN 8 BYTES!! **** */
 #ifdef __MVS__ /* IBM Z/OS XL C/C++ */
 #define CMT_CONSOLE CMTCOCOP
-#define CMT_CONSOLE_C_OOP__FREE MTCOPFRE
+#define CMT_CONSOLE_C_OOP__DESTRUCTOR MTCOPDES
 #define CMT_CONSOLE_C_OOP__LOG MTCOPLOG
 #define CMT_CONSOLE_C_OOP__WARNING MTCOPWAR
 #define CMT_CONSOLE_C_OOP__WARNING_AT MTCOPWAT
@@ -493,11 +829,12 @@ object CMT_CONSOLE
 /* *************************** [^] MVS LINKER [^] *************************** */
 
 /* **************************** [v] EXTERNS [v] ***************************** */
-extern OBJECT CMT_CONSOLE	console;
+extern object cmt_console	console;
+extern OBJECT CMT_CONSOLE	CONSOLE;
 
 #ifndef KNR_STYLE /* STANDARD C */
 extern void					CMT_CONSOLE(void);
-extern void					CMT_CONSOLE_C_OOP__FREE(void);
+extern void					CMT_CONSOLE_C_OOP__DESTRUCTOR(void);
 extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__LOG(char *);
 extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__WARNING(char *);
 extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__WARNING_AT(\
@@ -624,7 +961,7 @@ extern char					**CMT_CONSOLE_C_OOP__GET_AREA(\
 );
 #else /* K&R */
 extern						CMT_CONSOLE();
-extern						CMT_CONSOLE_C_OOP__FREE();
+extern						CMT_CONSOLE_C_OOP__DESTRUCTOR();
 extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__LOG();
 extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__WARNING();
 extern OBJECT CMT_CONSOLE	*CMT_CONSOLE_C_OOP__WARNING_AT();
@@ -682,20 +1019,16 @@ extern char					**CMT_CONSOLE_C_OOP__GET_AREA();
 #endif /* !KNR_STYLE */
 /* **************************** [^] EXTERNS [^] ***************************** */
 
-#include "C_OOP/CMT_CONSOLE.INL"
-
-#include "C_OOP/FREE.INL"
+#include "C_OOP/__CONSTRUCTOR__.INL"
+#include "C_OOP/__DESTRUCTOR__.INL"
 #include "C_OOP/LOG.INL"
 #include "C_OOP/WARNING.INL"
 #include "C_OOP/WARNING_AT.INL"
 #include "C_OOP/ERROR.INL"
 #include "C_OOP/ERROR_AT.INL"
-
 #include "C_OOP/CURSOR/COLOR.INL"
 #include "C_OOP/CURSOR/DEFAULT_COLOR.INL"
-
 #include "C_OOP/PUT/STRING.INL"
-
 #include "C_OOP/X.INL"
 #include "C_OOP/Y.INL"
 #include "C_OOP/XY.INL"
@@ -710,7 +1043,6 @@ extern char					**CMT_CONSOLE_C_OOP__GET_AREA();
 #include "C_OOP/PUSH.INL"
 #include "C_OOP/POP.INL"
 #include "C_OOP/PRINT.INL"
-
 #include "C_OOP/CURSOR/X.INL"
 #include "C_OOP/CURSOR/Y.INL"
 #include "C_OOP/CURSOR/XY.INL"
@@ -719,7 +1051,6 @@ extern char					**CMT_CONSOLE_C_OOP__GET_AREA();
 #include "C_OOP/CURSOR/MOVE_XY.INL"
 #include "C_OOP/CURSOR/SHOW.INL"
 #include "C_OOP/CURSOR/SIZE.INL"
-
 #include "C_OOP/PUT/LINE.INL"
 #include "C_OOP/PUT/CURVE.INL"
 #include "C_OOP/PUT/FRAME.INL"
@@ -728,7 +1059,6 @@ extern char					**CMT_CONSOLE_C_OOP__GET_AREA();
 #include "C_OOP/PUT/RECTANGLE_RADIUS.INL"
 #include "C_OOP/PUT/CIRCLE.INL"
 #include "C_OOP/PUT/ELLIPSE.INL"
-
 #include "C_OOP/PUT/COLORED/STRING.INL"
 #include "C_OOP/PUT/COLORED/LINE.INL"
 #include "C_OOP/PUT/COLORED/CURVE.INL"
@@ -738,30 +1068,32 @@ extern char					**CMT_CONSOLE_C_OOP__GET_AREA();
 #include "C_OOP/PUT/COLORED/RECTANGLE_RADIUS.INL"
 #include "C_OOP/PUT/COLORED/CIRCLE.INL"
 #include "C_OOP/PUT/COLORED/ELLIPSE.INL"
-
 #include "C_OOP/INPUT/WAIT/ANY.INL"
 #include "C_OOP/INPUT/WAIT/KEY.INL"
 #include "C_OOP/INPUT/WAIT/MOUSE.INL"
 #include "C_OOP/INPUT/WAIT/MOUSE_ACTION.INL"
 #include "C_OOP/INPUT/WAIT/MOUSE_MOVE.INL"
-
 #include "C_OOP/GET/LINE.INL"
 #include "C_OOP/GET/AREA.INL"
 
 #define LOCALCONSTRUCTOR__CONSOLE \
-	LOCALMACRO__OBJECT_SENDER (console);\
-	CMT_CONSOLE();
-#define LOCALDESTRUCTOR__CONSOLE console.cursor.default_color()->free();
+	LOCALMACRO__OBJECT_SENDER (&CONSOLE);\
+	CMT_CONSOLE();\
+	OBJECT__COPY (&console, &CONSOLE);
+#define LOCALDESTRUCTOR__CONSOLE \
+	CONSOLE.CURSOR.DEFAULT_COLOR();\
+	DESTROY (CONSOLE);
 
 /* .,,,,. #==========================================================# .,,,,. */
 /*  \\//  |                 LINKABLE MEMBER CREATION                 |  \\//  */
 /*   \/   #==========================================================#   \/   */
 
-#undef LOCALLINKER__CONSOLE
-#define LOCALLINKER__CONSOLE \
-	OBJECT CMT_CONSOLE	console; \
+#undef LOCALLINKER__CONSOLE_OOP
+#define LOCALLINKER__CONSOLE_OOP \
+	object cmt_console	console;\
+	OBJECT CMT_CONSOLE	CONSOLE;\
 	LOCALFUNCTION__CMT_CONSOLE_C_OOP \
-	LOCALFUNCTION__CMT_CONSOLE_C_OOP__FREE \
+	LOCALFUNCTION__CMT_CONSOLE_C_OOP__DESTRUCTOR \
 	LOCALFUNCTION__CMT_CONSOLE_C_OOP__LOG \
 	LOCALFUNCTION__CMT_CONSOLE_C_OOP__WARNING \
 	LOCALFUNCTION__CMT_CONSOLE_C_OOP__WARNING_AT \
@@ -820,6 +1152,8 @@ extern char					**CMT_CONSOLE_C_OOP__GET_AREA();
 /*   /\   #==========================================================#   /\   */
 /*  //\\  |                 LINKABLE MEMBER CREATION                 |  //\\  */
 /* '""""' #==========================================================# '""""' */
+
+#endif /* !SEAL_CMT_CONSOLE_OOP */
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\
  * * AT THE ALL END OF FILES, I AM ADDING A SPECIAL BYTE <0X1A> TO END THE  * *

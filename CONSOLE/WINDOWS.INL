@@ -4,6 +4,9 @@
 #endif /* !CONSOLE_H */
 #endif /* !CONSOLE_HPP */
 
+#ifndef SEAL_CMT_CONSOLE_WINDOWS
+#define SEAL_CMT_CONSOLE_WINDOWS
+
 /* **************************** [v] INCLUDES [v] **************************** */
 #include "../WIN_CORE/KERNEL32.H"
 /******* """"""""""""""""""""""""
@@ -23,7 +26,7 @@
 
 #define LOCALMACRO__CMT_CONSOLE__SNAPSHOT_MAGIC \
 	(unsigned long)0X434D5443 /* "CMTC" */
-#define LOCALMACRO__CMT_CONSOLE__SNAPSHOT_VERSION (unsigned long)202608
+#define LOCALMACRO__CMT_CONSOLE__SNAPSHOT_VERSION (unsigned long)202609
 
 /* ***************************** [v] STRUCT [v] ***************************** */
 struct S_CONSOLE_SNAPSHOT
@@ -41,10 +44,20 @@ struct S_CONSOLE_SNAPSHOT
 };
 /* ***************************** [^] STRUCT [^] ***************************** */
 
-/* **************************** [v] TYPEDEFS [v] **************************** */
-typedef PTR	T_CONSOLE_OUT_HANDLE;
-typedef PTR	T_CONSOLE_IN_HANDLE;
-/* **************************** [^] TYPEDEFS [^] **************************** */
+#define LOCALMACRO__CMT_CONSOLE__PRIVATE_VARIABLES \
+	PTR				_OUT_HANDLE;\
+	PTR				_IN_HANDLE;\
+	unsigned long	_IN_MODE;\
+	PTR				_PUSH_DATA;\
+	unsigned long	_PUSH_SIZE;\
+	unsigned long	_PUSH_CAPACITY;\
+	unsigned int	_PUSH_DEPTH;\
+	PTR				_SCRATCH_DATA;\
+	unsigned long	_SCRATCH_SIZE;\
+	BOOLEAN			_ACTIVE;\
+	BOOLEAN			_VT;\
+	BOOLEAN			_OWNED;\
+	BOOLEAN			_TERMINAL;
 
 #include "WINDOWS/UTILS/PRIMITIVES.INL"
 #include "WINDOWS/UTILS/ATTACH.INL"
@@ -53,8 +66,8 @@ typedef PTR	T_CONSOLE_IN_HANDLE;
 #include "WINDOWS/UTILS/MOVE.INL"
 #include "WINDOWS/INPUT/EVENT.INL"
 
-#include "WINDOWS/CMT_CONSOLE.INL"
-#include "WINDOWS/FREE.INL"
+#include "WINDOWS/__CONSTRUCTOR__.INL"
+#include "WINDOWS/__DESTRUCTOR__.INL"
 #include "WINDOWS/LOG.INL"
 #include "WINDOWS/WARNING.INL"
 #include "WINDOWS/WARNING_AT.INL"
@@ -116,6 +129,8 @@ typedef PTR	T_CONSOLE_IN_HANDLE;
 
 #include "WINDOWS/GET/LINE.INL"
 #include "WINDOWS/GET/AREA.INL"
+
+#endif /* !SEAL_CMT_CONSOLE_WINDOWS */
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\
  * * AT THE ALL END OF FILES, I AM ADDING A SPECIAL BYTE <0X1A> TO END THE  * *

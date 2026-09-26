@@ -3,9 +3,9 @@
 #endif /* !CONSOLE_HPP */
 
 #define LOCALMACRO__CMT_CONSOLE__PUT_CIRCLE_CONTENT \
-	THIS->put.colored.circle(\
+	THIS->PUT.COLORED.CIRCLE(\
 		CHARACTER,\
-		THIS->get.cursor.color,\
+		THIS->GET.CURSOR.COLOR,\
 		START_X,\
 		START_Y,\
 		END_X,\

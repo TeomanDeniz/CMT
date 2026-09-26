@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2024/05/28 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/09/08 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/09/23 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -68,7 +68,12 @@
 #ifndef KNR_STYLE /* STANDARD C */
 #define IGNORE_VAR(VARIABLE) (void)(VARIABLE) /* PRAY FOR IT TO WORK LOL */
 #else /* K&R */
-#define IGNORE_VAR(VARIABLE) do {if (VARIABLE){}} while (0)
+#define IGNORE_VAR(VARIABLE) \
+	do\
+	{\
+		if (VARIABLE) {/* LMAOOOOOOOO */}\
+	}\
+	while (0)
 #endif /* !KNR_STYLE */
 #endif /*_MSC_VER */
 

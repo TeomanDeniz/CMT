@@ -3,9 +3,9 @@
 #endif /* !CONSOLE_HPP */
 
 #define LOCALMACRO__CMT_CONSOLE__PUT_CURVE_CONTENT \
-	THIS->put.colored.curve(\
+	THIS->PUT.COLORED.CURVE(\
 		CHARACTER,\
-		THIS->get.cursor.color,\
+		THIS->GET.CURSOR.COLOR,\
 		START_X,\
 		START_Y,\
 		END_X,\

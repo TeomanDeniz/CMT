@@ -3,9 +3,9 @@
 #endif /* !CONSOLE_HPP */
 
 #define LOCALMACRO__CMT_CONSOLE__PUT_RECTANGLE_RADIUS_CONTENT \
-	THIS->put.colored.rectangle_radius(\
+	THIS->PUT.COLORED.RECTANGLE_RADIUS(\
 		CHARACTER,\
-		THIS->get.cursor.color,\
+		THIS->GET.CURSOR.COLOR,\
 		START_X,\
 		START_Y,\
 		END_X,\

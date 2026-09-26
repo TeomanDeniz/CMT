@@ -15,14 +15,14 @@
 	char			*TEXT;\
 	PTR				BLOCK;\
 	\
-	LOCALMACRO__CMT_CONSOLE__SWAP (LEFT, RIGHT);\
-	LOCALMACRO__CMT_CONSOLE__SWAP (TOP, BOTTOM);\
+	LOCALMACRO__CMT_CONSOLE__SWAP(LEFT, RIGHT);\
+	LOCALMACRO__CMT_CONSOLE__SWAP(TOP, BOTTOM);\
 	\
-	if (RIGHT >= (long)THIS->get.width)\
-		RIGHT = (long)THIS->get.width - (long)1;\
+	if (RIGHT >= (long)THIS->GET.WIDTH)\
+		RIGHT = (long)THIS->GET.WIDTH - (long)1;\
 	\
-	if (BOTTOM >= (long)THIS->get.height)\
-		BOTTOM = (long)THIS->get.height - (long)1;\
+	if (BOTTOM >= (long)THIS->GET.HEIGHT)\
+		BOTTOM = (long)THIS->GET.HEIGHT - (long)1;\
 	\
 	if ((LEFT > RIGHT) || (TOP > BOTTOM))\
 		return ((char **)0);\

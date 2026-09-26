@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2026/08/10 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/08/28 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/09/14 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -68,6 +68,7 @@
 #include "KEYWORDS/BOOLEAN.H"
 /******* """"""""""""""""""""
  * #define BOOLEAN
+ * #define boolean
  * #define TRUE
  * #define FALSE
  */
@@ -78,7 +79,7 @@
  * typedef	LET;
  * typedef	VAR;
  * typedef	PTR;
- * typedef	FAR_PTR;
+ * typedef	ptr;
  */
 #include "KEYWORDS/VA_ARGS.H"
 /******* """"""""""""""""""""
@@ -87,7 +88,9 @@
  * #define VA_BEGIN
  * #define VA_END
  * #define VA_ARGS
+ * #define va_args
  * #define VA_DECLARE
+ * #define va_declare
  * typedef	VA_LIST;
  */
 #include "OS_API/MEMORY.H"
@@ -98,7 +101,10 @@
  */
 /* **************************** [^] INCLUDES [^] **************************** */
 
+#ifndef LOG_CURRENT
 #define LOG_CURRENT __FILE__, __LINE__
+#endif /* !LOG_CURRENT */
+
 #define WARNING_HERE(STRING) warning_at((STRING), LOG_CURRENT)
 #define ERROR_HERE(STRING) error_at((STRING), LOG_CURRENT)
 #define warning_here(STRING) WARNING_HERE(STRING)
@@ -113,6 +119,7 @@
 #endif /* __HIGHC__ */
 /* ********************* [^] METAWARE HIGH C LINKER [^] ********************* */
 
+#ifndef LOCALMACRO__PLATFORM_FOUND
 /* ****************************** [v] UNIX [v] ****************************** */
 #ifdef __PLATFORM_AIX__
 #define LOCALMACRO__PLATFORM_FOUND
@@ -353,19 +360,17 @@
 #endif /* __PLATFORM_WINDOWS_CE__ */
 #endif /* !LOCALMACRO__PLATFORM_FOUND */
 /* **************************** [^] WINDOWS [^] ***************************** */
+#endif /* !LOCALMACRO__PLATFORM_FOUND */
 
 #ifdef LOCALMACRO__CONSOLE_PLATFORM_MACOS
-#undef LOCALMACRO__CONSOLE_PLATFORM_MACOS
 #include "CONSOLE/MACOS.INL"
 #endif /* LOCALMACRO__CONSOLE_PLATFORM_MACOS */
 
 #ifdef LOCALMACRO__CONSOLE_PLATFORM_UNIX
-#undef LOCALMACRO__CONSOLE_PLATFORM_UNIX
 #include "CONSOLE/UNIX.INL"
 #endif /* LOCALMACRO__CONSOLE_PLATFORM_UNIX */
 
 #ifdef LOCALMACRO__CONSOLE_PLATFORM_WINDOWS
-#undef LOCALMACRO__CONSOLE_PLATFORM_WINDOWS
 #include "CONSOLE/WINDOWS.INL"
 #endif /* LOCALMACRO__CONSOLE_PLATFORM_WINDOWS */
 
@@ -450,7 +455,7 @@
 /* [v] %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% /!\ IMPORTANT /!\ */
 EXTERN_C_START
 LOCALLINKER__CONSOLE_HIGHC
-LOCALLINKER__CONSOLE
+LOCALLINKER__CONSOLE_OOP
 EXTERN_C_END
 /* [^] %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% /!\ IMPORTANT /!\ */
 
@@ -458,8 +463,10 @@ EXTERN_C_END
 #else /* !CMT_SETUP */
 
 /* [v] %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% /!\ IMPORTANT /!\ */
-#undef GLOBALLINKER__CONSOLE
-#define GLOBALLINKER__CONSOLE LOCALLINKER__CONSOLE_HIGHC LOCALLINKER__CONSOLE
+#undef GLOBALLINKER__CONSOLE_OOP
+#define GLOBALLINKER__CONSOLE_OOP \
+	LOCALLINKER__CONSOLE_HIGHC \
+	LOCALLINKER__CONSOLE_OOP
 /* [^] %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% /!\ IMPORTANT /!\ */
 
 #include "CMT/LINKER.INL"

@@ -5,8 +5,8 @@
 #define LOCALMACRO__CMT_CONSOLE__Y_CONTENT \
 	do\
 	{\
-		int	__CMT_KEEP_X__ = THIS->get.x;\
-		int	__CMT_KEEP_Y__ = THIS->get.y;\
+		int	__CMT_KEEP_X__ = THIS->GET.X;\
+		int	__CMT_KEEP_Y__ = THIS->GET.Y;\
 		\
 		LOCALMACRO__CMT_CONSOLE__PLACE("y", __CMT_KEEP_X__, (int)(Y_VALUE))\
 	}\

@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2023/07/11 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/06/16 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/09/17 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -36,12 +36,12 @@
 |*| SOURCE COMPATIBILITY WITHOUT ALTERING BEHAVIOR.                          |*|
 |*|                                                                          |*|
 |*| O - IMPORTANT:                                                           |*|
-|*| :   _______                                                              |*|
-|*| :.. regparm IS NOT A STANDARDIZED ABI.                                   |*|
+|*| :    _______                                                             |*|
+|*| :.., regparm IS NOT A STANDARDIZED ABI.                                  |*|
 |*| :                                                                        |*|
-|*| :.. IT IS A COMPILER AND ARCHITECTURE-SPECIFIC OPTIMIZATION AND MUST BE  |*|
-|*|   : USED CONSISTENTLY ACROSS DECLARATIONS, DEFINITIONS, AND FUNCTION     |*|
-|*|   : POINTERS.                                                            |*|
+|*| :.., IT IS A COMPILER AND ARCHITECTURE-SPECIFIC OPTIMIZATION AND MUST BE |*|
+|*|    : USED CONSISTENTLY ACROSS DECLARATIONS, DEFINITIONS, AND FUNCTION    |*|
+|*|    : POINTERS.                                                           |*|
 |*|__________________________________________________________________________|*|
 |*                                                                            *|
 \******************************************************************************/
@@ -138,11 +138,11 @@
 |* : THIS INDICATES THAT THE COMPILER TRULY SUPPORTS THE regparm ATTRIBUTE. : *|
 |* :                                                                        : *|
 |* : O - NOTE:                                                              : *|
-|* : :            ______________________                                    : *|
-|* : :.. CHECKING IS__REGPARM__SUPPORTED ALONE IS NOT SUFFICIENT.           : *|
+|* : :             ______________________                                   : *|
+|* : :.., CHECKING IS__REGPARM__SUPPORTED ALONE IS NOT SUFFICIENT.          : *|
 |* : :                                                                      : *|
-|* : :.. YOU MUST ALSO VERIFY THAT YOUR TARGET ARCHITECTURE AND COMPILER    : *|
-|* :   : SUPPORTS REGPARM.                                                  : *|
+|* : :.., YOU MUST ALSO VERIFY THAT YOUR TARGET ARCHITECTURE AND COMPILER   : *|
+|* :    : SUPPORTS REGPARM.                                                 : *|
 |* :                                                                        : *|
 |* : EXAMPLES:                                                              : *|
 |* :                                                                        : *|
@@ -159,7 +159,7 @@
 \******************************************************************************/
 
 #ifndef REGPARM_H
-#define REGPARM_H 202606 /* VERSION */
+#define REGPARM_H 202609 /* VERSION */
 
 #ifdef __WATCOMC__ /* WATCOM C++ */
 #ifndef _ENABLE_AUTODEPEND /* IF AUTO DEPENDENCY TRACKING IS OFF */

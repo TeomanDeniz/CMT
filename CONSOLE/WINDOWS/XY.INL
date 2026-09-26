@@ -3,7 +3,7 @@
 #endif /* !CONSOLE_HPP */
 
 #define LOCALMACRO__CMT_CONSOLE__XY_CONTENT \
-	LOCALMACRO__CMT_CONSOLE__PLACE ("xy", (int)(X_VALUE), (int)(Y_VALUE))
+	LOCALMACRO__CMT_CONSOLE__PLACE("xy", (int)(X_VALUE), (int)(Y_VALUE))
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\
  * * AT THE ALL END OF FILES, I AM ADDING A SPECIAL BYTE <0X1A> TO END THE  * *

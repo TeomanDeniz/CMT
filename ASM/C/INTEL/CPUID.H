@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2026/03/16 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/08/25 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/09/23 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -246,7 +246,7 @@
 \******************************************************************************/
 
 #ifndef CPUID_H
-#define CPUID_H 202608 /* VERSION */
+#define CPUID_H 202609 /* VERSION */
 
 /* ********************** [v] VENDOR STRINGS (CPUS) [v] ********************* */
 #define CPUID_VENDOR_AMD "AuthenticAMD"
@@ -427,7 +427,8 @@
 		(ARG2) = __EBX__;\
 		(ARG3) = __ECX__;\
 		(ARG4) = __EDX__;\
-	} while (0)
+	}\
+	while (0)
 #endif /* INLINE_ASM_TYPE__BORLAND */
 
 #ifndef GET_CPUID
@@ -456,13 +457,23 @@
 		(ARG2) = __EBX__;\
 		(ARG3) = __ECX__;\
 		(ARG4) = __EDX__;\
-	} while (0)
+	}\
+	while (0)
 #endif /* INLINE_ASM_TYPE__DIGITAL_MARS */
 #endif /* !GET_CPUID */
 
 #ifndef GET_CPUID
 #ifdef INLINE_ASM_TYPE__GNU
-#ifndef __PIC__ /* POSITION-INDEPENDENT CODE */
+#ifndef __PIC__
+#define LOCALMACRO__EBX_RESERVED_BY_32_BIT_PIC
+#else /* __PIC__ */
+#ifndef __i386__
+#define LOCALMACRO__EBX_RESERVED_BY_32_BIT_PIC
+#endif /* !__i386__ */
+#endif /* !__PIC__ */
+
+#ifdef LOCALMACRO__EBX_RESERVED_BY_32_BIT_PIC
+#undef LOCALMACRO__EBX_RESERVED_BY_32_BIT_PIC
 #define GET_CPUID(LEAF, EAX, EBX, ECX, EDX) \
 	__asm__ __volatile__("cpuid"\
 		:\
@@ -472,7 +483,7 @@
 			"=d" (EDX)\
 		: "a" (LEAF)\
 	)
-#else /* __PIC__ */
+#else /* !LOCALMACRO__EBX_RESERVED_BY_32_BIT_PIC */
 #define GET_CPUID(LEAF, EAX, EBX, ECX, EDX) \
 	__asm__ __volatile__("xchg{l} %%ebx, %1\n\t" \
 		"cpuid\n\t" \
@@ -484,7 +495,7 @@
 			"=d"(EDX) \
 		: "a"(LEAF)\
 	)
-#endif /* !__PIC__ */
+#endif /* LOCALMACRO__EBX_RESERVED_BY_32_BIT_PIC */
 #endif /* INLINE_ASM_TYPE__GNU */
 #endif /* !GET_CPUID */
 
@@ -514,7 +525,8 @@
 		(ARG2) = __EBX__;\
 		(ARG3) = __ECX__;\
 		(ARG4) = __EDX__;\
-	} while (0)
+	}\
+	while (0)
 #endif /* INLINE_ASM_TYPE__MSVC */
 #endif /* !GET_CPUID */
 

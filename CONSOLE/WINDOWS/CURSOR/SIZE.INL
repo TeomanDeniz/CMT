@@ -18,7 +18,7 @@
 	INFO.SIZE = TARGET;\
 	\
 	if (KERNEL32.SetConsoleCursorInfo(THIS->_OUT_HANDLE, &INFO))\
-		OBJECT__INITIALIZE (THIS->get.cursor.size, unsigned long) = TARGET;
+		OBJECT__INITIALIZE (THIS->GET.CURSOR.SIZE, unsigned long) = TARGET;
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\
  * * AT THE ALL END OF FILES, I AM ADDING A SPECIAL BYTE <0X1A> TO END THE  * *

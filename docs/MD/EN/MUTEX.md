@@ -59,18 +59,18 @@ Also, as an extra: If you can't find your platform in the list, don't worry; CMT
 
 ## Contents
 
-| Contents List                                         |
-| ----------------------------------------------------- |
-| `#define MUTEX_LOCK(MUTEX)`                           |
-| `#define mutex_lock(MUTEX)`                           |
-| `#define MUTEX_UNLOCK(MUTEX)`                         |
-| `#define mutex_unlock(MUTEX)`                         |
-| `typedef T_MUTEX;`                                    |
-| `typedef t_mutex;`                                    |
-| `int MUTEX_CREATE(T_MUTEX *);`                        |
-| `int mutex_create(t_mutex *);`                        |
-| `int MUTEX_DESTROY(T_MUTEX *);`                       |
-| `int mutex_destroy(t_mutex *);`                       |
+| Contents List                   |
+| ------------------------------- |
+| `#define MUTEX_LOCK(MUTEX)`     |
+| `#define mutex_lock(MUTEX)`     |
+| `#define MUTEX_UNLOCK(MUTEX)`   |
+| `#define mutex_unlock(MUTEX)`   |
+| `typedef T_MUTEX;`              |
+| `typedef t_mutex;`              |
+| `int MUTEX_CREATE(T_MUTEX *);`  |
+| `int mutex_create(t_mutex *);`  |
+| `int MUTEX_DESTROY(T_MUTEX *);` |
+| `int mutex_destroy(t_mutex *);` |
 
 ----
 

@@ -36,8 +36,8 @@
 	{\
 		struct S_RECT	__CMT_BOX__;\
 		\
-		(AT_X) = THIS->get.x;\
-		(AT_Y) = THIS->get.y;\
+		(AT_X) = THIS->GET.X;\
+		(AT_Y) = THIS->GET.Y;\
 		\
 		if (!USER32.GetWindowRect)\
 			break ;\
@@ -66,7 +66,7 @@
 		\
 		if (!KERNEL32.GetConsoleWindow)\
 		{\
-			THIS->warning(\
+			THIS->WARNING(\
 				"console." NAME "() - KERNEL32.GetConsoleWindow was never "\
 				"resolved\n"\
 			);\
@@ -77,7 +77,7 @@
 		\
 		if (!__CMT_WIN__)\
 		{\
-			THIS->warning("console." NAME "() - no console window\n");\
+			THIS->WARNING("console." NAME "() - no console window\n");\
 			break ;\
 		}\
 		\
@@ -85,7 +85,7 @@
 		\
 		if (!__CMT_U32__)\
 		{\
-			THIS->warning(\
+			THIS->WARNING(\
 				"console." NAME "() - USER32 could not be connected\n"\
 			);\
 			break ;\
@@ -104,17 +104,17 @@
 			)\
 		)\
 		{\
-			THIS->warning("console." NAME "() - SetWindowPos failed\n");\
+			THIS->WARNING("console." NAME "() - SetWindowPos failed\n");\
 			break ;\
 		}\
 		\
-		OBJECT__INITIALIZE (THIS->get.x, int) = (TO_X);\
-		OBJECT__INITIALIZE (THIS->get.y, int) = (TO_Y);\
+		OBJECT__INITIALIZE (THIS->GET.X, int) = (TO_X);\
+		OBJECT__INITIALIZE (THIS->GET.Y, int) = (TO_Y);\
 		LOCALMACRO__CMT_CONSOLE__WINDOW_ORIGIN(\
 			__CMT_WIN__, __CMT_X__, __CMT_Y__\
 		)\
-		OBJECT__INITIALIZE (THIS->get.x, int) = __CMT_X__;\
-		OBJECT__INITIALIZE (THIS->get.y, int) = __CMT_Y__;\
+		OBJECT__INITIALIZE (THIS->GET.X, int) = __CMT_X__;\
+		OBJECT__INITIALIZE (THIS->GET.Y, int) = __CMT_Y__;\
 	}\
 	while (0);
 

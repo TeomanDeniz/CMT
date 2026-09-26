@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2025/04/25 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/08/18 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/09/25 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -307,7 +307,7 @@
 \******************************************************************************/
 
 #ifndef TRY_CATCH_H
-#define TRY_CATCH_H 202608 /* VERSION */
+#define TRY_CATCH_H 202609 /* VERSION */
 
 #define CMT_TRY_CATCH_MEMORY_PAGE_SIZE 32 /* CHANGE IF YOU WANT */
 
@@ -333,11 +333,11 @@
  * #define EXTERN_C_START
  * #define EXTERN_C_END
  */
-#include <setjmp.h> /* TODO: UPGRADE AND UPDATE LATER */
-/******* """"""""""
- * #define jmp_buf
- * #define setjmp(env)
- * #define longjmp(env, val)
+#include "../LIB/SETJMP.H"
+/******* """""""""""""""""
+ * #define JMP_BUF
+ * #define SETJMP(ENV)
+ * #define LONGJMP(ENV, VAL)
  */
 #include "../ATTRIBUTES/LOCAL.H"
 /******* """""""""""""""""""""""
@@ -382,9 +382,9 @@ struct S_TRY_CATCH_STATE
 			LET __NEW_LIMIT__ = \
 				G__TRY_CATCH_INDEX_LIMIT__ - CMT_TRY_CATCH_MEMORY_PAGE_SIZE;\
 			\
-			jmp_buf	*__NEW_BUFFER__ = \
-				(jmp_buf *)REALLOC(\
-					G__TRY_CATCH_BUFFER__, __NEW_LIMIT__ * sizeof(jmp_buf)	\
+			JMP_BUF	*__NEW_BUFFER__ = \
+				(JMP_BUF *)REALLOC(\
+					G__TRY_CATCH_BUFFER__, __NEW_LIMIT__ * sizeof(JMP_BUF)	\
 				);\
 			\
 			if (__NEW_BUFFER__)\
@@ -404,7 +404,7 @@ struct S_TRY_CATCH_STATE
 		G__TRY_CATCH_INDEX__++;\
 		G__TRY_CATCH_STATE__.THROWN = (BOOLEAN)0;\
 		\
-		if (setjmp(G__TRY_CATCH_BUFFER__[G__TRY_CATCH_INDEX__ - 1]) == 0)
+		if (SETJMP(G__TRY_CATCH_BUFFER__[G__TRY_CATCH_INDEX__ - 1]) == 0)
 
 #define CATCH(ERROR_VARIABLE) \
 	}\
@@ -433,7 +433,7 @@ struct S_TRY_CATCH_STATE
 		--G__TRY_CATCH_INDEX__;\
 		__TRY_CATCH_SHRINK__();\
 		\
-		longjmp(\
+		LONGJMP(\
 			G__TRY_CATCH_BUFFER__[G__TRY_CATCH_INDEX__], \
 			(int)(!!(__THROW_VALUE__))\
 		);\
@@ -455,7 +455,7 @@ struct S_TRY_CATCH_STATE
 
 /* **************************** [v] EXTERNS [v] ***************************** */
 EXTERN_C_START
-extern LOCAL jmp_buf					*G__TRY_CATCH_BUFFER__;
+extern LOCAL JMP_BUF					*G__TRY_CATCH_BUFFER__;
 extern LOCAL LET						G__TRY_CATCH_INDEX__;
 extern LOCAL LET						G__TRY_CATCH_INDEX_LIMIT__;
 extern LOCAL struct S_TRY_CATCH_STATE	G__TRY_CATCH_STATE__;
@@ -505,7 +505,7 @@ EXTERN_C_END
 	do\
 	{\
 		G__TRY_CATCH_BUFFER__ = \
-			(jmp_buf *)ALLOC(CMT_TRY_CATCH_MEMORY_PAGE_SIZE * sizeof(jmp_buf));\
+			(JMP_BUF *)ALLOC(CMT_TRY_CATCH_MEMORY_PAGE_SIZE * sizeof(JMP_BUF));\
 		G__TRY_CATCH_STATE__.VALUE = (VAR)0;\
 		G__TRY_CATCH_STATE__.THROWN = (BOOLEAN)0;\
 	}\
@@ -531,7 +531,7 @@ EXTERN_C_END
 /*   \/   #==========================================================#   \/   */
 
 #define LOCALLINKER__TRY_CATCH \
-	LOCAL jmp_buf					*G__TRY_CATCH_BUFFER__ = (jmp_buf *)0;\
+	LOCAL JMP_BUF					*G__TRY_CATCH_BUFFER__ = (JMP_BUF *)0;\
 	LOCAL LET						G__TRY_CATCH_INDEX__ = 0;\
 	LOCAL LET						G__TRY_CATCH_INDEX_LIMIT__ = \
 		CMT_TRY_CATCH_MEMORY_PAGE_SIZE;\
@@ -586,10 +586,10 @@ UNUSED static int
 		LET __NEW_LIMIT__ =
 			G__TRY_CATCH_INDEX_LIMIT__ + CMT_TRY_CATCH_MEMORY_PAGE_SIZE;
 		
-		jmp_buf	*__NEW_BUFFER__ =
-			(jmp_buf *)REALLOC(
+		JMP_BUF	*__NEW_BUFFER__ =
+			(JMP_BUF *)REALLOC(
 				G__TRY_CATCH_BUFFER__,
-				__NEW_LIMIT__ * sizeof(jmp_buf)
+				__NEW_LIMIT__ * sizeof(JMP_BUF)
 			);
 
 		if (__NEW_BUFFER__)

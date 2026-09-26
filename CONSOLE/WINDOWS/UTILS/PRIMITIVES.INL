@@ -3,10 +3,12 @@
 #endif /* !CONSOLE_HPP */
 
 #define LOCALMACRO__CMT_CONSOLE__ATTRIBUTE(COLOR_VALUE) \
-	((unsigned short)(\
-		((((unsigned short)((COLOR_VALUE) >> 4)) & 0X0F) << 4) |\
-		(((unsigned short)(COLOR_VALUE)) & 0X0F)\
-	))
+	(\
+		(unsigned short)(\
+			((((unsigned short)((COLOR_VALUE) >> 4)) & 0X0F) << 4) | \
+			(((unsigned short)(COLOR_VALUE)) & 0X0F)\
+		)\
+	)
 
 #define LOCALMACRO__CMT_CONSOLE__SWAP(FIRST, SECOND) \
 	do\
@@ -43,7 +45,7 @@
 				++__CMT_SQRT_STEP__\
 			)\
 				__CMT_SQRT_ROOT__ = 0.5 * (\
-					__CMT_SQRT_ROOT__ +\
+					__CMT_SQRT_ROOT__ + \
 					(__CMT_SQRT_VALUE__ / __CMT_SQRT_ROOT__)\
 				);\
 		}\
@@ -59,9 +61,9 @@
 		const long	__CMT_PLOT_Y__ = (long)(AT_Y);\
 		\
 		if (\
-			(__CMT_PLOT_X__ >= (long)0) && (__CMT_PLOT_Y__ >= (long)0) &&\
-			(__CMT_PLOT_X__ < (long)THIS->get.width) &&\
-			(__CMT_PLOT_Y__ < (long)THIS->get.height)\
+			(__CMT_PLOT_X__ >= (long)0) && (__CMT_PLOT_Y__ >= (long)0) && \
+			(__CMT_PLOT_X__ < (long)THIS->GET.WIDTH) && \
+			(__CMT_PLOT_Y__ < (long)THIS->GET.HEIGHT)\
 		)\
 		{\
 			const char			__CMT_PLOT_CHARACTER__ = (char)(CHARACTER);\
@@ -99,29 +101,29 @@
 			__CMT_RUN_X__ = (long)0;\
 		}\
 		\
-		if ((__CMT_RUN_X__ + __CMT_RUN_LENGTH__) > (long)THIS->get.width)\
-			__CMT_RUN_LENGTH__ = (long)THIS->get.width - __CMT_RUN_X__;\
+		if ((__CMT_RUN_X__ + __CMT_RUN_LENGTH__) > (long)THIS->GET.WIDTH)\
+			__CMT_RUN_LENGTH__ = (long)THIS->GET.WIDTH - __CMT_RUN_X__;\
 		\
 		if (\
-			(__CMT_RUN_LENGTH__ > (long)0) && (__CMT_RUN_Y__ >= (long)0) &&\
-			(__CMT_RUN_Y__ < (long)THIS->get.height)\
+			(__CMT_RUN_LENGTH__ > (long)0) && (__CMT_RUN_Y__ >= (long)0) && \
+			(__CMT_RUN_Y__ < (long)THIS->GET.HEIGHT)\
 		)\
 		{\
 			struct S_COORD	__CMT_RUN_AT__;\
 			unsigned long	__CMT_RUN_DONE__;\
-			const unsigned short	__CMT_RUN_ATTRIBUTE__ =\
+			const unsigned short	__CMT_RUN_ATTRIBUTE__ = \
 				LOCALMACRO__CMT_CONSOLE__ATTRIBUTE(COLOR_VALUE);\
 			\
 			__CMT_RUN_AT__.X = (short)__CMT_RUN_X__;\
 			__CMT_RUN_AT__.Y = (short)__CMT_RUN_Y__;\
 			KERNEL32.FillConsoleOutputCharacterA(\
-				THIS->_OUT_HANDLE, (char)(CHARACTER),\
-				(unsigned long)__CMT_RUN_LENGTH__, __CMT_RUN_AT__,\
+				THIS->_OUT_HANDLE, (char)(CHARACTER), \
+				(unsigned long)__CMT_RUN_LENGTH__, __CMT_RUN_AT__, \
 				&__CMT_RUN_DONE__\
 			);\
 			KERNEL32.FillConsoleOutputAttribute(\
-				THIS->_OUT_HANDLE, __CMT_RUN_ATTRIBUTE__,\
-				(unsigned long)__CMT_RUN_LENGTH__, __CMT_RUN_AT__,\
+				THIS->_OUT_HANDLE, __CMT_RUN_ATTRIBUTE__, \
+				(unsigned long)__CMT_RUN_LENGTH__, __CMT_RUN_AT__, \
 				&__CMT_RUN_DONE__\
 			);\
 		}\
@@ -153,16 +155,24 @@
 		const double	__CMT_SPAN_CX__ = ((double)(X0) + (double)(X1)) / 2.0;\
 		const double	__CMT_SPAN_CY__ = ((double)(Y0) + (double)(Y1)) / 2.0;\
 		double			__CMT_SPAN_OFF__;\
+		double			__CMT_SPAN_REACH__;\
 		double			__CMT_SPAN_REST__;\
 		double			__CMT_SPAN_ROOT__;\
+		\
+		__CMT_SPAN_REACH__ = __CMT_SPAN_CY__ - (double)(ROW);\
+		\
+		if (__CMT_SPAN_REACH__ < 0.0)\
+			__CMT_SPAN_REACH__ = -__CMT_SPAN_REACH__;\
+		\
+		__CMT_SPAN_REACH__ -= 0.5;\
+		\
+		if (__CMT_SPAN_REACH__ < 0.0)\
+			__CMT_SPAN_REACH__ = 0.0;\
 		\
 		if (__CMT_SPAN_B__ <= 0.0)\
 			__CMT_SPAN_OFF__ = 0.0;\
 		else\
-		{\
-			__CMT_SPAN_OFF__ = \
-				((double)(ROW) - __CMT_SPAN_CY__) / __CMT_SPAN_B__;\
-		}\
+			__CMT_SPAN_OFF__ = __CMT_SPAN_REACH__ / __CMT_SPAN_B__;\
 		\
 		__CMT_SPAN_REST__ = 1.0 - (__CMT_SPAN_OFF__ * __CMT_SPAN_OFF__);\
 		\

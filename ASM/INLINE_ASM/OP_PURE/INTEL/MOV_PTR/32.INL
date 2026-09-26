@@ -2,6 +2,8 @@
 #error "ERROR - PLEASE DON'T USE THIS LIBRARY DIRECTLY!!!"
 #endif /* !ASM_H */
 
+#define MOV_PTR32_(POINTER, VALUE) _MOV_PTR32_(POINTER, VALUE)
+
 /* ************************* [v] 32-BIT MEMORY [v] ************************** */
 #ifdef __SYSTEM_32_BIT__
 #define MOV_EAX_FROM_PTR_(VALUE) _MOV_EAX_FROM_PTR_(VALUE)

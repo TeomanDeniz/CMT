@@ -1,22 +1,34 @@
-#ifndef CONSOLE_HPP
+#ifndef CONSOLE_H
 #error "ERROR - PLEASE DON'T USE THIS LIBRARY DIRECTLY!!!"
-#endif /* !CONSOLE_HPP */
+#endif /* !CONSOLE_H */
 
 #ifndef KNR_STYLE /* STANDARD C */
-#define FUNCTION_HEADER__CMT_CONSOLE_C_OOP \
+#define FUNCTION_HEADER__CONSOLE_X \
 	void\
-		CMT_CONSOLE(void)
+		CONSOLE_X(struct s_console *THIS, int X_VALUE)
+#define FUNCTION_HEADER__console_x \
+	void\
+		console_x(struct s_console *THIS, int X_VALUE)
 #else /* K&R */
-#define FUNCTION_HEADER__CMT_CONSOLE_C_OOP \
-	CMT_CONSOLE()
+#define FUNCTION_HEADER__CONSOLE_X \
+	CONSOLE_X(THIS, X_VALUE)\
+	struct s_console	*THIS;\
+	int					X_VALUE;
+#define FUNCTION_HEADER__console_x \
+	console_x(THIS, X_VALUE)\
+	struct s_console	*THIS;\
+	int					X_VALUE;
 #endif /* !KNR_STYLE */
 
-#define LOCALFUNCTION__CMT_CONSOLE_C_OOP \
-	FUNCTION_HEADER__CMT_CONSOLE_C_OOP \
+#define LOCALFUNCTION__CONSOLE_X \
+	FUNCTION_HEADER__CONSOLE_X \
 	{\
-		OBJECT__CONNECT (CMT_CONSOLE);\
-		\
-		LOCALFUNCTION__CMT_CONSOLE_CONTENT\
+		LOCALMACRO__CMT_CONSOLE__X_CONTENT\
+	}\
+	\
+	FUNCTION_HEADER__console_x \
+	{\
+		LOCALMACRO__CMT_CONSOLE__X_CONTENT\
 	}
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\

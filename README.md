@@ -226,6 +226,7 @@ If you include an `H` file in both C and C++, you just get stright functions or 
  * [![][__FASTCALL_GIF__] **FASTCALL**][__FASTCALL_MD__]
  * [![][__INLINE_GIF__] **INLINE**][__INLINE_MD__]
  * [![][__LOCAL_GIF__] **LOCAL**][__LOCAL_MD__]
+ * [![][__MAYBE_ARGS_GIF__] **MAYBE_ARGS**][__MAYBE_ARGS_MD__]
  * [![][__NOINLINE_GIF__] **NOINLINE**][__NOINLINE_MD__]
  * [![][__PACK_GIF__] **PACK**][__PACK_MD__]
  * [![][__PASCAL_GIF__] **PASCAL**][__PASCAL_MD__]
@@ -233,6 +234,7 @@ If you include an `H` file in both C and C++, you just get stright functions or 
  * [![][__REGPASS_GIF__] **REGPASS**][__REGPASS_MD__]
  * [![][__STDCALL_GIF__] **STDCALL**][__STDCALL_MD__]
  * [![][__UNUSED_GIF__] **UNUSED**][__UNUSED_MD__]
+ * [![][__VOLATILE_GIF__] **VOLATILE**][__VOLATILE_MD__]
 
 ## ![][__CHECK_FEATURE_GIF__] Check Feature
  * [![][__COMMA_OPERATOR_GIF__] **COMMA_OPERATOR**][__COMMA_OPERATOR_MD__]
@@ -443,6 +445,9 @@ List of the icons:
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/__PEB_LOADER__.gif" ALT="__PEB_LOADER__" TITLE="__PEB_LOADER__"/>
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/NOINLINE.gif" ALT="NOINLINE" TITLE="NOINLINE"/>
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/INLINE.gif" ALT="INLINE" TITLE="INLINE"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/VOLATILE.gif" ALT="VOLATILE" TITLE="VOLATILE"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/MAYBE_ARGS.gif" ALT="MAYBE_ARGS" TITLE="MAYBE_ARGS"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/SETJMP.gif" ALT="SETJMP" TITLE="SETJMP"/>
 </details>
 
 <details>
@@ -504,6 +509,9 @@ List of the icons:
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/__PEB_LOADER__.gif" ALT="__PEB_LOADER__" TITLE="__PEB_LOADER__"/>
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/NOINLINE.gif" ALT="NOINLINE" TITLE="NOINLINE"/>
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/INLINE.gif" ALT="INLINE" TITLE="INLINE"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/VOLATILE.gif" ALT="VOLATILE" TITLE="VOLATILE"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/MAYBE_ARGS.gif" ALT="MAYBE_ARGS" TITLE="MAYBE_ARGS"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/SETJMP.gif" ALT="SETJMP" TITLE="SETJMP"/>
 </details>
 
 ---
@@ -565,6 +573,9 @@ List of the icons:
 [__INLINE_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/INLINE.md
 [__VA_ARGS_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/VA_ARGS.md
 [__R10_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/R10.md
+[__VOLATILE_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/VOLATILE.md
+[__MAYBE_ARGS_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/MAYBE_ARGS.md
+[__SETJMP_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/SETJMP.md
 <!-- MARKDOWNS -->
 
 <!-- ICONS -->
@@ -621,4 +632,7 @@ List of the icons:
 [__UNUSED_GIF__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/IMAGES/32/UNUSED.gif
 [__INLINE_GIF__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/IMAGES/32/INLINE.gif
 [__VA_ARGS_GIF__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/IMAGES/32/VA_ARGS.gif
+[__VOLATILE_GIF__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/IMAGES/32/VOLATILE.gif
+[__MAYBE_ARGS_GIF__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/IMAGES/32/MAYBE_ARGS.gif
+[__SETJMP_GIF__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/IMAGES/32/SETJMP.gif
 <!-- ICONS -->

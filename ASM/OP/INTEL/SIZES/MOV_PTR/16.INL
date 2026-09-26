@@ -1,5 +1,8 @@
 /* ************************** [v] 8-BIT MEMORY [v] ************************** */
 #ifdef __SYSTEM_16_BIT__
+#define SIZEOF_MOV_PTR8_ 6
+#define SIZEOF_MOV_PTR16_ 7
+
 #define SIZEOF_MOV_AL_FROM_PTR_ 4
 #define SIZEOF_MOV_BL_FROM_PTR_ 4
 #define SIZEOF_MOV_CL_FROM_PTR_ 4

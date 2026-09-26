@@ -1,5 +1,9 @@
 /* ************************* [v] 32-BIT MEMORY [v] ************************** */
 #ifdef __SYSTEM_32_BIT__
+#define SIZEOF_MOV_PTR8_ 7
+#define SIZEOF_MOV_PTR16_ 7
+#define SIZEOF_MOV_PTR32_ 10
+
 #define SIZEOF_MOV_EAX_FROM_PTR_ 6
 #define SIZEOF_MOV_EBX_FROM_PTR_ 6
 #define SIZEOF_MOV_ECX_FROM_PTR_ 6

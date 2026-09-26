@@ -3,13 +3,13 @@
 #endif /* !CONSOLE_HPP */
 
 #define LOCALMACRO__CMT_CONSOLE__CURSOR_DEFAULT_COLOR_CONTENT \
-	const unsigned int	COLOR_VALUE = THIS->get.cursor.default_color;\
+	const unsigned int	COLOR_VALUE = THIS->GET.CURSOR.DEFAULT_COLOR;\
 	unsigned short		FOREGROUND;\
 	unsigned short		BACKGROUND;\
 	\
 	FOREGROUND = (unsigned short)(COLOR_VALUE & 0X0F);\
 	BACKGROUND = (unsigned short)((COLOR_VALUE >> 4) & 0X0F);\
-	OBJECT__INITIALIZE (THIS->get.cursor.color, unsigned int) = COLOR_VALUE;\
+	OBJECT__INITIALIZE (THIS->GET.CURSOR.COLOR, unsigned int) = COLOR_VALUE;\
 	\
 	KERNEL32.SetConsoleTextAttribute(\
 		THIS->_OUT_HANDLE,\

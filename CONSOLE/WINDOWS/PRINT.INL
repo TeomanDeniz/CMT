@@ -23,7 +23,7 @@
 		if (PRINT_FILL >= 960)\
 		{\
 			PRINT_BUFFER[PRINT_FILL] = (char)0;\
-			THIS->log(PRINT_BUFFER);\
+			THIS->LOG(PRINT_BUFFER);\
 			PRINT_FILL = 0;\
 		}\
 	}\
@@ -448,7 +448,7 @@
 	PRINT_BUFFER[PRINT_FILL] = (char)0;\
 	\
 	if (PRINT_FILL)\
-		THIS->log(PRINT_BUFFER);
+		THIS->LOG(PRINT_BUFFER);
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\
  * * AT THE ALL END OF FILES, I AM ADDING A SPECIAL BYTE <0X1A> TO END THE  * *

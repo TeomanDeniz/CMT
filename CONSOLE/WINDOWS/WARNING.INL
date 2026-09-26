@@ -3,16 +3,16 @@
 #endif /* !CONSOLE_HPP */
 
 #define LOCALMACRO__CMT_CONSOLE__WARNING_CONTENT \
-	if (THIS->highlighter)\
-		THIS->cursor.color(0XD)\
-			->log(" WARNING")\
-			->cursor.default_color()\
-			->log(": ")\
-			->cursor.color(0XF)\
-			->log(STRING)\
-			->cursor.default_color();\
+	if (THIS->HIGHLIGHTER)\
+		THIS->CURSOR.COLOR(0XD)\
+			->LOG(" WARNING")\
+			->CURSOR.DEFAULT_COLOR()\
+			->LOG(": ")\
+			->CURSOR.COLOR(0XF)\
+			->LOG(STRING)\
+			->CURSOR.DEFAULT_COLOR();\
 	else\
-		THIS->log(" WARNING: ")->log(STRING);
+		THIS->LOG(" WARNING: ")->LOG(STRING);
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\
  * * AT THE ALL END OF FILES, I AM ADDING A SPECIAL BYTE <0X1A> TO END THE  * *

@@ -1,4 +1,8 @@
 /* ************************* [v] 64-BIT MEMORY [v] ************************** */
+#define SIZEOF_MOV_PTR8_ 8
+#define SIZEOF_MOV_PTR16_ 10
+#define SIZEOF_MOV_PTR32_ 11
+
 #define SIZEOF_MOV_RAX_FROM_PTR_ 8
 #define SIZEOF_MOV_RBX_FROM_PTR_ 8
 #define SIZEOF_MOV_RCX_FROM_PTR_ 8

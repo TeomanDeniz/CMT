@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2024/02/27 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/08/20 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/09/16 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -147,17 +147,19 @@
 |* __________________________________________________________________________ *|
 |*| CONTENT                                                       | DOC LINE |*|
 |*|===============================================================|==========|*|
-|*| #define SECTION(RETURN_TYPE, NAME, ARGUMENTS)                 | 164      |*|
+|*| #define SECTION(RETURN_TYPE, NAME, ARGUMENTS)                 | 166      |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| #define STATIC_SECTION(RETURN_TYPE, NAME, ARGUMENTS)          | 190      |*|
+|*| #define STATIC_SECTION(RETURN_TYPE, NAME, ARGUMENTS)          | 192      |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| #define SECTION_KNR(RETURN_TYPE, NAME, ARGUMENTS)             | 216      |*|
+|*| #define SECTION_KNR(RETURN_TYPE, NAME, ARGUMENTS)             | 218      |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| #define STATIC_SECTION_KNR(RETURN_TYPE, NAME, ARGUMENTS)      | 250      |*|
+|*| #define STATIC_SECTION_KNR(RETURN_TYPE, NAME, ARGUMENTS)      | 252      |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| #define END                                                   | 285      |*|
+|*| #define END                                                   | 287      |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| #define CMT_CANT_USE_INLINE_ASM_FOR_SECTIONS                  | 305      |*|
+|*| #define SYMBOL(OBJECT)                                        | 307      |*|
+|*|---------------------------------------------------------------|----------|*|
+|*| #define CMT_CANT_USE_INLINE_ASM_FOR_SECTIONS                  | 329      |*|
 |*|_______________________________________________________________|__________|*|
 |*                                                                            *|
 |*                                ...........                                 *|
@@ -299,6 +301,28 @@
 |* : 3| . . .                                                               : *|
 |* : 4| END                                                                 : *|
 |* : 5|                                                                     : *|
+|* :........................................................................: *|
+|*                                                                            *|
+|*                                 .........                                  *|
+|* ................................: SYBOL :................................. *|
+|* :                               '''''''''                                : *|
+|* :  v [C LANGUAGE]                                                        : *|
+|* : 1|                                                                     : *|
+|* : 2| #define SYBOL(OBJECT)                                               : *|
+|* : 3|                                                                     : *|
+|* :     ________                                                           : *|
+|* : USE SYMBOL() WHEN PASSING THE ADDRESS OF A LINKABLE OBJECT, SUCH AS A  : *|
+|* : FUNCTION OR VARIABLE, TO ASSEMBLY CODE.                                : *|
+|* :                                                                        : *|
+|* : EXAMPLES:                                                              : *|
+|* :                                                                        : *|
+|* :  v [C LANGUAGE]                                                        : *|
+|* : 1|                                                                     : *|
+|* : 2| SECTION(void, test, (int a, char b))                                : *|
+|* : 3|     MOVABS_RAX_(SYBOL(test)) // RAX is now holding test's pointer   : *|
+|* : 4|     . . .                                                           : *|
+|* : 5| END                                                                 : *|
+|* : 6|                                                                     : *|
 |* :........................................................................: *|
 |*                                                                            *|
 |*                  ........................................                  *|
@@ -471,7 +495,7 @@ Still planning PTR
 \* @@@@@@@@@@@@@@@@@@@@@ TODO | PLEASE IGNORE THIS PART @@@@@@@@@@@@@@@@@@@@@ */
 
 #ifndef ASM_H
-#define ASM_H 202608 /* VERSION */
+#define ASM_H 202609 /* VERSION */
 #endif /* !ASM_H */
 
 /* *********************** [v] TI CGT CCS (PUSH) [v] ************************ */
@@ -590,6 +614,7 @@ Still planning PTR
 #ifdef LOCALMACRO__GNU_STYLE
 #undef LOCALMACRO__GNU_STYLE
 #define LOCALMACRO_ATNT_SYNTAX_STRING
+#define SYMBOL(__SYBOL__) __SYBOL__
 #define CMT_ASM(EVERYTHING) EVERYTHING"\n\t"
 #define _(X) #X
 #define SECTION(RETURN_TYPE, NAME, ARGUMENTS) \
@@ -629,6 +654,8 @@ Still planning PTR
  * typedef	BYTE;
  */
 /* **************************** [^] INCLUDES [^] **************************** */
+
+#define SYMBOL(__SYBOL__) OFFSET __SYBOL__
 
 #ifndef KNR_STYLE /* STANDARD C */
 #define SECTION(RETURN_TYPE, NAME, ARGUMENTS) \
@@ -817,6 +844,22 @@ Still planning PTR
 	static RETURN_TYPE NOINLINE NAME ARGUMENTS \
 	LOCALMACRO__SECTION_START(NAME)
 #endif /* !KNR_STYLE */
+
+#ifdef __SYSTEM_8_BIT__
+#define SYMBOL(__SYBOL__) __ASM__IMM8__(&(__SYBOL__))
+#else /* !__SYSTEM_8_BIT__ */
+#ifdef __SYSTEM_16_BIT__
+#define SYMBOL(__SYBOL__) __ASM__IMM16__(&(__SYBOL__))
+#else /* !__SYSTEM_16_BIT__ */
+#ifdef __SYSTEM_32_BIT__
+#define SYMBOL(__SYBOL__) __ASM__IMM32__(&(__SYBOL__))
+#else /* !__SYSTEM_32_BIT__ */
+#ifdef __SYSTEM_64_BIT__
+#define SYMBOL(__SYBOL__) __ASM__IMM64__(&(__SYBOL__))
+#endif /* __SYSTEM_64_BIT__ */
+#endif /* __SYSTEM_32_BIT__ */
+#endif /* __SYSTEM_16_BIT__ */
+#endif /* __SYSTEM_8_BIT__ */
 
 #ifdef __CPU_INTEL__
 #ifndef INCL_CMT_ASM_MOV_PTR

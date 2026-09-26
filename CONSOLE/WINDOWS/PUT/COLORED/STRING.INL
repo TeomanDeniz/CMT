@@ -6,18 +6,18 @@
 	struct S_COORD			COORDINATES;\
 	unsigned long			WRITTEN;\
 	unsigned long			LENGTH;\
-	const unsigned short	ATTRIBUTE =\
-		LOCALMACRO__CMT_CONSOLE__ATTRIBUTE (COLOR_VALUE);\
+	const unsigned short	ATTRIBUTE = \
+		LOCALMACRO__CMT_CONSOLE__ATTRIBUTE(COLOR_VALUE);\
 	\
 	LENGTH = (unsigned long)0;\
 	\
 	while (STRING[LENGTH] != 0)\
 		++LENGTH;\
 	\
-	if ((X < THIS->get.width) && (Y < THIS->get.height))\
+	if ((X < THIS->GET.WIDTH) && (Y < THIS->GET.HEIGHT))\
 	{\
-		if ((X + LENGTH) > THIS->get.width)\
-			LENGTH = THIS->get.width - X;\
+		if ((X + LENGTH) > THIS->GET.WIDTH)\
+			LENGTH = THIS->GET.WIDTH - X;\
 		\
 		COORDINATES.X = (short)X;\
 		COORDINATES.Y = (short)Y;\

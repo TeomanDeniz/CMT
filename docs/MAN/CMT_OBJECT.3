@@ -33,9 +33,15 @@ Object definitions (\f[CR]object\f[R])
 Stack constructors (\f[CR]obj\f[R]) and heap constructors
 (\f[CR]new\f[R])
 .IP \(bu 2
+Automatic destructor dispatch on heap release (\f[CR]delete\f[R]),
+driven by an injected \f[CR]__DESTRUCTOR__\f[R] member
+.IP \(bu 2
 Bound methods through runtime generated trampolines
 .IP \(bu 2
 Assembly\-level injection for performance
+.IP \(bu 2
+Pluggable heap allocator/deallocator per object type
+(\f[CR]OBJECT__MY_ALLOCATOR\f[R] / \f[CR]OBJECT__MY_FREER\f[R])
 .IP \(bu 2
 Cross\-platform support (16/32/64\-bit Intel) and major compilers
 .IP \(bu 2
@@ -68,6 +74,12 @@ T{
 \f[CR]#define new(object_name, variable_name)\f[R]
 T}
 T{
+\f[CR]#define DELETE(OBJECT_POINTER)\f[R]
+T}
+T{
+\f[CR]#define delete(object_pointer)\f[R]
+T}
+T{
 \f[CR]#define DESTROY(THE_OBJECT)\f[R]
 T}
 T{
@@ -78,6 +90,18 @@ T{
 T}
 T{
 \f[CR]#define object__connect(object_type_name)\f[R]
+T}
+T{
+\f[CR]#define OBJECT__MY_ALLOCATOR(ALLOCATOR)\f[R]
+T}
+T{
+\f[CR]#define object__my_allocator(allocator)\f[R]
+T}
+T{
+\f[CR]#define OBJECT__MY_FREER(FREER)\f[R]
+T}
+T{
+\f[CR]#define object__my_freer(freer)\f[R]
 T}
 T{
 \f[CR]#define OBJECT__INJECT(TARGET, SOURCE)\f[R]
@@ -96,6 +120,12 @@ T{
 T}
 T{
 \f[CR]#define object__initialize(variable, type)\f[R]
+T}
+T{
+\f[CR]#define OBJECT__COPY(DST, SRC)\f[R]
+T}
+T{
+\f[CR]#define object__copy(dst, src)\f[R]
 T}
 .TE
 .SS OBJECT
@@ -134,9 +164,11 @@ The variable is a plain object value, so its members are reached with
 .PP
 Calling \f[CR]OBJ\f[R] automatically invokes the constructor.
 .PP
-\f[CR]DESTROY\f[R] may safely be called on the object.
-Since the object lives on the stack, the call simply does nothing after
-any member cleanup has completed.
+Call \f[CR]DESTROY\f[R] on the object when it\(aqs done with, to run its
+\f[CR]__DESTRUCTOR__\f[R] and free that destructor\(aqs own trampoline
+(see \f[CR]DESTROY\f[R]).
+There is no allocation to release for a stack object \- it goes away
+with its scope as usual.
 .PP
 The constructor must be named exactly the same as the object type:
 .IP
@@ -200,11 +232,10 @@ The allocation is checked before the constructor runs: if
 constructor is never called.
 .PP
 Unlike \f[CR]OBJ\f[R], heap instances own their storage.
-Calling \f[CR]DESTROY\f[R] after member cleanup releases that
-allocation.
-.PP
-The caller owns that allocation and has to release it with
-\f[CR]DESTROY\f[R] once the injected members have been ejected.
+Call \f[CR]DELETE\f[R] on the object when it\(aqs done with \- it runs
+\f[CR]__DESTRUCTOR__\f[R], frees that destructor\(aqs trampoline, then
+releases the underlying allocation and nulls the pointer (see
+\f[CR]DELETE\f[R]).
 .PP
 Usage:
 .IP
@@ -239,15 +270,68 @@ method:
 const new (test_object_type, test) (42);
 
 test\->set(33);
-\f[I]/* test\->value = 33; \-> error: assignment of member \(aqvalue\(aq in read\-only object */\f[R]
+\f[I]// test\->value = 33; \-> error: assignment of member \(aqvalue\(aq in read\-only object\f[R]
 .EE
 .PP
    *   *   *   *   *
-.SS DESTROY
+.SS The \f[CR]__DESTRUCTOR__\f[R] convention
+Both \f[CR]DELETE\f[R] and \f[CR]DESTROY\f[R] (below) call a member
+named exactly \f[CR]__DESTRUCTOR__\f[R] on the object.
+This member is \f[B]not\f[R] created automatically \- like every other
+bound method, it has to be injected by the constructor with
+\f[CR]object__inject\f[R]:
 .IP
 .EX
-#define DESTROY(THE_OBJECT)
-#define destroy(the_object)
+object o_test
+{
+    void    (*test)(void);
+    void    (*__DESTRUCTOR__)(void);
+};
+
+void my_destructor(void)
+{
+    object__connect (o_test);
+
+    object__eject (this\->test); \f[I]// eject every OTHER member here\f[R]
+}
+
+void o_test(void)
+{
+    object__connect (o_test);
+
+    object__inject (this\->test, test);
+    object__inject (this\->__DESTRUCTOR__, my_destructor);
+}
+.EE
+.RS
+.PP
+/!\(rs The name is \f[B]always uppercase\f[R], exactly
+\f[CR]__DESTRUCTOR__\f[R], regardless of whether the object was declared
+with the uppercase or lowercase macro family.
+The double\-underscore, all\-caps shape is the signal that this member
+is framework\-recognized and reserved: don\(aqt reuse it for anything
+else, and don\(aqt rely on any other casing being recognized by
+\f[CR]DELETE\f[R]/\f[CR]DESTROY\f[R].
+.RE
+.PP
+Nothing checks that \f[CR]__DESTRUCTOR__\f[R] was actually injected.
+Calling \f[CR]DELETE\f[R] or \f[CR]DESTROY\f[R] on an object whose
+constructor never injected \f[CR]__DESTRUCTOR__\f[R] jumps through an
+uninitialized function pointer.
+Every \f[CR]object\f[R] used with \f[CR]DELETE\f[R]/\f[CR]DESTROY\f[R]
+\f[B]must\f[R] declare and inject \f[CR]__DESTRUCTOR__\f[R].
+.PP
+The destructor\(aqs own job is to eject every \f[I]other\f[R] injected
+member of the object (see \f[CR]OBJECT__EJECT\f[R] below) \-
+\f[CR]DELETE\f[R]/\f[CR]DESTROY\f[R] only take care of the destructor
+member itself and, for \f[CR]DELETE\f[R], the underlying allocation.
+.PP
+   *   *   *   *   *
+.SS DELETE
+.IP
+.EX
+#define DELETE(OBJECT_POINTER)
+#define delete(object_pointer)
 .EE
 .PP
 Releases an object that was created \f[B]on the heap\f[R] with
@@ -260,7 +344,7 @@ variable \f[CR]NEW\f[R] produced, and from inside a method it is simply
 .EX
 new (o_test, test) ();
 \&...
-destroy (test);
+delete (test);
 .EE
 .IP
 .EX
@@ -268,67 +352,107 @@ void    free_self(void)
 {
     object__connect (o_test);
 
-    destroy (this);
+    delete (this);
 }
 .EE
 .PP
-\f[CR]DESTROY\f[R] only gives back the object allocation.
-It does \f[B]not\f[R] eject anything, so every injected member has to be
-ejected \f[I]before\f[R] the object is destroyed, otherwise the
-executable memory behind each trampoline leaks and the ejects themselves
-would be reading freed memory.
+\f[CR]DELETE\f[R] is a no\-op on a null pointer.
+Otherwise it, in order:
+.IP "1." 3
+Calls \f[CR]OBJECT_POINTER\->__DESTRUCTOR__()\f[R].
+.IP "2." 3
+Frees the executable trampoline behind \f[CR]__DESTRUCTOR__\f[R] itself.
+.IP "3." 3
+Recovers the allocator/freer pair that was stored for this object when
+it was created (by \f[CR]NEW\f[R], or by
+\f[CR]OBJECT__MY_ALLOCATOR\f[R]/\f[CR]OBJECT__MY_FREER\f[R], see below),
+and calls it on the allocation.
+.IP "4." 3
+Sets \f[CR]OBJECT_POINTER\f[R] to \f[CR]0\f[R].
 .PP
-After the call the pointer is dangling; nothing in the object may be
-touched again, including \f[CR]this\f[R].
-.PP
-\f[B]Recommended usage\f[R]: since there is no automatic destructor, put
-\f[CR]destroy\f[R] as the last statement of the \f[CR]free()\f[R] member
-you write anyway, so a heap object cleans itself up in one call:
+The destructor is still responsible for ejecting every \f[B]other\f[R]
+injected member first \- \f[CR]DELETE\f[R] does not walk the object\(aqs
+members, it only knows about \f[CR]__DESTRUCTOR__\f[R] and the
+underlying allocation:
 .IP
 .EX
-void    test_free(void)
+void    my_destructor(void)
+{
+    object__connect (o_test);
+
+    object__eject (this\->test); \f[I]// every member except __DESTRUCTOR__ itself\f[R]
+}
+
+void    free_self(void)
+{
+    object__connect (o_test);
+
+    delete (this); \f[I]// runs __DESTRUCTOR__ (ejects \(gatest\(ga), then frees\f[R]
+}
+.EE
+.PP
+Because step 2 and the pointer\-null happen automatically, nothing needs
+to be ejected or nulled by hand for the destructor member or the
+allocation itself \- only the object\(aqs \f[I]other\f[R] bound methods
+need an explicit \f[CR]object__eject\f[R] inside the destructor.
+.PP
+After the call the pointer is \f[CR]0\f[R]; nothing in the object may be
+touched again.
+.PP
+\f[CR]DELETE\f[R] is heap\-only.
+Calling it on a stack object (created with \f[CR]obj\f[R]) is undefined
+\- use \f[CR]DESTROY\f[R] for those instead.
+.PP
+If the pointer was declared \f[CR]const\f[R], delete it from inside a
+method, where the \f[CR]this\f[R] produced by \f[CR]OBJECT__CONNECT\f[R]
+carries no qualifier, or cast it at the call site \- depending on how
+strict the compiler is about qualifiers on \f[CR]free\f[R].
+.PP
+   *   *   *   *   *
+.SS DESTROY
+.IP
+.EX
+#define DESTROY(THE_OBJECT)
+#define destroy(the_object)
+.EE
+.PP
+Runs the destructor of an object that lives \f[B]on the stack\f[R]
+(created with \f[CR]OBJ\f[R]/\f[CR]obj\f[R]).
+It calls \f[CR]THE_OBJECT.__DESTRUCTOR__()\f[R] and frees that
+destructor\(aqs own trampoline \- nothing else.
+.IP
+.EX
+obj (o_test, test) ();
+\&...
+destroy (test);
+.EE
+.PP
+Unlike \f[CR]DELETE\f[R], \f[CR]DESTROY\f[R] does not check for null,
+does not touch any allocation, and does not null out its argument \-
+there is no allocation to release for a stack object, and the variable
+itself goes out of scope normally at the end of the block.
+As with \f[CR]DELETE\f[R], the destructor function is still responsible
+for ejecting every other injected member:
+.IP
+.EX
+void    my_destructor(void)
 {
     object__connect (o_test);
 
     object__eject (this\->test);
-    object__eject (this\->free); \f[I]/* Always the last eject! */\f[R]
-
-    destroy (this); \f[I]/* Always the very last statement! */\f[R]
 }
-.EE
-.IP
-.EX
-new (o_test, test) ();
 
-test\->free(); \f[I]/* Ejects everything and frees the object */\f[R]
-.EE
-.SS /!\(rs Stack objects
-\f[CR]DESTROY\f[R] may also be called on objects created with
-\f[CR]obj\f[R].
-.PP
-The macro detects whether the object resides on the heap.
-Heap objects are released normally; stack objects are left untouched, so
-calling \f[CR]destroy\f[R] on them is a no\-op.
-.PP
-This allows a single cleanup path to be shared between stack and heap
-instances:
-.IP
-.EX
-void free_self(void)
-{
-    object__connect(o_test);
-
-    object__eject(this\->test);
-    object__eject(this\->free);
-
-    destroy(this); \f[I]/* Safe for both stack and heap objects */\f[R]
-}
+obj (o_test, test) ();
+\&...
+destroy (test); \f[I]// runs __DESTRUCTOR__, frees its trampoline\f[R]
 .EE
 .PP
-If the pointer was declared \f[CR]const\f[R], destroy it from inside a
-method, where the \f[CR]this\f[R] produced by \f[CR]OBJECT__CONNECT\f[R]
-carries no qualifier, or cast it at the call site \- depending on how
-strict the compiler is about qualifiers on \f[CR]free\f[R].
+\f[CR]DESTROY\f[R] does not distinguish stack objects from heap objects
+by itself \- calling it on a heap pointer runs the destructor and frees
+its trampoline but leaks the object allocation, since only
+\f[CR]DELETE\f[R] knows how to give that back.
+Use \f[CR]DESTROY\f[R] for stack objects and \f[CR]DELETE\f[R] for heap
+objects.
 .PP
    *   *   *   *   *
 .SS OBJECT__CONNECT
@@ -365,6 +489,61 @@ void test2(int a)
 .EE
 .PP
    *   *   *   *   *
+.SS OBJECT__MY_ALLOCATOR / OBJECT__MY_FREER
+.IP
+.EX
+#define OBJECT__MY_ALLOCATOR(ALLOCATOR)
+#define OBJECT__MY_FREER(FREER)
+.EE
+.PP
+By default, a heap object created with \f[CR]NEW\f[R] is allocated with
+\f[CR]ALLOC\f[R] and released with \f[CR]FREE\f[R].
+\f[CR]OBJECT__MY_ALLOCATOR\f[R]/\f[CR]OBJECT__MY_FREER\f[R] let a
+constructor override that pair for its own object type \- for example,
+to use a pool allocator, a tracking allocator, or anything else with the
+same signature as \f[CR]ALLOC\f[R]/\f[CR]FREE\f[R].
+.PP
+Both go where \f[CR]OBJECT__CONNECT\f[R] would otherwise go, as the
+\f[B]first statement\f[R] of the constructor, and both are needed
+together \- \f[CR]MY_ALLOCATOR\f[R] performs the allocation but does
+\f[B]not\f[R] by itself record what to call to free it;
+\f[CR]MY_FREER\f[R] records that:
+.IP
+.EX
+void o_test(void)
+{
+    OBJECT__MY_ALLOCATOR (my_alloc);
+    OBJECT__MY_FREER (my_free);
+
+    OBJECT__CONNECT (o_test);
+
+    ...
+}
+.EE
+.PP
+\f[CR]ALLOCATOR\f[R] must accept a single \f[CR]LET\f[R] size and return
+a \f[CR]PTR\f[R], exactly like \f[CR]ALLOC\f[R].
+\f[CR]FREER\f[R] must accept a single \f[CR]PTR\f[R] and return
+\f[CR]void\f[R], exactly like \f[CR]FREE\f[R]; it is what
+\f[CR]DELETE\f[R] will call on the allocation later.
+.RS
+.PP
+/!\(rs \f[B]Always pair these.\f[R] \f[CR]OBJECT__MY_ALLOCATOR\f[R] on
+its own leaves the allocation\(aqs stored free\-function uninitialized
+\- \f[CR]DELETE\f[R] will read garbage there and call it, which is
+undefined behavior.
+There is no compiler check for \(dqthe constructor called the allocator
+but forgot the freer\(dq: it is the constructor author\(aqs
+responsibility to always call both, in that order, every time the object
+type is constructed.
+.PP
+If a constructor only needs a custom allocator but the \f[I]default\f[R]
+freer (\f[CR]FREE\f[R]) is still correct for it, call
+\f[CR]OBJECT__MY_FREER (FREE)\f[R] explicitly rather than assuming the
+slot defaults to it.
+.RE
+.PP
+   *   *   *   *   *
 .SS OBJECT__INJECT
 .IP
 .EX
@@ -387,9 +566,9 @@ void o_object(int a)
 {
     object__connect (o_object);
 
-    object__inject (\f[B]this\f[R]\->test, test);       \f[I]/* this\->test  = test  */\f[R]
-    object__inject (\f[B]this\f[R]\->abc, test);        \f[I]/* this\->abc   = test  */\f[R]
-    object__inject (struct_ptr\->abc, test);  \f[I]/* any lvalue works    */\f[R]
+    object__inject (\f[B]this\f[R]\->test, test); \f[I]// this\->test  = test\f[R]
+    object__inject (\f[B]this\f[R]\->abc, test); \f[I]// this\->abc = test\f[R]
+    object__inject (struct_ptr\->abc, test); \f[I]// any lvalue works\f[R]
 
     \f[B]this\f[R]\->value = a;
 }
@@ -402,12 +581,6 @@ That trampoline is what makes \f[CR]OBJECT__CONNECT\f[R] able to recover
 \f[CR]this\f[R], and it is why every injected member owns a small
 executable allocation that has to be released again with
 \f[CR]OBJECT__EJECT\f[R].
-.RS
-.PP
-The older \f[CR]OBJECT__INJECT_2\f[R] / \f[CR]OBJECT__INJECT_3\f[R]
-variants no longer exist.
-The two\-argument form replaces all of them.
-.RE
 .PP
    *   *   *   *   *
 .SS OBJECT__EJECT
@@ -417,20 +590,21 @@ The two\-argument form replaces all of them.
 #define object__eject(member_name)
 .EE
 .PP
-Since no automatic destructor exists, members must be ejected manually.
+Releases the executable trampoline behind an injected member.
+Every bound method injected with \f[CR]OBJECT__INJECT\f[R] owns one such
+allocation, and it has to be given back explicitly \- nothing does this
+automatically except \f[CR]__DESTRUCTOR__\f[R]\(aqs own trampoline,
+which \f[CR]DELETE\f[R]/\f[CR]DESTROY\f[R] free by themselves.
 .PP
-A custom destructor must be implemented by the user.
-.PP
-Ejecting releases the trampoline behind a member, so the member that
-holds the destructor itself has to be ejected \f[B]last\f[R].
-.PP
-Example:
+The natural place to eject every \f[I]other\f[R] member is the
+object\(aqs own \f[CR]__DESTRUCTOR__\f[R] function, so a single call to
+\f[CR]delete\f[R]/\f[CR]destroy\f[R] cleans up the whole object:
 .IP
 .EX
 object o_test
 {
-    void    (*free)(void);
     void    (*test)(void);
+    void    (*__DESTRUCTOR__)(void);
 };
 
 void test(void)
@@ -438,13 +612,11 @@ void test(void)
     object__connect (o_test);
 }
 
-void test_free(void)
+void my_destructor(void)
 {
     object__connect (o_test);
 
-    object__eject (\f[B]this\f[R]\->test);
-    object__eject (\f[B]this\f[R]\->free); \f[I]/* Always on the end! */\f[R]
-    destroy (\f[B]this\f[R]);
+    object__eject (\f[B]this\f[R]\->test); \f[I]// every member except __DESTRUCTOR__ itself\f[R]
 }
 
 void o_test(void)
@@ -452,20 +624,19 @@ void o_test(void)
     object__connect (o_test);
 
     object__inject (\f[B]this\f[R]\->test, test);
-    object__inject (\f[B]this\f[R]\->free, test_free);
+    object__inject (\f[B]this\f[R]\->__DESTRUCTOR__, my_destructor);
 }
 .EE
 .PP
-For objects created with \f[CR]new\f[R], ejecting only gives back the
-executable memory of the injected methods.
-The object allocation itself still belongs to the caller and has to be
-released separately.
+Do \f[B]not\f[R] eject \f[CR]__DESTRUCTOR__\f[R]\(aqs own member from
+inside itself \- \f[CR]DELETE\f[R] and \f[CR]DESTROY\f[R] free that
+trampoline right after calling it, so ejecting it manually as well would
+double\-free it.
 .PP
 For objects created with \f[CR]new\f[R], ejecting only gives back the
 executable memory of the injected methods.
-The object allocation itself is released with \f[CR]DESTROY\f[R], either
-by the caller or as the last statement of the member that does the
-ejecting.
+The object allocation itself is released by \f[CR]DELETE\f[R] (see
+\f[CR]DELETE\f[R]), not by \f[CR]OBJECT__EJECT\f[R].
 .PP
    *   *   *   *   *
 .SS OBJECT__INITIALIZE
@@ -507,7 +678,7 @@ printf(\(dq%d\(rsn\(dq, test.value);
 But attempting to modify it directly is rejected by the compiler:
 .IP
 .EX
-test.value = 33; \f[I]/* Error: value is const */\f[R]
+test.value = 33; \f[I]// Error: value is const\f[R]
 .EE
 .PP
 When modification is required internally, \f[CR]object__initialize\f[R]
@@ -558,7 +729,7 @@ printf(\(dq%d\(rsn\(dq, test.value);
 while direct modification is prevented:
 .IP
 .EX
-test.value = 33; \f[I]/* Error */\f[R]
+test.value = 33; \f[I]// Error\f[R]
 .EE
 .PP
 The implementation can still explicitly initialize or update the value:
@@ -573,10 +744,34 @@ equivalent forms.
 The uppercase form follows the macro naming convention, while the
 lowercase form is intended for normal object\-oriented usage.
 .RE
+.PP
+   *   *   *   *   *
+.SS OBJECT__COPY
+.IP
+.EX
+#define OBJECT__COPY(DST, SRC)
+#define object__copy(dst, src)
+.EE
+.PP
+It copies your object to destination.
+.PP
+You can also use memcpy for that instead of this macro.
+.PP
+And be aware: this is not creating a new object!!!
+.PP
+Example:
+.IP
+.EX
+object o_object test;
+obj (o_object, test2) ();
+
+object__copy (&test, &test2);
+\f[I]// Now both test and test2 are same\f[R]
+.EE
 .SS Full Example
 .IP
 .EX
-#define INCL_CMT_OBJECT \f[I]/* DEFINE OOP */\f[R]
+#define INCL_CMT_OBJECT \f[I]// DEFINE OOP\f[R]
 #include \f[B]\(dqCMT/CMT.H\(dq\f[R]
 #include \f[B]<stdio.h>\f[R]
 
@@ -585,7 +780,7 @@ object test_object_type
     void    (*add)(int);
     void    (*set)(int);
     int     value;
-    void    (*free)(void);
+    void    (*__DESTRUCTOR__)(void);
 };
 
 void    add(int value)
@@ -602,15 +797,14 @@ void    set(int value)
     \f[B]this\f[R]\->value = value;
 }
 
-void    free_self(void)
+void    my_destructor(void)
 {
     object__connect (test_object_type);
 
     object__eject (\f[B]this\f[R]\->add);
     object__eject (\f[B]this\f[R]\->set);
-
-    object__eject (\f[B]this\f[R]\->free); \f[I]/* Always on the end! */\f[R]
-    destroy (\f[B]this\f[R]);
+    \f[I]// __DESTRUCTOR__\(aqs own trampoline is freed automatically\f[R]
+    \f[I]// by DELETE/DESTROY \- don\(aqt eject it here yourself\f[R]
 }
 
 void    test_object_type(int start_var)
@@ -619,13 +813,13 @@ void    test_object_type(int start_var)
 
     object__inject (\f[B]this\f[R]\->add, add);
     object__inject (\f[B]this\f[R]\->set, set);
-    object__inject (\f[B]this\f[R]\->free, free_self);
+    object__inject (\f[B]this\f[R]\->__DESTRUCTOR__, my_destructor);
     \f[B]this\f[R]\->value = start_var;
 }
 
 void    *a_function(void)
 {
-    \f[B]new\f[R] (test_object_type, result) (1); \f[I]/* Heap */\f[R]
+    \f[B]new\f[R] (test_object_type, result) (1); \f[I]// Heap\f[R]
 
     \f[B]return\f[R] (result);
 }
@@ -634,27 +828,29 @@ int main(void)
 {
     object test_object_type *a;
 
-    const \f[B]new\f[R] (test_object_type, test_h) (42); \f[I]/* Yeah, variable attributes works too */\f[R]
-    obj (test_object_type, test_s) (22); \f[I]/* Stack */\f[R]
+    \f[I]// Yeah, variable attributes works too\f[R]
+    const \f[B]new\f[R] (test_object_type, test_h) (42);
+    obj (test_object_type, test_s) (22); \f[I]// Stack\f[R]
 
-    printf(\(dq%d\(rsn\(dq, test_h\->value); \f[I]/* 42 */\f[R]
+    printf(\(dq%d\(rsn\(dq, test_h\->value); \f[I]// 42\f[R]
     test_h\->add(42);
-    printf(\(dq%d\(rsn\(dq, test_h\->value); \f[I]/* 84 */\f[R]
-    printf(\(dq%d\(rsn\(dq, test_s.value); \f[I]/* 22 */\f[R]
+    printf(\(dq%d\(rsn\(dq, test_h\->value); \f[I]// 84\f[R]
+    printf(\(dq%d\(rsn\(dq, test_s.value); \f[I]// 22\f[R]
 
     test_s.value = 33;
-    test_h\->set(33); \f[I]/* I needed to do this in C++ way. */\f[R]
-    \f[I]/* test_h\->value = 33; | error: assignment of member \(aqvalue\(aq in read\-only object */\f[R]
+    test_h\->set(33); \f[I]// I needed to do this in C++ way.\f[R]
+    \f[I]// test_h\->value = 33;\f[R]
+    \f[I]// error: assignment of member \(aqvalue\(aq in read\-only object\f[R]
 
-    printf(\(dq%d\(rsn\(dq, test_h\->value); \f[I]/* 33 */\f[R]
-    printf(\(dq%d\(rsn\(dq, test_s.value); \f[I]/* 33 */\f[R]
+    printf(\(dq%d\(rsn\(dq, test_h\->value); \f[I]// 33\f[R]
+    printf(\(dq%d\(rsn\(dq, test_s.value); \f[I]// 33\f[R]
 
-    test_h\->free();
-    test_s.free();      \f[I]/* Stack: nothing else to release */\f[R]
+    \f[B]delete\f[R] (test_h); \f[I]// Heap: runs __DESTRUCTOR__, then frees the allocation\f[R]
+    destroy (test_s); \f[I]// Stack: runs __DESTRUCTOR__ only, nothing to free\f[R]
 
     a = a_function();
-    printf(\(dq%d\(rsn\(dq, a\->value); \f[I]/* 1 */\f[R]
-    a\->free();
+    printf(\(dq%d\(rsn\(dq, a\->value); \f[I]// 1\f[R]
+    \f[B]delete\f[R] (a);
     \f[B]return\f[R] (0);
 }
 .EE
