@@ -90,6 +90,9 @@
 		else if (PRINT_SPACE)\
 			__CMT_NUM_SIGN__ = ' ';\
 		\
+		__CMT_NUM_PREFIX__[0] = (char)0;\
+		__CMT_NUM_PREFIX__[1] = (char)0;\
+		\
 		if (PRINT_ALT)\
 		{\
 			if ((__CMT_NUM_BASE__ == (unsigned long)16) && (!__CMT_NUM_ZERO__))\
