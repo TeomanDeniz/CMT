@@ -11,12 +11,6 @@
 		int	INDEX_3;\
 		int	INDEX_FOR;\
 		\
-		if (THE_LINE < 0)\
-		{\
-			INT_STR[INDEX_1++] = '-';\
-			THE_LINE = -THE_LINE;\
-		}\
-		\
 		INDEX_2 = INDEX_1;\
 		\
 		do\
