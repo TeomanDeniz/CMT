@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2023/07/12 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - AGPL-3.0  :: Update - 2026/06/16 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - Apache2.0 :: Update - 2026/09/28 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -25,53 +25,83 @@
 |*|                                                                          |*|
 |*| ALIGNMENT AFFECTS HOW OBJECTS ARE LAID OUT IN MEMORY.                    |*|
 |*|                                                                          |*|
-|*| USING THESE MACROS CHANGES                                               |*|
-|*| :.. WHERE AN OBJECT MAY START IN MEMORY                                  |*|
-|*| :.. HOW MUCH PADDING THE COMPILER INSERTS                                |*|
-|*| :.. THE EFFECTIVE SIZE AND LAYOUT OF STRUCT TYPES                        |*|
-|*| :.. THE GENERATED LOAD / STORE INSTRUCTIONS                              |*|
-|*| :.. ABI COMPATIBILITY WITH OTHER CODE                                    |*|
+|*| O - USING THESE MACROS CHANGES                                           |*|
+|*| :                                                                        |*|
+|*| :.., WHERE AN OBJECT MAY START IN MEMORY                                 |*|
+|*| :                                                                        |*|
+|*| :.., HOW MUCH PADDING THE COMPILER INSERTS                               |*|
+|*| :                                                                        |*|
+|*| :.., THE EFFECTIVE SIZE AND LAYOUT OF STRUCT TYPES                       |*|
+|*| :                                                                        |*|
+|*| :.., THE GENERATED LOAD / STORE INSTRUCTIONS                             |*|
+|*| :                                                                        |*|
+|*| :.., ABI COMPATIBILITY WITH OTHER CODE                                   |*|
 |*|                                                                          |*|
-|*| ALIGNMENT DOES NOT CHANGE                                                |*|
-|*| :.. THE VALUE REPRESENTATION                                             |*|
-|*| :.. THE SEMANTICS OF THE TYPE                                            |*|
-|*| :.. THE LANGUAGE RULES OF C                                              |*|
-|*| :.. ACCESS ORDER OR ATOMICITY                                            |*|
+|*| O - ALIGNMENT DOES NOT CHANGE                                            |*|
+|*| :                                                                        |*|
+|*| :.., THE VALUE REPRESENTATION                                            |*|
+|*| :                                                                        |*|
+|*| :.., THE SEMANTICS OF THE TYPE                                           |*|
+|*| :                                                                        |*|
+|*| :.., THE LANGUAGE RULES OF C                                             |*|
+|*| :                                                                        |*|
+|*| :.., ACCESS ORDER OR ATOMICITY                                           |*|
 |*|                                                                          |*|
-|*| FOR VARIABLES                                                            |*|
-|*| :.. THE OBJECT ADDRESS WILL BE A MULTIPLE OF THE GIVEN ALIGNMENT         |*|
-|*| :.. MISALIGNED ACCESSES ARE AVOIDED                                      |*|
-|*| :.. OVER-ALIGNMENT MAY INCREASE STACK OR DATA SEGMENT SIZE               |*|
+|*| O - FOR VARIABLES                                                        |*|
+|*| :                                                                        |*|
+|*| :.., THE OBJECT ADDRESS WILL BE A MULTIPLE OF THE GIVEN ALIGNMENT        |*|
+|*| :                                                                        |*|
+|*| :.., MISALIGNED ACCESSES ARE AVOIDED                                     |*|
+|*| :                                                                        |*|
+|*| :.., OVER-ALIGNMENT MAY INCREASE STACK OR DATA SEGMENT SIZE              |*|
 |*|                                                                          |*|
-|*| FOR STRUCTS                                                              |*|
-|*| :.. THE STRUCT TYPE ITSELF BECOMES ALIGNED                               |*|
-|*| :.. ALL INSTANCES OF THE TYPE FOLLOW THAT ALIGNMENT                      |*|
-|*| :.. sizeof(struct) MAY INCREASE DUE TO TAIL PADDING                      |*|
-|*| :.. BINARY LAYOUT CHANGES → ABI BREAK IF SHARED                          |*|
+|*| O - FOR STRUCTS                                                          |*|
+|*| :                                                                        |*|
+|*| :.., THE STRUCT TYPE ITSELF BECOMES ALIGNED                              |*|
+|*| :                                                                        |*|
+|*| :.., ALL INSTANCES OF THE TYPE FOLLOW THAT ALIGNMENT                     |*|
+|*| :                                                                        |*|
+|*| :.., sizeof(struct) MAY INCREASE DUE TO TAIL PADDING                     |*|
+|*| :                                                                        |*|
+|*| :.., BINARY LAYOUT CHANGES → ABI BREAK IF SHARED                         |*|
 |*|                                                                          |*|
-|*| FOR ARRAYS                                                               |*|
-|*| :.. EACH ELEMENT RESPECTS THE TYPE ALIGNMENT                             |*|
-|*| :.. STRIDE MAY INCREASE                                                  |*|
+|*| O - FOR ARRAYS                                                           |*|
+|*| :                                                                        |*|
+|*| :.., EACH ELEMENT RESPECTS THE TYPE ALIGNMENT                            |*|
+|*| :                                                                        |*|
+|*| :.., STRIDE MAY INCREASE                                                 |*|
 |*|                                                                          |*|
-|*| FOR PERFORMANCE                                                          |*|
-|*| :.. PROPER ALIGNMENT ENABLES SIMD AND WIDE LOADS                         |*|
-|*| :.. BAD ALIGNMENT MAY FORCE SLOW OR FAULTING ACCESSES                    |*|
-|*| :.. OVER-ALIGNMENT MAY HURT CACHE DENSITY                                |*|
+|*| O - FOR PERFORMANCE                                                      |*|
+|*| :                                                                        |*|
+|*| :.., PROPER ALIGNMENT ENABLES SIMD AND WIDE LOADS                        |*|
+|*| :                                                                        |*|
+|*| :.., BAD ALIGNMENT MAY FORCE SLOW OR FAULTING ACCESSES                   |*|
+|*| :                                                                        |*|
+|*| :.., OVER-ALIGNMENT MAY HURT CACHE DENSITY                               |*|
 |*|                                                                          |*|
-|*| FOR ABI                                                                  |*|
-|*| :.. CHANGING ALIGNMENT CHANGES CALLING AND MEMORY CONTRACTS              |*|
-|*| :.. STRUCTS PASSED ACROSS MODULES MUST MATCH ALIGNMENT EXACTLY           |*|
+|*| O - FOR ABI                                                              |*|
+|*| :                                                                        |*|
+|*| :.., CHANGING ALIGNMENT CHANGES CALLING AND MEMORY CONTRACTS             |*|
+|*| :                                                                        |*|
+|*| :.., STRUCTS PASSED ACROSS MODULES MUST MATCH ALIGNMENT EXACTLY          |*|
 |*|                                                                          |*|
-|*| ALLOCATORS                                                               |*|
-|*| :.. ALIGNMENT ONLY APPLIES TO THE TYPE                                   |*|
-|*| :.. DYNAMIC ALLOCATION MUST PROVIDE COMPATIBLE ALIGNMENT                 |*|
-|*| :.. malloc IS NOT REQUIRED TO SATISFY OVER-ALIGNED TYPES                 |*|
+|*| O - ALLOCATORS                                                           |*|
+|*| :                                                                        |*|
+|*| :.., ALIGNMENT ONLY APPLIES TO THE TYPE                                  |*|
+|*| :                                                                        |*|
+|*| :.., DYNAMIC ALLOCATION MUST PROVIDE COMPATIBLE ALIGNMENT                |*|
+|*| :                                                                        |*|
+|*| :.., malloc IS NOT REQUIRED TO SATISFY OVER-ALIGNED TYPES                |*|
 |*|                                                                          |*|
-|*| FAILURE MODES                                                            |*|
-|*| :.. SILENT PADDING CHANGES                                               |*|
-|*| :.. ABI MISMATCHES                                                       |*|
-|*| :.. INCOMPATIBLE SERIALIZED DATA                                         |*|
-|*| :.. CRASHES ON STRICT-ALIGNMENT ARCHITECTURES                            |*|
+|*| O - FAILURE MODES                                                        |*|
+|*| :                                                                        |*|
+|*| :.., SILENT PADDING CHANGES                                              |*|
+|*| :                                                                        |*|
+|*| :.., ABI MISMATCHES                                                      |*|
+|*| :                                                                        |*|
+|*| :.., INCOMPATIBLE SERIALIZED DATA                                        |*|
+|*| :                                                                        |*|
+|*| :.., CRASHES ON STRICT-ALIGNMENT ARCHITECTURES                           |*|
 |*|                                                                          |*|
 |*| ALIGNMENT IS A LAYOUT CONSTRAINT, NOT A SAFETY FEATURE.                  |*|
 |*|__________________________________________________________________________|*|
@@ -84,18 +114,18 @@
 |* __________________________________________________________________________ *|
 |*| CONTENT                                                       | DOC LINE |*|
 |*|===============================================================|==========|*|
-|*| #define MAX_ALIGNMENT                                         | 51       |*|
+|*| #define MAX_ALIGNMENT                                         | 133      |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| #define ALIGN_UP(VALUE)                                       | 63       |*|
+|*| #define ALIGN_UP(VALUE)                                       | 145      |*|
 |*| #define align_up(value)                                       |          |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| #define ALIGN_VARIABLE(VALUE)                                 | 83       |*|
+|*| #define ALIGN_VARIABLE(VALUE)                                 | 165      |*|
 |*| #define align_variable(value)                                 |          |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| #define ALIGN_STRUCT_PUSH(VALUE)                              | 104      |*|
+|*| #define ALIGN_STRUCT_PUSH(VALUE)                              | 186      |*|
 |*| #define align_struct_push(value)                              |          |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| #define ALIGN_STRUCT_POP(VALUE)                               | 104      |*|
+|*| #define ALIGN_STRUCT_POP(VALUE)                               | 186      |*|
 |*| #define align_struct_pop(value)                               |          |*|
 |*|_______________________________________________________________|__________|*|
 |*                                                                            *|
@@ -188,7 +218,7 @@
 \******************************************************************************/
 
 #ifndef ALIGN_H
-#define ALIGN_H 202606 /* VERSION */
+#define ALIGN_H 202609 /* VERSION */
 
 /* *********************** [v] TI CGT CCS (PUSH) [v] ************************ */
 #ifdef __TI_COMPILER_VERSION__

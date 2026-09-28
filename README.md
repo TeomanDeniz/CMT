@@ -527,10 +527,10 @@ List of the icons:
 
 ## Copyright
 
-- CMT is licensed under the GPL-3.0 License. (Will change in the future to make it more freely usable)
-- This means it can be freely used in open source projects compatible with GPL-3.0.
-- For commercial licensing inquiries, contact me.
-- *© Maximum Tension™ all rights NOT reserved - 2023*
+* CMT is licensed under the Apache License, Version 2.0.
+* This permits use, modification, and redistribution, including in commercial and proprietary projects, subject to the terms of the license.
+* See the `LICENSE` file for the full license text.
+* © 2023 Maximum Tension™.
 
 <!-- MARKDOWNS -->
 [__OBJECT_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/OBJECT.md
