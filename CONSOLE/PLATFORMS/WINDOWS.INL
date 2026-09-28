@@ -8,8 +8,8 @@
 #define SEAL_CMT_CONSOLE_WINDOWS
 
 /* **************************** [v] INCLUDES [v] **************************** */
-#include "../WIN_CORE/KERNEL32.H"
-/******* """"""""""""""""""""""""
+#include "../../WIN_CORE/KERNEL32.H"
+/******* """""""""""""""""""""""""""
  * struct S_COORD;
  * struct S_RECT;
  * struct S_SMALL_RECT;
@@ -18,8 +18,8 @@
  * struct S_INPUT_RECORD;
  * struct S_KERNEL32	KERNEL32;
  */
-#include "../WIN_CORE/USER32.H"
-/******* """""""""""""""""""""
+#include "../../WIN_CORE/USER32.H"
+/******* """""""""""""""""""""""""
  * struct S_USER32	USER32;
  */
 /* **************************** [^] INCLUDES [^] **************************** */
