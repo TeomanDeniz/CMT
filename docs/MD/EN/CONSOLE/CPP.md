@@ -121,164 +121,164 @@ console.put.colored.line (character, color, x_start, y_start, x_end, y_end);
 
 ## Contents
 
-| Contents List                        |
-| ------------------------------------ |
-| `class cmt::CONSOLE;`                |
-| `class cmt::console;`                |
-| `extern cmt::CONSOLE &CONSOLE;`      |
-| `extern cmt::console &console;`      |
-| `#define WARNING_HERE(STRING)`       |
-| `#define warning_here(STRING)`       |
-| `#define ERROR_HERE(STRING)`         |
-| `#define error_here(STRING)`         |
-| `#define LOG_CURRENT`                |
+| Contents List                   |
+| ------------------------------- |
+| `class cmt::CONSOLE;`           |
+| `class cmt::console;`           |
+| `extern cmt::CONSOLE &CONSOLE;` |
+| `extern cmt::console &console;` |
+| `#define WARNING_HERE(STRING)`  |
+| `#define warning_here(STRING)`  |
+| `#define ERROR_HERE(STRING)`    |
+| `#define error_here(STRING)`    |
+| `#define LOG_CURRENT`           |
 
-| `class cmt::CONSOLE`, `class cmt::console`                                                                                  |
-| --------------------------------------------------------------------------------------------------------------------------- |
-| `CONSOLE(void);`                                                                                                            |
-| `console(void);`                                                                                                            |
-| `~CONSOLE(void);`                                                                                                           |
-| `~console(void);`                                                                                                           |
-| `CONSOLE *X(int);`                                                                                                          |
-| `console *x(int);`                                                                                                          |
-| `CONSOLE *Y(int);`                                                                                                          |
-| `console *y(int);`                                                                                                          |
-| `CONSOLE *XY(int, int);`                                                                                                    |
-| `console *xy(int, int);`                                                                                                    |
-| `CONSOLE *WIDTH(unsigned int);`                                                                                             |
-| `console *width(unsigned int);`                                                                                             |
-| `CONSOLE *HEIGHT(unsigned int);`                                                                                            |
-| `console *height(unsigned int);`                                                                                            |
-| `CONSOLE *TITLE(const char *);`                                                                                             |
-| `console *title(const char *);`                                                                                             |
-| `CONSOLE *COLOR(unsigned int);`                                                                                             |
-| `console *color(unsigned int);`                                                                                             |
-| `CONSOLE *DEFAULT_COLOR(void);`                                                                                             |
-| `console *default_color(void);`                                                                                             |
-| `CONSOLE *CLEAR(void);`                                                                                                     |
-| `console *clear(void);`                                                                                                     |
-| `CONSOLE *LOG(const char *);`                                                                                               |
-| `console *log(const char *);`                                                                                               |
-| `CONSOLE *WARNING(const char *);`                                                                                           |
-| `console *warning(const char *);`                                                                                           |
-| `CONSOLE *WARNING_AT(const char *, const char *, unsigned int);`                                                            |
-| `console *warning_at(const char *, const char *, unsigned int);`                                                            |
-| `CONSOLE *ERROR(const char *);`                                                                                             |
-| `console *error(const char *);`                                                                                             |
-| `CONSOLE *ERROR_AT(const char *, const char *, unsigned int);`                                                              |
-| `console *error_at(const char *, const char *, unsigned int);`                                                              |
-| `CONSOLE *PRINT(const char *, ...);`                                                                                        |
-| `console *print(const char *, ...);`                                                                                        |
-| `CONSOLE *PUSH(void);`                                                                                                      |
-| `console *push(void);`                                                                                                      |
-| `CONSOLE *POP(void);`                                                                                                       |
-| `console *pop(void);`                                                                                                       |
-| `CONSOLE *PUT.STRING(const char *, unsigned int, unsigned int);`                                                            |
-| `console *put.string(const char *, unsigned int, unsigned int);`                                                            |
-| `CONSOLE *PUT.LINE(char, unsigned int, unsigned int, unsigned int, unsigned int);`                                          |
-| `console *put.line(char, unsigned int, unsigned int, unsigned int, unsigned int);`                                          |
-| `CONSOLE *PUT.CURVE(char, unsigned int, unsigned int, unsigned int, unsigned int, float, float);`                           |
-| `console *put.curve(char, unsigned int, unsigned int, unsigned int, unsigned int, float, float);`                           |
-| `CONSOLE *PUT.FRAME(char, unsigned int, unsigned int, unsigned int, unsigned int);`                                         |
-| `console *put.frame(char, unsigned int, unsigned int, unsigned int, unsigned int);`                                         |
-| `CONSOLE *PUT.FRAME_RADIUS(char, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);`                    |
-| `console *put.frame_radius(char, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);`                    |
-| `CONSOLE *PUT.RECTANGLE(char, unsigned int, unsigned int, unsigned int, unsigned int);`                                     |
-| `console *put.rectangle(char, unsigned int, unsigned int, unsigned int, unsigned int);`                                     |
-| `CONSOLE *PUT.RECTANGLE_RADIUS(char, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);`                |
-| `console *put.rectangle_radius(char, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);`                |
-| `CONSOLE *PUT.CIRCLE(char, unsigned int, unsigned int, unsigned int, unsigned int);`                                        |
-| `console *put.circle(char, unsigned int, unsigned int, unsigned int, unsigned int);`                                        |
-| `CONSOLE *PUT.ELLIPSE(char, unsigned int, unsigned int, unsigned int, unsigned int);`                                       |
-| `console *put.ellipse(char, unsigned int, unsigned int, unsigned int, unsigned int);`                                       |
-| `CONSOLE *PUT.COLORED.STRING(const char *, unsigned int, unsigned int, unsigned int);`                                      |
-| `console *put.colored.string(const char *, unsigned int, unsigned int, unsigned int);`                                      |
-| `CONSOLE *PUT.COLORED.LINE(char, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);`                    |
-| `console *put.colored.line(char, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);`                    |
-| `CONSOLE *PUT.COLORED.CURVE(char, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, float, float);`     |
-| `console *put.colored.curve(char, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, float, float);`     |
-| `CONSOLE *PUT.COLORED.FRAME(char, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);`                   |
-| `console *put.colored.frame(char, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);`                   |
-| `CONSOLE *PUT.COLORED.FRAME_RADIUS(char, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);`         |
-| `console *put.colored.frame_radius(char, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);`         |
-| `CONSOLE *PUT.COLORED.RECTANGLE(char, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);`               |
-| `console *put.colored.rectangle(char, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);`               |
-| `CONSOLE *PUT.COLORED.RECTANGLE_RADIUS(char, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);`     |
-| `console *put.colored.rectangle_radius(char, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);`     |
-| `CONSOLE *PUT.COLORED.CIRCLE(char, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);`                  |
-| `console *put.colored.circle(char, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);`                  |
-| `CONSOLE *PUT.COLORED.ELLIPSE(char, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);`                 |
-| `console *put.colored.ellipse(char, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);`                 |
-| `CONSOLE *CURSOR.COLOR(unsigned int);`                                                                                      |
-| `console *cursor.color(unsigned int);`                                                                                      |
-| `CONSOLE *CURSOR.DEFAULT_COLOR(void);`                                                                                      |
-| `console *cursor.default_color(void);`                                                                                      |
-| `CONSOLE *CURSOR.X(unsigned int);`                                                                                          |
-| `console *cursor.x(unsigned int);`                                                                                          |
-| `CONSOLE *CURSOR.Y(unsigned int);`                                                                                          |
-| `console *cursor.y(unsigned int);`                                                                                          |
-| `CONSOLE *CURSOR.XY(unsigned int, unsigned int);`                                                                           |
-| `console *cursor.xy(unsigned int, unsigned int);`                                                                           |
-| `CONSOLE *CURSOR.MOVE_X(int);`                                                                                              |
-| `console *cursor.move_x(int);`                                                                                              |
-| `CONSOLE *CURSOR.MOVE_Y(int);`                                                                                              |
-| `console *cursor.move_y(int);`                                                                                              |
-| `CONSOLE *CURSOR.MOVE_XY(int, int);`                                                                                        |
-| `console *cursor.move_xy(int, int);`                                                                                        |
-| `CONSOLE *CURSOR.SHOW(BOOLEAN);`                                                                                            |
-| `console *cursor.show(boolean);`                                                                                            |
-| `CONSOLE *CURSOR.SIZE(unsigned long);`                                                                                      |
-| `console *cursor.size(unsigned long);`                                                                                      |
-| `PTR EXPORT(void);`                                                                                                         |
-| `ptr export_(void);`                                                                                                        |
-| `CONSOLE *IMPORT(PTR);`                                                                                                     |
-| `console *import(ptr);`                                                                                                     |
-| `CONSOLE *INPUT.WAIT.ANY(void);`                                                                                            |
-| `console *input.wait.any(void);`                                                                                            |
-| `CONSOLE *INPUT.WAIT.KEY(void);`                                                                                            |
-| `console *input.wait.key(void);`                                                                                            |
-| `CONSOLE *INPUT.WAIT.MOUSE(void);`                                                                                          |
-| `console *input.wait.mouse(void);`                                                                                          |
-| `CONSOLE *INPUT.WAIT.MOUSE_ACTION(void);`                                                                                   |
-| `console *input.wait.mouse_action(void);`                                                                                   |
-| `CONSOLE *INPUT.WAIT.MOUSE_MOVE(void);`                                                                                     |
-| `console *input.wait.mouse_move(void);`                                                                                     |
-| `const unsigned int INPUT.GET.KEY;`, `MOUSE`, `MOUSE_X`, `MOUSE_Y`                                                          |
-| `const unsigned int input.get.key;`, `mouse`, `mouse_x`, `mouse_y`                                                          |
-| `void (*EVENT.ON_RESIZE)(unsigned int, unsigned int);`                                                                      |
-| `void (*event.on_resize)(unsigned int, unsigned int);`                                                                      |
-| `void (*EVENT.ON_MOVE)(int, int);`                                                                                          |
-| `void (*event.on_move)(int, int);`                                                                                          |
-| `void (*EVENT.ON_CLOSE)(void);`                                                                                             |
-| `void (*event.on_close)(void);`                                                                                             |
-| `void (*EVENT.ON_FOCUS)(void);`                                                                                             |
-| `void (*event.on_focus)(void);`                                                                                             |
-| `void (*EVENT.ON_BLUR)(void);`                                                                                              |
-| `void (*event.on_blur)(void);`                                                                                              |
-| `void (*EVENT.ON_KEY)(unsigned int);`                                                                                       |
-| `void (*event.on_key)(unsigned int);`                                                                                       |
-| `void (*EVENT.ON_MOUSE)(unsigned int, unsigned int, unsigned int);`                                                         |
-| `void (*event.on_mouse)(unsigned int, unsigned int, unsigned int);`                                                         |
-| `char *GET.LINE(unsigned int, unsigned int, unsigned int, unsigned int);`                                                   |
-| `char *get.line(unsigned int, unsigned int, unsigned int, unsigned int);`                                                   |
-| `char **GET.AREA(unsigned int, unsigned int, unsigned int, unsigned int);`                                                  |
-| `char **get.area(unsigned int, unsigned int, unsigned int, unsigned int);`                                                  |
-| `const BOOLEAN GET.ACTIVE;`, `GET.TERMINAL;`                                                                                |
-| `const boolean get.active;`, `get.terminal;`                                                                                |
-| `const unsigned int GET.ROWS;`, `COLUMNS`, `PIXEL_WIDTH`, `PIXEL_HEIGHT`, `COLOR`, `DEFAULT_COLOR`, `WIDTH`, `HEIGHT`       |
-| `const unsigned int get.rows;`, `columns`, `pixel_width`, `pixel_height`, `color`, `default_color`, `width`, `height`       |
-| `const int GET.X;`, `GET.Y;`                                                                                                |
-| `const int get.x;`, `get.y;`                                                                                                |
-| `const unsigned long GET.CURSOR.SIZE;`                                                                                      |
-| `const unsigned long get.cursor.size;`                                                                                      |
-| `const int GET.CURSOR.X;`, `GET.CURSOR.Y;`                                                                                  |
-| `const int get.cursor.x;`, `get.cursor.y;`                                                                                  |
-| `const unsigned int GET.CURSOR.COLOR;`, `GET.CURSOR.DEFAULT_COLOR;`                                                         |
-| `const unsigned int get.cursor.color;`, `get.cursor.default_color;`                                                         |
-| `const BOOLEAN GET.CURSOR.VISIBLE;`                                                                                         |
-| `const boolean get.cursor.visible;`                                                                                         |
-| `BOOLEAN HIGHLIGHTER;`                                                                                                      |
-| `boolean highlighter;`                                                                                                      |
+| `class cmt::CONSOLE`, `class cmt::console`                                                                                         |
+| ---------------------------------------------------------------------------------------------------------------------------------- |
+| `CONSOLE(void);`                                                                                                                   |
+| `console(void);`                                                                                                                   |
+| `~CONSOLE(void);`                                                                                                                  |
+| `~console(void);`                                                                                                                  |
+| `CONSOLE *X(int);`                                                                                                                 |
+| `console *x(int);`                                                                                                                 |
+| `CONSOLE *Y(int);`                                                                                                                 |
+| `console *y(int);`                                                                                                                 |
+| `CONSOLE *XY(int, int);`                                                                                                           |
+| `console *xy(int, int);`                                                                                                           |
+| `CONSOLE *WIDTH(unsigned int);`                                                                                                    |
+| `console *width(unsigned int);`                                                                                                    |
+| `CONSOLE *HEIGHT(unsigned int);`                                                                                                   |
+| `console *height(unsigned int);`                                                                                                   |
+| `CONSOLE *TITLE(const char *);`                                                                                                    |
+| `console *title(const char *);`                                                                                                    |
+| `CONSOLE *COLOR(unsigned int);`                                                                                                    |
+| `console *color(unsigned int);`                                                                                                    |
+| `CONSOLE *DEFAULT_COLOR(void);`                                                                                                    |
+| `console *default_color(void);`                                                                                                    |
+| `CONSOLE *CLEAR(void);`                                                                                                            |
+| `console *clear(void);`                                                                                                            |
+| `CONSOLE *LOG(const char *);`                                                                                                      |
+| `console *log(const char *);`                                                                                                      |
+| `CONSOLE *WARNING(const char *);`                                                                                                  |
+| `console *warning(const char *);`                                                                                                  |
+| `CONSOLE *WARNING_AT(const char *, const char *, unsigned int);`                                                                   |
+| `console *warning_at(const char *, const char *, unsigned int);`                                                                   |
+| `CONSOLE *ERROR(const char *);`                                                                                                    |
+| `console *error(const char *);`                                                                                                    |
+| `CONSOLE *ERROR_AT(const char *, const char *, unsigned int);`                                                                     |
+| `console *error_at(const char *, const char *, unsigned int);`                                                                     |
+| `CONSOLE *PRINT(const char *, ...);`                                                                                               |
+| `console *print(const char *, ...);`                                                                                               |
+| `CONSOLE *PUSH(void);`                                                                                                             |
+| `console *push(void);`                                                                                                             |
+| `CONSOLE *POP(void);`                                                                                                              |
+| `console *pop(void);`                                                                                                              |
+| `CONSOLE *PUT.STRING(const char *, unsigned int, unsigned int);`                                                                   |
+| `console *put.string(const char *, unsigned int, unsigned int);`                                                                   |
+| `CONSOLE *PUT.LINE(char, unsigned int, unsigned int, unsigned int, unsigned int);`                                                 |
+| `console *put.line(char, unsigned int, unsigned int, unsigned int, unsigned int);`                                                 |
+| `CONSOLE *PUT.CURVE(char, unsigned int, unsigned int, unsigned int, unsigned int, float, float);`                                  |
+| `console *put.curve(char, unsigned int, unsigned int, unsigned int, unsigned int, float, float);`                                  |
+| `CONSOLE *PUT.FRAME(char, unsigned int, unsigned int, unsigned int, unsigned int);`                                                |
+| `console *put.frame(char, unsigned int, unsigned int, unsigned int, unsigned int);`                                                |
+| `CONSOLE *PUT.FRAME_RADIUS(char, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);`                           |
+| `console *put.frame_radius(char, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);`                           |
+| `CONSOLE *PUT.RECTANGLE(char, unsigned int, unsigned int, unsigned int, unsigned int);`                                            |
+| `console *put.rectangle(char, unsigned int, unsigned int, unsigned int, unsigned int);`                                            |
+| `CONSOLE *PUT.RECTANGLE_RADIUS(char, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);`                       |
+| `console *put.rectangle_radius(char, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);`                       |
+| `CONSOLE *PUT.CIRCLE(char, unsigned int, unsigned int, unsigned int, unsigned int);`                                               |
+| `console *put.circle(char, unsigned int, unsigned int, unsigned int, unsigned int);`                                               |
+| `CONSOLE *PUT.ELLIPSE(char, unsigned int, unsigned int, unsigned int, unsigned int);`                                              |
+| `console *put.ellipse(char, unsigned int, unsigned int, unsigned int, unsigned int);`                                              |
+| `CONSOLE *PUT.COLORED.STRING(const char *, unsigned int, unsigned int, unsigned int);`                                             |
+| `console *put.colored.string(const char *, unsigned int, unsigned int, unsigned int);`                                             |
+| `CONSOLE *PUT.COLORED.LINE(char, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);`                           |
+| `console *put.colored.line(char, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);`                           |
+| `CONSOLE *PUT.COLORED.CURVE(char, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, float, float);`            |
+| `console *put.colored.curve(char, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, float, float);`            |
+| `CONSOLE *PUT.COLORED.FRAME(char, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);`                          |
+| `console *put.colored.frame(char, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);`                          |
+| `CONSOLE *PUT.COLORED.FRAME_RADIUS(char, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);`     |
+| `console *put.colored.frame_radius(char, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);`     |
+| `CONSOLE *PUT.COLORED.RECTANGLE(char, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);`                      |
+| `console *put.colored.rectangle(char, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);`                      |
+| `CONSOLE *PUT.COLORED.RECTANGLE_RADIUS(char, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);` |
+| `console *put.colored.rectangle_radius(char, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);` |
+| `CONSOLE *PUT.COLORED.CIRCLE(char, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);`                         |
+| `console *put.colored.circle(char, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);`                         |
+| `CONSOLE *PUT.COLORED.ELLIPSE(char, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);`                        |
+| `console *put.colored.ellipse(char, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);`                        |
+| `CONSOLE *CURSOR.COLOR(unsigned int);`                                                                                             |
+| `console *cursor.color(unsigned int);`                                                                                             |
+| `CONSOLE *CURSOR.DEFAULT_COLOR(void);`                                                                                             |
+| `console *cursor.default_color(void);`                                                                                             |
+| `CONSOLE *CURSOR.X(unsigned int);`                                                                                                 |
+| `console *cursor.x(unsigned int);`                                                                                                 |
+| `CONSOLE *CURSOR.Y(unsigned int);`                                                                                                 |
+| `console *cursor.y(unsigned int);`                                                                                                 |
+| `CONSOLE *CURSOR.XY(unsigned int, unsigned int);`                                                                                  |
+| `console *cursor.xy(unsigned int, unsigned int);`                                                                                  |
+| `CONSOLE *CURSOR.MOVE_X(int);`                                                                                                     |
+| `console *cursor.move_x(int);`                                                                                                     |
+| `CONSOLE *CURSOR.MOVE_Y(int);`                                                                                                     |
+| `console *cursor.move_y(int);`                                                                                                     |
+| `CONSOLE *CURSOR.MOVE_XY(int, int);`                                                                                               |
+| `console *cursor.move_xy(int, int);`                                                                                               |
+| `CONSOLE *CURSOR.SHOW(BOOLEAN);`                                                                                                   |
+| `console *cursor.show(boolean);`                                                                                                   |
+| `CONSOLE *CURSOR.SIZE(unsigned long);`                                                                                             |
+| `console *cursor.size(unsigned long);`                                                                                             |
+| `PTR EXPORT(void);`                                                                                                                |
+| `ptr export_(void);`                                                                                                               |
+| `CONSOLE *IMPORT(PTR);`                                                                                                            |
+| `console *import(ptr);`                                                                                                            |
+| `CONSOLE *INPUT.WAIT.ANY(void);`                                                                                                   |
+| `console *input.wait.any(void);`                                                                                                   |
+| `CONSOLE *INPUT.WAIT.KEY(void);`                                                                                                   |
+| `console *input.wait.key(void);`                                                                                                   |
+| `CONSOLE *INPUT.WAIT.MOUSE(void);`                                                                                                 |
+| `console *input.wait.mouse(void);`                                                                                                 |
+| `CONSOLE *INPUT.WAIT.MOUSE_ACTION(void);`                                                                                          |
+| `console *input.wait.mouse_action(void);`                                                                                          |
+| `CONSOLE *INPUT.WAIT.MOUSE_MOVE(void);`                                                                                            |
+| `console *input.wait.mouse_move(void);`                                                                                            |
+| `const unsigned int INPUT.GET.KEY;`, `MOUSE`, `MOUSE_X`, `MOUSE_Y`                                                                 |
+| `const unsigned int input.get.key;`, `mouse`, `mouse_x`, `mouse_y`                                                                 |
+| `void (*EVENT.ON_RESIZE)(unsigned int, unsigned int);`                                                                             |
+| `void (*event.on_resize)(unsigned int, unsigned int);`                                                                             |
+| `void (*EVENT.ON_MOVE)(int, int);`                                                                                                 |
+| `void (*event.on_move)(int, int);`                                                                                                 |
+| `void (*EVENT.ON_CLOSE)(void);`                                                                                                    |
+| `void (*event.on_close)(void);`                                                                                                    |
+| `void (*EVENT.ON_FOCUS)(void);`                                                                                                    |
+| `void (*event.on_focus)(void);`                                                                                                    |
+| `void (*EVENT.ON_BLUR)(void);`                                                                                                     |
+| `void (*event.on_blur)(void);`                                                                                                     |
+| `void (*EVENT.ON_KEY)(unsigned int);`                                                                                              |
+| `void (*event.on_key)(unsigned int);`                                                                                              |
+| `void (*EVENT.ON_MOUSE)(unsigned int, unsigned int, unsigned int);`                                                                |
+| `void (*event.on_mouse)(unsigned int, unsigned int, unsigned int);`                                                                |
+| `char *GET.LINE(unsigned int, unsigned int, unsigned int, unsigned int);`                                                          |
+| `char *get.line(unsigned int, unsigned int, unsigned int, unsigned int);`                                                          |
+| `char **GET.AREA(unsigned int, unsigned int, unsigned int, unsigned int);`                                                         |
+| `char **get.area(unsigned int, unsigned int, unsigned int, unsigned int);`                                                         |
+| `const BOOLEAN GET.ACTIVE;`, `GET.TERMINAL;`                                                                                       |
+| `const boolean get.active;`, `get.terminal;`                                                                                       |
+| `const unsigned int GET.ROWS;`, `COLUMNS`, `PIXEL_WIDTH`, `PIXEL_HEIGHT`, `COLOR`, `DEFAULT_COLOR`, `WIDTH`, `HEIGHT`              |
+| `const unsigned int get.rows;`, `columns`, `pixel_width`, `pixel_height`, `color`, `default_color`, `width`, `height`              |
+| `const int GET.X;`, `GET.Y;`                                                                                                       |
+| `const int get.x;`, `get.y;`                                                                                                       |
+| `const unsigned long GET.CURSOR.SIZE;`                                                                                             |
+| `const unsigned long get.cursor.size;`                                                                                             |
+| `const int GET.CURSOR.X;`, `GET.CURSOR.Y;`                                                                                         |
+| `const int get.cursor.x;`, `get.cursor.y;`                                                                                         |
+| `const unsigned int GET.CURSOR.COLOR;`, `GET.CURSOR.DEFAULT_COLOR;`                                                                |
+| `const unsigned int get.cursor.color;`, `get.cursor.default_color;`                                                                |
+| `const BOOLEAN GET.CURSOR.VISIBLE;`                                                                                                |
+| `const boolean get.cursor.visible;`                                                                                                |
+| `BOOLEAN HIGHLIGHTER;`                                                                                                             |
+| `boolean highlighter;`                                                                                                             |
 
 ### Constructor, destructor
 
@@ -901,13 +901,13 @@ The C++ globals `console` and `CONSOLE` use the same symbol names as the C objec
 
 ## References
 
-- [Console Functions - microsoft.com](https://learn.microsoft.com/en-us/windows/console/console-functions)
-- [SetConsoleScreenBufferSize - microsoft.com](https://learn.microsoft.com/en-us/windows/console/setconsolescreenbuffersize)
-- [SetConsoleWindowInfo - microsoft.com](https://learn.microsoft.com/en-us/windows/console/setconsolewindowinfo)
-- [SetConsoleTitle - microsoft.com](https://learn.microsoft.com/en-us/windows/console/setconsoletitle)
-- [AllocConsole - microsoft.com](https://learn.microsoft.com/en-us/windows/console/allocconsole)
-- [INPUT_RECORD structure - microsoft.com](https://learn.microsoft.com/en-us/windows/console/input-record-str)
-- [Virtual-Key Codes - microsoft.com](https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes)
-- [Keywords (export) - cppreference.com](https://en.cppreference.com/w/cpp/keyword/export)
-- [Bresenham's line algorithm - Jack E. Bresenham, IBM Systems Journal (1965)](https://ieeexplore.ieee.org/document/5388473)
-- [A Rasterizing Algorithm for Drawing Curves - Alois Zingl](http://members.chello.at/easyfilter/Bresenham.pdf)
+ - [Console Functions - microsoft.com](https://learn.microsoft.com/en-us/windows/console/console-functions)
+ - [SetConsoleScreenBufferSize - microsoft.com](https://learn.microsoft.com/en-us/windows/console/setconsolescreenbuffersize)
+ - [SetConsoleWindowInfo - microsoft.com](https://learn.microsoft.com/en-us/windows/console/setconsolewindowinfo)
+ - [SetConsoleTitle - microsoft.com](https://learn.microsoft.com/en-us/windows/console/setconsoletitle)
+ - [AllocConsole - microsoft.com](https://learn.microsoft.com/en-us/windows/console/allocconsole)
+ - [INPUT_RECORD structure - microsoft.com](https://learn.microsoft.com/en-us/windows/console/input-record-str)
+ - [Virtual-Key Codes - microsoft.com](https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes)
+ - [Keywords (export) - cppreference.com](https://en.cppreference.com/w/cpp/keyword/export)
+ - [Bresenham's line algorithm - Jack E. Bresenham, IBM Systems Journal (1965)](https://ieeexplore.ieee.org/document/5388473)
+ - [A Rasterizing Algorithm for Drawing Curves - Alois Zingl](http://members.chello.at/easyfilter/Bresenham.pdf)

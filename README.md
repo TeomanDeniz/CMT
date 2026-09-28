@@ -259,6 +259,7 @@ If you include an `H` file in both C and C++, you just get stright functions or 
  * [![][__VA_ARGS_GIF__] **VA_ARGS**][__VA_ARGS_MD__]
 
 ## ![][__LIB_GIF__] LIB
+ * [![][__SETJMP_GIF__] **SETJMP**][__SETJMP_MD__]
 
 ## ![][__OS_API_GIF__] OS_API
  * [![][__CLEAR_INSTRUCTION_CACHE_GIF__] **CLEAR_INSTRUCTION_CACHE**][__CLEAR_INSTRUCTION_CACHE_MD__]

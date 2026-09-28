@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2025/06/22 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - GPL-3.0   :: Update - 2026/09/25 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - GPL-3.0   :: Update - 2026/09/28 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -62,6 +62,7 @@
 #ifndef INCL_CMT_INLINE
 #ifndef INCL_CMT_VA_ARGS
 #ifndef INCL_CMT_CONSOLE
+#ifndef INCL_CMT_CONSOLE_OOP
 #ifndef INCL_CMT_VOLATILE
 #ifndef INCL_CMT_MAYBE_ARGS
 #ifndef INCL_CMT_SETJMP
@@ -69,6 +70,7 @@
 #endif /* !INCL_CMT_SETJMP */
 #endif /* !INCL_CMT_MAYBE_ARGS */
 #endif /* !INCL_CMT_VOLATILE */
+#endif /* !INCL_CMT_CONSOLE_OOP */
 #endif /* !INCL_CMT_CONSOLE */
 #endif /* !INCL_CMT_VA_ARGS */
 #endif /* !INCL_CMT_INLINE */
@@ -397,11 +399,23 @@
 #ifdef INCL_CMT_CONSOLE
 #include "CONSOLE.H"
 /******* """""""""""
- * object cmt_console;
- * object cmt_console	console;
+ * struct s_console;
  */
 #undef INCL_CMT_CONSOLE
 #endif /* INCL_CMT_CONSOLE */
+
+#ifdef INCL_CMT_CONSOLE_OOP
+#include "CONSOLE.HPP"
+/******* """""""""""""
+ * class cmt::console;
+ * class cmt::CONSOLE;
+ * object cmt_console;
+ * OBJECT CMT_CONSOLE;
+ * object cmt_console	console;
+ * OBJECT CMT_CONSOLE	CONSOLE;
+ */
+#undef INCL_CMT_CONSOLE_OOP
+#endif /* INCL_CMT_CONSOLE_OOP */
 /* ********************* [^] SUPER MASSIVE MODULES [^] ********************** */
 
 /* ****************************** [v] ASM [v] ******************************* */
