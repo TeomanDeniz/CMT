@@ -311,54 +311,13 @@ For example, `MOV_RBX_(IMM32)` becames `SIZEOF_MOV_RBX_` and `MOV_RAX_RBX` becam
 
 ### CPUs
 
-<details>
-<summary>
-	<img src="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/INTEL_ASM.gif">
-	<b>Intel (12925 Assembly Codes in total)</b>
-</summary>
+[![](https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/INTEL_ASM.gif) **Intel (89645 Assembly Codes in total)**](https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/ASM/INTEL.md)
 
-**Note**: `MOV_RAX_`, `ADD_RAX_`, `..._PTR_` etc. commands automatically downscale on 32/16-bit modes.
+[![](https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/ARM_ASM.gif) **ARM32 (1 Assembly Code in total)**](https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/ASM/ARM32.md)
 
-When performing jumps, you must calculate the jump offset **manually**. The jump value represents the **number of bytes to skip**, not the label itself.
+[![](https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/ARM_ASM.gif) **ARM64 (3 Assembly Code in total)**](https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/ASM/ARM64.md)
 
-* Offsets can be **positive or negative**. For example, to jump backward, use `-(size_of_forward_code + size_of_jump_instruction)`.
-* All jump instructions (`JMP`, `JE`, etc.) work with **signed values**.
-
-Key points:
-
-* `JE_SHORT_` and `JMP_SHORT_` use **byte offsets**, so you must include the size of any instructions between the jump and target.
-* Counting instruction sizes (`SIZEOF_...`) ensures your jump lands exactly at the intended segment.
-
-Example:
-
-```c
-SECTION (void, test, (int input))
-	CMP_ARG1_(1)                             // cmp (first_argument) (Cross OS & ABI), 1
-	JE_SHORT_(SIZEOF_MOV_RAX_ + SIZEOF_JMP_) // je layer_50
-	MOV_RAX_(42)                             // mov rax, 42
-	JMP_SHORT_(SIZEOF_MOV_RAX_)              // jmp layer_end
-	// layer_50:                             // layer_50:
-	MOV_RAX_(50)                             // mov rax, 50
-	// layer_end:                            // layer_end:
-	RET                                      // ret
-END
-```
-
-Icons at the list works like that:
-
-- **(✅)** Exists.
-- **(❌)** Doesn't exist.
-- **(⚠️)** Doesn't exist but automatically loweres to smaller/bigger architecture.
-
-## [Go to the list of Intel Commands](https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/TXT/ASM_LIST/INTEL.txt)
-
-</details>
-
-[![](https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/ARM_ASM.gif) **ARM32 (1 Assembly Code in total)**](https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/TXT/ASM_LIST/ARM32.txt)
-
-[![](https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/ARM_ASM.gif) **ARM64 (3 Assembly Code in total)**](https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/TXT/ASM_LIST/ARM64.txt)
-
-[![](https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/POWERPC_ASM.gif) **PowerPC (2 Assembly Code in total)**](https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/TXT/ASM_LIST/POWERPC.txt)
+[![](https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/POWERPC_ASM.gif) **PowerPC (2 Assembly Code in total)**](https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/ASM/POWERPC.md)
 
 ----
 

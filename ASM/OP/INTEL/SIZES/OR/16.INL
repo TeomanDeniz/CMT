@@ -1,0 +1,814 @@
+/* ************************ [v] 8-BIT REGISTERS [v] ************************* */
+#ifdef __SYSTEM_16_BIT__
+#define SIZEOF_OR_AL_AL 2
+#define SIZEOF_OR_AL_BL 2
+#define SIZEOF_OR_AL_CL 2
+#define SIZEOF_OR_AL_DL 2
+
+#define SIZEOF_OR_BL_AL 2
+#define SIZEOF_OR_BL_BL 2
+#define SIZEOF_OR_BL_CL 2
+#define SIZEOF_OR_BL_DL 2
+
+#define SIZEOF_OR_CL_AL 2
+#define SIZEOF_OR_CL_BL 2
+#define SIZEOF_OR_CL_CL 2
+#define SIZEOF_OR_CL_DL 2
+
+#define SIZEOF_OR_DL_AL 2
+#define SIZEOF_OR_DL_BL 2
+#define SIZEOF_OR_DL_CL 2
+#define SIZEOF_OR_DL_DL 2
+
+#define SIZEOF_OR_AL_ 3
+#define SIZEOF_OR_BL_ 3
+#define SIZEOF_OR_CL_ 3
+#define SIZEOF_OR_DL_ 3
+#endif /* __SYSTEM_16_BIT__ */
+
+#ifdef __SYSTEM_32_BIT__
+#define SIZEOF_OR_AL_AL 2
+#define SIZEOF_OR_AL_BL 2
+#define SIZEOF_OR_AL_CL 2
+#define SIZEOF_OR_AL_DL 2
+
+#define SIZEOF_OR_BL_AL 2
+#define SIZEOF_OR_BL_BL 2
+#define SIZEOF_OR_BL_CL 2
+#define SIZEOF_OR_BL_DL 2
+
+#define SIZEOF_OR_CL_AL 2
+#define SIZEOF_OR_CL_BL 2
+#define SIZEOF_OR_CL_CL 2
+#define SIZEOF_OR_CL_DL 2
+
+#define SIZEOF_OR_DL_AL 2
+#define SIZEOF_OR_DL_BL 2
+#define SIZEOF_OR_DL_CL 2
+#define SIZEOF_OR_DL_DL 2
+
+#define SIZEOF_OR_AL_ 3
+#define SIZEOF_OR_BL_ 3
+#define SIZEOF_OR_CL_ 3
+#define SIZEOF_OR_DL_ 3
+#endif /* __SYSTEM_32_BIT__ */
+
+#ifdef __SYSTEM_64_BIT__
+#define SIZEOF_OR_AL_AL 2
+#define SIZEOF_OR_AL_BL 2
+#define SIZEOF_OR_AL_CL 2
+#define SIZEOF_OR_AL_DL 2
+#define SIZEOF_OR_AL_DIL 3
+#define SIZEOF_OR_AL_SIL 3
+#define SIZEOF_OR_AL_BPL 3
+#define SIZEOF_OR_AL_SPL 3
+#define SIZEOF_OR_AL_R8B 3
+#define SIZEOF_OR_AL_R9B 3
+#define SIZEOF_OR_AL_R10B 3
+#define SIZEOF_OR_AL_R11B 3
+#define SIZEOF_OR_AL_R12B 3
+#define SIZEOF_OR_AL_R13B 3
+#define SIZEOF_OR_AL_R14B 3
+#define SIZEOF_OR_AL_R15B 3
+
+#define SIZEOF_OR_BL_AL 2
+#define SIZEOF_OR_BL_BL 2
+#define SIZEOF_OR_BL_CL 2
+#define SIZEOF_OR_BL_DL 2
+#define SIZEOF_OR_BL_DIL 3
+#define SIZEOF_OR_BL_SIL 3
+#define SIZEOF_OR_BL_BPL 3
+#define SIZEOF_OR_BL_SPL 3
+#define SIZEOF_OR_BL_R8B 3
+#define SIZEOF_OR_BL_R9B 3
+#define SIZEOF_OR_BL_R10B 3
+#define SIZEOF_OR_BL_R11B 3
+#define SIZEOF_OR_BL_R12B 3
+#define SIZEOF_OR_BL_R13B 3
+#define SIZEOF_OR_BL_R14B 3
+#define SIZEOF_OR_BL_R15B 3
+
+#define SIZEOF_OR_CL_AL 2
+#define SIZEOF_OR_CL_BL 2
+#define SIZEOF_OR_CL_CL 2
+#define SIZEOF_OR_CL_DL 2
+#define SIZEOF_OR_CL_DIL 3
+#define SIZEOF_OR_CL_SIL 3
+#define SIZEOF_OR_CL_BPL 3
+#define SIZEOF_OR_CL_SPL 3
+#define SIZEOF_OR_CL_R8B 3
+#define SIZEOF_OR_CL_R9B 3
+#define SIZEOF_OR_CL_R10B 3
+#define SIZEOF_OR_CL_R11B 3
+#define SIZEOF_OR_CL_R12B 3
+#define SIZEOF_OR_CL_R13B 3
+#define SIZEOF_OR_CL_R14B 3
+#define SIZEOF_OR_CL_R15B 3
+
+#define SIZEOF_OR_DL_AL 2
+#define SIZEOF_OR_DL_BL 2
+#define SIZEOF_OR_DL_CL 2
+#define SIZEOF_OR_DL_DL 2
+#define SIZEOF_OR_DL_DIL 3
+#define SIZEOF_OR_DL_SIL 3
+#define SIZEOF_OR_DL_BPL 3
+#define SIZEOF_OR_DL_SPL 3
+#define SIZEOF_OR_DL_R8B 3
+#define SIZEOF_OR_DL_R9B 3
+#define SIZEOF_OR_DL_R10B 3
+#define SIZEOF_OR_DL_R11B 3
+#define SIZEOF_OR_DL_R12B 3
+#define SIZEOF_OR_DL_R13B 3
+#define SIZEOF_OR_DL_R14B 3
+#define SIZEOF_OR_DL_R15B 3
+
+#define SIZEOF_OR_DIL_AL 3
+#define SIZEOF_OR_DIL_BL 3
+#define SIZEOF_OR_DIL_CL 3
+#define SIZEOF_OR_DIL_DL 3
+#define SIZEOF_OR_DIL_DIL 3
+#define SIZEOF_OR_DIL_SIL 3
+#define SIZEOF_OR_DIL_BPL 3
+#define SIZEOF_OR_DIL_SPL 3
+#define SIZEOF_OR_DIL_R8B 3
+#define SIZEOF_OR_DIL_R9B 3
+#define SIZEOF_OR_DIL_R10B 3
+#define SIZEOF_OR_DIL_R11B 3
+#define SIZEOF_OR_DIL_R12B 3
+#define SIZEOF_OR_DIL_R13B 3
+#define SIZEOF_OR_DIL_R14B 3
+#define SIZEOF_OR_DIL_R15B 3
+
+#define SIZEOF_OR_SIL_AL 3
+#define SIZEOF_OR_SIL_BL 3
+#define SIZEOF_OR_SIL_CL 3
+#define SIZEOF_OR_SIL_DL 3
+#define SIZEOF_OR_SIL_DIL 3
+#define SIZEOF_OR_SIL_SIL 3
+#define SIZEOF_OR_SIL_BPL 3
+#define SIZEOF_OR_SIL_SPL 3
+#define SIZEOF_OR_SIL_R8B 3
+#define SIZEOF_OR_SIL_R9B 3
+#define SIZEOF_OR_SIL_R10B 3
+#define SIZEOF_OR_SIL_R11B 3
+#define SIZEOF_OR_SIL_R12B 3
+#define SIZEOF_OR_SIL_R13B 3
+#define SIZEOF_OR_SIL_R14B 3
+#define SIZEOF_OR_SIL_R15B 3
+
+#define SIZEOF_OR_BPL_AL 3
+#define SIZEOF_OR_BPL_BL 3
+#define SIZEOF_OR_BPL_CL 3
+#define SIZEOF_OR_BPL_DL 3
+#define SIZEOF_OR_BPL_DIL 3
+#define SIZEOF_OR_BPL_SIL 3
+#define SIZEOF_OR_BPL_BPL 3
+#define SIZEOF_OR_BPL_SPL 3
+#define SIZEOF_OR_BPL_R8B 3
+#define SIZEOF_OR_BPL_R9B 3
+#define SIZEOF_OR_BPL_R10B 3
+#define SIZEOF_OR_BPL_R11B 3
+#define SIZEOF_OR_BPL_R12B 3
+#define SIZEOF_OR_BPL_R13B 3
+#define SIZEOF_OR_BPL_R14B 3
+#define SIZEOF_OR_BPL_R15B 3
+
+#define SIZEOF_OR_SPL_AL 3
+#define SIZEOF_OR_SPL_BL 3
+#define SIZEOF_OR_SPL_CL 3
+#define SIZEOF_OR_SPL_DL 3
+#define SIZEOF_OR_SPL_DIL 3
+#define SIZEOF_OR_SPL_SIL 3
+#define SIZEOF_OR_SPL_BPL 3
+#define SIZEOF_OR_SPL_SPL 3
+#define SIZEOF_OR_SPL_R8B 3
+#define SIZEOF_OR_SPL_R9B 3
+#define SIZEOF_OR_SPL_R10B 3
+#define SIZEOF_OR_SPL_R11B 3
+#define SIZEOF_OR_SPL_R12B 3
+#define SIZEOF_OR_SPL_R13B 3
+#define SIZEOF_OR_SPL_R14B 3
+#define SIZEOF_OR_SPL_R15B 3
+
+#define SIZEOF_OR_R8B_AL 3
+#define SIZEOF_OR_R8B_BL 3
+#define SIZEOF_OR_R8B_CL 3
+#define SIZEOF_OR_R8B_DL 3
+#define SIZEOF_OR_R8B_DIL 3
+#define SIZEOF_OR_R8B_SIL 3
+#define SIZEOF_OR_R8B_BPL 3
+#define SIZEOF_OR_R8B_SPL 3
+#define SIZEOF_OR_R8B_R8B 3
+#define SIZEOF_OR_R8B_R9B 3
+#define SIZEOF_OR_R8B_R10B 3
+#define SIZEOF_OR_R8B_R11B 3
+#define SIZEOF_OR_R8B_R12B 3
+#define SIZEOF_OR_R8B_R13B 3
+#define SIZEOF_OR_R8B_R14B 3
+#define SIZEOF_OR_R8B_R15B 3
+
+#define SIZEOF_OR_R9B_AL 3
+#define SIZEOF_OR_R9B_BL 3
+#define SIZEOF_OR_R9B_CL 3
+#define SIZEOF_OR_R9B_DL 3
+#define SIZEOF_OR_R9B_DIL 3
+#define SIZEOF_OR_R9B_SIL 3
+#define SIZEOF_OR_R9B_BPL 3
+#define SIZEOF_OR_R9B_SPL 3
+#define SIZEOF_OR_R9B_R8B 3
+#define SIZEOF_OR_R9B_R9B 3
+#define SIZEOF_OR_R9B_R10B 3
+#define SIZEOF_OR_R9B_R11B 3
+#define SIZEOF_OR_R9B_R12B 3
+#define SIZEOF_OR_R9B_R13B 3
+#define SIZEOF_OR_R9B_R14B 3
+#define SIZEOF_OR_R9B_R15B 3
+
+#define SIZEOF_OR_R10B_AL 3
+#define SIZEOF_OR_R10B_BL 3
+#define SIZEOF_OR_R10B_CL 3
+#define SIZEOF_OR_R10B_DL 3
+#define SIZEOF_OR_R10B_DIL 3
+#define SIZEOF_OR_R10B_SIL 3
+#define SIZEOF_OR_R10B_BPL 3
+#define SIZEOF_OR_R10B_SPL 3
+#define SIZEOF_OR_R10B_R8B 3
+#define SIZEOF_OR_R10B_R9B 3
+#define SIZEOF_OR_R10B_R10B 3
+#define SIZEOF_OR_R10B_R11B 3
+#define SIZEOF_OR_R10B_R12B 3
+#define SIZEOF_OR_R10B_R13B 3
+#define SIZEOF_OR_R10B_R14B 3
+#define SIZEOF_OR_R10B_R15B 3
+
+#define SIZEOF_OR_R11B_AL 3
+#define SIZEOF_OR_R11B_BL 3
+#define SIZEOF_OR_R11B_CL 3
+#define SIZEOF_OR_R11B_DL 3
+#define SIZEOF_OR_R11B_DIL 3
+#define SIZEOF_OR_R11B_SIL 3
+#define SIZEOF_OR_R11B_BPL 3
+#define SIZEOF_OR_R11B_SPL 3
+#define SIZEOF_OR_R11B_R8B 3
+#define SIZEOF_OR_R11B_R9B 3
+#define SIZEOF_OR_R11B_R10B 3
+#define SIZEOF_OR_R11B_R11B 3
+#define SIZEOF_OR_R11B_R12B 3
+#define SIZEOF_OR_R11B_R13B 3
+#define SIZEOF_OR_R11B_R14B 3
+#define SIZEOF_OR_R11B_R15B 3
+
+#define SIZEOF_OR_R12B_AL 3
+#define SIZEOF_OR_R12B_BL 3
+#define SIZEOF_OR_R12B_CL 3
+#define SIZEOF_OR_R12B_DL 3
+#define SIZEOF_OR_R12B_DIL 3
+#define SIZEOF_OR_R12B_SIL 3
+#define SIZEOF_OR_R12B_BPL 3
+#define SIZEOF_OR_R12B_SPL 3
+#define SIZEOF_OR_R12B_R8B 3
+#define SIZEOF_OR_R12B_R9B 3
+#define SIZEOF_OR_R12B_R10B 3
+#define SIZEOF_OR_R12B_R11B 3
+#define SIZEOF_OR_R12B_R12B 3
+#define SIZEOF_OR_R12B_R13B 3
+#define SIZEOF_OR_R12B_R14B 3
+#define SIZEOF_OR_R12B_R15B 3
+
+#define SIZEOF_OR_R13B_AL 3
+#define SIZEOF_OR_R13B_BL 3
+#define SIZEOF_OR_R13B_CL 3
+#define SIZEOF_OR_R13B_DL 3
+#define SIZEOF_OR_R13B_DIL 3
+#define SIZEOF_OR_R13B_SIL 3
+#define SIZEOF_OR_R13B_BPL 3
+#define SIZEOF_OR_R13B_SPL 3
+#define SIZEOF_OR_R13B_R8B 3
+#define SIZEOF_OR_R13B_R9B 3
+#define SIZEOF_OR_R13B_R10B 3
+#define SIZEOF_OR_R13B_R11B 3
+#define SIZEOF_OR_R13B_R12B 3
+#define SIZEOF_OR_R13B_R13B 3
+#define SIZEOF_OR_R13B_R14B 3
+#define SIZEOF_OR_R13B_R15B 3
+
+#define SIZEOF_OR_R14B_AL 3
+#define SIZEOF_OR_R14B_BL 3
+#define SIZEOF_OR_R14B_CL 3
+#define SIZEOF_OR_R14B_DL 3
+#define SIZEOF_OR_R14B_DIL 3
+#define SIZEOF_OR_R14B_SIL 3
+#define SIZEOF_OR_R14B_BPL 3
+#define SIZEOF_OR_R14B_SPL 3
+#define SIZEOF_OR_R14B_R8B 3
+#define SIZEOF_OR_R14B_R9B 3
+#define SIZEOF_OR_R14B_R10B 3
+#define SIZEOF_OR_R14B_R11B 3
+#define SIZEOF_OR_R14B_R12B 3
+#define SIZEOF_OR_R14B_R13B 3
+#define SIZEOF_OR_R14B_R14B 3
+#define SIZEOF_OR_R14B_R15B 3
+
+#define SIZEOF_OR_R15B_AL 3
+#define SIZEOF_OR_R15B_BL 3
+#define SIZEOF_OR_R15B_CL 3
+#define SIZEOF_OR_R15B_DL 3
+#define SIZEOF_OR_R15B_DIL 3
+#define SIZEOF_OR_R15B_SIL 3
+#define SIZEOF_OR_R15B_BPL 3
+#define SIZEOF_OR_R15B_SPL 3
+#define SIZEOF_OR_R15B_R8B 3
+#define SIZEOF_OR_R15B_R9B 3
+#define SIZEOF_OR_R15B_R10B 3
+#define SIZEOF_OR_R15B_R11B 3
+#define SIZEOF_OR_R15B_R12B 3
+#define SIZEOF_OR_R15B_R13B 3
+#define SIZEOF_OR_R15B_R14B 3
+#define SIZEOF_OR_R15B_R15B 3
+
+#define SIZEOF_OR_AL_ 3
+#define SIZEOF_OR_BL_ 3
+#define SIZEOF_OR_CL_ 3
+#define SIZEOF_OR_DL_ 3
+#define SIZEOF_OR_DIL_ 4
+#define SIZEOF_OR_SIL_ 4
+#define SIZEOF_OR_BPL_ 4
+#define SIZEOF_OR_SPL_ 4
+#define SIZEOF_OR_R8B_ 4
+#define SIZEOF_OR_R9B_ 4
+#define SIZEOF_OR_R10B_ 4
+#define SIZEOF_OR_R11B_ 4
+#define SIZEOF_OR_R12B_ 4
+#define SIZEOF_OR_R13B_ 4
+#define SIZEOF_OR_R14B_ 4
+#define SIZEOF_OR_R15B_ 4
+#endif /* __SYSTEM_64_BIT__ */
+/* ************************ [^] 8-BIT REGISTERS [^] ************************* */
+
+/* ************************ [v] 16-BIT REGISTERS [v] ************************ */
+#ifdef __SYSTEM_16_BIT__
+#define SIZEOF_OR_AX_AX 2
+#define SIZEOF_OR_AX_BX 2
+#define SIZEOF_OR_AX_CX 2
+#define SIZEOF_OR_AX_DX 2
+#define SIZEOF_OR_AX_DI 2
+#define SIZEOF_OR_AX_SI 2
+#define SIZEOF_OR_AX_BP 2
+#define SIZEOF_OR_AX_SP 2
+
+#define SIZEOF_OR_BX_AX 2
+#define SIZEOF_OR_BX_BX 2
+#define SIZEOF_OR_BX_CX 2
+#define SIZEOF_OR_BX_DX 2
+#define SIZEOF_OR_BX_DI 2
+#define SIZEOF_OR_BX_SI 2
+#define SIZEOF_OR_BX_BP 2
+#define SIZEOF_OR_BX_SP 2
+
+#define SIZEOF_OR_CX_AX 2
+#define SIZEOF_OR_CX_BX 2
+#define SIZEOF_OR_CX_CX 2
+#define SIZEOF_OR_CX_DX 2
+#define SIZEOF_OR_CX_DI 2
+#define SIZEOF_OR_CX_SI 2
+#define SIZEOF_OR_CX_BP 2
+#define SIZEOF_OR_CX_SP 2
+
+#define SIZEOF_OR_DX_AX 2
+#define SIZEOF_OR_DX_BX 2
+#define SIZEOF_OR_DX_CX 2
+#define SIZEOF_OR_DX_DX 2
+#define SIZEOF_OR_DX_DI 2
+#define SIZEOF_OR_DX_SI 2
+#define SIZEOF_OR_DX_BP 2
+#define SIZEOF_OR_DX_SP 2
+
+#define SIZEOF_OR_DI_AX 2
+#define SIZEOF_OR_DI_BX 2
+#define SIZEOF_OR_DI_CX 2
+#define SIZEOF_OR_DI_DX 2
+#define SIZEOF_OR_DI_DI 2
+#define SIZEOF_OR_DI_SI 2
+#define SIZEOF_OR_DI_BP 2
+#define SIZEOF_OR_DI_SP 2
+
+#define SIZEOF_OR_SI_AX 2
+#define SIZEOF_OR_SI_BX 2
+#define SIZEOF_OR_SI_CX 2
+#define SIZEOF_OR_SI_DX 2
+#define SIZEOF_OR_SI_DI 2
+#define SIZEOF_OR_SI_SI 2
+#define SIZEOF_OR_SI_BP 2
+#define SIZEOF_OR_SI_SP 2
+
+#define SIZEOF_OR_BP_AX 2
+#define SIZEOF_OR_BP_BX 2
+#define SIZEOF_OR_BP_CX 2
+#define SIZEOF_OR_BP_DX 2
+#define SIZEOF_OR_BP_DI 2
+#define SIZEOF_OR_BP_SI 2
+#define SIZEOF_OR_BP_BP 2
+#define SIZEOF_OR_BP_SP 2
+
+#define SIZEOF_OR_SP_AX 2
+#define SIZEOF_OR_SP_BX 2
+#define SIZEOF_OR_SP_CX 2
+#define SIZEOF_OR_SP_DX 2
+#define SIZEOF_OR_SP_DI 2
+#define SIZEOF_OR_SP_SI 2
+#define SIZEOF_OR_SP_BP 2
+#define SIZEOF_OR_SP_SP 2
+
+#define SIZEOF_OR_AX_ 4
+#define SIZEOF_OR_BX_ 4
+#define SIZEOF_OR_CX_ 4
+#define SIZEOF_OR_DX_ 4
+#define SIZEOF_OR_DI_ 4
+#define SIZEOF_OR_SI_ 4
+#define SIZEOF_OR_BP_ 4
+#define SIZEOF_OR_SP_ 4
+#endif /* __SYSTEM_16_BIT__ */
+
+#ifdef __SYSTEM_32_BIT__
+#define SIZEOF_OR_AX_AX 3
+#define SIZEOF_OR_AX_BX 3
+#define SIZEOF_OR_AX_CX 3
+#define SIZEOF_OR_AX_DX 3
+#define SIZEOF_OR_AX_DI 3
+#define SIZEOF_OR_AX_SI 3
+#define SIZEOF_OR_AX_BP 3
+#define SIZEOF_OR_AX_SP 3
+
+#define SIZEOF_OR_BX_AX 3
+#define SIZEOF_OR_BX_BX 3
+#define SIZEOF_OR_BX_CX 3
+#define SIZEOF_OR_BX_DX 3
+#define SIZEOF_OR_BX_DI 3
+#define SIZEOF_OR_BX_SI 3
+#define SIZEOF_OR_BX_BP 3
+#define SIZEOF_OR_BX_SP 3
+
+#define SIZEOF_OR_CX_AX 3
+#define SIZEOF_OR_CX_BX 3
+#define SIZEOF_OR_CX_CX 3
+#define SIZEOF_OR_CX_DX 3
+#define SIZEOF_OR_CX_DI 3
+#define SIZEOF_OR_CX_SI 3
+#define SIZEOF_OR_CX_BP 3
+#define SIZEOF_OR_CX_SP 3
+
+#define SIZEOF_OR_DX_AX 3
+#define SIZEOF_OR_DX_BX 3
+#define SIZEOF_OR_DX_CX 3
+#define SIZEOF_OR_DX_DX 3
+#define SIZEOF_OR_DX_DI 3
+#define SIZEOF_OR_DX_SI 3
+#define SIZEOF_OR_DX_BP 3
+#define SIZEOF_OR_DX_SP 3
+
+#define SIZEOF_OR_DI_AX 3
+#define SIZEOF_OR_DI_BX 3
+#define SIZEOF_OR_DI_CX 3
+#define SIZEOF_OR_DI_DX 3
+#define SIZEOF_OR_DI_DI 3
+#define SIZEOF_OR_DI_SI 3
+#define SIZEOF_OR_DI_BP 3
+#define SIZEOF_OR_DI_SP 3
+
+#define SIZEOF_OR_SI_AX 3
+#define SIZEOF_OR_SI_BX 3
+#define SIZEOF_OR_SI_CX 3
+#define SIZEOF_OR_SI_DX 3
+#define SIZEOF_OR_SI_DI 3
+#define SIZEOF_OR_SI_SI 3
+#define SIZEOF_OR_SI_BP 3
+#define SIZEOF_OR_SI_SP 3
+
+#define SIZEOF_OR_BP_AX 3
+#define SIZEOF_OR_BP_BX 3
+#define SIZEOF_OR_BP_CX 3
+#define SIZEOF_OR_BP_DX 3
+#define SIZEOF_OR_BP_DI 3
+#define SIZEOF_OR_BP_SI 3
+#define SIZEOF_OR_BP_BP 3
+#define SIZEOF_OR_BP_SP 3
+
+#define SIZEOF_OR_SP_AX 3
+#define SIZEOF_OR_SP_BX 3
+#define SIZEOF_OR_SP_CX 3
+#define SIZEOF_OR_SP_DX 3
+#define SIZEOF_OR_SP_DI 3
+#define SIZEOF_OR_SP_SI 3
+#define SIZEOF_OR_SP_BP 3
+#define SIZEOF_OR_SP_SP 3
+
+#define SIZEOF_OR_AX_ 5
+#define SIZEOF_OR_BX_ 5
+#define SIZEOF_OR_CX_ 5
+#define SIZEOF_OR_DX_ 5
+#define SIZEOF_OR_DI_ 5
+#define SIZEOF_OR_SI_ 5
+#define SIZEOF_OR_BP_ 5
+#define SIZEOF_OR_SP_ 5
+#endif /* __SYSTEM_32_BIT__ */
+
+#ifdef __SYSTEM_64_BIT__
+#define SIZEOF_OR_AX_AX 3
+#define SIZEOF_OR_AX_BX 3
+#define SIZEOF_OR_AX_CX 3
+#define SIZEOF_OR_AX_DX 3
+#define SIZEOF_OR_AX_DI 3
+#define SIZEOF_OR_AX_SI 3
+#define SIZEOF_OR_AX_BP 3
+#define SIZEOF_OR_AX_SP 3
+#define SIZEOF_OR_AX_R8W 4
+#define SIZEOF_OR_AX_R9W 4
+#define SIZEOF_OR_AX_R10W 4
+#define SIZEOF_OR_AX_R11W 4
+#define SIZEOF_OR_AX_R12W 4
+#define SIZEOF_OR_AX_R13W 4
+#define SIZEOF_OR_AX_R14W 4
+#define SIZEOF_OR_AX_R15W 4
+
+#define SIZEOF_OR_BX_AX 3
+#define SIZEOF_OR_BX_BX 3
+#define SIZEOF_OR_BX_CX 3
+#define SIZEOF_OR_BX_DX 3
+#define SIZEOF_OR_BX_DI 3
+#define SIZEOF_OR_BX_SI 3
+#define SIZEOF_OR_BX_BP 3
+#define SIZEOF_OR_BX_SP 3
+#define SIZEOF_OR_BX_R8W 4
+#define SIZEOF_OR_BX_R9W 4
+#define SIZEOF_OR_BX_R10W 4
+#define SIZEOF_OR_BX_R11W 4
+#define SIZEOF_OR_BX_R12W 4
+#define SIZEOF_OR_BX_R13W 4
+#define SIZEOF_OR_BX_R14W 4
+#define SIZEOF_OR_BX_R15W 4
+
+#define SIZEOF_OR_CX_AX 3
+#define SIZEOF_OR_CX_BX 3
+#define SIZEOF_OR_CX_CX 3
+#define SIZEOF_OR_CX_DX 3
+#define SIZEOF_OR_CX_DI 3
+#define SIZEOF_OR_CX_SI 3
+#define SIZEOF_OR_CX_BP 3
+#define SIZEOF_OR_CX_SP 3
+#define SIZEOF_OR_CX_R8W 4
+#define SIZEOF_OR_CX_R9W 4
+#define SIZEOF_OR_CX_R10W 4
+#define SIZEOF_OR_CX_R11W 4
+#define SIZEOF_OR_CX_R12W 4
+#define SIZEOF_OR_CX_R13W 4
+#define SIZEOF_OR_CX_R14W 4
+#define SIZEOF_OR_CX_R15W 4
+
+#define SIZEOF_OR_DX_AX 3
+#define SIZEOF_OR_DX_BX 3
+#define SIZEOF_OR_DX_CX 3
+#define SIZEOF_OR_DX_DX 3
+#define SIZEOF_OR_DX_DI 3
+#define SIZEOF_OR_DX_SI 3
+#define SIZEOF_OR_DX_BP 3
+#define SIZEOF_OR_DX_SP 3
+#define SIZEOF_OR_DX_R8W 4
+#define SIZEOF_OR_DX_R9W 4
+#define SIZEOF_OR_DX_R10W 4
+#define SIZEOF_OR_DX_R11W 4
+#define SIZEOF_OR_DX_R12W 4
+#define SIZEOF_OR_DX_R13W 4
+#define SIZEOF_OR_DX_R14W 4
+#define SIZEOF_OR_DX_R15W 4
+
+#define SIZEOF_OR_DI_AX 3
+#define SIZEOF_OR_DI_BX 3
+#define SIZEOF_OR_DI_CX 3
+#define SIZEOF_OR_DI_DX 3
+#define SIZEOF_OR_DI_DI 3
+#define SIZEOF_OR_DI_SI 3
+#define SIZEOF_OR_DI_BP 3
+#define SIZEOF_OR_DI_SP 3
+#define SIZEOF_OR_DI_R8W 4
+#define SIZEOF_OR_DI_R9W 4
+#define SIZEOF_OR_DI_R10W 4
+#define SIZEOF_OR_DI_R11W 4
+#define SIZEOF_OR_DI_R12W 4
+#define SIZEOF_OR_DI_R13W 4
+#define SIZEOF_OR_DI_R14W 4
+#define SIZEOF_OR_DI_R15W 4
+
+#define SIZEOF_OR_SI_AX 3
+#define SIZEOF_OR_SI_BX 3
+#define SIZEOF_OR_SI_CX 3
+#define SIZEOF_OR_SI_DX 3
+#define SIZEOF_OR_SI_DI 3
+#define SIZEOF_OR_SI_SI 3
+#define SIZEOF_OR_SI_BP 3
+#define SIZEOF_OR_SI_SP 3
+#define SIZEOF_OR_SI_R8W 4
+#define SIZEOF_OR_SI_R9W 4
+#define SIZEOF_OR_SI_R10W 4
+#define SIZEOF_OR_SI_R11W 4
+#define SIZEOF_OR_SI_R12W 4
+#define SIZEOF_OR_SI_R13W 4
+#define SIZEOF_OR_SI_R14W 4
+#define SIZEOF_OR_SI_R15W 4
+
+#define SIZEOF_OR_BP_AX 3
+#define SIZEOF_OR_BP_BX 3
+#define SIZEOF_OR_BP_CX 3
+#define SIZEOF_OR_BP_DX 3
+#define SIZEOF_OR_BP_DI 3
+#define SIZEOF_OR_BP_SI 3
+#define SIZEOF_OR_BP_BP 3
+#define SIZEOF_OR_BP_SP 3
+#define SIZEOF_OR_BP_R8W 4
+#define SIZEOF_OR_BP_R9W 4
+#define SIZEOF_OR_BP_R10W 4
+#define SIZEOF_OR_BP_R11W 4
+#define SIZEOF_OR_BP_R12W 4
+#define SIZEOF_OR_BP_R13W 4
+#define SIZEOF_OR_BP_R14W 4
+#define SIZEOF_OR_BP_R15W 4
+
+#define SIZEOF_OR_SP_AX 3
+#define SIZEOF_OR_SP_BX 3
+#define SIZEOF_OR_SP_CX 3
+#define SIZEOF_OR_SP_DX 3
+#define SIZEOF_OR_SP_DI 3
+#define SIZEOF_OR_SP_SI 3
+#define SIZEOF_OR_SP_BP 3
+#define SIZEOF_OR_SP_SP 3
+#define SIZEOF_OR_SP_R8W 4
+#define SIZEOF_OR_SP_R9W 4
+#define SIZEOF_OR_SP_R10W 4
+#define SIZEOF_OR_SP_R11W 4
+#define SIZEOF_OR_SP_R12W 4
+#define SIZEOF_OR_SP_R13W 4
+#define SIZEOF_OR_SP_R14W 4
+#define SIZEOF_OR_SP_R15W 4
+
+#define SIZEOF_OR_R8W_AX 4
+#define SIZEOF_OR_R8W_BX 4
+#define SIZEOF_OR_R8W_CX 4
+#define SIZEOF_OR_R8W_DX 4
+#define SIZEOF_OR_R8W_DI 4
+#define SIZEOF_OR_R8W_SI 4
+#define SIZEOF_OR_R8W_BP 4
+#define SIZEOF_OR_R8W_SP 4
+#define SIZEOF_OR_R8W_R8W 4
+#define SIZEOF_OR_R8W_R9W 4
+#define SIZEOF_OR_R8W_R10W 4
+#define SIZEOF_OR_R8W_R11W 4
+#define SIZEOF_OR_R8W_R12W 4
+#define SIZEOF_OR_R8W_R13W 4
+#define SIZEOF_OR_R8W_R14W 4
+#define SIZEOF_OR_R8W_R15W 4
+
+#define SIZEOF_OR_R9W_AX 4
+#define SIZEOF_OR_R9W_BX 4
+#define SIZEOF_OR_R9W_CX 4
+#define SIZEOF_OR_R9W_DX 4
+#define SIZEOF_OR_R9W_DI 4
+#define SIZEOF_OR_R9W_SI 4
+#define SIZEOF_OR_R9W_BP 4
+#define SIZEOF_OR_R9W_SP 4
+#define SIZEOF_OR_R9W_R8W 4
+#define SIZEOF_OR_R9W_R9W 4
+#define SIZEOF_OR_R9W_R10W 4
+#define SIZEOF_OR_R9W_R11W 4
+#define SIZEOF_OR_R9W_R12W 4
+#define SIZEOF_OR_R9W_R13W 4
+#define SIZEOF_OR_R9W_R14W 4
+#define SIZEOF_OR_R9W_R15W 4
+
+#define SIZEOF_OR_R10W_AX 4
+#define SIZEOF_OR_R10W_BX 4
+#define SIZEOF_OR_R10W_CX 4
+#define SIZEOF_OR_R10W_DX 4
+#define SIZEOF_OR_R10W_DI 4
+#define SIZEOF_OR_R10W_SI 4
+#define SIZEOF_OR_R10W_BP 4
+#define SIZEOF_OR_R10W_SP 4
+#define SIZEOF_OR_R10W_R8W 4
+#define SIZEOF_OR_R10W_R9W 4
+#define SIZEOF_OR_R10W_R10W 4
+#define SIZEOF_OR_R10W_R11W 4
+#define SIZEOF_OR_R10W_R12W 4
+#define SIZEOF_OR_R10W_R13W 4
+#define SIZEOF_OR_R10W_R14W 4
+#define SIZEOF_OR_R10W_R15W 4
+
+#define SIZEOF_OR_R11W_AX 4
+#define SIZEOF_OR_R11W_BX 4
+#define SIZEOF_OR_R11W_CX 4
+#define SIZEOF_OR_R11W_DX 4
+#define SIZEOF_OR_R11W_DI 4
+#define SIZEOF_OR_R11W_SI 4
+#define SIZEOF_OR_R11W_BP 4
+#define SIZEOF_OR_R11W_SP 4
+#define SIZEOF_OR_R11W_R8W 4
+#define SIZEOF_OR_R11W_R9W 4
+#define SIZEOF_OR_R11W_R10W 4
+#define SIZEOF_OR_R11W_R11W 4
+#define SIZEOF_OR_R11W_R12W 4
+#define SIZEOF_OR_R11W_R13W 4
+#define SIZEOF_OR_R11W_R14W 4
+#define SIZEOF_OR_R11W_R15W 4
+
+#define SIZEOF_OR_R12W_AX 4
+#define SIZEOF_OR_R12W_BX 4
+#define SIZEOF_OR_R12W_CX 4
+#define SIZEOF_OR_R12W_DX 4
+#define SIZEOF_OR_R12W_DI 4
+#define SIZEOF_OR_R12W_SI 4
+#define SIZEOF_OR_R12W_BP 4
+#define SIZEOF_OR_R12W_SP 4
+#define SIZEOF_OR_R12W_R8W 4
+#define SIZEOF_OR_R12W_R9W 4
+#define SIZEOF_OR_R12W_R10W 4
+#define SIZEOF_OR_R12W_R11W 4
+#define SIZEOF_OR_R12W_R12W 4
+#define SIZEOF_OR_R12W_R13W 4
+#define SIZEOF_OR_R12W_R14W 4
+#define SIZEOF_OR_R12W_R15W 4
+
+#define SIZEOF_OR_R13W_AX 4
+#define SIZEOF_OR_R13W_BX 4
+#define SIZEOF_OR_R13W_CX 4
+#define SIZEOF_OR_R13W_DX 4
+#define SIZEOF_OR_R13W_DI 4
+#define SIZEOF_OR_R13W_SI 4
+#define SIZEOF_OR_R13W_BP 4
+#define SIZEOF_OR_R13W_SP 4
+#define SIZEOF_OR_R13W_R8W 4
+#define SIZEOF_OR_R13W_R9W 4
+#define SIZEOF_OR_R13W_R10W 4
+#define SIZEOF_OR_R13W_R11W 4
+#define SIZEOF_OR_R13W_R12W 4
+#define SIZEOF_OR_R13W_R13W 4
+#define SIZEOF_OR_R13W_R14W 4
+#define SIZEOF_OR_R13W_R15W 4
+
+#define SIZEOF_OR_R14W_AX 4
+#define SIZEOF_OR_R14W_BX 4
+#define SIZEOF_OR_R14W_CX 4
+#define SIZEOF_OR_R14W_DX 4
+#define SIZEOF_OR_R14W_DI 4
+#define SIZEOF_OR_R14W_SI 4
+#define SIZEOF_OR_R14W_BP 4
+#define SIZEOF_OR_R14W_SP 4
+#define SIZEOF_OR_R14W_R8W 4
+#define SIZEOF_OR_R14W_R9W 4
+#define SIZEOF_OR_R14W_R10W 4
+#define SIZEOF_OR_R14W_R11W 4
+#define SIZEOF_OR_R14W_R12W 4
+#define SIZEOF_OR_R14W_R13W 4
+#define SIZEOF_OR_R14W_R14W 4
+#define SIZEOF_OR_R14W_R15W 4
+
+#define SIZEOF_OR_R15W_AX 4
+#define SIZEOF_OR_R15W_BX 4
+#define SIZEOF_OR_R15W_CX 4
+#define SIZEOF_OR_R15W_DX 4
+#define SIZEOF_OR_R15W_DI 4
+#define SIZEOF_OR_R15W_SI 4
+#define SIZEOF_OR_R15W_BP 4
+#define SIZEOF_OR_R15W_SP 4
+#define SIZEOF_OR_R15W_R8W 4
+#define SIZEOF_OR_R15W_R9W 4
+#define SIZEOF_OR_R15W_R10W 4
+#define SIZEOF_OR_R15W_R11W 4
+#define SIZEOF_OR_R15W_R12W 4
+#define SIZEOF_OR_R15W_R13W 4
+#define SIZEOF_OR_R15W_R14W 4
+#define SIZEOF_OR_R15W_R15W 4
+
+#define SIZEOF_OR_AX_ 5
+#define SIZEOF_OR_BX_ 5
+#define SIZEOF_OR_CX_ 5
+#define SIZEOF_OR_DX_ 5
+#define SIZEOF_OR_DI_ 5
+#define SIZEOF_OR_SI_ 5
+#define SIZEOF_OR_BP_ 5
+#define SIZEOF_OR_SP_ 5
+#define SIZEOF_OR_R8W_ 6
+#define SIZEOF_OR_R9W_ 6
+#define SIZEOF_OR_R10W_ 6
+#define SIZEOF_OR_R11W_ 6
+#define SIZEOF_OR_R12W_ 6
+#define SIZEOF_OR_R13W_ 6
+#define SIZEOF_OR_R14W_ 6
+#define SIZEOF_OR_R15W_ 6
+#endif /* __SYSTEM_64_BIT__ */
+/* ************************ [^] 16-BIT REGISTERS [^] ************************ */
+
+/* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\
+ * * AT THE ALL END OF FILES, I AM ADDING A SPECIAL BYTE <0X1A> TO END THE  * *
+ * *                       FILE IN DOS, CP/M SYSTEMS                        * *
+ * *   "//" FOR HANDLING THE BYTE IN MODERN COMPILERS AND #define IS FOR    * *
+ * *       HANDLING "//" SYNTAX WHICH IS NOT SUPPORTED ON OLD SYSTEMS       * *
+\* * * * * * * * * * * * * * * * * * *  * * * * * * * * * * * * * * * * * * * */
+#undef __CMT__END_OF_FILE__
+#define __CMT__END_OF_FILE__ //

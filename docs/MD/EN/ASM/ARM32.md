@@ -1,0 +1,5 @@
+# ARM32 Assembly
+
+| **Macro**     | **Unified Assembly Syntax (UAS)** | **OP-Size** |
+| ------------- | --------------------------------- | ----------- |
+| `MRC_R0_MIDR` | `mrc p15, 0, r0, c0, c0, 0`       | (4)         |

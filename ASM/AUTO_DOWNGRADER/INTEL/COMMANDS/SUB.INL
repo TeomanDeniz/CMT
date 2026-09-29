@@ -1,0 +1,176 @@
+#ifndef ASM_H
+#error "ERROR - PLEASE DON'T USE THIS LIBRARY DIRECTLY!!!"
+#endif /* !ASM_H */
+
+#ifndef __SYSTEM_64_BIT__
+#define SUB_RAX_ SUB_EAX_
+#define SUB_RAX_RAX SUB_EAX_EAX
+#define SUB_RAX_RBP SUB_EAX_EBP
+#define SUB_RAX_RBX SUB_EAX_EBX
+#define SUB_RAX_RCX SUB_EAX_ECX
+#define SUB_RAX_RDI SUB_EAX_EDI
+#define SUB_RAX_RDX SUB_EAX_EDX
+#define SUB_RAX_RSI SUB_EAX_ESI
+#define SUB_RAX_RSP SUB_EAX_ESP
+
+#define SUB_RBP_ SUB_EBP_
+#define SUB_RBP_RAX SUB_EBP_EAX
+#define SUB_RBP_RBP SUB_EBP_EBP
+#define SUB_RBP_RBX SUB_EBP_EBX
+#define SUB_RBP_RCX SUB_EBP_ECX
+#define SUB_RBP_RDI SUB_EBP_EDI
+#define SUB_RBP_RDX SUB_EBP_EDX
+#define SUB_RBP_RSI SUB_EBP_ESI
+#define SUB_RBP_RSP SUB_EBP_ESP
+
+#define SUB_RBX_ SUB_EBX_
+#define SUB_RBX_RAX SUB_EBX_EAX
+#define SUB_RBX_RBP SUB_EBX_EBP
+#define SUB_RBX_RBX SUB_EBX_EBX
+#define SUB_RBX_RCX SUB_EBX_ECX
+#define SUB_RBX_RDI SUB_EBX_EDI
+#define SUB_RBX_RDX SUB_EBX_EDX
+#define SUB_RBX_RSI SUB_EBX_ESI
+#define SUB_RBX_RSP SUB_EBX_ESP
+
+#define SUB_RCX_ SUB_ECX_
+#define SUB_RCX_RAX SUB_ECX_EAX
+#define SUB_RCX_RBP SUB_ECX_EBP
+#define SUB_RCX_RBX SUB_ECX_EBX
+#define SUB_RCX_RCX SUB_ECX_ECX
+#define SUB_RCX_RDI SUB_ECX_EDI
+#define SUB_RCX_RDX SUB_ECX_EDX
+#define SUB_RCX_RSI SUB_ECX_ESI
+#define SUB_RCX_RSP SUB_ECX_ESP
+
+#define SUB_RDI_ SUB_EDI_
+#define SUB_RDI_RAX SUB_EDI_EAX
+#define SUB_RDI_RBP SUB_EDI_EBP
+#define SUB_RDI_RBX SUB_EDI_EBX
+#define SUB_RDI_RCX SUB_EDI_ECX
+#define SUB_RDI_RDI SUB_EDI_EDI
+#define SUB_RDI_RDX SUB_EDI_EDX
+#define SUB_RDI_RSI SUB_EDI_ESI
+#define SUB_RDI_RSP SUB_EDI_ESP
+
+#define SUB_RDX_ SUB_EDX_
+#define SUB_RDX_RAX SUB_EDX_EAX
+#define SUB_RDX_RBP SUB_EDX_EBP
+#define SUB_RDX_RBX SUB_EDX_EBX
+#define SUB_RDX_RCX SUB_EDX_ECX
+#define SUB_RDX_RDI SUB_EDX_EDI
+#define SUB_RDX_RDX SUB_EDX_EDX
+#define SUB_RDX_RSI SUB_EDX_ESI
+#define SUB_RDX_RSP SUB_EDX_ESP
+
+#define SUB_RSI_ SUB_ESI_
+#define SUB_RSI_RAX SUB_ESI_EAX
+#define SUB_RSI_RBP SUB_ESI_EBP
+#define SUB_RSI_RBX SUB_ESI_EBX
+#define SUB_RSI_RCX SUB_ESI_ECX
+#define SUB_RSI_RDI SUB_ESI_EDI
+#define SUB_RSI_RDX SUB_ESI_EDX
+#define SUB_RSI_RSI SUB_ESI_ESI
+#define SUB_RSI_RSP SUB_ESI_ESP
+
+#define SUB_RSP_ SUB_ESP_
+#define SUB_RSP_RAX SUB_ESP_EAX
+#define SUB_RSP_RBP SUB_ESP_EBP
+#define SUB_RSP_RBX SUB_ESP_EBX
+#define SUB_RSP_RCX SUB_ESP_ECX
+#define SUB_RSP_RDI SUB_ESP_EDI
+#define SUB_RSP_RDX SUB_ESP_EDX
+#define SUB_RSP_RSI SUB_ESP_ESI
+#define SUB_RSP_RSP SUB_ESP_ESP
+
+#ifndef __SYSTEM_32_BIT__
+#define SUB_EAX_ SUB_AX_
+#define SUB_EAX_EAX SUB_AX_AX
+#define SUB_EAX_EBP SUB_AX_BP
+#define SUB_EAX_EBX SUB_AX_BX
+#define SUB_EAX_ECX SUB_AX_CX
+#define SUB_EAX_EDI SUB_AX_DI
+#define SUB_EAX_EDX SUB_AX_DX
+#define SUB_EAX_ESI SUB_AX_SI
+#define SUB_EAX_ESP SUB_AX_SP
+
+#define SUB_EBP_ SUB_BP_
+#define SUB_EBP_EAX SUB_BP_AX
+#define SUB_EBP_EBP SUB_BP_BP
+#define SUB_EBP_EBX SUB_BP_BX
+#define SUB_EBP_ECX SUB_BP_CX
+#define SUB_EBP_EDI SUB_BP_DI
+#define SUB_EBP_EDX SUB_BP_DX
+#define SUB_EBP_ESI SUB_BP_SI
+#define SUB_EBP_ESP SUB_BP_SP
+
+#define SUB_EBX_ SUB_BX_
+#define SUB_EBX_EAX SUB_BX_AX
+#define SUB_EBX_EBP SUB_BX_BP
+#define SUB_EBX_EBX SUB_BX_BX
+#define SUB_EBX_ECX SUB_BX_CX
+#define SUB_EBX_EDI SUB_BX_DI
+#define SUB_EBX_EDX SUB_BX_DX
+#define SUB_EBX_ESI SUB_BX_SI
+#define SUB_EBX_ESP SUB_BX_SP
+
+#define SUB_ECX_ SUB_CX_
+#define SUB_ECX_EAX SUB_CX_AX
+#define SUB_ECX_EBP SUB_CX_BP
+#define SUB_ECX_EBX SUB_CX_BX
+#define SUB_ECX_ECX SUB_CX_CX
+#define SUB_ECX_EDI SUB_CX_DI
+#define SUB_ECX_EDX SUB_CX_DX
+#define SUB_ECX_ESI SUB_CX_SI
+#define SUB_ECX_ESP SUB_CX_SP
+
+#define SUB_EDI_ SUB_DI_
+#define SUB_EDI_EAX SUB_DI_AX
+#define SUB_EDI_EBP SUB_DI_BP
+#define SUB_EDI_EBX SUB_DI_BX
+#define SUB_EDI_ECX SUB_DI_CX
+#define SUB_EDI_EDI SUB_DI_DI
+#define SUB_EDI_EDX SUB_DI_DX
+#define SUB_EDI_ESI SUB_DI_SI
+#define SUB_EDI_ESP SUB_DI_SP
+
+#define SUB_EDX_ SUB_DX_
+#define SUB_EDX_EAX SUB_DX_AX
+#define SUB_EDX_EBP SUB_DX_BP
+#define SUB_EDX_EBX SUB_DX_BX
+#define SUB_EDX_ECX SUB_DX_CX
+#define SUB_EDX_EDI SUB_DX_DI
+#define SUB_EDX_EDX SUB_DX_DX
+#define SUB_EDX_ESI SUB_DX_SI
+#define SUB_EDX_ESP SUB_DX_SP
+
+#define SUB_ESI_ SUB_SI_
+#define SUB_ESI_EAX SUB_SI_AX
+#define SUB_ESI_EBP SUB_SI_BP
+#define SUB_ESI_EBX SUB_SI_BX
+#define SUB_ESI_ECX SUB_SI_CX
+#define SUB_ESI_EDI SUB_SI_DI
+#define SUB_ESI_EDX SUB_SI_DX
+#define SUB_ESI_ESI SUB_SI_SI
+#define SUB_ESI_ESP SUB_SI_SP
+
+#define SUB_ESP_ SUB_SP_
+#define SUB_ESP_EAX SUB_SP_AX
+#define SUB_ESP_EBP SUB_SP_BP
+#define SUB_ESP_EBX SUB_SP_BX
+#define SUB_ESP_ECX SUB_SP_CX
+#define SUB_ESP_EDI SUB_SP_DI
+#define SUB_ESP_EDX SUB_SP_DX
+#define SUB_ESP_ESI SUB_SP_SI
+#define SUB_ESP_ESP SUB_SP_SP
+#endif /* !__SYSTEM_32_BIT__ */
+#endif /* !__SYSTEM_64_BIT__ */
+
+/* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\
+ * * AT THE ALL END OF FILES, I AM ADDING A SPECIAL BYTE <0X1A> TO END THE  * *
+ * *                       FILE IN DOS, CP/M SYSTEMS                        * *
+ * *   "//" FOR HANDLING THE BYTE IN MODERN COMPILERS AND #define IS FOR    * *
+ * *       HANDLING "//" SYNTAX WHICH IS NOT SUPPORTED ON OLD SYSTEMS       * *
+\* * * * * * * * * * * * * * * * * * *  * * * * * * * * * * * * * * * * * * * */
+#undef __CMT__END_OF_FILE__
+#define __CMT__END_OF_FILE__ //

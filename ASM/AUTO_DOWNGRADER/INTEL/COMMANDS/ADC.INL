@@ -1,0 +1,176 @@
+#ifndef ASM_H
+#error "ERROR - PLEASE DON'T USE THIS LIBRARY DIRECTLY!!!"
+#endif /* !ASM_H */
+
+#ifndef __SYSTEM_64_BIT__
+#define ADC_RAX_ ADC_EAX_
+#define ADC_RAX_RAX ADC_EAX_EAX
+#define ADC_RAX_RBP ADC_EAX_EBP
+#define ADC_RAX_RBX ADC_EAX_EBX
+#define ADC_RAX_RCX ADC_EAX_ECX
+#define ADC_RAX_RDI ADC_EAX_EDI
+#define ADC_RAX_RDX ADC_EAX_EDX
+#define ADC_RAX_RSI ADC_EAX_ESI
+#define ADC_RAX_RSP ADC_EAX_ESP
+
+#define ADC_RBP_ ADC_EBP_
+#define ADC_RBP_RAX ADC_EBP_EAX
+#define ADC_RBP_RBP ADC_EBP_EBP
+#define ADC_RBP_RBX ADC_EBP_EBX
+#define ADC_RBP_RCX ADC_EBP_ECX
+#define ADC_RBP_RDI ADC_EBP_EDI
+#define ADC_RBP_RDX ADC_EBP_EDX
+#define ADC_RBP_RSI ADC_EBP_ESI
+#define ADC_RBP_RSP ADC_EBP_ESP
+
+#define ADC_RBX_ ADC_EBX_
+#define ADC_RBX_RAX ADC_EBX_EAX
+#define ADC_RBX_RBP ADC_EBX_EBP
+#define ADC_RBX_RBX ADC_EBX_EBX
+#define ADC_RBX_RCX ADC_EBX_ECX
+#define ADC_RBX_RDI ADC_EBX_EDI
+#define ADC_RBX_RDX ADC_EBX_EDX
+#define ADC_RBX_RSI ADC_EBX_ESI
+#define ADC_RBX_RSP ADC_EBX_ESP
+
+#define ADC_RCX_ ADC_ECX_
+#define ADC_RCX_RAX ADC_ECX_EAX
+#define ADC_RCX_RBP ADC_ECX_EBP
+#define ADC_RCX_RBX ADC_ECX_EBX
+#define ADC_RCX_RCX ADC_ECX_ECX
+#define ADC_RCX_RDI ADC_ECX_EDI
+#define ADC_RCX_RDX ADC_ECX_EDX
+#define ADC_RCX_RSI ADC_ECX_ESI
+#define ADC_RCX_RSP ADC_ECX_ESP
+
+#define ADC_RDI_ ADC_EDI_
+#define ADC_RDI_RAX ADC_EDI_EAX
+#define ADC_RDI_RBP ADC_EDI_EBP
+#define ADC_RDI_RBX ADC_EDI_EBX
+#define ADC_RDI_RCX ADC_EDI_ECX
+#define ADC_RDI_RDI ADC_EDI_EDI
+#define ADC_RDI_RDX ADC_EDI_EDX
+#define ADC_RDI_RSI ADC_EDI_ESI
+#define ADC_RDI_RSP ADC_EDI_ESP
+
+#define ADC_RDX_ ADC_EDX_
+#define ADC_RDX_RAX ADC_EDX_EAX
+#define ADC_RDX_RBP ADC_EDX_EBP
+#define ADC_RDX_RBX ADC_EDX_EBX
+#define ADC_RDX_RCX ADC_EDX_ECX
+#define ADC_RDX_RDI ADC_EDX_EDI
+#define ADC_RDX_RDX ADC_EDX_EDX
+#define ADC_RDX_RSI ADC_EDX_ESI
+#define ADC_RDX_RSP ADC_EDX_ESP
+
+#define ADC_RSI_ ADC_ESI_
+#define ADC_RSI_RAX ADC_ESI_EAX
+#define ADC_RSI_RBP ADC_ESI_EBP
+#define ADC_RSI_RBX ADC_ESI_EBX
+#define ADC_RSI_RCX ADC_ESI_ECX
+#define ADC_RSI_RDI ADC_ESI_EDI
+#define ADC_RSI_RDX ADC_ESI_EDX
+#define ADC_RSI_RSI ADC_ESI_ESI
+#define ADC_RSI_RSP ADC_ESI_ESP
+
+#define ADC_RSP_ ADC_ESP_
+#define ADC_RSP_RAX ADC_ESP_EAX
+#define ADC_RSP_RBP ADC_ESP_EBP
+#define ADC_RSP_RBX ADC_ESP_EBX
+#define ADC_RSP_RCX ADC_ESP_ECX
+#define ADC_RSP_RDI ADC_ESP_EDI
+#define ADC_RSP_RDX ADC_ESP_EDX
+#define ADC_RSP_RSI ADC_ESP_ESI
+#define ADC_RSP_RSP ADC_ESP_ESP
+
+#ifndef __SYSTEM_32_BIT__
+#define ADC_EAX_ ADC_AX_
+#define ADC_EAX_EAX ADC_AX_AX
+#define ADC_EAX_EBP ADC_AX_BP
+#define ADC_EAX_EBX ADC_AX_BX
+#define ADC_EAX_ECX ADC_AX_CX
+#define ADC_EAX_EDI ADC_AX_DI
+#define ADC_EAX_EDX ADC_AX_DX
+#define ADC_EAX_ESI ADC_AX_SI
+#define ADC_EAX_ESP ADC_AX_SP
+
+#define ADC_EBP_ ADC_BP_
+#define ADC_EBP_EAX ADC_BP_AX
+#define ADC_EBP_EBP ADC_BP_BP
+#define ADC_EBP_EBX ADC_BP_BX
+#define ADC_EBP_ECX ADC_BP_CX
+#define ADC_EBP_EDI ADC_BP_DI
+#define ADC_EBP_EDX ADC_BP_DX
+#define ADC_EBP_ESI ADC_BP_SI
+#define ADC_EBP_ESP ADC_BP_SP
+
+#define ADC_EBX_ ADC_BX_
+#define ADC_EBX_EAX ADC_BX_AX
+#define ADC_EBX_EBP ADC_BX_BP
+#define ADC_EBX_EBX ADC_BX_BX
+#define ADC_EBX_ECX ADC_BX_CX
+#define ADC_EBX_EDI ADC_BX_DI
+#define ADC_EBX_EDX ADC_BX_DX
+#define ADC_EBX_ESI ADC_BX_SI
+#define ADC_EBX_ESP ADC_BX_SP
+
+#define ADC_ECX_ ADC_CX_
+#define ADC_ECX_EAX ADC_CX_AX
+#define ADC_ECX_EBP ADC_CX_BP
+#define ADC_ECX_EBX ADC_CX_BX
+#define ADC_ECX_ECX ADC_CX_CX
+#define ADC_ECX_EDI ADC_CX_DI
+#define ADC_ECX_EDX ADC_CX_DX
+#define ADC_ECX_ESI ADC_CX_SI
+#define ADC_ECX_ESP ADC_CX_SP
+
+#define ADC_EDI_ ADC_DI_
+#define ADC_EDI_EAX ADC_DI_AX
+#define ADC_EDI_EBP ADC_DI_BP
+#define ADC_EDI_EBX ADC_DI_BX
+#define ADC_EDI_ECX ADC_DI_CX
+#define ADC_EDI_EDI ADC_DI_DI
+#define ADC_EDI_EDX ADC_DI_DX
+#define ADC_EDI_ESI ADC_DI_SI
+#define ADC_EDI_ESP ADC_DI_SP
+
+#define ADC_EDX_ ADC_DX_
+#define ADC_EDX_EAX ADC_DX_AX
+#define ADC_EDX_EBP ADC_DX_BP
+#define ADC_EDX_EBX ADC_DX_BX
+#define ADC_EDX_ECX ADC_DX_CX
+#define ADC_EDX_EDI ADC_DX_DI
+#define ADC_EDX_EDX ADC_DX_DX
+#define ADC_EDX_ESI ADC_DX_SI
+#define ADC_EDX_ESP ADC_DX_SP
+
+#define ADC_ESI_ ADC_SI_
+#define ADC_ESI_EAX ADC_SI_AX
+#define ADC_ESI_EBP ADC_SI_BP
+#define ADC_ESI_EBX ADC_SI_BX
+#define ADC_ESI_ECX ADC_SI_CX
+#define ADC_ESI_EDI ADC_SI_DI
+#define ADC_ESI_EDX ADC_SI_DX
+#define ADC_ESI_ESI ADC_SI_SI
+#define ADC_ESI_ESP ADC_SI_SP
+
+#define ADC_ESP_ ADC_SP_
+#define ADC_ESP_EAX ADC_SP_AX
+#define ADC_ESP_EBP ADC_SP_BP
+#define ADC_ESP_EBX ADC_SP_BX
+#define ADC_ESP_ECX ADC_SP_CX
+#define ADC_ESP_EDI ADC_SP_DI
+#define ADC_ESP_EDX ADC_SP_DX
+#define ADC_ESP_ESI ADC_SP_SI
+#define ADC_ESP_ESP ADC_SP_SP
+#endif /* !__SYSTEM_32_BIT__ */
+#endif /* !__SYSTEM_64_BIT__ */
+
+/* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\
+ * * AT THE ALL END OF FILES, I AM ADDING A SPECIAL BYTE <0X1A> TO END THE  * *
+ * *                       FILE IN DOS, CP/M SYSTEMS                        * *
+ * *   "//" FOR HANDLING THE BYTE IN MODERN COMPILERS AND #define IS FOR    * *
+ * *       HANDLING "//" SYNTAX WHICH IS NOT SUPPORTED ON OLD SYSTEMS       * *
+\* * * * * * * * * * * * * * * * * * *  * * * * * * * * * * * * * * * * * * * */
+#undef __CMT__END_OF_FILE__
+#define __CMT__END_OF_FILE__ //

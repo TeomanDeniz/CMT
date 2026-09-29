@@ -1,7 +1,3 @@
-#ifndef ASM_H
-#error "ERROR - PLEASE DON'T USE THIS LIBRARY DIRECTLY!!!"
-#endif /* !ASM_H */
-
 #ifdef __SYSTEM_16_BIT__
 #include "ADD/16.INL"
 #endif /* __SYSTEM_16_BIT__ */

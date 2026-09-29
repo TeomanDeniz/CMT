@@ -1,0 +1,176 @@
+#ifndef ASM_H
+#error "ERROR - PLEASE DON'T USE THIS LIBRARY DIRECTLY!!!"
+#endif /* !ASM_H */
+
+#ifndef __SYSTEM_64_BIT__
+#define _TEST_RAX_ _TEST_EAX_
+#define _TEST_RAX_RAX _TEST_EAX_EAX
+#define _TEST_RAX_RBP _TEST_EAX_EBP
+#define _TEST_RAX_RBX _TEST_EAX_EBX
+#define _TEST_RAX_RCX _TEST_EAX_ECX
+#define _TEST_RAX_RDI _TEST_EAX_EDI
+#define _TEST_RAX_RDX _TEST_EAX_EDX
+#define _TEST_RAX_RSI _TEST_EAX_ESI
+#define _TEST_RAX_RSP _TEST_EAX_ESP
+
+#define _TEST_RBP_ _TEST_EBP_
+#define _TEST_RBP_RAX _TEST_EBP_EAX
+#define _TEST_RBP_RBP _TEST_EBP_EBP
+#define _TEST_RBP_RBX _TEST_EBP_EBX
+#define _TEST_RBP_RCX _TEST_EBP_ECX
+#define _TEST_RBP_RDI _TEST_EBP_EDI
+#define _TEST_RBP_RDX _TEST_EBP_EDX
+#define _TEST_RBP_RSI _TEST_EBP_ESI
+#define _TEST_RBP_RSP _TEST_EBP_ESP
+
+#define _TEST_RBX_ _TEST_EBX_
+#define _TEST_RBX_RAX _TEST_EBX_EAX
+#define _TEST_RBX_RBP _TEST_EBX_EBP
+#define _TEST_RBX_RBX _TEST_EBX_EBX
+#define _TEST_RBX_RCX _TEST_EBX_ECX
+#define _TEST_RBX_RDI _TEST_EBX_EDI
+#define _TEST_RBX_RDX _TEST_EBX_EDX
+#define _TEST_RBX_RSI _TEST_EBX_ESI
+#define _TEST_RBX_RSP _TEST_EBX_ESP
+
+#define _TEST_RCX_ _TEST_ECX_
+#define _TEST_RCX_RAX _TEST_ECX_EAX
+#define _TEST_RCX_RBP _TEST_ECX_EBP
+#define _TEST_RCX_RBX _TEST_ECX_EBX
+#define _TEST_RCX_RCX _TEST_ECX_ECX
+#define _TEST_RCX_RDI _TEST_ECX_EDI
+#define _TEST_RCX_RDX _TEST_ECX_EDX
+#define _TEST_RCX_RSI _TEST_ECX_ESI
+#define _TEST_RCX_RSP _TEST_ECX_ESP
+
+#define _TEST_RDI_ _TEST_EDI_
+#define _TEST_RDI_RAX _TEST_EDI_EAX
+#define _TEST_RDI_RBP _TEST_EDI_EBP
+#define _TEST_RDI_RBX _TEST_EDI_EBX
+#define _TEST_RDI_RCX _TEST_EDI_ECX
+#define _TEST_RDI_RDI _TEST_EDI_EDI
+#define _TEST_RDI_RDX _TEST_EDI_EDX
+#define _TEST_RDI_RSI _TEST_EDI_ESI
+#define _TEST_RDI_RSP _TEST_EDI_ESP
+
+#define _TEST_RDX_ _TEST_EDX_
+#define _TEST_RDX_RAX _TEST_EDX_EAX
+#define _TEST_RDX_RBP _TEST_EDX_EBP
+#define _TEST_RDX_RBX _TEST_EDX_EBX
+#define _TEST_RDX_RCX _TEST_EDX_ECX
+#define _TEST_RDX_RDI _TEST_EDX_EDI
+#define _TEST_RDX_RDX _TEST_EDX_EDX
+#define _TEST_RDX_RSI _TEST_EDX_ESI
+#define _TEST_RDX_RSP _TEST_EDX_ESP
+
+#define _TEST_RSI_ _TEST_ESI_
+#define _TEST_RSI_RAX _TEST_ESI_EAX
+#define _TEST_RSI_RBP _TEST_ESI_EBP
+#define _TEST_RSI_RBX _TEST_ESI_EBX
+#define _TEST_RSI_RCX _TEST_ESI_ECX
+#define _TEST_RSI_RDI _TEST_ESI_EDI
+#define _TEST_RSI_RDX _TEST_ESI_EDX
+#define _TEST_RSI_RSI _TEST_ESI_ESI
+#define _TEST_RSI_RSP _TEST_ESI_ESP
+
+#define _TEST_RSP_ _TEST_ESP_
+#define _TEST_RSP_RAX _TEST_ESP_EAX
+#define _TEST_RSP_RBP _TEST_ESP_EBP
+#define _TEST_RSP_RBX _TEST_ESP_EBX
+#define _TEST_RSP_RCX _TEST_ESP_ECX
+#define _TEST_RSP_RDI _TEST_ESP_EDI
+#define _TEST_RSP_RDX _TEST_ESP_EDX
+#define _TEST_RSP_RSI _TEST_ESP_ESI
+#define _TEST_RSP_RSP _TEST_ESP_ESP
+
+#ifndef __SYSTEM_32_BIT__
+#define _TEST_EAX_ _TEST_AX_
+#define _TEST_EAX_EAX _TEST_AX_AX
+#define _TEST_EAX_EBP _TEST_AX_BP
+#define _TEST_EAX_EBX _TEST_AX_BX
+#define _TEST_EAX_ECX _TEST_AX_CX
+#define _TEST_EAX_EDI _TEST_AX_DI
+#define _TEST_EAX_EDX _TEST_AX_DX
+#define _TEST_EAX_ESI _TEST_AX_SI
+#define _TEST_EAX_ESP _TEST_AX_SP
+
+#define _TEST_EBP_ _TEST_BP_
+#define _TEST_EBP_EAX _TEST_BP_AX
+#define _TEST_EBP_EBP _TEST_BP_BP
+#define _TEST_EBP_EBX _TEST_BP_BX
+#define _TEST_EBP_ECX _TEST_BP_CX
+#define _TEST_EBP_EDI _TEST_BP_DI
+#define _TEST_EBP_EDX _TEST_BP_DX
+#define _TEST_EBP_ESI _TEST_BP_SI
+#define _TEST_EBP_ESP _TEST_BP_SP
+
+#define _TEST_EBX_ _TEST_BX_
+#define _TEST_EBX_EAX _TEST_BX_AX
+#define _TEST_EBX_EBP _TEST_BX_BP
+#define _TEST_EBX_EBX _TEST_BX_BX
+#define _TEST_EBX_ECX _TEST_BX_CX
+#define _TEST_EBX_EDI _TEST_BX_DI
+#define _TEST_EBX_EDX _TEST_BX_DX
+#define _TEST_EBX_ESI _TEST_BX_SI
+#define _TEST_EBX_ESP _TEST_BX_SP
+
+#define _TEST_ECX_ _TEST_CX_
+#define _TEST_ECX_EAX _TEST_CX_AX
+#define _TEST_ECX_EBP _TEST_CX_BP
+#define _TEST_ECX_EBX _TEST_CX_BX
+#define _TEST_ECX_ECX _TEST_CX_CX
+#define _TEST_ECX_EDI _TEST_CX_DI
+#define _TEST_ECX_EDX _TEST_CX_DX
+#define _TEST_ECX_ESI _TEST_CX_SI
+#define _TEST_ECX_ESP _TEST_CX_SP
+
+#define _TEST_EDI_ _TEST_DI_
+#define _TEST_EDI_EAX _TEST_DI_AX
+#define _TEST_EDI_EBP _TEST_DI_BP
+#define _TEST_EDI_EBX _TEST_DI_BX
+#define _TEST_EDI_ECX _TEST_DI_CX
+#define _TEST_EDI_EDI _TEST_DI_DI
+#define _TEST_EDI_EDX _TEST_DI_DX
+#define _TEST_EDI_ESI _TEST_DI_SI
+#define _TEST_EDI_ESP _TEST_DI_SP
+
+#define _TEST_EDX_ _TEST_DX_
+#define _TEST_EDX_EAX _TEST_DX_AX
+#define _TEST_EDX_EBP _TEST_DX_BP
+#define _TEST_EDX_EBX _TEST_DX_BX
+#define _TEST_EDX_ECX _TEST_DX_CX
+#define _TEST_EDX_EDI _TEST_DX_DI
+#define _TEST_EDX_EDX _TEST_DX_DX
+#define _TEST_EDX_ESI _TEST_DX_SI
+#define _TEST_EDX_ESP _TEST_DX_SP
+
+#define _TEST_ESI_ _TEST_SI_
+#define _TEST_ESI_EAX _TEST_SI_AX
+#define _TEST_ESI_EBP _TEST_SI_BP
+#define _TEST_ESI_EBX _TEST_SI_BX
+#define _TEST_ESI_ECX _TEST_SI_CX
+#define _TEST_ESI_EDI _TEST_SI_DI
+#define _TEST_ESI_EDX _TEST_SI_DX
+#define _TEST_ESI_ESI _TEST_SI_SI
+#define _TEST_ESI_ESP _TEST_SI_SP
+
+#define _TEST_ESP_ _TEST_SP_
+#define _TEST_ESP_EAX _TEST_SP_AX
+#define _TEST_ESP_EBP _TEST_SP_BP
+#define _TEST_ESP_EBX _TEST_SP_BX
+#define _TEST_ESP_ECX _TEST_SP_CX
+#define _TEST_ESP_EDI _TEST_SP_DI
+#define _TEST_ESP_EDX _TEST_SP_DX
+#define _TEST_ESP_ESI _TEST_SP_SI
+#define _TEST_ESP_ESP _TEST_SP_SP
+#endif /* !__SYSTEM_32_BIT__ */
+#endif /* !__SYSTEM_64_BIT__ */
+
+/* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\
+ * * AT THE ALL END OF FILES, I AM ADDING A SPECIAL BYTE <0X1A> TO END THE  * *
+ * *                       FILE IN DOS, CP/M SYSTEMS                        * *
+ * *   "//" FOR HANDLING THE BYTE IN MODERN COMPILERS AND #define IS FOR    * *
+ * *       HANDLING "//" SYNTAX WHICH IS NOT SUPPORTED ON OLD SYSTEMS       * *
+\* * * * * * * * * * * * * * * * * * *  * * * * * * * * * * * * * * * * * * * */
+#undef __CMT__END_OF_FILE__
+#define __CMT__END_OF_FILE__ //

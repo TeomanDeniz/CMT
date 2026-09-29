@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2024/02/27 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - Apache2.0 :: Update - 2026/09/28 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - Apache2.0 :: Update - 2026/09/29 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -509,36 +509,93 @@ Still planning PTR
 #endif /* __TI_COMPILER_VERSION__ */
 /* *********************** [^] TI CGT CCS (PUSH) [^] ************************ */
 
-#ifndef INCL_CMT_ASM_ADD
-#ifndef INCL_CMT_ASM_JMP
 #ifndef INCL_CMT_ASM_MOV
+#ifndef INCL_CMT_ASM_MOV_PTR
+#ifndef INCL_CMT_ASM_MOV_PTR_SEGMENT
+#ifndef INCL_CMT_ASM_ADD
+#ifndef INCL_CMT_ASM_ADD_PTR
+#ifndef INCL_CMT_ASM_ADC
+#ifndef INCL_CMT_ASM_ADC_PTR
+#ifndef INCL_CMT_ASM_SUB
+#ifndef INCL_CMT_ASM_SUB_PTR
+#ifndef INCL_CMT_ASM_SBB
+#ifndef INCL_CMT_ASM_SBB_PTR
+#ifndef INCL_CMT_ASM_AND
+#ifndef INCL_CMT_ASM_AND_PTR
+#ifndef INCL_CMT_ASM_OR
+#ifndef INCL_CMT_ASM_OR_PTR
+#ifndef INCL_CMT_ASM_XOR
+#ifndef INCL_CMT_ASM_XOR_PTR
+#ifndef INCL_CMT_ASM_CMP
+#ifndef INCL_CMT_ASM_CMP_PTR
+#ifndef INCL_CMT_ASM_TEST
+#ifndef INCL_CMT_ASM_TEST_PTR
+#ifndef INCL_CMT_ASM_XCHG
+#ifndef INCL_CMT_ASM_XCHG_PTR
+#ifndef INCL_CMT_ASM_JMP
 #ifndef INCL_CMT_ASM_MOVABS
 #ifndef INCL_CMT_ASM_OTHERS
 #ifndef INCL_CMT_ASM_PUSH
 #ifndef INCL_CMT_ASM_POP
-#ifndef INCL_CMT_ASM_MOV_PTR
-#ifndef INCL_CMT_ASM_MOV_PTR_SEGMENT
 #ifndef INCL_CMT_ASM_MOV_ABI
-#define INCL_CMT_ASM_ADD
-#define INCL_CMT_ASM_JMP
 #define INCL_CMT_ASM_MOV
+#define INCL_CMT_ASM_MOV_PTR
+#define INCL_CMT_ASM_MOV_PTR_SEGMENT
+#define INCL_CMT_ASM_ADD
+#define INCL_CMT_ASM_ADD_PTR
+#define INCL_CMT_ASM_ADC
+#define INCL_CMT_ASM_ADC_PTR
+#define INCL_CMT_ASM_SUB
+#define INCL_CMT_ASM_SUB_PTR
+#define INCL_CMT_ASM_SBB
+#define INCL_CMT_ASM_SBB_PTR
+#define INCL_CMT_ASM_AND
+#define INCL_CMT_ASM_AND_PTR
+#define INCL_CMT_ASM_OR
+#define INCL_CMT_ASM_OR_PTR
+#define INCL_CMT_ASM_XOR
+#define INCL_CMT_ASM_XOR_PTR
+#define INCL_CMT_ASM_CMP
+#define INCL_CMT_ASM_CMP_PTR
+#define INCL_CMT_ASM_TEST
+#define INCL_CMT_ASM_TEST_PTR
+#define INCL_CMT_ASM_XCHG
+#define INCL_CMT_ASM_XCHG_PTR
+#define INCL_CMT_ASM_JMP
 #define INCL_CMT_ASM_MOVABS
 #define INCL_CMT_ASM_OTHERS
 #define INCL_CMT_ASM_PUSH
 #define INCL_CMT_ASM_POP
-#define INCL_CMT_ASM_MOV_PTR
-#define INCL_CMT_ASM_MOV_PTR_SEGMENT
 #define INCL_CMT_ASM_MOV_ABI
 #endif /* !INCL_CMT_ASM_MOV_ABI */
-#endif /* !INCL_CMT_ASM_MOV_PTR_SEGMENT */
-#endif /* !INCL_CMT_ASM_MOV_PTR */
 #endif /* !INCL_CMT_ASM_POP */
 #endif /* !INCL_CMT_ASM_PUSH */
 #endif /* !INCL_CMT_ASM_OTHERS */
 #endif /* !INCL_CMT_ASM_MOVABS */
-#endif /* !INCL_CMT_ASM_MOV */
 #endif /* !INCL_CMT_ASM_JMP */
+#endif /* !INCL_CMT_ASM_XCHG_PTR */
+#endif /* !INCL_CMT_ASM_XCHG */
+#endif /* !INCL_CMT_ASM_TEST_PTR */
+#endif /* !INCL_CMT_ASM_TEST */
+#endif /* !INCL_CMT_ASM_CMP_PTR */
+#endif /* !INCL_CMT_ASM_CMP */
+#endif /* !INCL_CMT_ASM_XOR_PTR */
+#endif /* !INCL_CMT_ASM_XOR */
+#endif /* !INCL_CMT_ASM_OR_PTR */
+#endif /* !INCL_CMT_ASM_OR */
+#endif /* !INCL_CMT_ASM_AND_PTR */
+#endif /* !INCL_CMT_ASM_AND */
+#endif /* !INCL_CMT_ASM_SBB_PTR */
+#endif /* !INCL_CMT_ASM_SBB */
+#endif /* !INCL_CMT_ASM_SUB_PTR */
+#endif /* !INCL_CMT_ASM_SUB */
+#endif /* !INCL_CMT_ASM_ADC_PTR */
+#endif /* !INCL_CMT_ASM_ADC */
+#endif /* !INCL_CMT_ASM_ADD_PTR */
 #endif /* !INCL_CMT_ASM_ADD */
+#endif /* !INCL_CMT_ASM_MOV_PTR_SEGMENT */
+#endif /* !INCL_CMT_ASM_MOV_PTR */
+#endif /* !INCL_CMT_ASM_MOV */
 
 #ifdef INCL_CMT_ASM_MOV_ABI
 #ifndef INCL_CMT_ASM_MOV_PTR

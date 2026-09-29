@@ -1,0 +1,176 @@
+#ifndef ASM_H
+#error "ERROR - PLEASE DON'T USE THIS LIBRARY DIRECTLY!!!"
+#endif /* !ASM_H */
+
+#ifndef __SYSTEM_64_BIT__
+#define SBB_RAX_ SBB_EAX_
+#define SBB_RAX_RAX SBB_EAX_EAX
+#define SBB_RAX_RBP SBB_EAX_EBP
+#define SBB_RAX_RBX SBB_EAX_EBX
+#define SBB_RAX_RCX SBB_EAX_ECX
+#define SBB_RAX_RDI SBB_EAX_EDI
+#define SBB_RAX_RDX SBB_EAX_EDX
+#define SBB_RAX_RSI SBB_EAX_ESI
+#define SBB_RAX_RSP SBB_EAX_ESP
+
+#define SBB_RBP_ SBB_EBP_
+#define SBB_RBP_RAX SBB_EBP_EAX
+#define SBB_RBP_RBP SBB_EBP_EBP
+#define SBB_RBP_RBX SBB_EBP_EBX
+#define SBB_RBP_RCX SBB_EBP_ECX
+#define SBB_RBP_RDI SBB_EBP_EDI
+#define SBB_RBP_RDX SBB_EBP_EDX
+#define SBB_RBP_RSI SBB_EBP_ESI
+#define SBB_RBP_RSP SBB_EBP_ESP
+
+#define SBB_RBX_ SBB_EBX_
+#define SBB_RBX_RAX SBB_EBX_EAX
+#define SBB_RBX_RBP SBB_EBX_EBP
+#define SBB_RBX_RBX SBB_EBX_EBX
+#define SBB_RBX_RCX SBB_EBX_ECX
+#define SBB_RBX_RDI SBB_EBX_EDI
+#define SBB_RBX_RDX SBB_EBX_EDX
+#define SBB_RBX_RSI SBB_EBX_ESI
+#define SBB_RBX_RSP SBB_EBX_ESP
+
+#define SBB_RCX_ SBB_ECX_
+#define SBB_RCX_RAX SBB_ECX_EAX
+#define SBB_RCX_RBP SBB_ECX_EBP
+#define SBB_RCX_RBX SBB_ECX_EBX
+#define SBB_RCX_RCX SBB_ECX_ECX
+#define SBB_RCX_RDI SBB_ECX_EDI
+#define SBB_RCX_RDX SBB_ECX_EDX
+#define SBB_RCX_RSI SBB_ECX_ESI
+#define SBB_RCX_RSP SBB_ECX_ESP
+
+#define SBB_RDI_ SBB_EDI_
+#define SBB_RDI_RAX SBB_EDI_EAX
+#define SBB_RDI_RBP SBB_EDI_EBP
+#define SBB_RDI_RBX SBB_EDI_EBX
+#define SBB_RDI_RCX SBB_EDI_ECX
+#define SBB_RDI_RDI SBB_EDI_EDI
+#define SBB_RDI_RDX SBB_EDI_EDX
+#define SBB_RDI_RSI SBB_EDI_ESI
+#define SBB_RDI_RSP SBB_EDI_ESP
+
+#define SBB_RDX_ SBB_EDX_
+#define SBB_RDX_RAX SBB_EDX_EAX
+#define SBB_RDX_RBP SBB_EDX_EBP
+#define SBB_RDX_RBX SBB_EDX_EBX
+#define SBB_RDX_RCX SBB_EDX_ECX
+#define SBB_RDX_RDI SBB_EDX_EDI
+#define SBB_RDX_RDX SBB_EDX_EDX
+#define SBB_RDX_RSI SBB_EDX_ESI
+#define SBB_RDX_RSP SBB_EDX_ESP
+
+#define SBB_RSI_ SBB_ESI_
+#define SBB_RSI_RAX SBB_ESI_EAX
+#define SBB_RSI_RBP SBB_ESI_EBP
+#define SBB_RSI_RBX SBB_ESI_EBX
+#define SBB_RSI_RCX SBB_ESI_ECX
+#define SBB_RSI_RDI SBB_ESI_EDI
+#define SBB_RSI_RDX SBB_ESI_EDX
+#define SBB_RSI_RSI SBB_ESI_ESI
+#define SBB_RSI_RSP SBB_ESI_ESP
+
+#define SBB_RSP_ SBB_ESP_
+#define SBB_RSP_RAX SBB_ESP_EAX
+#define SBB_RSP_RBP SBB_ESP_EBP
+#define SBB_RSP_RBX SBB_ESP_EBX
+#define SBB_RSP_RCX SBB_ESP_ECX
+#define SBB_RSP_RDI SBB_ESP_EDI
+#define SBB_RSP_RDX SBB_ESP_EDX
+#define SBB_RSP_RSI SBB_ESP_ESI
+#define SBB_RSP_RSP SBB_ESP_ESP
+
+#ifndef __SYSTEM_32_BIT__
+#define SBB_EAX_ SBB_AX_
+#define SBB_EAX_EAX SBB_AX_AX
+#define SBB_EAX_EBP SBB_AX_BP
+#define SBB_EAX_EBX SBB_AX_BX
+#define SBB_EAX_ECX SBB_AX_CX
+#define SBB_EAX_EDI SBB_AX_DI
+#define SBB_EAX_EDX SBB_AX_DX
+#define SBB_EAX_ESI SBB_AX_SI
+#define SBB_EAX_ESP SBB_AX_SP
+
+#define SBB_EBP_ SBB_BP_
+#define SBB_EBP_EAX SBB_BP_AX
+#define SBB_EBP_EBP SBB_BP_BP
+#define SBB_EBP_EBX SBB_BP_BX
+#define SBB_EBP_ECX SBB_BP_CX
+#define SBB_EBP_EDI SBB_BP_DI
+#define SBB_EBP_EDX SBB_BP_DX
+#define SBB_EBP_ESI SBB_BP_SI
+#define SBB_EBP_ESP SBB_BP_SP
+
+#define SBB_EBX_ SBB_BX_
+#define SBB_EBX_EAX SBB_BX_AX
+#define SBB_EBX_EBP SBB_BX_BP
+#define SBB_EBX_EBX SBB_BX_BX
+#define SBB_EBX_ECX SBB_BX_CX
+#define SBB_EBX_EDI SBB_BX_DI
+#define SBB_EBX_EDX SBB_BX_DX
+#define SBB_EBX_ESI SBB_BX_SI
+#define SBB_EBX_ESP SBB_BX_SP
+
+#define SBB_ECX_ SBB_CX_
+#define SBB_ECX_EAX SBB_CX_AX
+#define SBB_ECX_EBP SBB_CX_BP
+#define SBB_ECX_EBX SBB_CX_BX
+#define SBB_ECX_ECX SBB_CX_CX
+#define SBB_ECX_EDI SBB_CX_DI
+#define SBB_ECX_EDX SBB_CX_DX
+#define SBB_ECX_ESI SBB_CX_SI
+#define SBB_ECX_ESP SBB_CX_SP
+
+#define SBB_EDI_ SBB_DI_
+#define SBB_EDI_EAX SBB_DI_AX
+#define SBB_EDI_EBP SBB_DI_BP
+#define SBB_EDI_EBX SBB_DI_BX
+#define SBB_EDI_ECX SBB_DI_CX
+#define SBB_EDI_EDI SBB_DI_DI
+#define SBB_EDI_EDX SBB_DI_DX
+#define SBB_EDI_ESI SBB_DI_SI
+#define SBB_EDI_ESP SBB_DI_SP
+
+#define SBB_EDX_ SBB_DX_
+#define SBB_EDX_EAX SBB_DX_AX
+#define SBB_EDX_EBP SBB_DX_BP
+#define SBB_EDX_EBX SBB_DX_BX
+#define SBB_EDX_ECX SBB_DX_CX
+#define SBB_EDX_EDI SBB_DX_DI
+#define SBB_EDX_EDX SBB_DX_DX
+#define SBB_EDX_ESI SBB_DX_SI
+#define SBB_EDX_ESP SBB_DX_SP
+
+#define SBB_ESI_ SBB_SI_
+#define SBB_ESI_EAX SBB_SI_AX
+#define SBB_ESI_EBP SBB_SI_BP
+#define SBB_ESI_EBX SBB_SI_BX
+#define SBB_ESI_ECX SBB_SI_CX
+#define SBB_ESI_EDI SBB_SI_DI
+#define SBB_ESI_EDX SBB_SI_DX
+#define SBB_ESI_ESI SBB_SI_SI
+#define SBB_ESI_ESP SBB_SI_SP
+
+#define SBB_ESP_ SBB_SP_
+#define SBB_ESP_EAX SBB_SP_AX
+#define SBB_ESP_EBP SBB_SP_BP
+#define SBB_ESP_EBX SBB_SP_BX
+#define SBB_ESP_ECX SBB_SP_CX
+#define SBB_ESP_EDI SBB_SP_DI
+#define SBB_ESP_EDX SBB_SP_DX
+#define SBB_ESP_ESI SBB_SP_SI
+#define SBB_ESP_ESP SBB_SP_SP
+#endif /* !__SYSTEM_32_BIT__ */
+#endif /* !__SYSTEM_64_BIT__ */
+
+/* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\
+ * * AT THE ALL END OF FILES, I AM ADDING A SPECIAL BYTE <0X1A> TO END THE  * *
+ * *                       FILE IN DOS, CP/M SYSTEMS                        * *
+ * *   "//" FOR HANDLING THE BYTE IN MODERN COMPILERS AND #define IS FOR    * *
+ * *       HANDLING "//" SYNTAX WHICH IS NOT SUPPORTED ON OLD SYSTEMS       * *
+\* * * * * * * * * * * * * * * * * * *  * * * * * * * * * * * * * * * * * * * */
+#undef __CMT__END_OF_FILE__
+#define __CMT__END_OF_FILE__ //

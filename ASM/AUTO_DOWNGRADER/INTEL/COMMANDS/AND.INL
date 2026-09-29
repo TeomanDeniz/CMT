@@ -1,0 +1,176 @@
+#ifndef ASM_H
+#error "ERROR - PLEASE DON'T USE THIS LIBRARY DIRECTLY!!!"
+#endif /* !ASM_H */
+
+#ifndef __SYSTEM_64_BIT__
+#define AND_RAX_ AND_EAX_
+#define AND_RAX_RAX AND_EAX_EAX
+#define AND_RAX_RBP AND_EAX_EBP
+#define AND_RAX_RBX AND_EAX_EBX
+#define AND_RAX_RCX AND_EAX_ECX
+#define AND_RAX_RDI AND_EAX_EDI
+#define AND_RAX_RDX AND_EAX_EDX
+#define AND_RAX_RSI AND_EAX_ESI
+#define AND_RAX_RSP AND_EAX_ESP
+
+#define AND_RBP_ AND_EBP_
+#define AND_RBP_RAX AND_EBP_EAX
+#define AND_RBP_RBP AND_EBP_EBP
+#define AND_RBP_RBX AND_EBP_EBX
+#define AND_RBP_RCX AND_EBP_ECX
+#define AND_RBP_RDI AND_EBP_EDI
+#define AND_RBP_RDX AND_EBP_EDX
+#define AND_RBP_RSI AND_EBP_ESI
+#define AND_RBP_RSP AND_EBP_ESP
+
+#define AND_RBX_ AND_EBX_
+#define AND_RBX_RAX AND_EBX_EAX
+#define AND_RBX_RBP AND_EBX_EBP
+#define AND_RBX_RBX AND_EBX_EBX
+#define AND_RBX_RCX AND_EBX_ECX
+#define AND_RBX_RDI AND_EBX_EDI
+#define AND_RBX_RDX AND_EBX_EDX
+#define AND_RBX_RSI AND_EBX_ESI
+#define AND_RBX_RSP AND_EBX_ESP
+
+#define AND_RCX_ AND_ECX_
+#define AND_RCX_RAX AND_ECX_EAX
+#define AND_RCX_RBP AND_ECX_EBP
+#define AND_RCX_RBX AND_ECX_EBX
+#define AND_RCX_RCX AND_ECX_ECX
+#define AND_RCX_RDI AND_ECX_EDI
+#define AND_RCX_RDX AND_ECX_EDX
+#define AND_RCX_RSI AND_ECX_ESI
+#define AND_RCX_RSP AND_ECX_ESP
+
+#define AND_RDI_ AND_EDI_
+#define AND_RDI_RAX AND_EDI_EAX
+#define AND_RDI_RBP AND_EDI_EBP
+#define AND_RDI_RBX AND_EDI_EBX
+#define AND_RDI_RCX AND_EDI_ECX
+#define AND_RDI_RDI AND_EDI_EDI
+#define AND_RDI_RDX AND_EDI_EDX
+#define AND_RDI_RSI AND_EDI_ESI
+#define AND_RDI_RSP AND_EDI_ESP
+
+#define AND_RDX_ AND_EDX_
+#define AND_RDX_RAX AND_EDX_EAX
+#define AND_RDX_RBP AND_EDX_EBP
+#define AND_RDX_RBX AND_EDX_EBX
+#define AND_RDX_RCX AND_EDX_ECX
+#define AND_RDX_RDI AND_EDX_EDI
+#define AND_RDX_RDX AND_EDX_EDX
+#define AND_RDX_RSI AND_EDX_ESI
+#define AND_RDX_RSP AND_EDX_ESP
+
+#define AND_RSI_ AND_ESI_
+#define AND_RSI_RAX AND_ESI_EAX
+#define AND_RSI_RBP AND_ESI_EBP
+#define AND_RSI_RBX AND_ESI_EBX
+#define AND_RSI_RCX AND_ESI_ECX
+#define AND_RSI_RDI AND_ESI_EDI
+#define AND_RSI_RDX AND_ESI_EDX
+#define AND_RSI_RSI AND_ESI_ESI
+#define AND_RSI_RSP AND_ESI_ESP
+
+#define AND_RSP_ AND_ESP_
+#define AND_RSP_RAX AND_ESP_EAX
+#define AND_RSP_RBP AND_ESP_EBP
+#define AND_RSP_RBX AND_ESP_EBX
+#define AND_RSP_RCX AND_ESP_ECX
+#define AND_RSP_RDI AND_ESP_EDI
+#define AND_RSP_RDX AND_ESP_EDX
+#define AND_RSP_RSI AND_ESP_ESI
+#define AND_RSP_RSP AND_ESP_ESP
+
+#ifndef __SYSTEM_32_BIT__
+#define AND_EAX_ AND_AX_
+#define AND_EAX_EAX AND_AX_AX
+#define AND_EAX_EBP AND_AX_BP
+#define AND_EAX_EBX AND_AX_BX
+#define AND_EAX_ECX AND_AX_CX
+#define AND_EAX_EDI AND_AX_DI
+#define AND_EAX_EDX AND_AX_DX
+#define AND_EAX_ESI AND_AX_SI
+#define AND_EAX_ESP AND_AX_SP
+
+#define AND_EBP_ AND_BP_
+#define AND_EBP_EAX AND_BP_AX
+#define AND_EBP_EBP AND_BP_BP
+#define AND_EBP_EBX AND_BP_BX
+#define AND_EBP_ECX AND_BP_CX
+#define AND_EBP_EDI AND_BP_DI
+#define AND_EBP_EDX AND_BP_DX
+#define AND_EBP_ESI AND_BP_SI
+#define AND_EBP_ESP AND_BP_SP
+
+#define AND_EBX_ AND_BX_
+#define AND_EBX_EAX AND_BX_AX
+#define AND_EBX_EBP AND_BX_BP
+#define AND_EBX_EBX AND_BX_BX
+#define AND_EBX_ECX AND_BX_CX
+#define AND_EBX_EDI AND_BX_DI
+#define AND_EBX_EDX AND_BX_DX
+#define AND_EBX_ESI AND_BX_SI
+#define AND_EBX_ESP AND_BX_SP
+
+#define AND_ECX_ AND_CX_
+#define AND_ECX_EAX AND_CX_AX
+#define AND_ECX_EBP AND_CX_BP
+#define AND_ECX_EBX AND_CX_BX
+#define AND_ECX_ECX AND_CX_CX
+#define AND_ECX_EDI AND_CX_DI
+#define AND_ECX_EDX AND_CX_DX
+#define AND_ECX_ESI AND_CX_SI
+#define AND_ECX_ESP AND_CX_SP
+
+#define AND_EDI_ AND_DI_
+#define AND_EDI_EAX AND_DI_AX
+#define AND_EDI_EBP AND_DI_BP
+#define AND_EDI_EBX AND_DI_BX
+#define AND_EDI_ECX AND_DI_CX
+#define AND_EDI_EDI AND_DI_DI
+#define AND_EDI_EDX AND_DI_DX
+#define AND_EDI_ESI AND_DI_SI
+#define AND_EDI_ESP AND_DI_SP
+
+#define AND_EDX_ AND_DX_
+#define AND_EDX_EAX AND_DX_AX
+#define AND_EDX_EBP AND_DX_BP
+#define AND_EDX_EBX AND_DX_BX
+#define AND_EDX_ECX AND_DX_CX
+#define AND_EDX_EDI AND_DX_DI
+#define AND_EDX_EDX AND_DX_DX
+#define AND_EDX_ESI AND_DX_SI
+#define AND_EDX_ESP AND_DX_SP
+
+#define AND_ESI_ AND_SI_
+#define AND_ESI_EAX AND_SI_AX
+#define AND_ESI_EBP AND_SI_BP
+#define AND_ESI_EBX AND_SI_BX
+#define AND_ESI_ECX AND_SI_CX
+#define AND_ESI_EDI AND_SI_DI
+#define AND_ESI_EDX AND_SI_DX
+#define AND_ESI_ESI AND_SI_SI
+#define AND_ESI_ESP AND_SI_SP
+
+#define AND_ESP_ AND_SP_
+#define AND_ESP_EAX AND_SP_AX
+#define AND_ESP_EBP AND_SP_BP
+#define AND_ESP_EBX AND_SP_BX
+#define AND_ESP_ECX AND_SP_CX
+#define AND_ESP_EDI AND_SP_DI
+#define AND_ESP_EDX AND_SP_DX
+#define AND_ESP_ESI AND_SP_SI
+#define AND_ESP_ESP AND_SP_SP
+#endif /* !__SYSTEM_32_BIT__ */
+#endif /* !__SYSTEM_64_BIT__ */
+
+/* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\
+ * * AT THE ALL END OF FILES, I AM ADDING A SPECIAL BYTE <0X1A> TO END THE  * *
+ * *                       FILE IN DOS, CP/M SYSTEMS                        * *
+ * *   "//" FOR HANDLING THE BYTE IN MODERN COMPILERS AND #define IS FOR    * *
+ * *       HANDLING "//" SYNTAX WHICH IS NOT SUPPORTED ON OLD SYSTEMS       * *
+\* * * * * * * * * * * * * * * * * * *  * * * * * * * * * * * * * * * * * * * */
+#undef __CMT__END_OF_FILE__
+#define __CMT__END_OF_FILE__ //

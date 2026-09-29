@@ -1,0 +1,176 @@
+#ifndef ASM_H
+#error "ERROR - PLEASE DON'T USE THIS LIBRARY DIRECTLY!!!"
+#endif /* !ASM_H */
+
+#ifndef __SYSTEM_64_BIT__
+#define CMP_RAX_ CMP_EAX_
+#define CMP_RAX_RAX CMP_EAX_EAX
+#define CMP_RAX_RBP CMP_EAX_EBP
+#define CMP_RAX_RBX CMP_EAX_EBX
+#define CMP_RAX_RCX CMP_EAX_ECX
+#define CMP_RAX_RDI CMP_EAX_EDI
+#define CMP_RAX_RDX CMP_EAX_EDX
+#define CMP_RAX_RSI CMP_EAX_ESI
+#define CMP_RAX_RSP CMP_EAX_ESP
+
+#define CMP_RBP_ CMP_EBP_
+#define CMP_RBP_RAX CMP_EBP_EAX
+#define CMP_RBP_RBP CMP_EBP_EBP
+#define CMP_RBP_RBX CMP_EBP_EBX
+#define CMP_RBP_RCX CMP_EBP_ECX
+#define CMP_RBP_RDI CMP_EBP_EDI
+#define CMP_RBP_RDX CMP_EBP_EDX
+#define CMP_RBP_RSI CMP_EBP_ESI
+#define CMP_RBP_RSP CMP_EBP_ESP
+
+#define CMP_RBX_ CMP_EBX_
+#define CMP_RBX_RAX CMP_EBX_EAX
+#define CMP_RBX_RBP CMP_EBX_EBP
+#define CMP_RBX_RBX CMP_EBX_EBX
+#define CMP_RBX_RCX CMP_EBX_ECX
+#define CMP_RBX_RDI CMP_EBX_EDI
+#define CMP_RBX_RDX CMP_EBX_EDX
+#define CMP_RBX_RSI CMP_EBX_ESI
+#define CMP_RBX_RSP CMP_EBX_ESP
+
+#define CMP_RCX_ CMP_ECX_
+#define CMP_RCX_RAX CMP_ECX_EAX
+#define CMP_RCX_RBP CMP_ECX_EBP
+#define CMP_RCX_RBX CMP_ECX_EBX
+#define CMP_RCX_RCX CMP_ECX_ECX
+#define CMP_RCX_RDI CMP_ECX_EDI
+#define CMP_RCX_RDX CMP_ECX_EDX
+#define CMP_RCX_RSI CMP_ECX_ESI
+#define CMP_RCX_RSP CMP_ECX_ESP
+
+#define CMP_RDI_ CMP_EDI_
+#define CMP_RDI_RAX CMP_EDI_EAX
+#define CMP_RDI_RBP CMP_EDI_EBP
+#define CMP_RDI_RBX CMP_EDI_EBX
+#define CMP_RDI_RCX CMP_EDI_ECX
+#define CMP_RDI_RDI CMP_EDI_EDI
+#define CMP_RDI_RDX CMP_EDI_EDX
+#define CMP_RDI_RSI CMP_EDI_ESI
+#define CMP_RDI_RSP CMP_EDI_ESP
+
+#define CMP_RDX_ CMP_EDX_
+#define CMP_RDX_RAX CMP_EDX_EAX
+#define CMP_RDX_RBP CMP_EDX_EBP
+#define CMP_RDX_RBX CMP_EDX_EBX
+#define CMP_RDX_RCX CMP_EDX_ECX
+#define CMP_RDX_RDI CMP_EDX_EDI
+#define CMP_RDX_RDX CMP_EDX_EDX
+#define CMP_RDX_RSI CMP_EDX_ESI
+#define CMP_RDX_RSP CMP_EDX_ESP
+
+#define CMP_RSI_ CMP_ESI_
+#define CMP_RSI_RAX CMP_ESI_EAX
+#define CMP_RSI_RBP CMP_ESI_EBP
+#define CMP_RSI_RBX CMP_ESI_EBX
+#define CMP_RSI_RCX CMP_ESI_ECX
+#define CMP_RSI_RDI CMP_ESI_EDI
+#define CMP_RSI_RDX CMP_ESI_EDX
+#define CMP_RSI_RSI CMP_ESI_ESI
+#define CMP_RSI_RSP CMP_ESI_ESP
+
+#define CMP_RSP_ CMP_ESP_
+#define CMP_RSP_RAX CMP_ESP_EAX
+#define CMP_RSP_RBP CMP_ESP_EBP
+#define CMP_RSP_RBX CMP_ESP_EBX
+#define CMP_RSP_RCX CMP_ESP_ECX
+#define CMP_RSP_RDI CMP_ESP_EDI
+#define CMP_RSP_RDX CMP_ESP_EDX
+#define CMP_RSP_RSI CMP_ESP_ESI
+#define CMP_RSP_RSP CMP_ESP_ESP
+
+#ifndef __SYSTEM_32_BIT__
+#define CMP_EAX_ CMP_AX_
+#define CMP_EAX_EAX CMP_AX_AX
+#define CMP_EAX_EBP CMP_AX_BP
+#define CMP_EAX_EBX CMP_AX_BX
+#define CMP_EAX_ECX CMP_AX_CX
+#define CMP_EAX_EDI CMP_AX_DI
+#define CMP_EAX_EDX CMP_AX_DX
+#define CMP_EAX_ESI CMP_AX_SI
+#define CMP_EAX_ESP CMP_AX_SP
+
+#define CMP_EBP_ CMP_BP_
+#define CMP_EBP_EAX CMP_BP_AX
+#define CMP_EBP_EBP CMP_BP_BP
+#define CMP_EBP_EBX CMP_BP_BX
+#define CMP_EBP_ECX CMP_BP_CX
+#define CMP_EBP_EDI CMP_BP_DI
+#define CMP_EBP_EDX CMP_BP_DX
+#define CMP_EBP_ESI CMP_BP_SI
+#define CMP_EBP_ESP CMP_BP_SP
+
+#define CMP_EBX_ CMP_BX_
+#define CMP_EBX_EAX CMP_BX_AX
+#define CMP_EBX_EBP CMP_BX_BP
+#define CMP_EBX_EBX CMP_BX_BX
+#define CMP_EBX_ECX CMP_BX_CX
+#define CMP_EBX_EDI CMP_BX_DI
+#define CMP_EBX_EDX CMP_BX_DX
+#define CMP_EBX_ESI CMP_BX_SI
+#define CMP_EBX_ESP CMP_BX_SP
+
+#define CMP_ECX_ CMP_CX_
+#define CMP_ECX_EAX CMP_CX_AX
+#define CMP_ECX_EBP CMP_CX_BP
+#define CMP_ECX_EBX CMP_CX_BX
+#define CMP_ECX_ECX CMP_CX_CX
+#define CMP_ECX_EDI CMP_CX_DI
+#define CMP_ECX_EDX CMP_CX_DX
+#define CMP_ECX_ESI CMP_CX_SI
+#define CMP_ECX_ESP CMP_CX_SP
+
+#define CMP_EDI_ CMP_DI_
+#define CMP_EDI_EAX CMP_DI_AX
+#define CMP_EDI_EBP CMP_DI_BP
+#define CMP_EDI_EBX CMP_DI_BX
+#define CMP_EDI_ECX CMP_DI_CX
+#define CMP_EDI_EDI CMP_DI_DI
+#define CMP_EDI_EDX CMP_DI_DX
+#define CMP_EDI_ESI CMP_DI_SI
+#define CMP_EDI_ESP CMP_DI_SP
+
+#define CMP_EDX_ CMP_DX_
+#define CMP_EDX_EAX CMP_DX_AX
+#define CMP_EDX_EBP CMP_DX_BP
+#define CMP_EDX_EBX CMP_DX_BX
+#define CMP_EDX_ECX CMP_DX_CX
+#define CMP_EDX_EDI CMP_DX_DI
+#define CMP_EDX_EDX CMP_DX_DX
+#define CMP_EDX_ESI CMP_DX_SI
+#define CMP_EDX_ESP CMP_DX_SP
+
+#define CMP_ESI_ CMP_SI_
+#define CMP_ESI_EAX CMP_SI_AX
+#define CMP_ESI_EBP CMP_SI_BP
+#define CMP_ESI_EBX CMP_SI_BX
+#define CMP_ESI_ECX CMP_SI_CX
+#define CMP_ESI_EDI CMP_SI_DI
+#define CMP_ESI_EDX CMP_SI_DX
+#define CMP_ESI_ESI CMP_SI_SI
+#define CMP_ESI_ESP CMP_SI_SP
+
+#define CMP_ESP_ CMP_SP_
+#define CMP_ESP_EAX CMP_SP_AX
+#define CMP_ESP_EBP CMP_SP_BP
+#define CMP_ESP_EBX CMP_SP_BX
+#define CMP_ESP_ECX CMP_SP_CX
+#define CMP_ESP_EDI CMP_SP_DI
+#define CMP_ESP_EDX CMP_SP_DX
+#define CMP_ESP_ESI CMP_SP_SI
+#define CMP_ESP_ESP CMP_SP_SP
+#endif /* !__SYSTEM_32_BIT__ */
+#endif /* !__SYSTEM_64_BIT__ */
+
+/* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\
+ * * AT THE ALL END OF FILES, I AM ADDING A SPECIAL BYTE <0X1A> TO END THE  * *
+ * *                       FILE IN DOS, CP/M SYSTEMS                        * *
+ * *   "//" FOR HANDLING THE BYTE IN MODERN COMPILERS AND #define IS FOR    * *
+ * *       HANDLING "//" SYNTAX WHICH IS NOT SUPPORTED ON OLD SYSTEMS       * *
+\* * * * * * * * * * * * * * * * * * *  * * * * * * * * * * * * * * * * * * * */
+#undef __CMT__END_OF_FILE__
+#define __CMT__END_OF_FILE__ //

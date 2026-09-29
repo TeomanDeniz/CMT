@@ -1,0 +1,176 @@
+#ifndef ASM_H
+#error "ERROR - PLEASE DON'T USE THIS LIBRARY DIRECTLY!!!"
+#endif /* !ASM_H */
+
+#ifndef __SYSTEM_64_BIT__
+#define XOR_RAX_ XOR_EAX_
+#define XOR_RAX_RAX XOR_EAX_EAX
+#define XOR_RAX_RBP XOR_EAX_EBP
+#define XOR_RAX_RBX XOR_EAX_EBX
+#define XOR_RAX_RCX XOR_EAX_ECX
+#define XOR_RAX_RDI XOR_EAX_EDI
+#define XOR_RAX_RDX XOR_EAX_EDX
+#define XOR_RAX_RSI XOR_EAX_ESI
+#define XOR_RAX_RSP XOR_EAX_ESP
+
+#define XOR_RBP_ XOR_EBP_
+#define XOR_RBP_RAX XOR_EBP_EAX
+#define XOR_RBP_RBP XOR_EBP_EBP
+#define XOR_RBP_RBX XOR_EBP_EBX
+#define XOR_RBP_RCX XOR_EBP_ECX
+#define XOR_RBP_RDI XOR_EBP_EDI
+#define XOR_RBP_RDX XOR_EBP_EDX
+#define XOR_RBP_RSI XOR_EBP_ESI
+#define XOR_RBP_RSP XOR_EBP_ESP
+
+#define XOR_RBX_ XOR_EBX_
+#define XOR_RBX_RAX XOR_EBX_EAX
+#define XOR_RBX_RBP XOR_EBX_EBP
+#define XOR_RBX_RBX XOR_EBX_EBX
+#define XOR_RBX_RCX XOR_EBX_ECX
+#define XOR_RBX_RDI XOR_EBX_EDI
+#define XOR_RBX_RDX XOR_EBX_EDX
+#define XOR_RBX_RSI XOR_EBX_ESI
+#define XOR_RBX_RSP XOR_EBX_ESP
+
+#define XOR_RCX_ XOR_ECX_
+#define XOR_RCX_RAX XOR_ECX_EAX
+#define XOR_RCX_RBP XOR_ECX_EBP
+#define XOR_RCX_RBX XOR_ECX_EBX
+#define XOR_RCX_RCX XOR_ECX_ECX
+#define XOR_RCX_RDI XOR_ECX_EDI
+#define XOR_RCX_RDX XOR_ECX_EDX
+#define XOR_RCX_RSI XOR_ECX_ESI
+#define XOR_RCX_RSP XOR_ECX_ESP
+
+#define XOR_RDI_ XOR_EDI_
+#define XOR_RDI_RAX XOR_EDI_EAX
+#define XOR_RDI_RBP XOR_EDI_EBP
+#define XOR_RDI_RBX XOR_EDI_EBX
+#define XOR_RDI_RCX XOR_EDI_ECX
+#define XOR_RDI_RDI XOR_EDI_EDI
+#define XOR_RDI_RDX XOR_EDI_EDX
+#define XOR_RDI_RSI XOR_EDI_ESI
+#define XOR_RDI_RSP XOR_EDI_ESP
+
+#define XOR_RDX_ XOR_EDX_
+#define XOR_RDX_RAX XOR_EDX_EAX
+#define XOR_RDX_RBP XOR_EDX_EBP
+#define XOR_RDX_RBX XOR_EDX_EBX
+#define XOR_RDX_RCX XOR_EDX_ECX
+#define XOR_RDX_RDI XOR_EDX_EDI
+#define XOR_RDX_RDX XOR_EDX_EDX
+#define XOR_RDX_RSI XOR_EDX_ESI
+#define XOR_RDX_RSP XOR_EDX_ESP
+
+#define XOR_RSI_ XOR_ESI_
+#define XOR_RSI_RAX XOR_ESI_EAX
+#define XOR_RSI_RBP XOR_ESI_EBP
+#define XOR_RSI_RBX XOR_ESI_EBX
+#define XOR_RSI_RCX XOR_ESI_ECX
+#define XOR_RSI_RDI XOR_ESI_EDI
+#define XOR_RSI_RDX XOR_ESI_EDX
+#define XOR_RSI_RSI XOR_ESI_ESI
+#define XOR_RSI_RSP XOR_ESI_ESP
+
+#define XOR_RSP_ XOR_ESP_
+#define XOR_RSP_RAX XOR_ESP_EAX
+#define XOR_RSP_RBP XOR_ESP_EBP
+#define XOR_RSP_RBX XOR_ESP_EBX
+#define XOR_RSP_RCX XOR_ESP_ECX
+#define XOR_RSP_RDI XOR_ESP_EDI
+#define XOR_RSP_RDX XOR_ESP_EDX
+#define XOR_RSP_RSI XOR_ESP_ESI
+#define XOR_RSP_RSP XOR_ESP_ESP
+
+#ifndef __SYSTEM_32_BIT__
+#define XOR_EAX_ XOR_AX_
+#define XOR_EAX_EAX XOR_AX_AX
+#define XOR_EAX_EBP XOR_AX_BP
+#define XOR_EAX_EBX XOR_AX_BX
+#define XOR_EAX_ECX XOR_AX_CX
+#define XOR_EAX_EDI XOR_AX_DI
+#define XOR_EAX_EDX XOR_AX_DX
+#define XOR_EAX_ESI XOR_AX_SI
+#define XOR_EAX_ESP XOR_AX_SP
+
+#define XOR_EBP_ XOR_BP_
+#define XOR_EBP_EAX XOR_BP_AX
+#define XOR_EBP_EBP XOR_BP_BP
+#define XOR_EBP_EBX XOR_BP_BX
+#define XOR_EBP_ECX XOR_BP_CX
+#define XOR_EBP_EDI XOR_BP_DI
+#define XOR_EBP_EDX XOR_BP_DX
+#define XOR_EBP_ESI XOR_BP_SI
+#define XOR_EBP_ESP XOR_BP_SP
+
+#define XOR_EBX_ XOR_BX_
+#define XOR_EBX_EAX XOR_BX_AX
+#define XOR_EBX_EBP XOR_BX_BP
+#define XOR_EBX_EBX XOR_BX_BX
+#define XOR_EBX_ECX XOR_BX_CX
+#define XOR_EBX_EDI XOR_BX_DI
+#define XOR_EBX_EDX XOR_BX_DX
+#define XOR_EBX_ESI XOR_BX_SI
+#define XOR_EBX_ESP XOR_BX_SP
+
+#define XOR_ECX_ XOR_CX_
+#define XOR_ECX_EAX XOR_CX_AX
+#define XOR_ECX_EBP XOR_CX_BP
+#define XOR_ECX_EBX XOR_CX_BX
+#define XOR_ECX_ECX XOR_CX_CX
+#define XOR_ECX_EDI XOR_CX_DI
+#define XOR_ECX_EDX XOR_CX_DX
+#define XOR_ECX_ESI XOR_CX_SI
+#define XOR_ECX_ESP XOR_CX_SP
+
+#define XOR_EDI_ XOR_DI_
+#define XOR_EDI_EAX XOR_DI_AX
+#define XOR_EDI_EBP XOR_DI_BP
+#define XOR_EDI_EBX XOR_DI_BX
+#define XOR_EDI_ECX XOR_DI_CX
+#define XOR_EDI_EDI XOR_DI_DI
+#define XOR_EDI_EDX XOR_DI_DX
+#define XOR_EDI_ESI XOR_DI_SI
+#define XOR_EDI_ESP XOR_DI_SP
+
+#define XOR_EDX_ XOR_DX_
+#define XOR_EDX_EAX XOR_DX_AX
+#define XOR_EDX_EBP XOR_DX_BP
+#define XOR_EDX_EBX XOR_DX_BX
+#define XOR_EDX_ECX XOR_DX_CX
+#define XOR_EDX_EDI XOR_DX_DI
+#define XOR_EDX_EDX XOR_DX_DX
+#define XOR_EDX_ESI XOR_DX_SI
+#define XOR_EDX_ESP XOR_DX_SP
+
+#define XOR_ESI_ XOR_SI_
+#define XOR_ESI_EAX XOR_SI_AX
+#define XOR_ESI_EBP XOR_SI_BP
+#define XOR_ESI_EBX XOR_SI_BX
+#define XOR_ESI_ECX XOR_SI_CX
+#define XOR_ESI_EDI XOR_SI_DI
+#define XOR_ESI_EDX XOR_SI_DX
+#define XOR_ESI_ESI XOR_SI_SI
+#define XOR_ESI_ESP XOR_SI_SP
+
+#define XOR_ESP_ XOR_SP_
+#define XOR_ESP_EAX XOR_SP_AX
+#define XOR_ESP_EBP XOR_SP_BP
+#define XOR_ESP_EBX XOR_SP_BX
+#define XOR_ESP_ECX XOR_SP_CX
+#define XOR_ESP_EDI XOR_SP_DI
+#define XOR_ESP_EDX XOR_SP_DX
+#define XOR_ESP_ESI XOR_SP_SI
+#define XOR_ESP_ESP XOR_SP_SP
+#endif /* !__SYSTEM_32_BIT__ */
+#endif /* !__SYSTEM_64_BIT__ */
+
+/* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\
+ * * AT THE ALL END OF FILES, I AM ADDING A SPECIAL BYTE <0X1A> TO END THE  * *
+ * *                       FILE IN DOS, CP/M SYSTEMS                        * *
+ * *   "//" FOR HANDLING THE BYTE IN MODERN COMPILERS AND #define IS FOR    * *
+ * *       HANDLING "//" SYNTAX WHICH IS NOT SUPPORTED ON OLD SYSTEMS       * *
+\* * * * * * * * * * * * * * * * * * *  * * * * * * * * * * * * * * * * * * * */
+#undef __CMT__END_OF_FILE__
+#define __CMT__END_OF_FILE__ //
