@@ -56,9 +56,11 @@ The repository includes multiple documentation formats, test matrices across com
 
 > **The stable downloadable version is currently available:**
 > 
-> **WIP**
+> **[Stable release](https://github.com/TeomanDeniz/CMT/releases/latest)**
+> 
+> **[Latest release](https://github.com/TeomanDeniz/CMT/releases)**
 
-For a minimal, stripped build (no documentation or comments), download the latest release from **[Releases](https://github.com/TeomanDeniz/CMT/releases)** area.
+For a minimal, stripped build (no documentation or comments), download the latest release from **[Here](https://github.com/TeomanDeniz/CMT/releases/latest)**.
 
 ## Clone
 
