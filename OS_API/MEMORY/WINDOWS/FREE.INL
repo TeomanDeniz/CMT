@@ -23,7 +23,7 @@
 		\
 		MUTEX_LOCK(G_MUTEX_ALLOC);\
 		BLOCK = (\
-			(struct S_MEM_BLOCK *)(((BYTE *)(POINTER)) -\
+			(struct S_MEM_BLOCK *)(((BYTE *)(POINTER)) - \
 			ALIGN_UP(sizeof(struct S_MEM_BLOCK)))\
 		);\
 		\
@@ -41,10 +41,10 @@
 		PAGE->USED -= BLOCK->SIZE;\
 		\
 		{\
-			register int	Q_CLASS = -1;\
+			REGISTER int	Q_CLASS = -1;\
 			\
 			{\
-				register LET	INDEX;\
+				REGISTER LET	INDEX;\
 				\
 				for (INDEX = 0; INDEX < CMT_MEMORY_QUICKLIST_CLASSES; INDEX++)\
 				{\
@@ -74,7 +74,7 @@
 		\
 		if (BLOCK->NEXT && BLOCK->NEXT->FREED == 1)\
 		{\
-			BLOCK->SIZE +=\
+			BLOCK->SIZE += \
 				ALIGN_UP(sizeof(struct S_MEM_BLOCK)) + BLOCK->NEXT->SIZE;\
 			BLOCK->NEXT = BLOCK->NEXT->NEXT;\
 			\
@@ -84,7 +84,7 @@
 		\
 		if (BLOCK->PREV && BLOCK->PREV->FREED == 1)\
 		{\
-			BLOCK->PREV->SIZE +=\
+			BLOCK->PREV->SIZE += \
 				ALIGN_UP(sizeof(struct S_MEM_BLOCK)) + BLOCK->SIZE;\
 			BLOCK->PREV->NEXT = BLOCK->NEXT;\
 			\
@@ -110,7 +110,7 @@
 					G_MEM_PAGES = PAGE->NEXT;\
 				\
 				{\
-					register int	PURGE_CLASS;\
+					REGISTER int	PURGE_CLASS;\
 					\
 					for (\
 						PURGE_CLASS = 0;\

@@ -11,7 +11,7 @@ static
 #endif /* !KNR_STYLE */
 {
 	struct S_THREAD_MANAGER	*THREAD_MANAGER;
-	register unsigned int	WAITERS;
+	REGISTER unsigned int	WAITERS;
 
 	THREAD_MANAGER = __THREAD_ARG_MAILBOX__;
 	MUTEX_UNLOCK(__THREAD_ARG_HANDOFF__);

@@ -12,7 +12,7 @@ static
 #endif /* !KNR_STYLE */
 {
 	struct S_THREAD_MANAGER	*THREAD_MANAGER;
-	register unsigned int	WAITERS;
+	REGISTER unsigned int	WAITERS;
 
 	if (sizeof(int) == sizeof(char *))
 		THREAD_MANAGER = (struct S_THREAD_MANAGER *)ARG_PTR_A;
@@ -75,40 +75,40 @@ static
 		if (sizeof(int) == sizeof(char *))\
 		{\
 			RESULT->THREAD = taskSpawn(\
-				"tThread",\
-				100,\
-				0,\
-				0X10000,\
-				(FUNCPTR)__THREAD_WRAPPER__,\
-				(int)RESULT,\
-				0,\
-				0,\
-				0,\
-				0,\
-				0,\
-				0,\
-				0,\
-				0,\
+				"tThread", \
+				100, \
+				0, \
+				0X10000, \
+				(FUNCPTR)__THREAD_WRAPPER__, \
+				(int)RESULT, \
+				0, \
+				0, \
+				0, \
+				0, \
+				0, \
+				0, \
+				0, \
+				0, \
 				0\
 			);\
 		}\
 		else /* ALWAYS 64-BIT, SO DON'T WORRY */\
 		{\
 			RESULT->THREAD = taskSpawn(\
-				"tThread",\
-				100,\
-				0,\
-				0X10000,\
-				(FUNCPTR)__THREAD_WRAPPER__,\
-				(int)(((LET)RESULT) & (unsigned)0XFFFFFFFF),\
-				(int)((((LET)RESULT) >> 32) & (unsigned)0XFFFFFFFF),\
-				0,\
-				0,\
-				0,\
-				0,\
-				0,\
-				0,\
-				0,\
+				"tThread", \
+				100, \
+				0, \
+				0X10000, \
+				(FUNCPTR)__THREAD_WRAPPER__, \
+				(int)(((LET)RESULT) & (unsigned)0XFFFFFFFF), \
+				(int)((((LET)RESULT) >> 32) & (unsigned)0XFFFFFFFF), \
+				0, \
+				0, \
+				0, \
+				0, \
+				0, \
+				0, \
+				0, \
 				0\
 			);\
 		}\

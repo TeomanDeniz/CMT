@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2026/05/19 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - Apache2.0 :: Update - 2026/09/28 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - Apache2.0 :: Update - 2026/10/02 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -137,7 +137,7 @@
 \******************************************************************************/
 
 #ifndef PEB_LOADER_H
-#define PEB_LOADER_H 202609 /* VERSION */
+#define PEB_LOADER_H 202610 /* VERSION */
 #define LOCALMACRO__MAX_FORWARD_DEPTH 4
 
 /* *********************** [v] TI CGT CCS (PUSH) [v] ************************ */
@@ -172,6 +172,10 @@
 /******* """"""""""""""""""""""""""
  * #define EXTERN_C_START
  * #define EXTERN_C_END
+ */
+#include "../ATTRIBUTES/REGISTER.H"
+/******* """"""""""""""""""""""""""
+ * #define REGISTER
  */
 /* **************************** [^] INCLUDES [^] **************************** */
 
@@ -387,13 +391,13 @@ extern unsigned long	READ_GS_QWORD();
 	SECTION (\
 		unsigned long long, \
 		READ_GS_QWORD, \
-		(register unsigned long long OFFSET)\
+		(REGISTER unsigned long long OFFSET)\
 	)\
 	SECTION_KNR (\
 		unsigned long long, \
 		READ_GS_QWORD, \
 		(OFFSET)\
-		register unsigned long long	OFFSET;\
+		REGISTER unsigned long long	OFFSET;\
 	)\
 		MOV_RAX_FROM_PTR_GS_RCX /* ALWAYS RCX, IT'S FOR WIN64 ANYWAY */\
 		RET\
@@ -451,7 +455,7 @@ extern unsigned long	READ_GS_QWORD();
 		if (!THE_PEB || !THE_PEB->LDR)\
 			return (0);\
 		\
-		const struct S_LIST_ENTRY	*const HEAD =\
+		const struct S_LIST_ENTRY	*const HEAD = \
 			&THE_PEB->LDR->IN_LOAD_ORDER_MODULE_LIST;\
 		struct S_LIST_ENTRY			*CURSOR = HEAD->FLINK;\
 		\
@@ -464,21 +468,21 @@ extern unsigned long	READ_GS_QWORD();
 			\
 			if (ENTRY->BASE_DLL_NAME.BUFFER)\
 			{\
-				const struct S_UNICODE_STRING	*UNICODE_ARGIMENT =\
+				const struct S_UNICODE_STRING	*UNICODE_ARGIMENT = \
 					(struct S_UNICODE_STRING *)&ENTRY->BASE_DLL_NAME;\
-				register unsigned short			INDEX;\
-				const unsigned short			SIZE =\
+				REGISTER unsigned short			INDEX;\
+				const unsigned short			SIZE = \
 					UNICODE_ARGIMENT->LENGTH / sizeof(unsigned short);\
 				\
 				if (SIZE <= 256)\
 				{\
-					register int	SKIP = 0;\
+					REGISTER int	SKIP = 0;\
 					\
 					for (INDEX = 0; INDEX < SIZE; INDEX++)\
 					{\
-						register unsigned short	CHARACTER_1 =\
+						REGISTER unsigned short	CHARACTER_1 = \
 							UNICODE_ARGIMENT->BUFFER[INDEX];\
-						register char			CHARACTER_2 = TARGET[INDEX];\
+						REGISTER char			CHARACTER_2 = TARGET[INDEX];\
 						\
 						if (!CHARACTER_2)\
 						{\
@@ -539,7 +543,7 @@ extern unsigned long	READ_GS_QWORD();
 			EXPORT_SIZE = (unsigned long)0;\
 			\
 			{\
-				const unsigned char		*const NT =\
+				const unsigned char		*const NT = \
 					CURRENT_MODULE +\
 					*((unsigned long *)(CURRENT_MODULE + 0X3C));\
 				const unsigned short	MAGIC =\
@@ -565,12 +569,13 @@ extern unsigned long	READ_GS_QWORD();
 			FUNCTION_RVA = (unsigned long)0;\
 			\
 			{\
-				const unsigned char		*const EXPORT =\
+				const unsigned char		*const EXPORT = \
 					CURRENT_MODULE + EXPORT_RVA;\
-				const unsigned long		*const FUNCTIONS =\
+				const unsigned long		*const FUNCTIONS = (\
 					(unsigned long *)(\
 						CURRENT_MODULE + *(unsigned long *)(EXPORT + 0X1C)\
-					);\
+					)\
+				);\
 				\
 				if (ORDINAL >= 0)\
 				{\
@@ -579,34 +584,36 @@ extern unsigned long	READ_GS_QWORD();
 					 * IS USELESS HERE AND THE FUNCTION TABLE IS INDEXED\
 					 * DIRECTLY AFTER SUBTRACTING "Base".\
 					 */\
-					const unsigned long	BASE_ORDINAL =\
+					const unsigned long	BASE_ORDINAL = \
 						*(unsigned long *)(EXPORT + 0X10);\
-					const unsigned long	COUNT_FUNCTIONS =\
+					const unsigned long	COUNT_FUNCTIONS = \
 						*(unsigned long *)(EXPORT + 0X14);\
 					\
 					if ((unsigned long)ORDINAL < BASE_ORDINAL)\
 						return (0);\
 					\
 					if (\
-						(unsigned long)ORDINAL - BASE_ORDINAL >=\
+						(unsigned long)ORDINAL - BASE_ORDINAL >= \
 						COUNT_FUNCTIONS\
 					)\
 						return (0);\
 					\
-					FUNCTION_RVA =\
+					FUNCTION_RVA = \
 						FUNCTIONS[(unsigned long)ORDINAL - BASE_ORDINAL];\
 				}\
 				else\
 				{\
-					const unsigned long		*const NAMES =\
+					const unsigned long		*const NAMES = (\
 						(unsigned long *)(\
 							CURRENT_MODULE + *(unsigned long *)(EXPORT + 0X20)\
-						);\
-					const unsigned short	*const OLD =\
+						)\
+					);\
+					const unsigned short	*const OLD = (\
 						(unsigned short *)(\
 							CURRENT_MODULE + *(unsigned long *)(EXPORT + 0X24)\
-						);\
-					const unsigned long		COUNT =\
+						)\
+					);\
+					const unsigned long		COUNT = \
 						*(unsigned long *)(EXPORT + 0X18);\
 					unsigned long			INDEX;\
 					\
@@ -615,7 +622,7 @@ extern unsigned long	READ_GS_QWORD();
 					\
 					for (INDEX = 0; INDEX < COUNT; INDEX++)\
 					{\
-						const char	*FUNCTION_ADDRESS =\
+						const char	*FUNCTION_ADDRESS = \
 							(char *)(CURRENT_MODULE + NAMES[INDEX]);\
 						const char	*FUNCTION_NAME_ITERATION = CURRENT_NAME;\
 						\
@@ -623,7 +630,7 @@ extern unsigned long	READ_GS_QWORD();
 							continue ;\
 						\
 						while (\
-							*FUNCTION_ADDRESS && *FUNCTION_NAME_ITERATION &&\
+							*FUNCTION_ADDRESS && *FUNCTION_NAME_ITERATION && \
 							*FUNCTION_ADDRESS == *FUNCTION_NAME_ITERATION\
 						)\
 						{\
@@ -632,7 +639,7 @@ extern unsigned long	READ_GS_QWORD();
 						}\
 						\
 						if (\
-							*FUNCTION_ADDRESS == 0 &&\
+							*FUNCTION_ADDRESS == 0 && \
 							*FUNCTION_NAME_ITERATION == 0\
 						)\
 						{\
@@ -659,7 +666,7 @@ extern unsigned long	READ_GS_QWORD();
 			\
 			/* INSIDE IT - A FORWARDER STRING, SO FOLLOW IT */\
 			{\
-				const char		*FORWARD =\
+				const char		*FORWARD = \
 					(const char *)(CURRENT_MODULE + FUNCTION_RVA);\
 				unsigned long	SPLIT;\
 				unsigned long	COPY;\

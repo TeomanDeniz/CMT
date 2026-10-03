@@ -17,7 +17,7 @@
 #define LOCALFUNCTION__THREAD_JOIN \
 	FUNCTION_HEADER__THREAD_JOIN \
 	{\
-		register unsigned int	MUST_WAIT;\
+		REGISTER unsigned int	MUST_WAIT;\
 		\
 		if (!THREAD)\
 			return (1);\

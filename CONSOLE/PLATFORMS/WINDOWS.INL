@@ -22,6 +22,10 @@
 /******* """""""""""""""""""""""""
  * struct S_USER32	USER32;
  */
+#include "../../ATTRIBUTES/REGISTER.H"
+/******* """""""""""""""""""""""""""""
+ * #define REGISTER
+ */
 /* **************************** [^] INCLUDES [^] **************************** */
 
 #define LOCALMACRO__CMT_CONSOLE__SNAPSHOT_MAGIC \
@@ -129,7 +133,6 @@ struct S_CONSOLE_SNAPSHOT
 
 #include "WINDOWS/GET/LINE.INL"
 #include "WINDOWS/GET/AREA.INL"
-
 #endif /* !SEAL_CMT_CONSOLE_WINDOWS */
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\

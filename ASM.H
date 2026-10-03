@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2024/02/27 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - Apache2.0 :: Update - 2026/09/29 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - Apache2.0 :: Update - 2026/10/02 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -495,7 +495,7 @@ Still planning PTR
 \* @@@@@@@@@@@@@@@@@@@@@ TODO | PLEASE IGNORE THIS PART @@@@@@@@@@@@@@@@@@@@@ */
 
 #ifndef ASM_H
-#define ASM_H 202609 /* VERSION */
+#define ASM_H 202610 /* VERSION */
 #endif /* !ASM_H */
 
 /* *********************** [v] TI CGT CCS (PUSH) [v] ************************ */
@@ -826,6 +826,10 @@ Still planning PTR
 /******* """"""""""""""""""""
  * #define LOCAL
  */
+#include "ATTRIBUTES/REGISTER.H"
+/******* """""""""""""""""""""""
+ * #define REGISTER
+ */
 /* **************************** [^] INCLUDES [^] **************************** */
 
 #define LOCALMACRO__ASM_FILLING_CONDITION if (G_ASM_MEMORY_MODE_ERROR == FALSE)
@@ -870,7 +874,7 @@ Still planning PTR
 #else /* !LOCALMACRO__ASM_MODERN_OS */
 #define LOCALMACRO__SECTION_START(NAME) \
 	{\
-		register LET	INDEX = 0;\
+		REGISTER LET	INDEX = 0;\
 		BYTE			*__OP__ = (BYTE *)(NAME);
 #define END \
 	}\

@@ -32,7 +32,7 @@
 		struct S_MEM_BLOCK	*BLOCK;\
 		PTR					RESULT;\
 		LET					REQUEST = ALIGN_UP(SIZE);\
-		register int		Q_CLASS = -1;\
+		REGISTER int		Q_CLASS = -1;\
 		\
 		if (REQUEST == 0)\
 			return ((PTR)0);\
@@ -40,7 +40,7 @@
 		MUTEX_LOCK(G_MUTEX_ALLOC);\
 		\
 		{\
-			register LET	INDEX;\
+			REGISTER LET	INDEX;\
 			\
 			for (INDEX = 0; INDEX < CMT_MEMORY_QUICKLIST_CLASSES; INDEX++)\
 			{\
@@ -114,18 +114,18 @@
 			const LET	NEW_PAGE_SIZE = (\
 				(\
 					(\
-						ALIGN_UP(sizeof(struct S_MEM_PAGE)) +\
-						ALIGN_UP(sizeof(struct S_MEM_BLOCK)) +\
+						ALIGN_UP(sizeof(struct S_MEM_PAGE)) + \
+						ALIGN_UP(sizeof(struct S_MEM_BLOCK)) + \
 						REQUEST + PAGE_SIZE - 1\
 					) / PAGE_SIZE\
 				) * PAGE_SIZE\
 			);\
 			\
 			PAGE = mmap(\
-				(PTR)0,\
-				NEW_PAGE_SIZE,\
-				PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS,\
-				-1,\
+				(PTR)0, \
+				NEW_PAGE_SIZE, \
+				PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, \
+				-1, \
 				0\
 			);\
 			\
@@ -144,12 +144,12 @@
 				G_MEM_PAGES->PREV = PAGE;\
 			\
 			BLOCK = (\
-				(struct S_MEM_BLOCK *)(((BYTE *)PAGE) +\
+				(struct S_MEM_BLOCK *)(((BYTE *)PAGE) + \
 				ALIGN_UP(sizeof(struct S_MEM_PAGE)))\
 			);\
 			BLOCK->SIZE = (\
-				NEW_PAGE_SIZE -\
-				ALIGN_UP(sizeof(struct S_MEM_PAGE)) -\
+				NEW_PAGE_SIZE - \
+				ALIGN_UP(sizeof(struct S_MEM_PAGE)) - \
 				ALIGN_UP(sizeof(struct S_MEM_BLOCK))\
 			);\
 			BLOCK->FREED = 1;\
@@ -161,15 +161,15 @@
 		}\
 		\
 		if (\
-			BLOCK->SIZE >=\
+			BLOCK->SIZE >= \
 			REQUEST + ALIGN_UP(sizeof(struct S_MEM_BLOCK)) + MAX_ALIGNMENT\
 		)\
 		{\
 			struct S_MEM_BLOCK	*NEW_BLOCK;\
 			\
 			NEW_BLOCK = (struct S_MEM_BLOCK *)(\
-				((BYTE *)BLOCK) +\
-				ALIGN_UP(sizeof(struct S_MEM_BLOCK)) +\
+				((BYTE *)BLOCK) + \
+				ALIGN_UP(sizeof(struct S_MEM_BLOCK)) + \
 				REQUEST\
 			);\
 			NEW_BLOCK->SIZE =\

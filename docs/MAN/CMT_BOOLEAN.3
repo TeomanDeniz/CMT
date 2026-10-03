@@ -25,24 +25,89 @@ Direct include:
 .EE
 .RE
 .SS Abstract
-Provides a portable boolean interface for C that automatically adapts to
-the compiler\(aqs native boolean implementation whenever available.
+One boolean type and one pair of truth values that mean the same thing
+on every compiler, from K&R C to C23 and from Turbo C++ to today.
 .PP
-Rather than forcing a fixed type or value definitions,
-\f[CR]BOOLEAN.H\f[R] detects the most suitable compiler\-supported
-boolean type and constants, falling back to a portable implementation
-only when necessary.
+The header asks one question, \f[I]\(dqwhat does this language already
+give me?\(dq\f[R], and the first rule that matches wins:
 .PP
-If a standard compiler boolean header (such as \f[CR]stdbool.h\f[R] or
-an equivalent implementation) has already been included, this module
-transparently adopts it.
+.TS
+tab(@);
+l l l.
+T{
+Rule
+T}@T{
+Language / compiler
+T}@T{
+\f[CR]BOOLEAN\f[R] is
+T}
+_
+T{
+1
+T}@T{
+C++ older than the \f[CR]bool\f[R] keyword
+T}@T{
+\f[CR]unsigned char\f[R]
+T}
+T{
+2
+T}@T{
+C++
+T}@T{
+\f[CR]bool\f[R]
+T}
+T{
+3
+T}@T{
+C, \f[CR]<stdbool.h>\f[R] already included
+T}@T{
+\f[CR]bool\f[R] (adopted as it is)
+T}
+T{
+4
+T}@T{
+C23 and later
+T}@T{
+\f[CR]bool\f[R]
+T}
+T{
+5
+T}@T{
+C99, C11, C17
+T}@T{
+\f[CR]bool\f[R] (\f[CR]<stdbool.h>\f[R])
+T}
+T{
+6
+T}@T{
+MSVC 2013+ in its default C mode
+T}@T{
+\f[CR]bool\f[R] (\f[CR]<stdbool.h>\f[R])
+T}
+T{
+7
+T}@T{
+C89 on GCC 3+ or Clang
+T}@T{
+\f[CR]_Bool\f[R] (extension)
+T}
+T{
+8
+T}@T{
+Anything else
+T}@T{
+\f[CR]unsigned char\f[R]
+T}
+.TE
 .PP
-Otherwise, it includes the appropriate compiler header itself before
-exposing a consistent set of boolean definitions.
+Turbo C++, Borland C++ before 5.0, Watcom C++ before 11.0, Visual C++
+before 5.0.
 .PP
-The result is a single, compiler\-independent interface that remains
-fully compatible with existing code while preserving the compiler\(aqs
-preferred boolean representation whenever possible.
+\f[CR]TRUE\f[R] and \f[CR]FALSE\f[R] always follow the chosen type, so
+in C++ they are real \f[CR]bool\f[R] values, not integers.
+.PP
+\f[CR]bool\f[R], \f[CR]true\f[R] and \f[CR]false\f[R] are only defined
+when the language has none of its own.
 .SS Contents
 .PP
 .TS
@@ -71,6 +136,9 @@ T{
 \f[CR]#define false\f[R]
 T}
 T{
+\f[CR]#define bool\f[R]
+T}
+T{
 \f[CR]#define __bool_true_false_are_defined\f[R]
 T}
 .TE
@@ -83,11 +151,18 @@ T}
 #define boolean
 .EE
 .PP
-Defines the project\(aqs portable boolean type.
+The portable boolean type.
 .PP
-When supported, it aliases the compiler\(aqs native boolean type;
-otherwise it falls back to an implementation based on
-\f[CR]unsigned char\f[R].
+It is \f[CR]bool\f[R] wherever the language has one, \f[CR]_Bool\f[R] on
+C89 compilers that accept it as an extension, and
+\f[CR]unsigned char\f[R] everywhere else.
+.PP
+Converting any nonzero value to \f[CR]BOOLEAN\f[R] gives
+\f[CR]TRUE\f[R], except on the \f[CR]unsigned char\f[R] fallback, where
+only the low 8 bits survive.
+Write \f[CR](BOOLEAN)(VALUE != 0)\f[R] when that matters.
+.PP
+\f[CR]boolean\f[R] is the lowercase alias.
 .PP
    *   *   *   *   *
 .SS TRUE
@@ -97,10 +172,14 @@ otherwise it falls back to an implementation based on
 #define true
 .EE
 .PP
-Defines the boolean true value.
+The true value of the chosen type: \f[CR]true\f[R] wherever
+\f[CR]bool\f[R] exists, \f[CR]1\f[R] everywhere else.
 .PP
-Uses the compiler\(aqs native definition whenever available, otherwise
-provides a portable fallback value.
+An earlier \f[CR]TRUE\f[R] (for example from \f[CR]<windows.h>\f[R]) is
+replaced.
+It always meant \f[CR]1\f[R], so nothing changes for code that used it.
+.PP
+\f[CR]true\f[R] is only defined when the language has none of its own.
 .PP
    *   *   *   *   *
 .SS FALSE
@@ -110,10 +189,30 @@ provides a portable fallback value.
 #define false
 .EE
 .PP
-Defines the boolean false value.
+The false value of the chosen type: \f[CR]false\f[R] wherever
+\f[CR]bool\f[R] exists, \f[CR]0\f[R] everywhere else.
 .PP
-Uses the compiler\(aqs native definition whenever available, otherwise
-provides a portable fallback value.
+An earlier \f[CR]FALSE\f[R] (for example from \f[CR]<windows.h>\f[R]) is
+replaced.
+It always meant \f[CR]0\f[R], so nothing changes for code that used it.
+.PP
+\f[CR]false\f[R] is only defined when the language has none of its own.
+.PP
+   *   *   *   *   *
+.SS bool
+.IP
+.EX
+#define bool
+.EE
+.PP
+Only defined when the language has no \f[CR]bool\f[R] of its own: C89
+and older, and C++ compilers older than the keyword.
+It names the same type as \f[CR]BOOLEAN\f[R], so code written for
+\f[CR]<stdbool.h>\f[R] still compiles.
+.PP
+The guards of the known \f[CR]<stdbool.h>\f[R] headers are closed at the
+same time, so a later \f[CR]#include <stdbool.h>\f[R] is a no\-op
+instead of a clash.
 .PP
    *   *   *   *   *
 .SS __bool_true_false_are_defined
@@ -122,14 +221,20 @@ provides a portable fallback value.
 #define __bool_true_false_are_defined
 .EE
 .PP
-Defines the standard compatibility macro indicating that boolean
-definitions are available, matching the behavior expected by
-implementations compatible with \f[CR]stdbool.h\f[R].
+The standard macro that says \f[CR]bool\f[R], \f[CR]true\f[R] and
+\f[CR]false\f[R] are ready to use, the same way \f[CR]<stdbool.h>\f[R]
+defines it.
+Always \f[CR]1\f[R].
 .SS References
 .IP \(bu 2
 \c
 .UR https://cppreference.com/c/language/arithmetic_types#Boolean_type
 Arithmetic types \- cppreference.com
+.UE \c
+.IP \(bu 2
+\c
+.UR https://en.cppreference.com/w/c/types/boolean
+Boolean type support library \- cppreference.com
 .UE \c
 .SH AUTHORS
 Teoman Deniz.

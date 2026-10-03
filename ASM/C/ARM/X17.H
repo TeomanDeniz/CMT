@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2025/09/15 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - Apache2.0 :: Update - 2026/09/28 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - Apache2.0 :: Update - 2026/10/02 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -91,7 +91,7 @@
 \******************************************************************************/
 
 #ifndef X17_H
-#define X17_H 202609 /* VERSION */
+#define X17_H 202610 /* VERSION */
 
 /* **************************** [v] INCLUDES [v] **************************** */
 #include "../../../ENVIRONMENTS/CPU.H"
@@ -110,6 +110,10 @@
 /******* """"""""""""""""""""""""""""""""
  * #define EXTERN_C_START
  * #define EXTERN_C_END
+ */
+#include "../../../ATTRIBUTES/REGISTER.H"
+/******* """"""""""""""""""""""""""""""""
+ * #define REGISTER
  */
 /* **************************** [^] INCLUDES [^] **************************** */
 
@@ -173,7 +177,7 @@
 #define GET_X17(VARIABLE) \
 	do\
 	{\
-		register PTR	__REGISTER__;\
+		REGISTER PTR	__REGISTER__;\
 		\
 		LOCALMACRO__X17_GET(__REGISTER__);\
 		(VARIABLE) = __REGISTER__;\
@@ -182,7 +186,7 @@
 #define SET_X17(VALUE) \
 	do\
 	{\
-		register PTR	__REGISTER__ = (PTR)(VALUE);\
+		REGISTER PTR	__REGISTER__ = (PTR)(VALUE);\
 		\
 		LOCALMACRO__X17_SET(__REGISTER__);\
 	}\
@@ -371,7 +375,7 @@ EXTERN_C_END
 #define SET_X17(VALUE) \
 	do\
 	{\
-		register PTR	__REGISTER__ = (PTR)(VALUE);\
+		REGISTER PTR	__REGISTER__ = (PTR)(VALUE);\
 		\
 		LOCALMACRO__X17_SET(__REGISTER__);\
 	}\

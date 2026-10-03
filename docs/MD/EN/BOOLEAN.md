@@ -19,15 +19,26 @@
 
 ## Abstract
 
-Provides a portable boolean interface for C that automatically adapts to the compiler's native boolean implementation whenever available.
+One boolean type and one pair of truth values that mean the same thing on every compiler, from K&R C to C23 and from Turbo C++ to today.
 
-Rather than forcing a fixed type or value definitions, `BOOLEAN.H` detects the most suitable compiler-supported boolean type and constants, falling back to a portable implementation only when necessary.
+The header asks one question, *"what does this language already give me?"*, and the first rule that matches wins:
 
-If a standard compiler boolean header (such as `stdbool.h` or an equivalent implementation) has already been included, this module transparently adopts it.
+| Rule | Language / compiler               | `BOOLEAN` is              |
+| ---- | --------------------------------- | ------------------------- |
+| 1    | C++ older than the `bool` keyword | `unsigned char`           |
+| 2    | C++                               | `bool`                    |
+| 3    | C, `<stdbool.h>` already included | `bool` (adopted as it is) |
+| 4    | C23 and later                     | `bool`                    |
+| 5    | C99, C11, C17                     | `bool` (`<stdbool.h>`)    |
+| 6    | MSVC 2013+ in its default C mode  | `bool` (`<stdbool.h>`)    |
+| 7    | C89 on GCC 3+ or Clang            | `_Bool` (extension)       |
+| 8    | Anything else                     | `unsigned char`           |
 
-Otherwise, it includes the appropriate compiler header itself before exposing a consistent set of boolean definitions.
+Turbo C++, Borland C++ before 5.0, Watcom C++ before 11.0, Visual C++ before 5.0.
 
-The result is a single, compiler-independent interface that remains fully compatible with existing code while preserving the compiler's preferred boolean representation whenever possible.
+`TRUE` and `FALSE` always follow the chosen type, so in C++ they are real `bool` values, not integers.
+
+`bool`, `true` and `false` are only defined when the language has none of its own.
 
 ## Contents
 
@@ -39,6 +50,7 @@ The result is a single, compiler-independent interface that remains fully compat
 | `#define true`                          |
 | `#define FALSE`                         |
 | `#define false`                         |
+| `#define bool`                          |
 | `#define __bool_true_false_are_defined` |
 
 ----
@@ -50,9 +62,13 @@ The result is a single, compiler-independent interface that remains fully compat
 #define boolean
 ```
 
-Defines the project's portable boolean type.
+The portable boolean type.
 
-When supported, it aliases the compiler's native boolean type; otherwise it falls back to an implementation based on `unsigned char`.
+It is `bool` wherever the language has one, `_Bool` on C89 compilers that accept it as an extension, and `unsigned char` everywhere else.
+
+Converting any nonzero value to `BOOLEAN` gives `TRUE`, except on the `unsigned char` fallback, where only the low 8 bits survive. Write `(BOOLEAN)(VALUE != 0)` when that matters.
+
+`boolean` is the lowercase alias.
 
 ----
 
@@ -63,9 +79,11 @@ When supported, it aliases the compiler's native boolean type; otherwise it fall
 #define true
 ```
 
-Defines the boolean true value.
+The true value of the chosen type: `true` wherever `bool` exists, `1` everywhere else.
 
-Uses the compiler's native definition whenever available, otherwise provides a portable fallback value.
+An earlier `TRUE` (for example from `<windows.h>`) is replaced. It always meant `1`, so nothing changes for code that used it.
+
+`true` is only defined when the language has none of its own.
 
 ----
 
@@ -76,9 +94,23 @@ Uses the compiler's native definition whenever available, otherwise provides a p
 #define false
 ```
 
-Defines the boolean false value.
+The false value of the chosen type: `false` wherever `bool` exists, `0` everywhere else.
 
-Uses the compiler's native definition whenever available, otherwise provides a portable fallback value.
+An earlier `FALSE` (for example from `<windows.h>`) is replaced. It always meant `0`, so nothing changes for code that used it.
+
+`false` is only defined when the language has none of its own.
+
+----
+
+### bool
+
+```c
+#define bool
+```
+
+Only defined when the language has no `bool` of its own: C89 and older, and C++ compilers older than the keyword. It names the same type as `BOOLEAN`, so code written for `<stdbool.h>` still compiles.
+
+The guards of the known `<stdbool.h>` headers are closed at the same time, so a later `#include <stdbool.h>` is a no-op instead of a clash.
 
 ----
 
@@ -88,8 +120,9 @@ Uses the compiler's native definition whenever available, otherwise provides a p
 #define __bool_true_false_are_defined
 ```
 
-Defines the standard compatibility macro indicating that boolean definitions are available, matching the behavior expected by implementations compatible with `stdbool.h`.
+The standard macro that says `bool`, `true` and `false` are ready to use, the same way `<stdbool.h>` defines it. Always `1`.
 
 ## References
 
  - [Arithmetic types - cppreference.com](https://cppreference.com/c/language/arithmetic_types#Boolean_type)
+ - [Boolean type support library - cppreference.com](https://en.cppreference.com/w/c/types/boolean)

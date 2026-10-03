@@ -10,779 +10,445 @@
 /******* """""
  * void	*operator new(...);
  */
-#include <cstddef>
+#include "../CMT/CPP_CLASSES.INL"
+/******* """"""""""""""""""""""""
+ * #define CMT__OOP_CPP__...
+ */
+#include "API.INL"
 /******* """""""""
- * #define offsetof
+ * #define LOCALTABLE__CMT_CONSOLE__...
  */
 /* **************************** [^] INCLUDES [^] **************************** */
 
 /******************************************************************************\
-|* THE SHARED CONTENT MACROS WRITE INTO "const" MEMBERS OF A DIFFERENT TYPE  *|
-|* (FOR EXAMPLE A "const int" THROUGH AN "unsigned int *"). const_cast ALONE  *|
-|* CAN NOT CHANGE THE TYPE, SO REINTERPRET FIRST AND DROP THE const AFTER.    *|
+|* THE SHARED CONTENT MACROS WRITE INTO VALUES OF A DIFFERENT TYPE (FOR       *|
+|* EXAMPLE AN "int" THROUGH AN "unsigned int *"). const_cast ALONE CAN NOT    *|
+|* CHANGE THE TYPE, SO REINTERPRET FIRST AND DROP THE const AFTER. THE        *|
+|* STORAGE BEHIND EVERY READ-ONLY VALUE IS NOT const, SO THE WRITE IS LEGAL.  *|
 \******************************************************************************/
 #undef OBJECT__INITIALIZE
 #define OBJECT__INITIALIZE(VARIABLE, TYPE) \
 	(*const_cast<TYPE *>(reinterpret_cast<const TYPE *>(&(VARIABLE))))
 
+/* ************************ [v] TABLE ADAPTERS [v] ************************** */
+#define LOCALMACRO__CMT_CONSOLE_CPP__DECLARE_METHOD(\
+	UPPER, \
+	LOWER, \
+	KEY, \
+	PARAMETERS, \
+	ARGUMENTS, \
+	PROLOGUE\
+) \
+	CMT__OOP_CPP__DECLARE_METHOD(\
+		cmt::CONSOLE, UPPER, LOWER, PARAMETERS, ARGUMENTS\
+	)
+#define LOCALMACRO__CMT_CONSOLE_CPP__DECLARE_QUERY(\
+	TYPE, \
+	UPPER, \
+	LOWER, \
+	KEY, \
+	PARAMETERS, \
+	ARGUMENTS, \
+	PROLOGUE\
+) \
+	CMT__OOP_CPP__DECLARE_QUERY(\
+		TYPE, UPPER, LOWER, PARAMETERS, ARGUMENTS\
+	)
+/* ************************ [^] TABLE ADAPTERS [^] ************************** */
+
 namespace cmt
 {
-	class console;
-
 	class CONSOLE
 	{
-		friend class console;
+		CMT__OOP_CPP__ROOT_OWNER(CONSOLE)
 
 	public:
+		/* ****************** [v] console.put.colored [v] ******************* */
+		class T_PUT_COLORED
+		{
+			CMT__OOP_CPP__GROUP_OWNER(CONSOLE)
+
+			explicit T_PUT_COLORED(CONSOLE *OWNER) :
+				CMT__VALUE__OWNER(OWNER) {}
+
+			LOCALTABLE__CMT_CONSOLE__PUT_COLORED(
+				LOCALMACRO__CMT_CONSOLE_CPP__DECLARE_METHOD,
+				LOCALMACRO__CMT_CONSOLE_CPP__DECLARE_QUERY
+			)
+		};
+
+		/* ********************** [v] console.put [v] *********************** */
+		class T_PUT
+		{
+			CMT__OOP_CPP__GROUP_OWNER(CONSOLE)
+
+			explicit T_PUT(CONSOLE *OWNER) :
+				CMT__VALUE__OWNER(OWNER),
+				COLORED(OWNER),
+				colored(COLORED) {}
+
+			LOCALTABLE__CMT_CONSOLE__PUT(
+				LOCALMACRO__CMT_CONSOLE_CPP__DECLARE_METHOD,
+				LOCALMACRO__CMT_CONSOLE_CPP__DECLARE_QUERY
+			)
+
+			T_PUT_COLORED	COLORED;
+			T_PUT_COLORED	&colored;
+		};
+
+		/* ******************** [v] console.cursor [v] ********************** */
+		class T_CURSOR
+		{
+			CMT__OOP_CPP__GROUP_OWNER(CONSOLE)
+
+			explicit T_CURSOR(CONSOLE *OWNER) :
+				CMT__VALUE__OWNER(OWNER) {}
+
+			LOCALTABLE__CMT_CONSOLE__CURSOR(
+				LOCALMACRO__CMT_CONSOLE_CPP__DECLARE_METHOD,
+				LOCALMACRO__CMT_CONSOLE_CPP__DECLARE_QUERY
+			)
+		};
+
+		/* ********************* [v] console.event [v] ********************** */
+		class T_EVENT : private cmt::CMT__OOP_START
+		{
+		public:
+			T_EVENT(void) :
+				CMT__OOP_START()
+				LOCALTABLE__CMT_CONSOLE__EVENT_VALUES(
+					CMT__OOP_CPP__WRITABLE_INIT_STORE
+				)
+				LOCALTABLE__CMT_CONSOLE__EVENT_VALUES(
+					CMT__OOP_CPP__WRITABLE_INIT_EXPOSE
+				) {}
+
+			LOCALTABLE__CMT_CONSOLE__EVENT_VALUES(
+				CMT__OOP_CPP__WRITABLE_STORE
+			)
+			LOCALTABLE__CMT_CONSOLE__EVENT_VALUES(
+				CMT__OOP_CPP__WRITABLE_EXPOSE
+			)
+		};
+
+		/* ***************** [v] console.input.wait [v] ********************* */
+		class T_INPUT_WAIT
+		{
+			CMT__OOP_CPP__GROUP_OWNER(CONSOLE)
+
+			explicit T_INPUT_WAIT(CONSOLE *OWNER) :
+				CMT__VALUE__OWNER(OWNER) {}
+
+			LOCALTABLE__CMT_CONSOLE__INPUT_WAIT(
+				LOCALMACRO__CMT_CONSOLE_CPP__DECLARE_METHOD,
+				LOCALMACRO__CMT_CONSOLE_CPP__DECLARE_QUERY
+			)
+		};
+
+		/* ****************** [v] console.input.get [v] ********************* */
+		class T_INPUT_GET : private cmt::CMT__OOP_START
+		{
+		public:
+			T_INPUT_GET(void) :
+				CMT__OOP_START()
+				LOCALTABLE__CMT_CONSOLE__INPUT_GET_VALUES(
+					CMT__OOP_CPP__READONLY_INIT_STORE
+				)
+				LOCALTABLE__CMT_CONSOLE__INPUT_GET_VALUES(
+					CMT__OOP_CPP__READONLY_INIT_EXPOSE
+				) {}
+
+		private:
+			LOCALTABLE__CMT_CONSOLE__INPUT_GET_VALUES(
+				CMT__OOP_CPP__READONLY_STORE
+			)
+
+		public:
+			LOCALTABLE__CMT_CONSOLE__INPUT_GET_VALUES(
+				CMT__OOP_CPP__READONLY_EXPOSE
+			)
+		};
+
+		/* ********************* [v] console.input [v] ********************** */
+		class T_INPUT
+		{
+		public:
+			explicit T_INPUT(CONSOLE *OWNER) :
+				WAIT(OWNER),
+				wait(WAIT),
+				GET(),
+				get(GET) {}
+
+			T_INPUT_WAIT	WAIT;
+			T_INPUT_WAIT	&wait;
+			T_INPUT_GET		GET;
+			T_INPUT_GET		&get;
+		};
+
+		/* ****************** [v] console.get.cursor [v] ******************** */
+		class T_GET_CURSOR : private cmt::CMT__OOP_START
+		{
+		public:
+			T_GET_CURSOR(void) :
+				CMT__OOP_START()
+				LOCALTABLE__CMT_CONSOLE__GET_CURSOR_VALUES(
+					CMT__OOP_CPP__READONLY_INIT_STORE
+				)
+				LOCALTABLE__CMT_CONSOLE__GET_CURSOR_VALUES(
+					CMT__OOP_CPP__READONLY_INIT_EXPOSE
+				) {}
+
+		private:
+			LOCALTABLE__CMT_CONSOLE__GET_CURSOR_VALUES(
+				CMT__OOP_CPP__READONLY_STORE
+			)
+
+		public:
+			LOCALTABLE__CMT_CONSOLE__GET_CURSOR_VALUES(
+				CMT__OOP_CPP__READONLY_EXPOSE
+			)
+		};
+
+		/* ********************** [v] console.get [v] *********************** */
+		class T_GET
+		{
+			CMT__OOP_CPP__GROUP_OWNER(CONSOLE)
+
+			explicit T_GET(CONSOLE *OWNER) :
+				CMT__VALUE__OWNER(OWNER)
+				LOCALTABLE__CMT_CONSOLE__GET_VALUES(
+					CMT__OOP_CPP__READONLY_INIT_STORE
+				)
+				LOCALTABLE__CMT_CONSOLE__GET_VALUES(
+					CMT__OOP_CPP__READONLY_INIT_EXPOSE
+				),
+				CURSOR(),
+				cursor(CURSOR) {}
+
+			LOCALTABLE__CMT_CONSOLE__GET(
+				LOCALMACRO__CMT_CONSOLE_CPP__DECLARE_METHOD,
+				LOCALMACRO__CMT_CONSOLE_CPP__DECLARE_QUERY
+			)
+
+		private:
+			LOCALTABLE__CMT_CONSOLE__GET_VALUES(
+				CMT__OOP_CPP__READONLY_STORE
+			)
+
+		public:
+			LOCALTABLE__CMT_CONSOLE__GET_VALUES(
+				CMT__OOP_CPP__READONLY_EXPOSE
+			)
+
+			T_GET_CURSOR	CURSOR;
+			T_GET_CURSOR	&cursor;
+		};
+
+		/* ************************ [v] console [v] ************************* */
 		CONSOLE(void);
 		~CONSOLE(void);
 
-		CONSOLE	*X(int);
-		CONSOLE	*Y(int);
-		CONSOLE	*XY(int, int);
-		CONSOLE	*WIDTH(unsigned int);
-		CONSOLE	*HEIGHT(unsigned int);
-		CONSOLE	*TITLE(const char *);
-		CONSOLE	*COLOR(unsigned int);
-		CONSOLE	*DEFAULT_COLOR(void);
-		CONSOLE	*CLEAR(void);
-		PTR		EXPORT(void);
-		CONSOLE	*IMPORT(PTR);
-		CONSOLE	*PUSH(void);
-		CONSOLE	*POP(void);
-		CONSOLE	*LOG(const char *);
-		CONSOLE	*ERROR(const char *);
-		CONSOLE	*ERROR_AT(const char *, const char *, unsigned int);
-		CONSOLE	*WARNING(const char *);
-		CONSOLE	*WARNING_AT(const char *, const char *, unsigned int);
+		LOCALTABLE__CMT_CONSOLE__ROOT(
+			LOCALMACRO__CMT_CONSOLE_CPP__DECLARE_METHOD,
+			LOCALMACRO__CMT_CONSOLE_CPP__DECLARE_QUERY
+		)
+
+		/* VARIADIC: NOT FORWARDABLE, SO BOTH SPELLINGS RUN THE CONTENT */
 		CONSOLE	*PRINT(const char *, VA_ARGS);
+		CONSOLE	*print(const char *, VA_ARGS);
 
-		struct PUT
-		{
-			CONSOLE	*STRING(const char *, unsigned int, unsigned int);
-			CONSOLE	*LINE(
-				char,
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int
-			);
-			CONSOLE	*CURVE(
-				char,
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				float,
-				float
-			);
-			CONSOLE	*FRAME(
-				char,
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int
-			);
-			CONSOLE	*FRAME_RADIUS(
-				char,
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int
-			);
-			CONSOLE	*RECTANGLE(
-				char,
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int
-			);
-			CONSOLE	*RECTANGLE_RADIUS(
-				char,
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int
-			);
-			CONSOLE	*CIRCLE(
-				char,
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int
-			);
-			CONSOLE	*ELLIPSE(
-				char,
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int
-			);
+		T_PUT		PUT;
+		T_PUT		&put;
+		T_CURSOR	CURSOR;
+		T_CURSOR	&cursor;
+		T_EVENT		EVENT;
+		T_EVENT		&event;
+		T_INPUT		INPUT;
+		T_INPUT		&input;
+		T_GET		GET;
+		T_GET		&get;
 
-			struct COLORED
-			{
-				CONSOLE	*STRING(
-					const char *,
-					unsigned int,
-					unsigned int,
-					unsigned int
-				);
-				CONSOLE	*LINE(
-					char,
-					unsigned int,
-					unsigned int,
-					unsigned int,
-					unsigned int,
-					unsigned int
-				);
-				CONSOLE	*CURVE(
-					char,
-					unsigned int,
-					unsigned int,
-					unsigned int,
-					unsigned int,
-					unsigned int,
-					float,
-					float
-				);
-				CONSOLE	*FRAME(
-					char,
-					unsigned int,
-					unsigned int,
-					unsigned int,
-					unsigned int,
-					unsigned int
-				);
-				CONSOLE	*FRAME_RADIUS(
-					char,
-					unsigned int,
-					unsigned int,
-					unsigned int,
-					unsigned int,
-					unsigned int,
-					unsigned int
-				);
-				CONSOLE	*RECTANGLE(
-					char,
-					unsigned int,
-					unsigned int,
-					unsigned int,
-					unsigned int,
-					unsigned int
-				);
-				CONSOLE	*RECTANGLE_RADIUS(
-					char,
-					unsigned int,
-					unsigned int,
-					unsigned int,
-					unsigned int,
-					unsigned int,
-					unsigned int
-				);
-				CONSOLE	*CIRCLE(
-					char,
-					unsigned int,
-					unsigned int,
-					unsigned int,
-					unsigned int,
-					unsigned int
-				);
-				CONSOLE	*ELLIPSE(
-					char,
-					unsigned int,
-					unsigned int,
-					unsigned int,
-					unsigned int,
-					unsigned int
-				);
-			} COLORED;
-		} PUT;
-
-		struct CURSOR
-		{
-			CONSOLE	*COLOR(unsigned int);
-			CONSOLE	*DEFAULT_COLOR(void);
-			CONSOLE	*X(unsigned int);
-			CONSOLE	*Y(unsigned int);
-			CONSOLE	*XY(unsigned int, unsigned int);
-			CONSOLE	*MOVE_X(int);
-			CONSOLE	*MOVE_Y(int);
-			CONSOLE	*MOVE_XY(int, int);
-			CONSOLE	*SHOW(BOOLEAN);
-			CONSOLE	*SIZE(unsigned long);
-		} CURSOR;
-
-		struct /* EVENT */
-		{
-			void	(*ON_RESIZE)(unsigned int, unsigned int);
-			void	(*ON_MOVE)(int, int);
-			void	(*ON_CLOSE)(void);
-			void	(*ON_FOCUS)(void);
-			void	(*ON_BLUR)(void);
-			void	(*ON_KEY)(unsigned int);
-			void	(*ON_MOUSE)(unsigned int, unsigned int, unsigned int);
-		} EVENT;
-
-		struct INPUT
-		{
-			struct WAIT
-			{
-				CONSOLE	*ANY(void);
-				CONSOLE	*KEY(void);
-				CONSOLE	*MOUSE(void);
-				CONSOLE	*MOUSE_ACTION(void);
-				CONSOLE	*MOUSE_MOVE(void);
-			} WAIT;
-
-			struct GET
-			{
-				const unsigned int	KEY;
-				const unsigned int	MOUSE;
-				const unsigned int	MOUSE_X;
-				const unsigned int	MOUSE_Y;
-			} GET;
-		} INPUT;
-
-		struct GET
-		{
-			char	*LINE(
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int
-			);
-			char	**AREA(
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int
-			);
-
-			const BOOLEAN		ACTIVE;
-			const BOOLEAN		TERMINAL;
-			const unsigned int	ROWS;
-			const unsigned int	COLUMNS;
-			const unsigned int	PIXEL_WIDTH;
-			const unsigned int	PIXEL_HEIGHT;
-			const int			X;
-			const int			Y;
-			const unsigned int	COLOR;
-			const unsigned int	DEFAULT_COLOR;
-			const unsigned int	WIDTH;
-			const unsigned int	HEIGHT;
-
-			struct CURSOR
-			{
-				const unsigned long	SIZE;
-				const int			X;
-				const int			Y;
-				const unsigned int	COLOR;
-				const unsigned int	DEFAULT_COLOR;
-				const BOOLEAN		VISIBLE;
-			} CURSOR;
-		} GET;
-
-		BOOLEAN					HIGHLIGHTER;
+		LOCALTABLE__CMT_CONSOLE__ROOT_VALUES(
+			CMT__OOP_CPP__WRITABLE_STORE
+		)
+		LOCALTABLE__CMT_CONSOLE__ROOT_VALUES(
+			CMT__OOP_CPP__WRITABLE_EXPOSE
+		)
 
 	private:
-		CONSOLE(const CONSOLE &) = delete; /* OWNS HANDLES AND BUFFERS */
-		CONSOLE	&operator=(const CONSOLE &) = delete;
+		CONSOLE(const CONSOLE &); /* OWNS HANDLES AND BUFFERS: NOT COPYABLE */
+		CONSOLE	&operator=(const CONSOLE &);
+
+		/* PRE-2003 COMPILERS DO NOT LET NESTED CLASSES SEE PRIVATE MEMBERS */
+		friend class T_PUT;
+		friend class T_PUT_COLORED;
+		friend class T_CURSOR;
+		friend class T_INPUT_WAIT;
+		friend class T_GET;
 
 		LOCALMACRO__CMT_CONSOLE__PRIVATE_VARIABLES
 	};
 
-	class console
-	{
-	public:
-		console(void);
-		~console(void);
-
-		console	*x(int);
-		console	*y(int);
-		console	*xy(int, int);
-		console	*width(unsigned int);
-		console	*height(unsigned int);
-		console	*title(const char *);
-		console	*color(unsigned int);
-		console	*default_color(void);
-		console	*clear(void);
-		ptr		export_(void);
-		console	*import(ptr);
-		console	*push(void);
-		console	*pop(void);
-		console	*log(const char *);
-		console	*error(const char *);
-		console	*error_at(const char *, const char *, unsigned int);
-		console	*warning(const char *);
-		console	*warning_at(const char *, const char *, unsigned int);
-		console	*print(const char *, va_args);
-
-		struct put
-		{
-			console	*string(const char *, unsigned int, unsigned int);
-			console	*line(
-				char,
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int
-			);
-			console	*curve(
-				char,
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				float,
-				float
-			);
-			console	*frame(
-				char,
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int
-			);
-			console	*frame_radius(
-				char,
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int
-			);
-			console	*rectangle(
-				char,
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int
-			);
-			console	*rectangle_radius(
-				char,
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int
-			);
-			console	*circle(
-				char,
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int
-			);
-			console	*ellipse(
-				char,
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int
-			);
-
-			struct colored
-			{
-				console	*string(
-					const char *,
-					unsigned int,
-					unsigned int,
-					unsigned int
-				);
-				console	*line(
-					char,
-					unsigned int,
-					unsigned int,
-					unsigned int,
-					unsigned int,
-					unsigned int
-				);
-				console	*curve(
-					char,
-					unsigned int,
-					unsigned int,
-					unsigned int,
-					unsigned int,
-					unsigned int,
-					float,
-					float
-				);
-				console	*frame(
-					char,
-					unsigned int,
-					unsigned int,
-					unsigned int,
-					unsigned int,
-					unsigned int
-				);
-				console	*frame_radius(
-					char,
-					unsigned int,
-					unsigned int,
-					unsigned int,
-					unsigned int,
-					unsigned int,
-					unsigned int
-				);
-				console	*rectangle(
-					char,
-					unsigned int,
-					unsigned int,
-					unsigned int,
-					unsigned int,
-					unsigned int
-				);
-				console	*rectangle_radius(
-					char,
-					unsigned int,
-					unsigned int,
-					unsigned int,
-					unsigned int,
-					unsigned int,
-					unsigned int
-				);
-				console	*circle(
-					char,
-					unsigned int,
-					unsigned int,
-					unsigned int,
-					unsigned int,
-					unsigned int
-				);
-				console	*ellipse(
-					char,
-					unsigned int,
-					unsigned int,
-					unsigned int,
-					unsigned int,
-					unsigned int
-				);
-			} colored;
-		} put;
-
-		struct cursor
-		{
-			console	*color(unsigned int);
-			console	*default_color(void);
-			console	*x(unsigned int);
-			console	*y(unsigned int);
-			console	*xy(unsigned int, unsigned int);
-			console	*move_x(int);
-			console	*move_y(int);
-			console	*move_xy(int, int);
-			console	*show(boolean);
-			console	*size(unsigned long);
-		} cursor;
-
-		struct /* event */
-		{
-			void	(*on_resize)(unsigned int, unsigned int);
-			void	(*on_move)(int, int);
-			void	(*on_close)(void);
-			void	(*on_focus)(void);
-			void	(*on_blur)(void);
-			void	(*on_key)(unsigned int);
-			void	(*on_mouse)(unsigned int, unsigned int, unsigned int);
-		} event;
-
-		struct input
-		{
-			struct wait
-			{
-				console	*any(void);
-				console	*key(void);
-				console	*mouse(void);
-				console	*mouse_action(void);
-				console	*mouse_move(void);
-			} wait;
-
-			struct get
-			{
-				const unsigned int	key;
-				const unsigned int	mouse;
-				const unsigned int	mouse_x;
-				const unsigned int	mouse_y;
-			} get;
-		} input;
-
-		struct get
-		{
-			char	*line(
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int
-			);
-			char	**area(
-				unsigned int,
-				unsigned int,
-				unsigned int,
-				unsigned int
-			);
-
-			const boolean		active;
-			const boolean		terminal;
-			const unsigned int	rows;
-			const unsigned int	columns;
-			const unsigned int	pixel_width;
-			const unsigned int	pixel_height;
-			const int			x;
-			const int			y;
-			const unsigned int	color;
-			const unsigned int	default_color;
-			const unsigned int	width;
-			const unsigned int	height;
-
-			struct cursor
-			{
-				const unsigned long	size;
-				const int			x;
-				const int			y;
-				const unsigned int	color;
-				const unsigned int	default_color;
-				const boolean		visible;
-			} cursor;
-		} get;
-
-		boolean					highlighter;
-
-	private:
-		console(const console &) = delete; /* OWNS HANDLES AND BUFFERS */
-		console	&operator=(const console &) = delete;
-
-		LOCALMACRO__CMT_CONSOLE__PRIVATE_VARIABLES
-	};
-
-	/**************************************************************************\
-	|* A MEMBER FUNCTION OF A NESTED STRUCT (PUT, CURSOR, ...) GETS A "this"  *|
-	|* THAT POINTS AT THAT STRUCT, NOT AT THE CONSOLE. OWNER() WALKS BACK TO  *|
-	|* THE CONSOLE THAT CONTAINS IT.                                          *|
-	\**************************************************************************/
-	namespace LOCALNAMESPACE__CONSOLE
-	{
-
-#if (defined(__GNUC__) || defined(__clang__))
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Winvalid-offsetof"
-#endif /* __GNUC__ || __clang__ */
-		inline CONSOLE	*OWNER(struct CONSOLE::PUT *MEMBER)
-		{
-			return (
-				reinterpret_cast<CONSOLE *>(
-					reinterpret_cast<char *>(MEMBER) - (offsetof(CONSOLE, PUT))
-				)
-			);
-		}
-		inline CONSOLE	*OWNER(struct CONSOLE::PUT::COLORED *MEMBER)
-		{
-			return (
-				reinterpret_cast<CONSOLE *>(
-					reinterpret_cast<char *>(MEMBER) - (offsetof(CONSOLE, PUT) +
-					offsetof(struct CONSOLE::PUT, COLORED))
-				)
-			);
-		}
-		inline CONSOLE	*OWNER(struct CONSOLE::CURSOR *MEMBER)
-		{
-			return (
-				reinterpret_cast<CONSOLE *>(
-					reinterpret_cast<char *>(MEMBER) -
-					(offsetof(CONSOLE, CURSOR))
-				)
-			);
-		}
-		inline CONSOLE	*OWNER(struct CONSOLE::INPUT::WAIT *MEMBER)
-		{
-			return (
-				reinterpret_cast<CONSOLE *>(
-					reinterpret_cast<char *>(MEMBER) -
-					(
-						offsetof(CONSOLE, INPUT) +
-						offsetof(struct CONSOLE::INPUT, WAIT)
-					)
-				)
-			);
-		}
-		inline CONSOLE	*OWNER(struct CONSOLE::GET *MEMBER)
-		{
-			return (
-				reinterpret_cast<CONSOLE *>(
-					reinterpret_cast<char *>(MEMBER) - (offsetof(CONSOLE, GET))
-				)
-			);
-		}
-		inline console	*OWNER(struct console::put *MEMBER)
-		{
-			return (
-				reinterpret_cast<console *>(
-					reinterpret_cast<char *>(MEMBER) - (offsetof(console, put))
-				)
-			);
-		}
-		inline console	*OWNER(struct console::put::colored *MEMBER)
-		{
-			return (
-				reinterpret_cast<console *>(
-					reinterpret_cast<char *>(MEMBER) - (offsetof(console, put) +
-					offsetof(struct console::put, colored))
-				)
-			);
-		}
-		inline console	*OWNER(struct console::cursor *MEMBER)
-		{
-			return (
-				reinterpret_cast<console *>(
-					reinterpret_cast<char *>(MEMBER) -
-					(offsetof(console, cursor))
-				)
-			);
-		}
-		inline console	*OWNER(struct console::input::wait *MEMBER)
-		{
-			return (
-				reinterpret_cast<console *>(
-					reinterpret_cast<char *>(MEMBER) - (
-						offsetof(console, input) +
-						offsetof(struct console::input, wait)
-					)
-				)
-			);
-		}
-		inline console	*OWNER(struct console::get *MEMBER)
-		{
-			return (
-				reinterpret_cast<console *>(
-					reinterpret_cast<char *>(MEMBER) - (offsetof(console, get))
-				)
-			);
-		}
-
-#if (defined(__GNUC__) || defined(__clang__))
-#pragma GCC diagnostic pop
-#endif /* __GNUC__ || __clang__ */
-
-		/* LETS THE SHARED "print" CONTENT RUN ON A cmt::console */
-		class VIEW
-		{
-		public:
-			explicit VIEW(console *SELF) :
-				TARGET(reinterpret_cast<CONSOLE *>(SELF)) {}
-
-			CONSOLE	*operator->(void) const { return (TARGET); }
-			operator console *(void) const
-			{
-				return (reinterpret_cast<console *>(TARGET));
-			}
-
-		private:
-			CONSOLE	*TARGET;
-		};
-	}
+	typedef CONSOLE	console; /* cmt::console NAMES THE SAME CLASS */
 }
-
-#define LOCALMACRO__CMT_CONSOLE_CPP__OWNER(POINTER) \
-	cmt::LOCALNAMESPACE__CONSOLE::OWNER(POINTER)
-#define LOCALMACRO__CMT_CONSOLE_CPP__UPPER(POINTER) \
-	reinterpret_cast<cmt::CONSOLE *>(POINTER)
-
-/* cmt::console IS A LOWER CASE VIEW OF THE SAME BYTES AS cmt::CONSOLE */
-static_assert(
-	sizeof(cmt::CONSOLE) == sizeof(cmt::console),
-	"CMT CONSOLE: cmt::CONSOLE AND cmt::console LAYOUTS DIVERGED (SIZE)"
-);
-
-#if (defined(__GNUC__) || defined(__clang__))
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Winvalid-offsetof"
-#endif /* __GNUC__ || __clang__ */
-
-static_assert(
-	offsetof(cmt::CONSOLE, EVENT) == offsetof(cmt::console, event),
-	"CMT CONSOLE: cmt::CONSOLE AND cmt::console LAYOUTS DIVERGED (EVENT)"
-);
-static_assert(
-	offsetof(cmt::CONSOLE, INPUT) == offsetof(cmt::console, input),
-	"CMT CONSOLE: cmt::CONSOLE AND cmt::console LAYOUTS DIVERGED (INPUT)"
-);
-static_assert(
-	offsetof(cmt::CONSOLE, GET) == offsetof(cmt::console, get),
-	"CMT CONSOLE: cmt::CONSOLE AND cmt::console LAYOUTS DIVERGED (GET)"
-);
-static_assert(
-	offsetof(cmt::CONSOLE, HIGHLIGHTER) == offsetof(cmt::console, highlighter),
-	"CMT CONSOLE: cmt::CONSOLE AND cmt::console LAYOUTS DIVERGED (HIGHLIGHTER)"
-);
-
-#if (defined(__GNUC__) || defined(__clang__))
-#pragma GCC diagnostic pop
-#endif /* __GNUC__ || __clang__ */
 
 /* **************************** [v] EXTERNS [v] ***************************** */
 extern cmt::CONSOLE	&CONSOLE;
-extern cmt::console	&console;
+extern cmt::CONSOLE	&console;
 /* **************************** [^] EXTERNS [^] ***************************** */
 
-#include "CPP/__CONSTRUCTOR__.INL"
-#include "CPP/__DESTRUCTOR__.INL"
-#include "CPP/PRINT.INL"
-#include "CPP/X.INL"
-#include "CPP/Y.INL"
-#include "CPP/XY.INL"
-#include "CPP/WIDTH.INL"
-#include "CPP/HEIGHT.INL"
-#include "CPP/TITLE.INL"
-#include "CPP/COLOR.INL"
-#include "CPP/DEFAULT_COLOR.INL"
-#include "CPP/CLEAR.INL"
-#include "CPP/EXPORT.INL"
-#include "CPP/IMPORT.INL"
-#include "CPP/PUSH.INL"
-#include "CPP/POP.INL"
-#include "CPP/LOG.INL"
-#include "CPP/ERROR.INL"
-#include "CPP/ERROR_AT.INL"
-#include "CPP/WARNING.INL"
-#include "CPP/WARNING_AT.INL"
-#include "CPP/PUT/STRING.INL"
-#include "CPP/PUT/LINE.INL"
-#include "CPP/PUT/CURVE.INL"
-#include "CPP/PUT/FRAME.INL"
-#include "CPP/PUT/FRAME_RADIUS.INL"
-#include "CPP/PUT/RECTANGLE.INL"
-#include "CPP/PUT/RECTANGLE_RADIUS.INL"
-#include "CPP/PUT/CIRCLE.INL"
-#include "CPP/PUT/ELLIPSE.INL"
-#include "CPP/PUT/COLORED/STRING.INL"
-#include "CPP/PUT/COLORED/LINE.INL"
-#include "CPP/PUT/COLORED/CURVE.INL"
-#include "CPP/PUT/COLORED/FRAME.INL"
-#include "CPP/PUT/COLORED/FRAME_RADIUS.INL"
-#include "CPP/PUT/COLORED/RECTANGLE.INL"
-#include "CPP/PUT/COLORED/RECTANGLE_RADIUS.INL"
-#include "CPP/PUT/COLORED/CIRCLE.INL"
-#include "CPP/PUT/COLORED/ELLIPSE.INL"
-#include "CPP/CURSOR/COLOR.INL"
-#include "CPP/CURSOR/DEFAULT_COLOR.INL"
-#include "CPP/CURSOR/X.INL"
-#include "CPP/CURSOR/Y.INL"
-#include "CPP/CURSOR/XY.INL"
-#include "CPP/CURSOR/MOVE_X.INL"
-#include "CPP/CURSOR/MOVE_Y.INL"
-#include "CPP/CURSOR/MOVE_XY.INL"
-#include "CPP/CURSOR/SHOW.INL"
-#include "CPP/CURSOR/SIZE.INL"
-#include "CPP/INPUT/WAIT/ANY.INL"
-#include "CPP/INPUT/WAIT/KEY.INL"
-#include "CPP/INPUT/WAIT/MOUSE.INL"
-#include "CPP/INPUT/WAIT/MOUSE_ACTION.INL"
-#include "CPP/INPUT/WAIT/MOUSE_MOVE.INL"
-#include "CPP/GET/LINE.INL"
-#include "CPP/GET/AREA.INL"
+/* *********************** [v] MEMBER DEFINITIONS [v] *********************** */
+#define LOCALMACRO__CMT_CONSOLE_CPP__DEFINE(\
+	SCOPE, \
+	UPPER, \
+	KEY, \
+	PARAMETERS, \
+	PROLOGUE\
+) \
+	CMT__OOP_CPP__DEFINE_METHOD(\
+		cmt::CONSOLE,\
+		SCOPE,\
+		UPPER,\
+		LOCALMACRO__CMT_CONSOLE__##KEY##_CONTENT,\
+		PARAMETERS,\
+		PROLOGUE\
+	)
+#define LOCALMACRO__CMT_CONSOLE_CPP__DEFINE_Q(\
+	SCOPE, \
+	TYPE, \
+	UPPER, \
+	KEY, \
+	PARAMETERS, \
+	PROLOGUE\
+) \
+	CMT__OOP_CPP__DEFINE_QUERY(\
+		cmt::CONSOLE,\
+		TYPE,\
+		SCOPE,\
+		UPPER,\
+		LOCALMACRO__CMT_CONSOLE__##KEY##_CONTENT,\
+		PARAMETERS,\
+		PROLOGUE\
+	)
+
+/* ONE PAIR PER GROUP: ONLY THE SCOPE CHANGES */
+#define LOCALMACRO__CMT_CONSOLE_CPP__ROOT_M(U, L, K, P, A, R) \
+	LOCALMACRO__CMT_CONSOLE_CPP__DEFINE(cmt::CONSOLE, U, K, P, R)
+#define LOCALMACRO__CMT_CONSOLE_CPP__ROOT_Q(T, U, L, K, P, A, R) \
+	LOCALMACRO__CMT_CONSOLE_CPP__DEFINE_Q(cmt::CONSOLE, T, U, K, P, R)
+#define LOCALMACRO__CMT_CONSOLE_CPP__PUT_M(U, L, K, P, A, R) \
+	LOCALMACRO__CMT_CONSOLE_CPP__DEFINE(cmt::CONSOLE::T_PUT, U, K, P, R)
+#define LOCALMACRO__CMT_CONSOLE_CPP__PUT_Q(T, U, L, K, P, A, R) \
+	LOCALMACRO__CMT_CONSOLE_CPP__DEFINE_Q(cmt::CONSOLE::T_PUT, T, U, K, P, R)
+#define LOCALMACRO__CMT_CONSOLE_CPP__PUT_COLORED_M(U, L, K, P, A, R) \
+	LOCALMACRO__CMT_CONSOLE_CPP__DEFINE(\
+		cmt::CONSOLE::T_PUT_COLORED, U, K, P, R\
+	)
+#define LOCALMACRO__CMT_CONSOLE_CPP__PUT_COLORED_Q(T, U, L, K, P, A, R) \
+	LOCALMACRO__CMT_CONSOLE_CPP__DEFINE_Q(\
+		cmt::CONSOLE::T_PUT_COLORED, T, U, K, P, R\
+	)
+#define LOCALMACRO__CMT_CONSOLE_CPP__CURSOR_M(U, L, K, P, A, R) \
+	LOCALMACRO__CMT_CONSOLE_CPP__DEFINE(cmt::CONSOLE::T_CURSOR, U, K, P, R)
+#define LOCALMACRO__CMT_CONSOLE_CPP__CURSOR_Q(T, U, L, K, P, A, R) \
+	LOCALMACRO__CMT_CONSOLE_CPP__DEFINE_Q(cmt::CONSOLE::T_CURSOR, T, U, K, P, R)
+#define LOCALMACRO__CMT_CONSOLE_CPP__INPUT_WAIT_M(U, L, K, P, A, R) \
+	LOCALMACRO__CMT_CONSOLE_CPP__DEFINE(\
+		cmt::CONSOLE::T_INPUT_WAIT, U, K, P, R\
+	)
+#define LOCALMACRO__CMT_CONSOLE_CPP__INPUT_WAIT_Q(T, U, L, K, P, A, R) \
+	LOCALMACRO__CMT_CONSOLE_CPP__DEFINE_Q(\
+		cmt::CONSOLE::T_INPUT_WAIT, T, U, K, P, R\
+	)
+#define LOCALMACRO__CMT_CONSOLE_CPP__GET_M(U, L, K, P, A, R) \
+	LOCALMACRO__CMT_CONSOLE_CPP__DEFINE(cmt::CONSOLE::T_GET, U, K, P, R)
+#define LOCALMACRO__CMT_CONSOLE_CPP__GET_Q(T, U, L, K, P, A, R) \
+	LOCALMACRO__CMT_CONSOLE_CPP__DEFINE_Q(cmt::CONSOLE::T_GET, T, U, K, P, R)
+
+#define LOCALFUNCTION__CMT_CONSOLE_CPP__MEMBERS \
+	LOCALTABLE__CMT_CONSOLE__ROOT(\
+		LOCALMACRO__CMT_CONSOLE_CPP__ROOT_M,\
+		LOCALMACRO__CMT_CONSOLE_CPP__ROOT_Q\
+	)\
+	LOCALTABLE__CMT_CONSOLE__PUT(\
+		LOCALMACRO__CMT_CONSOLE_CPP__PUT_M,\
+		LOCALMACRO__CMT_CONSOLE_CPP__PUT_Q\
+	)\
+	LOCALTABLE__CMT_CONSOLE__PUT_COLORED(\
+		LOCALMACRO__CMT_CONSOLE_CPP__PUT_COLORED_M,\
+		LOCALMACRO__CMT_CONSOLE_CPP__PUT_COLORED_Q\
+	)\
+	LOCALTABLE__CMT_CONSOLE__CURSOR(\
+		LOCALMACRO__CMT_CONSOLE_CPP__CURSOR_M,\
+		LOCALMACRO__CMT_CONSOLE_CPP__CURSOR_Q\
+	)\
+	LOCALTABLE__CMT_CONSOLE__INPUT_WAIT(\
+		LOCALMACRO__CMT_CONSOLE_CPP__INPUT_WAIT_M,\
+		LOCALMACRO__CMT_CONSOLE_CPP__INPUT_WAIT_Q\
+	)\
+	LOCALTABLE__CMT_CONSOLE__GET(\
+		LOCALMACRO__CMT_CONSOLE_CPP__GET_M,\
+		LOCALMACRO__CMT_CONSOLE_CPP__GET_Q\
+	)
+
+/* THE HAND-WRITTEN ONES: CONSTRUCTION, DESTRUCTION AND THE VARIADIC PRINT */
+#define LOCALFUNCTION__CMT_CONSOLE_CPP__SPECIAL \
+	cmt::CONSOLE::CONSOLE(void) : \
+		PUT(this), \
+		put(PUT), \
+		CURSOR(this), \
+		cursor(CURSOR), \
+		EVENT(), \
+		event(EVENT), \
+		INPUT(this), \
+		input(INPUT), \
+		GET(this), \
+		get(GET)\
+		LOCALTABLE__CMT_CONSOLE__ROOT_VALUES(\
+			CMT__OOP_CPP__WRITABLE_INIT_STORE\
+		)\
+		LOCALTABLE__CMT_CONSOLE__ROOT_VALUES(\
+			CMT__OOP_CPP__WRITABLE_INIT_EXPOSE\
+		)\
+	{\
+		cmt::CONSOLE	*THIS = this;\
+		\
+		THIS->HIGHLIGHTER = TRUE;\
+		LOCALFUNCTION__CMT_CONSOLE_CONTENT\
+	}\
+	\
+	cmt::CONSOLE::~CONSOLE(void)\
+	{\
+		cmt::CONSOLE	*THIS = this;\
+		\
+		LOCALMACRO__CMT_CONSOLE__DESTRUCTOR_CONTENT\
+	}\
+	\
+	cmt::CONSOLE\
+		*cmt::CONSOLE::PRINT(const char *FORMAT, VA_ARGS)\
+	VA_DECLARE\
+	{\
+		cmt::CONSOLE	*THIS = this;\
+		\
+		LOCALMACRO__CMT_CONSOLE__PRINT_CONTENT\
+		\
+		return (THIS);\
+	}\
+	\
+	cmt::CONSOLE\
+		*cmt::CONSOLE::print(const char *FORMAT, VA_ARGS)\
+	VA_DECLARE\
+	{\
+		cmt::CONSOLE	*THIS = this;\
+		\
+		LOCALMACRO__CMT_CONSOLE__PRINT_CONTENT\
+		\
+		return (THIS);\
+	}
+/* *********************** [^] MEMBER DEFINITIONS [^] *********************** */
 
 #define LOCALCONSTRUCTOR__CONSOLE \
-	new (static_cast<void *>(CONSOLE_STORAGE)) cmt::CONSOLE();
+	new (static_cast<void *>(&CONSOLE_STORAGE)) cmt::CONSOLE();
 #define LOCALDESTRUCTOR__CONSOLE \
 	CONSOLE.CURSOR.DEFAULT_COLOR()->~CONSOLE();
 
@@ -790,75 +456,27 @@ extern cmt::console	&console;
 /*  \\//  |                 LINKABLE MEMBER CREATION                 |  \\//  */
 /*   \/   #==========================================================#   \/   */
 
+/* THE UNION ONLY GIVES THE BYTES THE STRICTEST ALIGNMENT, WITHOUT alignas */
 #undef LOCALLINKER__CONSOLE_OOP
 #define LOCALLINKER__CONSOLE_OOP \
-	alignas(cmt::CONSOLE) unsigned char\
-		CONSOLE_STORAGE[sizeof(cmt::CONSOLE)];\
+	union LOCALUNION__CMT_CONSOLE_STORAGE\
+	{\
+		unsigned char	BYTES[sizeof(cmt::CONSOLE)];\
+		long double		ALIGN_FLOAT;\
+		long			ALIGN_INTEGER;\
+		void			*ALIGN_POINTER;\
+		void			(*ALIGN_FUNCTION)(void);\
+	}	CONSOLE_STORAGE;\
 	cmt::CONSOLE	&CONSOLE = \
-		*reinterpret_cast<cmt::CONSOLE *>(CONSOLE_STORAGE);\
-	cmt::console	&console = \
-		*reinterpret_cast<cmt::console *>(CONSOLE_STORAGE);\
-	LOCALFUNCTION__CMT_CONSOLE_CPP__CONSTRUCTOR \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__DESTRUCTOR \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__PRINT \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__X \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__Y \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__XY \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__WIDTH \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__HEIGHT \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__TITLE \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__COLOR \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__DEFAULT_COLOR \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__CLEAR \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__EXPORT \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__IMPORT \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__PUSH \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__POP \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__LOG \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__ERROR \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__ERROR_AT \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__WARNING \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__WARNING_AT \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__PUT_STRING \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__PUT_LINE \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__PUT_CURVE \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__PUT_FRAME \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__PUT_FRAME_RADIUS \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__PUT_RECTANGLE \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__PUT_RECTANGLE_RADIUS \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__PUT_CIRCLE \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__PUT_ELLIPSE \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__PUT_COLORED_STRING \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__PUT_COLORED_LINE \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__PUT_COLORED_CURVE \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__PUT_COLORED_FRAME \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__PUT_COLORED_FRAME_RADIUS \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__PUT_COLORED_RECTANGLE \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__PUT_COLORED_RECTANGLE_RADIUS \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__PUT_COLORED_CIRCLE \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__PUT_COLORED_ELLIPSE \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__CURSOR_COLOR \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__CURSOR_DEFAULT_COLOR \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__CURSOR_X \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__CURSOR_Y \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__CURSOR_XY \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__CURSOR_MOVE_X \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__CURSOR_MOVE_Y \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__CURSOR_MOVE_XY \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__CURSOR_SHOW \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__CURSOR_SIZE \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__INPUT_WAIT_ANY \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__INPUT_WAIT_KEY \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__INPUT_WAIT_MOUSE \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__INPUT_WAIT_MOUSE_ACTION \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__INPUT_WAIT_MOUSE_MOVE \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__GET_LINE \
-	LOCALFUNCTION__CMT_CONSOLE_CPP__GET_AREA
+		*reinterpret_cast<cmt::CONSOLE *>(&CONSOLE_STORAGE);\
+	cmt::CONSOLE	&console = \
+		*reinterpret_cast<cmt::CONSOLE *>(&CONSOLE_STORAGE);\
+	LOCALFUNCTION__CMT_CONSOLE_CPP__SPECIAL \
+	LOCALFUNCTION__CMT_CONSOLE_CPP__MEMBERS
 
 /*   /\   #==========================================================#   /\   */
 /*  //\\  |                 LINKABLE MEMBER CREATION                 |  //\\  */
 /* '""""' #==========================================================# '""""' */
-
 #endif /* !SEAL_CMT_CONSOLE_CPP */
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\

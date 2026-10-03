@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2024/06/10 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - Apache2.0 :: Update - 2026/09/28 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - Apache2.0 :: Update - 2026/10/02 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -445,7 +445,7 @@
 \******************************************************************************/
 
 #ifndef VA_ARGS_H
-#define VA_ARGS_H 202609 /* VERSION */
+#define VA_ARGS_H 202610 /* VERSION */
 
 /* *********************** [v] TI CGT CCS (PUSH) [v] ************************ */
 #ifdef __TI_COMPILER_VERSION__
@@ -691,6 +691,10 @@
  * #define EXTERN_C_START
  * #define EXTERN_C_END
  */
+#include "../ATTRIBUTES/REGISTER.H"
+/******* """"""""""""""""""""""""""
+ * #define REGISTER
+ */
 /* **************************** [^] INCLUDES [^] **************************** */
 
 #define va_args var __dummy_va_args_variable__
@@ -710,7 +714,7 @@ typedef char	*va_list;
 /* **************************** [v] EXTERNS [v] ***************************** */
 EXTERN_C_START
 #ifndef KNR_STYLE /* STANDARD C */
-FORCE_INLINE char	*__VA_ARGS_HELPER_FUNCTION__(register char **, register int);
+FORCE_INLINE char	*__VA_ARGS_HELPER_FUNCTION__(REGISTER char **, REGISTER int);
 #else /* K&R */
 FORCE_INLINE char	*__VA_ARGS_HELPER_FUNCTION__();
 #endif /* !KNR_STYLE */
@@ -759,20 +763,20 @@ EXTERN_C_END
 #ifndef KNR_STYLE /* STANDARD C */
 #define FUNCTION_HEADER____VA_ARGS_HELPER_FUNCTION__ \
 	FORCE_INLINE char\
-		*__VA_ARGS_HELPER_FUNCTION__(register char **LIST, register int SIZE)
+		*__VA_ARGS_HELPER_FUNCTION__(REGISTER char **LIST, REGISTER int SIZE)
 #else /* K&R */
 #define FUNCTION_HEADER____VA_ARGS_HELPER_FUNCTION__ \
 	FORCE_INLINE char\
 		*__VA_ARGS_HELPER_FUNCTION__(LIST, SIZE)\
-		register char	**LIST;\
-		register int	SIZE;
+		REGISTER char	**LIST;\
+		REGISTER int	SIZE;
 #endif /* !KNR_STYLE */
 
 #ifdef __SYSTEM_32_BIT__
 #define LOCALFUNCTION____VA_ARGS_HELPER_FUNCTION__ \
 	FUNCTION_HEADER____VA_ARGS_HELPER_FUNCTION__\
 	{\
-		register int	ADJUST;\
+		REGISTER int	ADJUST;\
 		\
 		ADJUST = (SIZE + 3) & (~ 3);\
 		*LIST += ADJUST;\
@@ -787,7 +791,7 @@ EXTERN_C_END
 #define LOCALFUNCTION____VA_ARGS_HELPER_FUNCTION__ \
 	FUNCTION_HEADER____VA_ARGS_HELPER_FUNCTION__\
 	{\
-		register int	ADJUST;\
+		REGISTER int	ADJUST;\
 		\
 		ADJUST = (SIZE + 1) & (~ 1);\
 		*LIST += ADJUST;\

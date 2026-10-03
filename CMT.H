@@ -8,12 +8,12 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2025/06/22 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - Apache2.0 :: Update - 2026/09/28 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - Apache2.0 :: Update - 2026/10/02 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
 #ifndef CMT_H
-#define CMT_H 202609 /* VERSION */
+#define CMT_H 202610 /* VERSION */
 #endif /* !CMT_H */
 
 /* ****************** [v] LOCALMACRO_DEFINE_ALL_TRY_1 [v] ******************* */
@@ -66,7 +66,11 @@
 #ifndef INCL_CMT_VOLATILE
 #ifndef INCL_CMT_MAYBE_ARGS
 #ifndef INCL_CMT_SETJMP
+#ifndef INCL_CMT_REGISTER
+#ifndef INCL_CMT_RESTRICT
 #define LOCALMACRO_DEFINE_ALL_TRY_1
+#endif /* !INCL_CMT_RESTRICT */
+#endif /* !INCL_CMT_REGISTER */
 #endif /* !INCL_CMT_SETJMP */
 #endif /* !INCL_CMT_MAYBE_ARGS */
 #endif /* !INCL_CMT_VOLATILE */
@@ -224,6 +228,14 @@
 #ifndef INCL_CMT_MAYBE_ARGS
 #define INCL_CMT_MAYBE_ARGS
 #endif /* !INCL_CMT_MAYBE_ARGS */
+
+#ifndef INCL_CMT_REGISTER
+#define INCL_CMT_REGISTER
+#endif /* !INCL_CMT_REGISTER */
+
+#ifndef INCL_CMT_RESTRICT
+#define INCL_CMT_RESTRICT
+#endif /* !INCL_CMT_RESTRICT */
 #endif /* INCL_CMT_ATTRIBUTES */
 /* *************************** [^] ATTRIBUTES [^] *************************** */
 
@@ -727,6 +739,25 @@
  */
 #undef INCL_CMT_MAYBE_ARGS
 #endif /* INCL_CMT_MAYBE_ARGS */
+
+#ifdef INCL_CMT_REGISTER
+#include "ATTRIBUTES/REGISTER.H"
+/******* """""""""""""""""""""""
+ * #define REGISTER
+ * #define register
+ */
+#undef INCL_CMT_REGISTER
+#endif /* INCL_CMT_REGISTER */
+
+#ifdef INCL_CMT_RESTRICT
+#include "ATTRIBUTES/RESTRICT.H"
+/******* """""""""""""""""""""""
+ * #define RESTRICT
+ * #define restrict
+ * #define IS__RESTRICT__SUPPORTED
+ */
+#undef INCL_CMT_RESTRICT
+#endif /* INCL_CMT_RESTRICT */
 /* *************************** [^] ATTRIBUTES [^] *************************** */
 
 /* ************************* [v] CHECK FEATURE [v] ************************** */
@@ -997,6 +1028,7 @@
  * #define true
  * #define FALSE
  * #define false
+ * #define bool
  * #define __bool_true_false_are_defined
  */
 #undef INCL_CMT_BOOLEAN

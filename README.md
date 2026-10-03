@@ -233,8 +233,10 @@ If you include an `H` file in both C and C++, you just get stright functions or 
  * [![][__NOINLINE_GIF__] **NOINLINE**][__NOINLINE_MD__]
  * [![][__PACK_GIF__] **PACK**][__PACK_MD__]
  * [![][__PASCAL_GIF__] **PASCAL**][__PASCAL_MD__]
+ * [![][__REGISTER_GIF__] **REGISTER**][__REGISTER_MD__]
  * [![][__REGPARM_GIF__] **REGPARM**][__REGPARM_MD__]
  * [![][__REGPASS_GIF__] **REGPASS**][__REGPASS_MD__]
+ * [![][__RESTRICT_GIF__] **RESTRICT**][__RESTRICT_MD__]
  * [![][__STDCALL_GIF__] **STDCALL**][__STDCALL_MD__]
  * [![][__UNUSED_GIF__] **UNUSED**][__UNUSED_MD__]
  * [![][__VOLATILE_GIF__] **VOLATILE**][__VOLATILE_MD__]
@@ -453,6 +455,8 @@ List of the icons:
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/MAYBE_ARGS.gif" ALT="MAYBE_ARGS" TITLE="MAYBE_ARGS"/>
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/SETJMP.gif" ALT="SETJMP" TITLE="SETJMP"/>
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/CONSOLE.gif" ALT="CONSOLE" TITLE="CONSOLE"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/REGISTER.gif" ALT="REGISTER" TITLE="REGISTER"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/RESTRICT.gif" ALT="RESTRICT" TITLE="RESTRICT"/>
 </details>
 
 <details>
@@ -518,6 +522,8 @@ List of the icons:
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/MAYBE_ARGS.gif" ALT="MAYBE_ARGS" TITLE="MAYBE_ARGS"/>
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/SETJMP.gif" ALT="SETJMP" TITLE="SETJMP"/>
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/CONSOLE.gif" ALT="CONSOLE" TITLE="CONSOLE"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/REGISTER.gif" ALT="REGISTER" TITLE="REGISTER"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/RESTRICT.gif" ALT="RESTRICT" TITLE="RESTRICT"/>
 </details>
 
 ---
@@ -583,6 +589,8 @@ List of the icons:
 [__MAYBE_ARGS_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/MAYBE_ARGS.md
 [__SETJMP_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/SETJMP.md
 [__CONSOLE_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/CONSOLE.md
+[__REGISTER_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/REGISTER.md
+[__RESTRICT_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/RESTRICT.md
 <!-- MARKDOWNS -->
 
 <!-- ICONS -->
@@ -643,4 +651,6 @@ List of the icons:
 [__MAYBE_ARGS_GIF__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/IMAGES/32/MAYBE_ARGS.gif
 [__SETJMP_GIF__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/IMAGES/32/SETJMP.gif
 [__CONSOLE_GIF__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/IMAGES/32/CONSOLE.gif
+[__REGISTER_GIF__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/IMAGES/32/REGISTER.gif
+[__RESTRICT_GIF__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/IMAGES/32/RESTRICT.gif
 <!-- ICONS -->

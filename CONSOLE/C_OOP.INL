@@ -830,7 +830,14 @@ object cmt_console
 
 /* **************************** [v] EXTERNS [v] ***************************** */
 extern object cmt_console	console;
-extern OBJECT CMT_CONSOLE	CONSOLE;
+
+/******************************************************************************\
+|* CONSOLE AND console ARE ONE OBJECT SEEN THROUGH TWO SETS OF NAMES. THE TWO *|
+|* STRUCTURES ARE MEMBER-FOR-MEMBER IDENTICAL, SO THE UPPER CASE VIEW IS JUST *|
+|* THE SAME BYTES READ AS OBJECT CMT_CONSOLE. (IT USED TO BE A SECOND OBJECT  *|
+|* COPIED FROM THE FIRST, AND EVERY console.get.* READ A STALE COPY.)         *|
+\******************************************************************************/
+#define CONSOLE (*(OBJECT CMT_CONSOLE *)&console)
 
 #ifndef KNR_STYLE /* STANDARD C */
 extern void					CMT_CONSOLE(void);
@@ -1078,8 +1085,7 @@ extern char					**CMT_CONSOLE_C_OOP__GET_AREA();
 
 #define LOCALCONSTRUCTOR__CONSOLE \
 	LOCALMACRO__OBJECT_SENDER (&CONSOLE);\
-	CMT_CONSOLE();\
-	OBJECT__COPY (&console, &CONSOLE);
+	CMT_CONSOLE();
 #define LOCALDESTRUCTOR__CONSOLE \
 	CONSOLE.CURSOR.DEFAULT_COLOR();\
 	DESTROY (CONSOLE);
@@ -1091,7 +1097,6 @@ extern char					**CMT_CONSOLE_C_OOP__GET_AREA();
 #undef LOCALLINKER__CONSOLE_OOP
 #define LOCALLINKER__CONSOLE_OOP \
 	object cmt_console	console;\
-	OBJECT CMT_CONSOLE	CONSOLE;\
 	LOCALFUNCTION__CMT_CONSOLE_C_OOP \
 	LOCALFUNCTION__CMT_CONSOLE_C_OOP__DESTRUCTOR \
 	LOCALFUNCTION__CMT_CONSOLE_C_OOP__LOG \

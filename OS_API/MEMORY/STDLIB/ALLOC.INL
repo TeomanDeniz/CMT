@@ -4,11 +4,11 @@
 
 #ifndef KNR_STYLE /* ANSI C */
 #define FUNCTION_HEADER__ALLOC \
-	PTR	ALLOC(register LET SIZE)
+	PTR	ALLOC(REGISTER LET SIZE)
 #else /* K&R */
 #define FUNCTION_HEADER__ALLOC \
 	PTR	ALLOC(SIZE) \
-	register LET	SIZE;
+	REGISTER LET	SIZE;
 #endif /* !KNR_STYLE */
 
 #define LOCALFUNCTION__ALLOC \
@@ -57,7 +57,7 @@
 #define LOCALDESTRUCTOR__MEMORY_GARBAGE_COLLECTOR \
 	do\
 	{\
-		LET	INDEX;\
+		REGISTER LET	INDEX;\
 		\
 		for (INDEX = 0; INDEX < G_HEAP_COUNT; INDEX++)\
 		{\

@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2026/03/23 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - Apache2.0 :: Update - 2026/09/28 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - Apache2.0 :: Update - 2026/10/02 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -116,7 +116,7 @@
 \******************************************************************************/
 
 #ifndef MFSPR_287_H
-#define MFSPR_287_H 202609 /* VERSION */
+#define MFSPR_287_H 202610 /* VERSION */
 
 /* **************************** [v] INCLUDES [v] **************************** */
 #include "../../../ENVIRONMENTS/CPU.H"
@@ -145,6 +145,10 @@
  * #define EXTERN_C_START
  * #define EXTERN_C_END
  */
+#include "../../../ATTRIBUTES/REGISTER.H"
+/******* """"""""""""""""""""""""""""""""
+ * #define REGISTER
+ */
 /* **************************** [^] INCLUDES [^] **************************** */
 
 #ifdef INLINE_ASM_TYPE__CODEWARRIOR
@@ -161,7 +165,7 @@
 #define GET_MFSPR_287(VARIABLE) \
 	do\
 	{\
-		register unsigned long	RESULT;\
+		REGISTER unsigned long	RESULT;\
 		\
 		__asm__ __volatile__ (\
 			"mfspr %0, 287" \
@@ -177,7 +181,7 @@
 #define GET_MFSPR_287(VARIABLE) \
 	do\
 	{\
-		register unsigned long	RESULT;\
+		REGISTER unsigned long	RESULT;\
 		\
 		asm (\
 			"mfspr %0, 287" \

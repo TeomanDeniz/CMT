@@ -4,12 +4,12 @@
 
 #ifndef KNR_STYLE /* ANSI C */
 #define FUNCTION_HEADER__REALLOC \
-	PTR	REALLOC(PTR ADDRESS, register LET SIZE)
+	PTR	REALLOC(PTR ADDRESS, REGISTER LET SIZE)
 #else /* K&R */
 #define FUNCTION_HEADER__REALLOC \
 	PTR	REALLOC(ADDRESS, SIZE) \
 	PTR				ADDRESS;
-	register LET	SIZE;
+	REGISTER LET	SIZE;
 #endif /* !KNR_STYLE */
 
 #define LOCALFUNCTION__REALLOC \
@@ -29,7 +29,7 @@
 			return ((PTR)0);\
 		\
 		{\
-			LET	TRACK_I;\
+			REGISTER LET	TRACK_I;\
 			\
 			for (TRACK_I = 0; TRACK_I < G_HEAP_COUNT; TRACK_I += 1)\
 			{\

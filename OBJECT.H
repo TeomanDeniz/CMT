@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2025/05/25 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - Apache2.0 :: Update - 2026/09/28 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - Apache2.0 :: Update - 2026/10/02 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -866,7 +866,7 @@
 /* ****************************** [^] C++ [^] ******************************* */
 
 #ifndef OBJECT_H
-#define OBJECT_H 202609 /* VERSION */
+#define OBJECT_H 202610 /* VERSION */
 
 /* *********************** [v] TI CGT CCS (PUSH) [v] ************************ */
 #ifdef __TI_COMPILER_VERSION__
@@ -956,6 +956,10 @@
 #include "ATTRIBUTES/MAYBE_ARGS.H"
 /******* """""""""""""""""""""""""
  * #define MAYBE_ARGS
+ */
+#include "ATTRIBUTES/REGISTER.H"
+/******* """""""""""""""""""""""
+ * #define REGISTER
  */
 #include "ENVIRONMENTS/KNR_STYLE.H"
 /******* """"""""""""""""""""""""""
@@ -1207,7 +1211,7 @@
 #define OBJECT__INJECT(TARGET, SOURCE) \
 	do\
 	{\
-		register LET	INDEX;\
+		REGISTER LET	INDEX;\
 		BYTE			__OP__[LOCALMACRO__FUNCTION_SIZE];\
 		\
 		INDEX = 0;\
@@ -1220,7 +1224,7 @@
 #define object__inject(target, source) \
 	do\
 	{\
-		register LET	INDEX;\
+		REGISTER LET	INDEX;\
 		BYTE			__OP__[LOCALMACRO__FUNCTION_SIZE];\
 		\
 		INDEX = 0;\
@@ -1236,7 +1240,7 @@
 #define OBJECT__COPY(DST, SRC) \
 	do\
 	{\
-		register LET		SIZE = sizeof(*(DST));\
+		REGISTER LET		SIZE = sizeof(*(DST));\
 		unsigned char		*DESTINATION = (unsigned char *)(DST);\
 		const unsigned char	*SOURCE = (const unsigned char *)(SRC);\
 		\

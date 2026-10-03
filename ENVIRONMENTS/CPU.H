@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2025/08/02 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - Apache2.0 :: Update - 2026/09/28 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - Apache2.0 :: Update - 2026/10/02 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -543,7 +543,7 @@
 \******************************************************************************/
 
 #ifndef CPU_H
-#define CPU_H 202609 /* VERSION */
+#define CPU_H 202610 /* VERSION */
 
 /* **************************** [v] INCLUDES [v] **************************** */
 #include "KNR_STYLE.H"
@@ -951,14 +951,18 @@
 /******* """"""""""""""""""""""""
  * #define GET_CPUID(LEAF, EAX, EBX, ECX, EDX)
  */
+#include "../ATTRIBUTES/REGISTER.H"
+/******* """"""""""""""""""""""""""
+ * #define REGISTER
+ */
 /* **************************** [^] INCLUDES [^] **************************** */
 
 #define LOCALMACRO__GLOBAL_SIZE 28
 #define LOCALMACRO__CPU_VER \
-	register unsigned int	EAX;\
-	register unsigned int	EBX;\
-	register unsigned int	ECX;\
-	register unsigned int	EDX;\
+	REGISTER unsigned int	EAX;\
+	REGISTER unsigned int	EBX;\
+	REGISTER unsigned int	ECX;\
+	REGISTER unsigned int	EDX;\
 	\
 	GET_CPUID(0, EAX, EBX, ECX, EDX);\
 	((unsigned int *)CPU_VERSION)[0] = EBX;\
@@ -996,15 +1000,19 @@
 /******* """""""""""""""""""""
  * typedef VAR;
  */
+#include "../ATTRIBUTES/REGISTER.H"
+/******* """"""""""""""""""""""""""
+ * #define REGISTER
+ */
 /* **************************** [^] INCLUDES [^] **************************** */
 
 #define LOCALMACRO__GLOBAL_SIZE 12
 #define LOCALMACRO__CPU_VER \
-	register unsigned int	IMPLEMENTER;\
-	register unsigned int	VARIANT;\
-	register unsigned int	ARCHITECTURE;\
-	register unsigned int	PARTNUM;\
-	register unsigned int	REVISION;\
+	REGISTER unsigned int	IMPLEMENTER;\
+	REGISTER unsigned int	VARIANT;\
+	REGISTER unsigned int	ARCHITECTURE;\
+	REGISTER unsigned int	PARTNUM;\
+	REGISTER unsigned int	REVISION;\
 	\
 	{\
 		VAR	MIDR_VALUE;\
@@ -1035,9 +1043,7 @@
 
 /* ***************************** [v] RISCV [v] ****************************** */
 #ifdef __CPU_RISCV__
-
 #ifdef __riscv_xlen
-
 #if (__riscv_xlen == 32)
 #define LOCALMACRO__CPU_VERSION_FOUND \
 	CPU_VERSION[6] = '3';\
@@ -1070,30 +1076,31 @@
 	CPU_VERSION[5] = 'V';\
 	LOCALMACRO__CPU_VERSION_FOUND\
 	CPU_VERSION[8] = 0;
-
 #endif /* __CPU_RISCV__ */
 /* ***************************** [^] RISCV [^] ****************************** */
 
 /* **************************** [v] POWERPC [v] ***************************** */
 #ifdef __CPU_POWERPC__
-
 #define LOCALMACRO__GLOBAL_SIZE 14
 
 #ifdef IS__INLINE_ASM__SUPPORTED
-
 /* **************************** [v] INCLUDES [v] **************************** */
 #include "../ASM/C/POWERPC/MFSPR_287.H"
 /******* """"""""""""""""""""""""""""""
  * #define GET_MFSPR_287(VARIABLE)
  */
+#include "../ATTRIBUTES/REGISTER.H"
+/******* """"""""""""""""""""""""""
+ * #define REGISTER
+ */
 /* **************************** [^] INCLUDES [^] **************************** */
 
 #define LOCALMACRO__CPU_VER \
-	register unsigned int	VERSION;\
-	register unsigned int	REVISION;\
+	REGISTER unsigned int	VERSION;\
+	REGISTER unsigned int	REVISION;\
 	\
 	{\
-		register unsigned int	PVR = 0;\
+		REGISTER unsigned int	PVR = 0;\
 		\
 		GET_MFSPR_287(PVR);\
 		VERSION = (PVR >> 16) & 0XFFFF;\
@@ -1116,7 +1123,6 @@
 	CPU_VERSION[13] = 0;
 
 #else /* !IS__INLINE_ASM__SUPPORTED */
-
 #ifdef _M_PPC
 #if (_M_PPC == 601)
 #define LOCALMACRO__CPU_VERSION_FOUND \

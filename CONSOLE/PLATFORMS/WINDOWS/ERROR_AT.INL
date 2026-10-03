@@ -6,10 +6,10 @@
 	char	INT_STR[12];\
 	\
 	{\
-		int	INDEX_1 = 0;\
-		int	INDEX_2;\
-		int	INDEX_3;\
-		int	INDEX_FOR;\
+		REGISTER int	INDEX_1 = 0;\
+		REGISTER int	INDEX_2;\
+		REGISTER int	INDEX_3;\
+		REGISTER int	INDEX_FOR;\
 		\
 		INDEX_2 = INDEX_1;\
 		\

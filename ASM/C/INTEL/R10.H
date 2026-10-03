@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2026/08/28 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - Apache2.0 :: Update - 2026/09/28 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - Apache2.0 :: Update - 2026/10/02 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -97,7 +97,7 @@
 \******************************************************************************/
 
 #ifndef R10_H
-#define R10_H 202609 /* VERSION */
+#define R10_H 202610 /* VERSION */
 
 /* **************************** [v] INCLUDES [v] **************************** */
 #include "../../../ENVIRONMENTS/CPU.H"
@@ -122,6 +122,10 @@
 /******* """"""""""""""""""""""""""""""""
  * #define EXTERN_C_START
  * #define EXTERN_C_END
+ */
+#include "../../../ATTRIBUTES/REGISTER.H"
+/******* """"""""""""""""""""""""""""""""
+ * #define REGISTER
  */
 /* **************************** [^] INCLUDES [^] **************************** */
 
@@ -186,7 +190,7 @@
 #define GET_R10(VARIABLE) \
 	do\
 	{\
-		register PTR	__REGISTER__;\
+		REGISTER PTR	__REGISTER__;\
 		\
 		LOCALMACRO__R10_GET(__REGISTER__);\
 		(VARIABLE) = __REGISTER__;\
@@ -196,7 +200,7 @@
 #define SET_R10(VALUE) \
 	do\
 	{\
-		register PTR	__REGISTER__ = (PTR)(VALUE);\
+		REGISTER PTR	__REGISTER__ = (PTR)(VALUE);\
 		\
 		LOCALMACRO__R10_SET(__REGISTER__);\
 	}\
@@ -403,7 +407,7 @@ EXTERN_C_END
 #define SET_R10(VALUE) \
 	do\
 	{\
-		register PTR	__REGISTER__ = (PTR)(VALUE);\
+		REGISTER PTR	__REGISTER__ = (PTR)(VALUE);\
 		\
 		LOCALMACRO__R10_SET(__REGISTER__);\
 	}\

@@ -12,7 +12,7 @@ static
 #endif /* !KNR_STYLE */
 {
 	struct S_THREAD_MANAGER	*THREAD_MANAGER;
-	register unsigned int	WAITERS;
+	REGISTER unsigned int	WAITERS;
 
 	THREAD_MANAGER = (struct S_THREAD_MANAGER *)ARG_PTR;
 	THREAD_MANAGER->RETURN = THREAD_MANAGER->FUNCTION(THREAD_MANAGER->ARG);
@@ -68,11 +68,11 @@ static
 		\
 		if (\
 			xTaskCreate(\
-				(TaskFunction_t)__THREAD_WRAPPER__,\
-				"THREAD",\
-				configMINIMAL_STACK_SIZE,\
-				RESULT,\
-				(tskIDLE_PRIORITY + 1),\
+				(TaskFunction_t)__THREAD_WRAPPER__, \
+				"THREAD", \
+				configMINIMAL_STACK_SIZE, \
+				RESULT, \
+				(tskIDLE_PRIORITY + 1), \
 				&RESULT->THREAD\
 			) != pdPASS\
 		)\

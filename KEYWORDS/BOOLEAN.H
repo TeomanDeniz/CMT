@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2026/07/07 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - Apache2.0 :: Update - 2026/09/28 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - Apache2.0 :: Update - 2026/10/02 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -17,23 +17,47 @@
 |*|                                 BOOLEAN                                  |*|
 |*|__________________________________________________________________________|*|
 |*|                                                                          |*|
-|*| PROVIDES A PORTABLE BOOLEAN INTERFACE FOR C THAT AUTOMATICALLY ADAPTS TO |*|
-|*| THE COMPILER'S NATIVE BOOLEAN IMPLEMENTATION WHENEVER AVAILABLE.         |*|
-|*|                                                        _________         |*|
-|*| RATHER THAN FORCING A FIXED TYPE OR VALUE DEFINITIONS, BOOLEAN.H DETECTS |*|
-|*| THE MOST SUITABLE COMPILER-SUPPORTED BOOLEAN TYPE AND CONSTANTS, FALLING |*|
-|*| BACK TO A PORTABLE IMPLEMENTATION ONLY WHEN NECESSARY.                   |*|
-|*|                                                _________                 |*|
-|*| IF A STANDARD COMPILER BOOLEAN HEADER (SUCH AS stdbool.h OR AN           |*|
-|*| EQUIVALENT IMPLEMENTATION) HAS ALREADY BEEN INCLUDED, THIS MODULE        |*|
-|*| TRANSPARENTLY ADOPTS IT.                                                 |*|
+|*| ONE BOOLEAN TYPE AND ONE PAIR OF TRUTH VALUES THAT MEAN THE SAME THING   |*|
+|*| ON EVERY COMPILER, FROM K&R C TO C23 AND FROM TURBO C++ TO TODAY.        |*|
+|*|                               _____________________________________      |*|
+|*| THE HEADER ASKS ONE QUESTION, "WHAT DOES THIS LANGUAGE ALREADY GIVE      |*|
+|*| ME?", AND THE FIRST RULE THAT MATCHES WINS:                              |*|
+|*|  ______________________________________________________________________  |*|
+|*| | Rule | Language / compiler                 | BOOLEAN is              | |*|
+|*| |======|=====================================|=========================| |*|
+|*| | 1    | C++ older than the bool keyword     | unsigned char           | |*|
+|*| |      |                    ^^^^             | ^^^^^^^^^^^^^           | |*|
+|*| |------|-------------------------------------|-------------------------| |*|
+|*| | 2    | C++                                 | bool                    | |*|
+|*| |      |                                     | ^^^^                    | |*|
+|*| |------|-------------------------------------|-------------------------| |*|
+|*| | 3    | C, <stdbool.h> already included     | bool (adopted as it is) | |*|
+|*| |      |    ^^^^^^^^^^^                      | ^^^^                    | |*|
+|*| |------|-------------------------------------|-------------------------| |*|
+|*| | 4    | C23 and later                       | bool                    | |*|
+|*| |      |                                     | ^^^^                    | |*|
+|*| |------|-------------------------------------|-------------------------| |*|
+|*| | 5    | C99, C11, C17                       | bool (<stdbool.h>)      | |*|
+|*| |      |                                     | ^^^^  ^^^^^^^^^^^       | |*|
+|*| |------|-------------------------------------|-------------------------| |*|
+|*| | 6    | MSVC 2013+ in its default C mode    | bool (<stdbool.h>)      | |*|
+|*| |      |                                     | ^^^^  ^^^^^^^^^^^       | |*|
+|*| |------|-------------------------------------|-------------------------| |*|
+|*| | 7    | C89 on GCC 3+ or Clang              | _Bool (extension)       | |*|
+|*| |      |                                     | ^^^^^                   | |*|
+|*| |------|-------------------------------------|-------------------------| |*|
+|*| | 8    | Anything else                       | unsigned char           | |*|
+|*| |      |                                     | ^^^^^^^^^^^^^           | |*|
+|*| |______|_____________________________________|_________________________| |*|
 |*|                                                                          |*|
-|*| OTHERWISE, IT INCLUDES THE APPROPRIATE COMPILER HEADER ITSELF BEFORE     |*|
-|*| EXPOSING A CONSISTENT SET OF BOOLEAN DEFINITIONS.                        |*|
-|*|                                                                          |*|
-|*| THE RESULT IS A SINGLE, COMPILER-INDEPENDENT INTERFACE THAT REMAINS      |*|
-|*| FULLY COMPATIBLE WITH EXISTING CODE WHILE PRESERVING THE COMPILER'S      |*|
-|*| PREFERRED BOOLEAN REPRESENTATION WHENEVER POSSIBLE.                      |*|
+|*| TURBO C++, BORLAND C++ BEFORE 5.0, WATCOM C++ BEFORE 11.0, VISUAL C++    |*|
+|*| BEFORE 5.0.                                                              |*|
+|*| ____     _____                                                           |*|
+|*| TRUE AND FALSE ALWAYS FOLLOW THE CHOSEN TYPE, SO IN C++ THEY ARE         |*|
+|*| REAL bool VALUES, NOT INTEGERS.                                          |*|
+|*|      ^^^^                                                                |*|
+|*| <bool>, <true> AND <false> ARE ONLY DEFINED WHEN THE LANGUAGE HAS NONE   |*|
+|*| OF ITS OWN.                                                              |*|
 |*|__________________________________________________________________________|*|
 |*                                                                            *|
 \******************************************************************************/
@@ -44,16 +68,18 @@
 |* __________________________________________________________________________ *|
 |*| CONTENT                                                       | DOC LINE |*|
 |*|===============================================================|==========|*|
-|*| #define BOOLEAN                                               | 60       |*|
+|*| #define BOOLEAN                                               | 86       |*|
 |*| #define boolean                                               |          |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| #define TRUE                                                  | 76       |*|
+|*| #define TRUE                                                  | 107      |*|
 |*| #define true                                                  |          |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| #define FALSE                                                 | 91       |*|
+|*| #define FALSE                                                 | 125      |*|
 |*| #define false                                                 |          |*|
 |*|---------------------------------------------------------------|----------|*|
-|*| #define __bool_true_false_are_defined                         | 106      |*|
+|*| #define bool                                                  | 143      |*|
+|*|---------------------------------------------------------------|----------|*|
+|*| #define __bool_true_false_are_defined                         | 160      |*|
 |*|_______________________________________________________________|__________|*|
 |*                                                                            *|
 |*                                ...........                                 *|
@@ -65,11 +91,16 @@
 |* : 3| #define boolean                                                     : *|
 |* : 4|                                                                     : *|
 |* :                                                                        : *|
-|* : DEFINES THE PROJECT'S PORTABLE BOOLEAN TYPE.                           : *|
-|* :                                                                        : *|
-|* : WHEN SUPPORTED, IT ALIASES THE COMPILER'S NATIVE BOOLEAN TYPE;         : *|
-|* : OTHERWISE IT FALLS BACK TO AN IMPLEMENTATION BASED ON unsigned char.   : *|
-|* :                                                       ^^^^^^^^^^^^^    : *|
+|* : THE PORTABLE BOOLEAN TYPE.                                             : *|
+|* :       ____                                _____                        : *|
+|* : IT IS bool WHEREVER THE LANGUAGE HAS ONE, _Bool ON C89 COMPILERS       : *|
+|* : THAT ACCEPT IT AS AN EXTENSION, AND unsigned char EVERYWHERE ELSE.     : *|
+|* :                                     ^^^^^^^^^^^^^                      : *|
+|* : CONVERTING ANY NONZERO VALUE TO <BOOLEAN> GIVES <TRUE>, EXCEPT ON THE  : *|
+|* : <unsigned char> FALLBACK, WHERE ONLY THE LOW 8 BITS SURVIVE. WRITE     : *|
+|* : (BOOLEAN)(VALUE != 0) WHEN THAT MATTERS.                               : *|
+|* : ^^^^^^^^^^^^^^^^^^^^^                                                  : *|
+|* : <boolean> IS THE LOWERCASE ALIAS.                                      : *|
 |* :........................................................................: *|
 |*                                                                            *|
 |*                                  ........                                  *|
@@ -80,11 +111,14 @@
 |* : 2| #define TRUE                                                        : *|
 |* : 3| #define true                                                        : *|
 |* : 4|                                                                     : *|
-|* :                                                                        : *|
-|* : DEFINES THE BOOLEAN TRUE VALUE.                                        : *|
-|* :                                                                        : *|
-|* : USES THE COMPILER'S NATIVE DEFINITION WHENEVER AVAILABLE, OTHERWISE    : *|
-|* : PROVIDES A PORTABLE FALLBACK VALUE.                                    : *|
+|* :                                    ____          ____         _        : *|
+|* : THE TRUE VALUE OF THE CHOSEN TYPE: true WHEREVER bool EXISTS, 1        : *|
+|* : EVERYWHERE ELSE.                                                       : *|
+|* :            ____                   ___________                          : *|
+|* : AN EARLIER TRUE (FOR EXAMPLE FROM <windows.h>) IS REPLACED. IT         : *|
+|* : ALWAYS MEANT 1, SO NOTHING CHANGES FOR CODE THAT USED IT.              : *|
+|* :              ^                                                         : *|
+|* : <true> IS ONLY DEFINED WHEN THE LANGUAGE HAS NONE OF ITS OWN.          : *|
 |* :........................................................................: *|
 |*                                                                            *|
 |*                                 .........                                  *|
@@ -95,11 +129,31 @@
 |* : 2| #define FALSE                                                       : *|
 |* : 3| #define false                                                       : *|
 |* : 4|                                                                     : *|
-|* :                                                                        : *|
-|* : DEFINES THE BOOLEAN FALSE VALUE.                                       : *|
-|* :                                                                        : *|
-|* : USES THE COMPILER'S NATIVE DEFINITION WHENEVER AVAILABLE, OTHERWISE    : *|
-|* : PROVIDES A PORTABLE FALLBACK VALUE.                                    : *|
+|* :                                     _____          ____                : *|
+|* : THE FALSE VALUE OF THE CHOSEN TYPE: false WHEREVER bool EXISTS,        : *|
+|* : 0 EVERYWHERE ELSE.                                                     : *|
+|* : ^                                                                      : *|
+|* : AN EARLIER <FALSE> (FOR EXAMPLE FROM <<windows.h>>) IS REPLACED. IT    : *|
+|* : ALWAYS MEANT 0, SO NOTHING CHANGES FOR CODE THAT USED IT.              : *|
+|* :              ^                                                         : *|
+|* : <false> IS ONLY DEFINED WHEN THE LANGUAGE HAS NONE OF ITS OWN.         : *|
+|* :........................................................................: *|
+|*                                                                            *|
+|*                                  ........                                  *|
+|* .................................: bool :................................. *|
+|* :                                ''''''''                                : *|
+|* :  v [C LANGUAGE]                                                        : *|
+|* : 1|                                                                     : *|
+|* : 2| #define bool                                                        : *|
+|* : 3|                                                                     : *|
+|* :                                       ____                             : *|
+|* : ONLY DEFINED WHEN THE LANGUAGE HAS NO bool OF ITS OWN: C89 AND         : *|
+|* : OLDER, AND C++ COMPILERS OLDER THAN THE KEYWORD. IT NAMES THE SAME     : *|
+|* : TYPE AS BOOLEAN, SO CODE WRITTEN FOR <stdbool.h> STILL COMPILES.       : *|
+|* :         ^^^^^^^                      ^^^^^^^^^^^                       : *|
+|* : THE GUARDS OF THE KNOWN <<stdbool.h>> HEADERS ARE CLOSED AT THE SAME   : *|
+|* : TIME, SO A LATER #include <stdbool.h> IS A NO-OP INSTEAD OF A CLASH.   : *|
+|* :                  ^^^^^^^^^^^^^^^^^^^^                                  : *|
 |* :........................................................................: *|
 |*                                                                            *|
 |*                     .................................                      *|
@@ -109,17 +163,15 @@
 |* : 1|                                                                     : *|
 |* : 2| #define __bool_true_false_are_defined                               : *|
 |* : 3|                                                                     : *|
-|* :                                                                        : *|
-|* : DEFINES THE STANDARD COMPATIBILITY MACRO INDICATING THAT BOOLEAN       : *|
-|* : DEFINITIONS ARE AVAILABLE, MATCHING THE BEHAVIOR EXPECTED BY           : *|
-|* : IMPLEMENTATIONS COMPATIBLE WITH stdbool.h.                             : *|
-|* :                                 ^^^^^^^^^                              : *|
+|* :                              ____  ____     _____                      : *|
+|* : THE STANDARD MACRO THAT SAYS bool, true AND false ARE READY TO         : *|
+|* : USE, THE SAME WAY <<stdbool.h>> DEFINES IT. ALWAYS <1>.                : *|
 |* :........................................................................: *|
 |*                                                                            *|
 \******************************************************************************/
 
 #ifndef BOOLEAN_H
-#define BOOLEAN_H 202609 /* VERSION */
+#define BOOLEAN_H 202610 /* VERSION */
 
 #ifdef __WATCOMC__ /* WATCOM C++ */
 #ifndef _ENABLE_AUTODEPEND /* IF AUTO DEPENDENCY TRACKING IS OFF */
@@ -127,254 +179,149 @@
 #endif /* !_ENABLE_AUTODEPEND */
 #endif /* __WATCOMC__ */
 
+/* *************************** [v] THE MODELS [v] *************************** */
+#define LOCALMACRO__BOOLEAN_KEYWORD 1 /* THE LANGUAGE ALREADY HAS bool */
+#define LOCALMACRO__BOOLEAN_STDBOOL 2 /* bool COMES FROM <stdbool.h> */
+#define LOCALMACRO__BOOLEAN_EXTENSION 3 /* C89 WITH THE GNU _Bool */
+#define LOCALMACRO__BOOLEAN_FALLBACK 4 /* NOTHING, unsigned char IT IS */
+/* *************************** [^] THE MODELS [^] *************************** */
+
+/* ************************* [v] PICK THE MODEL [v] ************************* */
+/* FIRST MATCH WINS: EVERY RULE IS SKIPPED ONCE A MODEL HAS BEEN PICKED. */
+
+/* RULE 1 - C++ COMPILERS OLDER THAN THE bool KEYWORD */
+#ifdef __cplusplus
+#ifdef __BORLANDC__
+#if (__BORLANDC__ < 0x0500) /* BORLAND C++ 5.0 */
+#define LOCALMACRO__BOOLEAN_MODEL LOCALMACRO__BOOLEAN_FALLBACK
+#endif /* __BORLANDC__ < 0x0500 */
+#else /* !__BORLANDC__ */
+#ifdef __TURBOC__ /* TURBO C++ NEVER HAD IT */
+#define LOCALMACRO__BOOLEAN_MODEL LOCALMACRO__BOOLEAN_FALLBACK
+#endif /* __TURBOC__ */
+#endif /* __BORLANDC__ */
+
+#ifndef LOCALMACRO__BOOLEAN_MODEL
+#ifdef __WATCOMC__
+#if (__WATCOMC__ < 1100) /* WATCOM C++ 11.0 */
+#define LOCALMACRO__BOOLEAN_MODEL LOCALMACRO__BOOLEAN_FALLBACK
+#endif /* __WATCOMC__ < 1100 */
+#endif /* __WATCOMC__ */
+#endif /* !LOCALMACRO__BOOLEAN_MODEL */
+
+#ifndef LOCALMACRO__BOOLEAN_MODEL
+#ifdef _MSC_VER
+#if (_MSC_VER < 1100) /* VISUAL C++ 5.0 */
+#define LOCALMACRO__BOOLEAN_MODEL LOCALMACRO__BOOLEAN_FALLBACK
+#endif /* _MSC_VER < 1100 */
+#endif /* _MSC_VER */
+#endif /* !LOCALMACRO__BOOLEAN_MODEL */
+
+/* RULE 2 - C++ */
+#ifndef LOCALMACRO__BOOLEAN_MODEL
+#define LOCALMACRO__BOOLEAN_MODEL LOCALMACRO__BOOLEAN_KEYWORD
+#endif /* !LOCALMACRO__BOOLEAN_MODEL */
+#endif /* __cplusplus */
+
+/* RULE 3 - C WITH <stdbool.h> ALREADY INCLUDED: ADOPT IT AS IT IS */
+#ifndef LOCALMACRO__BOOLEAN_MODEL
+#ifdef __bool_true_false_are_defined
+#define LOCALMACRO__BOOLEAN_MODEL LOCALMACRO__BOOLEAN_KEYWORD
+#endif /* __bool_true_false_are_defined */
+#endif /* !LOCALMACRO__BOOLEAN_MODEL */
+
+/* RULE 4 AND 5 - C23 HAS THE KEYWORD, C99 TO C17 HAVE <stdbool.h> */
+#ifndef LOCALMACRO__BOOLEAN_MODEL
+#ifdef __STDC_VERSION__
+#if (__STDC_VERSION__ > 201710L)
+#define LOCALMACRO__BOOLEAN_MODEL LOCALMACRO__BOOLEAN_KEYWORD
+#else /* __STDC_VERSION__ <= 201710L */
+#if (__STDC_VERSION__ >= 199901L)
+#define LOCALMACRO__BOOLEAN_MODEL LOCALMACRO__BOOLEAN_STDBOOL
+#endif /* __STDC_VERSION__ >= 199901L */
+#endif /* __STDC_VERSION__ > 201710L */
+#endif /* __STDC_VERSION__ */
+#endif /* !LOCALMACRO__BOOLEAN_MODEL */
+
+/* RULE 6 - MSVC 2013+ HAS <stdbool.h> EVEN WITHOUT __STDC_VERSION__ */
+#ifndef LOCALMACRO__BOOLEAN_MODEL
+#ifdef _MSC_VER
+#if (_MSC_VER >= 1800)
+#define LOCALMACRO__BOOLEAN_MODEL LOCALMACRO__BOOLEAN_STDBOOL
+#endif /* _MSC_VER >= 1800 */
+#endif /* _MSC_VER */
+#endif /* !LOCALMACRO__BOOLEAN_MODEL */
+
+/* RULE 7 - C89 ON GCC 3+ OR CLANG: _Bool AS AN EXTENSION */
+#ifndef LOCALMACRO__BOOLEAN_MODEL
+#ifdef __GNUC__
+#if (__GNUC__ >= 3)
+#define LOCALMACRO__BOOLEAN_MODEL LOCALMACRO__BOOLEAN_EXTENSION
+#endif /* __GNUC__ >= 3 */
+#endif /* __GNUC__ */
+#endif /* !LOCALMACRO__BOOLEAN_MODEL */
+
+/* RULE 8 - ANYTHING ELSE */
+#ifndef LOCALMACRO__BOOLEAN_MODEL
+#define LOCALMACRO__BOOLEAN_MODEL LOCALMACRO__BOOLEAN_FALLBACK
+#endif /* !LOCALMACRO__BOOLEAN_MODEL */
+/* ************************* [^] PICK THE MODEL [^] ************************* */
+
+/* ************************** [v] CLEAN SLATE [v] *************************** */
 #ifdef TRUE /* TRUST ME, I KNOW WHAT I AM DOING */
 #undef TRUE
-#endif /* !TRUE */
+#endif /* TRUE */
 
 #ifdef FALSE
 #undef FALSE
-#endif /* !FALSE */
+#endif /* FALSE */
 
-/* ****************************** [v] TCC [v] ******************************* */
-#ifdef __TINYC__
-#define LOCALMACRO__BOOLEAN_DEFINED
+#ifdef BOOLEAN
+#undef BOOLEAN
+#endif /* BOOLEAN */
 
-#ifndef _STDBOOL_H
-#define bool _Bool
-#define true 1
-#define false 0
-#define BOOLEAN _Bool
-#define boolean _Bool
+#ifdef boolean
+#undef boolean
+#endif /* boolean */
+/* ************************** [^] CLEAN SLATE [^] *************************** */
+
+/* ********************** [v] KEYWORD AND STDBOOL [v] *********************** */
+#if (LOCALMACRO__BOOLEAN_MODEL == LOCALMACRO__BOOLEAN_STDBOOL)
+#include <stdbool.h>
+#endif /* LOCALMACRO__BOOLEAN_MODEL == LOCALMACRO__BOOLEAN_STDBOOL */
+
+#if (LOCALMACRO__BOOLEAN_MODEL <= LOCALMACRO__BOOLEAN_STDBOOL)
+#define BOOLEAN bool
+#define TRUE true
+#define FALSE false
+#endif /* LOCALMACRO__BOOLEAN_MODEL <= LOCALMACRO__BOOLEAN_STDBOOL */
+/* ********************** [^] KEYWORD AND STDBOOL [^] *********************** */
+
+/* *************************** [v] EXTENSION [v] **************************** */
+#if (LOCALMACRO__BOOLEAN_MODEL == LOCALMACRO__BOOLEAN_EXTENSION)
+__extension__ typedef _Bool	T_BOOLEAN; /* NO -pedantic NOISE IN C89 */
+
+#define BOOLEAN T_BOOLEAN
 #define TRUE 1
 #define FALSE 0
-#else /* _STDBOOL_H */
-#undef _STDBOOL_H
-#define BOOLEAN bool
-#define boolean bool
-#define TRUE true
-#define FALSE false
-#endif /* !_STDBOOL_H */
-#endif /* __TINYC__ */
-/* ****************************** [^] TCC [^] ******************************* */
+#endif /* LOCALMACRO__BOOLEAN_MODEL == LOCALMACRO__BOOLEAN_EXTENSION */
+/* *************************** [^] EXTENSION [^] **************************** */
 
-/* ***************************** [v] DJGPP [v] ****************************** */
-#ifndef LOCALMACRO__BOOLEAN_DEFINED
-#ifdef __DJGPP__
-#ifndef __dj_stdbool__h_
-#ifdef __STDC_VERSION__
-#if (__STDC_VERSION__ >= 199901L)
-#define LOCALMACRO__STDC_BOOLEAN
-#endif /* __STDC_VERSION__ >= 199901L */
-#endif /* __STDC_VERSION__ */
+/* **************************** [v] FALLBACK [v] **************************** */
+#if (LOCALMACRO__BOOLEAN_MODEL == LOCALMACRO__BOOLEAN_FALLBACK)
+typedef unsigned char	T_BOOLEAN;
 
-#ifndef LOCALMACRO__STDC_BOOLEAN
-#ifndef __STRICT_ANSI__
-#define LOCALMACRO__STDC_BOOLEAN
-#endif /* !__STRICT_ANSI__ */
-#endif /* !LOCALMACRO__STDC_BOOLEAN */
-
-#ifndef LOCALMACRO__STDC_BOOLEAN
-#ifdef __cplusplus
-#define LOCALMACRO__STDC_BOOLEAN
-#endif /* __cplusplus */
-#endif /* !LOCALMACRO__STDC_BOOLEAN */
-
-#ifdef LOCALMACRO__STDC_BOOLEAN
-#undef LOCALMACRO__STDC_BOOLEAN
-#define bool _Bool
-#define true 1
-#define false 0
-#endif /* LOCALMACRO__STDC_BOOLEAN */
-#else /* __dj_stdbool__h_ */
-#undef __dj_stdbool__h_
-#endif /* !__dj_stdbool__h_ */
-
-#define LOCALMACRO__BOOLEAN_DEFINED
-#define BOOLEAN bool
-#define boolean bool
-#define TRUE true
-#define FALSE false
-#endif /* __DJGPP__ */
-#endif /* !LOCALMACRO__BOOLEAN_DEFINED */
-/* ***************************** [^] DJGPP [^] ****************************** */
-
-/* ***************************** [v] CLANG [v] ****************************** */
-#ifndef LOCALMACRO__BOOLEAN_DEFINED
-#ifdef __clang__
-#define LOCALMACRO__BOOLEAN_DEFINED
-
-#ifndef __STDBOOL_H
-#ifndef __cplusplus
-#define bool _Bool
-#define true 1
-#define false 0
-#define BOOLEAN bool
-#else /* __cplusplus */
-#ifdef __GNUC__
-#ifndef __STRICT_ANSI__
-#define _Bool bool
-
-#if (__cplusplus < 201103L) /* FOR C++98 */
-#define bool bool
-#define false false
-#define true true
-#endif /* __cplusplus < 201103L */
-#else /* __STRICT_ANSI__ */
-#undef LOCALMACRO__BOOLEAN_DEFINED
-#endif /* !__STRICT_ANSI__ */
-#else /* !__GNUC__ */
-#undef LOCALMACRO__BOOLEAN_DEFINED
-#endif /* __GNUC__ */
-#endif /* !__cplusplus */
-#else /* __STDBOOL_H */
-#undef __STDBOOL_H
-#define BOOLEAN bool
-#define boolean bool
-#define TRUE true
-#define FALSE false
-#endif /* !__STDBOOL_H */
-#endif /* __clang__ */
-#endif /* !LOCALMACRO__BOOLEAN_DEFINED */
-/* ***************************** [^] CLANG [^] ****************************** */
-
-/* ****************************** [v] CINT [v] ****************************** */
-#ifndef LOCALMACRO__BOOLEAN_DEFINED
-#ifdef G__OLDIMPLEMENRTATION1604
-#ifndef G__BOOLEAN_H
-#define BOOLEAN int
-#else /* G__BOOLEAN_H */
-#undef G__BOOLEAN_H
-#define BOOLEAN boolean
-#endif /* !G__BOOLEAN_H */
-
-#define TRUE 1
-#define FALSE 0
-#define LOCALMACRO__BOOLEAN_DEFINED
-#endif /* G__OLDIMPLEMENRTATION1604 */
-#endif /* !LOCALMACRO__BOOLEAN_DEFINED */
-/* ****************************** [^] CINT [^] ****************************** */
-
-/* *************************** [v] WATCOM C++ [v] *************************** */
-#ifndef LOCALMACRO__BOOLEAN_DEFINED
-#ifdef __WATCOMC__
-#define LOCALMACRO__BOOLEAN_DEFINED
-
-#ifndef _STDBOOL_H_INCLUDED
-#ifndef __cplusplus
-#if (__STDC_VERSION__ >= 199901L)
-#define BOOLEAN _Bool
-#else /* __STDC_VERSION__ < 199901L */
-#define BOOLEAN char
-#endif /* __STDC_VERSION__ >= 199901L */
-
-#define boolean BOOLEAN
-#define bool BOOLEAN
-#define TRUE 1
-#define FALSE 0
-#endif /* !__cplusplus */
-#else /* _STDBOOL_H_INCLUDED */
-#undef _STDBOOL_H_INCLUDED
-#define BOOLEAN bool
-#define TRUE true
-#define FALSE false
-#endif /* !_STDBOOL_H_INCLUDED */
-#endif /* __WATCOMC__ */
-#endif /* !LOCALMACRO__BOOLEAN_DEFINED */
-/* *************************** [^] WATCOM C++ [^] *************************** */
-
-/* ****************************** [v] GNUC [v] ****************************** */
-#ifndef LOCALMACRO__BOOLEAN_DEFINED
-#ifdef __GNUC__
-#define LOCALMACRO__BOOLEAN_DEFINED
-
-#ifndef _STDBOOL_H
-#ifndef __cplusplus
-#define bool _Bool
-
-#ifdef __STDC_VERSION__
-#if (__STDC_VERSION__ > 201710L)
-#define true ((_Bool) +1U)
-#define false ((_Bool) +0U)
-#define TRUE ((_Bool) +1U)
-#define FALSE ((_Bool) +0U)
-#else /* __STDC_VERSION__ <= 201710L */
-#define TRUE 1
-#define FALSE 0
-#endif /* __STDC_VERSION__ > 201710L */
-#else /* !__STDC_VERSION__ */
-#define true 1
-#define false 0
-#define TRUE 1
-#define FALSE 0
-#endif /* __STDC_VERSION__ */
-#else /* __cplusplus */
-#define _Bool bool
-#endif /* __cplusplus */
-
-#define BOOLEAN bool
-#else /* _STDBOOL_H */
-#undef _STDBOOL_H
-#define BOOLEAN bool
-#define TRUE true
-#define FALSE false
-#endif /* !_STDBOOL_H */
-#endif /* __GNUC__ */
-#endif /* !LOCALMACRO__BOOLEAN_DEFINED */
-/* ****************************** [^] GNUC [^] ****************************** */
-
-/* ******************************* [v] TI [v] ******************************* */
-#ifndef LOCALMACRO__BOOLEAN_DEFINED
-#ifdef __TI_PROPRIETARY_STRICT_ANSI_MACRO
-#define LOCALMACRO__BOOLEAN_DEFINED
-
-#ifdef __bool_true_false_are_defined
-#define BOOLEAN bool
-#define TRUE true
-#define FALSE false
-#else /* !__bool_true_false_are_defined */
-#ifndef __cplusplus
-#if (__TI_PROPRIETARY_STRICT_ANSI_MACRO && 199901L > __STDC_VERSION__)
-typedef unsigned char	_Bool;
-#endif /* __TI_PROPRIETARY_STRICT_ANSI_MACRO && 199901L > __STDC_VERSION__ */
-
-#define BOOLEAN _Bool
-#define bool _Bool
-#define true 1
-#define false 0
-#else /* __cplusplus */
-#define BOOLEAN bool
-#endif /* !__cplusplus */
-
-#define TRUE 1
-#define FALSE 0
-#endif /* __bool_true_false_are_defined */
-#endif /* __TI_PROPRIETARY_STRICT_ANSI_MACRO */
-#endif /* !LOCALMACRO__BOOLEAN_DEFINED */
-/* ******************************* [^] TI [^] ******************************* */
-
-/* ***************************** [v] Z88DK [v] ****************************** */
-#ifndef LOCALMACRO__BOOLEAN_DEFINED
-#ifdef __STDBOOL_H__
-#undef __STDBOOL_H__
-#define LOCALMACRO__BOOLEAN_DEFINED
-#define BOOLEAN bool
-#define TRUE true
-#define FALSE false
-#endif /* __STDBOOL_H__ */
-#endif /* !LOCALMACRO__BOOLEAN_DEFINED */
-/* ***************************** [^] Z88DK [^] ****************************** */
-
-#ifndef LOCALMACRO__BOOLEAN_DEFINED
-typedef unsigned char	BOOLEAN;
-
+#define BOOLEAN T_BOOLEAN
 #define TRUE 1 /* INDEED! <TEA NOISES> */
 #define FALSE 0 /* APPALLING! <BLOODY TEA NOISES> */
-#else /* LOCALMACRO__BOOLEAN_DEFINED */
-#undef LOCALMACRO__BOOLEAN_DEFINED
-#endif /* !LOCALMACRO__BOOLEAN_DEFINED */
+#endif /* LOCALMACRO__BOOLEAN_MODEL == LOCALMACRO__BOOLEAN_FALLBACK */
+/* **************************** [^] FALLBACK [^] **************************** */
 
-#undef boolean
-#define boolean BOOLEAN
+/* ******************** [v] NO bool IN THE LANGUAGE [v] ********************* */
+#if (LOCALMACRO__BOOLEAN_MODEL >= LOCALMACRO__BOOLEAN_EXTENSION)
+#ifndef bool
+#define bool BOOLEAN
+#endif /* !bool */
 
 #ifndef true
 #define true TRUE
@@ -384,23 +331,29 @@ typedef unsigned char	BOOLEAN;
 #define false FALSE
 #endif /* !false */
 
-#ifndef __bool_true_false_are_defined
-#ifndef bool
-#define bool BOOLEAN /* JUST IN CASE? */
-#endif /* !bool */
-#endif /* !__bool_true_false_are_defined */
-
-#undef __bool_true_false_are_defined
-#define __bool_true_false_are_defined 1
-
-/* ************************ [v] REMOVE CONFLICTS [v] ************************ */
-#define G__BOOLEAN_H /* CINT */
-#define _STDBOOL_H_INCLUDED /* WATCOM C++ */
+/* A LATER <stdbool.h> WOULD REDEFINE bool: ITS GUARDS MAKE IT A NO-OP */
+#define _STDBOOL_H /* GCC, TCC */
 #define __STDBOOL_H /* CLANG */
-#define _STDBOOL_H /* TCC & GCC */
+#define _STDBOOL_H_INCLUDED /* WATCOM C++ */
 #define __dj_stdbool__h_ /* DJGPP */
 #define __STDBOOL_H__ /* Z88DK */
-/* ************************ [^] REMOVE CONFLICTS [^] ************************ */
+#define G__BOOLEAN_H /* CINT */
+#endif /* LOCALMACRO__BOOLEAN_MODEL >= LOCALMACRO__BOOLEAN_EXTENSION */
+/* ******************** [^] NO bool IN THE LANGUAGE [^] ********************* */
+
+/* ************************** [v] EVERY MODEL [v] *************************** */
+#define boolean BOOLEAN
+
+#ifndef __bool_true_false_are_defined
+#define __bool_true_false_are_defined 1
+#endif /* !__bool_true_false_are_defined */
+
+#undef LOCALMACRO__BOOLEAN_MODEL
+#undef LOCALMACRO__BOOLEAN_KEYWORD
+#undef LOCALMACRO__BOOLEAN_STDBOOL
+#undef LOCALMACRO__BOOLEAN_EXTENSION
+#undef LOCALMACRO__BOOLEAN_FALLBACK
+/* ************************** [^] EVERY MODEL [^] *************************** */
 #endif /* !BOOLEAN_H */
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\
