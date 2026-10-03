@@ -1,5 +1,9 @@
 # REGISTER
 
+<p align="center">
+<img src="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/REGISTER.gif"/>
+</p>
+
 > ## ⚠️ Important
 > ### File location: [**[📜 CMT/ATTRIBUTES/REGISTER.H](https://github.com/TeomanDeniz/CMT/blob/main/ATTRIBUTES/REGISTER.H)**]
 > ### How to include:

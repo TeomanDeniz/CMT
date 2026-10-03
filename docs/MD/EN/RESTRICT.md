@@ -1,5 +1,9 @@
 # RESTRICT
 
+<p align="center">
+<img src="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/RESTRICT.gif"/>
+</p>
+
 > ## ⚠️ Important
 > ### File location: [**[📜 CMT/ATTRIBUTES/RESTRICT.H](https://github.com/TeomanDeniz/CMT/blob/main/ATTRIBUTES/RESTRICT.H)**]
 > ### How to include:
