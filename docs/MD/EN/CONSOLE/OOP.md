@@ -57,7 +57,7 @@ new (CMT_CONSOLE, term) ();
 
 term->log("Worked\n");
 term->input.wait.key();
-term->free();
+delete (term);
 ```
 
 ### Colour
@@ -97,7 +97,7 @@ console.put.colored.line (character, color, x_start, y_start, x_end, y_end);
 ----
 
 > ### ⚠️ One console per process
-> This is a Windows OS rule, not a CMT one. `AllocConsole` fails while a console is already attached and there is no call that grants a second. So two created objects cannot each have a window, and a created object inside a program started from `cmd` shares that window instead of opening its own. `free()` only closes a console the object opened itself, so an inherited shell window is never taken down.
+> This is a Windows OS rule, not a CMT one. `AllocConsole` fails while a console is already attached and there is no call that grants a second. So two created objects cannot each have a window, and a created object inside a program started from `cmd` shares that window instead of opening its own.
 
 ## Contents
 
@@ -275,8 +275,6 @@ console.put.colored.line (character, color, x_start, y_start, x_end, y_end);
 | `const boolean get.cursor.visible;`                                                                                                           |
 | `BOOLEAN HIGHLIGHTER;`                                                                                                                        |
 | `boolean highlighter;`                                                                                                                        |
-| `void FREE(void);`                                                                                                                            |
-| `void free(void);`                                                                                                                            |
 
 ### `X`, `Y`, `XY`
 
@@ -705,7 +703,7 @@ console.print("[%s]\n", text);
 > 
 > console.print("%s\n", line); /* garbage */
 > ```
-> You do not free either of them; `console.free()` does it.
+> You do not free either of them.
 
 ----
 

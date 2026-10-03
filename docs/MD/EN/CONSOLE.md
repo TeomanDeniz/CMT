@@ -77,7 +77,6 @@ int	main(void)
 		->log("Hello\n");
 
 	console.input.wait.key();
-	console.free();
 
 	return (0);
 }
@@ -94,7 +93,6 @@ int	main(void)
 		->log("Hello\n");
 
 	console.input.wait.key();
-	console.free();
 
 	return (0);
 }
@@ -111,7 +109,6 @@ int	main(void)
 	console_log(&console, "Hello\n");
 
 	console_input_wait_key(&console);
-	console_free(&console);
 
 	return (0);
 }

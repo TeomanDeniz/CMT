@@ -78,7 +78,7 @@ console.log("Hello\n");
 } /* term's buffers are released here */
 ```
 
-There is no `free()` in the C++ interface; the destructor does that job. A console object owns handles and buffers, so it **cannot be copied** or assigned. Pass it by reference or by pointer.
+----
 
 ### Colour
 
