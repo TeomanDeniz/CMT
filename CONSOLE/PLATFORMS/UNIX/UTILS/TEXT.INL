@@ -363,7 +363,7 @@
 						(THIS->_ESC_DATA[0] == '<') || \
 						(THIS->_ESC_DATA[0] == '=') || \
 						(THIS->_ESC_DATA[0] == '>')\
-					)
+					)\
 				);\
 				\
 				if (\
