@@ -1,15 +1,13 @@
 /* ************************** [v] 8-BIT MEMORY [v] ************************** */
 #ifdef __SYSTEM_16_BIT__
 #define _MOV_PTR8_(POINTER, VALUE) \
-	__ASM__OP__(0X67)\
 	__ASM__OP__(0XC6)\
-	__ASM__OP__(0X05)\
+	__ASM__OP__(0X06)\
 	__ASM__IMM16__(POINTER)\
 	__ASM__IMM8__(VALUE)
 #define _MOV_PTR16_(POINTER, VALUE) \
-	__ASM__OP__(0X67)\
 	__ASM__OP__(0XC7)\
-	__ASM__OP__(0X05)\
+	__ASM__OP__(0X06)\
 	__ASM__IMM16__(POINTER)\
 	__ASM__IMM16__(VALUE)
 

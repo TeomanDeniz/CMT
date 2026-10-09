@@ -28,6 +28,14 @@
 #define SIZEOF_PUSH_RDI 1
 #define SIZEOF_PUSH_RBP 1
 #define SIZEOF_PUSH_RSP 1
+#define SIZEOF_PUSH_R8 2
+#define SIZEOF_PUSH_R9 2
+#define SIZEOF_PUSH_R10 2
+#define SIZEOF_PUSH_R11 2
+#define SIZEOF_PUSH_R12 2
+#define SIZEOF_PUSH_R13 2
+#define SIZEOF_PUSH_R14 2
+#define SIZEOF_PUSH_R15 2
 /* ************************ [^] 64-BIT REGISTERS [^] ************************ */
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\

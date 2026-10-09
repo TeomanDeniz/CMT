@@ -4,7 +4,7 @@
 
 #define RET CMT_ASM("ret")
 #define CPUID CMT_ASM("cpuid")
-#define INT_(VALUE) CMT_ASM("int " _(VALUE))
+#define INT_(VALUE) CMT_ASM("int $" _(VALUE))
 
 #ifdef __SYSTEM_64_BIT__
 #define ENDBR64 CMT_ASM("endbr64")

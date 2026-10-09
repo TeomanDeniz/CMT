@@ -63,6 +63,110 @@ struct S_CONSOLE_SNAPSHOT
 	BOOLEAN			_OWNED;\
 	BOOLEAN			_TERMINAL;
 
+#define LOCALMACRO__CMT_CONSOLE__LOG_INLINE(__STRING__) \
+	do\
+	{\
+		char			*THE_STRING = (__STRING__);\
+		LET				LENGTH;\
+		unsigned long	WRITTEN;\
+		unsigned int	*X = &(\
+			OBJECT__INITIALIZE (THIS->GET.CURSOR.X, unsigned int)\
+		);\
+		unsigned int	*Y = &(\
+			OBJECT__INITIALIZE (THIS->GET.CURSOR.Y, unsigned int)\
+		);\
+		\
+		LENGTH = (LET)0;\
+		\
+		while (THE_STRING[LENGTH] != 0)\
+		{ /* THIS PART OF THE CODE SPONSORED BY CLAUDE */\
+			const char		__CHARACTER__ = THE_STRING[LENGTH];\
+			\
+			if (__CHARACTER__ == '\n')\
+			{\
+				(*X) = 0;\
+				(*Y)++;\
+			}\
+			else if (__CHARACTER__ == '\r')\
+				(*X) = 0;\
+			else if (__CHARACTER__ == '\b')\
+			{\
+				if ((*X) > 0)\
+					(*X)--;\
+			}\
+			else\
+			{\
+				(*X)++;\
+				\
+				if ((*X) >= THIS->GET.WIDTH)\
+				{\
+					(*X) = 0;\
+					(*Y)++;\
+				}\
+			}\
+			\
+			++LENGTH;\
+		}\
+		\
+		if (THIS->_PUSH_DEPTH)\
+		{\
+			const unsigned long	NEEDED =\
+				THIS->_PUSH_SIZE + (unsigned long)LENGTH + (unsigned long)1;\
+			\
+			if (THIS->_PUSH_CAPACITY < NEEDED)\
+			{\
+				unsigned long	TARGET;\
+				PTR				BLOCK;\
+				\
+				if (THIS->_PUSH_CAPACITY)\
+					TARGET = THIS->_PUSH_CAPACITY;\
+				else\
+					TARGET = (unsigned long)1024;\
+				\
+				while (TARGET < NEEDED)\
+					TARGET = TARGET * (unsigned long)2;\
+				\
+				if (!THIS->_PUSH_DATA)\
+					BLOCK = ALLOC((LET)TARGET);\
+				else\
+					BLOCK = REALLOC(THIS->_PUSH_DATA, (LET)TARGET);\
+				\
+				if (BLOCK)\
+				{\
+					THIS->_PUSH_DATA = BLOCK;\
+					THIS->_PUSH_CAPACITY = TARGET;\
+				}\
+			}\
+			\
+			if (THIS->_PUSH_CAPACITY >= NEEDED)\
+			{\
+				REGISTER LET	INDEX = (LET)0;\
+				char			*TAIL =\
+					((char *)THIS->_PUSH_DATA) + THIS->_PUSH_SIZE;\
+				\
+				while (INDEX < LENGTH)\
+				{\
+					TAIL[INDEX] = THE_STRING[INDEX];\
+					++INDEX;\
+				}\
+				\
+				THIS->_PUSH_SIZE += (unsigned long)LENGTH;\
+				((char *)THIS->_PUSH_DATA)[THIS->_PUSH_SIZE] = (char)0;\
+				break ;\
+			}\
+		}\
+		\
+		if (\
+			!KERNEL32.WriteConsoleA(\
+				THIS->_OUT_HANDLE, THE_STRING, LENGTH, &WRITTEN, 0\
+			)\
+		)\
+			KERNEL32.WriteFile(\
+				THIS->_OUT_HANDLE, THE_STRING, LENGTH, &WRITTEN, 0\
+			);\
+	}\
+	while (0)
+
 #include "WINDOWS/UTILS/PRIMITIVES.INL"
 #include "WINDOWS/UTILS/ATTACH.INL"
 #include "WINDOWS/UTILS/ATTACH_PUBLISH.INL"

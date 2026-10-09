@@ -5,21 +5,25 @@
 #ifndef KNR_STYLE /* STANDARD C */
 #define FUNCTION_HEADER__CONSOLE_PRINT \
 	void\
-		CONSOLE_PRINT(struct s_console *THIS, const char *FORMAT, VA_ARGS)\
+		CONSOLE_PRINT(\
+			struct s_console *const THIS, const char *FORMAT, VA_ARGS\
+		)\
 	VA_DECLARE
 #define FUNCTION_HEADER__console_print \
 	void\
-		console_print(struct s_console *THIS, const char *FORMAT, va_args)\
+		console_print(\
+			struct s_console *const __this__, const char *FORMAT, va_args\
+		)\
 	va_declare
 #else /* K&R */
 #define FUNCTION_HEADER__CONSOLE_PRINT \
 	CONSOLE_PRINT(THIS, FORMAT, VA_ARGS)\
-	struct s_console	THIS;\
+	struct s_console	*const THIS;\
 	const char			*FORMAT;\
 	VA_DECLARE
 #define FUNCTION_HEADER__console_print \
-	console_print(THIS, FORMAT, va_args)\
-	struct s_console	THIS;\
+	console_print(__this__, FORMAT, va_args)\
+	struct s_console	*const __this__;\
 	const char			*FORMAT;\
 	va_declare
 #endif /* !KNR_STYLE */
@@ -32,6 +36,10 @@
 	\
 	FUNCTION_HEADER__console_print \
 	{\
+		union U_CONSOLE_STORAGE	*const __THIS_CONVERTER__ = \
+			(union U_CONSOLE_STORAGE *)(PTR)__this__;\
+		struct S_CONSOLE		*const THIS = &__THIS_CONVERTER__->UPPER;\
+		\
 		LOCALMACRO__CMT_CONSOLE__PRINT_CONTENT\
 	}
 

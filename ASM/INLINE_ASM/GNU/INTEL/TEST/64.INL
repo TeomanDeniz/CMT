@@ -275,22 +275,54 @@
 #define TEST_R15_R14 CMT_ASM("testq %r14, %r15")
 #define TEST_R15_R15 CMT_ASM("testq %r15, %r15")
 
-#define TEST_RAX_(VALUE) CMT_ASM("testq $" _(VALUE) ", %rax")
-#define TEST_RBX_(VALUE) CMT_ASM("testq $" _(VALUE) ", %rbx")
-#define TEST_RCX_(VALUE) CMT_ASM("testq $" _(VALUE) ", %rcx")
-#define TEST_RDX_(VALUE) CMT_ASM("testq $" _(VALUE) ", %rdx")
-#define TEST_RDI_(VALUE) CMT_ASM("testq $" _(VALUE) ", %rdi")
-#define TEST_RSI_(VALUE) CMT_ASM("testq $" _(VALUE) ", %rsi")
-#define TEST_RBP_(VALUE) CMT_ASM("testq $" _(VALUE) ", %rbp")
-#define TEST_RSP_(VALUE) CMT_ASM("testq $" _(VALUE) ", %rsp")
-#define TEST_R8_(VALUE) CMT_ASM("testq $" _(VALUE) ", %r8")
-#define TEST_R9_(VALUE) CMT_ASM("testq $" _(VALUE) ", %r9")
-#define TEST_R10_(VALUE) CMT_ASM("testq $" _(VALUE) ", %r10")
-#define TEST_R11_(VALUE) CMT_ASM("testq $" _(VALUE) ", %r11")
-#define TEST_R12_(VALUE) CMT_ASM("testq $" _(VALUE) ", %r12")
-#define TEST_R13_(VALUE) CMT_ASM("testq $" _(VALUE) ", %r13")
-#define TEST_R14_(VALUE) CMT_ASM("testq $" _(VALUE) ", %r14")
-#define TEST_R15_(VALUE) CMT_ASM("testq $" _(VALUE) ", %r15")
+#define TEST_RAX_(VALUE) \
+	CMT_ASM(".byte 0X48, 0XF7, 0XC0 # testq $" _(VALUE) ", %rax")\
+	CMT_ASM(".long " _(VALUE))
+#define TEST_RBX_(VALUE) \
+	CMT_ASM(".byte 0X48, 0XF7, 0XC3 # testq $" _(VALUE) ", %rbx")\
+	CMT_ASM(".long " _(VALUE))
+#define TEST_RCX_(VALUE) \
+	CMT_ASM(".byte 0X48, 0XF7, 0XC1 # testq $" _(VALUE) ", %rcx")\
+	CMT_ASM(".long " _(VALUE))
+#define TEST_RDX_(VALUE) \
+	CMT_ASM(".byte 0X48, 0XF7, 0XC2 # testq $" _(VALUE) ", %rdx")\
+	CMT_ASM(".long " _(VALUE))
+#define TEST_RDI_(VALUE) \
+	CMT_ASM(".byte 0X48, 0XF7, 0XC7 # testq $" _(VALUE) ", %rdi")\
+	CMT_ASM(".long " _(VALUE))
+#define TEST_RSI_(VALUE) \
+	CMT_ASM(".byte 0X48, 0XF7, 0XC6 # testq $" _(VALUE) ", %rsi")\
+	CMT_ASM(".long " _(VALUE))
+#define TEST_RBP_(VALUE) \
+	CMT_ASM(".byte 0X48, 0XF7, 0XC5 # testq $" _(VALUE) ", %rbp")\
+	CMT_ASM(".long " _(VALUE))
+#define TEST_RSP_(VALUE) \
+	CMT_ASM(".byte 0X48, 0XF7, 0XC4 # testq $" _(VALUE) ", %rsp")\
+	CMT_ASM(".long " _(VALUE))
+#define TEST_R8_(VALUE) \
+	CMT_ASM(".byte 0X49, 0XF7, 0XC0 # testq $" _(VALUE) ", %r8")\
+	CMT_ASM(".long " _(VALUE))
+#define TEST_R9_(VALUE) \
+	CMT_ASM(".byte 0X49, 0XF7, 0XC1 # testq $" _(VALUE) ", %r9")\
+	CMT_ASM(".long " _(VALUE))
+#define TEST_R10_(VALUE) \
+	CMT_ASM(".byte 0X49, 0XF7, 0XC2 # testq $" _(VALUE) ", %r10")\
+	CMT_ASM(".long " _(VALUE))
+#define TEST_R11_(VALUE) \
+	CMT_ASM(".byte 0X49, 0XF7, 0XC3 # testq $" _(VALUE) ", %r11")\
+	CMT_ASM(".long " _(VALUE))
+#define TEST_R12_(VALUE) \
+	CMT_ASM(".byte 0X49, 0XF7, 0XC4 # testq $" _(VALUE) ", %r12")\
+	CMT_ASM(".long " _(VALUE))
+#define TEST_R13_(VALUE) \
+	CMT_ASM(".byte 0X49, 0XF7, 0XC5 # testq $" _(VALUE) ", %r13")\
+	CMT_ASM(".long " _(VALUE))
+#define TEST_R14_(VALUE) \
+	CMT_ASM(".byte 0X49, 0XF7, 0XC6 # testq $" _(VALUE) ", %r14")\
+	CMT_ASM(".long " _(VALUE))
+#define TEST_R15_(VALUE) \
+	CMT_ASM(".byte 0X49, 0XF7, 0XC7 # testq $" _(VALUE) ", %r15")\
+	CMT_ASM(".long " _(VALUE))
 /* ************************ [^] 64-BIT REGISTERS [^] ************************ */
 
 #include "32.INL"

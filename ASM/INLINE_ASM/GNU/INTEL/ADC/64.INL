@@ -275,22 +275,54 @@
 #define ADC_R15_R14 CMT_ASM("adcq %r14, %r15")
 #define ADC_R15_R15 CMT_ASM("adcq %r15, %r15")
 
-#define ADC_RAX_(VALUE) CMT_ASM("adcq $" _(VALUE) ", %rax")
-#define ADC_RBX_(VALUE) CMT_ASM("adcq $" _(VALUE) ", %rbx")
-#define ADC_RCX_(VALUE) CMT_ASM("adcq $" _(VALUE) ", %rcx")
-#define ADC_RDX_(VALUE) CMT_ASM("adcq $" _(VALUE) ", %rdx")
-#define ADC_RDI_(VALUE) CMT_ASM("adcq $" _(VALUE) ", %rdi")
-#define ADC_RSI_(VALUE) CMT_ASM("adcq $" _(VALUE) ", %rsi")
-#define ADC_RBP_(VALUE) CMT_ASM("adcq $" _(VALUE) ", %rbp")
-#define ADC_RSP_(VALUE) CMT_ASM("adcq $" _(VALUE) ", %rsp")
-#define ADC_R8_(VALUE) CMT_ASM("adcq $" _(VALUE) ", %r8")
-#define ADC_R9_(VALUE) CMT_ASM("adcq $" _(VALUE) ", %r9")
-#define ADC_R10_(VALUE) CMT_ASM("adcq $" _(VALUE) ", %r10")
-#define ADC_R11_(VALUE) CMT_ASM("adcq $" _(VALUE) ", %r11")
-#define ADC_R12_(VALUE) CMT_ASM("adcq $" _(VALUE) ", %r12")
-#define ADC_R13_(VALUE) CMT_ASM("adcq $" _(VALUE) ", %r13")
-#define ADC_R14_(VALUE) CMT_ASM("adcq $" _(VALUE) ", %r14")
-#define ADC_R15_(VALUE) CMT_ASM("adcq $" _(VALUE) ", %r15")
+#define ADC_RAX_(VALUE) \
+	CMT_ASM(".byte 0X48, 0X81, 0XD0 # adcq $" _(VALUE) ", %rax")\
+	CMT_ASM(".long " _(VALUE))
+#define ADC_RBX_(VALUE) \
+	CMT_ASM(".byte 0X48, 0X81, 0XD3 # adcq $" _(VALUE) ", %rbx")\
+	CMT_ASM(".long " _(VALUE))
+#define ADC_RCX_(VALUE) \
+	CMT_ASM(".byte 0X48, 0X81, 0XD1 # adcq $" _(VALUE) ", %rcx")\
+	CMT_ASM(".long " _(VALUE))
+#define ADC_RDX_(VALUE) \
+	CMT_ASM(".byte 0X48, 0X81, 0XD2 # adcq $" _(VALUE) ", %rdx")\
+	CMT_ASM(".long " _(VALUE))
+#define ADC_RDI_(VALUE) \
+	CMT_ASM(".byte 0X48, 0X81, 0XD7 # adcq $" _(VALUE) ", %rdi")\
+	CMT_ASM(".long " _(VALUE))
+#define ADC_RSI_(VALUE) \
+	CMT_ASM(".byte 0X48, 0X81, 0XD6 # adcq $" _(VALUE) ", %rsi")\
+	CMT_ASM(".long " _(VALUE))
+#define ADC_RBP_(VALUE) \
+	CMT_ASM(".byte 0X48, 0X81, 0XD5 # adcq $" _(VALUE) ", %rbp")\
+	CMT_ASM(".long " _(VALUE))
+#define ADC_RSP_(VALUE) \
+	CMT_ASM(".byte 0X48, 0X81, 0XD4 # adcq $" _(VALUE) ", %rsp")\
+	CMT_ASM(".long " _(VALUE))
+#define ADC_R8_(VALUE) \
+	CMT_ASM(".byte 0X49, 0X81, 0XD0 # adcq $" _(VALUE) ", %r8")\
+	CMT_ASM(".long " _(VALUE))
+#define ADC_R9_(VALUE) \
+	CMT_ASM(".byte 0X49, 0X81, 0XD1 # adcq $" _(VALUE) ", %r9")\
+	CMT_ASM(".long " _(VALUE))
+#define ADC_R10_(VALUE) \
+	CMT_ASM(".byte 0X49, 0X81, 0XD2 # adcq $" _(VALUE) ", %r10")\
+	CMT_ASM(".long " _(VALUE))
+#define ADC_R11_(VALUE) \
+	CMT_ASM(".byte 0X49, 0X81, 0XD3 # adcq $" _(VALUE) ", %r11")\
+	CMT_ASM(".long " _(VALUE))
+#define ADC_R12_(VALUE) \
+	CMT_ASM(".byte 0X49, 0X81, 0XD4 # adcq $" _(VALUE) ", %r12")\
+	CMT_ASM(".long " _(VALUE))
+#define ADC_R13_(VALUE) \
+	CMT_ASM(".byte 0X49, 0X81, 0XD5 # adcq $" _(VALUE) ", %r13")\
+	CMT_ASM(".long " _(VALUE))
+#define ADC_R14_(VALUE) \
+	CMT_ASM(".byte 0X49, 0X81, 0XD6 # adcq $" _(VALUE) ", %r14")\
+	CMT_ASM(".long " _(VALUE))
+#define ADC_R15_(VALUE) \
+	CMT_ASM(".byte 0X49, 0X81, 0XD7 # adcq $" _(VALUE) ", %r15")\
+	CMT_ASM(".long " _(VALUE))
 /* ************************ [^] 64-BIT REGISTERS [^] ************************ */
 
 #include "32.INL"

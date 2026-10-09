@@ -243,7 +243,11 @@ typedef FLOAT64	float64;
 #ifdef __SYSTEM_32_BIT__
 typedef long			VAR;
 typedef VAR				var;
+#ifdef __SIZE_TYPE__ /* GCC/CLANG: EXACTLY THE TYPE OF size_t */
+typedef __SIZE_TYPE__	LET;
+#else /* !__SIZE_TYPE__ */
 typedef unsigned long	LET;
+#endif /* __SIZE_TYPE__ */
 typedef LET				let;
 typedef unsigned char	BYTE;
 typedef BYTE			byte;
@@ -282,11 +286,15 @@ typedef FLOAT64	float64;
 typedef long long			VAR;
 typedef VAR					var;
 
+#ifdef __SIZE_TYPE__ /* GCC/CLANG: EXACTLY THE TYPE OF size_t */
+typedef __SIZE_TYPE__		LET; /* NOT "unsigned long": 32-BIT ON WIN64 */
+#else /* !__SIZE_TYPE__ */
 #ifdef __clang__
 typedef unsigned long		LET;
 #else /* !__clang__ */
 typedef unsigned long long	LET;
 #endif /* __clang__ */
+#endif /* __SIZE_TYPE__ */
 
 typedef LET					let;
 typedef unsigned char		BYTE;

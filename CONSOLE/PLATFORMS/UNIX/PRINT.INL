@@ -25,7 +25,37 @@
 		if (PRINT_FILL >= 960)\
 		{\
 			PRINT_BUFFER[PRINT_FILL] = (char)0;\
-			THIS->LOG(PRINT_BUFFER);\
+			\
+			{\
+				const unsigned char	*__CMT_LOG__ = \
+					(const unsigned char *)(PRINT_BUFFER);\
+				\
+				if (__CMT_LOG__)\
+				{\
+					LOCALMACRO__CMT_CONSOLE__ENTER\
+					LOCALMACRO__CMT_CONSOLE__BATCH_BEGIN\
+					\
+					if (!THIS->_ACTIVE)\
+					{\
+						const unsigned char	*__CMT_LOG_RAW__ = __CMT_LOG__;\
+						\
+						while (*__CMT_LOG_RAW__)\
+						{\
+							LOCALMACRO__CMT_CONSOLE__OUT_BYTE(*__CMT_LOG_RAW__)\
+							++__CMT_LOG_RAW__;\
+						}\
+					}\
+					\
+					while (*__CMT_LOG__)\
+					{\
+						LOCALMACRO__CMT_CONSOLE__FEED(*__CMT_LOG__)\
+						++__CMT_LOG__;\
+					}\
+					\
+					LOCALMACRO__CMT_CONSOLE__BATCH_END\
+				}\
+			}\
+			\
 			PRINT_FILL = 0;\
 		}\
 	}\
@@ -34,7 +64,7 @@
 #define LOCALMACRO__CMT_CONSOLE__PRINT_PAD(CHARACTER, COUNT) \
 	do\
 	{\
-		long	__CMT_PAD_LEFT__ = (long)(COUNT);\
+		REGISTER long	__CMT_PAD_LEFT__ = (long)(COUNT);\
 		\
 		while (__CMT_PAD_LEFT__-- > (long)0)\
 			LOCALMACRO__CMT_CONSOLE__PRINT_EMIT(CHARACTER)\
@@ -80,7 +110,7 @@
 		}\
 	\
 		while (\
-			((long)__CMT_NUM_COUNT__ < PRINT_PRECISION) &&\
+			((long)__CMT_NUM_COUNT__ < PRINT_PRECISION) && \
 			(__CMT_NUM_COUNT__ < (int)(sizeof(__CMT_NUM_DIGITS__) - 1))\
 		)\
 			__CMT_NUM_DIGITS__[__CMT_NUM_COUNT__++] = '0';\
@@ -121,7 +151,7 @@
 				\
 				__CMT_NUM_PRELEN__ = 2;\
 			}\
-			else if ((__CMT_NUM_BASE__ == (unsigned long)8) &&\
+			else if ((__CMT_NUM_BASE__ == (unsigned long)8) && \
 				(__CMT_NUM_DIGITS__[__CMT_NUM_COUNT__ - 1] != '0'))\
 			{\
 				__CMT_NUM_PREFIX__[0] = '0';\
@@ -135,7 +165,7 @@
 				(long)__CMT_NUM_PRELEN__;\
 		else\
 			__CMT_NUM_PAD__ = \
-				PRINT_WIDTH - (long)__CMT_NUM_COUNT__ -\
+				PRINT_WIDTH - (long)__CMT_NUM_COUNT__ - \
 				(long)__CMT_NUM_PRELEN__;\
 		\
 		if ((!PRINT_LEFT) && ((!PRINT_ZERO) || (PRINT_PRECISION >= (long)0)))\
@@ -264,7 +294,7 @@
 			else\
 				while ((*SCAN >= '0') && (*SCAN <= '9'))\
 				{\
-					PRINT_PRECISION =\
+					PRINT_PRECISION = \
 						(PRINT_PRECISION * (long)10) + (long)(*SCAN - '0');\
 					++SCAN;\
 				}\
@@ -273,7 +303,7 @@
 		PRINT_LONG = 0;\
 		\
 		while (\
-			(*SCAN == 'l') || (*SCAN == 'h') || (*SCAN == 'z') ||\
+			(*SCAN == 'l') || (*SCAN == 'h') || (*SCAN == 'z') || \
 			(*SCAN == 'j') || (*SCAN == 't')\
 		)\
 		{\
@@ -293,22 +323,22 @@
 		if ((CONVERSION == 'd') || (CONVERSION == 'i'))\
 		{\
 			const long			VALUE = PRINT_LONG\
-				? VA_ARG(ARGUMENTS, long)\
+				? VA_ARG(ARGUMENTS, long) \
 				: (long)VA_ARG(ARGUMENTS, int);\
 			const int			NEGATIVE = (VALUE < (long)0);\
-			const unsigned long	MAGNITUDE = NEGATIVE\
-				? ((unsigned long)(-(VALUE + (long)1)) + (unsigned long)1)\
+			const unsigned long	MAGNITUDE = NEGATIVE \
+				? ((unsigned long)(-(VALUE + (long)1)) + (unsigned long)1) \
 				: (unsigned long)VALUE;\
 			\
 			LOCALMACRO__CMT_CONSOLE__PRINT_NUMBER(MAGNITUDE, NEGATIVE, 10, 0)\
 		}\
 		else if (\
-			(CONVERSION == 'u') || (CONVERSION == 'o') ||\
+			(CONVERSION == 'u') || (CONVERSION == 'o') || \
 			(CONVERSION == 'x') || (CONVERSION == 'X') || (CONVERSION == 'b')\
 		)\
 		{\
-			const unsigned long	VALUE = PRINT_LONG\
-				? VA_ARG(ARGUMENTS, unsigned long)\
+			const unsigned long	VALUE = PRINT_LONG \
+				? VA_ARG(ARGUMENTS, unsigned long) \
 				: (unsigned long)VA_ARG(ARGUMENTS, unsigned int);\
 			int					BASE = 10;\
 			\
@@ -359,7 +389,7 @@
 				TEXT = "(null)";\
 			\
 			while (\
-				TEXT[LENGTH] &&\
+				TEXT[LENGTH] && \
 				((PRINT_PRECISION < (long)0) || (LENGTH < PRINT_PRECISION))\
 			)\
 				++LENGTH;\
@@ -455,7 +485,36 @@
 	PRINT_BUFFER[PRINT_FILL] = (char)0;\
 	\
 	if (PRINT_FILL)\
-		THIS->LOG(PRINT_BUFFER);\
+	{\
+		const unsigned char	*__CMT_LOG__ = \
+			(const unsigned char *)(PRINT_BUFFER);\
+		\
+		if (__CMT_LOG__)\
+		{\
+			LOCALMACRO__CMT_CONSOLE__ENTER\
+			LOCALMACRO__CMT_CONSOLE__BATCH_BEGIN\
+			\
+			if (!THIS->_ACTIVE)\
+			{\
+				const unsigned char	*__CMT_LOG_RAW__ = __CMT_LOG__;\
+				\
+				while (*__CMT_LOG_RAW__)\
+				{\
+					LOCALMACRO__CMT_CONSOLE__OUT_BYTE(*__CMT_LOG_RAW__)\
+					++__CMT_LOG_RAW__;\
+				}\
+			}\
+			\
+			while (*__CMT_LOG__)\
+			{\
+				LOCALMACRO__CMT_CONSOLE__FEED(*__CMT_LOG__)\
+				++__CMT_LOG__;\
+			}\
+			\
+			LOCALMACRO__CMT_CONSOLE__BATCH_END\
+		}\
+	}\
+	\
 	LOCALMACRO__CMT_CONSOLE__BATCH_END
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\

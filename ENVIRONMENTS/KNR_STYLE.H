@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2025/03/31 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - Apache2.0 :: Update - 2026/09/28 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - Apache2.0 :: Update - 2026/10/09 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -126,7 +126,7 @@
 \******************************************************************************/
 
 #ifndef KNR_STYLE_H
-#define KNR_STYLE_H 202609 /* VERSION */
+#define KNR_STYLE_H 202610 /* VERSION */
 
 /* *********************** [v] TI CGT CCS (PUSH) [v] ************************ */
 #ifdef __TI_COMPILER_VERSION__
@@ -145,17 +145,116 @@
 #define KNR_STYLE
 #endif /* __NOPROTO__ */
 #ifndef KNR_STYLE
+#ifndef CMT_NO_KNR_STYLE /* USER CAN FORCE ANSI MODE */
 #ifndef __STDC__
+/*
+# __STDC__ IS NOT DEFINED. THIS IS EITHER A REAL K&R COMPILER, OR AN ANSI
+# CAPABLE COMPILER RUNNING IN ITS DEFAULT (EXTENSIONS ON) MODE. MSVC, WATCOM,
+# BORLAND AND TURBO C DO NOT DEFINE __STDC__ UNLESS STRICT ANSI MODE IS ON
+# (/Za, -za, -A), BUT THEY ALL SUPPORT PROTOTYPES, void AND const.
+# SO ONLY COMPILERS THAT ARE NOT KNOWN TO BE ANSI CAPABLE ARE TREATED AS K&R.
+# C89/C90 (__STDC__ WITHOUT __STDC_VERSION__) IS ANSI, NOT K&R.
+*/
+#define LOCALMACRO__KNR_STYLE_CANDIDATE
+#ifdef _MSC_VER /* MICROSOFT C/C++ */
+#undef LOCALMACRO__KNR_STYLE_CANDIDATE
+#endif /* _MSC_VER */
+#ifdef __WATCOMC__ /* WATCOM C/C++ */
+#undef LOCALMACRO__KNR_STYLE_CANDIDATE
+#endif /* __WATCOMC__ */
+#ifdef __TURBOC__ /* TURBO C */
+#undef LOCALMACRO__KNR_STYLE_CANDIDATE
+#endif /* __TURBOC__ */
+#ifdef __BORLANDC__ /* BORLAND C/C++ */
+#undef LOCALMACRO__KNR_STYLE_CANDIDATE
+#endif /* __BORLANDC__ */
+#ifdef __CODEGEARC__ /* CODEGEAR C/C++ */
+#undef LOCALMACRO__KNR_STYLE_CANDIDATE
+#endif /* __CODEGEARC__ */
+#ifdef __ZTC__ /* ZORTECH C/C++ */
+#undef LOCALMACRO__KNR_STYLE_CANDIDATE
+#endif /* __ZTC__ */
+#ifdef __SC__ /* SYMANTEC C/C++ */
+#undef LOCALMACRO__KNR_STYLE_CANDIDATE
+#endif /* __SC__ */
+#ifdef __DMC__ /* DIGITAL MARS */
+#undef LOCALMACRO__KNR_STYLE_CANDIDATE
+#endif /* __DMC__ */
+#ifdef __GNUC__ /* GCC */
+#undef LOCALMACRO__KNR_STYLE_CANDIDATE
+#endif /* __GNUC__ */
+#ifdef __clang__ /* CLANG */
+#undef LOCALMACRO__KNR_STYLE_CANDIDATE
+#endif /* __clang__ */
+#ifdef __INTEL_COMPILER /* INTEL C/C++ */
+#undef LOCALMACRO__KNR_STYLE_CANDIDATE
+#endif /* __INTEL_COMPILER */
+#ifdef __TINYC__ /* TINY C COMPILER */
+#undef LOCALMACRO__KNR_STYLE_CANDIDATE
+#endif /* __TINYC__ */
+#ifdef __LCC__ /* LCC / LCC-WIN32 */
+#undef LOCALMACRO__KNR_STYLE_CANDIDATE
+#endif /* __LCC__ */
+#ifdef __POCC__ /* PELLES C */
+#undef LOCALMACRO__KNR_STYLE_CANDIDATE
+#endif /* __POCC__ */
+#ifdef __ORANGEC__ /* ORANGE C */
+#undef LOCALMACRO__KNR_STYLE_CANDIDATE
+#endif /* __ORANGEC__ */
+#ifdef __IBMC__ /* IBM C */
+#undef LOCALMACRO__KNR_STYLE_CANDIDATE
+#endif /* __IBMC__ */
+#ifdef __xlC__ /* IBM XL C */
+#undef LOCALMACRO__KNR_STYLE_CANDIDATE
+#endif /* __xlC__ */
+#ifdef __SUNPRO_C /* SUN STUDIO C (-Xt DEFINES __STDC__ AS 0 OR NOT AT ALL) */
+#undef LOCALMACRO__KNR_STYLE_CANDIDATE
+#endif /* __SUNPRO_C */
+#ifdef __HP_cc /* HP ANSI C */
+#undef LOCALMACRO__KNR_STYLE_CANDIDATE
+#endif /* __HP_cc */
+#ifdef __DECC /* DEC / COMPAQ C */
+#undef LOCALMACRO__KNR_STYLE_CANDIDATE
+#endif /* __DECC */
+#ifdef __HIGHC__ /* METAWARE HIGH C */
+#undef LOCALMACRO__KNR_STYLE_CANDIDATE
+#endif /* __HIGHC__ */
+#ifdef __MWERKS__ /* METROWERKS CODEWARRIOR */
+#undef LOCALMACRO__KNR_STYLE_CANDIDATE
+#endif /* __MWERKS__ */
+#ifdef __CC_ARM /* ARM C COMPILER */
+#undef LOCALMACRO__KNR_STYLE_CANDIDATE
+#endif /* __CC_ARM */
+#ifdef __IAR_SYSTEMS_ICC__ /* IAR C/C++ */
+#undef LOCALMACRO__KNR_STYLE_CANDIDATE
+#endif /* __IAR_SYSTEMS_ICC__ */
+#ifdef __TI_COMPILER_VERSION__ /* TI CGT */
+#undef LOCALMACRO__KNR_STYLE_CANDIDATE
+#endif /* __TI_COMPILER_VERSION__ */
+#ifdef __C51__ /* KEIL C51 */
+#undef LOCALMACRO__KNR_STYLE_CANDIDATE
+#endif /* __C51__ */
+#ifdef SDCC /* SMALL DEVICE C COMPILER (OLD MACRO NAME) */
+#undef LOCALMACRO__KNR_STYLE_CANDIDATE
+#endif /* SDCC */
+#ifdef __SDCC /* SMALL DEVICE C COMPILER */
+#undef LOCALMACRO__KNR_STYLE_CANDIDATE
+#endif /* __SDCC */
+#ifdef __CC65__ /* CC65 */
+#undef LOCALMACRO__KNR_STYLE_CANDIDATE
+#endif /* __CC65__ */
+#ifdef _CRAYC /* CRAY C */
+#undef LOCALMACRO__KNR_STYLE_CANDIDATE
+#endif /* _CRAYC */
+#ifdef __PGI /* PGI / NVIDIA HPC */
+#undef LOCALMACRO__KNR_STYLE_CANDIDATE
+#endif /* __PGI */
+#ifdef LOCALMACRO__KNR_STYLE_CANDIDATE
+#undef LOCALMACRO__KNR_STYLE_CANDIDATE
 #define KNR_STYLE
-#else /* __STDC__ */
-#ifdef __STDC_VERSION__
-#if (__STDC_VERSION__ < 199409L) /* ... < C89 */
-#define KNR_STYLE
-#endif /* __STDC_VERSION__ < 199409L */
-#else /* !__STDC_VERSION__ */
-#define KNR_STYLE
-#endif /* __STDC_VERSION__ */
+#endif /* LOCALMACRO__KNR_STYLE_CANDIDATE */
 #endif /* !__STDC__ */
+#endif /* !CMT_NO_KNR_STYLE */
 #endif /* !KNR_STYLE */
 /* *************************** [^] KNR_STYLE [^] **************************** */
 

@@ -199,6 +199,38 @@ struct S_CONSOLE_SNAPSHOT
 	unsigned int	_CLICK_Y;\
 	unsigned int	_CLICK_BUTTON;
 
+#define LOCALMACRO__CMT_CONSOLE__LOG_INLINE(STRING) \
+	do\
+	{\
+		const unsigned char	*__CMT_LOG__ = (const unsigned char *)(STRING);\
+		\
+		if (__CMT_LOG__)\
+		{\
+			LOCALMACRO__CMT_CONSOLE__ENTER\
+			LOCALMACRO__CMT_CONSOLE__BATCH_BEGIN\
+			\
+			if (!THIS->_ACTIVE)\
+			{\
+				const unsigned char	*__CMT_LOG_RAW__ = __CMT_LOG__;\
+				\
+				while (*__CMT_LOG_RAW__)\
+				{\
+					LOCALMACRO__CMT_CONSOLE__OUT_BYTE(*__CMT_LOG_RAW__)\
+					++__CMT_LOG_RAW__;\
+				}\
+			}\
+			\
+			while (*__CMT_LOG__)\
+			{\
+				LOCALMACRO__CMT_CONSOLE__FEED(*__CMT_LOG__)\
+				++__CMT_LOG__;\
+			}\
+			\
+			LOCALMACRO__CMT_CONSOLE__BATCH_END\
+		}\
+	}\
+	while (0)
+
 #include "UNIX/UTILS/PRIMITIVES.INL"
 #include "UNIX/UTILS/TERMINAL.INL"
 #include "UNIX/UTILS/TEXT.INL"

@@ -5,19 +5,19 @@
 #ifndef KNR_STYLE /* STANDARD C */
 #define FUNCTION_HEADER__CONSOLE_XY \
 	void\
-		CONSOLE_XY(struct s_console *THIS, int X_VALUE, int Y_VALUE)
+		CONSOLE_XY(struct s_console *const THIS, int X_VALUE, int Y_VALUE)
 #define FUNCTION_HEADER__console_xy \
 	void\
-		console_xy(struct s_console *THIS, int X_VALUE, int Y_VALUE)
+		console_xy(struct s_console *const __this__, int X_VALUE, int Y_VALUE)
 #else /* K&R */
 #define FUNCTION_HEADER__CONSOLE_XY \
 	CONSOLE_XY(THIS, X_VALUE, Y_VALUE)\
-	struct s_console	*THIS;\
+	struct s_console	*const THIS;\
 	int					X_VALUE;\
 	int					Y_VALUE;
 #define FUNCTION_HEADER__console_xy \
-	console_xy(THIS, X_VALUE, Y_VALUE)\
-	struct s_console	*THIS;\
+	console_xy(__this__, X_VALUE, Y_VALUE)\
+	struct s_console	*const __this__;\
 	int					X_VALUE;\
 	int					Y_VALUE;
 #endif /* !KNR_STYLE */
@@ -30,6 +30,10 @@
 	\
 	FUNCTION_HEADER__console_xy \
 	{\
+		union U_CONSOLE_STORAGE	*const __THIS_CONVERTER__ = \
+			(union U_CONSOLE_STORAGE *)(PTR)__this__;\
+		struct S_CONSOLE		*const THIS = &__THIS_CONVERTER__->UPPER;\
+		\
 		LOCALMACRO__CMT_CONSOLE__XY_CONTENT\
 	}
 

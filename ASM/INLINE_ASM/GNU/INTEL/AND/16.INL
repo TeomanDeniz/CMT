@@ -24,10 +24,18 @@
 #define AND_DL_CL CMT_ASM("andb %cl, %dl")
 #define AND_DL_DL CMT_ASM("andb %dl, %dl")
 
-#define AND_AL_(VALUE) CMT_ASM("andb $" _(VALUE) ", %al")
-#define AND_BL_(VALUE) CMT_ASM("andb $" _(VALUE) ", %bl")
-#define AND_CL_(VALUE) CMT_ASM("andb $" _(VALUE) ", %cl")
-#define AND_DL_(VALUE) CMT_ASM("andb $" _(VALUE) ", %dl")
+#define AND_AL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XE0 # andb $" _(VALUE) ", %al")\
+	CMT_ASM(".byte " _(VALUE))
+#define AND_BL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XE3 # andb $" _(VALUE) ", %bl")\
+	CMT_ASM(".byte " _(VALUE))
+#define AND_CL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XE1 # andb $" _(VALUE) ", %cl")\
+	CMT_ASM(".byte " _(VALUE))
+#define AND_DL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XE2 # andb $" _(VALUE) ", %dl")\
+	CMT_ASM(".byte " _(VALUE))
 #endif /* __SYSTEM_16_BIT__ */
 
 #ifdef __SYSTEM_32_BIT__
@@ -51,10 +59,18 @@
 #define AND_DL_CL CMT_ASM("andb %cl, %dl")
 #define AND_DL_DL CMT_ASM("andb %dl, %dl")
 
-#define AND_AL_(VALUE) CMT_ASM("andb $" _(VALUE) ", %al")
-#define AND_BL_(VALUE) CMT_ASM("andb $" _(VALUE) ", %bl")
-#define AND_CL_(VALUE) CMT_ASM("andb $" _(VALUE) ", %cl")
-#define AND_DL_(VALUE) CMT_ASM("andb $" _(VALUE) ", %dl")
+#define AND_AL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XE0 # andb $" _(VALUE) ", %al")\
+	CMT_ASM(".byte " _(VALUE))
+#define AND_BL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XE3 # andb $" _(VALUE) ", %bl")\
+	CMT_ASM(".byte " _(VALUE))
+#define AND_CL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XE1 # andb $" _(VALUE) ", %cl")\
+	CMT_ASM(".byte " _(VALUE))
+#define AND_DL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XE2 # andb $" _(VALUE) ", %dl")\
+	CMT_ASM(".byte " _(VALUE))
 #endif /* __SYSTEM_32_BIT__ */
 
 #ifdef __SYSTEM_64_BIT__
@@ -330,22 +346,54 @@
 #define AND_R15B_R14B CMT_ASM("andb %r14b, %r15b")
 #define AND_R15B_R15B CMT_ASM("andb %r15b, %r15b")
 
-#define AND_AL_(VALUE) CMT_ASM("andb $" _(VALUE) ", %al")
-#define AND_BL_(VALUE) CMT_ASM("andb $" _(VALUE) ", %bl")
-#define AND_CL_(VALUE) CMT_ASM("andb $" _(VALUE) ", %cl")
-#define AND_DL_(VALUE) CMT_ASM("andb $" _(VALUE) ", %dl")
-#define AND_DIL_(VALUE) CMT_ASM("andb $" _(VALUE) ", %dil")
-#define AND_SIL_(VALUE) CMT_ASM("andb $" _(VALUE) ", %sil")
-#define AND_BPL_(VALUE) CMT_ASM("andb $" _(VALUE) ", %bpl")
-#define AND_SPL_(VALUE) CMT_ASM("andb $" _(VALUE) ", %spl")
-#define AND_R8B_(VALUE) CMT_ASM("andb $" _(VALUE) ", %r8b")
-#define AND_R9B_(VALUE) CMT_ASM("andb $" _(VALUE) ", %r9b")
-#define AND_R10B_(VALUE) CMT_ASM("andb $" _(VALUE) ", %r10b")
-#define AND_R11B_(VALUE) CMT_ASM("andb $" _(VALUE) ", %r11b")
-#define AND_R12B_(VALUE) CMT_ASM("andb $" _(VALUE) ", %r12b")
-#define AND_R13B_(VALUE) CMT_ASM("andb $" _(VALUE) ", %r13b")
-#define AND_R14B_(VALUE) CMT_ASM("andb $" _(VALUE) ", %r14b")
-#define AND_R15B_(VALUE) CMT_ASM("andb $" _(VALUE) ", %r15b")
+#define AND_AL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XE0 # andb $" _(VALUE) ", %al")\
+	CMT_ASM(".byte " _(VALUE))
+#define AND_BL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XE3 # andb $" _(VALUE) ", %bl")\
+	CMT_ASM(".byte " _(VALUE))
+#define AND_CL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XE1 # andb $" _(VALUE) ", %cl")\
+	CMT_ASM(".byte " _(VALUE))
+#define AND_DL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XE2 # andb $" _(VALUE) ", %dl")\
+	CMT_ASM(".byte " _(VALUE))
+#define AND_DIL_(VALUE) \
+	CMT_ASM(".byte 0X40, 0X80, 0XE7 # andb $" _(VALUE) ", %dil")\
+	CMT_ASM(".byte " _(VALUE))
+#define AND_SIL_(VALUE) \
+	CMT_ASM(".byte 0X40, 0X80, 0XE6 # andb $" _(VALUE) ", %sil")\
+	CMT_ASM(".byte " _(VALUE))
+#define AND_BPL_(VALUE) \
+	CMT_ASM(".byte 0X40, 0X80, 0XE5 # andb $" _(VALUE) ", %bpl")\
+	CMT_ASM(".byte " _(VALUE))
+#define AND_SPL_(VALUE) \
+	CMT_ASM(".byte 0X40, 0X80, 0XE4 # andb $" _(VALUE) ", %spl")\
+	CMT_ASM(".byte " _(VALUE))
+#define AND_R8B_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X80, 0XE0 # andb $" _(VALUE) ", %r8b")\
+	CMT_ASM(".byte " _(VALUE))
+#define AND_R9B_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X80, 0XE1 # andb $" _(VALUE) ", %r9b")\
+	CMT_ASM(".byte " _(VALUE))
+#define AND_R10B_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X80, 0XE2 # andb $" _(VALUE) ", %r10b")\
+	CMT_ASM(".byte " _(VALUE))
+#define AND_R11B_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X80, 0XE3 # andb $" _(VALUE) ", %r11b")\
+	CMT_ASM(".byte " _(VALUE))
+#define AND_R12B_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X80, 0XE4 # andb $" _(VALUE) ", %r12b")\
+	CMT_ASM(".byte " _(VALUE))
+#define AND_R13B_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X80, 0XE5 # andb $" _(VALUE) ", %r13b")\
+	CMT_ASM(".byte " _(VALUE))
+#define AND_R14B_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X80, 0XE6 # andb $" _(VALUE) ", %r14b")\
+	CMT_ASM(".byte " _(VALUE))
+#define AND_R15B_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X80, 0XE7 # andb $" _(VALUE) ", %r15b")\
+	CMT_ASM(".byte " _(VALUE))
 #endif /* __SYSTEM_64_BIT__ */
 /* ************************ [^] 8-BIT REGISTERS [^] ************************* */
 
@@ -423,14 +471,30 @@
 #define AND_SP_BP CMT_ASM("andw %bp, %sp")
 #define AND_SP_SP CMT_ASM("andw %sp, %sp")
 
-#define AND_AX_(VALUE) CMT_ASM("andw $" _(VALUE) ", %ax")
-#define AND_BX_(VALUE) CMT_ASM("andw $" _(VALUE) ", %bx")
-#define AND_CX_(VALUE) CMT_ASM("andw $" _(VALUE) ", %cx")
-#define AND_DX_(VALUE) CMT_ASM("andw $" _(VALUE) ", %dx")
-#define AND_DI_(VALUE) CMT_ASM("andw $" _(VALUE) ", %di")
-#define AND_SI_(VALUE) CMT_ASM("andw $" _(VALUE) ", %si")
-#define AND_BP_(VALUE) CMT_ASM("andw $" _(VALUE) ", %bp")
-#define AND_SP_(VALUE) CMT_ASM("andw $" _(VALUE) ", %sp")
+#define AND_AX_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XE0 # andw $" _(VALUE) ", %ax")\
+	CMT_ASM(".short " _(VALUE))
+#define AND_BX_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XE3 # andw $" _(VALUE) ", %bx")\
+	CMT_ASM(".short " _(VALUE))
+#define AND_CX_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XE1 # andw $" _(VALUE) ", %cx")\
+	CMT_ASM(".short " _(VALUE))
+#define AND_DX_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XE2 # andw $" _(VALUE) ", %dx")\
+	CMT_ASM(".short " _(VALUE))
+#define AND_DI_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XE7 # andw $" _(VALUE) ", %di")\
+	CMT_ASM(".short " _(VALUE))
+#define AND_SI_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XE6 # andw $" _(VALUE) ", %si")\
+	CMT_ASM(".short " _(VALUE))
+#define AND_BP_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XE5 # andw $" _(VALUE) ", %bp")\
+	CMT_ASM(".short " _(VALUE))
+#define AND_SP_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XE4 # andw $" _(VALUE) ", %sp")\
+	CMT_ASM(".short " _(VALUE))
 #endif /* __SYSTEM_16_BIT__ */
 
 #ifdef __SYSTEM_32_BIT__
@@ -506,14 +570,30 @@
 #define AND_SP_BP CMT_ASM("andw %bp, %sp")
 #define AND_SP_SP CMT_ASM("andw %sp, %sp")
 
-#define AND_AX_(VALUE) CMT_ASM("andw $" _(VALUE) ", %ax")
-#define AND_BX_(VALUE) CMT_ASM("andw $" _(VALUE) ", %bx")
-#define AND_CX_(VALUE) CMT_ASM("andw $" _(VALUE) ", %cx")
-#define AND_DX_(VALUE) CMT_ASM("andw $" _(VALUE) ", %dx")
-#define AND_DI_(VALUE) CMT_ASM("andw $" _(VALUE) ", %di")
-#define AND_SI_(VALUE) CMT_ASM("andw $" _(VALUE) ", %si")
-#define AND_BP_(VALUE) CMT_ASM("andw $" _(VALUE) ", %bp")
-#define AND_SP_(VALUE) CMT_ASM("andw $" _(VALUE) ", %sp")
+#define AND_AX_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XE0 # andw $" _(VALUE) ", %ax")\
+	CMT_ASM(".short " _(VALUE))
+#define AND_BX_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XE3 # andw $" _(VALUE) ", %bx")\
+	CMT_ASM(".short " _(VALUE))
+#define AND_CX_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XE1 # andw $" _(VALUE) ", %cx")\
+	CMT_ASM(".short " _(VALUE))
+#define AND_DX_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XE2 # andw $" _(VALUE) ", %dx")\
+	CMT_ASM(".short " _(VALUE))
+#define AND_DI_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XE7 # andw $" _(VALUE) ", %di")\
+	CMT_ASM(".short " _(VALUE))
+#define AND_SI_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XE6 # andw $" _(VALUE) ", %si")\
+	CMT_ASM(".short " _(VALUE))
+#define AND_BP_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XE5 # andw $" _(VALUE) ", %bp")\
+	CMT_ASM(".short " _(VALUE))
+#define AND_SP_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XE4 # andw $" _(VALUE) ", %sp")\
+	CMT_ASM(".short " _(VALUE))
 #endif /* __SYSTEM_32_BIT__ */
 
 #ifdef __SYSTEM_64_BIT__
@@ -789,22 +869,54 @@
 #define AND_R15W_R14W CMT_ASM("andw %r14w, %r15w")
 #define AND_R15W_R15W CMT_ASM("andw %r15w, %r15w")
 
-#define AND_AX_(VALUE) CMT_ASM("andw $" _(VALUE) ", %ax")
-#define AND_BX_(VALUE) CMT_ASM("andw $" _(VALUE) ", %bx")
-#define AND_CX_(VALUE) CMT_ASM("andw $" _(VALUE) ", %cx")
-#define AND_DX_(VALUE) CMT_ASM("andw $" _(VALUE) ", %dx")
-#define AND_DI_(VALUE) CMT_ASM("andw $" _(VALUE) ", %di")
-#define AND_SI_(VALUE) CMT_ASM("andw $" _(VALUE) ", %si")
-#define AND_BP_(VALUE) CMT_ASM("andw $" _(VALUE) ", %bp")
-#define AND_SP_(VALUE) CMT_ASM("andw $" _(VALUE) ", %sp")
-#define AND_R8W_(VALUE) CMT_ASM("andw $" _(VALUE) ", %r8w")
-#define AND_R9W_(VALUE) CMT_ASM("andw $" _(VALUE) ", %r9w")
-#define AND_R10W_(VALUE) CMT_ASM("andw $" _(VALUE) ", %r10w")
-#define AND_R11W_(VALUE) CMT_ASM("andw $" _(VALUE) ", %r11w")
-#define AND_R12W_(VALUE) CMT_ASM("andw $" _(VALUE) ", %r12w")
-#define AND_R13W_(VALUE) CMT_ASM("andw $" _(VALUE) ", %r13w")
-#define AND_R14W_(VALUE) CMT_ASM("andw $" _(VALUE) ", %r14w")
-#define AND_R15W_(VALUE) CMT_ASM("andw $" _(VALUE) ", %r15w")
+#define AND_AX_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XE0 # andw $" _(VALUE) ", %ax")\
+	CMT_ASM(".short " _(VALUE))
+#define AND_BX_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XE3 # andw $" _(VALUE) ", %bx")\
+	CMT_ASM(".short " _(VALUE))
+#define AND_CX_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XE1 # andw $" _(VALUE) ", %cx")\
+	CMT_ASM(".short " _(VALUE))
+#define AND_DX_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XE2 # andw $" _(VALUE) ", %dx")\
+	CMT_ASM(".short " _(VALUE))
+#define AND_DI_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XE7 # andw $" _(VALUE) ", %di")\
+	CMT_ASM(".short " _(VALUE))
+#define AND_SI_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XE6 # andw $" _(VALUE) ", %si")\
+	CMT_ASM(".short " _(VALUE))
+#define AND_BP_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XE5 # andw $" _(VALUE) ", %bp")\
+	CMT_ASM(".short " _(VALUE))
+#define AND_SP_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XE4 # andw $" _(VALUE) ", %sp")\
+	CMT_ASM(".short " _(VALUE))
+#define AND_R8W_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X41, 0X81, 0XE0 # andw $" _(VALUE) ", %r8w")\
+	CMT_ASM(".short " _(VALUE))
+#define AND_R9W_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X41, 0X81, 0XE1 # andw $" _(VALUE) ", %r9w")\
+	CMT_ASM(".short " _(VALUE))
+#define AND_R10W_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X41, 0X81, 0XE2 # andw $" _(VALUE) ", %r10w")\
+	CMT_ASM(".short " _(VALUE))
+#define AND_R11W_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X41, 0X81, 0XE3 # andw $" _(VALUE) ", %r11w")\
+	CMT_ASM(".short " _(VALUE))
+#define AND_R12W_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X41, 0X81, 0XE4 # andw $" _(VALUE) ", %r12w")\
+	CMT_ASM(".short " _(VALUE))
+#define AND_R13W_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X41, 0X81, 0XE5 # andw $" _(VALUE) ", %r13w")\
+	CMT_ASM(".short " _(VALUE))
+#define AND_R14W_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X41, 0X81, 0XE6 # andw $" _(VALUE) ", %r14w")\
+	CMT_ASM(".short " _(VALUE))
+#define AND_R15W_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X41, 0X81, 0XE7 # andw $" _(VALUE) ", %r15w")\
+	CMT_ASM(".short " _(VALUE))
 #endif /* __SYSTEM_64_BIT__ */
 /* ************************ [^] 16-BIT REGISTERS [^] ************************ */
 

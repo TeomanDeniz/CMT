@@ -6,7 +6,7 @@
 #define FUNCTION_HEADER__CONSOLE_ERROR_AT \
 	void\
 		CONSOLE_ERROR_AT(\
-			struct s_console *THIS, \
+			struct s_console *const THIS, \
 			char *STRING, \
 			char *THE_FILE, \
 			unsigned int THE_LINE\
@@ -14,7 +14,7 @@
 #define FUNCTION_HEADER__console_error_at \
 	void\
 		console_error_at(\
-			struct s_console *THIS, \
+			struct s_console *const __this__, \
 			char *STRING, \
 			char *THE_FILE, \
 			unsigned int THE_LINE\
@@ -22,13 +22,13 @@
 #else /* K&R */
 #define FUNCTION_HEADER__CONSOLE_ERROR_AT \
 	CONSOLE_ERROR_AT(THIS, STRING, THE_FILE, THE_LINE)\
-	struct s_console	*THIS;\
+	struct s_console	*const THIS;\
 	char				*STRING;\
 	char				*THE_FILE;\
 	unsigned int		THE_LINE;
 #define FUNCTION_HEADER__console_error_at \
-	console_error_at(THIS, STRING, THE_FILE, THE_LINE)\
-	struct s_console	*THIS;\
+	console_error_at(__this__, STRING, THE_FILE, THE_LINE)\
+	struct s_console	*const __this__;\
 	char				*STRING;\
 	char				*THE_FILE;\
 	unsigned int		THE_LINE;
@@ -42,6 +42,10 @@
 	\
 	FUNCTION_HEADER__console_error_at \
 	{\
+		union U_CONSOLE_STORAGE	*const __THIS_CONVERTER__ = \
+			(union U_CONSOLE_STORAGE *)(PTR)__this__;\
+		struct S_CONSOLE		*const THIS = &__THIS_CONVERTER__->UPPER;\
+		\
 		LOCALMACRO__CMT_CONSOLE__ERROR_AT_CONTENT\
 	}
 

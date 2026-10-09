@@ -24,10 +24,18 @@
 #define SBB_DL_CL CMT_ASM("sbbb %cl, %dl")
 #define SBB_DL_DL CMT_ASM("sbbb %dl, %dl")
 
-#define SBB_AL_(VALUE) CMT_ASM("sbbb $" _(VALUE) ", %al")
-#define SBB_BL_(VALUE) CMT_ASM("sbbb $" _(VALUE) ", %bl")
-#define SBB_CL_(VALUE) CMT_ASM("sbbb $" _(VALUE) ", %cl")
-#define SBB_DL_(VALUE) CMT_ASM("sbbb $" _(VALUE) ", %dl")
+#define SBB_AL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XD8 # sbbb $" _(VALUE) ", %al")\
+	CMT_ASM(".byte " _(VALUE))
+#define SBB_BL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XDB # sbbb $" _(VALUE) ", %bl")\
+	CMT_ASM(".byte " _(VALUE))
+#define SBB_CL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XD9 # sbbb $" _(VALUE) ", %cl")\
+	CMT_ASM(".byte " _(VALUE))
+#define SBB_DL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XDA # sbbb $" _(VALUE) ", %dl")\
+	CMT_ASM(".byte " _(VALUE))
 #endif /* __SYSTEM_16_BIT__ */
 
 #ifdef __SYSTEM_32_BIT__
@@ -51,10 +59,18 @@
 #define SBB_DL_CL CMT_ASM("sbbb %cl, %dl")
 #define SBB_DL_DL CMT_ASM("sbbb %dl, %dl")
 
-#define SBB_AL_(VALUE) CMT_ASM("sbbb $" _(VALUE) ", %al")
-#define SBB_BL_(VALUE) CMT_ASM("sbbb $" _(VALUE) ", %bl")
-#define SBB_CL_(VALUE) CMT_ASM("sbbb $" _(VALUE) ", %cl")
-#define SBB_DL_(VALUE) CMT_ASM("sbbb $" _(VALUE) ", %dl")
+#define SBB_AL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XD8 # sbbb $" _(VALUE) ", %al")\
+	CMT_ASM(".byte " _(VALUE))
+#define SBB_BL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XDB # sbbb $" _(VALUE) ", %bl")\
+	CMT_ASM(".byte " _(VALUE))
+#define SBB_CL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XD9 # sbbb $" _(VALUE) ", %cl")\
+	CMT_ASM(".byte " _(VALUE))
+#define SBB_DL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XDA # sbbb $" _(VALUE) ", %dl")\
+	CMT_ASM(".byte " _(VALUE))
 #endif /* __SYSTEM_32_BIT__ */
 
 #ifdef __SYSTEM_64_BIT__
@@ -330,22 +346,54 @@
 #define SBB_R15B_R14B CMT_ASM("sbbb %r14b, %r15b")
 #define SBB_R15B_R15B CMT_ASM("sbbb %r15b, %r15b")
 
-#define SBB_AL_(VALUE) CMT_ASM("sbbb $" _(VALUE) ", %al")
-#define SBB_BL_(VALUE) CMT_ASM("sbbb $" _(VALUE) ", %bl")
-#define SBB_CL_(VALUE) CMT_ASM("sbbb $" _(VALUE) ", %cl")
-#define SBB_DL_(VALUE) CMT_ASM("sbbb $" _(VALUE) ", %dl")
-#define SBB_DIL_(VALUE) CMT_ASM("sbbb $" _(VALUE) ", %dil")
-#define SBB_SIL_(VALUE) CMT_ASM("sbbb $" _(VALUE) ", %sil")
-#define SBB_BPL_(VALUE) CMT_ASM("sbbb $" _(VALUE) ", %bpl")
-#define SBB_SPL_(VALUE) CMT_ASM("sbbb $" _(VALUE) ", %spl")
-#define SBB_R8B_(VALUE) CMT_ASM("sbbb $" _(VALUE) ", %r8b")
-#define SBB_R9B_(VALUE) CMT_ASM("sbbb $" _(VALUE) ", %r9b")
-#define SBB_R10B_(VALUE) CMT_ASM("sbbb $" _(VALUE) ", %r10b")
-#define SBB_R11B_(VALUE) CMT_ASM("sbbb $" _(VALUE) ", %r11b")
-#define SBB_R12B_(VALUE) CMT_ASM("sbbb $" _(VALUE) ", %r12b")
-#define SBB_R13B_(VALUE) CMT_ASM("sbbb $" _(VALUE) ", %r13b")
-#define SBB_R14B_(VALUE) CMT_ASM("sbbb $" _(VALUE) ", %r14b")
-#define SBB_R15B_(VALUE) CMT_ASM("sbbb $" _(VALUE) ", %r15b")
+#define SBB_AL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XD8 # sbbb $" _(VALUE) ", %al")\
+	CMT_ASM(".byte " _(VALUE))
+#define SBB_BL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XDB # sbbb $" _(VALUE) ", %bl")\
+	CMT_ASM(".byte " _(VALUE))
+#define SBB_CL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XD9 # sbbb $" _(VALUE) ", %cl")\
+	CMT_ASM(".byte " _(VALUE))
+#define SBB_DL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XDA # sbbb $" _(VALUE) ", %dl")\
+	CMT_ASM(".byte " _(VALUE))
+#define SBB_DIL_(VALUE) \
+	CMT_ASM(".byte 0X40, 0X80, 0XDF # sbbb $" _(VALUE) ", %dil")\
+	CMT_ASM(".byte " _(VALUE))
+#define SBB_SIL_(VALUE) \
+	CMT_ASM(".byte 0X40, 0X80, 0XDE # sbbb $" _(VALUE) ", %sil")\
+	CMT_ASM(".byte " _(VALUE))
+#define SBB_BPL_(VALUE) \
+	CMT_ASM(".byte 0X40, 0X80, 0XDD # sbbb $" _(VALUE) ", %bpl")\
+	CMT_ASM(".byte " _(VALUE))
+#define SBB_SPL_(VALUE) \
+	CMT_ASM(".byte 0X40, 0X80, 0XDC # sbbb $" _(VALUE) ", %spl")\
+	CMT_ASM(".byte " _(VALUE))
+#define SBB_R8B_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X80, 0XD8 # sbbb $" _(VALUE) ", %r8b")\
+	CMT_ASM(".byte " _(VALUE))
+#define SBB_R9B_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X80, 0XD9 # sbbb $" _(VALUE) ", %r9b")\
+	CMT_ASM(".byte " _(VALUE))
+#define SBB_R10B_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X80, 0XDA # sbbb $" _(VALUE) ", %r10b")\
+	CMT_ASM(".byte " _(VALUE))
+#define SBB_R11B_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X80, 0XDB # sbbb $" _(VALUE) ", %r11b")\
+	CMT_ASM(".byte " _(VALUE))
+#define SBB_R12B_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X80, 0XDC # sbbb $" _(VALUE) ", %r12b")\
+	CMT_ASM(".byte " _(VALUE))
+#define SBB_R13B_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X80, 0XDD # sbbb $" _(VALUE) ", %r13b")\
+	CMT_ASM(".byte " _(VALUE))
+#define SBB_R14B_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X80, 0XDE # sbbb $" _(VALUE) ", %r14b")\
+	CMT_ASM(".byte " _(VALUE))
+#define SBB_R15B_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X80, 0XDF # sbbb $" _(VALUE) ", %r15b")\
+	CMT_ASM(".byte " _(VALUE))
 #endif /* __SYSTEM_64_BIT__ */
 /* ************************ [^] 8-BIT REGISTERS [^] ************************* */
 
@@ -423,14 +471,30 @@
 #define SBB_SP_BP CMT_ASM("sbbw %bp, %sp")
 #define SBB_SP_SP CMT_ASM("sbbw %sp, %sp")
 
-#define SBB_AX_(VALUE) CMT_ASM("sbbw $" _(VALUE) ", %ax")
-#define SBB_BX_(VALUE) CMT_ASM("sbbw $" _(VALUE) ", %bx")
-#define SBB_CX_(VALUE) CMT_ASM("sbbw $" _(VALUE) ", %cx")
-#define SBB_DX_(VALUE) CMT_ASM("sbbw $" _(VALUE) ", %dx")
-#define SBB_DI_(VALUE) CMT_ASM("sbbw $" _(VALUE) ", %di")
-#define SBB_SI_(VALUE) CMT_ASM("sbbw $" _(VALUE) ", %si")
-#define SBB_BP_(VALUE) CMT_ASM("sbbw $" _(VALUE) ", %bp")
-#define SBB_SP_(VALUE) CMT_ASM("sbbw $" _(VALUE) ", %sp")
+#define SBB_AX_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XD8 # sbbw $" _(VALUE) ", %ax")\
+	CMT_ASM(".short " _(VALUE))
+#define SBB_BX_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XDB # sbbw $" _(VALUE) ", %bx")\
+	CMT_ASM(".short " _(VALUE))
+#define SBB_CX_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XD9 # sbbw $" _(VALUE) ", %cx")\
+	CMT_ASM(".short " _(VALUE))
+#define SBB_DX_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XDA # sbbw $" _(VALUE) ", %dx")\
+	CMT_ASM(".short " _(VALUE))
+#define SBB_DI_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XDF # sbbw $" _(VALUE) ", %di")\
+	CMT_ASM(".short " _(VALUE))
+#define SBB_SI_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XDE # sbbw $" _(VALUE) ", %si")\
+	CMT_ASM(".short " _(VALUE))
+#define SBB_BP_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XDD # sbbw $" _(VALUE) ", %bp")\
+	CMT_ASM(".short " _(VALUE))
+#define SBB_SP_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XDC # sbbw $" _(VALUE) ", %sp")\
+	CMT_ASM(".short " _(VALUE))
 #endif /* __SYSTEM_16_BIT__ */
 
 #ifdef __SYSTEM_32_BIT__
@@ -506,14 +570,30 @@
 #define SBB_SP_BP CMT_ASM("sbbw %bp, %sp")
 #define SBB_SP_SP CMT_ASM("sbbw %sp, %sp")
 
-#define SBB_AX_(VALUE) CMT_ASM("sbbw $" _(VALUE) ", %ax")
-#define SBB_BX_(VALUE) CMT_ASM("sbbw $" _(VALUE) ", %bx")
-#define SBB_CX_(VALUE) CMT_ASM("sbbw $" _(VALUE) ", %cx")
-#define SBB_DX_(VALUE) CMT_ASM("sbbw $" _(VALUE) ", %dx")
-#define SBB_DI_(VALUE) CMT_ASM("sbbw $" _(VALUE) ", %di")
-#define SBB_SI_(VALUE) CMT_ASM("sbbw $" _(VALUE) ", %si")
-#define SBB_BP_(VALUE) CMT_ASM("sbbw $" _(VALUE) ", %bp")
-#define SBB_SP_(VALUE) CMT_ASM("sbbw $" _(VALUE) ", %sp")
+#define SBB_AX_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XD8 # sbbw $" _(VALUE) ", %ax")\
+	CMT_ASM(".short " _(VALUE))
+#define SBB_BX_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XDB # sbbw $" _(VALUE) ", %bx")\
+	CMT_ASM(".short " _(VALUE))
+#define SBB_CX_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XD9 # sbbw $" _(VALUE) ", %cx")\
+	CMT_ASM(".short " _(VALUE))
+#define SBB_DX_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XDA # sbbw $" _(VALUE) ", %dx")\
+	CMT_ASM(".short " _(VALUE))
+#define SBB_DI_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XDF # sbbw $" _(VALUE) ", %di")\
+	CMT_ASM(".short " _(VALUE))
+#define SBB_SI_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XDE # sbbw $" _(VALUE) ", %si")\
+	CMT_ASM(".short " _(VALUE))
+#define SBB_BP_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XDD # sbbw $" _(VALUE) ", %bp")\
+	CMT_ASM(".short " _(VALUE))
+#define SBB_SP_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XDC # sbbw $" _(VALUE) ", %sp")\
+	CMT_ASM(".short " _(VALUE))
 #endif /* __SYSTEM_32_BIT__ */
 
 #ifdef __SYSTEM_64_BIT__
@@ -789,22 +869,54 @@
 #define SBB_R15W_R14W CMT_ASM("sbbw %r14w, %r15w")
 #define SBB_R15W_R15W CMT_ASM("sbbw %r15w, %r15w")
 
-#define SBB_AX_(VALUE) CMT_ASM("sbbw $" _(VALUE) ", %ax")
-#define SBB_BX_(VALUE) CMT_ASM("sbbw $" _(VALUE) ", %bx")
-#define SBB_CX_(VALUE) CMT_ASM("sbbw $" _(VALUE) ", %cx")
-#define SBB_DX_(VALUE) CMT_ASM("sbbw $" _(VALUE) ", %dx")
-#define SBB_DI_(VALUE) CMT_ASM("sbbw $" _(VALUE) ", %di")
-#define SBB_SI_(VALUE) CMT_ASM("sbbw $" _(VALUE) ", %si")
-#define SBB_BP_(VALUE) CMT_ASM("sbbw $" _(VALUE) ", %bp")
-#define SBB_SP_(VALUE) CMT_ASM("sbbw $" _(VALUE) ", %sp")
-#define SBB_R8W_(VALUE) CMT_ASM("sbbw $" _(VALUE) ", %r8w")
-#define SBB_R9W_(VALUE) CMT_ASM("sbbw $" _(VALUE) ", %r9w")
-#define SBB_R10W_(VALUE) CMT_ASM("sbbw $" _(VALUE) ", %r10w")
-#define SBB_R11W_(VALUE) CMT_ASM("sbbw $" _(VALUE) ", %r11w")
-#define SBB_R12W_(VALUE) CMT_ASM("sbbw $" _(VALUE) ", %r12w")
-#define SBB_R13W_(VALUE) CMT_ASM("sbbw $" _(VALUE) ", %r13w")
-#define SBB_R14W_(VALUE) CMT_ASM("sbbw $" _(VALUE) ", %r14w")
-#define SBB_R15W_(VALUE) CMT_ASM("sbbw $" _(VALUE) ", %r15w")
+#define SBB_AX_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XD8 # sbbw $" _(VALUE) ", %ax")\
+	CMT_ASM(".short " _(VALUE))
+#define SBB_BX_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XDB # sbbw $" _(VALUE) ", %bx")\
+	CMT_ASM(".short " _(VALUE))
+#define SBB_CX_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XD9 # sbbw $" _(VALUE) ", %cx")\
+	CMT_ASM(".short " _(VALUE))
+#define SBB_DX_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XDA # sbbw $" _(VALUE) ", %dx")\
+	CMT_ASM(".short " _(VALUE))
+#define SBB_DI_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XDF # sbbw $" _(VALUE) ", %di")\
+	CMT_ASM(".short " _(VALUE))
+#define SBB_SI_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XDE # sbbw $" _(VALUE) ", %si")\
+	CMT_ASM(".short " _(VALUE))
+#define SBB_BP_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XDD # sbbw $" _(VALUE) ", %bp")\
+	CMT_ASM(".short " _(VALUE))
+#define SBB_SP_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XDC # sbbw $" _(VALUE) ", %sp")\
+	CMT_ASM(".short " _(VALUE))
+#define SBB_R8W_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X41, 0X81, 0XD8 # sbbw $" _(VALUE) ", %r8w")\
+	CMT_ASM(".short " _(VALUE))
+#define SBB_R9W_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X41, 0X81, 0XD9 # sbbw $" _(VALUE) ", %r9w")\
+	CMT_ASM(".short " _(VALUE))
+#define SBB_R10W_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X41, 0X81, 0XDA # sbbw $" _(VALUE) ", %r10w")\
+	CMT_ASM(".short " _(VALUE))
+#define SBB_R11W_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X41, 0X81, 0XDB # sbbw $" _(VALUE) ", %r11w")\
+	CMT_ASM(".short " _(VALUE))
+#define SBB_R12W_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X41, 0X81, 0XDC # sbbw $" _(VALUE) ", %r12w")\
+	CMT_ASM(".short " _(VALUE))
+#define SBB_R13W_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X41, 0X81, 0XDD # sbbw $" _(VALUE) ", %r13w")\
+	CMT_ASM(".short " _(VALUE))
+#define SBB_R14W_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X41, 0X81, 0XDE # sbbw $" _(VALUE) ", %r14w")\
+	CMT_ASM(".short " _(VALUE))
+#define SBB_R15W_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X41, 0X81, 0XDF # sbbw $" _(VALUE) ", %r15w")\
+	CMT_ASM(".short " _(VALUE))
 #endif /* __SYSTEM_64_BIT__ */
 /* ************************ [^] 16-BIT REGISTERS [^] ************************ */
 

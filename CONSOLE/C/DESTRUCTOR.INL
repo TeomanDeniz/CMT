@@ -5,17 +5,17 @@
 #ifndef KNR_STYLE /* STANDARD C */
 #define FUNCTION_HEADER__CONSOLE_DESTRUCTOR \
 	void\
-		CONSOLE_DESTORY(struct s_console *THIS)
+		CONSOLE_DESTORY(struct s_console *const THIS)
 #define FUNCTION_HEADER__console_destructor \
 	void\
-		console_destory(struct s_console *THIS)
+		console_destory(struct s_console *const __this__)
 #else /* K&R */
 #define FUNCTION_HEADER__CONSOLE_DESTRUCTOR \
 	CONSOLE_DESTORY(THIS)\
-	struct s_console	*THIS;
+	struct s_console	*const THIS;
 #define FUNCTION_HEADER__console_destructor \
-	console_destory(THIS)\
-	struct s_console	*THIS;
+	console_destory(__this__)\
+	struct s_console	*const __this__;
 #endif /* !KNR_STYLE */
 
 #define LOCALFUNCTION__CONSOLE_DESTRUCTOR \
@@ -26,6 +26,10 @@
 	\
 	FUNCTION_HEADER__console_destructor \
 	{\
+		union U_CONSOLE_STORAGE	*const __THIS_CONVERTER__ = \
+			(union U_CONSOLE_STORAGE *)(PTR)__this__;\
+		struct S_CONSOLE		*const THIS = &__THIS_CONVERTER__->UPPER;\
+		\
 		LOCALMACRO__CMT_CONSOLE__DESTRUCTOR_CONTENT\
 	}
 

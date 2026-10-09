@@ -5,19 +5,19 @@
 #ifndef KNR_STYLE /* STANDARD C */
 #define FUNCTION_HEADER__CONSOLE_EXPORT \
 	PTR\
-		CONSOLE_EXPORT(struct s_console *THIS)
+		CONSOLE_EXPORT(struct s_console *const THIS)
 #define FUNCTION_HEADER__console_export \
 	ptr\
-		console_export(struct s_console *THIS)
+		console_export(struct s_console *const __this__)
 #else /* K&R */
 #define FUNCTION_HEADER__CONSOLE_EXPORT \
 	PTR\
 		CONSOLE_EXPORT(THIS)\
-		struct s_console	*THIS;
+		struct s_console	*const THIS;
 #define FUNCTION_HEADER__console_export \
 	ptr\
-		console_export(THIS)\
-		struct s_console	*THIS;
+		console_export(__this__)\
+		struct s_console	*const __this__;
 #endif /* !KNR_STYLE */
 
 #define LOCALFUNCTION__CONSOLE_EXPORT \
@@ -28,6 +28,10 @@
 	\
 	FUNCTION_HEADER__console_export \
 	{\
+		union U_CONSOLE_STORAGE	*const __THIS_CONVERTER__ = \
+			(union U_CONSOLE_STORAGE *)(PTR)__this__;\
+		struct S_CONSOLE		*const THIS = &__THIS_CONVERTER__->UPPER;\
+		\
 		LOCALMACRO__CMT_CONSOLE__EXPORT_CONTENT\
 	}
 

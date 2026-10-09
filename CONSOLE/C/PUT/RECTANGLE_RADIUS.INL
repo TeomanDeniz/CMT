@@ -6,7 +6,7 @@
 #define FUNCTION_HEADER__CONSOLE_PUT_RECTANGLE_RADIUS \
 	void\
 		CONSOLE_PUT_RECTANGLE_RADIUS(\
-			struct s_console *THIS, \
+			struct s_console *const THIS, \
 			char CHARACTER, \
 			unsigned int START_X, \
 			unsigned int START_Y, \
@@ -17,7 +17,7 @@
 #define FUNCTION_HEADER__console_put_rectangle_radius \
 	void\
 		console_put_rectangle_radius(\
-			struct s_console *THIS, \
+			struct s_console *const __this__, \
 			char CHARACTER, \
 			unsigned int START_X, \
 			unsigned int START_Y, \
@@ -30,7 +30,7 @@
 	CONSOLE_PUT_RECTANGLE_RADIUS(\
 		THIS, CHARACTER, START_X, START_Y, END_X, END_Y, RADIUS\
 	)\
-	struct s_console	*THIS;\
+	struct s_console	*const THIS;\
 	char				CHARACTER;\
 	unsigned int		START_X;\
 	unsigned int		START_Y;\
@@ -39,9 +39,9 @@
 	unsigned int		RADIUS;
 #define FUNCTION_HEADER__console_put_rectangle_radius \
 	console_put_rectangle_radius(\
-		THIS, CHARACTER, START_X, START_Y, END_X, END_Y, RADIUS\
+		__this__, CHARACTER, START_X, START_Y, END_X, END_Y, RADIUS\
 	)\
-	struct s_console	*THIS;\
+	struct s_console	*const __this__;\
 	char				CHARACTER;\
 	unsigned int		START_X;\
 	unsigned int		START_Y;\
@@ -58,6 +58,10 @@
 	\
 	FUNCTION_HEADER__console_put_rectangle_radius \
 	{\
+		union U_CONSOLE_STORAGE	*const __THIS_CONVERTER__ = \
+			(union U_CONSOLE_STORAGE *)(PTR)__this__;\
+		struct S_CONSOLE		*const THIS = &__THIS_CONVERTER__->UPPER;\
+		\
 		LOCALMACRO__CMT_CONSOLE__PUT_RECTANGLE_RADIUS_CONTENT\
 	}
 

@@ -5,18 +5,18 @@
 #ifndef KNR_STYLE /* STANDARD C */
 #define FUNCTION_HEADER__CONSOLE_CURSOR_SHOW \
 	void\
-		CONSOLE_CURSOR_SHOW(struct s_console *THIS, BOOLEAN STATE)
+		CONSOLE_CURSOR_SHOW(struct s_console *const THIS, BOOLEAN STATE)
 #define FUNCTION_HEADER__console_cursor_show \
 	void\
-		console_cursor_show(struct s_console *THIS, BOOLEAN STATE)
+		console_cursor_show(struct s_console *const __this__, BOOLEAN STATE)
 #else /* K&R */
 #define FUNCTION_HEADER__CONSOLE_CURSOR_SHOW \
 	CONSOLE_CURSOR_SHOW(THIS, STATE)\
-	struct s_console	*THIS;\
+	struct s_console	*const THIS;\
 	BOOLEAN				STATE;
 #define FUNCTION_HEADER__console_cursor_show \
-	console_cursor_show(THIS, STATE)\
-	struct s_console	*THIS;\
+	console_cursor_show(__this__, STATE)\
+	struct s_console	*const __this__;\
 	BOOLEAN				STATE;
 #endif /* !KNR_STYLE */
 
@@ -28,6 +28,10 @@
 	\
 	FUNCTION_HEADER__console_cursor_show \
 	{\
+		union U_CONSOLE_STORAGE	*const __THIS_CONVERTER__ = \
+			(union U_CONSOLE_STORAGE *)(PTR)__this__;\
+		struct S_CONSOLE		*const THIS = &__THIS_CONVERTER__->UPPER;\
+		\
 		LOCALMACRO__CMT_CONSOLE__CURSOR_SHOW_CONTENT\
 	}
 

@@ -6,7 +6,7 @@
 #define FUNCTION_HEADER__CONSOLE_PUT_STRING \
 	void\
 		CONSOLE_PUT_STRING(\
-			struct s_console *THIS, \
+			struct s_console *const THIS, \
 			char *STRING, \
 			unsigned int X, \
 			unsigned int Y\
@@ -14,7 +14,7 @@
 #define FUNCTION_HEADER__console_put_string \
 	void\
 		console_put_string(\
-			struct s_console *THIS, \
+			struct s_console *const __this__, \
 			char *STRING, \
 			unsigned int X, \
 			unsigned int Y\
@@ -22,13 +22,13 @@
 #else /* K&R */
 #define FUNCTION_HEADER__CONSOLE_PUT_STRING \
 	CONSOLE_PUT_STRING(THIS, STRING, X, Y)\
-	struct s_console	*THIS;\
+	struct s_console	*const THIS;\
 	char				*STRING;\
 	unsigned int		X;\
 	unsigned int		Y;
 #define FUNCTION_HEADER__console_put_string \
-	console_put_string(THIS, STRING, X, Y)\
-	struct s_console	*THIS;\
+	console_put_string(__this__, STRING, X, Y)\
+	struct s_console	*const __this__;\
 	char				*STRING;\
 	unsigned int		X;\
 	unsigned int		Y;
@@ -42,6 +42,10 @@
 	\
 	FUNCTION_HEADER__console_put_string \
 	{\
+		union U_CONSOLE_STORAGE	*const __THIS_CONVERTER__ = \
+			(union U_CONSOLE_STORAGE *)(PTR)__this__;\
+		struct S_CONSOLE		*const THIS = &__THIS_CONVERTER__->UPPER;\
+		\
 		LOCALMACRO__CMT_CONSOLE__PUT_STRING_CONTENT\
 	}
 

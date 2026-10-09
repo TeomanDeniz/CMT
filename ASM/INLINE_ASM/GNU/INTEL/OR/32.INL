@@ -76,14 +76,30 @@
 #define OR_ESP_EBP CMT_ASM("orl %ebp, %esp")
 #define OR_ESP_ESP CMT_ASM("orl %esp, %esp")
 
-#define OR_EAX_(VALUE) CMT_ASM("orl $" _(VALUE) ", %eax")
-#define OR_EBX_(VALUE) CMT_ASM("orl $" _(VALUE) ", %ebx")
-#define OR_ECX_(VALUE) CMT_ASM("orl $" _(VALUE) ", %ecx")
-#define OR_EDX_(VALUE) CMT_ASM("orl $" _(VALUE) ", %edx")
-#define OR_EDI_(VALUE) CMT_ASM("orl $" _(VALUE) ", %edi")
-#define OR_ESI_(VALUE) CMT_ASM("orl $" _(VALUE) ", %esi")
-#define OR_EBP_(VALUE) CMT_ASM("orl $" _(VALUE) ", %ebp")
-#define OR_ESP_(VALUE) CMT_ASM("orl $" _(VALUE) ", %esp")
+#define OR_EAX_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XC8 # orl $" _(VALUE) ", %eax")\
+	CMT_ASM(".long " _(VALUE))
+#define OR_EBX_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XCB # orl $" _(VALUE) ", %ebx")\
+	CMT_ASM(".long " _(VALUE))
+#define OR_ECX_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XC9 # orl $" _(VALUE) ", %ecx")\
+	CMT_ASM(".long " _(VALUE))
+#define OR_EDX_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XCA # orl $" _(VALUE) ", %edx")\
+	CMT_ASM(".long " _(VALUE))
+#define OR_EDI_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XCF # orl $" _(VALUE) ", %edi")\
+	CMT_ASM(".long " _(VALUE))
+#define OR_ESI_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XCE # orl $" _(VALUE) ", %esi")\
+	CMT_ASM(".long " _(VALUE))
+#define OR_EBP_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XCD # orl $" _(VALUE) ", %ebp")\
+	CMT_ASM(".long " _(VALUE))
+#define OR_ESP_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XCC # orl $" _(VALUE) ", %esp")\
+	CMT_ASM(".long " _(VALUE))
 #endif /* __SYSTEM_32_BIT__ */
 
 #ifdef __SYSTEM_64_BIT__
@@ -359,22 +375,54 @@
 #define OR_R15D_R14D CMT_ASM("orl %r14d, %r15d")
 #define OR_R15D_R15D CMT_ASM("orl %r15d, %r15d")
 
-#define OR_EAX_(VALUE) CMT_ASM("orl $" _(VALUE) ", %eax")
-#define OR_EBX_(VALUE) CMT_ASM("orl $" _(VALUE) ", %ebx")
-#define OR_ECX_(VALUE) CMT_ASM("orl $" _(VALUE) ", %ecx")
-#define OR_EDX_(VALUE) CMT_ASM("orl $" _(VALUE) ", %edx")
-#define OR_EDI_(VALUE) CMT_ASM("orl $" _(VALUE) ", %edi")
-#define OR_ESI_(VALUE) CMT_ASM("orl $" _(VALUE) ", %esi")
-#define OR_EBP_(VALUE) CMT_ASM("orl $" _(VALUE) ", %ebp")
-#define OR_ESP_(VALUE) CMT_ASM("orl $" _(VALUE) ", %esp")
-#define OR_R8D_(VALUE) CMT_ASM("orl $" _(VALUE) ", %r8d")
-#define OR_R9D_(VALUE) CMT_ASM("orl $" _(VALUE) ", %r9d")
-#define OR_R10D_(VALUE) CMT_ASM("orl $" _(VALUE) ", %r10d")
-#define OR_R11D_(VALUE) CMT_ASM("orl $" _(VALUE) ", %r11d")
-#define OR_R12D_(VALUE) CMT_ASM("orl $" _(VALUE) ", %r12d")
-#define OR_R13D_(VALUE) CMT_ASM("orl $" _(VALUE) ", %r13d")
-#define OR_R14D_(VALUE) CMT_ASM("orl $" _(VALUE) ", %r14d")
-#define OR_R15D_(VALUE) CMT_ASM("orl $" _(VALUE) ", %r15d")
+#define OR_EAX_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XC8 # orl $" _(VALUE) ", %eax")\
+	CMT_ASM(".long " _(VALUE))
+#define OR_EBX_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XCB # orl $" _(VALUE) ", %ebx")\
+	CMT_ASM(".long " _(VALUE))
+#define OR_ECX_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XC9 # orl $" _(VALUE) ", %ecx")\
+	CMT_ASM(".long " _(VALUE))
+#define OR_EDX_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XCA # orl $" _(VALUE) ", %edx")\
+	CMT_ASM(".long " _(VALUE))
+#define OR_EDI_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XCF # orl $" _(VALUE) ", %edi")\
+	CMT_ASM(".long " _(VALUE))
+#define OR_ESI_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XCE # orl $" _(VALUE) ", %esi")\
+	CMT_ASM(".long " _(VALUE))
+#define OR_EBP_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XCD # orl $" _(VALUE) ", %ebp")\
+	CMT_ASM(".long " _(VALUE))
+#define OR_ESP_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XCC # orl $" _(VALUE) ", %esp")\
+	CMT_ASM(".long " _(VALUE))
+#define OR_R8D_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X81, 0XC8 # orl $" _(VALUE) ", %r8d")\
+	CMT_ASM(".long " _(VALUE))
+#define OR_R9D_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X81, 0XC9 # orl $" _(VALUE) ", %r9d")\
+	CMT_ASM(".long " _(VALUE))
+#define OR_R10D_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X81, 0XCA # orl $" _(VALUE) ", %r10d")\
+	CMT_ASM(".long " _(VALUE))
+#define OR_R11D_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X81, 0XCB # orl $" _(VALUE) ", %r11d")\
+	CMT_ASM(".long " _(VALUE))
+#define OR_R12D_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X81, 0XCC # orl $" _(VALUE) ", %r12d")\
+	CMT_ASM(".long " _(VALUE))
+#define OR_R13D_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X81, 0XCD # orl $" _(VALUE) ", %r13d")\
+	CMT_ASM(".long " _(VALUE))
+#define OR_R14D_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X81, 0XCE # orl $" _(VALUE) ", %r14d")\
+	CMT_ASM(".long " _(VALUE))
+#define OR_R15D_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X81, 0XCF # orl $" _(VALUE) ", %r15d")\
+	CMT_ASM(".long " _(VALUE))
 #endif /* __SYSTEM_64_BIT__ */
 /* ************************ [^] 32-BIT REGISTERS [^] ************************ */
 

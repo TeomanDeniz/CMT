@@ -9,13 +9,7 @@
 			break ;\
 		\
 		if (!KERNEL32.SetConsoleTitleA)\
-		{\
-			THIS->WARNING(\
-				"console.title() - KERNEL32.SetConsoleTitleA was never "\
-				"resolved, add it to GLOBALCONSTRUCTOR__KERNEL32\n"\
-			);\
 			break ;\
-		}\
 		\
 		KERNEL32.SetConsoleTitleA(STRING);\
 	}\

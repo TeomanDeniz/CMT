@@ -64,19 +64,31 @@
 #endif /* __TI_COMPILER_VERSION__ */
 /* *********************** [^] TI CGT CCS (PUSH) [^] ************************ */
 
+/*
+# GCC/CLANG DEFINE __has_cpp_attribute EVEN IN C++98/C++11 MODE AND REPORT
+# maybe_unused AS AVAILABLE, BUT THE [[...]] SYNTAX ITSELF IS AN ERROR BEFORE
+# C++11 (AND maybe_unused IS ONLY STANDARD SINCE C++17). SO WE ALSO CHECK THE
+# LANGUAGE VERSION. SAME IDEA FOR C: [[...]] NEEDS C23.
+*/
+#ifdef __cplusplus
 #ifdef __has_cpp_attribute
+#if ((__cplusplus >= 201703L) || (defined(_MSVC_LANG) && (_MSVC_LANG >= 201703L)))
 #if (__has_cpp_attribute(maybe_unused))
 #define UNUSED [[maybe_unused]]
 #endif /* __has_cpp_attribute(maybe_unused) */
+#endif /* __cplusplus >= 201703L */
 #endif /* __has_cpp_attribute */
-
-#ifndef UNUSED
+#else /* !__cplusplus */
 #ifdef __has_c_attribute
+#ifdef __STDC_VERSION__
+#if (__STDC_VERSION__ > 201710L) /* C23 */
 #if (__has_c_attribute(maybe_unused))
 #define UNUSED [[maybe_unused]]
 #endif /* __has_c_attribute(maybe_unused) */
+#endif /* __STDC_VERSION__ > 201710L */
+#endif /* __STDC_VERSION__ */
 #endif /* __has_c_attribute */
-#endif /* !UNUSED */
+#endif /* __cplusplus */
 
 #ifndef UNUSED
 #ifdef __has_attribute

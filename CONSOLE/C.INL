@@ -231,6 +231,12 @@ struct s_console
 };
 #endif /* !KNR_STYLE */
 
+union U_CONSOLE_STORAGE
+{
+	struct S_CONSOLE	UPPER;
+	struct s_console	lower;
+};
+
 /* *************************** [v] MVS LINKER [v] *************************** */
 /* **** MVS LINKER DOES NOT SUPPORT EXTERNAL NAMES LARGER THAN 8 BYTES!! **** */
 #ifdef __MVS__ /* IBM Z/OS XL C/C++ */

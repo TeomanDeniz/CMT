@@ -24,10 +24,18 @@
 #define TEST_DL_CL CMT_ASM("testb %cl, %dl")
 #define TEST_DL_DL CMT_ASM("testb %dl, %dl")
 
-#define TEST_AL_(VALUE) CMT_ASM("testb $" _(VALUE) ", %al")
-#define TEST_BL_(VALUE) CMT_ASM("testb $" _(VALUE) ", %bl")
-#define TEST_CL_(VALUE) CMT_ASM("testb $" _(VALUE) ", %cl")
-#define TEST_DL_(VALUE) CMT_ASM("testb $" _(VALUE) ", %dl")
+#define TEST_AL_(VALUE) \
+	CMT_ASM(".byte 0XF6, 0XC0 # testb $" _(VALUE) ", %al")\
+	CMT_ASM(".byte " _(VALUE))
+#define TEST_BL_(VALUE) \
+	CMT_ASM(".byte 0XF6, 0XC3 # testb $" _(VALUE) ", %bl")\
+	CMT_ASM(".byte " _(VALUE))
+#define TEST_CL_(VALUE) \
+	CMT_ASM(".byte 0XF6, 0XC1 # testb $" _(VALUE) ", %cl")\
+	CMT_ASM(".byte " _(VALUE))
+#define TEST_DL_(VALUE) \
+	CMT_ASM(".byte 0XF6, 0XC2 # testb $" _(VALUE) ", %dl")\
+	CMT_ASM(".byte " _(VALUE))
 #endif /* __SYSTEM_16_BIT__ */
 
 #ifdef __SYSTEM_32_BIT__
@@ -51,10 +59,18 @@
 #define TEST_DL_CL CMT_ASM("testb %cl, %dl")
 #define TEST_DL_DL CMT_ASM("testb %dl, %dl")
 
-#define TEST_AL_(VALUE) CMT_ASM("testb $" _(VALUE) ", %al")
-#define TEST_BL_(VALUE) CMT_ASM("testb $" _(VALUE) ", %bl")
-#define TEST_CL_(VALUE) CMT_ASM("testb $" _(VALUE) ", %cl")
-#define TEST_DL_(VALUE) CMT_ASM("testb $" _(VALUE) ", %dl")
+#define TEST_AL_(VALUE) \
+	CMT_ASM(".byte 0XF6, 0XC0 # testb $" _(VALUE) ", %al")\
+	CMT_ASM(".byte " _(VALUE))
+#define TEST_BL_(VALUE) \
+	CMT_ASM(".byte 0XF6, 0XC3 # testb $" _(VALUE) ", %bl")\
+	CMT_ASM(".byte " _(VALUE))
+#define TEST_CL_(VALUE) \
+	CMT_ASM(".byte 0XF6, 0XC1 # testb $" _(VALUE) ", %cl")\
+	CMT_ASM(".byte " _(VALUE))
+#define TEST_DL_(VALUE) \
+	CMT_ASM(".byte 0XF6, 0XC2 # testb $" _(VALUE) ", %dl")\
+	CMT_ASM(".byte " _(VALUE))
 #endif /* __SYSTEM_32_BIT__ */
 
 #ifdef __SYSTEM_64_BIT__
@@ -330,22 +346,54 @@
 #define TEST_R15B_R14B CMT_ASM("testb %r14b, %r15b")
 #define TEST_R15B_R15B CMT_ASM("testb %r15b, %r15b")
 
-#define TEST_AL_(VALUE) CMT_ASM("testb $" _(VALUE) ", %al")
-#define TEST_BL_(VALUE) CMT_ASM("testb $" _(VALUE) ", %bl")
-#define TEST_CL_(VALUE) CMT_ASM("testb $" _(VALUE) ", %cl")
-#define TEST_DL_(VALUE) CMT_ASM("testb $" _(VALUE) ", %dl")
-#define TEST_DIL_(VALUE) CMT_ASM("testb $" _(VALUE) ", %dil")
-#define TEST_SIL_(VALUE) CMT_ASM("testb $" _(VALUE) ", %sil")
-#define TEST_BPL_(VALUE) CMT_ASM("testb $" _(VALUE) ", %bpl")
-#define TEST_SPL_(VALUE) CMT_ASM("testb $" _(VALUE) ", %spl")
-#define TEST_R8B_(VALUE) CMT_ASM("testb $" _(VALUE) ", %r8b")
-#define TEST_R9B_(VALUE) CMT_ASM("testb $" _(VALUE) ", %r9b")
-#define TEST_R10B_(VALUE) CMT_ASM("testb $" _(VALUE) ", %r10b")
-#define TEST_R11B_(VALUE) CMT_ASM("testb $" _(VALUE) ", %r11b")
-#define TEST_R12B_(VALUE) CMT_ASM("testb $" _(VALUE) ", %r12b")
-#define TEST_R13B_(VALUE) CMT_ASM("testb $" _(VALUE) ", %r13b")
-#define TEST_R14B_(VALUE) CMT_ASM("testb $" _(VALUE) ", %r14b")
-#define TEST_R15B_(VALUE) CMT_ASM("testb $" _(VALUE) ", %r15b")
+#define TEST_AL_(VALUE) \
+	CMT_ASM(".byte 0XF6, 0XC0 # testb $" _(VALUE) ", %al")\
+	CMT_ASM(".byte " _(VALUE))
+#define TEST_BL_(VALUE) \
+	CMT_ASM(".byte 0XF6, 0XC3 # testb $" _(VALUE) ", %bl")\
+	CMT_ASM(".byte " _(VALUE))
+#define TEST_CL_(VALUE) \
+	CMT_ASM(".byte 0XF6, 0XC1 # testb $" _(VALUE) ", %cl")\
+	CMT_ASM(".byte " _(VALUE))
+#define TEST_DL_(VALUE) \
+	CMT_ASM(".byte 0XF6, 0XC2 # testb $" _(VALUE) ", %dl")\
+	CMT_ASM(".byte " _(VALUE))
+#define TEST_DIL_(VALUE) \
+	CMT_ASM(".byte 0X40, 0XF6, 0XC7 # testb $" _(VALUE) ", %dil")\
+	CMT_ASM(".byte " _(VALUE))
+#define TEST_SIL_(VALUE) \
+	CMT_ASM(".byte 0X40, 0XF6, 0XC6 # testb $" _(VALUE) ", %sil")\
+	CMT_ASM(".byte " _(VALUE))
+#define TEST_BPL_(VALUE) \
+	CMT_ASM(".byte 0X40, 0XF6, 0XC5 # testb $" _(VALUE) ", %bpl")\
+	CMT_ASM(".byte " _(VALUE))
+#define TEST_SPL_(VALUE) \
+	CMT_ASM(".byte 0X40, 0XF6, 0XC4 # testb $" _(VALUE) ", %spl")\
+	CMT_ASM(".byte " _(VALUE))
+#define TEST_R8B_(VALUE) \
+	CMT_ASM(".byte 0X41, 0XF6, 0XC0 # testb $" _(VALUE) ", %r8b")\
+	CMT_ASM(".byte " _(VALUE))
+#define TEST_R9B_(VALUE) \
+	CMT_ASM(".byte 0X41, 0XF6, 0XC1 # testb $" _(VALUE) ", %r9b")\
+	CMT_ASM(".byte " _(VALUE))
+#define TEST_R10B_(VALUE) \
+	CMT_ASM(".byte 0X41, 0XF6, 0XC2 # testb $" _(VALUE) ", %r10b")\
+	CMT_ASM(".byte " _(VALUE))
+#define TEST_R11B_(VALUE) \
+	CMT_ASM(".byte 0X41, 0XF6, 0XC3 # testb $" _(VALUE) ", %r11b")\
+	CMT_ASM(".byte " _(VALUE))
+#define TEST_R12B_(VALUE) \
+	CMT_ASM(".byte 0X41, 0XF6, 0XC4 # testb $" _(VALUE) ", %r12b")\
+	CMT_ASM(".byte " _(VALUE))
+#define TEST_R13B_(VALUE) \
+	CMT_ASM(".byte 0X41, 0XF6, 0XC5 # testb $" _(VALUE) ", %r13b")\
+	CMT_ASM(".byte " _(VALUE))
+#define TEST_R14B_(VALUE) \
+	CMT_ASM(".byte 0X41, 0XF6, 0XC6 # testb $" _(VALUE) ", %r14b")\
+	CMT_ASM(".byte " _(VALUE))
+#define TEST_R15B_(VALUE) \
+	CMT_ASM(".byte 0X41, 0XF6, 0XC7 # testb $" _(VALUE) ", %r15b")\
+	CMT_ASM(".byte " _(VALUE))
 #endif /* __SYSTEM_64_BIT__ */
 /* ************************ [^] 8-BIT REGISTERS [^] ************************* */
 
@@ -423,14 +471,30 @@
 #define TEST_SP_BP CMT_ASM("testw %bp, %sp")
 #define TEST_SP_SP CMT_ASM("testw %sp, %sp")
 
-#define TEST_AX_(VALUE) CMT_ASM("testw $" _(VALUE) ", %ax")
-#define TEST_BX_(VALUE) CMT_ASM("testw $" _(VALUE) ", %bx")
-#define TEST_CX_(VALUE) CMT_ASM("testw $" _(VALUE) ", %cx")
-#define TEST_DX_(VALUE) CMT_ASM("testw $" _(VALUE) ", %dx")
-#define TEST_DI_(VALUE) CMT_ASM("testw $" _(VALUE) ", %di")
-#define TEST_SI_(VALUE) CMT_ASM("testw $" _(VALUE) ", %si")
-#define TEST_BP_(VALUE) CMT_ASM("testw $" _(VALUE) ", %bp")
-#define TEST_SP_(VALUE) CMT_ASM("testw $" _(VALUE) ", %sp")
+#define TEST_AX_(VALUE) \
+	CMT_ASM(".byte 0XF7, 0XC0 # testw $" _(VALUE) ", %ax")\
+	CMT_ASM(".short " _(VALUE))
+#define TEST_BX_(VALUE) \
+	CMT_ASM(".byte 0XF7, 0XC3 # testw $" _(VALUE) ", %bx")\
+	CMT_ASM(".short " _(VALUE))
+#define TEST_CX_(VALUE) \
+	CMT_ASM(".byte 0XF7, 0XC1 # testw $" _(VALUE) ", %cx")\
+	CMT_ASM(".short " _(VALUE))
+#define TEST_DX_(VALUE) \
+	CMT_ASM(".byte 0XF7, 0XC2 # testw $" _(VALUE) ", %dx")\
+	CMT_ASM(".short " _(VALUE))
+#define TEST_DI_(VALUE) \
+	CMT_ASM(".byte 0XF7, 0XC7 # testw $" _(VALUE) ", %di")\
+	CMT_ASM(".short " _(VALUE))
+#define TEST_SI_(VALUE) \
+	CMT_ASM(".byte 0XF7, 0XC6 # testw $" _(VALUE) ", %si")\
+	CMT_ASM(".short " _(VALUE))
+#define TEST_BP_(VALUE) \
+	CMT_ASM(".byte 0XF7, 0XC5 # testw $" _(VALUE) ", %bp")\
+	CMT_ASM(".short " _(VALUE))
+#define TEST_SP_(VALUE) \
+	CMT_ASM(".byte 0XF7, 0XC4 # testw $" _(VALUE) ", %sp")\
+	CMT_ASM(".short " _(VALUE))
 #endif /* __SYSTEM_16_BIT__ */
 
 #ifdef __SYSTEM_32_BIT__
@@ -506,14 +570,30 @@
 #define TEST_SP_BP CMT_ASM("testw %bp, %sp")
 #define TEST_SP_SP CMT_ASM("testw %sp, %sp")
 
-#define TEST_AX_(VALUE) CMT_ASM("testw $" _(VALUE) ", %ax")
-#define TEST_BX_(VALUE) CMT_ASM("testw $" _(VALUE) ", %bx")
-#define TEST_CX_(VALUE) CMT_ASM("testw $" _(VALUE) ", %cx")
-#define TEST_DX_(VALUE) CMT_ASM("testw $" _(VALUE) ", %dx")
-#define TEST_DI_(VALUE) CMT_ASM("testw $" _(VALUE) ", %di")
-#define TEST_SI_(VALUE) CMT_ASM("testw $" _(VALUE) ", %si")
-#define TEST_BP_(VALUE) CMT_ASM("testw $" _(VALUE) ", %bp")
-#define TEST_SP_(VALUE) CMT_ASM("testw $" _(VALUE) ", %sp")
+#define TEST_AX_(VALUE) \
+	CMT_ASM(".byte 0X66, 0XF7, 0XC0 # testw $" _(VALUE) ", %ax")\
+	CMT_ASM(".short " _(VALUE))
+#define TEST_BX_(VALUE) \
+	CMT_ASM(".byte 0X66, 0XF7, 0XC3 # testw $" _(VALUE) ", %bx")\
+	CMT_ASM(".short " _(VALUE))
+#define TEST_CX_(VALUE) \
+	CMT_ASM(".byte 0X66, 0XF7, 0XC1 # testw $" _(VALUE) ", %cx")\
+	CMT_ASM(".short " _(VALUE))
+#define TEST_DX_(VALUE) \
+	CMT_ASM(".byte 0X66, 0XF7, 0XC2 # testw $" _(VALUE) ", %dx")\
+	CMT_ASM(".short " _(VALUE))
+#define TEST_DI_(VALUE) \
+	CMT_ASM(".byte 0X66, 0XF7, 0XC7 # testw $" _(VALUE) ", %di")\
+	CMT_ASM(".short " _(VALUE))
+#define TEST_SI_(VALUE) \
+	CMT_ASM(".byte 0X66, 0XF7, 0XC6 # testw $" _(VALUE) ", %si")\
+	CMT_ASM(".short " _(VALUE))
+#define TEST_BP_(VALUE) \
+	CMT_ASM(".byte 0X66, 0XF7, 0XC5 # testw $" _(VALUE) ", %bp")\
+	CMT_ASM(".short " _(VALUE))
+#define TEST_SP_(VALUE) \
+	CMT_ASM(".byte 0X66, 0XF7, 0XC4 # testw $" _(VALUE) ", %sp")\
+	CMT_ASM(".short " _(VALUE))
 #endif /* __SYSTEM_32_BIT__ */
 
 #ifdef __SYSTEM_64_BIT__
@@ -789,22 +869,54 @@
 #define TEST_R15W_R14W CMT_ASM("testw %r14w, %r15w")
 #define TEST_R15W_R15W CMT_ASM("testw %r15w, %r15w")
 
-#define TEST_AX_(VALUE) CMT_ASM("testw $" _(VALUE) ", %ax")
-#define TEST_BX_(VALUE) CMT_ASM("testw $" _(VALUE) ", %bx")
-#define TEST_CX_(VALUE) CMT_ASM("testw $" _(VALUE) ", %cx")
-#define TEST_DX_(VALUE) CMT_ASM("testw $" _(VALUE) ", %dx")
-#define TEST_DI_(VALUE) CMT_ASM("testw $" _(VALUE) ", %di")
-#define TEST_SI_(VALUE) CMT_ASM("testw $" _(VALUE) ", %si")
-#define TEST_BP_(VALUE) CMT_ASM("testw $" _(VALUE) ", %bp")
-#define TEST_SP_(VALUE) CMT_ASM("testw $" _(VALUE) ", %sp")
-#define TEST_R8W_(VALUE) CMT_ASM("testw $" _(VALUE) ", %r8w")
-#define TEST_R9W_(VALUE) CMT_ASM("testw $" _(VALUE) ", %r9w")
-#define TEST_R10W_(VALUE) CMT_ASM("testw $" _(VALUE) ", %r10w")
-#define TEST_R11W_(VALUE) CMT_ASM("testw $" _(VALUE) ", %r11w")
-#define TEST_R12W_(VALUE) CMT_ASM("testw $" _(VALUE) ", %r12w")
-#define TEST_R13W_(VALUE) CMT_ASM("testw $" _(VALUE) ", %r13w")
-#define TEST_R14W_(VALUE) CMT_ASM("testw $" _(VALUE) ", %r14w")
-#define TEST_R15W_(VALUE) CMT_ASM("testw $" _(VALUE) ", %r15w")
+#define TEST_AX_(VALUE) \
+	CMT_ASM(".byte 0X66, 0XF7, 0XC0 # testw $" _(VALUE) ", %ax")\
+	CMT_ASM(".short " _(VALUE))
+#define TEST_BX_(VALUE) \
+	CMT_ASM(".byte 0X66, 0XF7, 0XC3 # testw $" _(VALUE) ", %bx")\
+	CMT_ASM(".short " _(VALUE))
+#define TEST_CX_(VALUE) \
+	CMT_ASM(".byte 0X66, 0XF7, 0XC1 # testw $" _(VALUE) ", %cx")\
+	CMT_ASM(".short " _(VALUE))
+#define TEST_DX_(VALUE) \
+	CMT_ASM(".byte 0X66, 0XF7, 0XC2 # testw $" _(VALUE) ", %dx")\
+	CMT_ASM(".short " _(VALUE))
+#define TEST_DI_(VALUE) \
+	CMT_ASM(".byte 0X66, 0XF7, 0XC7 # testw $" _(VALUE) ", %di")\
+	CMT_ASM(".short " _(VALUE))
+#define TEST_SI_(VALUE) \
+	CMT_ASM(".byte 0X66, 0XF7, 0XC6 # testw $" _(VALUE) ", %si")\
+	CMT_ASM(".short " _(VALUE))
+#define TEST_BP_(VALUE) \
+	CMT_ASM(".byte 0X66, 0XF7, 0XC5 # testw $" _(VALUE) ", %bp")\
+	CMT_ASM(".short " _(VALUE))
+#define TEST_SP_(VALUE) \
+	CMT_ASM(".byte 0X66, 0XF7, 0XC4 # testw $" _(VALUE) ", %sp")\
+	CMT_ASM(".short " _(VALUE))
+#define TEST_R8W_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X41, 0XF7, 0XC0 # testw $" _(VALUE) ", %r8w")\
+	CMT_ASM(".short " _(VALUE))
+#define TEST_R9W_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X41, 0XF7, 0XC1 # testw $" _(VALUE) ", %r9w")\
+	CMT_ASM(".short " _(VALUE))
+#define TEST_R10W_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X41, 0XF7, 0XC2 # testw $" _(VALUE) ", %r10w")\
+	CMT_ASM(".short " _(VALUE))
+#define TEST_R11W_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X41, 0XF7, 0XC3 # testw $" _(VALUE) ", %r11w")\
+	CMT_ASM(".short " _(VALUE))
+#define TEST_R12W_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X41, 0XF7, 0XC4 # testw $" _(VALUE) ", %r12w")\
+	CMT_ASM(".short " _(VALUE))
+#define TEST_R13W_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X41, 0XF7, 0XC5 # testw $" _(VALUE) ", %r13w")\
+	CMT_ASM(".short " _(VALUE))
+#define TEST_R14W_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X41, 0XF7, 0XC6 # testw $" _(VALUE) ", %r14w")\
+	CMT_ASM(".short " _(VALUE))
+#define TEST_R15W_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X41, 0XF7, 0XC7 # testw $" _(VALUE) ", %r15w")\
+	CMT_ASM(".short " _(VALUE))
 #endif /* __SYSTEM_64_BIT__ */
 /* ************************ [^] 16-BIT REGISTERS [^] ************************ */
 

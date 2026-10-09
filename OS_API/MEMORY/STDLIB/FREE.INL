@@ -13,14 +13,13 @@
 #define LOCALFUNCTION__FREE \
 	FUNCTION_HEADER__FREE \
 	{\
-		LET	TRACK_I;\
+		REGISTER LET	TRACK_I;\
 		\
 		for (TRACK_I = 0; TRACK_I < G_HEAP_COUNT; TRACK_I += 1)\
 		{\
 			if (G_HEAP_PTRS[TRACK_I] == ADDRESS)\
 			{\
-				G_HEAP_PTRS[TRACK_I] =\
-					G_HEAP_PTRS[G_HEAP_COUNT - 1];\
+				G_HEAP_PTRS[TRACK_I] = G_HEAP_PTRS[G_HEAP_COUNT - 1];\
 				G_HEAP_COUNT -= 1;\
 				break ;\
 			}\

@@ -6,22 +6,26 @@
 #define FUNCTION_HEADER__CONSOLE_CURSOR_XY \
 	void\
 		CONSOLE_CURSOR_XY(\
-			struct s_console *THIS, unsigned int X_VALUE, unsigned int Y_VALUE\
+			struct s_console *const THIS, \
+			unsigned int X_VALUE, \
+			unsigned int Y_VALUE\
 		)
 #define FUNCTION_HEADER__console_cursor_xy \
 	void\
 		console_cursor_xy(\
-			struct s_console *THIS, unsigned int X_VALUE, unsigned int Y_VALUE\
+			struct s_console *const __this__, \
+			unsigned int X_VALUE, \
+			unsigned int Y_VALUE\
 		)
 #else /* K&R */
 #define FUNCTION_HEADER__CONSOLE_CURSOR_XY \
 	CONSOLE_CURSOR_XY(THIS, X_VALUE, Y_VALUE)\
-	struct s_console	*THIS;\
+	struct s_console	*const THIS;\
 	unsigned int		X_VALUE;\
 	unsigned int		Y_VALUE;
 #define FUNCTION_HEADER__console_cursor_xy \
-	console_cursor_xy(THIS, X_VALUE, Y_VALUE)\
-	struct s_console	*THIS;\
+	console_cursor_xy(__this__, X_VALUE, Y_VALUE)\
+	struct s_console	*const __this__;\
 	unsigned int		X_VALUE;\
 	unsigned int		Y_VALUE;
 #endif /* !KNR_STYLE */
@@ -34,6 +38,10 @@
 	\
 	FUNCTION_HEADER__console_cursor_xy \
 	{\
+		union U_CONSOLE_STORAGE	*const __THIS_CONVERTER__ = \
+			(union U_CONSOLE_STORAGE *)(PTR)__this__;\
+		struct S_CONSOLE		*const THIS = &__THIS_CONVERTER__->UPPER;\
+		\
 		LOCALMACRO__CMT_CONSOLE__CURSOR_XY_CONTENT\
 	}
 

@@ -379,7 +379,7 @@
 		)\
 		{\
 			const int	__CMT_SIGNAL__ = \
-				(
+				(\
 					__CMT_LEAD__ == (\
 						(unsigned int)(unsigned char)THIS->_TERMIOS.c_cc[VINTR]\
 					) ? SIGINT : (\
@@ -724,7 +724,7 @@
 							__CMT_TILDE_KEY__ = (\
 								LOCALMACRO__CMT_CONSOLE__VK_F1 + \
 								(unsigned)10 + (unsigned int)(\
-									__CMT_TILDE__ - (unsigned long)23|
+									__CMT_TILDE__ - (unsigned long)23\
 								)\
 							);\
 						\

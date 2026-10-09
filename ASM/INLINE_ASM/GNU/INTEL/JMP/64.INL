@@ -5,10 +5,10 @@
 /* ************************** [v] DIRECT JUMPS [v] ************************** */
 #define JMP_NEAR_(VALUE) \
 	CMT_ASM(".byte 0XE9") \
-	CMT_ASM(".long (" #VALUE ")")
+	CMT_ASM(".long (" _(VALUE) ")")
 #define JMP_SHORT_(VALUE) \
 	CMT_ASM(".byte 0XEB") \
-	CMT_ASM(".byte (" #VALUE ")")
+	CMT_ASM(".byte (" _(VALUE) ")")
 /* ************************** [^] DIRECT JUMPS [^] ************************** */
 
 /* ************************* [v] REGISTER JUMPS [v] ************************* */

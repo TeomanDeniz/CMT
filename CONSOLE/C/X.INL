@@ -5,18 +5,18 @@
 #ifndef KNR_STYLE /* STANDARD C */
 #define FUNCTION_HEADER__CONSOLE_X \
 	void\
-		CONSOLE_X(struct s_console *THIS, int X_VALUE)
+		CONSOLE_X(struct s_console *const THIS, int X_VALUE)
 #define FUNCTION_HEADER__console_x \
 	void\
-		console_x(struct s_console *THIS, int X_VALUE)
+		console_x(struct s_console *const __this__, int X_VALUE)
 #else /* K&R */
 #define FUNCTION_HEADER__CONSOLE_X \
 	CONSOLE_X(THIS, X_VALUE)\
-	struct s_console	*THIS;\
+	struct s_console	*const THIS;\
 	int					X_VALUE;
 #define FUNCTION_HEADER__console_x \
-	console_x(THIS, X_VALUE)\
-	struct s_console	*THIS;\
+	console_x(__this__, X_VALUE)\
+	struct s_console	*const __this__;\
 	int					X_VALUE;
 #endif /* !KNR_STYLE */
 
@@ -28,6 +28,10 @@
 	\
 	FUNCTION_HEADER__console_x \
 	{\
+		union U_CONSOLE_STORAGE	*const __THIS_CONVERTER__ = \
+			(union U_CONSOLE_STORAGE *)(PTR)__this__;\
+		struct S_CONSOLE		*const THIS = &__THIS_CONVERTER__->UPPER;\
+		\
 		LOCALMACRO__CMT_CONSOLE__X_CONTENT\
 	}
 

@@ -6,7 +6,7 @@
 #define FUNCTION_HEADER__CONSOLE_PUT_COLORED_CURVE \
 	void\
 		CONSOLE_PUT_COLORED_CURVE(\
-			struct s_console *THIS, \
+			struct s_console *const THIS, \
 			char CHARACTER, \
 			unsigned int COLOR_VALUE, \
 			unsigned int START_X, \
@@ -19,7 +19,7 @@
 #define FUNCTION_HEADER__console_put_colored_curve \
 	void\
 		console_put_colored_curve(\
-			struct s_console *THIS, \
+			struct s_console *const __this__, \
 			char CHARACTER, \
 			unsigned int COLOR_VALUE, \
 			unsigned int START_X, \
@@ -42,7 +42,7 @@
 		CURVE_START, \
 		CURVE_END\
 	)\
-	struct s_console	*THIS;\
+	struct s_console	*const THIS;\
 	char				CHARACTER;\
 	unsigned int		COLOR_VALUE;\
 	unsigned int		START_X;\
@@ -53,7 +53,7 @@
 	float				CURVE_END;
 #define FUNCTION_HEADER__console_put_colored_curve \
 	console_put_colored_curve(\
-		THIS, \
+		__this__, \
 		CHARACTER, \
 		COLOR_VALUE, \
 		START_X, \
@@ -63,7 +63,7 @@
 		CURVE_START, \
 		CURVE_END\
 	)\
-	struct s_console	*THIS;\
+	struct s_console	*const __this__;\
 	char				CHARACTER;\
 	unsigned int		COLOR_VALUE;\
 	unsigned int		START_X;\
@@ -82,6 +82,10 @@
 	\
 	FUNCTION_HEADER__console_put_colored_curve \
 	{\
+		union U_CONSOLE_STORAGE	*const __THIS_CONVERTER__ = \
+			(union U_CONSOLE_STORAGE *)(PTR)__this__;\
+		struct S_CONSOLE		*const THIS = &__THIS_CONVERTER__->UPPER;\
+		\
 		LOCALMACRO__CMT_CONSOLE__PUT_COLORED_CURVE_CONTENT\
 	}
 

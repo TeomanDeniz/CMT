@@ -5,8 +5,8 @@
 /* ************************ [v] 8-BIT REGISTERS [v] ************************* */
 #define _MOV_AL_ARG1 _MOV_AL_CL
 #define _MOV_AL_ARG2 _MOV_AL_DL
-#define _MOV_AL_ARG3 _MOV_AL_R8L
-#define _MOV_AL_ARG4 _MOV_AL_R9L
+#define _MOV_AL_ARG3 _MOV_AL_R8B
+#define _MOV_AL_ARG4 _MOV_AL_R9B
 #define _MOV_AL_ARG5 _MOV_AL_FROM_PTR_RSP_(40)
 #define _MOV_AL_ARG6 _MOV_AL_FROM_PTR_RSP_(48)
 #define _MOV_AL_ARG7 _MOV_AL_FROM_PTR_RSP_(56)
@@ -15,8 +15,8 @@
 
 #define _MOV_BL_ARG1 _MOV_BL_CL
 #define _MOV_BL_ARG2 _MOV_BL_DL
-#define _MOV_BL_ARG3 _MOV_BL_R8L
-#define _MOV_BL_ARG4 _MOV_BL_R9L
+#define _MOV_BL_ARG3 _MOV_BL_R8B
+#define _MOV_BL_ARG4 _MOV_BL_R9B
 #define _MOV_BL_ARG5 _MOV_BL_FROM_PTR_RSP_(40)
 #define _MOV_BL_ARG6 _MOV_BL_FROM_PTR_RSP_(48)
 #define _MOV_BL_ARG7 _MOV_BL_FROM_PTR_RSP_(56)
@@ -25,8 +25,8 @@
 
 #define _MOV_CL_ARG1 _MOV_CL_CL
 #define _MOV_CL_ARG2 _MOV_CL_DL
-#define _MOV_CL_ARG3 _MOV_CL_R8L
-#define _MOV_CL_ARG4 _MOV_CL_R9L
+#define _MOV_CL_ARG3 _MOV_CL_R8B
+#define _MOV_CL_ARG4 _MOV_CL_R9B
 #define _MOV_CL_ARG5 _MOV_CL_FROM_PTR_RSP_(40)
 #define _MOV_CL_ARG6 _MOV_CL_FROM_PTR_RSP_(48)
 #define _MOV_CL_ARG7 _MOV_CL_FROM_PTR_RSP_(56)
@@ -35,8 +35,8 @@
 
 #define _MOV_DL_ARG1 _MOV_DL_CL
 #define _MOV_DL_ARG2 _MOV_DL_DL
-#define _MOV_DL_ARG3 _MOV_DL_R8L
-#define _MOV_DL_ARG4 _MOV_DL_R9L
+#define _MOV_DL_ARG3 _MOV_DL_R8B
+#define _MOV_DL_ARG4 _MOV_DL_R9B
 #define _MOV_DL_ARG5 _MOV_DL_FROM_PTR_RSP_(40)
 #define _MOV_DL_ARG6 _MOV_DL_FROM_PTR_RSP_(48)
 #define _MOV_DL_ARG7 _MOV_DL_FROM_PTR_RSP_(56)
@@ -45,8 +45,8 @@
 
 #define _MOV_SIL_ARG1 _MOV_SIL_CL
 #define _MOV_SIL_ARG2 _MOV_SIL_DL
-#define _MOV_SIL_ARG3 _MOV_SIL_R8L
-#define _MOV_SIL_ARG4 _MOV_SIL_R9L
+#define _MOV_SIL_ARG3 _MOV_SIL_R8B
+#define _MOV_SIL_ARG4 _MOV_SIL_R9B
 #define _MOV_SIL_ARG5 _MOV_SIL_FROM_PTR_RSP_(40)
 #define _MOV_SIL_ARG6 _MOV_SIL_FROM_PTR_RSP_(48)
 #define _MOV_SIL_ARG7 _MOV_SIL_FROM_PTR_RSP_(56)
@@ -55,8 +55,8 @@
 
 #define _MOV_DIL_ARG1 _MOV_DIL_CL
 #define _MOV_DIL_ARG2 _MOV_DIL_DL
-#define _MOV_DIL_ARG3 _MOV_DIL_R8L
-#define _MOV_DIL_ARG4 _MOV_DIL_R9L
+#define _MOV_DIL_ARG3 _MOV_DIL_R8B
+#define _MOV_DIL_ARG4 _MOV_DIL_R9B
 #define _MOV_DIL_ARG5 _MOV_DIL_FROM_PTR_RSP_(40)
 #define _MOV_DIL_ARG6 _MOV_DIL_FROM_PTR_RSP_(48)
 #define _MOV_DIL_ARG7 _MOV_DIL_FROM_PTR_RSP_(56)
@@ -65,8 +65,8 @@
 
 #define _MOV_BPL_ARG1 _MOV_BPL_CL
 #define _MOV_BPL_ARG2 _MOV_BPL_DL
-#define _MOV_BPL_ARG3 _MOV_BPL_R8L
-#define _MOV_BPL_ARG4 _MOV_BPL_R9L
+#define _MOV_BPL_ARG3 _MOV_BPL_R8B
+#define _MOV_BPL_ARG4 _MOV_BPL_R9B
 #define _MOV_BPL_ARG5 _MOV_BPL_FROM_PTR_RSP_(40)
 #define _MOV_BPL_ARG6 _MOV_BPL_FROM_PTR_RSP_(48)
 #define _MOV_BPL_ARG7 _MOV_BPL_FROM_PTR_RSP_(56)
@@ -75,8 +75,8 @@
 
 #define _MOV_SPL_ARG1 _MOV_SPL_CL
 #define _MOV_SPL_ARG2 _MOV_SPL_DL
-#define _MOV_SPL_ARG3 _MOV_SPL_R8L
-#define _MOV_SPL_ARG4 _MOV_SPL_R9L
+#define _MOV_SPL_ARG3 _MOV_SPL_R8B
+#define _MOV_SPL_ARG4 _MOV_SPL_R9B
 #define _MOV_SPL_ARG5 _MOV_SPL_FROM_PTR_RSP_(40)
 #define _MOV_SPL_ARG6 _MOV_SPL_FROM_PTR_RSP_(48)
 #define _MOV_SPL_ARG7 _MOV_SPL_FROM_PTR_RSP_(56)
@@ -165,8 +165,8 @@
 
 #define _MOV_ARG1_AL _MOV_CL_AL
 #define _MOV_ARG2_AL _MOV_DL_AL
-#define _MOV_ARG3_AL _MOV_R8L_AL
-#define _MOV_ARG4_AL _MOV_R9L_AL
+#define _MOV_ARG3_AL _MOV_R8B_AL
+#define _MOV_ARG4_AL _MOV_R9B_AL
 #define _MOV_ARG5_AL _MOV_AL_TO_PTR_RSP_(40)
 #define _MOV_ARG6_AL _MOV_AL_TO_PTR_RSP_(48)
 #define _MOV_ARG7_AL _MOV_AL_TO_PTR_RSP_(56)
@@ -175,8 +175,8 @@
 
 #define _MOV_ARG1_BL _MOV_CL_BL
 #define _MOV_ARG2_BL _MOV_DL_BL
-#define _MOV_ARG3_BL _MOV_R8L_BL
-#define _MOV_ARG4_BL _MOV_R9L_BL
+#define _MOV_ARG3_BL _MOV_R8B_BL
+#define _MOV_ARG4_BL _MOV_R9B_BL
 #define _MOV_ARG5_BL _MOV_BL_TO_PTR_RSP_(40)
 #define _MOV_ARG6_BL _MOV_BL_TO_PTR_RSP_(48)
 #define _MOV_ARG7_BL _MOV_BL_TO_PTR_RSP_(56)
@@ -185,8 +185,8 @@
 
 #define _MOV_ARG1_CL _MOV_CL_CL
 #define _MOV_ARG2_CL _MOV_DL_CL
-#define _MOV_ARG3_CL _MOV_R8L_CL
-#define _MOV_ARG4_CL _MOV_R9L_CL
+#define _MOV_ARG3_CL _MOV_R8B_CL
+#define _MOV_ARG4_CL _MOV_R9B_CL
 #define _MOV_ARG5_CL _MOV_CL_TO_PTR_RSP_(40)
 #define _MOV_ARG6_CL _MOV_CL_TO_PTR_RSP_(48)
 #define _MOV_ARG7_CL _MOV_CL_TO_PTR_RSP_(56)
@@ -195,8 +195,8 @@
 
 #define _MOV_ARG1_DL _MOV_CL_DL
 #define _MOV_ARG2_DL _MOV_DL_DL
-#define _MOV_ARG3_DL _MOV_R8L_DL
-#define _MOV_ARG4_DL _MOV_R9L_DL
+#define _MOV_ARG3_DL _MOV_R8B_DL
+#define _MOV_ARG4_DL _MOV_R9B_DL
 #define _MOV_ARG5_DL _MOV_DL_TO_PTR_RSP_(40)
 #define _MOV_ARG6_DL _MOV_DL_TO_PTR_RSP_(48)
 #define _MOV_ARG7_DL _MOV_DL_TO_PTR_RSP_(56)
@@ -205,8 +205,8 @@
 
 #define _MOV_ARG1_SIL _MOV_CL_SIL
 #define _MOV_ARG2_SIL _MOV_DL_SIL
-#define _MOV_ARG3_SIL _MOV_R8L_SIL
-#define _MOV_ARG4_SIL _MOV_R9L_SIL
+#define _MOV_ARG3_SIL _MOV_R8B_SIL
+#define _MOV_ARG4_SIL _MOV_R9B_SIL
 #define _MOV_ARG5_SIL _MOV_SIL_TO_PTR_RSP_(40)
 #define _MOV_ARG6_SIL _MOV_SIL_TO_PTR_RSP_(48)
 #define _MOV_ARG7_SIL _MOV_SIL_TO_PTR_RSP_(56)
@@ -215,8 +215,8 @@
 
 #define _MOV_ARG1_DIL _MOV_CL_DIL
 #define _MOV_ARG2_DIL _MOV_DL_DIL
-#define _MOV_ARG3_DIL _MOV_R8L_DIL
-#define _MOV_ARG4_DIL _MOV_R9L_DIL
+#define _MOV_ARG3_DIL _MOV_R8B_DIL
+#define _MOV_ARG4_DIL _MOV_R9B_DIL
 #define _MOV_ARG5_DIL _MOV_DIL_TO_PTR_RSP_(40)
 #define _MOV_ARG6_DIL _MOV_DIL_TO_PTR_RSP_(48)
 #define _MOV_ARG7_DIL _MOV_DIL_TO_PTR_RSP_(56)
@@ -225,8 +225,8 @@
 
 #define _MOV_ARG1_BPL _MOV_CL_BPL
 #define _MOV_ARG2_BPL _MOV_DL_BPL
-#define _MOV_ARG3_BPL _MOV_R8L_BPL
-#define _MOV_ARG4_BPL _MOV_R9L_BPL
+#define _MOV_ARG3_BPL _MOV_R8B_BPL
+#define _MOV_ARG4_BPL _MOV_R9B_BPL
 #define _MOV_ARG5_BPL _MOV_BPL_TO_PTR_RSP_(40)
 #define _MOV_ARG6_BPL _MOV_BPL_TO_PTR_RSP_(48)
 #define _MOV_ARG7_BPL _MOV_BPL_TO_PTR_RSP_(56)
@@ -235,8 +235,8 @@
 
 #define _MOV_ARG1_SPL _MOV_CL_SPL
 #define _MOV_ARG2_SPL _MOV_DL_SPL
-#define _MOV_ARG3_SPL _MOV_R8L_SPL
-#define _MOV_ARG4_SPL _MOV_R9L_SPL
+#define _MOV_ARG3_SPL _MOV_R8B_SPL
+#define _MOV_ARG4_SPL _MOV_R9B_SPL
 #define _MOV_ARG5_SPL _MOV_SPL_TO_PTR_RSP_(40)
 #define _MOV_ARG6_SPL _MOV_SPL_TO_PTR_RSP_(48)
 #define _MOV_ARG7_SPL _MOV_SPL_TO_PTR_RSP_(56)
@@ -1297,4 +1297,4 @@
  * *       HANDLING "//" SYNTAX WHICH IS NOT SUPPORTED ON OLD SYSTEMS       * *
 \* * * * * * * * * * * * * * * * * * *  * * * * * * * * * * * * * * * * * * * */
 #undef __CMT__END_OF_FILE__
-#define __CMT__END_OF_FILE__
+#define __CMT__END_OF_FILE__ //

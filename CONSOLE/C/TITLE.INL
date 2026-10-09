@@ -5,18 +5,18 @@
 #ifndef KNR_STYLE /* STANDARD C */
 #define FUNCTION_HEADER__CONSOLE_TITLE \
 	void\
-		CONSOLE_TITLE(struct s_console *THIS, const char *STRING)
+		CONSOLE_TITLE(struct s_console *const THIS, const char *STRING)
 #define FUNCTION_HEADER__console_title \
 	void\
-		console_title(struct s_console *THIS, const char *STRING)
+		console_title(struct s_console *const __this__, const char *STRING)
 #else /* K&R */
 #define FUNCTION_HEADER__CONSOLE_TITLE \
 	CONSOLE_TITLE(THIS, STRING)\
-	struct s_console	*THIS;\
+	struct s_console	*const THIS;\
 	const char			*STRING;
 #define FUNCTION_HEADER__console_title \
-	console_title(THIS, STRING)\
-	struct s_console	*THIS;\
+	console_title(__this__, STRING)\
+	struct s_console	*const __this__;\
 	const char			*STRING;
 #endif /* !KNR_STYLE */
 
@@ -28,6 +28,10 @@
 	\
 	FUNCTION_HEADER__console_title \
 	{\
+		union U_CONSOLE_STORAGE	*const __THIS_CONVERTER__ = \
+			(union U_CONSOLE_STORAGE *)(PTR)__this__;\
+		struct S_CONSOLE		*const THIS = &__THIS_CONVERTER__->UPPER;\
+		\
 		LOCALMACRO__CMT_CONSOLE__TITLE_CONTENT\
 	}
 

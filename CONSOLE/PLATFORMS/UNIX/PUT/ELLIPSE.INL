@@ -5,14 +5,11 @@
 #endif /* !CONSOLE_HPP */
 
 #define LOCALMACRO__CMT_CONSOLE__PUT_ELLIPSE_CONTENT \
-	THIS->PUT.COLORED.ELLIPSE(\
-		CHARACTER, \
-		THIS->GET.CURSOR.COLOR, \
-		START_X, \
-		START_Y, \
-		END_X, \
-		END_Y\
-	);
+	{\
+		unsigned int	COLOR_VALUE = (unsigned int)(THIS->GET.CURSOR.COLOR);\
+		\
+		LOCALMACRO__CMT_CONSOLE__PUT_COLORED_ELLIPSE_CONTENT\
+	}
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\
  * * AT THE ALL END OF FILES, I AM ADDING A SPECIAL BYTE <0X1A> TO END THE  * *

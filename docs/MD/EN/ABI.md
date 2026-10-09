@@ -42,6 +42,8 @@ Incorrect assumptions about ABI details can lead to subtle corruption bugs; this
 
 Stack offsets shown assume no compiler-generated prologue/epilogue adjustments. Actual offsets may vary depending on function frame setup.
 
+For the 64-bit register ABIs, offsets are measured at function entry: `[RSP]` holds the return address, so the first stack argument is at `[RSP + 8]` (System V) or `[RSP + 40]` (Windows x64, after the 32-byte shadow space).
+
 ## Contents
 
 | Endians                          |
@@ -256,8 +258,9 @@ Return register is `RAX`.
 | 4              | `RCX`            |
 | 5              | `R8`             |
 | 6              | `R9`             |
-| 7              | `[RSP + 16]`     |
-| 8              | `[RSP + 24]`     |
+| 7              | `[RSP + 8]`      |
+| 8              | `[RSP + 16]`     |
+| 9              | `[RSP + 24]`     |
 | ...            | `[RSP + ...]`    |
 
 For PowerPC CPU - 32-bit Architecture:

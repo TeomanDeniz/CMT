@@ -5,18 +5,20 @@
 #ifndef KNR_STYLE /* STANDARD C */
 #define FUNCTION_HEADER__CONSOLE_COLOR \
 	void\
-		CONSOLE_COLOR(struct s_console *THIS, unsigned int COLOR_VALUE)
+		CONSOLE_COLOR(struct s_console *const THIS, unsigned int COLOR_VALUE)
 #define FUNCTION_HEADER__console_color \
 	void\
-		console_color(struct s_console *THIS, unsigned int COLOR_VALUE)
+		console_color(\
+			struct s_console *const __this__, unsigned int COLOR_VALUE\
+		)
 #else /* K&R */
 #define FUNCTION_HEADER__CONSOLE_COLOR \
 	CONSOLE_COLOR(THIS, COLOR_VALUE)\
-	struct s_console	*THIS;\
+	struct s_console	*const THIS;\
 	unsigned int		COLOR_VALUE;
 #define FUNCTION_HEADER__console_color \
-	console_color(THIS, COLOR_VALUE)\
-	struct s_console	*THIS;\
+	console_color(__this__, COLOR_VALUE)\
+	struct s_console	*const __this__;\
 	unsigned int		COLOR_VALUE;
 #endif /* !KNR_STYLE */
 
@@ -28,6 +30,10 @@
 	\
 	FUNCTION_HEADER__console_color \
 	{\
+		union U_CONSOLE_STORAGE	*const __THIS_CONVERTER__ = \
+			(union U_CONSOLE_STORAGE *)(PTR)__this__;\
+		struct S_CONSOLE		*const THIS = &__THIS_CONVERTER__->UPPER;\
+		\
 		LOCALMACRO__CMT_CONSOLE__COLOR_CONTENT\
 	}
 

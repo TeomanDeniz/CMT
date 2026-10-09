@@ -5,18 +5,18 @@
 #ifndef KNR_STYLE /* STANDARD C */
 #define FUNCTION_HEADER__CONSOLE_IMPORT \
 	void\
-		CONSOLE_IMPORT(struct s_console *THIS, PTR DATA)
+		CONSOLE_IMPORT(struct s_console *const THIS, PTR DATA)
 #define FUNCTION_HEADER__console_import \
 	void\
-		console_import(struct s_console *THIS, ptr DATA)
+		console_import(struct s_console *const __this__, ptr DATA)
 #else /* K&R */
 #define FUNCTION_HEADER__CONSOLE_IMPORT \
 	CONSOLE_IMPORT(THIS, DATA)\
-	struct s_console	*THIS;\
+	struct s_console	*const THIS;\
 	PTR					DATA;
 #define FUNCTION_HEADER__console_import \
-	console_import(THIS, DATA)\
-	struct s_console	*THIS;\
+	console_import(__this__, DATA)\
+	struct s_console	*const __this__;\
 	ptr					DATA;
 #endif /* !KNR_STYLE */
 
@@ -28,6 +28,10 @@
 	\
 	FUNCTION_HEADER__console_import \
 	{\
+		union U_CONSOLE_STORAGE	*const __THIS_CONVERTER__ = \
+			(union U_CONSOLE_STORAGE *)(PTR)__this__;\
+		struct S_CONSOLE		*const THIS = &__THIS_CONVERTER__->UPPER;\
+		\
 		LOCALMACRO__CMT_CONSOLE__IMPORT_CONTENT\
 	}
 

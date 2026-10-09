@@ -6,7 +6,7 @@
 #define FUNCTION_HEADER__CONSOLE_PUT_COLORED_FRAME \
 	void\
 		CONSOLE_PUT_COLORED_FRAME(\
-			struct s_console *THIS, \
+			struct s_console *const THIS, \
 			char CHARACTER, \
 			unsigned int COLOR_VALUE, \
 			unsigned int START_X, \
@@ -17,7 +17,7 @@
 #define FUNCTION_HEADER__console_put_colored_frame \
 	void\
 		console_put_colored_frame(\
-			struct s_console *THIS, \
+			struct s_console *const __this__, \
 			char CHARACTER, \
 			unsigned int COLOR_VALUE, \
 			unsigned int START_X, \
@@ -30,7 +30,7 @@
 	CONSOLE_PUT_COLORED_FRAME(\
 		THIS, CHARACTER, COLOR_VALUE, START_X, START_Y, END_X, END_Y\
 	)\
-	struct s_console	*THIS;\
+	struct s_console	*const THIS;\
 	char				CHARACTER;\
 	unsigned int		COLOR_VALUE;\
 	unsigned int		START_X;\
@@ -39,9 +39,9 @@
 	unsigned int		END_Y;
 #define FUNCTION_HEADER__console_put_colored_frame \
 	console_put_colored_frame(\
-		THIS, CHARACTER, COLOR_VALUE, START_X, START_Y, END_X, END_Y\
+		__this__, CHARACTER, COLOR_VALUE, START_X, START_Y, END_X, END_Y\
 	)\
-	struct s_console	*THIS;\
+	struct s_console	*const __this__;\
 	char				CHARACTER;\
 	unsigned int		COLOR_VALUE;\
 	unsigned int		START_X;\
@@ -58,6 +58,10 @@
 	\
 	FUNCTION_HEADER__console_put_colored_frame \
 	{\
+		union U_CONSOLE_STORAGE	*const __THIS_CONVERTER__ = \
+			(union U_CONSOLE_STORAGE *)(PTR)__this__;\
+		struct S_CONSOLE		*const THIS = &__THIS_CONVERTER__->UPPER;\
+		\
 		LOCALMACRO__CMT_CONSOLE__PUT_COLORED_FRAME_CONTENT\
 	}
 

@@ -5,17 +5,17 @@
 #ifndef KNR_STYLE /* STANDARD C */
 #define FUNCTION_HEADER__CONSOLE_CURSOR_DEFAULT_COLOR \
 	void\
-		CONSOLE_CURSOR_DEFAULT_COLOR(struct s_console *THIS)
+		CONSOLE_CURSOR_DEFAULT_COLOR(struct s_console *const THIS)
 #define FUNCTION_HEADER__console_cursor_default_color \
 	void\
-		console_cursor_default_color(struct s_console *THIS)
+		console_cursor_default_color(struct s_console *const __this__)
 #else /* K&R */
 #define FUNCTION_HEADER__CONSOLE_CURSOR_DEFAULT_COLOR \
 	CONSOLE_CURSOR_DEFAULT_COLOR(THIS)\
-	struct s_console	*THIS;
+	struct s_console	*const THIS;
 #define FUNCTION_HEADER__console_cursor_default_color \
-	console_cursor_default_color(THIS)\
-	struct s_console	*THIS;
+	console_cursor_default_color(__this__)\
+	struct s_console	*const __this__;
 #endif /* !KNR_STYLE */
 
 #define LOCALFUNCTION__CONSOLE_CURSOR_DEFAULT_COLOR \
@@ -26,6 +26,10 @@
 	\
 	FUNCTION_HEADER__console_cursor_default_color \
 	{\
+		union U_CONSOLE_STORAGE	*const __THIS_CONVERTER__ = \
+			(union U_CONSOLE_STORAGE *)(PTR)__this__;\
+		struct S_CONSOLE		*const THIS = &__THIS_CONVERTER__->UPPER;\
+		\
 		LOCALMACRO__CMT_CONSOLE__CURSOR_DEFAULT_COLOR_CONTENT\
 	}
 

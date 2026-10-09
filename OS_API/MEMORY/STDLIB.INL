@@ -7,14 +7,24 @@
 /******* """"""""""
  * typedef	size_t;
  */
+
+#ifdef __cplusplus /* C++ HEADERS DECLARE THESE WITH noexcept: USE THEIRS */
+#include <stdlib.h>
+/******* """"""""""
+ * void	free(void *);
+ * void	*realloc(void *, size_t);
+ * void	*calloc(size_t, size_t);
+ * void	*malloc(size_t);
+ */
+#endif /* __cplusplus */
 /* **************************** [^] INCLUDES [^] **************************** */
 
 /* *************************** [v] MVS LINKER [v] *************************** */
 /* **** MVS LINKER DOES NOT SUPPORT EXTERNAL NAMES LARGER THAN 8 BYTES!! **** */
 #ifdef __MVS__ /* IBM Z/OS XL C/C++ */
-#define G_HEAP_PTRS G_HPTRS
+#define G_HEAP_PTRS G_HEPTRS
 #define G_HEAP_COUNT G_HCOUNT
-#define G_HEAP_CAPACITY G_HCAP
+#define G_HEAP_CAPACITY G_HEACAP
 #endif /* __MVS__ */
 /* *************************** [^] MVS LINKER [^] *************************** */
 
@@ -23,7 +33,9 @@ EXTERN_C_START
 extern PTR	*G_HEAP_PTRS;
 extern LET	G_HEAP_COUNT;
 extern LET	G_HEAP_CAPACITY;
+EXTERN_C_END
 
+#ifndef __cplusplus
 #ifndef KNR_STYLE /* ANSI C */
 extern void	free(void *);
 extern void	*realloc(void *, size_t);
@@ -35,7 +47,7 @@ extern		free();
 extern char	*calloc();
 extern char	*malloc();
 #endif /* !KNR_STYLE */
-EXTERN_C_END
+#endif /* !__cplusplus */
 /* **************************** [^] EXTERNS [^] ***************************** */
 
 /* *************************** [v] MVS LINKER [v] *************************** */

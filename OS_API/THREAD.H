@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2025/06/05 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - Apache2.0 :: Update - 2026/10/02 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - Apache2.0 :: Update - 2026/10/06 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -343,6 +343,14 @@
 #endif /* __TI_COMPILER_VERSION__ */
 #endif /* !LOCALMACRO_THREAD_FOUND */
 /* ******************* [^] LOCALMACRO_THREAD_TI_RTOS [^] ******************** */
+
+#ifndef GLOBALCONSTRUCTOR__TRY_CATCH
+#define GLOBALCONSTRUCTOR__TRY_CATCH
+#endif /* !GLOBALCONSTRUCTOR__TRY_CATCH */
+
+#ifndef GLOBALDESTRUCTOR__TRY_CATCH
+#define GLOBALDESTRUCTOR__TRY_CATCH
+#endif /* !GLOBALDESTRUCTOR__TRY_CATCH */
 
 #ifdef LOCALMACRO_THREAD_FOUND
 #undef LOCALMACRO_THREAD_FOUND

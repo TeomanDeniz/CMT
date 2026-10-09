@@ -1,4 +1,4 @@
-#define SIZEOF_RET 2
+#define SIZEOF_RET 1
 #define SIZEOF_CPUID 2
 #define SIZEOF_INT_ 2
 

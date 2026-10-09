@@ -246,6 +246,7 @@ EXTERN_C_END
 /* *************************** [^] MVS LINKER [^] *************************** */
 
 /* **************************** [v] EXTERNS [v] ***************************** */
+EXTERN_C_START
 #ifndef KNR_STYLE /* STANDARD C */
 extern void	*PEB_GET_EXPORT(const unsigned char *, const char *);
 extern void	*PEB_GET_MODULE_BASE(const char *);
@@ -269,6 +270,7 @@ extern unsigned long	READ_GS_QWORD();
 #endif /* __SYSTEM_64_BIT__ */
 #endif /* __SYSTEM_32_BIT__ */
 #endif /* !KNR_STYLE */
+EXTERN_C_END
 /* **************************** [^] EXTERNS [^] ***************************** */
 
 /**@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@**\

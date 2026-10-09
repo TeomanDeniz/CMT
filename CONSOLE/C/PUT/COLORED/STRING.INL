@@ -6,7 +6,7 @@
 #define FUNCTION_HEADER__CONSOLE_PUT_COLORED_STRING \
 	void\
 		CONSOLE_PUT_COLORED_STRING(\
-			struct s_console *THIS, \
+			struct s_console *const THIS, \
 			char *STRING, \
 			unsigned int COLOR_VALUE, \
 			unsigned int X, \
@@ -15,7 +15,7 @@
 #define FUNCTION_HEADER__console_put_colored_string \
 	void\
 		console_put_colored_string(\
-			struct s_console *THIS, \
+			struct s_console *const __this__, \
 			char *STRING, \
 			unsigned int COLOR_VALUE, \
 			unsigned int X, \
@@ -24,14 +24,14 @@
 #else /* K&R */
 #define FUNCTION_HEADER__CONSOLE_PUT_COLORED_STRING \
 	CONSOLE_PUT_COLORED_STRING(THIS, STRING, COLOR_VALUE, X, Y)\
-	struct s_console	*THIS;\
+	struct s_console	*const THIS;\
 	char				*STRING;\
 	unsigned int		COLOR_VALUE;\
 	unsigned int		X;\
 	unsigned int		Y;
 #define FUNCTION_HEADER__console_put_colored_string \
-	console_put_colored_string(THIS, STRING, COLOR_VALUE, X, Y)\
-	struct s_console	*THIS;\
+	console_put_colored_string(__this__, STRING, COLOR_VALUE, X, Y)\
+	struct s_console	*const __this__;\
 	char				*STRING;\
 	unsigned int		COLOR_VALUE;\
 	unsigned int		X;\
@@ -46,6 +46,10 @@
 	\
 	FUNCTION_HEADER__console_put_colored_string \
 	{\
+		union U_CONSOLE_STORAGE	*const __THIS_CONVERTER__ = \
+			(union U_CONSOLE_STORAGE *)(PTR)__this__;\
+		struct S_CONSOLE		*const THIS = &__THIS_CONVERTER__->UPPER;\
+		\
 		LOCALMACRO__CMT_CONSOLE__PUT_COLORED_STRING_CONTENT\
 	}
 

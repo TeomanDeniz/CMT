@@ -4,7 +4,7 @@
 
 #ifdef __SYSTEM_32_BIT__
 #define ENDBR64 ENDBR32
-#endif /* __SYSTEM_64_BIT__ */
+#endif /* __SYSTEM_32_BIT__ */
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\
  * * AT THE ALL END OF FILES, I AM ADDING A SPECIAL BYTE <0X1A> TO END THE  * *

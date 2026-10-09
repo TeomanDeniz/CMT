@@ -104,7 +104,7 @@
 		__CMT_CONSTRUCTOR__(void)\
 	{\
 		CMT_AUTO_CONSTRUCTOR\
-	}
+	}\
 	\
 	void\
 		__CMT_DESTRUCTOR__(void)\
@@ -117,7 +117,7 @@
 		__CMT_CONSTRUCTOR__()\
 	{\
 		CMT_AUTO_CONSTRUCTOR\
-	}
+	}\
 	\
 	int\
 		__CMT_DESTRUCTOR__()\
@@ -143,14 +143,14 @@ extern int	__CMT_DESTRUCTOR__();
 	CMT_AUTO_LINKER\
 	LOCALMACRO__MAIN\
 	{\
-		__CMT_CONSTRUCTOR__()\
+		__CMT_CONSTRUCTOR__();\
 		\
 		/* TODO: HANDLE ENV */\
 		extern int	__MAIN__();\
 		\
 		int	RESULT = ((int (*)(int, char **))(void *)__MAIN__)(ARGC, ARGV);\
 		\
-		__CMT_DESTRUCTOR__()\
+		__CMT_DESTRUCTOR__();\
 		return (RESULT);\
 	}\
 	int	__MAIN__
@@ -158,7 +158,7 @@ extern int	__CMT_DESTRUCTOR__();
 	CMT_AUTO_LINKER\
 	LOCALMACRO__WINMAIN\
 	{\
-		__CMT_CONSTRUCTOR__()\
+		__CMT_CONSTRUCTOR__();\
 		\
 		extern int	__WIN_MAIN__();\
 		\
@@ -169,7 +169,7 @@ extern int	__CMT_DESTRUCTOR__();
 			)\
 		);\
 		\
-		__CMT_DESTRUCTOR__()\
+		__CMT_DESTRUCTOR__();\
 		return (RESULT);\
 	}\
 	int __WIN_MAIN__
@@ -178,14 +178,14 @@ extern int	__CMT_DESTRUCTOR__();
 	CMT_AUTO_LINKER\
 	LOCALMACRO__MAIN\
 	{\
-		__CMT_CONSTRUCTOR__()\
+		__CMT_CONSTRUCTOR__();\
 		\
 		/* TODO: HANDLE ENV */\
 		extern int	__MAIN__();\
 		\
 		int	RESULT = __MAIN__(ARGC, ARGV);\
 		\
-		__CMT_DESTRUCTOR__()\
+		__CMT_DESTRUCTOR__();\
 		return (RESULT);\
 	}\
 	int	__MAIN__
@@ -193,7 +193,7 @@ extern int	__CMT_DESTRUCTOR__();
 	CMT_AUTO_LINKER\
 	LOCALMACRO__WINMAIN\
 	{\
-		__CMT_CONSTRUCTOR__()\
+		__CMT_CONSTRUCTOR__();\
 		\
 		extern int	__WIN_MAIN__();\
 		\
@@ -201,7 +201,7 @@ extern int	__CMT_DESTRUCTOR__();
 			HANDLE_INSTANCE, HANDLE_PREVIOUS_INSTANCE, CMD_LINE, CMD_SHOW\
 		);\
 		\
-		__CMT_DESTRUCTOR__()\
+		__CMT_DESTRUCTOR__();\
 		return (RESULT);\
 	}\
 	int __WIN_MAIN__

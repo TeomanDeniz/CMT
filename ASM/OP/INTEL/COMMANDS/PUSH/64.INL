@@ -28,6 +28,14 @@
 #define _PUSH_RDI __ASM__OP__(0X57)
 #define _PUSH_RBP __ASM__OP__(0X55)
 #define _PUSH_RSP __ASM__OP__(0X54)
+#define _PUSH_R8 __ASM__OP__(0X41) __ASM__OP__(0X50)
+#define _PUSH_R9 __ASM__OP__(0X41) __ASM__OP__(0X51)
+#define _PUSH_R10 __ASM__OP__(0X41) __ASM__OP__(0X52)
+#define _PUSH_R11 __ASM__OP__(0X41) __ASM__OP__(0X53)
+#define _PUSH_R12 __ASM__OP__(0X41) __ASM__OP__(0X54)
+#define _PUSH_R13 __ASM__OP__(0X41) __ASM__OP__(0X55)
+#define _PUSH_R14 __ASM__OP__(0X41) __ASM__OP__(0X56)
+#define _PUSH_R15 __ASM__OP__(0X41) __ASM__OP__(0X57)
 /* ************************ [^] 64-BIT REGISTERS [^] ************************ */
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\

@@ -24,10 +24,18 @@
 #define OR_DL_CL CMT_ASM("orb %cl, %dl")
 #define OR_DL_DL CMT_ASM("orb %dl, %dl")
 
-#define OR_AL_(VALUE) CMT_ASM("orb $" _(VALUE) ", %al")
-#define OR_BL_(VALUE) CMT_ASM("orb $" _(VALUE) ", %bl")
-#define OR_CL_(VALUE) CMT_ASM("orb $" _(VALUE) ", %cl")
-#define OR_DL_(VALUE) CMT_ASM("orb $" _(VALUE) ", %dl")
+#define OR_AL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XC8 # orb $" _(VALUE) ", %al")\
+	CMT_ASM(".byte " _(VALUE))
+#define OR_BL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XCB # orb $" _(VALUE) ", %bl")\
+	CMT_ASM(".byte " _(VALUE))
+#define OR_CL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XC9 # orb $" _(VALUE) ", %cl")\
+	CMT_ASM(".byte " _(VALUE))
+#define OR_DL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XCA # orb $" _(VALUE) ", %dl")\
+	CMT_ASM(".byte " _(VALUE))
 #endif /* __SYSTEM_16_BIT__ */
 
 #ifdef __SYSTEM_32_BIT__
@@ -51,10 +59,18 @@
 #define OR_DL_CL CMT_ASM("orb %cl, %dl")
 #define OR_DL_DL CMT_ASM("orb %dl, %dl")
 
-#define OR_AL_(VALUE) CMT_ASM("orb $" _(VALUE) ", %al")
-#define OR_BL_(VALUE) CMT_ASM("orb $" _(VALUE) ", %bl")
-#define OR_CL_(VALUE) CMT_ASM("orb $" _(VALUE) ", %cl")
-#define OR_DL_(VALUE) CMT_ASM("orb $" _(VALUE) ", %dl")
+#define OR_AL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XC8 # orb $" _(VALUE) ", %al")\
+	CMT_ASM(".byte " _(VALUE))
+#define OR_BL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XCB # orb $" _(VALUE) ", %bl")\
+	CMT_ASM(".byte " _(VALUE))
+#define OR_CL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XC9 # orb $" _(VALUE) ", %cl")\
+	CMT_ASM(".byte " _(VALUE))
+#define OR_DL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XCA # orb $" _(VALUE) ", %dl")\
+	CMT_ASM(".byte " _(VALUE))
 #endif /* __SYSTEM_32_BIT__ */
 
 #ifdef __SYSTEM_64_BIT__
@@ -330,22 +346,54 @@
 #define OR_R15B_R14B CMT_ASM("orb %r14b, %r15b")
 #define OR_R15B_R15B CMT_ASM("orb %r15b, %r15b")
 
-#define OR_AL_(VALUE) CMT_ASM("orb $" _(VALUE) ", %al")
-#define OR_BL_(VALUE) CMT_ASM("orb $" _(VALUE) ", %bl")
-#define OR_CL_(VALUE) CMT_ASM("orb $" _(VALUE) ", %cl")
-#define OR_DL_(VALUE) CMT_ASM("orb $" _(VALUE) ", %dl")
-#define OR_DIL_(VALUE) CMT_ASM("orb $" _(VALUE) ", %dil")
-#define OR_SIL_(VALUE) CMT_ASM("orb $" _(VALUE) ", %sil")
-#define OR_BPL_(VALUE) CMT_ASM("orb $" _(VALUE) ", %bpl")
-#define OR_SPL_(VALUE) CMT_ASM("orb $" _(VALUE) ", %spl")
-#define OR_R8B_(VALUE) CMT_ASM("orb $" _(VALUE) ", %r8b")
-#define OR_R9B_(VALUE) CMT_ASM("orb $" _(VALUE) ", %r9b")
-#define OR_R10B_(VALUE) CMT_ASM("orb $" _(VALUE) ", %r10b")
-#define OR_R11B_(VALUE) CMT_ASM("orb $" _(VALUE) ", %r11b")
-#define OR_R12B_(VALUE) CMT_ASM("orb $" _(VALUE) ", %r12b")
-#define OR_R13B_(VALUE) CMT_ASM("orb $" _(VALUE) ", %r13b")
-#define OR_R14B_(VALUE) CMT_ASM("orb $" _(VALUE) ", %r14b")
-#define OR_R15B_(VALUE) CMT_ASM("orb $" _(VALUE) ", %r15b")
+#define OR_AL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XC8 # orb $" _(VALUE) ", %al")\
+	CMT_ASM(".byte " _(VALUE))
+#define OR_BL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XCB # orb $" _(VALUE) ", %bl")\
+	CMT_ASM(".byte " _(VALUE))
+#define OR_CL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XC9 # orb $" _(VALUE) ", %cl")\
+	CMT_ASM(".byte " _(VALUE))
+#define OR_DL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XCA # orb $" _(VALUE) ", %dl")\
+	CMT_ASM(".byte " _(VALUE))
+#define OR_DIL_(VALUE) \
+	CMT_ASM(".byte 0X40, 0X80, 0XCF # orb $" _(VALUE) ", %dil")\
+	CMT_ASM(".byte " _(VALUE))
+#define OR_SIL_(VALUE) \
+	CMT_ASM(".byte 0X40, 0X80, 0XCE # orb $" _(VALUE) ", %sil")\
+	CMT_ASM(".byte " _(VALUE))
+#define OR_BPL_(VALUE) \
+	CMT_ASM(".byte 0X40, 0X80, 0XCD # orb $" _(VALUE) ", %bpl")\
+	CMT_ASM(".byte " _(VALUE))
+#define OR_SPL_(VALUE) \
+	CMT_ASM(".byte 0X40, 0X80, 0XCC # orb $" _(VALUE) ", %spl")\
+	CMT_ASM(".byte " _(VALUE))
+#define OR_R8B_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X80, 0XC8 # orb $" _(VALUE) ", %r8b")\
+	CMT_ASM(".byte " _(VALUE))
+#define OR_R9B_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X80, 0XC9 # orb $" _(VALUE) ", %r9b")\
+	CMT_ASM(".byte " _(VALUE))
+#define OR_R10B_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X80, 0XCA # orb $" _(VALUE) ", %r10b")\
+	CMT_ASM(".byte " _(VALUE))
+#define OR_R11B_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X80, 0XCB # orb $" _(VALUE) ", %r11b")\
+	CMT_ASM(".byte " _(VALUE))
+#define OR_R12B_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X80, 0XCC # orb $" _(VALUE) ", %r12b")\
+	CMT_ASM(".byte " _(VALUE))
+#define OR_R13B_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X80, 0XCD # orb $" _(VALUE) ", %r13b")\
+	CMT_ASM(".byte " _(VALUE))
+#define OR_R14B_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X80, 0XCE # orb $" _(VALUE) ", %r14b")\
+	CMT_ASM(".byte " _(VALUE))
+#define OR_R15B_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X80, 0XCF # orb $" _(VALUE) ", %r15b")\
+	CMT_ASM(".byte " _(VALUE))
 #endif /* __SYSTEM_64_BIT__ */
 /* ************************ [^] 8-BIT REGISTERS [^] ************************* */
 
@@ -423,14 +471,30 @@
 #define OR_SP_BP CMT_ASM("orw %bp, %sp")
 #define OR_SP_SP CMT_ASM("orw %sp, %sp")
 
-#define OR_AX_(VALUE) CMT_ASM("orw $" _(VALUE) ", %ax")
-#define OR_BX_(VALUE) CMT_ASM("orw $" _(VALUE) ", %bx")
-#define OR_CX_(VALUE) CMT_ASM("orw $" _(VALUE) ", %cx")
-#define OR_DX_(VALUE) CMT_ASM("orw $" _(VALUE) ", %dx")
-#define OR_DI_(VALUE) CMT_ASM("orw $" _(VALUE) ", %di")
-#define OR_SI_(VALUE) CMT_ASM("orw $" _(VALUE) ", %si")
-#define OR_BP_(VALUE) CMT_ASM("orw $" _(VALUE) ", %bp")
-#define OR_SP_(VALUE) CMT_ASM("orw $" _(VALUE) ", %sp")
+#define OR_AX_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XC8 # orw $" _(VALUE) ", %ax")\
+	CMT_ASM(".short " _(VALUE))
+#define OR_BX_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XCB # orw $" _(VALUE) ", %bx")\
+	CMT_ASM(".short " _(VALUE))
+#define OR_CX_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XC9 # orw $" _(VALUE) ", %cx")\
+	CMT_ASM(".short " _(VALUE))
+#define OR_DX_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XCA # orw $" _(VALUE) ", %dx")\
+	CMT_ASM(".short " _(VALUE))
+#define OR_DI_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XCF # orw $" _(VALUE) ", %di")\
+	CMT_ASM(".short " _(VALUE))
+#define OR_SI_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XCE # orw $" _(VALUE) ", %si")\
+	CMT_ASM(".short " _(VALUE))
+#define OR_BP_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XCD # orw $" _(VALUE) ", %bp")\
+	CMT_ASM(".short " _(VALUE))
+#define OR_SP_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XCC # orw $" _(VALUE) ", %sp")\
+	CMT_ASM(".short " _(VALUE))
 #endif /* __SYSTEM_16_BIT__ */
 
 #ifdef __SYSTEM_32_BIT__
@@ -506,14 +570,30 @@
 #define OR_SP_BP CMT_ASM("orw %bp, %sp")
 #define OR_SP_SP CMT_ASM("orw %sp, %sp")
 
-#define OR_AX_(VALUE) CMT_ASM("orw $" _(VALUE) ", %ax")
-#define OR_BX_(VALUE) CMT_ASM("orw $" _(VALUE) ", %bx")
-#define OR_CX_(VALUE) CMT_ASM("orw $" _(VALUE) ", %cx")
-#define OR_DX_(VALUE) CMT_ASM("orw $" _(VALUE) ", %dx")
-#define OR_DI_(VALUE) CMT_ASM("orw $" _(VALUE) ", %di")
-#define OR_SI_(VALUE) CMT_ASM("orw $" _(VALUE) ", %si")
-#define OR_BP_(VALUE) CMT_ASM("orw $" _(VALUE) ", %bp")
-#define OR_SP_(VALUE) CMT_ASM("orw $" _(VALUE) ", %sp")
+#define OR_AX_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XC8 # orw $" _(VALUE) ", %ax")\
+	CMT_ASM(".short " _(VALUE))
+#define OR_BX_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XCB # orw $" _(VALUE) ", %bx")\
+	CMT_ASM(".short " _(VALUE))
+#define OR_CX_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XC9 # orw $" _(VALUE) ", %cx")\
+	CMT_ASM(".short " _(VALUE))
+#define OR_DX_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XCA # orw $" _(VALUE) ", %dx")\
+	CMT_ASM(".short " _(VALUE))
+#define OR_DI_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XCF # orw $" _(VALUE) ", %di")\
+	CMT_ASM(".short " _(VALUE))
+#define OR_SI_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XCE # orw $" _(VALUE) ", %si")\
+	CMT_ASM(".short " _(VALUE))
+#define OR_BP_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XCD # orw $" _(VALUE) ", %bp")\
+	CMT_ASM(".short " _(VALUE))
+#define OR_SP_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XCC # orw $" _(VALUE) ", %sp")\
+	CMT_ASM(".short " _(VALUE))
 #endif /* __SYSTEM_32_BIT__ */
 
 #ifdef __SYSTEM_64_BIT__
@@ -789,22 +869,54 @@
 #define OR_R15W_R14W CMT_ASM("orw %r14w, %r15w")
 #define OR_R15W_R15W CMT_ASM("orw %r15w, %r15w")
 
-#define OR_AX_(VALUE) CMT_ASM("orw $" _(VALUE) ", %ax")
-#define OR_BX_(VALUE) CMT_ASM("orw $" _(VALUE) ", %bx")
-#define OR_CX_(VALUE) CMT_ASM("orw $" _(VALUE) ", %cx")
-#define OR_DX_(VALUE) CMT_ASM("orw $" _(VALUE) ", %dx")
-#define OR_DI_(VALUE) CMT_ASM("orw $" _(VALUE) ", %di")
-#define OR_SI_(VALUE) CMT_ASM("orw $" _(VALUE) ", %si")
-#define OR_BP_(VALUE) CMT_ASM("orw $" _(VALUE) ", %bp")
-#define OR_SP_(VALUE) CMT_ASM("orw $" _(VALUE) ", %sp")
-#define OR_R8W_(VALUE) CMT_ASM("orw $" _(VALUE) ", %r8w")
-#define OR_R9W_(VALUE) CMT_ASM("orw $" _(VALUE) ", %r9w")
-#define OR_R10W_(VALUE) CMT_ASM("orw $" _(VALUE) ", %r10w")
-#define OR_R11W_(VALUE) CMT_ASM("orw $" _(VALUE) ", %r11w")
-#define OR_R12W_(VALUE) CMT_ASM("orw $" _(VALUE) ", %r12w")
-#define OR_R13W_(VALUE) CMT_ASM("orw $" _(VALUE) ", %r13w")
-#define OR_R14W_(VALUE) CMT_ASM("orw $" _(VALUE) ", %r14w")
-#define OR_R15W_(VALUE) CMT_ASM("orw $" _(VALUE) ", %r15w")
+#define OR_AX_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XC8 # orw $" _(VALUE) ", %ax")\
+	CMT_ASM(".short " _(VALUE))
+#define OR_BX_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XCB # orw $" _(VALUE) ", %bx")\
+	CMT_ASM(".short " _(VALUE))
+#define OR_CX_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XC9 # orw $" _(VALUE) ", %cx")\
+	CMT_ASM(".short " _(VALUE))
+#define OR_DX_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XCA # orw $" _(VALUE) ", %dx")\
+	CMT_ASM(".short " _(VALUE))
+#define OR_DI_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XCF # orw $" _(VALUE) ", %di")\
+	CMT_ASM(".short " _(VALUE))
+#define OR_SI_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XCE # orw $" _(VALUE) ", %si")\
+	CMT_ASM(".short " _(VALUE))
+#define OR_BP_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XCD # orw $" _(VALUE) ", %bp")\
+	CMT_ASM(".short " _(VALUE))
+#define OR_SP_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XCC # orw $" _(VALUE) ", %sp")\
+	CMT_ASM(".short " _(VALUE))
+#define OR_R8W_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X41, 0X81, 0XC8 # orw $" _(VALUE) ", %r8w")\
+	CMT_ASM(".short " _(VALUE))
+#define OR_R9W_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X41, 0X81, 0XC9 # orw $" _(VALUE) ", %r9w")\
+	CMT_ASM(".short " _(VALUE))
+#define OR_R10W_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X41, 0X81, 0XCA # orw $" _(VALUE) ", %r10w")\
+	CMT_ASM(".short " _(VALUE))
+#define OR_R11W_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X41, 0X81, 0XCB # orw $" _(VALUE) ", %r11w")\
+	CMT_ASM(".short " _(VALUE))
+#define OR_R12W_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X41, 0X81, 0XCC # orw $" _(VALUE) ", %r12w")\
+	CMT_ASM(".short " _(VALUE))
+#define OR_R13W_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X41, 0X81, 0XCD # orw $" _(VALUE) ", %r13w")\
+	CMT_ASM(".short " _(VALUE))
+#define OR_R14W_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X41, 0X81, 0XCE # orw $" _(VALUE) ", %r14w")\
+	CMT_ASM(".short " _(VALUE))
+#define OR_R15W_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X41, 0X81, 0XCF # orw $" _(VALUE) ", %r15w")\
+	CMT_ASM(".short " _(VALUE))
 #endif /* __SYSTEM_64_BIT__ */
 /* ************************ [^] 16-BIT REGISTERS [^] ************************ */
 

@@ -76,8 +76,9 @@
 		\
 		if (THIS->_PUSH_CAPACITY >= NEEDED)\
 		{\
-			char	*TAIL = ((char *)THIS->_PUSH_DATA) + THIS->_PUSH_SIZE;\
-			LET		INDEX = (LET)0;\
+			REGISTER LET	INDEX = (LET)0;\
+			char			*TAIL = \
+				((char *)THIS->_PUSH_DATA) + THIS->_PUSH_SIZE;\
 			\
 			while (INDEX < LENGTH)\
 			{\

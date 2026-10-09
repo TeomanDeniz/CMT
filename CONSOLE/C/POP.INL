@@ -5,17 +5,17 @@
 #ifndef KNR_STYLE /* STANDARD C */
 #define FUNCTION_HEADER__CONSOLE_POP \
 	void\
-		CONSOLE_POP(struct s_console *THIS)
+		CONSOLE_POP(struct s_console *const THIS)
 #define FUNCTION_HEADER__console_pop \
 	void\
-		console_pop(struct s_console *THIS)
+		console_pop(struct s_console *const __this__)
 #else /* K&R */
 #define FUNCTION_HEADER__CONSOLE_POP \
 	CONSOLE_POP(THIS)\
-	struct s_console	THIS;
+	struct s_console	*const THIS;
 #define FUNCTION_HEADER__console_pop \
-	console_pop(THIS)\
-	struct s_console	THIS;
+	console_pop(__this__)\
+	struct s_console	*const __this__;
 #endif /* !KNR_STYLE */
 
 #define LOCALFUNCTION__CONSOLE_POP \
@@ -26,6 +26,10 @@
 	\
 	FUNCTION_HEADER__console_pop \
 	{\
+		union U_CONSOLE_STORAGE	*const __THIS_CONVERTER__ = \
+			(union U_CONSOLE_STORAGE *)(PTR)__this__;\
+		struct S_CONSOLE		*const THIS = &__THIS_CONVERTER__->UPPER;\
+		\
 		LOCALMACRO__CMT_CONSOLE__POP_CONTENT\
 	}
 

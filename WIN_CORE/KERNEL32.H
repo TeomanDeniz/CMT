@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2026/05/19 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - Apache2.0 :: Update - 2026/09/28 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - Apache2.0 :: Update - 2026/10/07 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -108,7 +108,7 @@ typedef LONG_PTR  SSIZE_T;
 */
 
 #ifndef KERNEL32_H
-#define KERNEL32_H 202609 /* VERSION */
+#define KERNEL32_H 202610 /* VERSION */
 
 /* *********************** [v] TI CGT CCS (PUSH) [v] ************************ */
 #ifdef __TI_COMPILER_VERSION__
@@ -150,6 +150,356 @@ typedef LONG_PTR  SSIZE_T;
  */
 /* **************************** [^] INCLUDES [^] **************************** */
 
+/* **************************** [v] TYPEDEFS [v] **************************** */
+#ifndef KNR_STYLE /* STANDARD C */
+#define T_KERNEL32__LoadLibraryA(NAME) PTR (STDCALL *NAME)(const char *)
+#define T_KERNEL32__LoadLibraryExA(NAME) \
+	PTR (STDCALL *NAME)(\
+		const char *, PTR, unsigned long\
+	)
+#define T_KERNEL32__FreeLibrary(NAME) int (STDCALL *NAME)(PTR)
+#define T_KERNEL32__GetProcAddress(NAME) PTR (STDCALL *NAME)(PTR, const char *)
+#define T_KERNEL32__GetModuleHandleA(NAME) PTR (STDCALL *NAME)(const char *)
+#define T_KERNEL32__GetCurrentProcess(NAME) PTR (STDCALL *NAME)(void)
+#define T_KERNEL32__GetCurrentProcessId(NAME) \
+	unsigned long (STDCALL *NAME)(void)
+#define T_KERNEL32__TerminateProcess(NAME) \
+	int (STDCALL *NAME)(PTR, unsigned int)
+#define T_KERNEL32__ExitProcess(NAME) void (STDCALL *NAME)(unsigned int)
+#define T_KERNEL32__CreateThread(NAME) PTR (STDCALL *NAME)(\
+		PTR, \
+		LET, \
+		unsigned long (STDCALL *NAME)(PTR), \
+		PTR, \
+		unsigned long, \
+		unsigned long *\
+	)
+#define T_KERNEL32__GetCurrentThread(NAME) PTR (STDCALL *NAME)(void)
+#define T_KERNEL32__GetCurrentThreadId(NAME) unsigned long (STDCALL *NAME)(void)
+#define T_KERNEL32__ExitThread(NAME) void (STDCALL *NAME)(unsigned long)
+#define T_KERNEL32__SuspendThread(NAME) unsigned long (STDCALL *NAME)(PTR)
+#define T_KERNEL32__ResumeThread(NAME) unsigned long (STDCALL *NAME)(PTR)
+#define T_KERNEL32__VirtualAlloc(NAME) PTR (STDCALL *NAME)(\
+		PTR, \
+		LET, \
+		unsigned long, \
+		unsigned long\
+	)
+#define T_KERNEL32__VirtualFree(NAME) int (STDCALL *NAME)(\
+		PTR, \
+		LET, \
+		unsigned long\
+	)
+#define T_KERNEL32__VirtualProtect(NAME) int (STDCALL *NAME)(\
+		PTR, \
+		LET, \
+		unsigned long, \
+		unsigned long *\
+	)
+#define T_KERNEL32__RtlMoveMemory(NAME) void (STDCALL *NAME)(\
+		PTR, \
+		const PTR, \
+		LET\
+	)
+#define T_KERNEL32__RtlCopyMemory(NAME) void (STDCALL *NAME)(\
+		PTR, \
+		const PTR, \
+		LET\
+	)
+#define T_KERNEL32__RtlZeroMemory(NAME) void (STDCALL *NAME)(PTR, LET)
+#define T_KERNEL32__GetProcessHeap(NAME) PTR (STDCALL *NAME)(void)
+#define T_KERNEL32__HeapAlloc(NAME) PTR (STDCALL *NAME)(\
+		PTR, \
+		unsigned long, \
+		LET\
+	)
+#define T_KERNEL32__HeapFree(NAME) int (STDCALL *NAME)(\
+		PTR, \
+		unsigned long, \
+		PTR\
+	)
+#define T_KERNEL32__CreateFileA(NAME) PTR (STDCALL *NAME)(\
+		const char *, \
+		unsigned long, \
+		unsigned long, \
+		PTR, \
+		unsigned long, \
+		unsigned long, \
+		PTR\
+	)
+#define T_KERNEL32__ReadFile(NAME) int (STDCALL *NAME)(\
+		PTR, \
+		PTR, \
+		unsigned long, \
+		unsigned long *, \
+		PTR\
+	)
+#define T_KERNEL32__WriteFile(NAME) int (STDCALL *NAME)(\
+		PTR, \
+		const PTR, \
+		unsigned long, \
+		unsigned long *, \
+		PTR\
+	)
+#define T_KERNEL32__CloseHandle(NAME) int (STDCALL *NAME)(PTR)
+#define T_KERNEL32__GetFileSize(NAME) unsigned long (STDCALL *NAME)(\
+		PTR, \
+		unsigned long *\
+	)
+#define T_KERNEL32__DeleteFileA(NAME) int (STDCALL *NAME)(const char*)
+#define T_KERNEL32__GetStdHandle(NAME) PTR (STDCALL *NAME)(unsigned long)
+#define T_KERNEL32__WriteConsoleA(NAME) int (STDCALL *NAME)(\
+		PTR, \
+		const PTR, \
+		unsigned long, \
+		unsigned long *, \
+		PTR\
+	)
+#define T_KERNEL32__WaitForSingleObject(NAME) unsigned long (STDCALL *NAME)(\
+		PTR, \
+		unsigned long\
+	)
+#define T_KERNEL32__Sleep(NAME) void (STDCALL *NAME)(unsigned long)
+#define T_KERNEL32__GetSystemTime(NAME) void (STDCALL *NAME)(PTR)
+#define T_KERNEL32__GetLocalTime(NAME) void (STDCALL *NAME)(PTR)
+#define T_KERNEL32__QueryPerformanceCounter(NAME) \
+	int (STDCALL *NAME)(long long *)
+#define T_KERNEL32__QueryPerformanceFrequency(NAME) \
+	int (STDCALL *NAME)(long long *)
+#define T_KERNEL32__GetLastError(NAME) unsigned long (STDCALL *NAME)(void)
+#define T_KERNEL32__SetLastError(NAME) void (STDCALL *NAME)(unsigned long)
+#define T_KERNEL32__lstrcmpA(NAME) int (STDCALL *NAME)(\
+		const char *, \
+		const char *\
+	)
+#define T_KERNEL32__lstrcpyA(NAME) char *(STDCALL *NAME)(char *, const char *)
+#define T_KERNEL32__lstrlenA(NAME) unsigned long (STDCALL *NAME)(const char *)
+#define T_KERNEL32__FlushInstructionCache(NAME) int (STDCALL *NAME)(\
+		PTR, \
+		const PTR, \
+		LET\
+	)
+#define T_KERNEL32__GetSystemInfo(NAME) \
+	void (STDCALL *NAME)(struct S_SYSTEM_INFO *)
+#define T_KERNEL32__GetExitCodeThread(NAME) \
+	int (STDCALL *NAME)(PTR, unsigned long *)
+#define T_KERNEL32__InitializeCriticalSection(NAME) void (STDCALL *NAME)(\
+		struct S_CRITICAL_SECTION *\
+	)
+#define T_KERNEL32__DeleteCriticalSection(NAME) void (STDCALL *NAME)(PTR)
+#define T_KERNEL32__EnterCriticalSection(NAME) void (STDCALL *NAME)(PTR)
+#define T_KERNEL32__LeaveCriticalSection(NAME) void (STDCALL *NAME)(PTR)
+#define T_KERNEL32__GlobalAlloc(NAME) PTR (STDCALL *NAME)(unsigned long, LET)
+#define T_KERNEL32__GlobalLock(NAME) PTR (STDCALL *NAME)(PTR)
+#define T_KERNEL32__GlobalUnlock(NAME) int (STDCALL *NAME)(PTR)
+#define T_KERNEL32__GlobalReAlloc(NAME) PTR (STDCALL *NAME)(\
+		PTR, \
+		LET, \
+		unsigned long\
+	)
+#define T_KERNEL32__GlobalFree(NAME) PTR (STDCALL *NAME)(PTR)
+#define T_KERNEL32__CreateFileMappingA(NAME) PTR (STDCALL *NAME)(\
+		PTR, \
+		PTR, \
+		unsigned long, \
+		unsigned long, \
+		unsigned long, \
+		const char *\
+	)
+#define T_KERNEL32__MapViewOfFile(NAME) PTR (STDCALL *NAME)(\
+		PTR, \
+		unsigned long, \
+		unsigned long, \
+		unsigned long, \
+		LET\
+	)
+#define T_KERNEL32__UnmapViewOfFile(NAME) int (STDCALL *NAME)(PTR)
+#define T_KERNEL32__SetConsoleTextAttribute(NAME) int (STDCALL *NAME)(\
+		PTR, \
+		unsigned short\
+	)
+#define T_KERNEL32__GetConsoleScreenBufferInfo(NAME) int (STDCALL *NAME)(\
+		PTR, \
+		struct S_CONSOLE_SCREEN_BUFFER_INFO *\
+	)
+#define T_KERNEL32__SetConsoleCursorPosition(NAME) int (STDCALL *NAME)(\
+		PTR, \
+		struct S_COORD\
+	)
+#define T_KERNEL32__SetConsoleCursorInfo(NAME) int (STDCALL *NAME)(\
+		PTR, \
+		struct S_CONSOLE_CURSOR_INFO *\
+	)
+#define T_KERNEL32__GetConsoleCursorInfo(NAME) int (STDCALL *NAME)(\
+		PTR, \
+		struct S_CONSOLE_CURSOR_INFO *\
+	)
+#define T_KERNEL32__GetConsoleWindow(NAME) PTR (STDCALL *NAME)(void)
+#define T_KERNEL32__SetConsoleScreenBufferSize(NAME) int (STDCALL *NAME)(\
+		PTR, \
+		struct S_COORD\
+	)
+#define T_KERNEL32__SetConsoleWindowInfo(NAME) int (STDCALL *NAME)(\
+		PTR, \
+		int, \
+		const struct S_SMALL_RECT *\
+	)
+#define T_KERNEL32__GetLargestConsoleWindowSize(NAME) \
+	struct S_COORD (STDCALL *NAME)(PTR)
+#define T_KERNEL32__FillConsoleOutputCharacterA(NAME) int (STDCALL *NAME)(\
+		PTR, \
+		char, \
+		unsigned long, \
+		struct S_COORD, \
+		unsigned long *\
+	)
+#define T_KERNEL32__FillConsoleOutputAttribute(NAME) int (STDCALL *NAME)(\
+		PTR, \
+		unsigned short, \
+		unsigned long, \
+		struct S_COORD, \
+		unsigned long *\
+	)
+#define T_KERNEL32__WriteConsoleOutputCharacterA(NAME) int (STDCALL *NAME)(\
+		PTR, \
+		const char *, \
+		unsigned long, \
+		struct S_COORD, \
+		unsigned long *\
+	)
+#define T_KERNEL32__WriteConsoleOutputAttribute(NAME) int (STDCALL *NAME)(\
+		PTR, \
+		const unsigned short *, \
+		unsigned long, \
+		struct S_COORD, \
+		unsigned long *\
+	)
+#define T_KERNEL32__ReadConsoleOutputCharacterA(NAME) int (STDCALL *NAME)(\
+		PTR, \
+		char *, \
+		unsigned long, \
+		struct S_COORD, \
+		unsigned long *\
+	)
+#define T_KERNEL32__ReadConsoleOutputAttribute(NAME) int (STDCALL *NAME)(\
+		PTR, \
+		unsigned short *, \
+		unsigned long, \
+		struct S_COORD, \
+		unsigned long *\
+	)
+#define T_KERNEL32__ReadConsoleInputA(NAME) int (STDCALL *NAME)(\
+		PTR, \
+		struct S_INPUT_RECORD *, \
+		unsigned long, \
+		unsigned long *\
+	)
+#define T_KERNEL32__GetConsoleMode(NAME) int (STDCALL *NAME)(\
+		PTR, \
+		unsigned long *\
+	)
+#define T_KERNEL32__SetConsoleMode(NAME) int (STDCALL *NAME)(\
+		PTR, \
+		unsigned long\
+	)
+#define T_KERNEL32__HeapReAlloc(NAME) PTR (STDCALL *NAME)(\
+		PTR, \
+		unsigned long, \
+		PTR, \
+		LET\
+	)
+#define T_KERNEL32__SetConsoleTitleA(NAME) int (STDCALL *NAME)(const char *)
+#define T_KERNEL32__GetEnvironmentVariableA(NAME) \
+	unsigned long (STDCALL *NAME)(\
+		const char *, \
+		char *, \
+		unsigned long\
+	)
+#else /* K&R */
+#define T_KERNEL32__LoadLibraryA(NAME) PTR (STDCALL *NAME)()
+#define T_KERNEL32__LoadLibraryExA(NAME) PTR (STDCALL *NAME)()
+#define T_KERNEL32__FreeLibrary(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__GetProcAddress(NAME) PTR (STDCALL *NAME)()
+#define T_KERNEL32__GetModuleHandleA(NAME) PTR (STDCALL *NAME)()
+#define T_KERNEL32__GetCurrentProcess(NAME) PTR (STDCALL *NAME)()
+#define T_KERNEL32__GetCurrentProcessId(NAME) unsigned long (STDCALL *NAME)()
+#define T_KERNEL32__TerminateProcess(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__ExitProcess(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__CreateThread(NAME) PTR (STDCALL *NAME)()
+#define T_KERNEL32__GetCurrentThread(NAME) PTR (STDCALL *NAME)()
+#define T_KERNEL32__GetCurrentThreadId(NAME) unsigned long (STDCALL *NAME)()
+#define T_KERNEL32__ExitThread(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__SuspendThread(NAME) unsigned long (STDCALL *NAME)()
+#define T_KERNEL32__ResumeThread(NAME) unsigned long (STDCALL *NAME)()
+#define T_KERNEL32__VirtualAlloc(NAME) PTR (STDCALL *NAME)()
+#define T_KERNEL32__VirtualFree(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__VirtualProtect(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__RtlMoveMemory(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__RtlCopyMemory(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__RtlZeroMemory(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__GetProcessHeap(NAME) PTR (STDCALL *NAME)()
+#define T_KERNEL32__HeapAlloc(NAME) PTR (STDCALL *NAME)()
+#define T_KERNEL32__HeapFree(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__CreateFileA(NAME) PTR (STDCALL *NAME)()
+#define T_KERNEL32__ReadFile(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__WriteFile(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__CloseHandle(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__GetFileSize(NAME) unsigned long (STDCALL *NAME)()
+#define T_KERNEL32__DeleteFileA(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__GetStdHandle(NAME) PTR (STDCALL *NAME)()
+#define T_KERNEL32__WriteConsoleA(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__WaitForSingleObject(NAME) unsigned long (STDCALL *NAME)()
+#define T_KERNEL32__Sleep(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__GetSystemTime(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__GetLocalTime(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__QueryPerformanceCounter(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__QueryPerformanceFrequency(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__GetLastError(NAME) unsigned long (STDCALL *NAME)()
+#define T_KERNEL32__SetLastError(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__lstrcmpA(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__lstrcpyA(NAME) char *(STDCALL *NAME)()
+#define T_KERNEL32__lstrlenA(NAME) unsigned long (STDCALL *NAME)()
+#define T_KERNEL32__FlushInstructionCache(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__GetSystemInfo(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__GetExitCodeThread(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__InitializeCriticalSection(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__DeleteCriticalSection(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__EnterCriticalSection(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__LeaveCriticalSection(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__GlobalAlloc(NAME) PTR (STDCALL *NAME)()
+#define T_KERNEL32__GlobalLock(NAME) PTR (STDCALL *NAME)()
+#define T_KERNEL32__GlobalUnlock(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__GlobalReAlloc(NAME) PTR (STDCALL *NAME)()
+#define T_KERNEL32__GlobalFree(NAME) PTR (STDCALL *NAME)()
+#define T_KERNEL32__CreateFileMappingA(NAME) PTR (STDCALL *NAME)()
+#define T_KERNEL32__MapViewOfFile(NAME) PTR (STDCALL *NAME)()
+#define T_KERNEL32__UnmapViewOfFile(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__SetConsoleTextAttribute(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__GetConsoleScreenBufferInfo(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__SetConsoleCursorPosition(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__SetConsoleCursorInfo(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__GetConsoleCursorInfo(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__GetConsoleWindow(NAME) PTR (STDCALL *NAME)()
+#define T_KERNEL32__SetConsoleScreenBufferSize(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__SetConsoleWindowInfo(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__GetLargestConsoleWindowSize(NAME) \
+	struct S_COORD (STDCALL *NAME)()
+#define T_KERNEL32__FillConsoleOutputCharacterA(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__FillConsoleOutputAttribute(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__WriteConsoleOutputCharacterA(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__WriteConsoleOutputAttribute(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__ReadConsoleOutputCharacterA(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__ReadConsoleOutputAttribute(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__ReadConsoleInputA(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__GetConsoleMode(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__SetConsoleMode(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__HeapReAlloc(NAME) PTR (STDCALL *NAME)()
+#define T_KERNEL32__SetConsoleTitleA(NAME) int (STDCALL *NAME)()
+#define T_KERNEL32__GetEnvironmentVariableA(NAME) \
+	unsigned long (STDCALL *NAME)()
+#endif /* !KNR_STYLE */
+/* **************************** [^] TYPEDEFS [^] **************************** */
+
 /* **************************** [v] STRUCTS [v] ***************************** */
 #include "STRUCTS/SYSTEM_INFO.H"
 /******* """""""""""""""""""""""
@@ -182,271 +532,86 @@ struct S_CRITICAL_SECTION test2;
 EXTERN_C_START
 struct S_KERNEL32
 {
-	PTR				SELF;
-#ifndef KNR_STYLE /* STANDARD C */
-	PTR				(STDCALL *LoadLibraryA)(const char *);
-	PTR				(STDCALL *LoadLibraryExA)(
-		const char*,
-		PTR,
-		unsigned long
-	);
-	int				(STDCALL *FreeLibrary)(PTR);
-	PTR				(STDCALL *GetProcAddress)(PTR, const char *);
-	PTR				(STDCALL *GetModuleHandleA)(const char *);
-	PTR				(STDCALL *GetCurrentProcess)(void);
-	unsigned long	(STDCALL *GetCurrentProcessId)(void);
-	int				(STDCALL *TerminateProcess)(PTR, unsigned int);
-	void			(STDCALL *ExitProcess)(unsigned int);
-	PTR				(STDCALL *CreateThread)(
-		PTR,
-		unsigned long,
-		unsigned long (STDCALL *)(PTR),
-		PTR,
-		unsigned long,
-		unsigned long *
-	);
-	PTR				(STDCALL *GetCurrentThread)(void);
-	unsigned long	(STDCALL *GetCurrentThreadId)(void);
-	void			(STDCALL *ExitThread)(unsigned long);
-	unsigned long	(STDCALL *SuspendThread)(PTR);
-	unsigned long	(STDCALL *ResumeThread)(PTR);
-	PTR				(STDCALL *VirtualAlloc)(
-		PTR,
-		unsigned long,
-		unsigned long,
-		unsigned long
-	);
-	int				(STDCALL *VirtualFree)(
-		PTR,
-		unsigned long,
-		unsigned long
-	);
-	int				(STDCALL *VirtualProtect)(
-		PTR,
-		unsigned long,
-		unsigned long,
-		unsigned long *
-	);
-	void			(STDCALL *RtlMoveMemory)(
-		PTR,
-		const PTR,
-		unsigned long
-	);
-	void			(STDCALL *RtlCopyMemory)(
-		PTR,
-		const PTR,
-		unsigned long
-	);
-	void			(STDCALL *RtlZeroMemory)(PTR, unsigned long);
-	PTR				(STDCALL *GetProcessHeap)(void);
-	PTR				(STDCALL *HeapAlloc)(
-		PTR,
-		unsigned long,
-		unsigned long
-	);
-	int				(STDCALL *HeapFree)(
-		PTR,
-		unsigned long,
-		PTR
-	);
-	PTR				(STDCALL *CreateFileA)(
-		const char *,
-		unsigned long,
-		unsigned long,
-		PTR,
-		unsigned long,
-		unsigned long,
-		PTR
-	);
-	int				(STDCALL *ReadFile)(
-		PTR,
-		PTR,
-		unsigned long,
-		unsigned long *,
-		PTR
-	);
-	int				(STDCALL *WriteFile)(
-		PTR,
-		const PTR,
-		unsigned long,
-		unsigned long *,
-		PTR
-	);
-	int				(STDCALL *CloseHandle)(PTR);
-	unsigned long	(STDCALL *GetFileSize)(PTR, unsigned long *);
-	int				(STDCALL *DeleteFileA)(const char*);
-	PTR				(STDCALL *GetStdHandle)(unsigned long);
-	int				(STDCALL *WriteConsoleA)(
-		PTR,
-		const PTR,
-		unsigned long,
-		unsigned long *,
-		PTR
-	);
-	unsigned long	(STDCALL *WaitForSingleObject)(PTR, unsigned long);
-	void			(STDCALL *Sleep)(unsigned long);
-	void			(STDCALL *GetSystemTime)(PTR);
-	void			(STDCALL *GetLocalTime)(PTR);
-	int				(STDCALL *QueryPerformanceCounter)(long long *);
-	int				(STDCALL *QueryPerformanceFrequency)(long long *);
-	unsigned long	(STDCALL *GetLastError)(void);
-	void			(STDCALL *SetLastError)(unsigned long);
-	int				(STDCALL *lstrcmpA)(const char *, const char *);
-	char			*(STDCALL *lstrcpyA)(char *, const char *);
-	unsigned long	(STDCALL *lstrlenA)(const char *);
-	int				(STDCALL *FlushInstructionCache)(PTR, const PTR, LET);
-	void			(STDCALL *GetSystemInfo)(struct S_SYSTEM_INFO *);
-	int				(STDCALL *GetExitCodeThread)(PTR, unsigned long *);
-	void			(STDCALL *InitializeCriticalSection)(
-		struct S_CRITICAL_SECTION *
-	);
-	void			(STDCALL *DeleteCriticalSection)(PTR);
-	void			(STDCALL *EnterCriticalSection)(PTR);
-	void			(STDCALL *LeaveCriticalSection)(PTR);
-	PTR				(STDCALL *GlobalAlloc)(unsigned long, LET);
-	PTR				(STDCALL *GlobalLock)(PTR);
-	int				(STDCALL *GlobalUnlock)(PTR);
-	PTR				(STDCALL *GlobalReAlloc)(PTR, LET, unsigned long);
-	PTR				(STDCALL *GlobalFree)(PTR);
-	PTR				(STDCALL *CreateFileMappingA)(
-		PTR, PTR, unsigned long, unsigned long,
-		unsigned long, const char *
-	);
-	PTR				(STDCALL *MapViewOfFile)(
-		PTR, unsigned long, unsigned long, unsigned long, LET
-	);
-	int				(STDCALL *UnmapViewOfFile)(PTR);
-	int				(STDCALL *SetConsoleTextAttribute)(PTR, unsigned short);
-	int				(STDCALL *GetConsoleScreenBufferInfo)(
-		PTR, struct S_CONSOLE_SCREEN_BUFFER_INFO *
-	);
-	int				(STDCALL *SetConsoleCursorPosition)(PTR, struct S_COORD);
-	int				(STDCALL *SetConsoleCursorInfo)(\
-		PTR, struct S_CONSOLE_CURSOR_INFO *\
-	);
-	int				(STDCALL *GetConsoleCursorInfo)(\
-		PTR, struct S_CONSOLE_CURSOR_INFO *\
-	);
-	PTR				(STDCALL *GetConsoleWindow)(void);
-	int				(STDCALL *SetConsoleScreenBufferSize)(PTR, struct S_COORD);
-	int				(STDCALL *SetConsoleWindowInfo)(\
-		PTR, int, const struct S_SMALL_RECT *\
-	);
-	struct S_COORD	(STDCALL *GetLargestConsoleWindowSize)(PTR);
-	int				(STDCALL *FillConsoleOutputCharacterA)(\
-		PTR, char, unsigned long, struct S_COORD, unsigned long *\
-	);
-	int				(STDCALL *FillConsoleOutputAttribute)(\
-		PTR, unsigned short, unsigned long, struct S_COORD, unsigned long *\
-	);
-	int				(STDCALL *WriteConsoleOutputCharacterA)(\
-		PTR, const char *, unsigned long, struct S_COORD, unsigned long *\
-	);
-	int				(STDCALL *WriteConsoleOutputAttribute)(\
-		PTR, const unsigned short *, \
-		unsigned long, \
-		struct S_COORD, \
-		unsigned long *\
-	);
-	int				(STDCALL *ReadConsoleOutputCharacterA)(\
-		PTR, char *, unsigned long, struct S_COORD, unsigned long *\
-	);
-	int				(STDCALL *ReadConsoleOutputAttribute)(\
-		PTR, unsigned short *, unsigned long, struct S_COORD, unsigned long *\
-	);
-	int				(STDCALL *ReadConsoleInputA)(\
-		PTR, struct S_INPUT_RECORD *, unsigned long, unsigned long *\
-	);
-	int				(STDCALL *GetConsoleMode)(PTR, unsigned long *);
-	int				(STDCALL *SetConsoleMode)(PTR, unsigned long);
-	PTR				(STDCALL *HeapReAlloc)(\
-		PTR, unsigned long, PTR, unsigned long\
-	);
-	int				(STDCALL *SetConsoleTitleA)(const char *);
-	unsigned long	(STDCALL *GetEnvironmentVariableA)(\
-		const char *, char *, unsigned long\
-	);
-#else /* K&R */
-	PTR				(STDCALL *LoadLibraryA)();
-	PTR				(STDCALL *LoadLibraryExA)();
-	int				(STDCALL *FreeLibrary)();
-	PTR				(STDCALL *GetProcAddress)();
-	PTR				(STDCALL *GetModuleHandleA)();
-	PTR				(STDCALL *GetCurrentProcess)();
-	unsigned long	(STDCALL *GetCurrentProcessId)();
-	int				(STDCALL *TerminateProcess)();
-	int				(STDCALL *ExitProcess)();
-	PTR				(STDCALL *CreateThread)();
-	PTR				(STDCALL *GetCurrentThread)();
-	unsigned long	(STDCALL *GetCurrentThreadId)();
-	int				(STDCALL *ExitThread)();
-	unsigned long	(STDCALL *SuspendThread)();
-	unsigned long	(STDCALL *ResumeThread)();
-	PTR				(STDCALL *VirtualAlloc)();
-	int				(STDCALL *VirtualFree)();
-	int				(STDCALL *VirtualProtect)();
-	int				(STDCALL *RtlMoveMemory)();
-	int				(STDCALL *RtlCopyMemory)();
-	int				(STDCALL *RtlZeroMemory)();
-	PTR				(STDCALL *GetProcessHeap)();
-	PTR				(STDCALL *HeapAlloc)();
-	int				(STDCALL *HeapFree)();
-	PTR				(STDCALL *CreateFileA)();
-	int				(STDCALL *ReadFile)();
-	int				(STDCALL *WriteFile)();
-	int				(STDCALL *CloseHandle)();
-	unsigned long	(STDCALL *GetFileSize)();
-	int				(STDCALL *DeleteFileA)();
-	PTR				(STDCALL *GetStdHandle)();
-	int				(STDCALL *WriteConsoleA)();
-	unsigned long	(STDCALL *WaitForSingleObject)();
-	int				(STDCALL *Sleep)();
-	int				(STDCALL *GetSystemTime)();
-	int				(STDCALL *GetLocalTime)();
-	int				(STDCALL *QueryPerformanceCounter)();
-	int				(STDCALL *QueryPerformanceFrequency)();
-	unsigned long	(STDCALL *GetLastError)();
-	int				(STDCALL *SetLastError)();
-	int				(STDCALL *lstrcmpA)();
-	char			*(STDCALL *lstrcpyA)();
-	unsigned long	(STDCALL *lstrlenA)();
-	int				(STDCALL *FlushInstructionCache)();
-	int				(STDCALL *GetSystemInfo)();
-	int				(STDCALL *GetExitCodeThread)();
-	int				(STDCALL *InitializeCriticalSection)();
-	int				(STDCALL *DeleteCriticalSection)();
-	int				(STDCALL *EnterCriticalSection)();
-	int				(STDCALL *LeaveCriticalSection)();
-	PTR				(STDCALL *GlobalAlloc)();
-	PTR				(STDCALL *GlobalLock)();
-	int				(STDCALL *GlobalUnlock)();
-	PTR				(STDCALL *GlobalReAlloc)();
-	PTR				(STDCALL *GlobalFree)();
-	PTR				(STDCALL *CreateFileMappingA)();
-	PTR				(STDCALL *MapViewOfFile)();
-	int				(STDCALL *UnmapViewOfFile)();
-	int				(STDCALL *SetConsoleTextAttribute)();
-	int				(STDCALL *GetConsoleScreenBufferInfo)();
-	int				(STDCALL *SetConsoleCursorPosition)();
-	int				(STDCALL *SetConsoleCursorInfo)();
-	int				(STDCALL *GetConsoleCursorInfo)();
-	PTR				(STDCALL *GetConsoleWindow)();
-	int				(STDCALL *SetConsoleScreenBufferSize)();
-	int				(STDCALL *SetConsoleWindowInfo)();
-	struct S_COORD	(STDCALL *GetLargestConsoleWindowSize)();
-	int				(STDCALL *FillConsoleOutputCharacterA)();
-	int				(STDCALL *FillConsoleOutputAttribute)();
-	int				(STDCALL *WriteConsoleOutputCharacterA)();
-	int				(STDCALL *WriteConsoleOutputAttribute)();
-	int				(STDCALL *ReadConsoleOutputCharacterA)();
-	int				(STDCALL *ReadConsoleOutputAttribute)();
-	int				(STDCALL *ReadConsoleInputA)();
-	int				(STDCALL *GetConsoleMode)();
-	int				(STDCALL *SetConsoleMode)();
-	PTR				(STDCALL *HeapReAlloc)();
-	int				(STDCALL *SetConsoleTitleA)();
-	unsigned long	(STDCALL *GetEnvironmentVariableA)();
-#endif /* !KNR_STYLE */
+	PTR	SELF;
+	T_KERNEL32__LoadLibraryA(LoadLibraryA);
+	T_KERNEL32__LoadLibraryExA(LoadLibraryExA);
+	T_KERNEL32__FreeLibrary(FreeLibrary);
+	T_KERNEL32__GetProcAddress(GetProcAddress);
+	T_KERNEL32__GetModuleHandleA(GetModuleHandleA);
+	T_KERNEL32__GetCurrentProcess(GetCurrentProcess);
+	T_KERNEL32__GetCurrentProcessId(GetCurrentProcessId);
+	T_KERNEL32__TerminateProcess(TerminateProcess);
+	T_KERNEL32__ExitProcess(ExitProcess);
+	T_KERNEL32__CreateThread(CreateThread);
+	T_KERNEL32__GetCurrentThread(GetCurrentThread);
+	T_KERNEL32__GetCurrentThreadId(GetCurrentThreadId);
+	T_KERNEL32__ExitThread(ExitThread);
+	T_KERNEL32__SuspendThread(SuspendThread);
+	T_KERNEL32__ResumeThread(ResumeThread);
+	T_KERNEL32__VirtualAlloc(VirtualAlloc);
+	T_KERNEL32__VirtualFree(VirtualFree);
+	T_KERNEL32__VirtualProtect(VirtualProtect);
+	T_KERNEL32__RtlMoveMemory(RtlMoveMemory);
+	T_KERNEL32__RtlCopyMemory(RtlCopyMemory);
+	T_KERNEL32__RtlZeroMemory(RtlZeroMemory);
+	T_KERNEL32__GetProcessHeap(GetProcessHeap);
+	T_KERNEL32__HeapAlloc(HeapAlloc);
+	T_KERNEL32__HeapFree(HeapFree);
+	T_KERNEL32__CreateFileA(CreateFileA);
+	T_KERNEL32__ReadFile(ReadFile);
+	T_KERNEL32__WriteFile(WriteFile);
+	T_KERNEL32__CloseHandle(CloseHandle);
+	T_KERNEL32__GetFileSize(GetFileSize);
+	T_KERNEL32__DeleteFileA(DeleteFileA);
+	T_KERNEL32__GetStdHandle(GetStdHandle);
+	T_KERNEL32__WriteConsoleA(WriteConsoleA);
+	T_KERNEL32__WaitForSingleObject(WaitForSingleObject);
+	T_KERNEL32__Sleep(Sleep);
+	T_KERNEL32__GetSystemTime(GetSystemTime);
+	T_KERNEL32__GetLocalTime(GetLocalTime);
+	T_KERNEL32__QueryPerformanceCounter(QueryPerformanceCounter);
+	T_KERNEL32__QueryPerformanceFrequency(QueryPerformanceFrequency);
+	T_KERNEL32__GetLastError(GetLastError);
+	T_KERNEL32__SetLastError(SetLastError);
+	T_KERNEL32__lstrcmpA(lstrcmpA);
+	T_KERNEL32__lstrcpyA(lstrcpyA);
+	T_KERNEL32__lstrlenA(lstrlenA);
+	T_KERNEL32__FlushInstructionCache(FlushInstructionCache);
+	T_KERNEL32__GetSystemInfo(GetSystemInfo);
+	T_KERNEL32__GetExitCodeThread(GetExitCodeThread);
+	T_KERNEL32__InitializeCriticalSection(InitializeCriticalSection);
+	T_KERNEL32__DeleteCriticalSection(DeleteCriticalSection);
+	T_KERNEL32__EnterCriticalSection(EnterCriticalSection);
+	T_KERNEL32__LeaveCriticalSection(LeaveCriticalSection);
+	T_KERNEL32__GlobalAlloc(GlobalAlloc);
+	T_KERNEL32__GlobalLock(GlobalLock);
+	T_KERNEL32__GlobalUnlock(GlobalUnlock);
+	T_KERNEL32__GlobalReAlloc(GlobalReAlloc);
+	T_KERNEL32__GlobalFree(GlobalFree);
+	T_KERNEL32__CreateFileMappingA(CreateFileMappingA);
+	T_KERNEL32__MapViewOfFile(MapViewOfFile);
+	T_KERNEL32__UnmapViewOfFile(UnmapViewOfFile);
+	T_KERNEL32__SetConsoleTextAttribute(SetConsoleTextAttribute);
+	T_KERNEL32__GetConsoleScreenBufferInfo(GetConsoleScreenBufferInfo);
+	T_KERNEL32__SetConsoleCursorPosition(SetConsoleCursorPosition);
+	T_KERNEL32__SetConsoleCursorInfo(SetConsoleCursorInfo);
+	T_KERNEL32__GetConsoleCursorInfo(GetConsoleCursorInfo);
+	T_KERNEL32__GetConsoleWindow(GetConsoleWindow);
+	T_KERNEL32__SetConsoleScreenBufferSize(SetConsoleScreenBufferSize);
+	T_KERNEL32__SetConsoleWindowInfo(SetConsoleWindowInfo);
+	T_KERNEL32__GetLargestConsoleWindowSize(GetLargestConsoleWindowSize);
+	T_KERNEL32__FillConsoleOutputCharacterA(FillConsoleOutputCharacterA);
+	T_KERNEL32__FillConsoleOutputAttribute(FillConsoleOutputAttribute);
+	T_KERNEL32__WriteConsoleOutputCharacterA(WriteConsoleOutputCharacterA);
+	T_KERNEL32__WriteConsoleOutputAttribute(WriteConsoleOutputAttribute);
+	T_KERNEL32__ReadConsoleOutputCharacterA(ReadConsoleOutputCharacterA);
+	T_KERNEL32__ReadConsoleOutputAttribute(ReadConsoleOutputAttribute);
+	T_KERNEL32__ReadConsoleInputA(ReadConsoleInputA);
+	T_KERNEL32__GetConsoleMode(GetConsoleMode);
+	T_KERNEL32__SetConsoleMode(SetConsoleMode);
+	T_KERNEL32__HeapReAlloc(HeapReAlloc);
+	T_KERNEL32__SetConsoleTitleA(SetConsoleTitleA);
+	T_KERNEL32__GetEnvironmentVariableA(GetEnvironmentVariableA);
 };
 EXTERN_C_END
 /* **************************** [^] STRUCTS [^] ***************************** */
@@ -502,142 +667,190 @@ EXTERN_C_END
 /*  \\//  |                  SETUP MEMBER CREATION                   |  \\//  */
 /*   \/   #==========================================================#   \/   */
 
+#define LOCALMACRO__KERNEL32__EXPORT(NAME) \
+	PEB_GET_EXPORT((const unsigned char *)KERNEL32.SELF, NAME)
+
 #undef GLOBALCONSTRUCTOR__KERNEL32
 #define GLOBALCONSTRUCTOR__KERNEL32 \
 	do\
 	{\
 		KERNEL32.SELF = PEB_GET_MODULE_BASE("KERNEL32.DLL");\
-		KERNEL32.GetCurrentProcess = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "GetCurrentProcess");\
-		KERNEL32.FlushInstructionCache = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "FlushInstructionCache");\
-		KERNEL32.LoadLibraryA = PEB_GET_EXPORT(KERNEL32.SELF, "LoadLibraryA");\
-		KERNEL32.LoadLibraryExA = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "LoadLibraryExA");\
-		KERNEL32.FreeLibrary = PEB_GET_EXPORT(KERNEL32.SELF, "FreeLibrary");\
-		KERNEL32.GetProcAddress = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "GetProcAddress");\
-		KERNEL32.GetModuleHandleA = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "GetModuleHandleA");\
-		KERNEL32.GetCurrentProcessId = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "GetCurrentProcessId");\
-		KERNEL32.TerminateProcess = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "TerminateProcess");\
-		KERNEL32.ExitProcess = PEB_GET_EXPORT(KERNEL32.SELF, "ExitProcess");\
-		KERNEL32.CreateThread = PEB_GET_EXPORT(KERNEL32.SELF, "CreateThread");\
-		KERNEL32.GetCurrentThread = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "GetCurrentThread");\
-		KERNEL32.GetCurrentThreadId = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "GetCurrentThreadId");\
-		KERNEL32.ExitThread = PEB_GET_EXPORT(KERNEL32.SELF, "ExitThread");\
-		KERNEL32.SuspendThread = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "SuspendThread");\
-		KERNEL32.ResumeThread = PEB_GET_EXPORT(KERNEL32.SELF, "ResumeThread");\
-		KERNEL32.VirtualAlloc = PEB_GET_EXPORT(KERNEL32.SELF, "VirtualAlloc");\
-		KERNEL32.VirtualFree = PEB_GET_EXPORT(KERNEL32.SELF, "VirtualFree");\
-		KERNEL32.VirtualProtect = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "VirtualProtect");\
-		KERNEL32.RtlMoveMemory = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "RtlMoveMemory");\
-		KERNEL32.RtlCopyMemory = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "RtlCopyMemory");\
-		KERNEL32.RtlZeroMemory = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "RtlZeroMemory");\
-		KERNEL32.GetProcessHeap = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "GetProcessHeap");\
-		KERNEL32.HeapAlloc = PEB_GET_EXPORT(KERNEL32.SELF, "HeapAlloc");\
-		KERNEL32.HeapFree = PEB_GET_EXPORT(KERNEL32.SELF, "HeapFree");\
-		KERNEL32.CreateFileA = PEB_GET_EXPORT(KERNEL32.SELF, "CreateFileA");\
-		KERNEL32.ReadFile = PEB_GET_EXPORT(KERNEL32.SELF, "ReadFile");\
-		KERNEL32.WriteFile = PEB_GET_EXPORT(KERNEL32.SELF, "WriteFile");\
-		KERNEL32.CloseHandle = PEB_GET_EXPORT(KERNEL32.SELF, "CloseHandle");\
-		KERNEL32.GetFileSize = PEB_GET_EXPORT(KERNEL32.SELF, "GetFileSize");\
-		KERNEL32.DeleteFileA = PEB_GET_EXPORT(KERNEL32.SELF, "DeleteFileA");\
-		KERNEL32.GetStdHandle = PEB_GET_EXPORT(KERNEL32.SELF, "GetStdHandle");\
-		KERNEL32.WriteConsoleA = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "WriteConsoleA");\
-		KERNEL32.WaitForSingleObject = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "WaitForSingleObject");\
-		KERNEL32.Sleep = PEB_GET_EXPORT(KERNEL32.SELF, "Sleep");\
-		KERNEL32.GetSystemTime = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "GetSystemTime");\
-		KERNEL32.GetLocalTime = PEB_GET_EXPORT(KERNEL32.SELF, "GetLocalTime");\
+		KERNEL32.GetCurrentProcess = (T_KERNEL32__GetCurrentProcess())\
+			LOCALMACRO__KERNEL32__EXPORT("GetCurrentProcess");\
+		KERNEL32.FlushInstructionCache = (T_KERNEL32__FlushInstructionCache())\
+			LOCALMACRO__KERNEL32__EXPORT("FlushInstructionCache");\
+		KERNEL32.LoadLibraryA = (T_KERNEL32__LoadLibraryA())\
+			LOCALMACRO__KERNEL32__EXPORT("LoadLibraryA");\
+		KERNEL32.LoadLibraryExA = (T_KERNEL32__LoadLibraryExA())\
+			LOCALMACRO__KERNEL32__EXPORT("LoadLibraryExA");\
+		KERNEL32.FreeLibrary = (T_KERNEL32__FreeLibrary())\
+			LOCALMACRO__KERNEL32__EXPORT("FreeLibrary");\
+		KERNEL32.GetProcAddress = (T_KERNEL32__GetProcAddress())\
+			LOCALMACRO__KERNEL32__EXPORT("GetProcAddress");\
+		KERNEL32.GetModuleHandleA = (T_KERNEL32__GetModuleHandleA())\
+			LOCALMACRO__KERNEL32__EXPORT("GetModuleHandleA");\
+		KERNEL32.GetCurrentProcessId = (T_KERNEL32__GetCurrentProcessId())\
+			LOCALMACRO__KERNEL32__EXPORT("GetCurrentProcessId");\
+		KERNEL32.TerminateProcess = (T_KERNEL32__TerminateProcess())\
+			LOCALMACRO__KERNEL32__EXPORT("TerminateProcess");\
+		KERNEL32.ExitProcess = (T_KERNEL32__ExitProcess())\
+			LOCALMACRO__KERNEL32__EXPORT("ExitProcess");\
+		KERNEL32.CreateThread = (T_KERNEL32__CreateThread())\
+			LOCALMACRO__KERNEL32__EXPORT("CreateThread");\
+		KERNEL32.GetCurrentThread = (T_KERNEL32__GetCurrentThread())\
+			LOCALMACRO__KERNEL32__EXPORT("GetCurrentThread");\
+		KERNEL32.GetCurrentThreadId = (T_KERNEL32__GetCurrentThreadId())\
+			LOCALMACRO__KERNEL32__EXPORT("GetCurrentThreadId");\
+		KERNEL32.ExitThread = (T_KERNEL32__ExitThread())\
+			LOCALMACRO__KERNEL32__EXPORT("ExitThread");\
+		KERNEL32.SuspendThread = (T_KERNEL32__SuspendThread())\
+			LOCALMACRO__KERNEL32__EXPORT("SuspendThread");\
+		KERNEL32.ResumeThread = (T_KERNEL32__ResumeThread())\
+			LOCALMACRO__KERNEL32__EXPORT("ResumeThread");\
+		KERNEL32.VirtualAlloc = (T_KERNEL32__VirtualAlloc())\
+			LOCALMACRO__KERNEL32__EXPORT("VirtualAlloc");\
+		KERNEL32.VirtualFree = (T_KERNEL32__VirtualFree())\
+			LOCALMACRO__KERNEL32__EXPORT("VirtualFree");\
+		KERNEL32.VirtualProtect = (T_KERNEL32__VirtualProtect())\
+			LOCALMACRO__KERNEL32__EXPORT("VirtualProtect");\
+		KERNEL32.RtlMoveMemory = (T_KERNEL32__RtlMoveMemory())\
+			LOCALMACRO__KERNEL32__EXPORT("RtlMoveMemory");\
+		KERNEL32.RtlCopyMemory = (T_KERNEL32__RtlCopyMemory())\
+			LOCALMACRO__KERNEL32__EXPORT("RtlCopyMemory");\
+		KERNEL32.RtlZeroMemory = (T_KERNEL32__RtlZeroMemory())\
+			LOCALMACRO__KERNEL32__EXPORT("RtlZeroMemory");\
+		KERNEL32.GetProcessHeap = (T_KERNEL32__GetProcessHeap())\
+			LOCALMACRO__KERNEL32__EXPORT("GetProcessHeap");\
+		KERNEL32.HeapAlloc = (T_KERNEL32__HeapAlloc())\
+			LOCALMACRO__KERNEL32__EXPORT("HeapAlloc");\
+		KERNEL32.HeapFree = (T_KERNEL32__HeapFree())\
+			LOCALMACRO__KERNEL32__EXPORT("HeapFree");\
+		KERNEL32.CreateFileA = (T_KERNEL32__CreateFileA())\
+			LOCALMACRO__KERNEL32__EXPORT("CreateFileA");\
+		KERNEL32.ReadFile = (T_KERNEL32__ReadFile())\
+			LOCALMACRO__KERNEL32__EXPORT("ReadFile");\
+		KERNEL32.WriteFile = (T_KERNEL32__WriteFile())\
+			LOCALMACRO__KERNEL32__EXPORT("WriteFile");\
+		KERNEL32.CloseHandle = (T_KERNEL32__CloseHandle())\
+			LOCALMACRO__KERNEL32__EXPORT("CloseHandle");\
+		KERNEL32.GetFileSize = (T_KERNEL32__GetFileSize())\
+			LOCALMACRO__KERNEL32__EXPORT("GetFileSize");\
+		KERNEL32.DeleteFileA = (T_KERNEL32__DeleteFileA())\
+			LOCALMACRO__KERNEL32__EXPORT("DeleteFileA");\
+		KERNEL32.GetStdHandle = (T_KERNEL32__GetStdHandle())\
+			LOCALMACRO__KERNEL32__EXPORT("GetStdHandle");\
+		KERNEL32.WriteConsoleA = (T_KERNEL32__WriteConsoleA())\
+			LOCALMACRO__KERNEL32__EXPORT("WriteConsoleA");\
+		KERNEL32.WaitForSingleObject = (T_KERNEL32__WaitForSingleObject())\
+			LOCALMACRO__KERNEL32__EXPORT("WaitForSingleObject");\
+		KERNEL32.Sleep = (T_KERNEL32__Sleep())\
+			LOCALMACRO__KERNEL32__EXPORT("Sleep");\
+		KERNEL32.GetSystemTime = (T_KERNEL32__GetSystemTime())\
+			LOCALMACRO__KERNEL32__EXPORT("GetSystemTime");\
+		KERNEL32.GetLocalTime = (T_KERNEL32__GetLocalTime())\
+			LOCALMACRO__KERNEL32__EXPORT("GetLocalTime");\
 		KERNEL32.QueryPerformanceCounter = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "QueryPerformanceCounter");\
+			(T_KERNEL32__QueryPerformanceCounter())\
+			LOCALMACRO__KERNEL32__EXPORT("QueryPerformanceCounter");\
 		KERNEL32.QueryPerformanceFrequency = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "QueryPerformanceFrequency");\
-		KERNEL32.GetLastError = PEB_GET_EXPORT(KERNEL32.SELF, "GetLastError");\
-		KERNEL32.SetLastError = PEB_GET_EXPORT(KERNEL32.SELF, "SetLastError");\
-		KERNEL32.lstrcmpA = PEB_GET_EXPORT(KERNEL32.SELF, "lstrcmpA");\
-		KERNEL32.lstrcpyA = PEB_GET_EXPORT(KERNEL32.SELF, "lstrcpyA");\
-		KERNEL32.lstrlenA = PEB_GET_EXPORT(KERNEL32.SELF, "lstrlenA");\
-		KERNEL32.GetSystemInfo = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "GetSystemInfo");\
-		KERNEL32.GetExitCodeThread = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "GetExitCodeThread");\
+			(T_KERNEL32__QueryPerformanceFrequency())\
+			LOCALMACRO__KERNEL32__EXPORT("QueryPerformanceFrequency");\
+		KERNEL32.GetLastError = (T_KERNEL32__GetLastError())\
+			LOCALMACRO__KERNEL32__EXPORT("GetLastError");\
+		KERNEL32.SetLastError = (T_KERNEL32__SetLastError())\
+			LOCALMACRO__KERNEL32__EXPORT("SetLastError");\
+		KERNEL32.lstrcmpA = (T_KERNEL32__lstrcmpA())\
+			LOCALMACRO__KERNEL32__EXPORT("lstrcmpA");\
+		KERNEL32.lstrcpyA = (T_KERNEL32__lstrcpyA())\
+			LOCALMACRO__KERNEL32__EXPORT("lstrcpyA");\
+		KERNEL32.lstrlenA = (T_KERNEL32__lstrlenA())\
+			LOCALMACRO__KERNEL32__EXPORT("lstrlenA");\
+		KERNEL32.GetSystemInfo = (T_KERNEL32__GetSystemInfo())\
+			LOCALMACRO__KERNEL32__EXPORT("GetSystemInfo");\
+		KERNEL32.GetExitCodeThread = (T_KERNEL32__GetExitCodeThread())\
+			LOCALMACRO__KERNEL32__EXPORT("GetExitCodeThread");\
 		KERNEL32.InitializeCriticalSection = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "InitializeCriticalSection");\
-		KERNEL32.DeleteCriticalSection = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "DeleteCriticalSection");\
-		KERNEL32.EnterCriticalSection = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "EnterCriticalSection");\
-		KERNEL32.LeaveCriticalSection = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "LeaveCriticalSection");\
-		KERNEL32.GlobalAlloc = PEB_GET_EXPORT(KERNEL32.SELF, "GlobalAlloc");\
-		KERNEL32.GlobalLock = PEB_GET_EXPORT(KERNEL32.SELF, "GlobalLock");\
-		KERNEL32.GlobalUnlock = PEB_GET_EXPORT(KERNEL32.SELF, "GlobalUnlock");\
-		KERNEL32.GlobalReAlloc = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "GlobalReAlloc");\
-		KERNEL32.GlobalFree = PEB_GET_EXPORT(KERNEL32.SELF, "GlobalFree");\
-		KERNEL32.CreateFileMappingA = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "CreateFileMappingA");\
-		KERNEL32.MapViewOfFile = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "MapViewOfFile");\
-		KERNEL32.UnmapViewOfFile = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "UnmapViewOfFile");\
+			(T_KERNEL32__InitializeCriticalSection())\
+			LOCALMACRO__KERNEL32__EXPORT("InitializeCriticalSection");\
+		KERNEL32.DeleteCriticalSection = (T_KERNEL32__DeleteCriticalSection())\
+			LOCALMACRO__KERNEL32__EXPORT("DeleteCriticalSection");\
+		KERNEL32.EnterCriticalSection = (T_KERNEL32__EnterCriticalSection())\
+			LOCALMACRO__KERNEL32__EXPORT("EnterCriticalSection");\
+		KERNEL32.LeaveCriticalSection = (T_KERNEL32__LeaveCriticalSection())\
+			LOCALMACRO__KERNEL32__EXPORT("LeaveCriticalSection");\
+		KERNEL32.GlobalAlloc = (T_KERNEL32__GlobalAlloc())\
+			LOCALMACRO__KERNEL32__EXPORT("GlobalAlloc");\
+		KERNEL32.GlobalLock = (T_KERNEL32__GlobalLock())\
+			LOCALMACRO__KERNEL32__EXPORT("GlobalLock");\
+		KERNEL32.GlobalUnlock = (T_KERNEL32__GlobalUnlock())\
+			LOCALMACRO__KERNEL32__EXPORT("GlobalUnlock");\
+		KERNEL32.GlobalReAlloc = (T_KERNEL32__GlobalReAlloc())\
+			LOCALMACRO__KERNEL32__EXPORT("GlobalReAlloc");\
+		KERNEL32.GlobalFree = (T_KERNEL32__GlobalFree())\
+			LOCALMACRO__KERNEL32__EXPORT("GlobalFree");\
+		KERNEL32.CreateFileMappingA = (T_KERNEL32__CreateFileMappingA())\
+			LOCALMACRO__KERNEL32__EXPORT("CreateFileMappingA");\
+		KERNEL32.MapViewOfFile = (T_KERNEL32__MapViewOfFile())\
+			LOCALMACRO__KERNEL32__EXPORT("MapViewOfFile");\
+		KERNEL32.UnmapViewOfFile = (T_KERNEL32__UnmapViewOfFile())\
+			LOCALMACRO__KERNEL32__EXPORT("UnmapViewOfFile");\
 		KERNEL32.SetConsoleTextAttribute = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "SetConsoleTextAttribute");\
+			(T_KERNEL32__SetConsoleTextAttribute())\
+			LOCALMACRO__KERNEL32__EXPORT("SetConsoleTextAttribute");\
 		KERNEL32.GetConsoleScreenBufferInfo = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "GetConsoleScreenBufferInfo");\
+			(T_KERNEL32__GetConsoleScreenBufferInfo())\
+			LOCALMACRO__KERNEL32__EXPORT("GetConsoleScreenBufferInfo");\
 		KERNEL32.SetConsoleCursorPosition = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "SetConsoleCursorPosition");\
-		KERNEL32.SetConsoleCursorInfo = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "SetConsoleCursorInfo");\
-		KERNEL32.GetConsoleCursorInfo = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "GetConsoleCursorInfo");\
-		KERNEL32.GetConsoleWindow = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "GetConsoleWindow");\
+			(T_KERNEL32__SetConsoleCursorPosition())\
+			LOCALMACRO__KERNEL32__EXPORT("SetConsoleCursorPosition");\
+		KERNEL32.SetConsoleCursorInfo = (T_KERNEL32__SetConsoleCursorInfo())\
+			LOCALMACRO__KERNEL32__EXPORT("SetConsoleCursorInfo");\
+		KERNEL32.GetConsoleCursorInfo = (T_KERNEL32__GetConsoleCursorInfo())\
+			LOCALMACRO__KERNEL32__EXPORT("GetConsoleCursorInfo");\
+		KERNEL32.GetConsoleWindow = (T_KERNEL32__GetConsoleWindow())\
+			LOCALMACRO__KERNEL32__EXPORT("GetConsoleWindow");\
 		KERNEL32.SetConsoleScreenBufferSize = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "SetConsoleScreenBufferSize");\
-		KERNEL32.SetConsoleWindowInfo = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "SetConsoleWindowInfo");\
+			(T_KERNEL32__SetConsoleScreenBufferSize())\
+			LOCALMACRO__KERNEL32__EXPORT("SetConsoleScreenBufferSize");\
+		KERNEL32.SetConsoleWindowInfo = (T_KERNEL32__SetConsoleWindowInfo())\
+			LOCALMACRO__KERNEL32__EXPORT("SetConsoleWindowInfo");\
 		KERNEL32.GetLargestConsoleWindowSize = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "GetLargestConsoleWindowSize");\
+			(T_KERNEL32__GetLargestConsoleWindowSize())\
+			LOCALMACRO__KERNEL32__EXPORT("GetLargestConsoleWindowSize");\
 		KERNEL32.FillConsoleOutputCharacterA = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "FillConsoleOutputCharacterA");\
+			(T_KERNEL32__FillConsoleOutputCharacterA())\
+			LOCALMACRO__KERNEL32__EXPORT("FillConsoleOutputCharacterA");\
 		KERNEL32.FillConsoleOutputAttribute = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "FillConsoleOutputAttribute");\
+			(T_KERNEL32__FillConsoleOutputAttribute())\
+			LOCALMACRO__KERNEL32__EXPORT("FillConsoleOutputAttribute");\
 		KERNEL32.WriteConsoleOutputCharacterA = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "WriteConsoleOutputCharacterA");\
+			(T_KERNEL32__WriteConsoleOutputCharacterA())\
+			LOCALMACRO__KERNEL32__EXPORT("WriteConsoleOutputCharacterA");\
 		KERNEL32.WriteConsoleOutputAttribute = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "WriteConsoleOutputAttribute");\
+			(T_KERNEL32__WriteConsoleOutputAttribute())\
+			LOCALMACRO__KERNEL32__EXPORT("WriteConsoleOutputAttribute");\
 		KERNEL32.ReadConsoleOutputCharacterA = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "ReadConsoleOutputCharacterA");\
+			(T_KERNEL32__ReadConsoleOutputCharacterA())\
+			LOCALMACRO__KERNEL32__EXPORT("ReadConsoleOutputCharacterA");\
 		KERNEL32.ReadConsoleOutputAttribute = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "ReadConsoleOutputAttribute");\
-		KERNEL32.ReadConsoleInputA = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "ReadConsoleInputA");\
-		KERNEL32.GetConsoleMode = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "GetConsoleMode");\
-		KERNEL32.SetConsoleMode = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "SetConsoleMode");\
-		KERNEL32.HeapReAlloc = PEB_GET_EXPORT(KERNEL32.SELF, "HeapReAlloc");\
-		KERNEL32.SetConsoleTitleA = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "SetConsoleTitleA");\
+			(T_KERNEL32__ReadConsoleOutputAttribute())\
+			LOCALMACRO__KERNEL32__EXPORT("ReadConsoleOutputAttribute");\
+		KERNEL32.ReadConsoleInputA = (T_KERNEL32__ReadConsoleInputA())\
+			LOCALMACRO__KERNEL32__EXPORT("ReadConsoleInputA");\
+		KERNEL32.GetConsoleMode = (T_KERNEL32__GetConsoleMode())\
+			LOCALMACRO__KERNEL32__EXPORT("GetConsoleMode");\
+		KERNEL32.SetConsoleMode = (T_KERNEL32__SetConsoleMode())\
+			LOCALMACRO__KERNEL32__EXPORT("SetConsoleMode");\
+		KERNEL32.HeapReAlloc = (T_KERNEL32__HeapReAlloc())\
+			LOCALMACRO__KERNEL32__EXPORT("HeapReAlloc");\
+		KERNEL32.SetConsoleTitleA = (T_KERNEL32__SetConsoleTitleA())\
+			LOCALMACRO__KERNEL32__EXPORT("SetConsoleTitleA");\
 		KERNEL32.GetEnvironmentVariableA = \
-			PEB_GET_EXPORT(KERNEL32.SELF, "GetEnvironmentVariableA");\
+			(T_KERNEL32__GetEnvironmentVariableA())\
+			LOCALMACRO__KERNEL32__EXPORT("GetEnvironmentVariableA");\
 	}\
 	while (0);
+
 /*   /\   #==========================================================#   /\   */
 /*  //\\  |                  SETUP MEMBER CREATION                   |  //\\  */
 /* '""""' #==========================================================# '""""' */

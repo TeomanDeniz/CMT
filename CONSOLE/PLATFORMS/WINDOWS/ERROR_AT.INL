@@ -16,7 +16,7 @@
 		do\
 		{\
 			INT_STR[INDEX_2++] = 48 + (THE_LINE % 10);\
-			THE_LINE = THE_LINE / 10;\
+			THE_LINE /= 10;\
 		}\
 		while (THE_LINE);\
 		\
@@ -26,7 +26,7 @@
 		\
 		while (INDEX_FOR < INDEX_3)\
 		{\
-			char	CHARACTER = INT_STR[INDEX_FOR];\
+			const char	CHARACTER = INT_STR[INDEX_FOR];\
 			\
 			INT_STR[INDEX_FOR] = INT_STR[INDEX_3];\
 			INT_STR[INDEX_3] = CHARACTER;\
@@ -36,30 +36,40 @@
 	}\
 	\
 	if (THIS->HIGHLIGHTER)\
-		THIS->CURSOR.COLOR(0XB)\
-			->LOG("\n ")\
-			->LOG(THE_FILE)\
-			->CURSOR.DEFAULT_COLOR()\
-			->LOG(" (")\
-			->CURSOR.COLOR(0XB)\
-			->LOG(INT_STR)\
-			->CURSOR.DEFAULT_COLOR()\
-			->LOG("): ")\
-			->CURSOR.COLOR(0XC)\
-			->LOG("ERROR")\
-			->CURSOR.DEFAULT_COLOR()\
-			->LOG(": ")\
-			->CURSOR.COLOR(0XF)\
-			->LOG(STRING)\
-			->CURSOR.DEFAULT_COLOR();\
+	{\
+		const unsigned short	DEFAULT_COLOR = (unsigned short)(\
+			((unsigned short)(\
+					(THIS->GET.CURSOR.DEFAULT_COLOR >> 4) & 0X0F\
+			) << 4) | \
+			(unsigned short)(THIS->GET.CURSOR.DEFAULT_COLOR & 0X0F)\
+		);\
+		\
+		KERNEL32.SetConsoleTextAttribute(THIS->_OUT_HANDLE, 11);\
+		LOCALMACRO__CMT_CONSOLE__LOG_INLINE("\n ");\
+		LOCALMACRO__CMT_CONSOLE__LOG_INLINE(THE_FILE);\
+		KERNEL32.SetConsoleTextAttribute(THIS->_OUT_HANDLE, DEFAULT_COLOR);\
+		LOCALMACRO__CMT_CONSOLE__LOG_INLINE(" (");\
+		KERNEL32.SetConsoleTextAttribute(THIS->_OUT_HANDLE, 11);\
+		LOCALMACRO__CMT_CONSOLE__LOG_INLINE(INT_STR);\
+		KERNEL32.SetConsoleTextAttribute(THIS->_OUT_HANDLE, DEFAULT_COLOR);\
+		LOCALMACRO__CMT_CONSOLE__LOG_INLINE("): ");\
+		KERNEL32.SetConsoleTextAttribute(THIS->_OUT_HANDLE, 12);\
+		LOCALMACRO__CMT_CONSOLE__LOG_INLINE("ERROR");\
+		KERNEL32.SetConsoleTextAttribute(THIS->_OUT_HANDLE, DEFAULT_COLOR);\
+		LOCALMACRO__CMT_CONSOLE__LOG_INLINE(": ");\
+		KERNEL32.SetConsoleTextAttribute(THIS->_OUT_HANDLE, 15);\
+		LOCALMACRO__CMT_CONSOLE__LOG_INLINE(STRING);\
+		KERNEL32.SetConsoleTextAttribute(THIS->_OUT_HANDLE, DEFAULT_COLOR);\
+	}\
 	else\
-		THIS->LOG("\n ")\
-			->LOG(THE_FILE)\
-			->LOG(":(")\
-			->LOG(INT_STR)\
-			->LOG("): ")\
-			->LOG("ERROR: ")\
-			->LOG(STRING);
+	{\
+		LOCALMACRO__CMT_CONSOLE__LOG_INLINE("\n ");\
+		LOCALMACRO__CMT_CONSOLE__LOG_INLINE(THE_FILE);\
+		LOCALMACRO__CMT_CONSOLE__LOG_INLINE(":(");\
+		LOCALMACRO__CMT_CONSOLE__LOG_INLINE(INT_STR);\
+		LOCALMACRO__CMT_CONSOLE__LOG_INLINE("): ERROR: ");\
+		LOCALMACRO__CMT_CONSOLE__LOG_INLINE(STRING);\
+	}
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\
  * * AT THE ALL END OF FILES, I AM ADDING A SPECIAL BYTE <0X1A> TO END THE  * *

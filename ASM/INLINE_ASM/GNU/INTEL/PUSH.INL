@@ -2,7 +2,15 @@
 #error "ERROR - PLEASE DON'T USE THIS LIBRARY DIRECTLY!!!"
 #endif /* !ASM_H */
 
-#define PUSH_(VALUE) CMT_ASM("push $" _(VALUE))
+#ifdef __SYSTEM_16_BIT__
+#define PUSH_(VALUE) \
+	CMT_ASM(".byte 0X68 # push $" _(VALUE))\
+	CMT_ASM(".short " _(VALUE))
+#else /* !__SYSTEM_16_BIT__ */
+#define PUSH_(VALUE) \
+	CMT_ASM(".byte 0X68 # push $" _(VALUE))\
+	CMT_ASM(".long " _(VALUE))
+#endif /* __SYSTEM_16_BIT__ */
 
 #ifdef __SYSTEM_16_BIT__
 #include "PUSH/16.INL"

@@ -6,7 +6,7 @@
 #define FUNCTION_HEADER__CONSOLE_PUT_CURVE \
 	void\
 		CONSOLE_PUT_CURVE(\
-			struct s_console *THIS, \
+			struct s_console *const THIS, \
 			char CHARACTER, \
 			unsigned int START_X, \
 			unsigned int START_Y, \
@@ -18,7 +18,7 @@
 #define FUNCTION_HEADER__console_put_curve \
 	void\
 		console_put_curve(\
-			struct s_console *THIS, \
+			struct s_console *const __this__, \
 			char CHARACTER, \
 			unsigned int START_X, \
 			unsigned int START_Y, \
@@ -39,7 +39,7 @@
 		CURVE_START, \
 		CURVE_END\
 	)\
-	struct s_console	*THIS;\
+	struct s_console	*const THIS;\
 	char				CHARACTER;\
 	unsigned int		START_X;\
 	unsigned int		START_Y;\
@@ -49,7 +49,7 @@
 	float				CURVE_END;
 #define FUNCTION_HEADER__console_put_curve \
 	console_put_curve(\
-		THIS, \
+		__this__, \
 		CHARACTER, \
 		START_X, \
 		START_Y, \
@@ -58,7 +58,7 @@
 		CURVE_START, \
 		CURVE_END\
 	)\
-	struct s_console	*THIS;\
+	struct s_console	*const __this__;\
 	char				CHARACTER;\
 	unsigned int		START_X;\
 	unsigned int		START_Y;\
@@ -76,6 +76,10 @@
 	\
 	FUNCTION_HEADER__console_put_curve \
 	{\
+		union U_CONSOLE_STORAGE	*const __THIS_CONVERTER__ = \
+			(union U_CONSOLE_STORAGE *)(PTR)__this__;\
+		struct S_CONSOLE		*const THIS = &__THIS_CONVERTER__->UPPER;\
+		\
 		LOCALMACRO__CMT_CONSOLE__PUT_CURVE_CONTENT\
 	}
 

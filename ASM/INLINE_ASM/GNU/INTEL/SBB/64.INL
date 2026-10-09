@@ -275,22 +275,54 @@
 #define SBB_R15_R14 CMT_ASM("sbbq %r14, %r15")
 #define SBB_R15_R15 CMT_ASM("sbbq %r15, %r15")
 
-#define SBB_RAX_(VALUE) CMT_ASM("sbbq $" _(VALUE) ", %rax")
-#define SBB_RBX_(VALUE) CMT_ASM("sbbq $" _(VALUE) ", %rbx")
-#define SBB_RCX_(VALUE) CMT_ASM("sbbq $" _(VALUE) ", %rcx")
-#define SBB_RDX_(VALUE) CMT_ASM("sbbq $" _(VALUE) ", %rdx")
-#define SBB_RDI_(VALUE) CMT_ASM("sbbq $" _(VALUE) ", %rdi")
-#define SBB_RSI_(VALUE) CMT_ASM("sbbq $" _(VALUE) ", %rsi")
-#define SBB_RBP_(VALUE) CMT_ASM("sbbq $" _(VALUE) ", %rbp")
-#define SBB_RSP_(VALUE) CMT_ASM("sbbq $" _(VALUE) ", %rsp")
-#define SBB_R8_(VALUE) CMT_ASM("sbbq $" _(VALUE) ", %r8")
-#define SBB_R9_(VALUE) CMT_ASM("sbbq $" _(VALUE) ", %r9")
-#define SBB_R10_(VALUE) CMT_ASM("sbbq $" _(VALUE) ", %r10")
-#define SBB_R11_(VALUE) CMT_ASM("sbbq $" _(VALUE) ", %r11")
-#define SBB_R12_(VALUE) CMT_ASM("sbbq $" _(VALUE) ", %r12")
-#define SBB_R13_(VALUE) CMT_ASM("sbbq $" _(VALUE) ", %r13")
-#define SBB_R14_(VALUE) CMT_ASM("sbbq $" _(VALUE) ", %r14")
-#define SBB_R15_(VALUE) CMT_ASM("sbbq $" _(VALUE) ", %r15")
+#define SBB_RAX_(VALUE) \
+	CMT_ASM(".byte 0X48, 0X81, 0XD8 # sbbq $" _(VALUE) ", %rax")\
+	CMT_ASM(".long " _(VALUE))
+#define SBB_RBX_(VALUE) \
+	CMT_ASM(".byte 0X48, 0X81, 0XDB # sbbq $" _(VALUE) ", %rbx")\
+	CMT_ASM(".long " _(VALUE))
+#define SBB_RCX_(VALUE) \
+	CMT_ASM(".byte 0X48, 0X81, 0XD9 # sbbq $" _(VALUE) ", %rcx")\
+	CMT_ASM(".long " _(VALUE))
+#define SBB_RDX_(VALUE) \
+	CMT_ASM(".byte 0X48, 0X81, 0XDA # sbbq $" _(VALUE) ", %rdx")\
+	CMT_ASM(".long " _(VALUE))
+#define SBB_RDI_(VALUE) \
+	CMT_ASM(".byte 0X48, 0X81, 0XDF # sbbq $" _(VALUE) ", %rdi")\
+	CMT_ASM(".long " _(VALUE))
+#define SBB_RSI_(VALUE) \
+	CMT_ASM(".byte 0X48, 0X81, 0XDE # sbbq $" _(VALUE) ", %rsi")\
+	CMT_ASM(".long " _(VALUE))
+#define SBB_RBP_(VALUE) \
+	CMT_ASM(".byte 0X48, 0X81, 0XDD # sbbq $" _(VALUE) ", %rbp")\
+	CMT_ASM(".long " _(VALUE))
+#define SBB_RSP_(VALUE) \
+	CMT_ASM(".byte 0X48, 0X81, 0XDC # sbbq $" _(VALUE) ", %rsp")\
+	CMT_ASM(".long " _(VALUE))
+#define SBB_R8_(VALUE) \
+	CMT_ASM(".byte 0X49, 0X81, 0XD8 # sbbq $" _(VALUE) ", %r8")\
+	CMT_ASM(".long " _(VALUE))
+#define SBB_R9_(VALUE) \
+	CMT_ASM(".byte 0X49, 0X81, 0XD9 # sbbq $" _(VALUE) ", %r9")\
+	CMT_ASM(".long " _(VALUE))
+#define SBB_R10_(VALUE) \
+	CMT_ASM(".byte 0X49, 0X81, 0XDA # sbbq $" _(VALUE) ", %r10")\
+	CMT_ASM(".long " _(VALUE))
+#define SBB_R11_(VALUE) \
+	CMT_ASM(".byte 0X49, 0X81, 0XDB # sbbq $" _(VALUE) ", %r11")\
+	CMT_ASM(".long " _(VALUE))
+#define SBB_R12_(VALUE) \
+	CMT_ASM(".byte 0X49, 0X81, 0XDC # sbbq $" _(VALUE) ", %r12")\
+	CMT_ASM(".long " _(VALUE))
+#define SBB_R13_(VALUE) \
+	CMT_ASM(".byte 0X49, 0X81, 0XDD # sbbq $" _(VALUE) ", %r13")\
+	CMT_ASM(".long " _(VALUE))
+#define SBB_R14_(VALUE) \
+	CMT_ASM(".byte 0X49, 0X81, 0XDE # sbbq $" _(VALUE) ", %r14")\
+	CMT_ASM(".long " _(VALUE))
+#define SBB_R15_(VALUE) \
+	CMT_ASM(".byte 0X49, 0X81, 0XDF # sbbq $" _(VALUE) ", %r15")\
+	CMT_ASM(".long " _(VALUE))
 /* ************************ [^] 64-BIT REGISTERS [^] ************************ */
 
 #include "32.INL"

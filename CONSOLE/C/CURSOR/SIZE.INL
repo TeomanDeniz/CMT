@@ -5,18 +5,22 @@
 #ifndef KNR_STYLE /* STANDARD C */
 #define FUNCTION_HEADER__CONSOLE_CURSOR_SIZE \
 	void\
-		CONSOLE_CURSOR_SIZE(struct s_console *THIS, unsigned long SIZE_VALUE)
+		CONSOLE_CURSOR_SIZE(\
+			struct s_console *const THIS, unsigned long SIZE_VALUE\
+		)
 #define FUNCTION_HEADER__console_cursor_size \
 	void\
-		console_cursor_size(struct s_console *THIS, unsigned long SIZE_VALUE)
+		console_cursor_size(\
+			struct s_console *const __this__, unsigned long SIZE_VALUE\
+		)
 #else /* K&R */
 #define FUNCTION_HEADER__CONSOLE_CURSOR_SIZE \
 	CONSOLE_CURSOR_SIZE(THIS, SIZE_VALUE)\
-	struct s_console	*THIS;\
+	struct s_console	*const THIS;\
 	unsigned long		SIZE_VALUE;
 #define FUNCTION_HEADER__console_cursor_size \
-	console_cursor_size(THIS, SIZE_VALUE)\
-	struct s_console	*THIS;\
+	console_cursor_size(__this__, SIZE_VALUE)\
+	struct s_console	*const __this__;\
 	unsigned long		SIZE_VALUE;
 #endif /* !KNR_STYLE */
 
@@ -28,6 +32,10 @@
 	\
 	FUNCTION_HEADER__console_cursor_size \
 	{\
+		union U_CONSOLE_STORAGE	*const __THIS_CONVERTER__ = \
+			(union U_CONSOLE_STORAGE *)(PTR)__this__;\
+		struct S_CONSOLE		*const THIS = &__THIS_CONVERTER__->UPPER;\
+		\
 		LOCALMACRO__CMT_CONSOLE__CURSOR_SIZE_CONTENT\
 	}
 

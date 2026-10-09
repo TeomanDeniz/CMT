@@ -5,15 +5,11 @@
 #endif /* !CONSOLE_HPP */
 
 #define LOCALMACRO__CMT_CONSOLE__PUT_FRAME_RADIUS_CONTENT \
-	THIS->PUT.COLORED.FRAME_RADIUS(\
-		CHARACTER, \
-		THIS->GET.CURSOR.COLOR, \
-		START_X, \
-		START_Y, \
-		END_X, \
-		END_Y, \
-		RADIUS\
-	);
+	{\
+		unsigned int	COLOR_VALUE = (unsigned int)(THIS->GET.CURSOR.COLOR);\
+		\
+		LOCALMACRO__CMT_CONSOLE__PUT_COLORED_FRAME_RADIUS_CONTENT\
+	}
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\
  * * AT THE ALL END OF FILES, I AM ADDING A SPECIAL BYTE <0X1A> TO END THE  * *

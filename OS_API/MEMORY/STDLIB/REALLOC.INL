@@ -8,7 +8,7 @@
 #else /* K&R */
 #define FUNCTION_HEADER__REALLOC \
 	PTR	REALLOC(ADDRESS, SIZE) \
-	PTR				ADDRESS;
+	PTR				ADDRESS;\
 	REGISTER LET	SIZE;
 #endif /* !KNR_STYLE */
 
@@ -35,8 +35,7 @@
 			{\
 				if (G_HEAP_PTRS[TRACK_I] == ADDRESS)\
 				{\
-					G_HEAP_PTRS[TRACK_I] =\
-						G_HEAP_PTRS[G_HEAP_COUNT - 1];\
+					G_HEAP_PTRS[TRACK_I] = G_HEAP_PTRS[G_HEAP_COUNT - 1];\
 					G_HEAP_COUNT -= 1;\
 					break ;\
 				}\

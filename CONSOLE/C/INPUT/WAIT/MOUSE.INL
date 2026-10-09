@@ -5,17 +5,17 @@
 #ifndef KNR_STYLE /* STANDARD C */
 #define FUNCTION_HEADER__CONSOLE_INPUT_WAIT_MOUSE \
 	void\
-		CONSOLE_INPUT_WAIT_MOUSE(struct s_console *THIS)
+		CONSOLE_INPUT_WAIT_MOUSE(struct s_console *const THIS)
 #define FUNCTION_HEADER__console_input_wait_mouse \
 	void\
-		console_input_wait_mouse(struct s_console *THIS)
+		console_input_wait_mouse(struct s_console *const __this__)
 #else /* K&R */
 #define FUNCTION_HEADER__CONSOLE_INPUT_WAIT_MOUSE \
 	CONSOLE_INPUT_WAIT_MOUSE(THIS)\
-	struct s_console	THIS;
+	struct s_console	*const THIS;
 #define FUNCTION_HEADER__console_input_wait_mouse \
-	console_input_wait_mouse(THIS)\
-	struct s_console	THIS;
+	console_input_wait_mouse(__this__)\
+	struct s_console	*const __this__;
 #endif /* !KNR_STYLE */
 
 #define LOCALFUNCTION__CONSOLE_INPUT_WAIT_MOUSE \
@@ -26,6 +26,10 @@
 	\
 	FUNCTION_HEADER__console_input_wait_mouse \
 	{\
+		union U_CONSOLE_STORAGE	*const __THIS_CONVERTER__ = \
+			(union U_CONSOLE_STORAGE *)(PTR)__this__;\
+		struct S_CONSOLE		*const THIS = &__THIS_CONVERTER__->UPPER;\
+		\
 		LOCALMACRO__CMT_CONSOLE__INPUT_WAIT_MOUSE_CONTENT\
 	}
 

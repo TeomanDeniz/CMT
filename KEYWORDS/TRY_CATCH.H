@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2025/04/25 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - Apache2.0 :: Update - 2026/09/28 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - Apache2.0 :: Update - 2026/10/06 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -307,7 +307,7 @@
 \******************************************************************************/
 
 #ifndef TRY_CATCH_H
-#define TRY_CATCH_H 202609 /* VERSION */
+#define TRY_CATCH_H 202610 /* VERSION */
 
 #define CMT_TRY_CATCH_MEMORY_PAGE_SIZE 32 /* CHANGE IF YOU WANT */
 
@@ -612,7 +612,9 @@ UNUSED static int
 {
 	LOCALMACRO__THROW_CONTENT(THROW_VALUE);
 }
+EXTERN_C_END
 
+#ifndef __cplusplus /* C++ */
 UNUSED static int
 #ifndef KNR_STYLE /* STANDARD C */
 	throw(var throw_value)
@@ -623,7 +625,7 @@ UNUSED static int
 {
 	LOCALMACRO__THROW_CONTENT(throw_value);
 }
-EXTERN_C_END
+#endif /* __cplusplus */
 
 /* **************************** [v] LOWERCASE [v] *************************** */
 #ifndef __cplusplus /* C++ */

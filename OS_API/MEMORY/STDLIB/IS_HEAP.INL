@@ -14,14 +14,14 @@
 #define LOCALFUNCTION__IS_HEAP \
 	FUNCTION_HEADER__IS_HEAP \
 	{\
-		LET	I;\
+		REGISTER LET	INDEX;\
 		\
 		if (POINTER == (PTR)0)\
 			return ((BOOLEAN)0);\
 		\
-		for (I = 0; I < G_HEAP_COUNT; I += 1)\
+		for (INDEX = 0; INDEX < G_HEAP_COUNT; INDEX += 1)\
 		{\
-			if (G_HEAP_PTRS[I] == POINTER)\
+			if (G_HEAP_PTRS[INDEX] == POINTER)\
 				return ((BOOLEAN)1);\
 		}\
 		\

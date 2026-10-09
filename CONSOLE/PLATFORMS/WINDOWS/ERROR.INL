@@ -4,15 +4,27 @@
 
 #define LOCALMACRO__CMT_CONSOLE__ERROR_CONTENT \
 	if (THIS->HIGHLIGHTER)\
-		THIS->CURSOR.COLOR(0XC)\
-			->LOG(" ERROR")\
-			->CURSOR.DEFAULT_COLOR()\
-			->LOG(": ")\
-			->CURSOR.COLOR(0XF)\
-			->LOG(STRING)\
-			->CURSOR.DEFAULT_COLOR();\
+	{\
+		const unsigned short	DEFAULT_COLOR = (unsigned short)(\
+			((unsigned short)(\
+					(THIS->GET.CURSOR.DEFAULT_COLOR >> 4) & 0X0F\
+			) << 4) | \
+			(unsigned short)(THIS->GET.CURSOR.DEFAULT_COLOR & 0X0F)\
+		);\
+		\
+		KERNEL32.SetConsoleTextAttribute(THIS->_OUT_HANDLE, 12);\
+		LOCALMACRO__CMT_CONSOLE__LOG_INLINE(" ERROR");\
+		KERNEL32.SetConsoleTextAttribute(THIS->_OUT_HANDLE, DEFAULT_COLOR);\
+		LOCALMACRO__CMT_CONSOLE__LOG_INLINE(": ");\
+		KERNEL32.SetConsoleTextAttribute(THIS->_OUT_HANDLE, 15);\
+		LOCALMACRO__CMT_CONSOLE__LOG_INLINE(STRING);\
+		KERNEL32.SetConsoleTextAttribute(THIS->_OUT_HANDLE, DEFAULT_COLOR);\
+	}\
 	else\
-		THIS->LOG(" ERROR: ")->LOG(STRING);
+	{\
+		LOCALMACRO__CMT_CONSOLE__LOG_INLINE(" ERROR: ");\
+		LOCALMACRO__CMT_CONSOLE__LOG_INLINE(STRING);\
+	}
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\
  * * AT THE ALL END OF FILES, I AM ADDING A SPECIAL BYTE <0X1A> TO END THE  * *

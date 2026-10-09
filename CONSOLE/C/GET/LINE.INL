@@ -6,7 +6,7 @@
 #define FUNCTION_HEADER__CONSOLE_GET_LINE \
 	char\
 		*CONSOLE_GET_LINE(\
-			struct s_console *THIS, \
+			struct s_console *const THIS, \
 			unsigned int START_X, \
 			unsigned int START_Y, \
 			unsigned int END_X, \
@@ -15,7 +15,7 @@
 #define FUNCTION_HEADER__console_get_line \
 	char\
 		*console_get_line(\
-			struct s_console *THIS, \
+			struct s_console *const __this__, \
 			unsigned int START_X, \
 			unsigned int START_Y, \
 			unsigned int END_X, \
@@ -25,15 +25,15 @@
 #define FUNCTION_HEADER__CONSOLE_GET_LINE \
 	char\
 		*CONSOLE_GET_LINE(THIS, START_X, START_Y, END_X, END_Y)\
-		struct s_console	*THIS;\
+		struct s_console	*const THIS;\
 		unsigned int		START_X;\
 		unsigned int		START_Y;\
 		unsigned int		END_X;\
 		unsigned int		END_Y;
 #define FUNCTION_HEADER__console_get_line \
 	char\
-		*console_get_line(THIS, START_X, START_Y, END_X, END_Y)\
-		struct s_console	*THIS;\
+		*console_get_line(__this__, START_X, START_Y, END_X, END_Y)\
+		struct s_console	*const __this__;\
 		unsigned int		START_X;\
 		unsigned int		START_Y;\
 		unsigned int		END_X;\
@@ -48,6 +48,10 @@
 	\
 	FUNCTION_HEADER__console_get_line \
 	{\
+		union U_CONSOLE_STORAGE	*const __THIS_CONVERTER__ = \
+			(union U_CONSOLE_STORAGE *)(PTR)__this__;\
+		struct S_CONSOLE		*const THIS = &__THIS_CONVERTER__->UPPER;\
+		\
 		LOCALMACRO__CMT_CONSOLE__GET_LINE_CONTENT\
 	}
 

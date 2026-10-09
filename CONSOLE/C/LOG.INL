@@ -5,18 +5,18 @@
 #ifndef KNR_STYLE /* STANDARD C */
 #define FUNCTION_HEADER__CONSOLE_LOG \
 	void\
-		CONSOLE_LOG(struct s_console *THIS, char *STRING)
+		CONSOLE_LOG(struct s_console *const THIS, char *STRING)
 #define FUNCTION_HEADER__console_log \
 	void\
-		console_log(struct s_console *THIS, char *STRING)
+		console_log(struct s_console *const __this__, char *STRING)
 #else /* K&R */
 #define FUNCTION_HEADER__CONSOLE_LOG \
 	CONSOLE_LOG(THIS, STRING)\
-	struct s_console	*THIS;\
+	struct s_console	*const THIS;\
 	char				*STRING;
 #define FUNCTION_HEADER__console_log \
-	console_log(THIS, STRING)\
-	struct s_console	*THIS;\
+	console_log(__this__, STRING)\
+	struct s_console	*const __this__;\
 	char				*STRING;
 #endif /* !KNR_STYLE */
 
@@ -28,6 +28,10 @@
 	\
 	FUNCTION_HEADER__console_log \
 	{\
+		union U_CONSOLE_STORAGE	*const __THIS_CONVERTER__ = \
+			(union U_CONSOLE_STORAGE *)(PTR)__this__;\
+		struct S_CONSOLE		*const THIS = &__THIS_CONVERTER__->UPPER;\
+		\
 		LOCALMACRO__CMT_CONSOLE__LOG_CONTENT\
 	}
 

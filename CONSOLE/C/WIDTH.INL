@@ -5,18 +5,20 @@
 #ifndef KNR_STYLE /* STANDARD C */
 #define FUNCTION_HEADER__CONSOLE_WIDTH \
 	void\
-		CONSOLE_WIDTH(struct s_console *THIS, unsigned int WIDTH_VALUE)
+		CONSOLE_WIDTH(struct s_console *const THIS, unsigned int WIDTH_VALUE)
 #define FUNCTION_HEADER__console_width \
 	void\
-		console_width(struct s_console *THIS, unsigned int WIDTH_VALUE)
+		console_width(\
+			struct s_console *const __this__, unsigned int WIDTH_VALUE\
+		)
 #else /* K&R */
 #define FUNCTION_HEADER__CONSOLE_WIDTH \
 	CONSOLE_WIDTH(THIS, WIDTH_VALUE)\
-	struct s_console	*THIS;\
+	struct s_console	*const THIS;\
 	unsigned int		WIDTH_VALUE;
 #define FUNCTION_HEADER__console_width \
-	console_width(THIS, WIDTH_VALUE)\
-	struct s_console	*THIS;\
+	console_width(__this__, WIDTH_VALUE)\
+	struct s_console	*const __this__;\
 	unsigned int		WIDTH_VALUE;
 #endif /* !KNR_STYLE */
 
@@ -28,6 +30,10 @@
 	\
 	FUNCTION_HEADER__console_width \
 	{\
+		union U_CONSOLE_STORAGE	*const __THIS_CONVERTER__ = \
+			(union U_CONSOLE_STORAGE *)(PTR)__this__;\
+		struct S_CONSOLE		*const THIS = &__THIS_CONVERTER__->UPPER;\
+		\
 		LOCALMACRO__CMT_CONSOLE__WIDTH_CONTENT\
 	}
 

@@ -5,18 +5,18 @@
 #ifndef KNR_STYLE /* STANDARD C */
 #define FUNCTION_HEADER__CONSOLE_ERROR \
 	void\
-		CONSOLE_ERROR(struct s_console *THIS, char *STRING)
+		CONSOLE_ERROR(struct s_console *const THIS, char *STRING)
 #define FUNCTION_HEADER__console_error \
 	void\
-		console_error(struct s_console *THIS, char *STRING)
+		console_error(struct s_console *const __this__, char *STRING)
 #else /* K&R */
 #define FUNCTION_HEADER__CONSOLE_ERROR \
 	CONSOLE_ERROR(THIS, STRING)\
-	struct s_console	*THIS;\
+	struct s_console	*const THIS;\
 	char				*STRING;
 #define FUNCTION_HEADER__console_error \
-	console_error(THIS, STRING)\
-	struct s_console	*THIS;\
+	console_error(__this__, STRING)\
+	struct s_console	*const __this__;\
 	char				*STRING;
 #endif /* !KNR_STYLE */
 
@@ -28,6 +28,10 @@
 	\
 	FUNCTION_HEADER__console_error \
 	{\
+		union U_CONSOLE_STORAGE	*const __THIS_CONVERTER__ = \
+			(union U_CONSOLE_STORAGE *)(PTR)__this__;\
+		struct S_CONSOLE		*const THIS = &__THIS_CONVERTER__->UPPER;\
+		\
 		LOCALMACRO__CMT_CONSOLE__ERROR_CONTENT\
 	}
 

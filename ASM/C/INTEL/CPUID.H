@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2026/03/16 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - Apache2.0 :: Update - 2026/09/28 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - Apache2.0 :: Update - 2026/10/09 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -246,7 +246,7 @@
 \******************************************************************************/
 
 #ifndef CPUID_H
-#define CPUID_H 202609 /* VERSION */
+#define CPUID_H 202610 /* VERSION */
 
 /* ********************** [v] VENDOR STRINGS (CPUS) [v] ********************* */
 #define CPUID_VENDOR_AMD "AuthenticAMD"
@@ -533,14 +533,14 @@
 #ifndef GET_CPUID
 #ifdef INLINE_ASM_TYPE__SOLARIS
 #define GET_CPUID(LEAF, EAX, EBX, ECX, EDX) \
-	__asm("\n\
-			movl %1, %%eax \n\
-			cpuid \n\
-			movl %%eax, %0 \n\
-			movl %%ebx, %2 \n\
-			movl %%ecx, %3 \n\
-			movl %%edx, %4 \n\
-		"
+	__asm(\
+		"\n"\
+		"movl %1, %%eax \n"\
+		"cpuid \n"\
+		"movl %%eax, %0 \n"\
+		"movl %%ebx, %2 \n"\
+		"movl %%ecx, %3 \n"\
+		"movl %%edx, %4 \n"\
 		: "=m"(EAX), "=m"(EBX), "=m"(ECX), "=m"(EDX) \
 		: "r"(LEAF) \
 		: "eax", "ebx", "ecx", "edx" \
@@ -626,8 +626,7 @@ EXTERN_C_END
 
 #ifdef CMT_CANT_USE_INLINE_ASM_FOR_SECTIONS
 #undef GLOBALCONSTRUCTOR__CPUID
-#define GLOBALCONSTRUCTOR__CPUID ((int (*)())LOCALFUNCTION__GET_CPUID)();\
-
+#define GLOBALCONSTRUCTOR__CPUID ((int (*)())(PTR)LOCALFUNCTION__GET_CPUID)();
 #endif /* CMT_CANT_USE_INLINE_ASM_FOR_SECTIONS */
 
 /*   /\   #==========================================================#   /\   */
@@ -640,16 +639,6 @@ EXTERN_C_END
 /* .,,,,. #==========================================================# .,,,,. */
 /*  \\//  |                 LINKABLE MEMBER CREATION                 |  \\//  */
 /*   \/   #==========================================================#   \/   */
-
-/* ********************* [v] METAWARE HIGH C LINKER [v] ********************* */
-/* * METAWARE LINKER DOES NOT SUPPORT LOWER CASE NAMES ON FUNCTION NAMES!!! * */
-#ifdef __HIGHC__ /* METAWARE HIGH C/C++ */
-#define LOCALLINKER__CPUID_HIGHC \
-	pragma Alias(LOCALFUNCTION__GET_CPUID, "LOCALFUNCTION__GET_CPUID");
-#else /* !__HIGHC__ */
-#define LOCALLINKER__CPUID_HIGHC
-#endif /* __HIGHC__ */
-/* ********************* [^] METAWARE HIGH C LINKER [^] ********************* */
 
 #ifndef INLINE_ASM_TYPE__WATCOM
 /* **************************** [v] INCLUDES [v] **************************** */
@@ -696,7 +685,6 @@ EXTERN_C_END
 
 #ifdef __ABI__PASS_REG_UNIX__
 #define LOCALLINKER__CPUID \
-	LOCALLINKER__CPUID_HIGHC \
 	SECTION(\
 		void, \
 		LOCALFUNCTION__GET_CPUID, \
@@ -719,11 +707,14 @@ EXTERN_C_END
 		BIT32	*DX;\
 	)\
 		PUSH_RBX \
+		MOV_R10_RDX /* CPUID OVERWRITES RDX AND RCX, SAVE THE POINTERS */ \
+		MOV_R11_RCX \
 		MOV_EAX_EDI \
+		MOV_ECX_(0) /* SUB-LEAF 0 */ \
 		CPUID \
 		MOV_EAX_TO_PTR_RSI \
-		MOV_EBX_TO_PTR_RDX \
-		MOV_ECX_TO_PTR_RCX \
+		MOV_EBX_TO_PTR_R10 \
+		MOV_ECX_TO_PTR_R11 \
 		MOV_EDX_TO_PTR_R8 \
 		POP_RBX \
 		RET \
@@ -731,7 +722,6 @@ EXTERN_C_END
 #else /* !__ABI__PASS_REG_UNIX__ */
 #ifdef __ABI__PASS_REG_WINDOWS__
 #define LOCALLINKER__CPUID \
-	LOCALLINKER__CPUID_HIGHC \
 	SECTION(\
 		void, \
 		LOCALFUNCTION__GET_CPUID, \
@@ -754,10 +744,12 @@ EXTERN_C_END
 		BIT32	*DX;\
 	)\
 		PUSH_RBX \
+		MOV_R11_RDX /* CPUID OVERWRITES RDX, SAVE THE POINTER */ \
 		MOV_EAX_ECX \
+		MOV_ECX_(0) /* SUB-LEAF 0 */ \
 		CPUID \
-		MOV_EAX_TO_PTR_RDX \
-		MOV_R10_FROM_PTR_RSP_(40) \
+		MOV_EAX_TO_PTR_R11 \
+		MOV_R10_FROM_PTR_RSP_(48) /* 5TH ARG: 40 AT ENTRY + 8 FOR PUSH_RBX */ \
 		MOV_EBX_TO_PTR_R8 \
 		MOV_ECX_TO_PTR_R9 \
 		MOV_EDX_TO_PTR_R10 \
@@ -766,7 +758,6 @@ EXTERN_C_END
 	END
 #else /* !__ABI__PASS_REG_WINDOWS__ */
 #define LOCALLINKER__CPUID \
-	LOCALLINKER__CPUID_HIGHC \
 	SECTION(\
 		void, \
 		LOCALFUNCTION__GET_CPUID, \
@@ -788,16 +779,12 @@ EXTERN_C_END
 		BIT32	*CX;\
 		BIT32	*DX;\
 	)\
-		MOV_EAX_(42) \
-		MOV_EBX_(42) \
-		MOV_ECX_(42) \
-		MOV_EDX_(42) \
-		RET \
 		PUSH_EBP \
 		MOV_EBP_ESP \
 		PUSH_EBX \
 		PUSH_ESI \
 		MOV_EAX_FROM_PTR_EBP_(8) \
+		MOV_ECX_(0) /* SUB-LEAF 0 */ \
 		CPUID \
 		MOV_ESI_FROM_PTR_EBP_(12) \
 		MOV_EAX_TO_PTR_ESI \
@@ -817,7 +804,7 @@ EXTERN_C_END
 
 #else /* INLINE_ASM_TYPE__WATCOM */
 
-#define LOCALLINKER__CPUID LOCALLINKER__CPUID_HIGHC
+#define LOCALLINKER__CPUID
 
 #ifdef CMT_SETUP
 #pragma aux LOCALFUNCTION__GET_CPUID = \

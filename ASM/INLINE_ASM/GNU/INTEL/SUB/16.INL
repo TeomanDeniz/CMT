@@ -24,10 +24,18 @@
 #define SUB_DL_CL CMT_ASM("subb %cl, %dl")
 #define SUB_DL_DL CMT_ASM("subb %dl, %dl")
 
-#define SUB_AL_(VALUE) CMT_ASM("subb $" _(VALUE) ", %al")
-#define SUB_BL_(VALUE) CMT_ASM("subb $" _(VALUE) ", %bl")
-#define SUB_CL_(VALUE) CMT_ASM("subb $" _(VALUE) ", %cl")
-#define SUB_DL_(VALUE) CMT_ASM("subb $" _(VALUE) ", %dl")
+#define SUB_AL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XE8 # subb $" _(VALUE) ", %al")\
+	CMT_ASM(".byte " _(VALUE))
+#define SUB_BL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XEB # subb $" _(VALUE) ", %bl")\
+	CMT_ASM(".byte " _(VALUE))
+#define SUB_CL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XE9 # subb $" _(VALUE) ", %cl")\
+	CMT_ASM(".byte " _(VALUE))
+#define SUB_DL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XEA # subb $" _(VALUE) ", %dl")\
+	CMT_ASM(".byte " _(VALUE))
 #endif /* __SYSTEM_16_BIT__ */
 
 #ifdef __SYSTEM_32_BIT__
@@ -51,10 +59,18 @@
 #define SUB_DL_CL CMT_ASM("subb %cl, %dl")
 #define SUB_DL_DL CMT_ASM("subb %dl, %dl")
 
-#define SUB_AL_(VALUE) CMT_ASM("subb $" _(VALUE) ", %al")
-#define SUB_BL_(VALUE) CMT_ASM("subb $" _(VALUE) ", %bl")
-#define SUB_CL_(VALUE) CMT_ASM("subb $" _(VALUE) ", %cl")
-#define SUB_DL_(VALUE) CMT_ASM("subb $" _(VALUE) ", %dl")
+#define SUB_AL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XE8 # subb $" _(VALUE) ", %al")\
+	CMT_ASM(".byte " _(VALUE))
+#define SUB_BL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XEB # subb $" _(VALUE) ", %bl")\
+	CMT_ASM(".byte " _(VALUE))
+#define SUB_CL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XE9 # subb $" _(VALUE) ", %cl")\
+	CMT_ASM(".byte " _(VALUE))
+#define SUB_DL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XEA # subb $" _(VALUE) ", %dl")\
+	CMT_ASM(".byte " _(VALUE))
 #endif /* __SYSTEM_32_BIT__ */
 
 #ifdef __SYSTEM_64_BIT__
@@ -330,22 +346,54 @@
 #define SUB_R15B_R14B CMT_ASM("subb %r14b, %r15b")
 #define SUB_R15B_R15B CMT_ASM("subb %r15b, %r15b")
 
-#define SUB_AL_(VALUE) CMT_ASM("subb $" _(VALUE) ", %al")
-#define SUB_BL_(VALUE) CMT_ASM("subb $" _(VALUE) ", %bl")
-#define SUB_CL_(VALUE) CMT_ASM("subb $" _(VALUE) ", %cl")
-#define SUB_DL_(VALUE) CMT_ASM("subb $" _(VALUE) ", %dl")
-#define SUB_DIL_(VALUE) CMT_ASM("subb $" _(VALUE) ", %dil")
-#define SUB_SIL_(VALUE) CMT_ASM("subb $" _(VALUE) ", %sil")
-#define SUB_BPL_(VALUE) CMT_ASM("subb $" _(VALUE) ", %bpl")
-#define SUB_SPL_(VALUE) CMT_ASM("subb $" _(VALUE) ", %spl")
-#define SUB_R8B_(VALUE) CMT_ASM("subb $" _(VALUE) ", %r8b")
-#define SUB_R9B_(VALUE) CMT_ASM("subb $" _(VALUE) ", %r9b")
-#define SUB_R10B_(VALUE) CMT_ASM("subb $" _(VALUE) ", %r10b")
-#define SUB_R11B_(VALUE) CMT_ASM("subb $" _(VALUE) ", %r11b")
-#define SUB_R12B_(VALUE) CMT_ASM("subb $" _(VALUE) ", %r12b")
-#define SUB_R13B_(VALUE) CMT_ASM("subb $" _(VALUE) ", %r13b")
-#define SUB_R14B_(VALUE) CMT_ASM("subb $" _(VALUE) ", %r14b")
-#define SUB_R15B_(VALUE) CMT_ASM("subb $" _(VALUE) ", %r15b")
+#define SUB_AL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XE8 # subb $" _(VALUE) ", %al")\
+	CMT_ASM(".byte " _(VALUE))
+#define SUB_BL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XEB # subb $" _(VALUE) ", %bl")\
+	CMT_ASM(".byte " _(VALUE))
+#define SUB_CL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XE9 # subb $" _(VALUE) ", %cl")\
+	CMT_ASM(".byte " _(VALUE))
+#define SUB_DL_(VALUE) \
+	CMT_ASM(".byte 0X80, 0XEA # subb $" _(VALUE) ", %dl")\
+	CMT_ASM(".byte " _(VALUE))
+#define SUB_DIL_(VALUE) \
+	CMT_ASM(".byte 0X40, 0X80, 0XEF # subb $" _(VALUE) ", %dil")\
+	CMT_ASM(".byte " _(VALUE))
+#define SUB_SIL_(VALUE) \
+	CMT_ASM(".byte 0X40, 0X80, 0XEE # subb $" _(VALUE) ", %sil")\
+	CMT_ASM(".byte " _(VALUE))
+#define SUB_BPL_(VALUE) \
+	CMT_ASM(".byte 0X40, 0X80, 0XED # subb $" _(VALUE) ", %bpl")\
+	CMT_ASM(".byte " _(VALUE))
+#define SUB_SPL_(VALUE) \
+	CMT_ASM(".byte 0X40, 0X80, 0XEC # subb $" _(VALUE) ", %spl")\
+	CMT_ASM(".byte " _(VALUE))
+#define SUB_R8B_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X80, 0XE8 # subb $" _(VALUE) ", %r8b")\
+	CMT_ASM(".byte " _(VALUE))
+#define SUB_R9B_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X80, 0XE9 # subb $" _(VALUE) ", %r9b")\
+	CMT_ASM(".byte " _(VALUE))
+#define SUB_R10B_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X80, 0XEA # subb $" _(VALUE) ", %r10b")\
+	CMT_ASM(".byte " _(VALUE))
+#define SUB_R11B_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X80, 0XEB # subb $" _(VALUE) ", %r11b")\
+	CMT_ASM(".byte " _(VALUE))
+#define SUB_R12B_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X80, 0XEC # subb $" _(VALUE) ", %r12b")\
+	CMT_ASM(".byte " _(VALUE))
+#define SUB_R13B_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X80, 0XED # subb $" _(VALUE) ", %r13b")\
+	CMT_ASM(".byte " _(VALUE))
+#define SUB_R14B_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X80, 0XEE # subb $" _(VALUE) ", %r14b")\
+	CMT_ASM(".byte " _(VALUE))
+#define SUB_R15B_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X80, 0XEF # subb $" _(VALUE) ", %r15b")\
+	CMT_ASM(".byte " _(VALUE))
 #endif /* __SYSTEM_64_BIT__ */
 /* ************************ [^] 8-BIT REGISTERS [^] ************************* */
 
@@ -423,14 +471,30 @@
 #define SUB_SP_BP CMT_ASM("subw %bp, %sp")
 #define SUB_SP_SP CMT_ASM("subw %sp, %sp")
 
-#define SUB_AX_(VALUE) CMT_ASM("subw $" _(VALUE) ", %ax")
-#define SUB_BX_(VALUE) CMT_ASM("subw $" _(VALUE) ", %bx")
-#define SUB_CX_(VALUE) CMT_ASM("subw $" _(VALUE) ", %cx")
-#define SUB_DX_(VALUE) CMT_ASM("subw $" _(VALUE) ", %dx")
-#define SUB_DI_(VALUE) CMT_ASM("subw $" _(VALUE) ", %di")
-#define SUB_SI_(VALUE) CMT_ASM("subw $" _(VALUE) ", %si")
-#define SUB_BP_(VALUE) CMT_ASM("subw $" _(VALUE) ", %bp")
-#define SUB_SP_(VALUE) CMT_ASM("subw $" _(VALUE) ", %sp")
+#define SUB_AX_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XE8 # subw $" _(VALUE) ", %ax")\
+	CMT_ASM(".short " _(VALUE))
+#define SUB_BX_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XEB # subw $" _(VALUE) ", %bx")\
+	CMT_ASM(".short " _(VALUE))
+#define SUB_CX_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XE9 # subw $" _(VALUE) ", %cx")\
+	CMT_ASM(".short " _(VALUE))
+#define SUB_DX_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XEA # subw $" _(VALUE) ", %dx")\
+	CMT_ASM(".short " _(VALUE))
+#define SUB_DI_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XEF # subw $" _(VALUE) ", %di")\
+	CMT_ASM(".short " _(VALUE))
+#define SUB_SI_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XEE # subw $" _(VALUE) ", %si")\
+	CMT_ASM(".short " _(VALUE))
+#define SUB_BP_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XED # subw $" _(VALUE) ", %bp")\
+	CMT_ASM(".short " _(VALUE))
+#define SUB_SP_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XEC # subw $" _(VALUE) ", %sp")\
+	CMT_ASM(".short " _(VALUE))
 #endif /* __SYSTEM_16_BIT__ */
 
 #ifdef __SYSTEM_32_BIT__
@@ -506,14 +570,30 @@
 #define SUB_SP_BP CMT_ASM("subw %bp, %sp")
 #define SUB_SP_SP CMT_ASM("subw %sp, %sp")
 
-#define SUB_AX_(VALUE) CMT_ASM("subw $" _(VALUE) ", %ax")
-#define SUB_BX_(VALUE) CMT_ASM("subw $" _(VALUE) ", %bx")
-#define SUB_CX_(VALUE) CMT_ASM("subw $" _(VALUE) ", %cx")
-#define SUB_DX_(VALUE) CMT_ASM("subw $" _(VALUE) ", %dx")
-#define SUB_DI_(VALUE) CMT_ASM("subw $" _(VALUE) ", %di")
-#define SUB_SI_(VALUE) CMT_ASM("subw $" _(VALUE) ", %si")
-#define SUB_BP_(VALUE) CMT_ASM("subw $" _(VALUE) ", %bp")
-#define SUB_SP_(VALUE) CMT_ASM("subw $" _(VALUE) ", %sp")
+#define SUB_AX_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XE8 # subw $" _(VALUE) ", %ax")\
+	CMT_ASM(".short " _(VALUE))
+#define SUB_BX_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XEB # subw $" _(VALUE) ", %bx")\
+	CMT_ASM(".short " _(VALUE))
+#define SUB_CX_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XE9 # subw $" _(VALUE) ", %cx")\
+	CMT_ASM(".short " _(VALUE))
+#define SUB_DX_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XEA # subw $" _(VALUE) ", %dx")\
+	CMT_ASM(".short " _(VALUE))
+#define SUB_DI_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XEF # subw $" _(VALUE) ", %di")\
+	CMT_ASM(".short " _(VALUE))
+#define SUB_SI_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XEE # subw $" _(VALUE) ", %si")\
+	CMT_ASM(".short " _(VALUE))
+#define SUB_BP_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XED # subw $" _(VALUE) ", %bp")\
+	CMT_ASM(".short " _(VALUE))
+#define SUB_SP_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XEC # subw $" _(VALUE) ", %sp")\
+	CMT_ASM(".short " _(VALUE))
 #endif /* __SYSTEM_32_BIT__ */
 
 #ifdef __SYSTEM_64_BIT__
@@ -789,22 +869,54 @@
 #define SUB_R15W_R14W CMT_ASM("subw %r14w, %r15w")
 #define SUB_R15W_R15W CMT_ASM("subw %r15w, %r15w")
 
-#define SUB_AX_(VALUE) CMT_ASM("subw $" _(VALUE) ", %ax")
-#define SUB_BX_(VALUE) CMT_ASM("subw $" _(VALUE) ", %bx")
-#define SUB_CX_(VALUE) CMT_ASM("subw $" _(VALUE) ", %cx")
-#define SUB_DX_(VALUE) CMT_ASM("subw $" _(VALUE) ", %dx")
-#define SUB_DI_(VALUE) CMT_ASM("subw $" _(VALUE) ", %di")
-#define SUB_SI_(VALUE) CMT_ASM("subw $" _(VALUE) ", %si")
-#define SUB_BP_(VALUE) CMT_ASM("subw $" _(VALUE) ", %bp")
-#define SUB_SP_(VALUE) CMT_ASM("subw $" _(VALUE) ", %sp")
-#define SUB_R8W_(VALUE) CMT_ASM("subw $" _(VALUE) ", %r8w")
-#define SUB_R9W_(VALUE) CMT_ASM("subw $" _(VALUE) ", %r9w")
-#define SUB_R10W_(VALUE) CMT_ASM("subw $" _(VALUE) ", %r10w")
-#define SUB_R11W_(VALUE) CMT_ASM("subw $" _(VALUE) ", %r11w")
-#define SUB_R12W_(VALUE) CMT_ASM("subw $" _(VALUE) ", %r12w")
-#define SUB_R13W_(VALUE) CMT_ASM("subw $" _(VALUE) ", %r13w")
-#define SUB_R14W_(VALUE) CMT_ASM("subw $" _(VALUE) ", %r14w")
-#define SUB_R15W_(VALUE) CMT_ASM("subw $" _(VALUE) ", %r15w")
+#define SUB_AX_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XE8 # subw $" _(VALUE) ", %ax")\
+	CMT_ASM(".short " _(VALUE))
+#define SUB_BX_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XEB # subw $" _(VALUE) ", %bx")\
+	CMT_ASM(".short " _(VALUE))
+#define SUB_CX_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XE9 # subw $" _(VALUE) ", %cx")\
+	CMT_ASM(".short " _(VALUE))
+#define SUB_DX_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XEA # subw $" _(VALUE) ", %dx")\
+	CMT_ASM(".short " _(VALUE))
+#define SUB_DI_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XEF # subw $" _(VALUE) ", %di")\
+	CMT_ASM(".short " _(VALUE))
+#define SUB_SI_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XEE # subw $" _(VALUE) ", %si")\
+	CMT_ASM(".short " _(VALUE))
+#define SUB_BP_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XED # subw $" _(VALUE) ", %bp")\
+	CMT_ASM(".short " _(VALUE))
+#define SUB_SP_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X81, 0XEC # subw $" _(VALUE) ", %sp")\
+	CMT_ASM(".short " _(VALUE))
+#define SUB_R8W_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X41, 0X81, 0XE8 # subw $" _(VALUE) ", %r8w")\
+	CMT_ASM(".short " _(VALUE))
+#define SUB_R9W_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X41, 0X81, 0XE9 # subw $" _(VALUE) ", %r9w")\
+	CMT_ASM(".short " _(VALUE))
+#define SUB_R10W_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X41, 0X81, 0XEA # subw $" _(VALUE) ", %r10w")\
+	CMT_ASM(".short " _(VALUE))
+#define SUB_R11W_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X41, 0X81, 0XEB # subw $" _(VALUE) ", %r11w")\
+	CMT_ASM(".short " _(VALUE))
+#define SUB_R12W_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X41, 0X81, 0XEC # subw $" _(VALUE) ", %r12w")\
+	CMT_ASM(".short " _(VALUE))
+#define SUB_R13W_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X41, 0X81, 0XED # subw $" _(VALUE) ", %r13w")\
+	CMT_ASM(".short " _(VALUE))
+#define SUB_R14W_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X41, 0X81, 0XEE # subw $" _(VALUE) ", %r14w")\
+	CMT_ASM(".short " _(VALUE))
+#define SUB_R15W_(VALUE) \
+	CMT_ASM(".byte 0X66, 0X41, 0X81, 0XEF # subw $" _(VALUE) ", %r15w")\
+	CMT_ASM(".short " _(VALUE))
 #endif /* __SYSTEM_64_BIT__ */
 /* ************************ [^] 16-BIT REGISTERS [^] ************************ */
 

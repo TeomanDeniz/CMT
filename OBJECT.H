@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2025/05/25 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - Apache2.0 :: Update - 2026/10/02 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - Apache2.0 :: Update - 2026/10/06 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -1078,7 +1078,7 @@
 		G_OBJECT_SIGNAL_TRANSFER = 0;\
 		G_OBJECT_NEW_PTR_TRANSFER = (PTR)(\
 			(\
-				(unsigned char *)ALLOC(\
+				(unsigned char *)CMT_OBJECT_DEFAULT_ALLOC(\
 					sizeof(PTR) + G_OBJECT_SIZE\
 				)\
 			) + (sizeof(PTR))\
@@ -1088,7 +1088,7 @@
 		{\
 			*(void (**)(PTR))(\
 				((unsigned char *)G_OBJECT_NEW_PTR_TRANSFER) - sizeof(PTR)\
-			) = FREE;\
+			) = CMT_OBJECT_DEFAULT_FREE;\
 		}\
 		\
 		LONGJMP(G_OBJECT_CONSTURCTOR_JUMP, 1);\
@@ -1112,7 +1112,7 @@
 		{\
 			*(void (**)(PTR))(\
 				((unsigned char *)G_OBJECT_NEW_PTR_TRANSFER) - sizeof(PTR)\
-			) = FREE;\
+			) = CMT_OBJECT_DEFAULT_FREE;\
 		}\
 		\
 		LONGJMP(G_OBJECT_CONSTURCTOR_JUMP, 1);\
@@ -1121,29 +1121,29 @@
 	OBJECT object_type_name	*const this = \
 		(OBJECT object_type_name * const)G_OBJECT_THIS_TRANSFER
 
-#define OBJECT__PROTOTYPE_ALLOC(ALLOC) \
+#define OBJECT__PROTOTYPE_ALLOC(__ALLOC__) \
 	if (G_OBJECT_SIGNAL_TRANSFER == 1)\
 	{\
 		G_OBJECT_SIGNAL_TRANSFER = 0;\
 		G_OBJECT_NEW_PTR_TRANSFER = (PTR)(\
 			(\
-				(unsigned char *)(ALLOC)(\
+				(unsigned char *)(__ALLOC__)(\
 					sizeof(PTR) + G_OBJECT_SIZE\
 				)\
 			) + (sizeof(PTR))\
 		);\
 		return ;\
 	}
-#define object__prototype_alloc(alloc) OBJECT__PROTOTYPE_ALLOC(alloc)
+#define object__prototype_alloc(__alloc__) OBJECT__PROTOTYPE_ALLOC(__alloc__)
 
-#define OBJECT__PROTOTYPE_FREE(FREE) \
+#define OBJECT__PROTOTYPE_FREE(__FREE__) \
 	if (G_OBJECT_NEW_PTR_TRANSFER)\
 	{\
 		*(void (**)(PTR))(\
 			((unsigned char *)G_OBJECT_NEW_PTR_TRANSFER) - sizeof(PTR)\
-		) = (FREE);\
+		) = (__FREE__);\
 	}
-#define object__prototype_free(free) OBJECT__PROTOTYPE_FREE(free)
+#define object__prototype_free(__free__) OBJECT__PROTOTYPE_FREE(__free__)
 
 #define OBJ(OBJECT_NAME, VARIABLE_NAME) \
 	OBJECT OBJECT_NAME	VARIABLE_NAME;\

@@ -109,7 +109,7 @@
 				) * PAGE_SIZE\
 			);\
 			\
-			PAGE = KERNEL32.VirtualAlloc(\
+			PAGE = (struct S_MEM_PAGE *)KERNEL32.VirtualAlloc(\
 				(PTR)0, \
 				NEW_PAGE_SIZE, \
 				(unsigned long)0X00003000, \

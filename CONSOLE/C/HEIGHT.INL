@@ -5,18 +5,20 @@
 #ifndef KNR_STYLE /* STANDARD C */
 #define FUNCTION_HEADER__CONSOLE_HEIGHT \
 	void\
-		CONSOLE_HEIGHT(struct s_console *THIS, unsigned int HEIGHT_VALUE)
+		CONSOLE_HEIGHT(struct s_console *const THIS, unsigned int HEIGHT_VALUE)
 #define FUNCTION_HEADER__console_height \
 	void\
-		console_height(struct s_console *THIS, unsigned int HEIGHT_VALUE)
+		console_height(\
+			struct s_console *const __this__, unsigned int HEIGHT_VALUE\
+		)
 #else /* K&R */
 #define FUNCTION_HEADER__CONSOLE_HEIGHT \
 	CONSOLE_HEIGHT(THIS, HEIGHT_VALUE)\
-	struct s_console	*THIS;\
+	struct s_console	*const THIS;\
 	unsigned int		HEIGHT_VALUE;
 #define FUNCTION_HEADER__console_height \
-	console_height(THIS, HEIGHT_VALUE)\
-	struct s_console	*THIS;\
+	console_height(__this__, HEIGHT_VALUE)\
+	struct s_console	*const __this__;\
 	unsigned int		HEIGHT_VALUE;
 #endif /* !KNR_STYLE */
 
@@ -28,6 +30,10 @@
 	\
 	FUNCTION_HEADER__console_height \
 	{\
+		union U_CONSOLE_STORAGE	*const __THIS_CONVERTER__ = \
+			(union U_CONSOLE_STORAGE *)(PTR)__this__;\
+		struct S_CONSOLE		*const THIS = &__THIS_CONVERTER__->UPPER;\
+		\
 		LOCALMACRO__CMT_CONSOLE__HEIGHT_CONTENT\
 	}
 

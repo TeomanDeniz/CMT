@@ -5,10 +5,10 @@
 /* ************************** [v] DIRECT JUMPS [v] ************************** */
 #define JMP_NEAR_(VALUE) \
 	CMT_ASM(".byte 0XE9") \
-	CMT_ASM(".word (" #VALUE ")")
+	CMT_ASM(".word (" _(VALUE) ")")
 #define JMP_SHORT_(VALUE) \
 	CMT_ASM(".byte 0XEB") \
-	CMT_ASM(".byte (" #VALUE ")")
+	CMT_ASM(".byte (" _(VALUE) ")")
 /* ************************** [^] DIRECT JUMPS [^] ************************** */
 
 /* * * * * * * * * * * /!\ AUTOMATIC EOF TREATMENT! /!\ * * * * * * * * * * * *\

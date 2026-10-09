@@ -76,14 +76,30 @@
 #define XOR_ESP_EBP CMT_ASM("xorl %ebp, %esp")
 #define XOR_ESP_ESP CMT_ASM("xorl %esp, %esp")
 
-#define XOR_EAX_(VALUE) CMT_ASM("xorl $" _(VALUE) ", %eax")
-#define XOR_EBX_(VALUE) CMT_ASM("xorl $" _(VALUE) ", %ebx")
-#define XOR_ECX_(VALUE) CMT_ASM("xorl $" _(VALUE) ", %ecx")
-#define XOR_EDX_(VALUE) CMT_ASM("xorl $" _(VALUE) ", %edx")
-#define XOR_EDI_(VALUE) CMT_ASM("xorl $" _(VALUE) ", %edi")
-#define XOR_ESI_(VALUE) CMT_ASM("xorl $" _(VALUE) ", %esi")
-#define XOR_EBP_(VALUE) CMT_ASM("xorl $" _(VALUE) ", %ebp")
-#define XOR_ESP_(VALUE) CMT_ASM("xorl $" _(VALUE) ", %esp")
+#define XOR_EAX_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XF0 # xorl $" _(VALUE) ", %eax")\
+	CMT_ASM(".long " _(VALUE))
+#define XOR_EBX_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XF3 # xorl $" _(VALUE) ", %ebx")\
+	CMT_ASM(".long " _(VALUE))
+#define XOR_ECX_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XF1 # xorl $" _(VALUE) ", %ecx")\
+	CMT_ASM(".long " _(VALUE))
+#define XOR_EDX_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XF2 # xorl $" _(VALUE) ", %edx")\
+	CMT_ASM(".long " _(VALUE))
+#define XOR_EDI_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XF7 # xorl $" _(VALUE) ", %edi")\
+	CMT_ASM(".long " _(VALUE))
+#define XOR_ESI_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XF6 # xorl $" _(VALUE) ", %esi")\
+	CMT_ASM(".long " _(VALUE))
+#define XOR_EBP_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XF5 # xorl $" _(VALUE) ", %ebp")\
+	CMT_ASM(".long " _(VALUE))
+#define XOR_ESP_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XF4 # xorl $" _(VALUE) ", %esp")\
+	CMT_ASM(".long " _(VALUE))
 #endif /* __SYSTEM_32_BIT__ */
 
 #ifdef __SYSTEM_64_BIT__
@@ -359,22 +375,54 @@
 #define XOR_R15D_R14D CMT_ASM("xorl %r14d, %r15d")
 #define XOR_R15D_R15D CMT_ASM("xorl %r15d, %r15d")
 
-#define XOR_EAX_(VALUE) CMT_ASM("xorl $" _(VALUE) ", %eax")
-#define XOR_EBX_(VALUE) CMT_ASM("xorl $" _(VALUE) ", %ebx")
-#define XOR_ECX_(VALUE) CMT_ASM("xorl $" _(VALUE) ", %ecx")
-#define XOR_EDX_(VALUE) CMT_ASM("xorl $" _(VALUE) ", %edx")
-#define XOR_EDI_(VALUE) CMT_ASM("xorl $" _(VALUE) ", %edi")
-#define XOR_ESI_(VALUE) CMT_ASM("xorl $" _(VALUE) ", %esi")
-#define XOR_EBP_(VALUE) CMT_ASM("xorl $" _(VALUE) ", %ebp")
-#define XOR_ESP_(VALUE) CMT_ASM("xorl $" _(VALUE) ", %esp")
-#define XOR_R8D_(VALUE) CMT_ASM("xorl $" _(VALUE) ", %r8d")
-#define XOR_R9D_(VALUE) CMT_ASM("xorl $" _(VALUE) ", %r9d")
-#define XOR_R10D_(VALUE) CMT_ASM("xorl $" _(VALUE) ", %r10d")
-#define XOR_R11D_(VALUE) CMT_ASM("xorl $" _(VALUE) ", %r11d")
-#define XOR_R12D_(VALUE) CMT_ASM("xorl $" _(VALUE) ", %r12d")
-#define XOR_R13D_(VALUE) CMT_ASM("xorl $" _(VALUE) ", %r13d")
-#define XOR_R14D_(VALUE) CMT_ASM("xorl $" _(VALUE) ", %r14d")
-#define XOR_R15D_(VALUE) CMT_ASM("xorl $" _(VALUE) ", %r15d")
+#define XOR_EAX_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XF0 # xorl $" _(VALUE) ", %eax")\
+	CMT_ASM(".long " _(VALUE))
+#define XOR_EBX_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XF3 # xorl $" _(VALUE) ", %ebx")\
+	CMT_ASM(".long " _(VALUE))
+#define XOR_ECX_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XF1 # xorl $" _(VALUE) ", %ecx")\
+	CMT_ASM(".long " _(VALUE))
+#define XOR_EDX_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XF2 # xorl $" _(VALUE) ", %edx")\
+	CMT_ASM(".long " _(VALUE))
+#define XOR_EDI_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XF7 # xorl $" _(VALUE) ", %edi")\
+	CMT_ASM(".long " _(VALUE))
+#define XOR_ESI_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XF6 # xorl $" _(VALUE) ", %esi")\
+	CMT_ASM(".long " _(VALUE))
+#define XOR_EBP_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XF5 # xorl $" _(VALUE) ", %ebp")\
+	CMT_ASM(".long " _(VALUE))
+#define XOR_ESP_(VALUE) \
+	CMT_ASM(".byte 0X81, 0XF4 # xorl $" _(VALUE) ", %esp")\
+	CMT_ASM(".long " _(VALUE))
+#define XOR_R8D_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X81, 0XF0 # xorl $" _(VALUE) ", %r8d")\
+	CMT_ASM(".long " _(VALUE))
+#define XOR_R9D_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X81, 0XF1 # xorl $" _(VALUE) ", %r9d")\
+	CMT_ASM(".long " _(VALUE))
+#define XOR_R10D_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X81, 0XF2 # xorl $" _(VALUE) ", %r10d")\
+	CMT_ASM(".long " _(VALUE))
+#define XOR_R11D_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X81, 0XF3 # xorl $" _(VALUE) ", %r11d")\
+	CMT_ASM(".long " _(VALUE))
+#define XOR_R12D_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X81, 0XF4 # xorl $" _(VALUE) ", %r12d")\
+	CMT_ASM(".long " _(VALUE))
+#define XOR_R13D_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X81, 0XF5 # xorl $" _(VALUE) ", %r13d")\
+	CMT_ASM(".long " _(VALUE))
+#define XOR_R14D_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X81, 0XF6 # xorl $" _(VALUE) ", %r14d")\
+	CMT_ASM(".long " _(VALUE))
+#define XOR_R15D_(VALUE) \
+	CMT_ASM(".byte 0X41, 0X81, 0XF7 # xorl $" _(VALUE) ", %r15d")\
+	CMT_ASM(".long " _(VALUE))
 #endif /* __SYSTEM_64_BIT__ */
 /* ************************ [^] 32-BIT REGISTERS [^] ************************ */
 
