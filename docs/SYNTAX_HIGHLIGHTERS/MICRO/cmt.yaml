@@ -1,0 +1,67 @@
+# CMT (C MAXIMUM TENSION)
+# INSTALL: COPY TO ~/.config/micro/syntax/cmt.yaml
+# (WINDOWS: %USERPROFILE%\.config\micro\syntax\cmt.yaml)
+# THE PLAIN C RULES ARE COPIED FROM micro's OWN c.yaml (MIT LICENSE,
+# COPYRIGHT (C) 2016-2020 ZACHARY YEDIDIA, ET AL.) SO CMT RULES CAN OVERRIDE THEM.
+
+filetype: cmt
+
+detect:
+    filename: "\\.(c|C|h|H|inl|INL)$"
+
+rules:
+    # ---- PLAIN C ----
+    - identifier: "\\b[A-Z_][0-9A-Z_]+\\b"
+    - type: "\\b(_Atomic|_BitInt|float|double|_Decimal32|_Decimal64|_Decimal128|_Complex|complex|_Imaginary|imaginary|_Bool|bool|char|int|short|long|enum|void|struct|union|typedef|typeof|typeof_unqual|(un)?signed|inline|_Noreturn)\\b"
+    - type: "\\b((s?size)|((u_?)?int(8|16|32|64|ptr))|char(8|16|32)|wchar)_t\\b"
+    - type: "\\b(_Float16|__fp16|_Float32|_Float32x|_Float64|_Float64x|__float80|_Float128|_Float128x|__float128|__ibm128|__int128|_Fract|_Sat|_Accum)\\b"
+    - type: "\\b[a-z_][0-9a-z_]+(_t|_T)\\b"
+    - statement: "\\b(auto|volatile|register|restrict|_Alignas|alignas|_Alignof|alignof|static|const|constexpr|extern|_Thread_local|thread_local)\\b"
+    - statement: "\\b(for|if|while|do|else|case|default|switch|_Generic|_Static_assert|static_assert)\\b"
+    - statement: "\\b(goto|continue|break|return)\\b"
+    - statement: "\\b(asm|fortran)\\b"
+    - preproc: "^[[:space:]]*#[[:space:]]*(define|embed|pragma|include|(un|ifn?)def|endif|el(if|ifdef|ifndef|se)|if|line|warning|error|__has_include|__has_embed|__has_c_attribute)"
+    - preproc: "^[[:space:]]*_Pragma\\b"
+    - statement: "__attribute__[[:space:]]*\\(\\([^)]*\\)\\)"
+    - statement: "__(aligned|asm|builtin|extension|hidden|inline|packed|restrict|section|typeof|weak)__"
+    - symbol.operator: "[-+*/%=<>.:;,~&|^!?]|\\b(offsetof|sizeof)\\b"
+    - symbol.brackets: "[(){}]|\\[|\\]"
+    - constant.number: "(\\b([1-9][0-9]*|0[0-7]*|0[Xx][0-9A-Fa-f]+|0[Bb][01]+)([Uu][Ll]?[Ll]?|[Ll][Ll]?[Uu]?)?\\b)"
+    - constant.number: "(\\b(([0-9]*[.][0-9]+|[0-9]+[.][0-9]*)([Ee][+-]?[0-9]+)?|[0-9]+[Ee][+-]?[0-9]+)[FfLl]?\\b)"
+    - constant.number: "(\\b0[Xx]([0-9A-Za-z]*[.][0-9A-Za-z]+|[0-9A-Za-z]+[.][0-9A-Za-z]*)[Pp][+-]?[0-9]+[FfLl]?\\b)"
+    - constant.bool: "(\\b(true|false|NULL|nullptr|TRUE|FALSE)\\b)"
+    # ---- CMT (AFTER C, SO THEY WIN) ----
+    - statement: "\\b(TRY|try|CATCH|catch|THROW|throw|CANCEL|cancel|IS_IN_TRY|is_in_try)\\b"
+    - statement: "\\b(LOCAL|local|VA_ARGS|va_args|VA_ARG|va_arg|VA_BEGIN|va_begin|VA_END|va_end|VA_DECLARE|va_declare)\\b"
+    - preproc: "\\b(SECTION|STATIC_SECTION|SECTION_KNR|STATIC_SECTION_KNR|END)\\b"
+    - type.keyword: "\\b(FASTCALL|fastcall|STDCALL|stdcall|REGPASS|regpass|REGPARM|regparm|IGNORE_VAR|ignore_var|CDECL|cdecl|FAR|far|NOINLINE|noinline|PASCAL|pascal|EXTERN_C_START|extern_c_start|EXTERN_C_END|extern_c_end|PACK|pack|PRAGMA_PACK_PUSH|pragma_pack_push|PRAGMA_PACK_POP|pragma_pack_pop|ALIGN_UP|align_up|ALIGN_VARIABLE|align_variable|ALIGN_STRUCT_PUSH|align_struct_push|ALIGN_STRUCT_POP|align_struct_pop|MAYBE_ARGS|maybe_args|VOLATILE|volatile|INLINE|inline|REGISTER|register|RESTRICT|restrict|UNUSED|FORCE_INLINE)\\b"
+    - type: "\\b(VAR|var|LET|let|PTR|ptr|FAR_PTR|far_ptr|BOOLEAN|boolean|BYTE|byte|BIT8|bit8|BIT16|bit16|BIT32|bit32|BIT64|bit64|BIT128|bit128|FLOAT32|float32|FLOAT64|float64|FLOAT128|float128|JMP_BUF|jmp_buf|VA_LIST|va_list|CONSOLE|console|KERNEL32|USER32)\\b"
+    - special: "\\b(NEW|new|OBJ|obj|DELETE|delete|DESTROY|destroy|OBJECT__CONNECT|object__connect|OBJECT__INJECT|object__inject|OBJECT__EJECT|object__eject|OBJECT__INITIALIZE|object__initialize|OBJECT__COPY|object__copy|OBJECT__PROTOTYPE_ALLOC|object__prototype_alloc|OBJECT__PROTOTYPE_FREE|object__prototype_free|__DESTRUCTOR__|OBJECT|object)\\b"
+    - constant: "\\b(THIS|this)\\b"
+    # ---- STRINGS AND COMMENTS ----
+    - constant.string:
+        start: "\""
+        end: "\""
+        skip: "\\\\."
+        rules:
+            - constant.specialChar: "\\\\([\"'abfnrtv\\\\]|[0-3]?[0-7]{1,2}|x[0-9A-Fa-f]{1,2}|u[0-9A-Fa-f]{4}|U[0-9A-Fa-f]{8})"
+
+    - constant.string:
+        start: "'"
+        end: "'"
+        skip: "\\\\."
+        rules:
+            - error: "..+"
+            - constant.specialChar: "\\\\([\"'abfnrtv\\\\]|[0-3]?[0-7]{1,2}|x[0-9A-Fa-f]{1,2}|u[0-9A-Fa-f]{4}|U[0-9A-Fa-f]{8})"
+
+    - comment:
+        start: "//"
+        end: "$"
+        rules:
+            - todo: "(TODO|XXX|FIXME):?"
+
+    - comment:
+        start: "/\\*"
+        end: "\\*/"
+        rules:
+            - todo: "(TODO|XXX|FIXME):?"

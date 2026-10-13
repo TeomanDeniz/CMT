@@ -1,14 +1,19 @@
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/BANNERS/HEADER.png" ALT="Header" STYLE="WIDTH: 100%;"/>
 
-**CMT (C Maximum Tension)** is a header-only systems programming library for C that pushes the language far beyond its conventional limits without sacrificing portability or performance. It introduces a unified runtime layer that enhances ergonomics, abstraction, and developer control while staying compatible with both ANSI and K&R C.
+**CMT (C Maximum Tension)** is a header-only ecosystem for the C language: one folder that gives C what it never had built in, and runs anywhere a C compiler exists.
 
-The library is built around low-level mechanisms rather than syntactic tricks, enabling natural and efficient usage patterns that integrate directly with the compiler, ABI, and architecture. It avoids hidden globals, minimizes overhead, and leverages register-level behavior and inline assembly to deliver predictable, high-performance execution across platforms.
+C is a small language on purpose. Everything outside the standard library depends on the platform, the compiler and the CPU, and every project ends up rebuilding the same foundations again. CMT builds those foundations once, from the lowest level up, and keeps building upward on top of them, from CPU instructions and memory to operating system services, objects, consoles and beyond.
 
-CMT also provides a structured meta-layer over assembly, bridging differences between architectures, compilers, and calling conventions. It includes feature detection, environment introspection, and compatibility layers that allow code to adapt at compile-time and runtime to the exact system it is targeting.
+Every CMT module, present and future, follows the same rules:
 
-Designed with longevity in mind, the project maintains support for legacy systems and toolchains while scaling up to modern environments. It emphasizes consistency across platforms, modular expansion, and deep control over system resources-from CPU instructions to OS-level APIs.
+* **Works everywhere C works.** From K&R compilers and DOS to C23, C++20 and modern 64-bit systems. Compiler, platform and architecture differences are detected and handled inside CMT, never left to the user.
+* **Owns its foundation.** CMT relies on its own layers instead of on what a platform happens to provide. If a compiler or OS is missing something, CMT implements it once and every module above benefits.
+* **Header-only, no build step.** Copy the folder, include what you need, compile. Include a single module or everything.
+* **One API, three ways to use it.** Plain C functions, CMT's object model for C (`thing.method(args)` with no `self` parameter), or native C++ classes, from the same module.
+* **Low-level by design.** CMT talks directly to the CPU, the calling conventions and the operating system where that is the right tool, without hiding the cost.
+* **Built to last.** Legacy systems and toolchains stay supported while new ones are added; nothing is dropped just because it is old.
 
-The repository includes multiple documentation formats, test matrices across compilers and architectures, and a stripped release variant optimized for minimal footprint.
+Also if you need Highlighters, you can check [here](https://github.com/TeomanDeniz/CMT/blob/main/docs/SYNTAX_HIGHLIGHTERS).
 
 <details>
   <summary><strong>Table of Contents</strong></summary>

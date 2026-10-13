@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- CMT (C MAXIMUM TENSION) -->
+<!-- FOR GNOME TEXT EDITOR, GEDIT, PLUMA, MOUSEPAD, XED, BUILDER (GtkSourceView 3/4/5).
+     INSTALL: COPY INTO ~/.local/share/gtksourceview-5/language-specs/
+     (OR gtksourceview-4 / gtksourceview-3.0 FOR OLDER APPS), THEN PICK "C (CMT)". -->
+<language id="cmt" name="C (CMT)" version="2.0" _section="Source">
+  <metadata>
+    <property name="mimetypes">text/x-c;text/x-csrc;text/x-chdr</property>
+    <property name="globs">*.inl;*.INL</property>
+    <property name="line-comment-start">//</property>
+    <property name="block-comment-start">/*</property>
+    <property name="block-comment-end">*/</property>
+  </metadata>
+  <styles>
+    <style id="control" name="CMT Control" map-to="def:keyword"/>
+    <style id="keyword" name="CMT Keyword" map-to="def:keyword"/>
+    <style id="modifier" name="CMT Modifier" map-to="def:type"/>
+    <style id="type" name="CMT Type" map-to="def:type"/>
+    <style id="oop" name="CMT OOP" map-to="def:keyword"/>
+    <style id="object" name="CMT Object" map-to="def:keyword"/>
+    <style id="this" name="CMT This" map-to="def:builtin"/>
+    <style id="section" name="CMT Section" map-to="def:preprocessor"/>
+    <style id="asm" name="CMT Assembly" map-to="def:function"/>
+  </styles>
+  <definitions>
+    <context id="cmt-control" style-ref="control">
+      <keyword>TRY</keyword>
+      <keyword>try</keyword>
+      <keyword>CATCH</keyword>
+      <keyword>catch</keyword>
+      <keyword>THROW</keyword>
+      <keyword>throw</keyword>
+      <keyword>CANCEL</keyword>
+      <keyword>cancel</keyword>
+      <keyword>IS_IN_TRY</keyword>
+      <keyword>is_in_try</keyword>
+    </context>
+    <context id="cmt-keyword" style-ref="keyword">
+      <keyword>LOCAL</keyword>
+      <keyword>local</keyword>
+      <keyword>VA_ARGS</keyword>
+      <keyword>va_args</keyword>
+      <keyword>VA_ARG</keyword>
+      <keyword>va_arg</keyword>
+      <keyword>VA_BEGIN</keyword>
+      <keyword>va_begin</keyword>
+      <keyword>VA_END</keyword>
+      <keyword>va_end</keyword>
+      <keyword>VA_DECLARE</keyword>
+      <keyword>va_declare</keyword>
+    </context>
+    <context id="cmt-modifier" style-ref="modifier">
+      <keyword>FASTCALL</keyword>
+      <keyword>fastcall</keyword>
+      <keyword>STDCALL</keyword>
+      <keyword>stdcall</keyword>
+      <keyword>REGPASS</keyword>
+      <keyword>regpass</keyword>
+      <keyword>REGPARM</keyword>
+      <keyword>regparm</keyword>
+      <keyword>IGNORE_VAR</keyword>
+      <keyword>ignore_var</keyword>
+      <keyword>CDECL</keyword>
+      <keyword>cdecl</keyword>
+      <keyword>FAR</keyword>
+      <keyword>far</keyword>
+      <keyword>NOINLINE</keyword>
+      <keyword>noinline</keyword>
+      <keyword>PASCAL</keyword>
+      <keyword>pascal</keyword>
+      <keyword>EXTERN_C_START</keyword>
+      <keyword>extern_c_start</keyword>
+      <keyword>EXTERN_C_END</keyword>
+      <keyword>extern_c_end</keyword>
+      <keyword>PACK</keyword>
+      <keyword>pack</keyword>
+      <keyword>PRAGMA_PACK_PUSH</keyword>
+      <keyword>pragma_pack_push</keyword>
+      <keyword>PRAGMA_PACK_POP</keyword>
+      <keyword>pragma_pack_pop</keyword>
+      <keyword>ALIGN_UP</keyword>
+      <keyword>align_up</keyword>
+      <keyword>ALIGN_VARIABLE</keyword>
+      <keyword>align_variable</keyword>
+      <keyword>ALIGN_STRUCT_PUSH</keyword>
+      <keyword>align_struct_push</keyword>
+      <keyword>ALIGN_STRUCT_POP</keyword>
+      <keyword>align_struct_pop</keyword>
+      <keyword>MAYBE_ARGS</keyword>
+      <keyword>maybe_args</keyword>
+      <keyword>VOLATILE</keyword>
+      <keyword>volatile</keyword>
+      <keyword>INLINE</keyword>
+      <keyword>inline</keyword>
+      <keyword>REGISTER</keyword>
+      <keyword>register</keyword>
+      <keyword>RESTRICT</keyword>
+      <keyword>restrict</keyword>
+      <keyword>UNUSED</keyword>
+      <keyword>FORCE_INLINE</keyword>
+    </context>
+    <context id="cmt-type" style-ref="type">
+      <keyword>VAR</keyword>
+      <keyword>var</keyword>
+      <keyword>LET</keyword>
+      <keyword>let</keyword>
+      <keyword>PTR</keyword>
+      <keyword>ptr</keyword>
+      <keyword>FAR_PTR</keyword>
+      <keyword>far_ptr</keyword>
+      <keyword>BOOLEAN</keyword>
+      <keyword>boolean</keyword>
+      <keyword>BYTE</keyword>
+      <keyword>byte</keyword>
+      <keyword>BIT8</keyword>
+      <keyword>bit8</keyword>
+      <keyword>BIT16</keyword>
+      <keyword>bit16</keyword>
+      <keyword>BIT32</keyword>
+      <keyword>bit32</keyword>
+      <keyword>BIT64</keyword>
+      <keyword>bit64</keyword>
+      <keyword>BIT128</keyword>
+      <keyword>bit128</keyword>
+      <keyword>FLOAT32</keyword>
+      <keyword>float32</keyword>
+      <keyword>FLOAT64</keyword>
+      <keyword>float64</keyword>
+      <keyword>FLOAT128</keyword>
+      <keyword>float128</keyword>
+      <keyword>JMP_BUF</keyword>
+      <keyword>jmp_buf</keyword>
+      <keyword>VA_LIST</keyword>
+      <keyword>va_list</keyword>
+      <keyword>CONSOLE</keyword>
+      <keyword>console</keyword>
+      <keyword>KERNEL32</keyword>
+      <keyword>USER32</keyword>
+    </context>
+    <context id="cmt-oop" style-ref="oop">
+      <keyword>NEW</keyword>
+      <keyword>new</keyword>
+      <keyword>OBJ</keyword>
+      <keyword>obj</keyword>
+      <keyword>DELETE</keyword>
+      <keyword>delete</keyword>
+      <keyword>DESTROY</keyword>
+      <keyword>destroy</keyword>
+      <keyword>OBJECT__CONNECT</keyword>
+      <keyword>object__connect</keyword>
+      <keyword>OBJECT__INJECT</keyword>
+      <keyword>object__inject</keyword>
+      <keyword>OBJECT__EJECT</keyword>
+      <keyword>object__eject</keyword>
+      <keyword>OBJECT__INITIALIZE</keyword>
+      <keyword>object__initialize</keyword>
+      <keyword>OBJECT__COPY</keyword>
+      <keyword>object__copy</keyword>
+      <keyword>OBJECT__PROTOTYPE_ALLOC</keyword>
+      <keyword>object__prototype_alloc</keyword>
+      <keyword>OBJECT__PROTOTYPE_FREE</keyword>
+      <keyword>object__prototype_free</keyword>
+      <keyword>__DESTRUCTOR__</keyword>
+    </context>
+    <context id="cmt-object" style-ref="object">
+      <keyword>OBJECT</keyword>
+      <keyword>object</keyword>
+    </context>
+    <context id="cmt-this" style-ref="this">
+      <keyword>THIS</keyword>
+      <keyword>this</keyword>
+    </context>
+    <context id="cmt-section-knr" style-ref="section">
+      <keyword>SECTION_KNR</keyword>
+      <keyword>STATIC_SECTION_KNR</keyword>
+    </context>
+    <context id="asm-section">
+      <start>\b(?:STATIC_)?SECTION(?:_KNR)?\b</start>
+      <end>\bEND\b</end>
+      <include>
+        <context sub-pattern="0" where="start" style-ref="section"/>
+        <context sub-pattern="0" where="end" style-ref="section"/>
+        <context ref="def:c-like-comment"/>
+        <context ref="def:c-like-comment-multiline"/>
+        <context ref="c:string"/>
+        <context ref="c:char"/>
+        <context ref="cmt-section-knr"/>
+        <context ref="cmt-type"/>
+        <context ref="cmt-modifier"/>
+        <context ref="c:types"/>
+        <context ref="c:storage-class"/>
+        <context ref="c:hexadecimal"/>
+        <context ref="c:decimal"/>
+        <context id="asm-instruction" style-ref="asm">
+          <match>\b[A-Z]+(?:_[A-Z0-9]+)*_?\b</match>
+        </context>
+      </include>
+    </context>
+    <context id="cmt" class="no-spell-check">
+      <include>
+        <context ref="asm-section"/>
+        <context ref="cmt-control"/>
+        <context ref="cmt-keyword"/>
+        <context ref="cmt-modifier"/>
+        <context ref="cmt-type"/>
+        <context ref="cmt-oop"/>
+        <context ref="cmt-object"/>
+        <context ref="cmt-this"/>
+        <context ref="c:c"/>
+      </include>
+    </context>
+  </definitions>
+</language>

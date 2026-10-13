@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE language>
+<!-- CMT (C MAXIMUM TENSION) -->
+<!-- FOR KATE, KWRITE, KDEVELOP, QT CREATOR AND ANYTHING USING KSyntaxHighlighting.
+     INSTALL: COPY INTO ~/.local/share/org.kde.syntax-highlighting/syntax/
+     (WINDOWS: %USERPROFILE%\AppData\Local\org.kde.syntax-highlighting\syntax\)
+     THEN PICK "C (CMT)" FROM Tools > Highlighting > Sources. -->
+<language name="C (CMT)" section="Sources" version="1" kateversion="5.79" extensions="*.c;*.C;*.h;*.H;*.inl;*.INL" priority="6" indenter="cstyle" author="Teoman Deniz" license="Apache-2.0">
+  <highlighting>
+    <list name="cmt_control">
+      <item>TRY</item>
+      <item>try</item>
+      <item>CATCH</item>
+      <item>catch</item>
+      <item>THROW</item>
+      <item>throw</item>
+      <item>CANCEL</item>
+      <item>cancel</item>
+      <item>IS_IN_TRY</item>
+      <item>is_in_try</item>
+    </list>
+    <list name="cmt_keyword">
+      <item>LOCAL</item>
+      <item>local</item>
+      <item>VA_ARGS</item>
+      <item>va_args</item>
+      <item>VA_ARG</item>
+      <item>va_arg</item>
+      <item>VA_BEGIN</item>
+      <item>va_begin</item>
+      <item>VA_END</item>
+      <item>va_end</item>
+      <item>VA_DECLARE</item>
+      <item>va_declare</item>
+    </list>
+    <list name="cmt_modifier">
+      <item>FASTCALL</item>
+      <item>fastcall</item>
+      <item>STDCALL</item>
+      <item>stdcall</item>
+      <item>REGPASS</item>
+      <item>regpass</item>
+      <item>REGPARM</item>
+      <item>regparm</item>
+      <item>IGNORE_VAR</item>
+      <item>ignore_var</item>
+      <item>CDECL</item>
+      <item>cdecl</item>
+      <item>FAR</item>
+      <item>far</item>
+      <item>NOINLINE</item>
+      <item>noinline</item>
+      <item>PASCAL</item>
+      <item>pascal</item>
+      <item>EXTERN_C_START</item>
+      <item>extern_c_start</item>
+      <item>EXTERN_C_END</item>
+      <item>extern_c_end</item>
+      <item>PACK</item>
+      <item>pack</item>
+      <item>PRAGMA_PACK_PUSH</item>
+      <item>pragma_pack_push</item>
+      <item>PRAGMA_PACK_POP</item>
+      <item>pragma_pack_pop</item>
+      <item>ALIGN_UP</item>
+      <item>align_up</item>
+      <item>ALIGN_VARIABLE</item>
+      <item>align_variable</item>
+      <item>ALIGN_STRUCT_PUSH</item>
+      <item>align_struct_push</item>
+      <item>ALIGN_STRUCT_POP</item>
+      <item>align_struct_pop</item>
+      <item>MAYBE_ARGS</item>
+      <item>maybe_args</item>
+      <item>VOLATILE</item>
+      <item>volatile</item>
+      <item>INLINE</item>
+      <item>inline</item>
+      <item>REGISTER</item>
+      <item>register</item>
+      <item>RESTRICT</item>
+      <item>restrict</item>
+      <item>UNUSED</item>
+      <item>FORCE_INLINE</item>
+    </list>
+    <list name="cmt_type">
+      <item>VAR</item>
+      <item>var</item>
+      <item>LET</item>
+      <item>let</item>
+      <item>PTR</item>
+      <item>ptr</item>
+      <item>FAR_PTR</item>
+      <item>far_ptr</item>
+      <item>BOOLEAN</item>
+      <item>boolean</item>
+      <item>BYTE</item>
+      <item>byte</item>
+      <item>BIT8</item>
+      <item>bit8</item>
+      <item>BIT16</item>
+      <item>bit16</item>
+      <item>BIT32</item>
+      <item>bit32</item>
+      <item>BIT64</item>
+      <item>bit64</item>
+      <item>BIT128</item>
+      <item>bit128</item>
+      <item>FLOAT32</item>
+      <item>float32</item>
+      <item>FLOAT64</item>
+      <item>float64</item>
+      <item>FLOAT128</item>
+      <item>float128</item>
+      <item>JMP_BUF</item>
+      <item>jmp_buf</item>
+      <item>VA_LIST</item>
+      <item>va_list</item>
+      <item>CONSOLE</item>
+      <item>console</item>
+      <item>KERNEL32</item>
+      <item>USER32</item>
+    </list>
+    <list name="cmt_oop">
+      <item>NEW</item>
+      <item>new</item>
+      <item>OBJ</item>
+      <item>obj</item>
+      <item>DELETE</item>
+      <item>delete</item>
+      <item>DESTROY</item>
+      <item>destroy</item>
+      <item>OBJECT__CONNECT</item>
+      <item>object__connect</item>
+      <item>OBJECT__INJECT</item>
+      <item>object__inject</item>
+      <item>OBJECT__EJECT</item>
+      <item>object__eject</item>
+      <item>OBJECT__INITIALIZE</item>
+      <item>object__initialize</item>
+      <item>OBJECT__COPY</item>
+      <item>object__copy</item>
+      <item>OBJECT__PROTOTYPE_ALLOC</item>
+      <item>object__prototype_alloc</item>
+      <item>OBJECT__PROTOTYPE_FREE</item>
+      <item>object__prototype_free</item>
+      <item>__DESTRUCTOR__</item>
+    </list>
+    <list name="cmt_object">
+      <item>OBJECT</item>
+      <item>object</item>
+    </list>
+    <list name="cmt_this">
+      <item>THIS</item>
+      <item>this</item>
+    </list>
+    <list name="cmt_section_knr">
+      <item>SECTION_KNR</item>
+      <item>STATIC_SECTION_KNR</item>
+    </list>
+    <contexts>
+      <context name="Normal" attribute="Normal Text" lineEndContext="#stay">
+        <RegExpr attribute="CMT Section" context="AsmSection" String="\b(?:STATIC_)?SECTION(?:_KNR)?\b"/>
+        <keyword attribute="CMT Control" context="#stay" String="cmt_control"/>
+        <keyword attribute="CMT Keyword" context="#stay" String="cmt_keyword"/>
+        <keyword attribute="CMT Modifier" context="#stay" String="cmt_modifier"/>
+        <keyword attribute="CMT Type" context="#stay" String="cmt_type"/>
+        <keyword attribute="CMT OOP" context="#stay" String="cmt_oop"/>
+        <keyword attribute="CMT Object" context="#stay" String="cmt_object"/>
+        <keyword attribute="CMT This" context="#stay" String="cmt_this"/>
+        <IncludeRules context="##C" includeAttrib="true"/>
+      </context>
+      <context name="AsmSection" attribute="Normal Text" lineEndContext="#stay">
+        <WordDetect attribute="CMT Section" context="#pop" String="END"/>
+        <keyword attribute="CMT Section" context="#stay" String="cmt_section_knr"/>
+        <keyword attribute="CMT Type" context="#stay" String="cmt_type"/>
+        <keyword attribute="CMT Modifier" context="#stay" String="cmt_modifier"/>
+        <RegExpr attribute="CMT Assembly" context="#stay" String="\b[A-Z]+(?:_[A-Z0-9]+)*_?\b"/>
+        <IncludeRules context="##C" includeAttrib="true"/>
+      </context>
+    </contexts>
+    <itemDatas>
+      <itemData name="Normal Text" defStyleNum="dsNormal"/>
+      <itemData name="CMT Control" defStyleNum="dsControlFlow"/>
+      <itemData name="CMT Keyword" defStyleNum="dsKeyword"/>
+      <itemData name="CMT Modifier" defStyleNum="dsAttribute"/>
+      <itemData name="CMT Type" defStyleNum="dsDataType"/>
+      <itemData name="CMT OOP" defStyleNum="dsKeyword"/>
+      <itemData name="CMT Object" defStyleNum="dsKeyword"/>
+      <itemData name="CMT This" defStyleNum="dsVariable"/>
+      <itemData name="CMT Section" defStyleNum="dsPreprocessor"/>
+      <itemData name="CMT Assembly" defStyleNum="dsBuiltIn"/>
+    </itemDatas>
+  </highlighting>
+  <general>
+    <comments>
+      <comment name="singleLine" start="//"/>
+      <comment name="multiLine" start="/*" end="*/" region="Comment"/>
+    </comments>
+    <keywords casesensitive="1"/>
+  </general>
+</language>

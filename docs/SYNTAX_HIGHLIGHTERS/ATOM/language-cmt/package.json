@@ -1,0 +1,9 @@
+{
+  "name": "language-cmt",
+  "version": "1.0.2",
+  "description": "Highlighting for the CMT C library (C Maximum Tension) in Atom and Pulsar.",
+  "keywords": ["c", "cmt", "syntax", "highlighting"],
+  "repository": "https://github.com/TeomanDeniz/CMT",
+  "license": "Apache-2.0",
+  "engines": { "atom": ">=1.0.0 <2.0.0" }
+}

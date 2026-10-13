@@ -41,6 +41,8 @@ The result is a simple, compiler-independent exception mechanism that closely re
 | `#define catch(error_variable)` |
 | `static int THROW(VAR);`        |
 | `static int throw(var);`        |
+| `#define CANCEL`                |
+| `#define cancel`                |
 | `#define IS_IN_TRY`             |
 | `#define is_in_try`             |
 
@@ -121,6 +123,35 @@ If no `TRY` block is currently active, the macro has no effect.
 if (file == NULL)
 {
 	throw("Unable to open file.");
+}
+```
+
+----
+
+### CANCEL
+
+```c
+#define CANCEL
+#define cancel
+```
+
+Cancels the last `TRY` block.
+
+If you use `THROW` after the `CANCEL` keyword, execution will jump back to the `TRY` block preceding your most recent `TRY` block.
+
+#### Example
+
+```cpp
+try
+{
+	if (is_in_try)
+	{
+		cancel ;
+		return ; // Without cancel, throw will back to this place
+	}
+} catch (. . .)
+{
+	. . .
 }
 ```
 

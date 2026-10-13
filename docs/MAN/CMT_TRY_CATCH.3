@@ -71,6 +71,12 @@ T{
 \f[CR]static int throw(var);\f[R]
 T}
 T{
+\f[CR]#define CANCEL\f[R]
+T}
+T{
+\f[CR]#define cancel\f[R]
+T}
+T{
 \f[CR]#define IS_IN_TRY\f[R]
 T}
 T{
@@ -155,6 +161,35 @@ If no \f[CR]TRY\f[R] block is currently active, the macro has no effect.
 \f[B]if\f[R] (file == NULL)
 {
     \f[B]throw\f[R](\(dqUnable to open file.\(dq);
+}
+.EE
+.PP
+   *   *   *   *   *
+.SS CANCEL
+.IP
+.EX
+#define CANCEL
+#define cancel
+.EE
+.PP
+Cancels the last \f[CR]TRY\f[R] block.
+.PP
+If you use \f[CR]THROW\f[R] after the \f[CR]CANCEL\f[R] keyword,
+execution will jump back to the \f[CR]TRY\f[R] block preceding your most
+recent \f[CR]TRY\f[R] block.
+.SS Example
+.IP
+.EX
+\f[B]try\f[R]
+{
+    \f[B]if\f[R] (is_in_try)
+    {
+        cancel ;
+        \f[B]return\f[R] ; \f[I]// Without cancel, throw will back to this place\f[R]
+    }
+} \f[B]catch\f[R] (. . .)
+{
+    . . .
 }
 .EE
 .PP
@@ -267,6 +302,42 @@ int main(void)
 \f[B]catch\f[R] (var error)
 {
     printf(\(dqerr_2: %d\(rsn\(dq, error);
+}
+.EE
+.PP
+   *   *   *   *   *
+.SS Between \f[CR]try\f[R] and \f[CR]catch\f[R]
+.IP
+.EX
+void test()
+{
+    \f[B]throw\f[R] (0);
+}
+
+int main(void)
+{
+    \f[B]try\f[R]
+    {
+        \f[B]try\f[R]
+        {
+            test();
+        }
+        \f[B]catch\f[R] (ptr error_message)
+        {
+            printf(\(dq[%s]\(rsn\(dq, error_message);
+        }
+
+        \f[B]throw\f[R] (\(dq2\(dq);
+    }
+
+    printf(\(dqTest\(rsn\(dq); \f[I]// Yeah, you can also do that, it always prints \(dqTest\(dq\f[R]
+
+    \f[B]catch\f[R] (ptr error_message)
+    {
+        printf(\(dq[%s]\(rsn\(dq, error_message);
+    }
+
+    \f[B]return\f[R] (0);
 }
 .EE
 .SH AUTHORS
