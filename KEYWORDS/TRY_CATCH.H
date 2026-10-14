@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2025/04/25 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - Apache2.0 :: Update - 2026/10/13 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - Apache2.0 :: Update - 2026/10/14 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -669,7 +669,7 @@ UNUSED static int
 #ifndef __cplusplus /* C++ */
 #define try TRY
 #define catch(error_variable) CATCH(error_variable)
-#define CANCEL cancel
+#define cancel CANCEL
 #endif /* __cplusplus */
 
 #define is_in_try IS_IN_TRY
