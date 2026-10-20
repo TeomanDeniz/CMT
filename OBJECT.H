@@ -8,7 +8,7 @@
 # +.....................++.....................+ #   :!:: :!:!1:!:!::1:::!!!:  #
 # : C - Maximum Tension :: Create - 2025/05/25 : #   ::!::!!1001010!:!11!!::   #
 # :---------------------::---------------------: #   :!1!!11000000000011!!:    #
-# : License - Apache2.0 :: Update - 2026/10/06 : #    ::::!!!1!!1!!!1!!!::     #
+# : License - Apache2.0 :: Update - 2026/10/20 : #    ::::!!!1!!1!!!1!!!::     #
 # +.....................++.....................+ #       ::::!::!:::!::::      #
 \******************************************************************************/
 
@@ -1075,20 +1075,17 @@
 #define OBJECT__CONNECT(OBJECT_TYPE_NAME) \
 	if (G_OBJECT_SIGNAL_TRANSFER == 1)\
 	{\
-		G_OBJECT_SIGNAL_TRANSFER = 0;\
-		G_OBJECT_NEW_PTR_TRANSFER = (PTR)(\
-			(\
-				(unsigned char *)CMT_OBJECT_DEFAULT_ALLOC(\
-					sizeof(PTR) + G_OBJECT_SIZE\
-				)\
-			) + (sizeof(PTR))\
+		unsigned char	*__RAW__ = (unsigned char *)CMT_OBJECT_DEFAULT_ALLOC(\
+			sizeof(PTR) + G_OBJECT_SIZE\
 		);\
 		\
-		if (G_OBJECT_NEW_PTR_TRANSFER)\
+		G_OBJECT_SIGNAL_TRANSFER = 0;\
+		G_OBJECT_NEW_PTR_TRANSFER = (PTR)0;\
+		\
+		if (__RAW__)\
 		{\
-			*(void (**)(PTR))(\
-				((unsigned char *)G_OBJECT_NEW_PTR_TRANSFER) - sizeof(PTR)\
-			) = CMT_OBJECT_DEFAULT_FREE;\
+			*(void (**)(PTR))__RAW__ = CMT_OBJECT_DEFAULT_FREE;\
+			G_OBJECT_NEW_PTR_TRANSFER = (PTR)(__RAW__ + sizeof(PTR));\
 		}\
 		\
 		LONGJMP(G_OBJECT_CONSTURCTOR_JUMP, 1);\
@@ -1099,20 +1096,17 @@
 #define object__connect(object_type_name) \
 	if (G_OBJECT_SIGNAL_TRANSFER == 1)\
 	{\
-		G_OBJECT_SIGNAL_TRANSFER = 0;\
-		G_OBJECT_NEW_PTR_TRANSFER = (PTR)(\
-			(\
-				(unsigned char *)CMT_OBJECT_DEFAULT_ALLOC(\
-					sizeof(PTR) + G_OBJECT_SIZE\
-				)\
-			) + (sizeof(PTR))\
+		unsigned char	*__RAW__ = (unsigned char *)CMT_OBJECT_DEFAULT_ALLOC(\
+			sizeof(PTR) + G_OBJECT_SIZE\
 		);\
 		\
-		if (G_OBJECT_NEW_PTR_TRANSFER)\
+		G_OBJECT_SIGNAL_TRANSFER = 0;\
+		G_OBJECT_NEW_PTR_TRANSFER = (PTR)0;\
+		\
+		if (__RAW__)\
 		{\
-			*(void (**)(PTR))(\
-				((unsigned char *)G_OBJECT_NEW_PTR_TRANSFER) - sizeof(PTR)\
-			) = CMT_OBJECT_DEFAULT_FREE;\
+			*(void (**)(PTR))__RAW__ = CMT_OBJECT_DEFAULT_FREE;\
+			G_OBJECT_NEW_PTR_TRANSFER = (PTR)(__RAW__ + sizeof(PTR));\
 		}\
 		\
 		LONGJMP(G_OBJECT_CONSTURCTOR_JUMP, 1);\
@@ -1124,14 +1118,17 @@
 #define OBJECT__PROTOTYPE_ALLOC(__ALLOC__) \
 	if (G_OBJECT_SIGNAL_TRANSFER == 1)\
 	{\
-		G_OBJECT_SIGNAL_TRANSFER = 0;\
-		G_OBJECT_NEW_PTR_TRANSFER = (PTR)(\
-			(\
-				(unsigned char *)(__ALLOC__)(\
-					sizeof(PTR) + G_OBJECT_SIZE\
-				)\
-			) + (sizeof(PTR))\
+		unsigned char	*__RAW__ = (unsigned char *)(__ALLOC__)(\
+			sizeof(PTR) + G_OBJECT_SIZE\
 		);\
+		\
+		G_OBJECT_SIGNAL_TRANSFER = 0;\
+		\
+		if (__RAW__)\
+			G_OBJECT_NEW_PTR_TRANSFER = (PTR)(__RAW__ + sizeof(PTR));\
+		else\
+			G_OBJECT_NEW_PTR_TRANSFER = (PTR)0;\
+		\
 		return ;\
 	}
 #define object__prototype_alloc(__alloc__) OBJECT__PROTOTYPE_ALLOC(__alloc__)
@@ -1148,6 +1145,7 @@
 #define OBJ(OBJECT_NAME, VARIABLE_NAME) \
 	OBJECT OBJECT_NAME	VARIABLE_NAME;\
 	\
+	G_OBJECT_NEW_PTR_TRANSFER = (PTR)0;\
 	LOCALMACRO__OBJECT_SENDER(&(VARIABLE_NAME));\
 	OBJECT_NAME
 #define NEW(OBJECT_NAME, VARIABLE_NAME) \
@@ -1158,7 +1156,7 @@
 	\
 	do\
 	{\
-		PTR				__CONSTRUCT_ALLOCATION_OBJECT__ = (PTR)(OBJECT_NAME);\
+		PTR	__CONSTRUCT_ALLOCATION_OBJECT__ = (PTR)(OBJECT_NAME);\
 		\
 		if (SETJMP(G_OBJECT_CONSTURCTOR_JUMP) == 0)\
 			((void (*)(MAYBE_ARGS))__CONSTRUCT_ALLOCATION_OBJECT__)();\

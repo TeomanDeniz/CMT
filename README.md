@@ -462,6 +462,7 @@ List of the icons:
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/CONSOLE.gif" ALT="CONSOLE" TITLE="CONSOLE"/>
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/REGISTER.gif" ALT="REGISTER" TITLE="REGISTER"/>
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/RESTRICT.gif" ALT="RESTRICT" TITLE="RESTRICT"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/DISK.gif" ALT="DISK" TITLE="DISK"/>
 </details>
 
 <details>
@@ -529,6 +530,7 @@ List of the icons:
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/CONSOLE.gif" ALT="CONSOLE" TITLE="CONSOLE"/>
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/REGISTER.gif" ALT="REGISTER" TITLE="REGISTER"/>
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/RESTRICT.gif" ALT="RESTRICT" TITLE="RESTRICT"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/DISK.gif" ALT="DISK" TITLE="DISK"/>
 </details>
 
 ---
@@ -596,6 +598,7 @@ List of the icons:
 [__CONSOLE_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/CONSOLE.md
 [__REGISTER_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/REGISTER.md
 [__RESTRICT_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/RESTRICT.md
+[__DISK_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/DISK.md
 <!-- MARKDOWNS -->
 
 <!-- ICONS -->
@@ -658,4 +661,5 @@ List of the icons:
 [__CONSOLE_GIF__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/IMAGES/32/CONSOLE.gif
 [__REGISTER_GIF__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/IMAGES/32/REGISTER.gif
 [__RESTRICT_GIF__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/IMAGES/32/RESTRICT.gif
+[__DISK_GIF__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/IMAGES/32/DISK.gif
 <!-- ICONS -->
