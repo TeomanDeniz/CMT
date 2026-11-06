@@ -465,6 +465,7 @@ List of the icons:
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/DISK.gif" ALT="DISK" TITLE="DISK"/>
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/ENV_VAR.gif" ALT="ENV_VAR" TITLE="ENV_VAR"/>
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/SIGNAL.gif" ALT="SIGNAL" TITLE="SIGNAL"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/32/ARGUMENT.gif" ALT="ARGUMENT" TITLE="ARGUMENT"/>
 </details>
 
 <details>
@@ -535,6 +536,7 @@ List of the icons:
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/DISK.gif" ALT="DISK" TITLE="DISK"/>
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/ENV_VAR.gif" ALT="ENV_VAR" TITLE="ENV_VAR"/>
 <IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/SIGNAL.gif" ALT="SIGNAL" TITLE="SIGNAL"/>
+<IMG SRC="https://raw.githubusercontent.com/TeomanDeniz/CMT/main/docs/IMAGES/128/ARGUMENT.gif" ALT="ARGUMENT" TITLE="ARGUMENT"/>
 </details>
 
 ---
@@ -605,6 +607,7 @@ List of the icons:
 [__DISK_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/DISK.md
 [__ENV_VAR_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/ENV_VAR.md
 [__SIGNAL_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/SIGNAL.md
+[__ARGUMENT_MD__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/MD/EN/ARGUMENT.md
 <!-- MARKDOWNS -->
 
 <!-- ICONS -->
@@ -670,4 +673,5 @@ List of the icons:
 [__DISK_GIF__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/IMAGES/32/DISK.gif
 [__ENV_VAR_GIF__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/IMAGES/32/ENV_VAR.gif
 [__SIGNAL_GIF__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/IMAGES/32/SIGNAL.gif
+[__ARGUMENT_GIF__]: https://github.com/TeomanDeniz/CMT/blob/main/docs/IMAGES/32/ARGUMENT.gif
 <!-- ICONS -->
